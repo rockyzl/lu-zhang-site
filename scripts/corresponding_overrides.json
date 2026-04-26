@@ -1,0 +1,13 @@
+{
+  "_doc": "Whitelist of titles where Lu Zhang is confirmed corresponding author. Match is by case-insensitive substring on the publication title. Source: ANL 2014-2017 annual reviews where author line was 'Lu Zhang*' (asterisk = corresponding).",
+  "corresponding_titles": [
+    "subtractive approach to molecular engineering of dimethoxybenzene",
+    "lightest organic radical cation for charge storage",
+    "Substituted thiadiazoles as energy-rich anolytes",
+    "existence of optimal molecular weight for poly(acrylic acid)",
+    "Liquid Redoxmers for Nonaqueous Redox Flow Batteries",
+    "Annulated Dialkoxybenzenes as Catholyte Materials",
+    "Toward Improved Catholyte Materials for Redox Flow Batteries"
+  ],
+  "_note": "Edit this list by hand to add/remove confirmed corresponding-author papers. Then run `npm run data` to regenerate publications.json."
+}

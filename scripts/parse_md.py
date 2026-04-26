@@ -119,17 +119,27 @@ for line in conf_block.splitlines():
 if current_conf:
     conferences.append(current_conf)
 
-# ---- Role detection (first/corresponding/co) ----
-# Heuristic: if "Lu Zhang" is the FIRST author → first; else → co
-# Corresponding-author detection requires manual review; flag heuristically when Lu Zhang is LAST
+# ---- Role detection (first / corresponding / co) ----
+# Strict policy:
+#   - "first"          if Lu Zhang is the first listed author
+#   - "corresponding"  ONLY if the title appears in the whitelist
+#   - "co"             everything else where Lu Zhang appears
+# (Last-position is no longer auto-marked corresponding — too unreliable.)
+overrides_path = Path(__file__).parent / "corresponding_overrides.json"
+overrides = json.loads(overrides_path.read_text(encoding="utf-8"))
+corresp_keys = [t.lower() for t in overrides.get("corresponding_titles", [])]
+
+def is_corresponding(title: str) -> bool:
+    t = title.lower()
+    return any(key in t for key in corresp_keys)
+
 for p in publications:
     authors = p["authors"]
     first = authors.split(",")[0].strip() if authors else ""
-    last = authors.replace(", et al.", "").split(",")[-1].strip() if authors else ""
     if first == "Lu Zhang":
         p["role"] = "first"
-    elif last == "Lu Zhang":
-        p["role"] = "corresponding"  # heuristic — needs manual confirm
+    elif is_corresponding(p["title"]):
+        p["role"] = "corresponding"
     elif "Lu Zhang" in authors:
         p["role"] = "co"
     else:

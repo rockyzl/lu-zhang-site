@@ -57,7 +57,7 @@
     "year": 2015,
     "citations": 104,
     "doi": "https://doi.org/10.1039/c5ta02380g",
-    "role": "unknown"
+    "role": "corresponding"
   },
   {
     "title": "The lightest organic radical cation for charge storage in redox flow batteries",
@@ -67,7 +67,7 @@
     "year": 2016,
     "citations": 81,
     "doi": "https://doi.org/10.1038/srep32102",
-    "role": "unknown"
+    "role": "corresponding"
   },
   {
     "title": "Novel redox shuttle additive for high-voltage cathode materials",
@@ -117,7 +117,7 @@
     "year": 2017,
     "citations": 65,
     "doi": "https://doi.org/10.1002/aenm.201701272",
-    "role": "unknown"
+    "role": "corresponding"
   },
   {
     "title": "Experimental Protocols for Studying Organic Non-aqueous Redox Flow Batteries",
@@ -157,7 +157,7 @@
     "year": 2022,
     "citations": 48,
     "doi": "https://doi.org/10.1021/acsmaterialslett.1c00668",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "Redox Shuttles with Axisymmetric Scaffold for Overcharge Protection of Lithium‐Ion Batteries",
@@ -187,7 +187,7 @@
     "year": 2018,
     "citations": 41,
     "doi": "https://doi.org/10.1039/c8ta01059e",
-    "role": "unknown"
+    "role": "corresponding"
   },
   {
     "title": "Molecular Level Understanding of the Factors Affecting the Stability of Dimethoxy Benzene Catholyte Candidates from First-Principles Investigations",
@@ -207,7 +207,7 @@
     "year": 2017,
     "citations": 33,
     "doi": "https://doi.org/10.1021/acs.jpcc.7b08281",
-    "role": "unknown"
+    "role": "corresponding"
   },
   {
     "title": "Crowded electrolytes containing redoxmers in different states of charge: Solution structure, properties, and fundamental limits on energy density",
@@ -227,7 +227,7 @@
     "year": 2018,
     "citations": 31,
     "doi": "https://doi.org/10.1016/j.jpowsour.2018.07.001",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "TEMPO allegro: liquid catholyte redoxmers for nonaqueous redox flow batteries",
@@ -247,7 +247,7 @@
     "year": 2019,
     "citations": 29,
     "doi": "https://doi.org/10.1021/acs.jpcc.9b02230",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "Unexpected electrochemical behavior of an anolyte redoxmer in flow battery electrolytes: solvating cations help to fight against the thermodynamic–kinetic dilemma",
@@ -317,7 +317,7 @@
     "year": 2022,
     "citations": 16,
     "doi": "https://doi.org/10.1016/j.jpowsour.2022.231493",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "Competitive Pi-Stacking and H-Bond Piling Increase Solubility of Heterocyclic Redoxmers",
@@ -437,7 +437,7 @@
     "year": 2023,
     "citations": 3,
     "doi": "https://doi.org/10.1039/d3dd00050h",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "Cross-Platform Classifier of Chemical Stability for Charged Redoxmers",
@@ -447,7 +447,7 @@
     "year": 2021,
     "citations": 2,
     "doi": "https://doi.org/10.1021/acsmaterialslett.1c00424",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "The lightest organic radical cation for charge storage in redox flow batteries",
@@ -457,7 +457,7 @@
     "year": 2016,
     "citations": 1,
     "doi": "",
-    "role": "unknown"
+    "role": "corresponding"
   },
   {
     "title": "A symmetric organic-based nonaqueous redox flow battery and its state of charge diagnostics by FTIR",
@@ -487,7 +487,7 @@
     "year": 2018,
     "citations": 0,
     "doi": "",
-    "role": "unknown"
+    "role": "corresponding"
   },
   {
     "title": "Redox Flow Batteries: Annulated Dialkoxybenzenes as Catholyte Materials for Non‐aqueous Redox Flow Batteries: Achieving High Chemical Stability through Bicyclic Substitution (Adv. Energy Mater. 21/2017)",
@@ -497,7 +497,7 @@
     "year": 2017,
     "citations": 0,
     "doi": "https://doi.org/10.1002/aenm.201770121",
-    "role": "unknown"
+    "role": "corresponding"
   },
   {
     "title": "Lithium lanthanum titanate perovskite as an anode for lithium ion batteries",
@@ -527,7 +527,7 @@
     "year": 2019,
     "citations": 12,
     "doi": "https://doi.org/10.1021/acs.chemmater.8b05261",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "Mn3O4 nano-sized crystals: Rapid synthesis and extension to preparation of nanosized LiMn2O4 materials",
@@ -567,7 +567,7 @@
     "year": 2023,
     "citations": 6,
     "doi": "https://doi.org/10.1002/ange.202308724",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "Re‐Engineering Poly(Acrylic Acid) Binder toward Optimized Electrochemical Performance for Silicon Lithium‐Ion Batteries: Branching Architecture Leads to Balanced Properties of Polymeric Binders",
@@ -587,7 +587,7 @@
     "year": 2018,
     "citations": 103,
     "doi": "https://doi.org/10.1016/j.jpowsour.2017.12.068",
-    "role": "unknown"
+    "role": "corresponding"
   },
   {
     "title": "Surface-Functionalized Silicon Nanoparticles as Anode Material for Lithium-Ion Battery",
@@ -707,7 +707,7 @@
     "year": 2024,
     "citations": 59,
     "doi": "https://doi.org/10.1038/s41467-024-47070-5",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "A comparative computational and scanning electrochemical microscopy study of factors influencing electron transfer at the hydrogenated and pristine graphite – propylene carbonate electrochemical interface",
@@ -787,7 +787,7 @@
     "year": 2021,
     "citations": 133,
     "doi": "https://doi.org/10.1016/j.jcis.2021.01.053",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "Novel 2D Layered Molybdenum Ditelluride Encapsulated in Few‐Layer Graphene as High‐Performance Anode for Lithium‐Ion Batteries",
@@ -1177,7 +1177,7 @@
     "year": 2020,
     "citations": 8,
     "doi": "https://doi.org/10.1016/j.jcp.2020.109608",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "Mitigating wall plasma expansion and enhancing x-ray emission by using multilayer gold films as hohlraum material",
@@ -1277,7 +1277,7 @@
     "year": 2023,
     "citations": 3,
     "doi": "https://doi.org/10.1007/s11581-023-04957-5",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "Predicting accurate x-ray absorption spectra for interstellar molecules <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:msup><mml:mi mathvariant=\"normal\">CN</mml:mi><mml:mo>+</mml:mo></mml:msup></mml:math>, CN, and <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:msup><mml:mi mathvariant=\"normal\">CN</mml:mi><mml:mo>−</mml:mo></mml:msup></mml:math>: Insights from <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mrow><mml:mi>a</mml:mi><mml:mi>b</mml:mi></mml:mrow><mml:mo> </mml:mo><mml:mrow><mml:mi>i</mml:mi><mml:mi>n</mml:mi><mml:mi>i</mml:mi><mml:mi>t</mml:mi><mml:mi>i</mml:mi><mml:mi>o</mml:mi></mml:mrow></mml:math> simulations",
@@ -1297,7 +1297,7 @@
     "year": 2022,
     "citations": 1,
     "doi": "https://doi.org/10.1007/s12517-022-10237-9",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "A new method to calculate sedimentation velocity of particle group with three-plane ECT based on the best correlation function",
@@ -1377,7 +1377,7 @@
     "year": 2021,
     "citations": 0,
     "doi": "https://doi.org/10.1051/e3sconf/202124801012",
-    "role": "corresponding"
+    "role": "co"
   },
   {
     "title": "Analytical solution of few-body fermionic model in synthetic gauge field",

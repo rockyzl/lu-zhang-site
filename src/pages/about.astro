@@ -3,13 +3,35 @@ import Base from "../layouts/Base.astro";
 ---
 <Base title="About — Lu Zhang">
   <div class="container" style="padding-top: 3rem;">
-  <span class="eyebrow">Bio</span>
-  <h1>About</h1>
-  <p class="lead">
-    Lu Zhang (张鲁) is a battery scientist and data engineer. After 17 years at
-    Argonne National Laboratory, he now applies machine-learning to industrial
-    energy-storage problems.
-  </p>
+  <div style="display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; align-items: start;" class="about-hero">
+    <div class="portrait square">
+      <div class="placeholder-mark">
+        <span>L · Z</span>
+        <span class="placeholder-hint">photo: drop public/images/portrait.jpg</span>
+      </div>
+      <img src="/images/portrait.jpg" alt="Lu Zhang" onerror="this.remove()" />
+    </div>
+    <div>
+      <span class="eyebrow">Bio</span>
+      <h1 style="margin-top: 0;">Lu Zhang</h1>
+      <p style="color: var(--c-muted); font-size: 1.1rem; margin-top: -0.4rem; margin-bottom: 1.2rem;">张鲁, Ph.D.</p>
+      <p class="lead">
+        Battery scientist and data engineer. After 17 years at Argonne National
+        Laboratory developing redox flow batteries, Li-ion electrolytes, and
+        silicon-anode binders, now applying machine learning to industrial
+        energy-storage problems.
+      </p>
+      <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: 1rem;">
+        Based in Chicago. Reachable at <a href="mailto:zhang@aaos.org">zhang@aaos.org</a>.
+      </p>
+    </div>
+  </div>
+  <style>
+    @media (max-width: 640px) {
+      .about-hero { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+      .about-hero .portrait.square { max-width: 200px; }
+    }
+  </style>
 
   <h2>Education</h2>
   <ul>
@@ -37,7 +59,9 @@ import Base from "../layouts/Base.astro";
   <h2>Contact</h2>
   <p>
     <a href="mailto:zhang@aaos.org">zhang@aaos.org</a> ·
-    <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en">Google Scholar</a>
+    <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en">Google Scholar</a> ·
+    <a href="https://github.com/rockyzl">GitHub</a> ·
+    <a href="https://www.linkedin.com/">LinkedIn</a>
   </p>
   </div>
 </Base>
