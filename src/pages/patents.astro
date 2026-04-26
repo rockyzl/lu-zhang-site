@@ -1,39 +1,98 @@
 ---
 import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
 import patents from "../data/patents.json";
+import extra from "../data/patents_extra.json";
 
-const byTopic = patents.reduce((acc, p) => {
+// Merge core 23 + 2 continuation patents → 25 issued total
+const issued = [
+  ...patents,
+  ...extra.issued_continuations.map((p) => ({
+    patent_no: p.patent_no,
+    year: p.year,
+    topic: p.topic,
+    title_en: p.title_en,
+    title_cn: p.title_cn,
+    inventors: p.inventors,
+    note: p.note,
+  })),
+];
+
+const byTopic = issued.reduce((acc, p) => {
   (acc[p.topic] = acc[p.topic] || []).push(p);
   return acc;
 }, {});
+
+const ISSUED = issued.length;
+const APPS = extra.published_applications.length + extra.internal_applications.length;
+const TOTAL = ISSUED + APPS;
 ---
 <Base title="Patents — Lu Zhang">
   <div class="container" style="padding-top: 3rem;">
-  <span class="eyebrow">28 issued · 23 detailed below</span>
-  <h1>US Patents</h1>
-  <p class="lead">28 issued US patents in flow battery chemistries, redox shuttles, electrolytes, and binders. The 23 below are the OSTI-verified subset; 5 additional patents are being added.</p>
+    <span class="eyebrow">{TOTAL} total · {ISSUED} issued · {APPS} pending applications</span>
+    <h1>US Patents</h1>
+    <p class="lead">
+      {ISSUED} issued US patents in flow battery chemistries, redox shuttles,
+      Li-ion electrolytes, and silicon-anode binders, plus {APPS} pending
+      applications in membrane / lithium-recovery and electrolyte-solvent
+      directions.
+    </p>
 
-  {Object.entries(byTopic).map(([topic, items]) => (
-    <section>
-      <h2>{topic}</h2>
-      {items.sort((a, b) => b.year - a.year).map((p) => (
-        <div class="entry">
-          <div class="title">
-            <a href={`https://patents.google.com/patent/${p.patent_no.replace(/\s|,/g, "")}`}>{p.patent_no}</a>
-            <span style="color:var(--c-muted)"> ({p.year})</span>
+    <h2 style="margin-top: 3rem;">Issued patents ({ISSUED})</h2>
+    {Object.entries(byTopic).map(([topic, items]) => (
+      <section>
+        <h3 style="margin-top: 2rem;">{topic} <span style="color: var(--c-muted); font-weight: 400; font-size: 0.85em;">({items.length})</span></h3>
+        {items.sort((a, b) => b.year - a.year).map((p) => (
+          <div class="entry">
+            <div class="title">
+              <a href={`https://patents.google.com/patent/${p.patent_no.replace(/\s|,/g, "")}`}>{p.patent_no}</a>
+              <span style="color: var(--c-muted); font-weight: 400;"> ({p.year})</span>
+              {p.note && <span class="badge" style="background: #e1ecff; color: #2456a8;">continuation</span>}
+            </div>
+            <div class="meta">{p.title_en}</div>
+            <div class="meta">{p.title_cn}</div>
+            <div class="meta" style="font-style: italic;">Inventors: {p.inventors}</div>
           </div>
-          <div class="meta">{p.title_en}</div>
-          <div class="meta">{p.title_cn}</div>
-          <div class="meta">Inventors: {p.inventors}</div>
-        </div>
-      ))}
-    </section>
-  ))}
+        ))}
+      </section>
+    ))}
 
-  <p style="color: var(--c-muted); font-size: 0.92rem; margin-top: 1.5rem; padding: 1rem; background: var(--c-bg-soft); border-radius: var(--radius-sm); border: 1px solid var(--c-border-soft);">
-    <strong style="color: var(--c-fg);">+ 5 additional patents</strong> issued
-    but not yet itemized here. Details (patent number, year, title,
-    co-inventors) being collected from USPTO and supplementary records.
-  </p>
+    <h2 style="margin-top: 3rem;">Published applications ({extra.published_applications.length})</h2>
+    {extra.published_applications.map((a) => (
+      <div class="entry">
+        <div class="title">
+          <a href={a.link}>{a.app_no}</a>
+          <span style="color: var(--c-muted); font-weight: 400;"> ({a.year})</span>
+          <span class="badge" style={`background: ${a.status === 'Pending' ? '#e3f1ee' : '#f0ece2'}; color: ${a.status === 'Pending' ? '#2d5d5e' : '#6b5c30'};`}>{a.status.toLowerCase()}</span>
+        </div>
+        <div class="meta">{a.title_en}</div>
+        <div class="meta">{a.title_cn}</div>
+        <div class="meta" style="font-style: italic;">Inventors: {a.inventors}</div>
+        <div class="meta">Filing no.: {a.filing_no} · Topic: {a.topic}</div>
+      </div>
+    ))}
+
+    <h2 style="margin-top: 3rem;">Non-provisional draft ({extra.internal_applications.length})</h2>
+    {extra.internal_applications.map((a) => (
+      <div class="entry">
+        <div class="title">
+          {a.name}
+          <span style="color: var(--c-muted); font-weight: 400;"> ({a.year})</span>
+          <span class="badge" style="background: #f0ece2; color: #6b5c30;">non-provisional</span>
+        </div>
+        <div class="meta">{a.title_en} · {a.title_cn}</div>
+        <div class="meta">Provisional: {a.provisional_no}. {a.status}.</div>
+        <div class="meta" style="font-style: italic;">Inventors: {a.inventors}</div>
+        <div class="meta">{a.note}</div>
+      </div>
+    ))}
+
+    <p style="color: var(--c-muted); font-size: 0.9rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border-soft);">
+      Patent ledger maintained at
+      <code style="font-family: var(--font-mono); background: var(--c-bg-soft); padding: 1px 6px; border-radius: 4px;">写稿过程/成果总表_2026-04-26/03_Patents全面总结.md</code>
+      (canonical source of truth). Update both that file and
+      <code style="font-family: var(--font-mono); background: var(--c-bg-soft); padding: 1px 6px; border-radius: 4px;">src/data/patents_extra.json</code>
+      when new patents issue.
+    </p>
   </div>
 </Base>
