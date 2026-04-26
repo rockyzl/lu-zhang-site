@@ -1,0 +1,42 @@
+[
+  {
+    "date": "2026-04",
+    "tag": "AI",
+    "title": "Building rfb-formulation-agent — AI scientist for redox flow battery formulation",
+    "blurb": "A vertical AI alternative to general-purpose materials platforms. Distilling 17 years of flow-battery intuition into automated electrolyte screening. Pre-v0.1.",
+    "image": null,
+    "link": null
+  },
+  {
+    "date": "2026-02",
+    "tag": "Career",
+    "title": "Joined AAOS as Data Science Engineer",
+    "blurb": "Building voice agents and clinical data systems for the American Academy of Orthopaedic Surgeons.",
+    "image": null,
+    "link": null
+  },
+  {
+    "date": "2024-04",
+    "tag": "Publication",
+    "title": "Nature Communications — high-throughput robotic platform + active learning for electrolyte discovery",
+    "blurb": "Co-authored work demonstrating an integrated robotic platform with active learning for accelerated discovery of optimal electrolyte formulations. The convergence of automation, ML, and battery chemistry.",
+    "image": "/images/news/nature-comm-2024-robotic.jpg",
+    "link": "https://www.nature.com/articles/s41467-024-46692-z"
+  },
+  {
+    "date": "2024",
+    "tag": "Patent",
+    "title": "US 2024/0252991 A1 — Crown ether modified cation exchange membranes",
+    "blurb": "Filed patent on selective ionic-species recovery membranes. Application of redox-flow membrane chemistry to lithium recovery.",
+    "image": "/images/news/google-patents-membrane.jpg",
+    "link": "https://patents.google.com/patent/US20240252991A1"
+  },
+  {
+    "date": "2023-08",
+    "tag": "Career",
+    "title": "Transitioned from ANL to industrial data science",
+    "blurb": "After 17 years at Argonne National Laboratory, started a new chapter in production data science (Cincinnati Insurance, Mercury Insurance, AAOS).",
+    "image": null,
+    "link": null
+  }
+]

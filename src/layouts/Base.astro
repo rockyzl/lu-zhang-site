@@ -1,6 +1,16 @@
 ---
 import "../styles/global.css";
 const { title = "Lu Zhang", description = "Battery scientist & data engineer." } = Astro.props;
+const pathname = Astro.url.pathname;
+const nav = [
+  { href: "/about/", label: "About" },
+  { href: "/publications/", label: "Publications" },
+  { href: "/patents/", label: "Patents" },
+  { href: "/projects/", label: "Projects" },
+  { href: "/talks/", label: "Talks" },
+  { href: "/ai/", label: "AI" },
+];
+const isActive = (href) => pathname === href || (href !== "/" && pathname.startsWith(href));
 ---
 <!doctype html>
 <html lang="en">
@@ -9,29 +19,33 @@ const { title = "Lu Zhang", description = "Battery scientist & data engineer." }
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href="data:," />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23b8531a'/%3E%3Ctext x='32' y='44' font-family='Georgia' font-size='38' font-weight='600' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap"
+    />
   </head>
   <body>
     <header class="site">
       <div class="inner">
         <a class="name" href="/">Lu Zhang</a>
         <nav>
-          <a href="/about/">About</a>
-          <a href="/publications/">Publications</a>
-          <a href="/patents/">Patents</a>
-          <a href="/talks/">Talks</a>
-          <a href="/projects/">Projects</a>
-          <a href="/ai/">AI</a>
+          {nav.map((n) => (
+            <a href={n.href} class={isActive(n.href) ? "active" : ""}>{n.label}</a>
+          ))}
         </nav>
       </div>
     </header>
-    <main class="container">
+    <main>
       <slot />
     </main>
     <footer class="site">
       © 2026 Lu Zhang ·
       <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en">Google Scholar</a> ·
-      <a href="https://github.com/rockyzl">GitHub</a>
+      <a href="https://github.com/rockyzl">GitHub</a> ·
+      <a href="mailto:zhang@aaos.org">Email</a>
     </footer>
   </body>
 </html>

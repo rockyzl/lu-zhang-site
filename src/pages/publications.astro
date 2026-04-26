@@ -6,6 +6,8 @@ const sorted = [...publications].sort((a, b) => (b.year || 0) - (a.year || 0) ||
 const topics = [...new Set(publications.map((p) => p.topic))].filter(Boolean);
 ---
 <Base title="Publications — Lu Zhang">
+  <div class="container" style="padding-top: 3rem;">
+  <span class="eyebrow">Peer-reviewed journal articles</span>
   <h1>Publications</h1>
   <p class="lead">{publications.length} peer-reviewed journal articles. Filter by topic, search by title or journal.</p>
 
@@ -55,4 +57,5 @@ const topics = [...new Set(publications.map((p) => p.topic))].filter(Boolean);
     }
     [q, topic, role].forEach((el) => el.addEventListener("input", apply));
   </script>
+  </div>
 </Base>

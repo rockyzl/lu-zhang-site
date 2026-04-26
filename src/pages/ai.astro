@@ -1,39 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
-
-const personal = [
-  {
-    name: "rfb-formulation-agent",
-    pitch: "AI scientist for redox flow battery electrolyte formulation screening — a vertical alternative to SES AI Molecular Universe.",
-    note: "Where 17 years of flow-battery chemistry meets ML-driven materials design. Pre-v0.1, private.",
-  },
-  {
-    name: "huashu-nuwa (女娲造人)",
-    pitch: "Distill any subject-matter expert into a runnable Claude skill — deep research → cognitive framework extraction → executable persona.",
-  },
-  {
-    name: "wiki-sb",
-    pitch: "Personal Obsidian-vault maintainer following Karpathy's 'LLM Wiki' pattern. Ingests sources, lints structure, queries with citations across multiple vaults.",
-  },
-  {
-    name: "meditation-voice-gen",
-    pitch: "End-to-end pipeline turning meditation session JSON into polished TTS audio: rewrite under style guide, sentence-segment, cue pauses, generate MP3.",
-  },
-  {
-    name: "gws-gmail",
-    pitch: "Gmail / Workspace CLI integration for agent workflows — triage, read, send, reply via a Rust binary.",
-  },
-  {
-    name: "claude-config",
-    pitch: "Personal Claude Code configuration: skills, commands, agents, hooks. Shipped as a reusable harness for daily multi-role orchestration.",
-  },
-];
+import aiProjects from "../data/ai_projects.json";
 
 const industrial = [
   {
     name: "AAOS — Data Science Engineer",
     period: "Feb 2026 – present",
-    note: "Voice agents and clinical data systems.",
+    note: "Voice agents and clinical data systems for the American Academy of Orthopaedic Surgeons.",
   },
   {
     name: "Mercury Insurance — Senior Data Scientist",
@@ -48,37 +21,69 @@ const industrial = [
 ];
 ---
 <Base title="AI &amp; Engineering — Lu Zhang">
-  <h1>AI &amp; Engineering</h1>
-  <p class="lead">
-    The bridge: 17 years of battery-materials intuition + production data-
-    science practice, applied to ML-driven materials discovery and agent-based
-    research tooling.
-  </p>
+  <div class="container">
 
-  <h2>Personal &amp; open-source projects</h2>
-  {personal.map((p) => (
-    <div class="entry">
-      <div class="title">{p.name}</div>
-      <div class="meta">{p.pitch}</div>
-      {p.note && <div class="meta" style="font-style:italic;">{p.note}</div>}
+    <section style="padding: 3rem 0 1rem;">
+      <span class="eyebrow">AI · Tooling · Industrial ML</span>
+      <h1>Where chemistry meets code</h1>
+      <p class="lead" style="font-size: 1.1rem; color: var(--c-fg); max-width: 680px;">
+        Most ML-for-materials systems are built by engineers without chemistry
+        intuition; most battery scientists never operate production ML
+        pipelines. The combination — a senior chemist with R&amp;D 100 winning
+        flow-battery work and three years of insurance-grade ML at scale — is
+        rare, and is the foundation for industrial-scale energy-storage AI
+        going forward.
+      </p>
+    </section>
+
+    <div class="section-head">
+      <h2>Personal &amp; open-source projects</h2>
+      <span class="more">{aiProjects.length} active</span>
     </div>
-  ))}
-
-  <h2>Industrial roles</h2>
-  {industrial.map((p) => (
-    <div class="entry">
-      <div class="title">{p.name}</div>
-      <div class="meta"><strong>{p.period}</strong> — {p.note}</div>
+    <div class="featured-grid">
+      {aiProjects.map((p) => (
+        <div class="project-card">
+          {p.image ? (
+            <div class="cover"><img src={p.image} alt={p.name} loading="lazy" /></div>
+          ) : (
+            <div class={`cover gradient ${p.gradient ?? "from-rust to-amber"}`}>
+              <span class="glyph">{p.name}</span>
+            </div>
+          )}
+          <div class="body">
+            <div class="name">{p.name}</div>
+            <div class="tagline">{p.tagline}</div>
+            <div class="description">{p.description}</div>
+            <div class="status">{p.status}</div>
+            <div class="tags">
+              {p.tags.map((t) => <span class="tag">{t}</span>)}
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
-  ))}
 
-  <h2>Why this combination matters</h2>
-  <p>
-    Most ML-for-materials systems are built by ML engineers without
-    chemistry intuition; most battery scientists never operate production
-    ML pipelines. The combination — a senior chemist with R&amp;D 100 — winning
-    flow-battery work and three years of insurance-grade ML at scale — is
-    rare, and is the foundation for industrial-scale energy-storage
-    AI work going forward.
-  </p>
+    <div class="section-head">
+      <h2>Industrial roles</h2>
+    </div>
+    {industrial.map((p) => (
+      <div class="entry">
+        <div class="title">{p.name}</div>
+        <div class="meta"><strong style="color: var(--c-fg);">{p.period}</strong> — {p.note}</div>
+      </div>
+    ))}
+
+    <div class="section-head">
+      <h2>Why this combination matters</h2>
+    </div>
+    <p class="prose" style="font-size: 1rem; color: var(--c-fg); max-width: 720px;">
+      The most interesting energy-AI work over the next decade will demand
+      both depths: graduate-level electrochemistry intuition for posing the
+      <em>right</em> questions, and production ML literacy for shipping
+      systems that earn trust at scale. The
+      <code style="font-family: var(--font-mono); background: var(--c-bg-soft); padding: 1px 6px; border-radius: 4px;">rfb-formulation-agent</code>
+      project is the explicit attempt to compound the two.
+    </p>
+
+  </div>
 </Base>

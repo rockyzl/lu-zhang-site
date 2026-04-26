@@ -3,53 +3,141 @@ import Base from "../layouts/Base.astro";
 import publications from "../data/publications.json";
 import patents from "../data/patents.json";
 import conferences from "../data/conferences.json";
+import news from "../data/news.json";
+import featured from "../data/featured.json";
+import aiProjects from "../data/ai_projects.json";
 
 const totalCitations = publications.reduce((s, p) => s + (p.citations || 0), 0);
 const firstAuthor = publications.filter((p) => p.role === "first").length;
 const corresponding = publications.filter((p) => p.role === "corresponding").length;
-const topCited = [...publications].sort((a, b) => b.citations - a.citations).slice(0, 5);
+
+const featuredAI = aiProjects.slice(0, 3);
 ---
 <Base title="Lu Zhang — Battery Scientist & Data Engineer">
-  <h1>Lu Zhang, Ph.D.</h1>
-  <p class="lead">
-    Battery scientist with 17+ years at Argonne National Laboratory.
-    Now bridging electrochemistry, machine learning, and industrial-scale
-    energy storage. R&amp;D 100 Award (2014, Finalist 2015).
-  </p>
 
-  <div class="stats">
-    <div class="stat"><div class="num">{publications.length}</div><div class="label">Journal articles</div></div>
-    <div class="stat"><div class="num">{patents.length}</div><div class="label">US patents</div></div>
-    <div class="stat"><div class="num">{conferences.length}</div><div class="label">Conference talks</div></div>
-    <div class="stat"><div class="num">{totalCitations.toLocaleString()}</div><div class="label">Citations</div></div>
-    <div class="stat"><div class="num">39</div><div class="label">h-index</div></div>
-    <div class="stat"><div class="num">{firstAuthor + corresponding}</div><div class="label">First / corresp. author</div></div>
-  </div>
-
-  <div class="cards">
-    <div class="card">
-      <h3>Research</h3>
-      <p>Redox flow batteries, Li-ion electrolytes, silicon-anode binders, computational chemistry. <a href="/publications/">Browse 143 papers →</a></p>
-    </div>
-    <div class="card">
-      <h3>Inventions</h3>
-      <p>23 issued US patents in flow battery chemistries, redox shuttles, electrolytes, and binders. <a href="/patents/">See patents →</a></p>
-    </div>
-    <div class="card">
-      <h3>AI &amp; engineering</h3>
-      <p>ML for materials discovery; production data-science pipelines (Cincinnati, Mercury, AAOS). <a href="/ai/">See projects →</a></p>
-    </div>
-  </div>
-
-  <h2>Selected highly-cited work</h2>
-  {topCited.map((p) => (
-    <div class="entry">
-      <div class="title">
-        {p.doi ? <a href={p.doi}>{p.title}</a> : p.title}
-        {p.role === "first" && <span class="badge first">first</span>}
-        {p.role === "corresponding" && <span class="badge corresponding">corresp.</span>}
+  <div class="container">
+    <!-- ========== HERO ========== -->
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Battery science · Machine learning · Industrial translation</span>
+        <h1>Lu Zhang, Ph.D.</h1>
+        <p class="role">
+          Battery scientist with 17 years at Argonne National Laboratory.
+          Now bridging electrochemistry and ML for industrial-scale energy
+          storage.
+        </p>
+        <p class="lead">
+          R&amp;D 100 Award (2014) for redox-shuttle technology. 143 peer-reviewed
+          publications, 23 issued US patents, 4,700+ citations. Built and led
+          cross-institution Sprint teams under JCESR (DOE BES).
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="/publications/">Publications →</a>
+          <a class="btn btn-ghost" href="/ai/">AI projects</a>
+          <a class="btn btn-ghost" href="/about/">About</a>
+        </div>
       </div>
-      <div class="meta">{p.journal} · {p.year} · {p.citations} citations</div>
+      <div class="portrait">
+        <div class="placeholder-mark">
+          <span>L · Z</span>
+          <span class="placeholder-hint">portrait placeholder</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== STATS BAR ========== -->
+    <div class="stat-bar">
+      <div class="stat"><div class="num">{publications.length}</div><div class="label">Journal articles</div></div>
+      <div class="stat"><div class="num">{patents.length}</div><div class="label">US patents</div></div>
+      <div class="stat"><div class="num">{conferences.length}</div><div class="label">Conference talks</div></div>
+      <div class="stat"><div class="num">{totalCitations.toLocaleString()}</div><div class="label">Citations</div></div>
+      <div class="stat"><div class="num">39</div><div class="label">h-index</div></div>
+      <div class="stat"><div class="num">{firstAuthor + corresponding}</div><div class="label">First / corresp.</div></div>
     </div>
-  ))}
+
+    <!-- ========== NEWS ========== -->
+    <div class="section-head">
+      <h2>Recent</h2>
+      <span class="more">latest first</span>
+    </div>
+    <div class="news-list">
+      {news.map((n) => (
+        <article class="news-item">
+          <div class="news-meta">
+            <div class="date">{n.date}</div>
+            <span class={`news-tag ${n.tag}`}>{n.tag}</span>
+          </div>
+          <div class="news-body">
+            <div class="title">
+              {n.link ? <a href={n.link}>{n.title}</a> : n.title}
+            </div>
+            <div class="blurb">{n.blurb}</div>
+            {n.image && (
+              <a class="preview" href={n.link ?? "#"}>
+                <img src={n.image} alt={n.title} loading="lazy" />
+              </a>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- ========== FEATURED RESEARCH ========== -->
+    <div class="section-head">
+      <h2>Featured research</h2>
+      <a class="more" href="/publications/">All publications →</a>
+    </div>
+    <div class="featured-grid">
+      {featured.map((f) => (
+        <a class="feature-card" href={f.doi ?? "#"}>
+          {f.image ? (
+            <div class="cover"><img src={f.image} alt={f.title} loading="lazy" /></div>
+          ) : (
+            <div class={`cover gradient ${f.gradient ?? "from-amber to-rust"}`}>
+              <span class="glyph">{f.journal}<br/><span style="font-weight:400; font-size:0.85em;">{f.year}</span></span>
+            </div>
+          )}
+          <div class="body">
+            <div class="title">{f.title}</div>
+            <div class="meta">
+              {f.journal} · {f.year}
+              {f.citations ? ` · ${f.citations} citations` : ""}
+              {f.role === "first" && <span class="badge first">first</span>}
+              {f.role === "corresponding" && <span class="badge corresponding">corresp.</span>}
+            </div>
+            <div class="highlight">{f.highlight}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- ========== AI SPOTLIGHT ========== -->
+    <div class="section-head">
+      <h2>AI &amp; engineering</h2>
+      <a class="more" href="/ai/">All projects →</a>
+    </div>
+    <div class="featured-grid">
+      {featuredAI.map((p) => (
+        <div class="project-card">
+          {p.image ? (
+            <div class="cover"><img src={p.image} alt={p.name} loading="lazy" /></div>
+          ) : (
+            <div class={`cover gradient ${p.gradient ?? "from-rust to-amber"}`}>
+              <span class="glyph">{p.name}</span>
+            </div>
+          )}
+          <div class="body">
+            <div class="name">{p.name}</div>
+            <div class="tagline">{p.tagline}</div>
+            <div class="description">{p.description}</div>
+            <div class="status">{p.status}</div>
+            <div class="tags">
+              {p.tags.map((t) => <span class="tag">{t}</span>)}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
 </Base>

@@ -1,0 +1,45 @@
+[
+  {
+    "title": "An integrated high-throughput robotic platform and active learning approach for accelerated discovery of optimal electrolyte formulations",
+    "journal": "Nature Communications",
+    "year": 2024,
+    "role": "co-author",
+    "highlight": "Robotic platform + ML for electrolyte discovery — bridging chemistry and AI.",
+    "image": "/images/news/nature-comm-2024-robotic.jpg",
+    "doi": "https://www.nature.com/articles/s41467-024-46692-z",
+    "gradient": null
+  },
+  {
+    "title": "Radical Compatibility with Nonaqueous Electrolytes and Its Impact on an All-Organic Redox Flow Battery",
+    "journal": "Angewandte Chemie",
+    "year": 2015,
+    "citations": 322,
+    "role": "co-author",
+    "highlight": "Most-cited paper. Foundational radical-cation work for non-aqueous flow batteries.",
+    "image": null,
+    "doi": "https://doi.org/10.1002/anie.201501443",
+    "gradient": "from-amber to-rust"
+  },
+  {
+    "title": "Molecular engineering towards safer lithium-ion batteries: a highly stable and compatible redox shuttle for overcharge protection",
+    "journal": "Energy & Environmental Science",
+    "year": 2012,
+    "citations": 126,
+    "role": "first",
+    "highlight": "First-author EES paper on overcharge-protection redox shuttles — basis for R&D 100 Award (2014).",
+    "image": null,
+    "doi": "https://doi.org/10.1039/c2ee21977h",
+    "gradient": "from-teal to-navy"
+  },
+  {
+    "title": "The lightest organic radical cation for charge storage in redox flow batteries",
+    "journal": "Scientific Reports",
+    "year": 2016,
+    "citations": 81,
+    "role": "co-author",
+    "highlight": "Systematic molecular trimming to find the smallest stable radical-cation core. Featured in Argonne Today.",
+    "image": null,
+    "doi": "https://doi.org/10.1038/srep32102",
+    "gradient": "from-rose to-orange"
+  }
+]

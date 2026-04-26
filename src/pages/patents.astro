@@ -8,6 +8,8 @@ const byTopic = patents.reduce((acc, p) => {
 }, {});
 ---
 <Base title="Patents — Lu Zhang">
+  <div class="container" style="padding-top: 3rem;">
+  <span class="eyebrow">23 issued · OSTI verified</span>
   <h1>US Patents</h1>
   <p class="lead">{patents.length} issued US patents (OSTI verified). Listed by research area, newest first.</p>
 
@@ -27,4 +29,5 @@ const byTopic = patents.reduce((acc, p) => {
       ))}
     </section>
   ))}
+  </div>
 </Base>
