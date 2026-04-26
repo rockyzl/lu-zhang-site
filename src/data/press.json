@@ -1,0 +1,109 @@
+{
+  "_doc": "Public press / news mentions of Lu Zhang's research at Argonne. Compiled 2026-04-26 from web search; add new entries as discovered.",
+  "items": [
+    {
+      "date": "2024-03",
+      "outlet": "Nature Communications",
+      "type": "Journal — flagship publication",
+      "title": "An integrated high-throughput robotic platform and active learning approach for accelerated discovery of optimal electrolyte formulations",
+      "summary": "Robotic chemistry + ML for electrolyte discovery. Co-authored work demonstrating an automated workflow that screened a 2000+ solvent library and identified solvents with >6.20 M solubility for 2,1,3-benzothiadiazole, while testing fewer than 10% of candidates.",
+      "url": "https://www.nature.com/articles/s41467-024-47070-5"
+    },
+    {
+      "date": "2021-11",
+      "outlet": "ScienceDaily",
+      "type": "Tech press",
+      "title": "AI used to optimize several flow battery properties simultaneously",
+      "summary": "Coverage of the JCESR / Argonne quantum-chemistry-guided multiobjective Bayesian optimization study — searching a million-molecule chemical space for optimal flow battery materials.",
+      "url": "https://www.sciencedaily.com/releases/2021/11/211123162801.htm"
+    },
+    {
+      "date": "2021-11",
+      "outlet": "Argonne National Laboratory",
+      "type": "Lab news",
+      "title": "Researchers use AI to optimize several flow battery properties simultaneously",
+      "summary": "Argonne's official write-up of the AI-driven flow battery materials work; Lu Zhang named co-author with Lily Robertson.",
+      "url": "https://www.anl.gov/article/researchers-use-ai-to-optimize-several-flow-battery-properties-simultaneously"
+    },
+    {
+      "date": "2021-11",
+      "outlet": "Tech Xplore",
+      "type": "Tech press",
+      "title": "Researchers use AI to optimize several flow battery properties simultaneously",
+      "summary": "Tech Xplore syndication of the Argonne AI flow-battery story.",
+      "url": "https://techxplore.com/news/2021-11-ai-optimize-battery-properties-simultaneously.html"
+    },
+    {
+      "date": "2021-02",
+      "outlet": "Argonne National Laboratory",
+      "type": "Lab news — major feature",
+      "title": "A glowing new prospect for self-reporting batteries",
+      "summary": "Coverage of fluorescent 2,1,3-benzothiadiazole redoxmer molecules that signal crossover events in flow batteries — designed by the JCESR team Lu Zhang led.",
+      "url": "https://www.anl.gov/article/a-glowing-new-prospect-for-selfreporting-batteries"
+    },
+    {
+      "date": "2021-02",
+      "outlet": "EurekAlert",
+      "type": "Press release syndication",
+      "title": "A glowing new prospect for self-reporting batteries",
+      "summary": "Official press release on the self-reporting redoxmer work; widely picked up by science press.",
+      "url": "https://www.eurekalert.org/news-releases/780281"
+    },
+    {
+      "date": "2021-02",
+      "outlet": "Tech Xplore",
+      "type": "Tech press",
+      "title": "A glowing new prospect for self-reporting batteries",
+      "summary": "Tech Xplore syndication of the self-reporting redox flow battery story.",
+      "url": "https://techxplore.com/news/2021-02-prospect-self-reporting-batteries.html"
+    },
+    {
+      "date": "2021-02",
+      "outlet": "PV Magazine International",
+      "type": "Industry press",
+      "title": "Redox flow batteries with fluorescence detection",
+      "summary": "Solar / energy industry trade press coverage of the self-reporting flow battery work.",
+      "url": "https://www.pv-magazine.com/2021/02/08/redox-flow-batteries-with-fluorescence-detection/"
+    },
+    {
+      "date": "2017",
+      "outlet": "Argonne National Laboratory",
+      "type": "Lab news",
+      "title": "New battery material goes with the flow",
+      "summary": "Coverage of the Annulated Dialkoxybenzenes catholyte work (Adv. Energy Mater. 2017). Lu Zhang named as the leading scientist.",
+      "url": "https://www.anl.gov/article/new-battery-material-goes-with-the-flow"
+    },
+    {
+      "date": "2014",
+      "outlet": "phys.org",
+      "type": "Tech press — patent confirmation",
+      "title": "Argonne battery technology confirmed by US Patent Office",
+      "summary": "Coverage of the redox-shuttle patent that anchored the 2014 R&D 100 Award win.",
+      "url": "https://phys.org/news/2014-01-argonne-battery-technology-patent-office.html"
+    },
+    {
+      "date": "—",
+      "outlet": "Argonne (Flickr)",
+      "type": "Photo / official imagery",
+      "title": "Redox shuttle additive — flask photograph",
+      "summary": "Argonne's official Flickr photo of Lu Zhang holding the R&D 100 redox-shuttle additive flask alongside Zhengcheng (John) Zhang.",
+      "url": "https://www.flickr.com/photos/argonne/16519624459"
+    },
+    {
+      "date": "—",
+      "outlet": "Argonne National Laboratory",
+      "type": "Profile",
+      "title": "Lu Zhang — official Argonne profile",
+      "summary": "ANL's chemist staff page.",
+      "url": "https://www.anl.gov/profile/lu-zhang"
+    },
+    {
+      "date": "—",
+      "outlet": "Google Scholar",
+      "type": "Profile",
+      "title": "Lu Zhang — Google Scholar citations",
+      "summary": "4,700+ citations · h-index 39 · i10-index 89.",
+      "url": "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en"
+    }
+  ]
+}

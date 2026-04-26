@@ -1,0 +1,58 @@
+---
+import Base from "../layouts/Base.astro";
+import press from "../data/press.json";
+
+// Sort: dated entries first (latest → oldest), then undated profile/static links
+const dated = press.items.filter((p) => p.date !== "—");
+const profiles = press.items.filter((p) => p.date === "—");
+dated.sort((a, b) => (b.date > a.date ? 1 : -1));
+---
+<Base title="Press &amp; Media — Lu Zhang">
+  <div class="container" style="padding-top: 3rem;">
+    <span class="eyebrow">{dated.length} press hits · {profiles.length} reference profiles</span>
+    <h1>Press &amp; Media</h1>
+    <p class="lead">
+      Selected coverage of research at Argonne — flow batteries, redox shuttles,
+      self-reporting redoxmers, and AI-driven materials discovery — across the
+      laboratory's own press room, science press syndication, and industry
+      trade publications.
+    </p>
+
+    <div class="section-head">
+      <h2 style="margin:0;">In the news</h2>
+      <span class="more">latest first</span>
+    </div>
+    {dated.map((p) => (
+      <article class="entry">
+        <div class="title">
+          <a href={p.url} target="_blank" rel="noopener">{p.title}</a>
+        </div>
+        <div class="meta">
+          <strong style="color: var(--c-fg);">{p.outlet}</strong>
+          {" · "}{p.date}
+          <span class="badge" style="background: #e3f1ee; color: #2d5d5e;">{p.type}</span>
+        </div>
+        <div class="meta" style="margin-top: 0.4rem;">{p.summary}</div>
+      </article>
+    ))}
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">Reference profiles</h2>
+    </div>
+    {profiles.map((p) => (
+      <div class="entry">
+        <div class="title">
+          <a href={p.url} target="_blank" rel="noopener">{p.title}</a>
+        </div>
+        <div class="meta"><strong style="color: var(--c-fg);">{p.outlet}</strong></div>
+        <div class="meta" style="margin-top: 0.4rem;">{p.summary}</div>
+      </div>
+    ))}
+
+    <p style="color: var(--c-muted); font-size: 0.9rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border-soft);">
+      List compiled from public web search and Argonne's own press archive.
+      Major omissions or new coverage to add? File an issue at the
+      <a href="https://github.com/rockyzl/lu-zhang-site">GitHub repo</a>.
+    </p>
+  </div>
+</Base>
