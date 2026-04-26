@@ -1,27 +1,84 @@
 ---
 import Base from "../layouts/Base.astro";
+
+const personal = [
+  {
+    name: "rfb-formulation-agent",
+    pitch: "AI scientist for redox flow battery electrolyte formulation screening — a vertical alternative to SES AI Molecular Universe.",
+    note: "Where 17 years of flow-battery chemistry meets ML-driven materials design. Pre-v0.1, private.",
+  },
+  {
+    name: "huashu-nuwa (女娲造人)",
+    pitch: "Distill any subject-matter expert into a runnable Claude skill — deep research → cognitive framework extraction → executable persona.",
+  },
+  {
+    name: "wiki-sb",
+    pitch: "Personal Obsidian-vault maintainer following Karpathy's 'LLM Wiki' pattern. Ingests sources, lints structure, queries with citations across multiple vaults.",
+  },
+  {
+    name: "meditation-voice-gen",
+    pitch: "End-to-end pipeline turning meditation session JSON into polished TTS audio: rewrite under style guide, sentence-segment, cue pauses, generate MP3.",
+  },
+  {
+    name: "gws-gmail",
+    pitch: "Gmail / Workspace CLI integration for agent workflows — triage, read, send, reply via a Rust binary.",
+  },
+  {
+    name: "claude-config",
+    pitch: "Personal Claude Code configuration: skills, commands, agents, hooks. Shipped as a reusable harness for daily multi-role orchestration.",
+  },
+];
+
+const industrial = [
+  {
+    name: "AAOS — Data Science Engineer",
+    period: "Feb 2026 – present",
+    note: "Voice agents and clinical data systems.",
+  },
+  {
+    name: "Mercury Insurance — Senior Data Scientist",
+    period: "Nov 2024 – Jan 2026",
+    note: "Pricing and risk models; production ML pipelines.",
+  },
+  {
+    name: "Cincinnati Insurance — Data Scientist",
+    period: "Aug 2023 – Nov 2024",
+    note: "Loss prediction and analytics platforms.",
+  },
+];
 ---
-<Base title="AI Projects — Lu Zhang">
-  <h1>AI &amp; Data Engineering</h1>
+<Base title="AI &amp; Engineering — Lu Zhang">
+  <h1>AI &amp; Engineering</h1>
   <p class="lead">
-    Production data-science pipelines and personal AI tooling. Building on
-    chemistry intuition to ship ML systems that earn trust.
+    The bridge: 17 years of battery-materials intuition + production data-
+    science practice, applied to ML-driven materials discovery and agent-based
+    research tooling.
   </p>
 
-  <h2>Industrial</h2>
-  <div class="entry">
-    <div class="title">AAOS — Voice agents &amp; clinical data systems</div>
-    <div class="meta">Feb 2026 – present</div>
-  </div>
-  <div class="entry">
-    <div class="title">Mercury Insurance — Senior Data Scientist</div>
-    <div class="meta">Nov 2024 – Jan 2026 · pricing &amp; risk models</div>
-  </div>
-  <div class="entry">
-    <div class="title">Cincinnati Insurance — Data Scientist</div>
-    <div class="meta">Aug 2023 – Nov 2024 · loss prediction &amp; analytics</div>
-  </div>
+  <h2>Personal &amp; open-source projects</h2>
+  {personal.map((p) => (
+    <div class="entry">
+      <div class="title">{p.name}</div>
+      <div class="meta">{p.pitch}</div>
+      {p.note && <div class="meta" style="font-style:italic;">{p.note}</div>}
+    </div>
+  ))}
 
-  <h2>Personal &amp; open-source</h2>
-  <p class="placeholder">Coming soon: Claude Code skill library, personal wiki ingestion pipeline, meditation-voice generator. Stub — to be expanded.</p>
+  <h2>Industrial roles</h2>
+  {industrial.map((p) => (
+    <div class="entry">
+      <div class="title">{p.name}</div>
+      <div class="meta"><strong>{p.period}</strong> — {p.note}</div>
+    </div>
+  ))}
+
+  <h2>Why this combination matters</h2>
+  <p>
+    Most ML-for-materials systems are built by ML engineers without
+    chemistry intuition; most battery scientists never operate production
+    ML pipelines. The combination — a senior chemist with R&amp;D 100 — winning
+    flow-battery work and three years of insurance-grade ML at scale — is
+    rare, and is the foundation for industrial-scale energy-storage
+    AI work going forward.
+  </p>
 </Base>
