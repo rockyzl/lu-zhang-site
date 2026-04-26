@@ -9,9 +9,9 @@ const byTopic = patents.reduce((acc, p) => {
 ---
 <Base title="Patents — Lu Zhang">
   <div class="container" style="padding-top: 3rem;">
-  <span class="eyebrow">23 issued · OSTI verified</span>
+  <span class="eyebrow">28 issued · 23 detailed below</span>
   <h1>US Patents</h1>
-  <p class="lead">{patents.length} issued US patents (OSTI verified). Listed by research area, newest first.</p>
+  <p class="lead">28 issued US patents in flow battery chemistries, redox shuttles, electrolytes, and binders. The 23 below are the OSTI-verified subset; 5 additional patents are being added.</p>
 
   {Object.entries(byTopic).map(([topic, items]) => (
     <section>
@@ -29,5 +29,11 @@ const byTopic = patents.reduce((acc, p) => {
       ))}
     </section>
   ))}
+
+  <p style="color: var(--c-muted); font-size: 0.92rem; margin-top: 1.5rem; padding: 1rem; background: var(--c-bg-soft); border-radius: var(--radius-sm); border: 1px solid var(--c-border-soft);">
+    <strong style="color: var(--c-fg);">+ 5 additional patents</strong> issued
+    but not yet itemized here. Details (patent number, year, title,
+    co-inventors) being collected from USPTO and supplementary records.
+  </p>
   </div>
 </Base>
