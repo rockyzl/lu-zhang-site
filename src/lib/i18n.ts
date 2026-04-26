@@ -17,13 +17,23 @@ export function t(key: string, locale: Locale): string {
 
 /** Build the alternate-locale path (toggle target) from the current pathname. */
 export function altLocalePath(pathname: string, base: string): string {
-  // Strip base prefix
-  const baseNorm = base.endsWith("/") ? base : base + "/";
-  let rel = pathname.startsWith(baseNorm) ? pathname.slice(baseNorm.length) : pathname.replace(/^\//, "");
-  const isZh = rel.startsWith("zh/") || rel === "zh" || rel === "zh/";
-  const stripped = isZh ? rel.replace(/^zh\/?/, "") : rel;
-  const target = isZh ? stripped : "zh/" + stripped;
-  // Always end with trailing slash if original did (Astro default)
-  const finalRel = target.endsWith("/") || target === "" ? target : target + "/";
-  return baseNorm + finalRel;
+  // Use base WITHOUT trailing slash so we can prepend cleanly.
+  const baseNoSlash = base.replace(/\/+$/, "");
+
+  // Strip base from pathname; whatever's left starts with "/" (or is empty).
+  let rel = baseNoSlash && pathname.startsWith(baseNoSlash)
+    ? pathname.slice(baseNoSlash.length)
+    : pathname;
+  if (!rel.startsWith("/")) rel = "/" + rel;
+
+  // Toggle: strip "/zh" if present, otherwise prepend "/zh".
+  let target: string;
+  if (rel === "/zh" || rel === "/zh/" || rel.startsWith("/zh/")) {
+    target = rel.replace(/^\/zh/, "") || "/";
+  } else {
+    target = "/zh" + rel;
+  }
+
+  if (!target.endsWith("/")) target += "/";
+  return baseNoSlash + target;
 }
