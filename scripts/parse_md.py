@@ -141,6 +141,27 @@ for line in conf_block.splitlines():
 if current_conf:
     conferences.append(current_conf)
 
+# ---- Topic translation (Chinese → English for rendering) ----
+TOPIC_MAP = {
+    # patents
+    "液流电池": "Flow battery",
+    "锂电/穿梭剂": "Li-ion redox shuttles",
+    "锂电/电解质": "Li-ion electrolytes",
+    "硅负极/粘合剂": "Silicon-anode binders",
+    # publications
+    "液流电池/氧化还原活性分子": "Flow battery / redox-active molecules",
+    "锂离子电池/电解质": "Li-ion electrolytes",
+    "机器学习/计算化学": "ML / computational chemistry",
+    "锌电池/水系电池": "Zn / aqueous batteries",
+    "超级电容器/储能材料": "Supercapacitors / energy storage",
+    "储能技术-综合": "Energy storage (broad)",
+    "其他": "Other",
+}
+for entry in patents:
+    entry["topic"] = TOPIC_MAP.get(entry["topic"], entry["topic"])
+for entry in publications:
+    entry["topic"] = TOPIC_MAP.get(entry["topic"], entry["topic"])
+
 # ---- Role detection (first / corresponding / co) ----
 # Strict policy:
 #   - "first"          if Lu Zhang is the first listed author

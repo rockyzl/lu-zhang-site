@@ -50,7 +50,6 @@ const TOTAL = ISSUED + APPS;
               {p.note && <span class="badge" style="background: #e1ecff; color: #2456a8;">continuation</span>}
             </div>
             <div class="meta">{p.title_en}</div>
-            <div class="meta">{p.title_cn}</div>
             <div class="meta" style="font-style: italic;">Inventors: {p.inventors}</div>
           </div>
         ))}
@@ -66,7 +65,6 @@ const TOTAL = ISSUED + APPS;
           <span class="badge" style={`background: ${a.status === 'Pending' ? '#e3f1ee' : '#f0ece2'}; color: ${a.status === 'Pending' ? '#2d5d5e' : '#6b5c30'};`}>{a.status.toLowerCase()}</span>
         </div>
         <div class="meta">{a.title_en}</div>
-        <div class="meta">{a.title_cn}</div>
         <div class="meta" style="font-style: italic;">Inventors: {a.inventors}</div>
         <div class="meta">Filing no.: {a.filing_no} · Topic: {a.topic}</div>
       </div>
@@ -80,7 +78,7 @@ const TOTAL = ISSUED + APPS;
           <span style="color: var(--c-muted); font-weight: 400;"> ({a.year})</span>
           <span class="badge" style="background: #f0ece2; color: #6b5c30;">non-provisional</span>
         </div>
-        <div class="meta">{a.title_en} · {a.title_cn}</div>
+        <div class="meta">{a.title_en}</div>
         <div class="meta">Provisional: {a.provisional_no}. {a.status}.</div>
         <div class="meta" style="font-style: italic;">Inventors: {a.inventors}</div>
         <div class="meta">{a.note}</div>
