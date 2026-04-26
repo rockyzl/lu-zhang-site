@@ -1,0 +1,37 @@
+---
+import "../styles/global.css";
+const { title = "Lu Zhang", description = "Battery scientist & data engineer." } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <header class="site">
+      <div class="inner">
+        <a class="name" href="/">Lu Zhang</a>
+        <nav>
+          <a href="/about/">About</a>
+          <a href="/publications/">Publications</a>
+          <a href="/patents/">Patents</a>
+          <a href="/talks/">Talks</a>
+          <a href="/projects/">Projects</a>
+          <a href="/ai/">AI</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <slot />
+    </main>
+    <footer class="site">
+      © 2026 Lu Zhang ·
+      <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en">Google Scholar</a> ·
+      <a href="https://github.com/rockyzl">GitHub</a>
+    </footer>
+  </body>
+</html>

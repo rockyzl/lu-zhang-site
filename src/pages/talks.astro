@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+import conferences from "../data/conferences.json";
+
+const sorted = [...conferences].sort((a, b) => b.year - a.year);
+---
+<Base title="Talks — Lu Zhang">
+  <h1>Conference Talks &amp; Abstracts</h1>
+  <p class="lead">{conferences.length} conference presentations, primarily at ECS Meetings and APS.</p>
+
+  {sorted.map((c) => (
+    <div class="entry">
+      <div class="title">{c.title}</div>
+      <div class="meta">{c.venue} · {c.year}{c.citations ? ` · ${c.citations} citations` : ""}</div>
+    </div>
+  ))}
+</Base>

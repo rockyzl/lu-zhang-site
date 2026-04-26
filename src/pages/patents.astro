@@ -1,0 +1,30 @@
+---
+import Base from "../layouts/Base.astro";
+import patents from "../data/patents.json";
+
+const byTopic = patents.reduce((acc, p) => {
+  (acc[p.topic] = acc[p.topic] || []).push(p);
+  return acc;
+}, {});
+---
+<Base title="Patents — Lu Zhang">
+  <h1>US Patents</h1>
+  <p class="lead">{patents.length} issued US patents (OSTI verified). Listed by research area, newest first.</p>
+
+  {Object.entries(byTopic).map(([topic, items]) => (
+    <section>
+      <h2>{topic}</h2>
+      {items.sort((a, b) => b.year - a.year).map((p) => (
+        <div class="entry">
+          <div class="title">
+            <a href={`https://patents.google.com/patent/${p.patent_no.replace(/\s|,/g, "")}`}>{p.patent_no}</a>
+            <span style="color:var(--c-muted)"> ({p.year})</span>
+          </div>
+          <div class="meta">{p.title_en}</div>
+          <div class="meta">{p.title_cn}</div>
+          <div class="meta">Inventors: {p.inventors}</div>
+        </div>
+      ))}
+    </section>
+  ))}
+</Base>

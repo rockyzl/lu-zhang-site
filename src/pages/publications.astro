@@ -1,0 +1,58 @@
+---
+import Base from "../layouts/Base.astro";
+import publications from "../data/publications.json";
+
+const sorted = [...publications].sort((a, b) => (b.year || 0) - (a.year || 0) || b.citations - a.citations);
+const topics = [...new Set(publications.map((p) => p.topic))].filter(Boolean);
+---
+<Base title="Publications — Lu Zhang">
+  <h1>Publications</h1>
+  <p class="lead">{publications.length} peer-reviewed journal articles. Filter by topic, search by title or journal.</p>
+
+  <div class="toolbar">
+    <input id="q" type="search" placeholder="Search title, authors, journal…" />
+    <select id="topic">
+      <option value="">All topics</option>
+      {topics.map((t) => <option value={t}>{t}</option>)}
+    </select>
+    <select id="role">
+      <option value="">Any role</option>
+      <option value="first">First author</option>
+      <option value="corresponding">Corresponding (heuristic)</option>
+      <option value="co">Co-author</option>
+    </select>
+  </div>
+
+  <div id="list">
+    {sorted.map((p) => (
+      <div class="entry" data-topic={p.topic} data-role={p.role} data-text={(p.title + " " + p.authors + " " + p.journal).toLowerCase()}>
+        <div class="title">
+          {p.doi ? <a href={p.doi}>{p.title}</a> : p.title}
+          {p.role === "first" && <span class="badge first">first</span>}
+          {p.role === "corresponding" && <span class="badge corresponding">corresp.</span>}
+        </div>
+        <div class="meta">{p.authors}</div>
+        <div class="meta">{p.journal} · {p.year} · {p.citations} citations · <em>{p.topic}</em></div>
+      </div>
+    ))}
+  </div>
+
+  <script is:inline>
+    const q = document.getElementById("q");
+    const topic = document.getElementById("topic");
+    const role = document.getElementById("role");
+    function apply() {
+      const qv = q.value.trim().toLowerCase();
+      const tv = topic.value;
+      const rv = role.value;
+      document.querySelectorAll("#list .entry").forEach((el) => {
+        const text = el.dataset.text || "";
+        const matchQ = !qv || text.includes(qv);
+        const matchT = !tv || el.dataset.topic === tv;
+        const matchR = !rv || el.dataset.role === rv;
+        el.style.display = matchQ && matchT && matchR ? "" : "none";
+      });
+    }
+    [q, topic, role].forEach((el) => el.addEventListener("input", apply));
+  </script>
+</Base>
