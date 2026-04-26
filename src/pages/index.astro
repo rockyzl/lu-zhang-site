@@ -73,12 +73,12 @@ const PATENT_COUNT_TOTAL = 28; // 25 issued + 2 published applications + 1 non-p
               {n.link ? <a href={n.link}>{n.title}</a> : n.title}
             </div>
             <div class="blurb">{n.blurb}</div>
-            {n.image && (
-              <a class="preview" href={n.link ?? "#"}>
-                <img src={u(n.image)} alt={n.title} loading="lazy" />
-              </a>
-            )}
           </div>
+          {n.image && (
+            <a class="preview" href={n.link ?? "#"}>
+              <img src={u(n.image)} alt={n.title} loading="lazy" />
+            </a>
+          )}
         </article>
       ))}
     </div>

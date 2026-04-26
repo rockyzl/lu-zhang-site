@@ -287,14 +287,17 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
 .news-list { display: flex; flex-direction: column; gap: 0; }
 .news-item {
   display: grid;
-  grid-template-columns: 110px 1fr;
+  grid-template-columns: 110px 1fr auto;
   gap: 1.5rem;
+  align-items: start;
   padding: 1.4rem 0;
   border-bottom: 1px solid var(--c-border-soft);
 }
 .news-item:last-child { border-bottom: none; }
-@media (max-width: 600px) {
-  .news-item { grid-template-columns: 1fr; gap: 0.4rem; }
+.news-item:not(:has(.preview)) { grid-template-columns: 110px 1fr; }
+@media (max-width: 700px) {
+  .news-item,
+  .news-item:not(:has(.preview)) { grid-template-columns: 1fr; gap: 0.4rem; }
 }
 .news-meta { color: var(--c-muted); font-size: 0.86rem; padding-top: 0.1rem; }
 .news-meta .date { font-weight: 600; color: var(--c-fg); }
@@ -313,25 +316,30 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
 .news-tag.Career { background: #e3f1ee; color: #2d5d5e; border-color: transparent; }
 .news-body .title { font-weight: 600; color: var(--c-ink); margin-bottom: 0.35rem; }
 .news-body .blurb { font-size: 0.95rem; color: var(--c-muted); }
-.news-body .preview {
-  margin-top: 0.8rem;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  border: 1px solid var(--c-border);
+/* Thumbnail-style preview: small, contained, sits to the right of text on
+   desktop and below on mobile. Never dominates the entry. */
+.news-item .preview {
   display: block;
-  aspect-ratio: 16 / 9;
-  max-width: 480px;
+  width: 160px;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--c-border);
+  overflow: hidden;
+  margin: 0;
 }
-.news-body .preview img {
+.news-item .preview img {
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: top center;
   display: block;
   transition: transform .4s ease;
 }
-.news-body .preview:hover img { transform: scale(1.02); }
-@media (max-width: 600px) {
-  .news-body .preview { max-width: 100%; aspect-ratio: 3 / 2; }
+.news-item .preview:hover img { transform: scale(1.02); }
+@media (max-width: 700px) {
+  .news-item .preview {
+    width: 100%; max-width: 280px;
+    margin-top: 0.6rem;
+  }
 }
 
 /* ============================================================
