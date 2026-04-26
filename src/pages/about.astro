@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
 ---
 <Base title="About — Lu Zhang">
   <div class="container" style="padding-top: 3rem;">
@@ -9,7 +10,7 @@ import Base from "../layouts/Base.astro";
         <span>L · Z</span>
         <span class="placeholder-hint">photo: drop public/images/portrait.jpg</span>
       </div>
-      <img src="/images/portrait.jpg" alt="Lu Zhang" onerror="this.remove()" />
+      <img src={u("/images/portrait.jpg")} alt="Lu Zhang" onerror="this.remove()" />
     </div>
     <div>
       <span class="eyebrow">Bio</span>

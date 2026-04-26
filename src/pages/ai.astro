@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
 import aiProjects from "../data/ai_projects.json";
 
 const industrial = [
@@ -37,31 +38,51 @@ const industrial = [
     </section>
 
     <div class="section-head">
-      <h2>Personal &amp; open-source projects</h2>
-      <span class="more">{aiProjects.length} active</span>
+      <h2>Selected projects</h2>
+      <span class="more">{aiProjects.length} shown · live or shipping</span>
     </div>
     <div class="featured-grid">
-      {aiProjects.map((p) => (
-        <div class="project-card">
-          {p.image ? (
-            <div class="cover"><img src={p.image} alt={p.name} loading="lazy" /></div>
-          ) : (
-            <div class={`cover gradient ${p.gradient ?? "from-rust to-amber"}`}>
-              <span class="glyph">{p.name}</span>
+      {aiProjects.map((p) => {
+        const linkHref = p.site ?? p.repo ?? null;
+        const Outer = linkHref ? "a" : "div";
+        const outerProps = linkHref
+          ? { href: linkHref, target: "_blank", rel: "noopener", class: "project-card" }
+          : { class: "project-card" };
+        return (
+          <Outer {...outerProps}>
+            {p.image ? (
+              <div class="cover"><img src={u(p.image)} alt={p.name} loading="lazy" /></div>
+            ) : (
+              <div class={`cover gradient ${p.gradient ?? "from-rust to-amber"}`}>
+                <span class="glyph">{p.name}</span>
+              </div>
+            )}
+            <div class="body">
+              <div class="name">{p.name}</div>
+              <div class="tagline">{p.tagline}</div>
+              <div class="description">{p.description}</div>
+              <div class="status">{p.status}</div>
+              <div class="tags">
+                {p.tags.map((t) => <span class="tag">{t}</span>)}
+              </div>
+              {(p.site || p.repo) && (
+                <div style="margin-top: 0.5rem; display: flex; gap: 0.6rem; font-size: 0.85rem;">
+                  {p.site && <span style="color: var(--c-accent); font-weight: 500;">↗ Live site</span>}
+                  {p.repo && <span style="color: var(--c-muted);">⌗ Source</span>}
+                </div>
+              )}
             </div>
-          )}
-          <div class="body">
-            <div class="name">{p.name}</div>
-            <div class="tagline">{p.tagline}</div>
-            <div class="description">{p.description}</div>
-            <div class="status">{p.status}</div>
-            <div class="tags">
-              {p.tags.map((t) => <span class="tag">{t}</span>)}
-            </div>
-          </div>
-        </div>
-      ))}
+          </Outer>
+        );
+      })}
     </div>
+
+    <p style="color: var(--c-muted); font-size: 0.9rem; margin-top: 1.5rem;">
+      More tools and experiments live on
+      <a href="https://github.com/rockyzl">github.com/rockyzl</a>
+      — primarily personal Claude Code skills, RAG / agent prototypes, and
+      research scripts. They are not productized and not listed here.
+    </p>
 
     <div class="section-head">
       <h2>Industrial roles</h2>
@@ -72,18 +93,6 @@ const industrial = [
         <div class="meta"><strong style="color: var(--c-fg);">{p.period}</strong> — {p.note}</div>
       </div>
     ))}
-
-    <div class="section-head">
-      <h2>Why this combination matters</h2>
-    </div>
-    <p class="prose" style="font-size: 1rem; color: var(--c-fg); max-width: 720px;">
-      The most interesting energy-AI work over the next decade will demand
-      both depths: graduate-level electrochemistry intuition for posing the
-      <em>right</em> questions, and production ML literacy for shipping
-      systems that earn trust at scale. The
-      <code style="font-family: var(--font-mono); background: var(--c-bg-soft); padding: 1px 6px; border-radius: 4px;">rfb-formulation-agent</code>
-      project is the explicit attempt to compound the two.
-    </p>
 
   </div>
 </Base>

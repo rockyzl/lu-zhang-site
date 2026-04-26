@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
 import publications from "../data/publications.json";
 import patents from "../data/patents.json";
 import conferences from "../data/conferences.json";
@@ -10,8 +11,6 @@ import aiProjects from "../data/ai_projects.json";
 const totalCitations = publications.reduce((s, p) => s + (p.citations || 0), 0);
 const firstAuthor = publications.filter((p) => p.role === "first").length;
 const corresponding = publications.filter((p) => p.role === "corresponding").length;
-
-const featuredAI = aiProjects.slice(0, 3);
 ---
 <Base title="Lu Zhang — Battery Scientist & Data Engineer">
 
@@ -32,9 +31,9 @@ const featuredAI = aiProjects.slice(0, 3);
           cross-institution Sprint teams under JCESR (DOE BES).
         </p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="/publications/">Publications →</a>
-          <a class="btn btn-ghost" href="/ai/">AI projects</a>
-          <a class="btn btn-ghost" href="/about/">About</a>
+          <a class="btn btn-primary" href={u("/publications/")}>Publications →</a>
+          <a class="btn btn-ghost" href={u("/ai/")}>AI projects</a>
+          <a class="btn btn-ghost" href={u("/about/")}>About</a>
         </div>
       </div>
       <div class="portrait">
@@ -42,7 +41,7 @@ const featuredAI = aiProjects.slice(0, 3);
           <span>L · Z</span>
           <span class="placeholder-hint">photo: drop public/images/portrait.jpg</span>
         </div>
-        <img src="/images/portrait.jpg" alt="Lu Zhang" onerror="this.remove()" />
+        <img src={u("/images/portrait.jpg")} alt="Lu Zhang" onerror="this.remove()" />
       </div>
     </section>
 
@@ -75,7 +74,7 @@ const featuredAI = aiProjects.slice(0, 3);
             <div class="blurb">{n.blurb}</div>
             {n.image && (
               <a class="preview" href={n.link ?? "#"}>
-                <img src={n.image} alt={n.title} loading="lazy" />
+                <img src={u(n.image)} alt={n.title} loading="lazy" />
               </a>
             )}
           </div>
@@ -86,13 +85,13 @@ const featuredAI = aiProjects.slice(0, 3);
     <!-- ========== FEATURED RESEARCH ========== -->
     <div class="section-head">
       <h2>Featured research</h2>
-      <a class="more" href="/publications/">All publications →</a>
+      <a class="more" href={u("/publications/")}>All publications →</a>
     </div>
     <div class="featured-grid">
       {featured.map((f) => (
         <a class="feature-card" href={f.doi ?? "#"}>
           {f.image ? (
-            <div class="cover"><img src={f.image} alt={f.title} loading="lazy" /></div>
+            <div class="cover"><img src={u(f.image)} alt={f.title} loading="lazy" /></div>
           ) : (
             <div class={`cover gradient ${f.gradient ?? "from-amber to-rust"}`}>
               <span class="glyph">{f.journal}<br/><span style="font-weight:400; font-size:0.85em;">{f.year}</span></span>
@@ -115,29 +114,36 @@ const featuredAI = aiProjects.slice(0, 3);
     <!-- ========== AI SPOTLIGHT ========== -->
     <div class="section-head">
       <h2>AI &amp; engineering</h2>
-      <a class="more" href="/ai/">All projects →</a>
+      <a class="more" href={u("/ai/")}>All projects →</a>
     </div>
     <div class="featured-grid">
-      {featuredAI.map((p) => (
-        <div class="project-card">
-          {p.image ? (
-            <div class="cover"><img src={p.image} alt={p.name} loading="lazy" /></div>
-          ) : (
-            <div class={`cover gradient ${p.gradient ?? "from-rust to-amber"}`}>
-              <span class="glyph">{p.name}</span>
+      {aiProjects.map((p) => {
+        const linkHref = p.site ?? p.repo ?? null;
+        const Outer = linkHref ? "a" : "div";
+        const outerProps = linkHref
+          ? { href: linkHref, target: "_blank", rel: "noopener", class: "project-card" }
+          : { class: "project-card" };
+        return (
+          <Outer {...outerProps}>
+            {p.image ? (
+              <div class="cover"><img src={u(p.image)} alt={p.name} loading="lazy" /></div>
+            ) : (
+              <div class={`cover gradient ${p.gradient ?? "from-rust to-amber"}`}>
+                <span class="glyph">{p.name}</span>
+              </div>
+            )}
+            <div class="body">
+              <div class="name">{p.name}</div>
+              <div class="tagline">{p.tagline}</div>
+              <div class="description">{p.description}</div>
+              <div class="status">{p.status}</div>
+              <div class="tags">
+                {p.tags.map((t) => <span class="tag">{t}</span>)}
+              </div>
             </div>
-          )}
-          <div class="body">
-            <div class="name">{p.name}</div>
-            <div class="tagline">{p.tagline}</div>
-            <div class="description">{p.description}</div>
-            <div class="status">{p.status}</div>
-            <div class="tags">
-              {p.tags.map((t) => <span class="tag">{t}</span>)}
-            </div>
-          </div>
-        </div>
-      ))}
+          </Outer>
+        );
+      })}
     </div>
 
   </div>

@@ -1,62 +1,35 @@
 [
   {
+    "name": "lu-zhang-site",
+    "tagline": "This site — academic homepage with structured data layer",
+    "description": "Astro static site driven by JSON data extracted from a master research record. 143 publications, 23 patents, 38 talks, all filterable. Open source.",
+    "status": "Live",
+    "tags": ["Astro", "open source", "data-driven"],
+    "image": null,
+    "gradient": "from-amber to-rust",
+    "site": "https://rockyzl.github.io/lu-zhang-site/",
+    "repo": "https://github.com/rockyzl/lu-zhang-site"
+  },
+  {
+    "name": "meditation-study",
+    "tagline": "Personal meditation learning platform",
+    "description": "Web app for studying a meditation teacher-training course. Built around session JSON, polished script generation, and TTS audio playback. Daily-use product.",
+    "status": "Live",
+    "tags": ["Next.js", "TTS", "personal product"],
+    "image": null,
+    "gradient": "from-teal to-navy",
+    "site": "https://meditation-study.vercel.app",
+    "repo": null
+  },
+  {
     "name": "rfb-formulation-agent",
     "tagline": "AI scientist for redox flow battery formulation",
-    "description": "A vertical-domain AI agent that screens electrolyte formulations for redox flow batteries. Distills 17 years of flow-battery chemistry into automated reasoning. A focused alternative to broad ML-for-materials platforms.",
-    "status": "Pre-v0.1 · private",
+    "description": "A vertical-domain AI agent that screens electrolyte formulations for redox flow batteries. Distills 17 years of flow-battery chemistry into automated reasoning. The flagship intersection of battery science + AI.",
+    "status": "In progress · pre-v0.1",
     "tags": ["LLM agents", "electrochemistry", "materials discovery"],
     "image": null,
     "gradient": "from-rust to-amber",
-    "link": null
-  },
-  {
-    "name": "huashu-nuwa (女娲造人)",
-    "tagline": "Distill any expert into a runnable Claude skill",
-    "description": "Deep research → cognitive framework extraction → executable persona. Two entry modes: explicit person to distill, or fuzzy need that gets diagnosed and recommended into a skill.",
-    "status": "Active · public",
-    "tags": ["Claude Code", "skill engineering", "knowledge distillation"],
-    "image": "/images/ai/nuwa-cover.jpg",
-    "gradient": null,
-    "link": null
-  },
-  {
-    "name": "wiki-sb",
-    "tagline": "Personal Karpathy-style LLM Wiki maintainer",
-    "description": "Multi-vault Obsidian maintainer enforcing schema, append-only logs, and source immutability. Subcommands: ingest, query (with citations), lint, new-source/task/decision/person/project.",
-    "status": "Active · personal",
-    "tags": ["Claude Code", "knowledge management", "Obsidian"],
-    "image": "/images/ai/agents-parallel.jpg",
-    "gradient": null,
-    "link": null
-  },
-  {
-    "name": "meditation-voice-gen",
-    "tagline": "JSON → polished TTS audio pipeline",
-    "description": "End-to-end pipeline: rewrite under style guide, sentence-segment, cue pauses, generate MP3. Multi-language support.",
-    "status": "Active · personal",
-    "tags": ["TTS", "audio pipeline", "agent orchestration"],
-    "image": null,
-    "gradient": "from-teal to-navy",
-    "link": null
-  },
-  {
-    "name": "claude-config",
-    "tagline": "Personal Claude Code harness",
-    "description": "Reusable skill / command / agent / hook configuration. Includes /team, /team-quick orchestration patterns and project-context layering.",
-    "status": "Active · private",
-    "tags": ["Claude Code", "developer tooling"],
-    "image": null,
-    "gradient": "from-rose to-orange",
-    "link": null
-  },
-  {
-    "name": "gws-gmail",
-    "tagline": "Google Workspace agent CLI",
-    "description": "Rust binary for triage, read, send, and reply integrated as a Claude skill. Cross-project Gmail access for any agent workflow.",
-    "status": "Active · public",
-    "tags": ["Rust", "Gmail", "CLI"],
-    "image": null,
-    "gradient": "from-amber to-teal",
-    "link": null
+    "site": null,
+    "repo": null
   }
 ]
