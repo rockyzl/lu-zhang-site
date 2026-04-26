@@ -1,7 +1,7 @@
 ---
-import Base from "../layouts/Base.astro";
-import { detectLocale, t } from "../lib/i18n";
-import publications from "../data/publications.json";
+import Base from "../../layouts/Base.astro";
+import { detectLocale, t } from "../../lib/i18n";
+import publications from "../../data/publications.json";
 
 const locale = detectLocale(Astro.url.pathname);
 const sorted = [...publications].sort((a, b) => (b.year || 0) - (a.year || 0) || b.citations - a.citations);

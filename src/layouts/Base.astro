@@ -1,21 +1,29 @@
 ---
 import "../styles/global.css";
 import { u } from "../lib/url";
+import { detectLocale, t, altLocalePath, type Locale } from "../lib/i18n";
+
 const { title = "Lu Zhang", description = "Battery scientist & data engineer." } = Astro.props;
 const pathname = Astro.url.pathname;
+const locale: Locale = detectLocale(pathname);
+const langPrefix = locale === "zh" ? "/zh" : "";
+const otherLocale: Locale = locale === "zh" ? "en" : "zh";
+const altPath = altLocalePath(pathname, import.meta.env.BASE_URL);
+
 const nav = [
-  { href: "/about/", label: "About" },
-  { href: "/publications/", label: "Publications" },
-  { href: "/patents/", label: "Patents" },
-  { href: "/projects/", label: "Projects" },
-  { href: "/talks/", label: "Talks" },
-  { href: "/press/", label: "Press" },
-  { href: "/ai/", label: "AI" },
+  { href: `${langPrefix}/about/`,        key: "nav.about" },
+  { href: `${langPrefix}/publications/`, key: "nav.publications" },
+  { href: `${langPrefix}/patents/`,      key: "nav.patents" },
+  { href: `${langPrefix}/projects/`,     key: "nav.projects" },
+  { href: `${langPrefix}/talks/`,        key: "nav.talks" },
+  { href: `${langPrefix}/press/`,        key: "nav.press" },
+  { href: `${langPrefix}/ai/`,           key: "nav.ai" },
 ];
 const isActive = (href) => pathname === u(href) || (href !== "/" && pathname.startsWith(u(href)));
+const homeHref = locale === "zh" ? "/zh/" : "/";
 ---
 <!doctype html>
-<html lang="en">
+<html lang={locale === "zh" ? "zh-CN" : "en"}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,17 +34,18 @@ const isActive = (href) => pathname === u(href) || (href !== "/" && pathname.sta
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Noto+Serif+SC:wght@400;500;600&display=swap"
     />
   </head>
-  <body>
+  <body data-locale={locale}>
     <header class="site">
       <div class="inner">
-        <a class="name" href={u("/")}>Lu Zhang</a>
+        <a class="name" href={u(homeHref)}>Lu Zhang</a>
         <nav>
           {nav.map((n) => (
-            <a href={u(n.href)} class={isActive(n.href) ? "active" : ""}>{n.label}</a>
+            <a href={u(n.href)} class={isActive(n.href) ? "active" : ""}>{t(n.key, locale)}</a>
           ))}
+          <a class="lang-toggle" href={altPath} aria-label="Switch language">{locale === "zh" ? "EN" : "中"}</a>
         </nav>
       </div>
     </header>
@@ -45,9 +54,29 @@ const isActive = (href) => pathname === u(href) || (href !== "/" && pathname.sta
     </main>
     <footer class="site">
       © 2026 Lu Zhang ·
-      <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en">Google Scholar</a> ·
-      <a href="https://github.com/rockyzl">GitHub</a> ·
-      <a href="mailto:zhanglu77@gmail.com">Email</a>
+      <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en">{t("footer.scholar", locale)}</a> ·
+      <a href="https://github.com/rockyzl">{t("footer.github", locale)}</a> ·
+      <a href="mailto:zhanglu77@gmail.com">{t("footer.email", locale)}</a>
     </footer>
   </body>
 </html>
+
+<style is:global>
+  body[data-locale="zh"] {
+    --font-serif: "Noto Serif SC", "Newsreader", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", serif;
+  }
+  .lang-toggle {
+    margin-left: 1.4rem;
+    padding: 0.18rem 0.55rem;
+    border: 1px solid var(--c-border);
+    border-radius: 999px;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    color: var(--c-fg) !important;
+  }
+  .lang-toggle:hover { background: var(--c-bg-soft); color: var(--c-accent) !important; }
+  @media (max-width: 760px) {
+    .lang-toggle { margin-left: 0.5rem !important; flex-shrink: 0; }
+  }
+</style>

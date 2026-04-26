@@ -1,7 +1,7 @@
 ---
-import Base from "../layouts/Base.astro";
-import { detectLocale, t } from "../lib/i18n";
-import projectsData from "../data/projects.json";
+import Base from "../../layouts/Base.astro";
+import { detectLocale, t } from "../../lib/i18n";
+import projectsData from "../../data/projects.json";
 
 const locale = detectLocale(Astro.url.pathname);
 const totalCount = projectsData.categories.reduce((s, c) => s + c.items.length, 0);

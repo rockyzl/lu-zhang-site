@@ -1,8 +1,8 @@
 ---
-import Base from "../layouts/Base.astro";
-import { detectLocale, t } from "../lib/i18n";
-import conferences from "../data/conferences.json";
-import invitedData from "../data/invited_talks.json";
+import Base from "../../layouts/Base.astro";
+import { detectLocale, t } from "../../lib/i18n";
+import conferences from "../../data/conferences.json";
+import invitedData from "../../data/invited_talks.json";
 
 const locale = detectLocale(Astro.url.pathname);
 const invited = invitedData.talks.sort((a, b) => b.year - a.year);
