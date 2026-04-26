@@ -1,5 +1,21 @@
 [
   {
+    "date": "2025",
+    "tag": "Publication",
+    "title": "First-author paper on 4 V magnesium-battery electrolyte chemistry",
+    "blurb": "Extending non-nucleophilic Mg(TFSI)₂ as a 4 V magnesium-battery electrolyte. Continues the post-ANL collaborative line on next-generation battery chemistries beyond Li-ion.",
+    "image": null,
+    "link": null
+  },
+  {
+    "date": "2025",
+    "tag": "Publication",
+    "title": "Automation-accelerated electrolyte design — follow-up to Nature Comm 2024",
+    "blurb": "Applying ML-guided automation to mitigate solubility competition in flow-battery electrolytes. Direct continuation of the 2024 robotic-platform work.",
+    "image": null,
+    "link": null
+  },
+  {
     "date": "2026-04",
     "tag": "AI",
     "title": "Building rfb-formulation-agent — AI scientist for redox flow battery formulation",

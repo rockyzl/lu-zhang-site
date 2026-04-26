@@ -1,8 +1,30 @@
 [
   {
+    "title": "Deciphering the interfacial electrochemistry of non-nucleophilic Mg(TFSI)₂ as 4 V magnesium-battery electrolyte",
+    "journal": "Magnesium battery electrolyte study",
+    "year": 2025,
+    "citations": 4,
+    "role": "first",
+    "highlight": "First-author 2025 work on 4 V magnesium battery electrolytes — extending non-nucleophilic Mg(TFSI)₂ chemistry into high-voltage operation.",
+    "image": null,
+    "doi": null,
+    "gradient": "from-rust to-amber"
+  },
+  {
+    "title": "Automation-Accelerated Electrolyte Design Mitigates Solubility Competition",
+    "journal": "Electrolyte automation study",
+    "year": 2025,
+    "role": "co-author",
+    "highlight": "2025 follow-up to the Nature Comm 2024 robotic platform — applying ML-guided automation to address solubility competition in flow-battery electrolytes.",
+    "image": null,
+    "doi": null,
+    "gradient": "from-amber to-teal"
+  },
+  {
     "title": "An integrated high-throughput robotic platform and active learning approach for accelerated discovery of optimal electrolyte formulations",
     "journal": "Nature Communications",
     "year": 2024,
+    "citations": 59,
     "role": "co-author",
     "highlight": "Robotic platform + ML for electrolyte discovery — bridging chemistry and AI.",
     "image": "/images/news/nature-comm-2024-robotic.jpg",
