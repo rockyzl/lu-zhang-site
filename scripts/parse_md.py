@@ -1,13 +1,35 @@
 #!/usr/bin/env python3
-"""Parse 学术成果完整记录.md → JSON files for Astro site."""
+"""Parse the academic-record markdown into JSON files for the Astro site.
+
+Source location:
+    Override with the LU_SITE_DATA_SOURCE env var pointing to the markdown file.
+    Otherwise falls back to a sibling-repo relative path.
+"""
 
 import json
+import os
 import re
+import sys
 from pathlib import Path
 
-SRC = Path("/home/lu2/dev/personal/zip/张鲁-申报材料-工作文档/研究报告/学术成果完整记录.md")
-OUT = Path(__file__).parent.parent / "src" / "data"
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_SRC = (
+    REPO_ROOT.parent
+    / "zip"
+    / "张鲁-申报材料-工作文档"
+    / "研究报告"
+    / "学术成果完整记录.md"
+)
+SRC = Path(os.environ.get("LU_SITE_DATA_SOURCE", str(DEFAULT_SRC)))
+OUT = REPO_ROOT / "src" / "data"
 OUT.mkdir(parents=True, exist_ok=True)
+
+if not SRC.exists():
+    sys.exit(
+        f"ERROR: data source not found at {SRC}\n"
+        "Set LU_SITE_DATA_SOURCE to the absolute path of 学术成果完整记录.md, "
+        "or place the source repo as a sibling of lu-zhang-site/."
+    )
 
 text = SRC.read_text(encoding="utf-8")
 
