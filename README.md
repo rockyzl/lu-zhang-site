@@ -1,6 +1,13 @@
 # lu-zhang-site
 
-Personal site for Lu Zhang — battery scientist & data engineer.
+[![Live site](https://img.shields.io/badge/live-rockyzl.github.io%2Flu--zhang--site-b8531a?style=flat-square)](https://rockyzl.github.io/lu-zhang-site/)
+[![Deploy](https://img.shields.io/github/actions/workflow/status/rockyzl/lu-zhang-site/deploy.yml?branch=main&style=flat-square&label=deploy)](https://github.com/rockyzl/lu-zhang-site/actions/workflows/deploy.yml)
+[![Astro](https://img.shields.io/badge/built%20with-Astro%205-bc52ee?style=flat-square&logo=astro)](https://astro.build)
+[![License](https://img.shields.io/badge/license-MIT-2d5d5e?style=flat-square)](LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/rockyzl/lu-zhang-site?style=flat-square)](https://github.com/rockyzl/lu-zhang-site/commits/main)
+
+Personal site for **Lu Zhang** — battery scientist & data engineer.
+14+ years at Argonne National Laboratory · R&D 100 Award (2014) · 143 papers · 28 patents.
 Live: <https://rockyzl.github.io/lu-zhang-site/>
 
 ## Stack
