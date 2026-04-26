@@ -1,0 +1,18 @@
+{
+  "_doc": "Invited and featured talks. Source: 张鲁-申报材料-工作文档/写稿过程/成果总表_2026-04-26/01_会议与报告全面总结.md (canonical 2026-04-26 ledger).",
+  "talks": [
+    {"year": 2024, "venue": "MRS Spring Meeting — ES05",                              "location": "Seattle, WA",          "type": "Invited speaker",                          "title": "Invited speaker (title not yet captured)"},
+    {"year": 2022, "venue": "ECS 241st Meeting — Lithium Ion Batteries",              "location": "Vancouver, Canada",    "type": "Invited speaker",                          "title": "Invited speaker (title not yet captured)"},
+    {"year": 2021, "venue": "International Battery Seminar — Battery Mgmt Systems",   "location": "Online",               "type": "Speaker + panel moderator",                "title": "A Data-Driven Approach to Probe the Stability of Dialkoxy Benzene Catholytes for Nonaqueous Redox Flow Batteries"},
+    {"year": 2019, "venue": "ECS 235th Meeting — Large-Scale Energy Storage 10",      "location": "Dallas, TX",           "type": "Invited speaker",                          "title": "Invited speaker (title not yet captured)"},
+    {"year": 2018, "venue": "MRS Spring Meeting",                                     "location": "Phoenix, AZ",          "type": "Invited",                                  "title": "Stable Dialkoxybenzenes as Catholyte Materials for Non-Aqueous Redox Flow Batteries"},
+    {"year": 2018, "venue": "International Battery Seminar & Exhibit",                "location": "Fort Lauderdale, FL",  "type": "Featured / Invited",                       "title": "Stable Annulated Dialkoxybenzenes as Catholyte Materials for Non-Aqueous Redox Flow Batteries"},
+    {"year": 2018, "venue": "ICESI Annual Meeting (国际储能与创新联盟)",                "location": "Dalian, China",        "type": "Invited",                                  "title": "液流电池有机活性材料研究进展 / Flow battery organic active materials"},
+    {"year": 2017, "venue": "International Battery Seminar & Exhibit",                "location": "Fort Lauderdale, FL",  "type": "Invited",                                  "title": "Redox Shuttle Additives towards Safer Lithium-Ion Batteries"},
+    {"year": 2016, "venue": "MRS Fall Meeting",                                       "location": "Boston, MA",           "type": "Invited",                                  "title": "Building Stable Radical Cations for Non-Aqueous Redox Flow Batteries"},
+    {"year": 2016, "venue": "PRiME / ECS Meeting",                                    "location": "Honolulu, HI",         "type": "Conference presentation",                  "title": "Building Stable Radical Cations for Non-Aqueous Redox Flow Batteries"},
+    {"year": 2014, "venue": "ECEE International Conference",                          "location": "Shanghai, China",      "type": "Invited",                                  "title": "Organic Redox Active Molecular Engineer for Non-Aqueous Redox Flow Battery"},
+    {"year": 2014, "venue": "Florida State University Seminar",                       "location": "Tallahassee, FL",      "type": "Invited seminar",                          "title": "Organic Molecules in Batteries"},
+    {"year": 2012, "venue": "29th International Battery Seminar",                     "location": "Fort Lauderdale, FL",  "type": "Invited",                                  "title": "Recent Development of Redox Shuttles for Li-Ion Batteries at Argonne"}
+  ]
+}

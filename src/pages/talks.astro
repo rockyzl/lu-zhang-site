@@ -1,20 +1,46 @@
 ---
 import Base from "../layouts/Base.astro";
 import conferences from "../data/conferences.json";
+import invitedData from "../data/invited_talks.json";
 
-const sorted = [...conferences].sort((a, b) => b.year - a.year);
+const invited = invitedData.talks.sort((a, b) => b.year - a.year);
+const sortedConf = [...conferences].sort((a, b) => b.year - a.year);
 ---
 <Base title="Talks — Lu Zhang">
   <div class="container" style="padding-top: 3rem;">
-  <span class="eyebrow">38 conference presentations</span>
-  <h1>Conference Talks &amp; Abstracts</h1>
-  <p class="lead">{conferences.length} conference presentations, primarily at ECS Meetings and APS.</p>
+    <span class="eyebrow">{invited.length} invited / featured · {conferences.length} conference abstracts</span>
+    <h1>Talks &amp; Presentations</h1>
+    <p class="lead">
+      Invited keynotes and conference talks across the major battery-research
+      venues — MRS, ECS, IBS, ICESI — plus 38 conference abstracts (primarily
+      ECS Meeting Abstracts and APS Bulletin).
+    </p>
 
-  {sorted.map((c) => (
-    <div class="entry">
-      <div class="title">{c.title}</div>
-      <div class="meta">{c.venue} · {c.year}{c.citations ? ` · ${c.citations} citations` : ""}</div>
+    <div class="section-head">
+      <h2 style="margin:0;">Invited &amp; featured talks ({invited.length})</h2>
+      <span class="more">2012 – 2024</span>
     </div>
-  ))}
+    {invited.map((t) => (
+      <div class="entry">
+        <div class="title">{t.title}</div>
+        <div class="meta">
+          <strong style="color: var(--c-fg);">{t.venue}</strong>
+          {" · "}{t.location}{" · "}{t.year}
+          <span class="badge" style={`background: ${t.type.toLowerCase().includes("invited") || t.type.toLowerCase().includes("featured") ? "#fde7d6" : "#f0ece2"}; color: ${t.type.toLowerCase().includes("invited") || t.type.toLowerCase().includes("featured") ? "#b8531a" : "#6b5c30"};`}>{t.type}</span>
+        </div>
+      </div>
+    ))}
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">Conference abstracts ({conferences.length})</h2>
+      <span class="more">latest first</span>
+    </div>
+    {sortedConf.map((c) => (
+      <div class="entry">
+        <div class="title">{c.title}</div>
+        <div class="meta">{c.venue} · {c.year}{c.citations ? ` · ${c.citations} citations` : ""}</div>
+      </div>
+    ))}
+
   </div>
 </Base>

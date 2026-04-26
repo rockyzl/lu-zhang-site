@@ -1,68 +1,15 @@
 ---
 import Base from "../layouts/Base.astro";
+import projectsData from "../data/projects.json";
 
-const projects = [
-  {
-    name: "Organic Molecular Engineering for Non-Aqueous Redox Flow Batteries (NRFBs)",
-    funder: "JCESR — DOE BES Energy Frontier Research Center",
-    years: "2013 – 2020",
-    role: "PI / sub-thrust lead / Sprint team leader",
-    highlights: [
-      "Designed liquid catholyte molecules (ANL-8/9) — featured in Argonne Today and JCESR Research Highlights",
-      "Discovered the lightest organic radical cation for charge storage (Scientific Reports, 2016)",
-      "Led the 'low-potential Sprint' team across 3 universities + 2 national labs",
-      "Y3 milestone leader for self-reporting fluorescent redoxmers (JCESR 2.0)",
-    ],
-  },
-  {
-    name: "Polymeric Binder Development for Silicon Lithium-Ion Batteries",
-    funder: "DOE EERE / Vehicle Technologies Office (VTO)",
-    years: "2016 – 2020",
-    role: "Principal Investigator",
-    highlights: [
-      "First systematic study of poly(acrylic acid) molecular-weight effect on silicon-anode performance (J. Power Sources)",
-      "Identified Mn 24–150 kDa as the optimal range; revealed low-MW PAA causes ester cleavage and adhesion loss",
-      "Developed crosslinked siloxane-based binders integrating adhesion and elasticity functions",
-    ],
-  },
-  {
-    name: "Advanced Electrolyte Additives for PHEV/EV Lithium-Ion Battery",
-    funder: "DOE ABR (Applied Battery Research)",
-    years: "2010 – 2014",
-    role: "Researcher → Co-investigator",
-    highlights: [
-      "Established a structure-based screening framework for SEI additives (cyclic + double-bond + unsaturation)",
-      "Discovered redox-shuttle additives for overcharge protection — basis of multiple US patents",
-      "Synthesized novel cyclic phosphate additive (EMP) with improved capacity retention and impedance",
-    ],
-  },
-  {
-    name: "High-Energy-Density Flow Batteries",
-    funder: "Argonne LDRD",
-    years: "2018 – 2020",
-    role: "Principal Investigator",
-    highlights: [
-      "Multi-electron redox-active molecules (TMPD, DMN, MPT) — up to 1183 Wh/kg theoretical specific energy",
-      "Mixed-flow battery demonstration with BODMA cycling 150+ times stably",
-    ],
-  },
-  {
-    name: "Redox-Shuttle Capacity Balancing (industrial)",
-    funder: "Daimler — industrial sponsored research",
-    years: "2020",
-    role: "Principal Investigator",
-    highlights: [
-      "Industrial collaboration translating Argonne shuttle chemistries into pack-level balancing",
-    ],
-  },
-];
+const totalCount = projectsData.categories.reduce((s, c) => s + c.items.length, 0);
 
 const collaborations = [
-  ["MIT", "Prof. Fikile Brushett — anolyte molecules (since 2014)"],
-  ["PNNL", "Flow battery testing & cell engineering (since 2015)"],
-  ["UIUC", "Electrolyte design & molecular modeling (since 2015)"],
-  ["University of Michigan", "ROMs stability studies (since 2016)"],
-  ["Daimler", "Industrial overcharge-protection translation (2020)"],
+  ["MIT", "Prof. Fikile Brushett — anolyte molecule design", "since 2014"],
+  ["PNNL", "Flow battery testing & cell engineering", "since 2015"],
+  ["UIUC", "Electrolyte design & molecular modeling", "since 2015"],
+  ["University of Michigan", "ROMs stability studies", "since 2016"],
+  ["Daimler", "Industrial overcharge-protection translation", "2020"],
 ];
 
 const teamGrowth = [
@@ -71,56 +18,83 @@ const teamGrowth = [
   ["2015", "1 postdoc + visiting student · led JCESR low-potential Sprint (3 universities + 2 labs)"],
   ["2016 – 2017", "2 postdocs + 2 students · led electrolyte-optimization Sprint (UIUC, PNNL, ANL)"],
   ["2018", "3 postdocs + 1 student · JCESR 2.0 sub-thrust lead"],
-  ["2020", "3 postdocs + 1 student · JCESR Y3 milestone lead"],
+  ["2020 – 2023", "3 postdocs + 1 student · JCESR Y3 milestone lead"],
 ];
 ---
 <Base title="Funded Projects — Lu Zhang">
   <div class="container" style="padding-top: 3rem;">
-  <span class="eyebrow">DOE-funded battery research at Argonne</span>
-  <h1>Funded Research Projects</h1>
-  <p class="lead">
-    DOE-funded battery research at Argonne National Laboratory across three
-    interconnected lines: redox flow batteries, silicon anodes, and Li-ion
-    electrolytes. Bridging fundamental molecular design to industrial
-    translation.
-  </p>
+    <span class="eyebrow">{totalCount} projects across 4 directions</span>
+    <h1>Funded Research Projects</h1>
+    <p class="lead">
+      DOE-funded battery research at Argonne National Laboratory across four
+      interconnected lines: redox flow batteries, silicon anodes, autonomous
+      ML-driven discovery, and membrane / lithium-recovery technology.
+      Bridging fundamental molecular design to industrial translation.
+    </p>
 
-  {projects.map((p) => (
-    <div class="entry">
-      <div class="title">{p.name}</div>
-      <div class="meta"><strong>{p.funder}</strong> · {p.years} · {p.role}</div>
-      <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--c-fg); font-size: 0.95rem;">
-        {p.highlights.map((h) => <li>{h}</li>)}
-      </ul>
-    </div>
-  ))}
+    {projectsData.categories.map((cat) => (
+      <section style="margin-top: 3rem;">
+        <div class="section-head">
+          <h2 style="margin: 0;">{cat.title}</h2>
+          <span class="more">{cat.items.length}</span>
+        </div>
+        <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">{cat.subtitle}</p>
+        {cat.items.map((p) => (
+          <div class="entry">
+            <div class="title">{p.name}</div>
+            <div class="meta">
+              <strong style="color: var(--c-fg);">{p.funder}</strong> · {p.years} · {p.role}
+            </div>
+            {p.highlights && p.highlights.length > 0 && (
+              <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--c-fg); font-size: 0.93rem; line-height: 1.55;">
+                {p.highlights.map((h) => <li>{h}</li>)}
+              </ul>
+            )}
+          </div>
+        ))}
+      </section>
+    ))}
 
-  <h2>Team growth</h2>
-  <table style="width:100%; border-collapse:collapse;">
-    <thead>
-      <tr><th style="text-align:left; border-bottom:1px solid var(--c-border); padding:0.5rem;">Year</th><th style="text-align:left; border-bottom:1px solid var(--c-border); padding:0.5rem;">Group / leadership</th></tr>
-    </thead>
-    <tbody>
-      {teamGrowth.map(([y, g]) => (
-        <tr><td style="padding:0.5rem; border-bottom:1px solid var(--c-border); white-space:nowrap;">{y}</td><td style="padding:0.5rem; border-bottom:1px solid var(--c-border);">{g}</td></tr>
-      ))}
-    </tbody>
-  </table>
+    <section style="margin-top: 3.5rem;">
+      <div class="section-head"><h2 style="margin:0;">Capability themes</h2></div>
+      <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">
+        Cross-cutting expertise developed across the projects above.
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 1rem;">
+        {projectsData.capability_themes.map((t) => (
+          <div style="background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-sm); padding: 0.9rem 1rem; font-size: 0.92rem;">
+            {t}
+          </div>
+        ))}
+      </div>
+    </section>
 
-  <h2>Active collaborations</h2>
-  <table style="width:100%; border-collapse:collapse;">
-    <tbody>
-      {collaborations.map(([inst, desc]) => (
-        <tr><td style="padding:0.5rem; border-bottom:1px solid var(--c-border); white-space:nowrap; font-weight:600;">{inst}</td><td style="padding:0.5rem; border-bottom:1px solid var(--c-border);">{desc}</td></tr>
-      ))}
-    </tbody>
-  </table>
+    <section style="margin-top: 3.5rem;">
+      <div class="section-head"><h2 style="margin:0;">Team growth</h2></div>
+      <table>
+        <thead><tr><th style="width: 180px;">Year</th><th>Group / leadership</th></tr></thead>
+        <tbody>
+          {teamGrowth.map(([y, g]) => (
+            <tr><td style="white-space:nowrap; font-weight:500;">{y}</td><td>{g}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
 
-  <h2>Recognition</h2>
-  <ul>
-    <li><strong>R&amp;D 100 Award</strong> (2014) — for redox-shuttle technology</li>
-    <li><strong>R&amp;D 100 Award Finalist</strong> (2015)</li>
-    <li>Featured in <em>Argonne Today</em> and <em>JCESR Research Highlights</em></li>
-  </ul>
+    <section style="margin-top: 3.5rem;">
+      <div class="section-head"><h2 style="margin:0;">Active collaborations</h2></div>
+      <table>
+        <tbody>
+          {collaborations.map(([inst, desc, when]) => (
+            <tr>
+              <td style="white-space:nowrap; font-weight:600; color: var(--c-fg);">{inst}</td>
+              <td>{desc}</td>
+              <td style="white-space:nowrap; color: var(--c-muted);">{when}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+
   </div>
 </Base>

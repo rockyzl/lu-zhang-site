@@ -1,0 +1,219 @@
+{
+  "_doc": "Project ledger sourced from 张鲁-申报材料-工作文档/wiki/entities/张鲁_项目总表.md (canonical, updated 2026-04-24).",
+  "categories": [
+    {
+      "key": "doe_main",
+      "title": "DOE / JCESR public-facing projects",
+      "subtitle": "Primary funded research at Argonne, 2010 – 2023",
+      "items": [
+        {
+          "name": "Advanced Electrolyte Additives for PHEV/EV Lithium-ion Battery",
+          "funder": "DOE ABR (Applied Battery Research)",
+          "years": "2010 – 2014",
+          "role": "Researcher → Co-investigator",
+          "highlights": [
+            "Structure-based screening framework for SEI additives (cyclic + double-bond + unsaturation)",
+            "Discovered redox-shuttle additives for overcharge protection — basis of multiple US patents",
+            "Synthesized cyclic phosphate additive (EMP) with improved capacity retention"
+          ],
+          "evidence": "公开已核实"
+        },
+        {
+          "name": "Organic Molecular Engineering for Non-Aqueous Redox Flow Batteries (NRFBs / ROMs)",
+          "funder": "JCESR — DOE BES Energy Frontier Research Center",
+          "years": "2013 – 2020",
+          "role": "Theme Lead · Sprint team leader · Y3 milestone lead",
+          "highlights": [
+            "Designed liquid catholytes ANL-8/9 — featured in Argonne Today and JCESR Research Highlights",
+            "Discovered the lightest organic radical cation for charge storage (Sci. Rep. 2016)",
+            "Led the cross-institution low-potential Sprint (3 universities + 2 national labs)",
+            "Led JCESR 2.0 Y3 milestone for self-reporting fluorescent redoxmers"
+          ],
+          "evidence": "本地原始文件 + 部分公开已核实"
+        },
+        {
+          "name": "Silicon Consortium Project — Science of Manufacturing for Silicon Anodes",
+          "funder": "DOE EERE / Vehicle Technologies Office",
+          "years": "2014 – 2021",
+          "role": "Principal Investigator (binders sub-thrust)",
+          "highlights": [
+            "First systematic study of PAA molecular-weight effect on silicon-anode performance",
+            "Identified Mn 24–150 kDa as the optimal range; revealed low-MW PAA causes ester cleavage and adhesion loss",
+            "Developed crosslinked siloxane-based binders integrating adhesion and elasticity"
+          ],
+          "evidence": "公开已核实"
+        },
+        {
+          "name": "Flow Batteries Technology Strategy Assessment / Storage Innovations 2030",
+          "funder": "DOE — long-duration storage roadmap",
+          "years": "2022 – 2023",
+          "role": "Co-author · DOE flow-battery information lead",
+          "highlights": [
+            "Co-author of the 2023 DOE Flow Batteries Technology Strategy Assessment",
+            "Contributed to the Storage Innovations 2030 framework launched at the 2022 Energy Storage Grand Challenge Summit",
+            "Engaged industry listening session: 22 attendees from 14 commercial entities"
+          ],
+          "evidence": "公开已核实 + 用户确认"
+        }
+      ]
+    },
+    {
+      "key": "ldrd",
+      "title": "LDRD / internal Argonne research",
+      "subtitle": "Laboratory-Directed R&D and exploratory programs, 2018 – ongoing",
+      "items": [
+        {
+          "name": "High-Density Energy Storage in Solvent-Free Redox Flow Batteries for Flexible Electric Grid",
+          "funder": "Argonne LDRD (2018-100)",
+          "years": "2018 – 2020",
+          "role": "Principal Investigator (with Ilya A. Shkrob)",
+          "highlights": [
+            "Multi-electron redoxmers (TMPD, DMN, MPT) → up to 1183 Wh/kg theoretical specific energy",
+            "Mixed-flow battery demonstration with BODMA cycling 150+ times stably"
+          ]
+        },
+        {
+          "name": "Hybrid Membranes for Flow Batteries",
+          "funder": "Argonne LDRD (2021-0087)",
+          "years": "2021 – 2023",
+          "role": "Project member · membrane sub-thrust (with Jeffrey Elam)",
+          "highlights": [
+            "ALD / sequential infiltration synthesis (SIS) for tunable flow-battery membranes"
+          ]
+        },
+        {
+          "name": "Autonomous Laboratory Research Expedition",
+          "funder": "Argonne LDRD (2021-0394)",
+          "years": "2021 – 2023",
+          "role": "Project participant — autonomous discovery platform",
+          "highlights": [
+            "Foundation for the AI + robotics electrolyte-discovery platform that became the 2024 Nature Communications paper"
+          ]
+        },
+        {
+          "name": "Organic Aqueous Hybrid Flow Batteries",
+          "funder": "Argonne LDRD (2022-0095)",
+          "years": "2022 – 2024",
+          "role": "Co-PI (with Lei Cheng)",
+          "highlights": []
+        },
+        {
+          "name": "Scalable Membrane Architecture from Recycled Plastics for Low-Cost Redox Flow Batteries",
+          "funder": "Argonne LDRD (2022-0196)",
+          "years": "2022 – 2024",
+          "role": "Co-PI (with Shrayesh Patel)",
+          "highlights": [
+            "Waste polystyrene → ion-exchange membranes for aqueous flow batteries and lithium extraction",
+            "US non-provisional patent application (63/734,300) filed 2024-12-16"
+          ]
+        },
+        {
+          "name": "3D Printed Interfaces for Solid-State Batteries",
+          "funder": "Argonne LDRD (2022-0226)",
+          "years": "2021 – 2024",
+          "role": "Project participant",
+          "highlights": [
+            "3D printing for solid-state battery interface engineering"
+          ]
+        },
+        {
+          "name": "Novel Polymer Binders for Direct Cathode Recycling",
+          "funder": "Argonne LDRD (2023-0003)",
+          "years": "2022 – ongoing",
+          "role": "Co-PI (with Ilya Shkrob, Albert Lipson)",
+          "highlights": [
+            "Fluoropolymer-removal binder-solvent system for direct Li-ion cathode recycling"
+          ]
+        },
+        {
+          "name": "Selective Ion Exchange Membranes for Lithium Recovery",
+          "funder": "Argonne LDRD (2023-0048)",
+          "years": "2023 – ongoing",
+          "role": "Co-PI (with Albert Lipson, A H M Golam Hyder)",
+          "highlights": [
+            "Crown-ether-modified cation exchange membranes for selective Li recovery via electrodialysis",
+            "US application 2024/0252991 A1 (pending)"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "ai_platform",
+      "title": "AI / ML / autonomous-discovery platforms",
+      "subtitle": "Computational and robotic acceleration of materials discovery",
+      "items": [
+        {
+          "name": "Quantum-Chemistry-Guided Multiobjective Bayesian Optimization for Energy-Storage Molecules",
+          "funder": "publication-driven research line",
+          "years": "2021",
+          "role": "Co-author",
+          "highlights": [
+            "Multiobjective Bayesian optimization for redox-active molecule discovery",
+            "Earliest of his ML-driven design publications"
+          ]
+        },
+        {
+          "name": "High-Throughput Robotic Platform with Active Learning for Electrolyte Discovery",
+          "funder": "Argonne — Polybot/N9 platform",
+          "years": "2021 – 2024",
+          "role": "Co-author of flagship Nature Communications 2024 paper",
+          "highlights": [
+            "Robotic chemistry + active learning → accelerated discovery of optimal electrolyte formulations",
+            "Direct precursor to rfb-formulation-agent — the personal AI scientist project"
+          ]
+        },
+        {
+          "name": "Autonomous Discovery for Battery Electrolytes",
+          "funder": "ANL internal (FY23)",
+          "years": "2023 – ongoing",
+          "role": "Project lead (internal proposal)",
+          "highlights": [
+            "Autonomous discovery framework extended from RFB electrolytes to Li-metal battery electrolytes"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "membrane_recovery",
+      "title": "Membrane materials & lithium recovery",
+      "subtitle": "Functional membranes — flow batteries, plastic upcycling, ionic separation",
+      "items": [
+        {
+          "name": "ALD/SIS-Tuned Hybrid Membranes (Jeffrey Elam collaboration)",
+          "funder": "ANL collaborative",
+          "years": "2021 – 2023",
+          "role": "Collaborator",
+          "highlights": [
+            "Atomic-layer deposition / sequential infiltration synthesis of flow-battery membranes"
+          ]
+        },
+        {
+          "name": "Upcycling Plastics into Battery Separating Membranes",
+          "funder": "ANL — Shrayesh Patel collaboration",
+          "years": "2022 – ongoing",
+          "role": "Co-lead",
+          "highlights": [
+            "Waste polystyrene → battery separator membranes for liquid-electrolyte and aqueous flow batteries"
+          ]
+        },
+        {
+          "name": "PS Upcycling Membrane → Aqueous Flow Battery & Lithium Extraction",
+          "funder": "ANL internal — ongoing",
+          "years": "2024 – ongoing",
+          "role": "Project lead (user-confirmed)",
+          "highlights": [
+            "Patent advanced to finalized US non-provisional draft (ANL 23-T-154 / ANL-IN-22-134)",
+            "Manuscript in preparation"
+          ]
+        }
+      ]
+    }
+  ],
+  "capability_themes": [
+    "Lithium-ion electrolytes & additives",
+    "Non-aqueous and aqueous redox flow batteries / redoxmer chemistry",
+    "Functional membranes & ionic-selective separation",
+    "High-throughput robotic & AI/ML autonomous discovery",
+    "Advanced manufacturing — 3D printing, recycling, binders"
+  ]
+}
