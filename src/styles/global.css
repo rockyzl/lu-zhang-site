@@ -63,7 +63,7 @@ body {
 a { color: var(--c-accent); text-decoration: none; transition: color .15s; }
 a:hover { color: var(--c-rust); }
 
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 
 p { margin: 0.6rem 0 1rem; }
 
@@ -318,14 +318,21 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   border-radius: var(--radius-sm);
   overflow: hidden;
   border: 1px solid var(--c-border);
-  max-height: 220px;
+  display: block;
+  aspect-ratio: 16 / 9;
+  max-width: 480px;
 }
 .news-body .preview img {
-  width: 100%; height: 100%; object-fit: cover;
+  width: 100%; height: 100%;
+  object-fit: cover;
   object-position: top center;
+  display: block;
   transition: transform .4s ease;
 }
 .news-body .preview:hover img { transform: scale(1.02); }
+@media (max-width: 600px) {
+  .news-body .preview { max-width: 100%; aspect-ratio: 3 / 2; }
+}
 
 /* ============================================================
    FEATURED CARDS
