@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import ScienceArt from "../../components/ScienceArt.astro";
 import { u } from "../../lib/url";
 import { detectLocale, t } from "../../lib/i18n";
 
@@ -112,10 +113,8 @@ const featuredIn = isZh
   <div class="container" style="padding-top: 3rem;">
   <div style="display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; align-items: start;" class="about-hero">
     <div class="portrait square">
-      <div class="placeholder-mark">
-        <span>L · Z</span>
-        <span class="placeholder-hint">{t("home.portrait.hint", locale)}</span>
-      </div>
+      <ScienceArt class="science-art" />
+      <span class="placeholder-hint">{t("home.portrait.hint", locale)}</span>
       <img src={u("/images/portrait.jpg")} alt="Lu Zhang" onerror="this.remove()" />
     </div>
     <div>

@@ -1,0 +1,53 @@
+---
+// Stylized 1,4-disubstituted benzene with delocalized aromatic system
+// and free-radical dots — visual nod to redox-active molecule chemistry
+// (the core research line: dialkoxybenzene catholytes, radical cations).
+//
+// Used as the portrait placeholder until a real photo is dropped at
+// public/images/portrait.jpg. Designed to read well at both 4:5 hero
+// aspect and 1:1 about-page square.
+---
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-label="Stylized redox-active molecule">
+  <!-- Subtle radial highlight, sits behind the molecule for depth -->
+  <defs>
+    <radialGradient id="haloLZ" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.16)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="90" r="80" fill="url(#haloLZ)" />
+
+  <!-- Aromatic ring (benzene skeleton) -->
+  <g transform="translate(100, 95)" fill="none" stroke="rgba(255,255,255,0.92)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+    <polygon points="0,-34 29.4,-17 29.4,17 0,34 -29.4,17 -29.4,-17" />
+    <!-- Inner dashed circle: delocalized π-system -->
+    <circle r="19" stroke-width="1.4" stroke-dasharray="2 3" opacity="0.7" />
+  </g>
+
+  <!-- Top alkoxy / methoxy substituent (—O—R) -->
+  <g stroke="rgba(255,255,255,0.85)" stroke-width="1.6" fill="none" stroke-linecap="round">
+    <line x1="100" y1="61" x2="100" y2="48" />
+    <circle cx="100" cy="44" r="3.4" fill="rgba(255,255,255,0.18)" />
+    <line x1="100" y1="40" x2="93"  y2="33" />
+    <line x1="100" y1="40" x2="107" y2="33" />
+  </g>
+
+  <!-- Bottom alkoxy substituent (mirror) -->
+  <g stroke="rgba(255,255,255,0.85)" stroke-width="1.6" fill="none" stroke-linecap="round">
+    <line x1="100" y1="129" x2="100" y2="142" />
+    <circle cx="100" cy="146" r="3.4" fill="rgba(255,255,255,0.18)" />
+    <line x1="100" y1="150" x2="93"  y2="157" />
+    <line x1="100" y1="150" x2="107" y2="157" />
+  </g>
+
+  <!-- Free-radical electron dots (oxidized state hint) -->
+  <circle cx="56"  cy="68"  r="2.6" fill="white" opacity="0.92" />
+  <circle cx="148" cy="132" r="2.2" fill="white" opacity="0.72" />
+  <circle cx="62"  cy="138" r="1.8" fill="white" opacity="0.55" />
+
+  <!-- L · Z monogram, restrained -->
+  <text x="100" y="190" text-anchor="middle"
+        font-family="Newsreader, 'Iowan Old Style', Georgia, serif"
+        font-size="14" font-weight="500" letter-spacing="0.18em"
+        fill="rgba(255,255,255,0.85)">L · Z</text>
+</svg>
