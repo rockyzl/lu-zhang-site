@@ -47,6 +47,7 @@
 html {
   font-size: 17px;
   scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem; /* offset anchor jumps for sticky header */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -587,14 +588,23 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
 .badge.first { background: #fde7d6; color: #b8531a; }
 .badge.corresponding { background: #e1ecff; color: #2456a8; }
 
-/* toolbar (pubs filtering) */
+/* toolbar (pubs filtering) — sticky below the site header so filters
+   are always reachable on long-list pages */
 .toolbar {
   display: flex; gap: 0.5rem; flex-wrap: wrap;
   margin: 1.5rem 0;
-  background: var(--c-card);
+  background: rgba(247, 244, 237, 0.96);
+  backdrop-filter: saturate(150%) blur(8px);
+  -webkit-backdrop-filter: saturate(150%) blur(8px);
   padding: 0.8rem;
   border-radius: var(--radius);
   border: 1px solid var(--c-border);
+  position: sticky;
+  top: 4rem;
+  z-index: 20;
+}
+@media (max-width: 760px) {
+  .toolbar { top: 3.4rem; padding: 0.55rem; }
 }
 .toolbar input, .toolbar select {
   padding: 0.5rem 0.8rem;
