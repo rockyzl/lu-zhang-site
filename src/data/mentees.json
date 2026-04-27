@@ -48,12 +48,12 @@
     },
     {
       "name": "Quinton J. Meisner",
-      "current_en": "industry placement (TBD)",
-      "current_zh": "工业界（去向待补）",
-      "role_en": "graduate student (co-advised by Lu Zhang)",
-      "role_zh": "研究生（张鲁共同指导）",
-      "thrust_en": "Li-S fluorinated ether electrolytes",
-      "thrust_zh": "Li-S 氟化醚电解液"
+      "current_en": "Tesla",
+      "current_zh": "Tesla",
+      "role_en": "graduate student (co-advised by Lu Zhang and Lei Zhu, FSU)",
+      "role_zh": "研究生（张鲁与 FSU Lei Zhu 共同指导）",
+      "thrust_en": "Li-S fluorinated ether electrolytes (FSU↔ANL cross-institution)",
+      "thrust_zh": "Li-S 氟化醚电解液（FSU↔ANL 跨机构）"
     }
   ],
   "postdocs": [
