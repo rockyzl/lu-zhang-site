@@ -2,9 +2,13 @@
   {
     "name": "lu-zhang-site",
     "tagline": "This site — academic homepage with structured data layer",
-    "description": "Astro static site driven by JSON data extracted from a master research record. 87 journal articles, 28 patents, 38 conference abstracts + 13 invited talks. Open source.",
+    "description": "Astro static site driven by JSON data extracted from a master research record. 99 publications (97 SCI + 2 book chapters), 28 patents (25 issued + 3 applications), 38+ conference abstracts + 13 invited talks. Open source.",
     "status": "Live",
-    "tags": ["Astro", "open source", "data-driven"],
+    "tags": [
+      "Astro",
+      "open source",
+      "data-driven"
+    ],
     "image": null,
     "gradient": "from-amber to-rust",
     "site": "https://rockyzl.github.io/lu-zhang-site/",
@@ -15,18 +19,43 @@
     "tagline": "Personal meditation learning platform",
     "description": "Web app for studying a meditation teacher-training course. Built around session JSON, polished script generation, and TTS audio playback. Daily-use product.",
     "status": "Live",
-    "tags": ["Next.js", "TTS", "personal product"],
+    "tags": [
+      "Next.js",
+      "TTS",
+      "personal product"
+    ],
     "image": null,
     "gradient": "from-teal to-navy",
     "site": "https://meditation-study.vercel.app",
     "repo": null
   },
   {
+    "name": "guangnian-energy-agent",
+    "tagline": "光年新能源智能体 — Azure-deployed RAG agent for new-energy industry client",
+    "description": "Live AI assistant deployed on Azure Container Apps for 光年新能源 (Guangnian New Energy). Built on Azure OpenAI GPT-4o + Azure AI Search retrieval (voice-rag stack), serves as a live customer-facing demo of AI × energy commercialization. Bilingual EN/ZH; Python aiohttp backend + lightweight web UI.",
+    "status": "Live · production",
+    "tags": [
+      "Azure OpenAI",
+      "RAG",
+      "voice-rag",
+      "AI × energy",
+      "client deployment"
+    ],
+    "image": null,
+    "gradient": "from-navy to-teal",
+    "site": "https://capps-backend-cjkrzvaj3737y.ambitiousmushroom-bd0f5384.eastus2.azurecontainerapps.io/",
+    "repo": "https://github.com/rockyzl/voice-rag"
+  },
+  {
     "name": "rfb-formulation-agent",
     "tagline": "AI scientist for redox flow battery formulation",
     "description": "A vertical-domain AI agent that screens electrolyte formulations for redox flow batteries. Distills 14+ years of flow-battery chemistry into automated reasoning. The flagship intersection of battery science + AI.",
     "status": "In progress · pre-v0.1",
-    "tags": ["LLM agents", "electrochemistry", "materials discovery"],
+    "tags": [
+      "LLM agents",
+      "electrochemistry",
+      "materials discovery"
+    ],
     "image": null,
     "gradient": "from-rust to-amber",
     "site": null,
