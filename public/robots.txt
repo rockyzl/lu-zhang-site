@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rockyzl.github.io/lu-zhang-site/sitemap-index.xml
