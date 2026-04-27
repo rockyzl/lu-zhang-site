@@ -10,6 +10,11 @@ const filtered = collaborators.filter((c) => c.count >= 2);
 const principal = collaborators.filter((c) => c.count >= 5);
 const recurring = collaborators.filter((c) => c.count >= 2 && c.count < 5);
 const oneOff = collaborators.filter((c) => c.count === 1);
+// Patent-only coauthors: collaborated on US patents but not on peer-reviewed
+// publications. Important to surface because they include UChicago (Patel,
+// Darling) and ANL membrane-team (Gao, Zhang, Li) — key for plastic-upcycling
+// and Li-recovery membrane work.
+const patentOnly = collaborators.filter((c) => c.via === "patent");
 
 // Strip institutional noise: OpenAlex sometimes attaches unrelated affiliations
 // (e.g. "Alex's Lemonade Stand Foundation"). Keep only obviously academic / lab.
@@ -33,7 +38,7 @@ function topInst(institutions: string[]): string {
 const TITLE_ZH = "科研合作者";
 const TITLE_EN = "Collaborators";
 ---
-<Base title={(isZh ? TITLE_ZH + " — " : TITLE_EN + " — ") + "张鲁 Lu Zhang"}>
+<Base title={(isZh ? TITLE_ZH + " — " : TITLE_EN + " — ") + "Lu Zhang"}>
   <div class="container" style="padding-top: 3rem;">
     <span class="eyebrow">{collaborators.length} {isZh ? "位独立合作者" : "unique collaborators"}</span>
     <h1>{isZh ? TITLE_ZH : TITLE_EN}</h1>
@@ -107,10 +112,41 @@ const TITLE_EN = "Collaborators";
       </div>
     </details>
 
+    {patentOnly.length > 0 && (
+      <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border-soft);">
+        <h2 style="margin-top: 0;">{isZh ? `仅专利合作者 (${patentOnly.length})` : `Patent-only coauthors (${patentOnly.length})`}</h2>
+        <p style="color: var(--c-muted); font-size: 0.92rem;">
+          {isZh
+            ? "在我授权或公开美国专利申请上担任共同发明人, 但尚未与之共同发表期刊论文 (常见于 UChicago Patel 组的废塑料制膜 LDRD + ANL 锂回收膜专利团队)。"
+            : "Co-inventors on my issued or published US patent applications who have not yet co-authored a peer-reviewed paper with me. Mostly from the UChicago Patel-group plastic-upcycling LDRD and the ANL Li-recovery membrane patent team."}
+        </p>
+        <table style="margin-top: 0.8rem;">
+          <thead>
+            <tr>
+              <th>{isZh ? "姓名" : "Name"}</th>
+              <th>{isZh ? "机构" : "Institution"}</th>
+              <th style="width: 80px; text-align: right;">{isZh ? "专利数" : "Patents"}</th>
+              <th>{isZh ? "备注" : "Note"}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {patentOnly.map((c) => (
+              <tr>
+                <td style="font-weight: 600;">{c.name}</td>
+                <td style="font-size: 0.9rem; color: var(--c-muted);">{topInst(c.institutions)}</td>
+                <td style="text-align: right;">{c.patent_count ?? 1}</td>
+                <td style="font-size: 0.88rem; color: var(--c-muted);">{isZh ? (c.note_zh ?? "") : (c.note_en ?? "")}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+
     <p style="color: var(--c-muted); font-size: 0.88rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border-soft);">
       {isZh
-        ? "数据源：OpenAlex API（作者 ID A5100388687），按本人机构过滤后再统计。每位合作者姓名链接到其 OpenAlex 主页。"
-        : "Source: OpenAlex API (author ID A5100388687), filtered by my own affiliation. Each name links to that researcher's OpenAlex page."}
+        ? "数据源：OpenAlex API（作者 ID A5100388687），按本人机构过滤后再统计；专利共同发明人补自 USPTO / Google Patents 公开记录。每位合作者姓名链接到其 OpenAlex 主页。"
+        : "Source: OpenAlex API (author ID A5100388687), filtered by my own affiliation; patent coinventors supplemented from USPTO / Google Patents public records. Each name links to that researcher's OpenAlex page."}
     </p>
   </div>
 </Base>

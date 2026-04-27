@@ -1647,5 +1647,49 @@
     "count": 1,
     "institutions": [],
     "openalex_id": "A5101850935"
+  },
+  {
+    "name": "Seth B. Darling",
+    "count": 0,
+    "patent_count": 1,
+    "institutions": [
+      "Argonne National Laboratory"
+    ],
+    "via": "patent",
+    "note_en": "ANL Director, Center for Molecular Engineering — co-inventor on US 2024/0252991 A1 (Li recovery membrane)",
+    "note_zh": "ANL 分子工程中心主任 — US 2024/0252991 A1（锂回收膜）共同发明人"
+  },
+  {
+    "name": "Feng Gao",
+    "count": 0,
+    "patent_count": 1,
+    "institutions": [
+      "Argonne National Laboratory"
+    ],
+    "via": "patent",
+    "note_en": "Co-inventor on US 2024/0252991 A1 (Li recovery membrane)",
+    "note_zh": "US 2024/0252991 A1（锂回收膜）共同发明人"
+  },
+  {
+    "name": "Yuepeng Zhang",
+    "count": 0,
+    "patent_count": 1,
+    "institutions": [
+      "Argonne National Laboratory"
+    ],
+    "via": "patent",
+    "note_en": "Co-inventor on US 2024/0252991 A1 (Li recovery membrane)",
+    "note_zh": "US 2024/0252991 A1（锂回收膜）共同发明人"
+  },
+  {
+    "name": "Shi Li",
+    "count": 0,
+    "patent_count": 1,
+    "institutions": [
+      "Argonne National Laboratory"
+    ],
+    "via": "patent",
+    "note_en": "Co-inventor on US 2024/0252991 A1 (Li recovery membrane)",
+    "note_zh": "US 2024/0252991 A1（锂回收膜）共同发明人"
   }
 ]
