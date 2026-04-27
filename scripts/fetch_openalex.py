@@ -21,6 +21,11 @@ EMPLOYER_KEYWORDS = [
     "uchicago argonne",
     "florida state university",
     "florida state",
+    # PhD era — Chinese Academy of Sciences
+    "chinese academy of sciences",
+    "academia sinica",
+    "institute of chemistry, chinese academy of sciences",
+    "technical institute of physics and chemistry",
     # Post-ANL roles (papers unlikely but possible)
     "american academy of orthopaedic surgeons",
     "aaos",
@@ -29,6 +34,7 @@ EMPLOYER_KEYWORDS = [
 ]
 
 OUT = Path(__file__).parent.parent / "src" / "data" / "publications.json"
+OUT_COAUTHORS = Path(__file__).parent.parent / "src" / "data" / "collaborators.json"
 
 
 def fetch_all_works():
@@ -144,6 +150,31 @@ def main():
         print(f"  {y}: {by_year[y]}")
     role_counts = Counter(p["role"] for p in verified)
     print(f"\nRoles: {dict(role_counts)}")
+
+    # ---- Collaborators: dedupe + count across the verified work set ----
+    coauthors: dict[str, dict] = {}
+    for w in works:
+        # Only count co-authors from verified papers
+        if not any(is_our_lu_zhang(a) for a in w.get("authorships", [])):
+            continue
+        for a in w["authorships"]:
+            name = a["author"]["display_name"]
+            if name.lower() == "lu zhang":
+                continue
+            insts = [i.get("display_name", "") for i in a.get("institutions", [])]
+            entry = coauthors.setdefault(name, {"name": name, "count": 0, "institutions": set(), "id": a["author"].get("id", "")})
+            entry["count"] += 1
+            entry["institutions"].update(insts)
+
+    collab_list = sorted(
+        ({"name": c["name"], "count": c["count"], "institutions": sorted(c["institutions"]), "openalex_id": c["id"].rsplit("/", 1)[-1] if c["id"] else ""}
+         for c in coauthors.values()),
+        key=lambda x: (-x["count"], x["name"]),
+    )
+
+    OUT_COAUTHORS.write_text(json.dumps(collab_list, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"\n  → wrote {OUT_COAUTHORS} ({len(collab_list)} unique collaborators)")
+    print("  Top 5:", " | ".join(f"{c['name']} ({c['count']})" for c in collab_list[:5]))
 
 
 if __name__ == "__main__":

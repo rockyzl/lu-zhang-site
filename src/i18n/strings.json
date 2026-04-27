@@ -6,6 +6,7 @@
   "nav.projects":    { "en": "Projects",       "zh": "项目" },
   "nav.talks":       { "en": "Talks",          "zh": "报告" },
   "nav.press":       { "en": "Press",          "zh": "媒体" },
+  "nav.collaborators":{"en": "Collaborators",  "zh": "合作者" },
   "nav.ai":          { "en": "AI",             "zh": "AI" },
 
   "footer.scholar":  { "en": "Google Scholar", "zh": "Google Scholar" },

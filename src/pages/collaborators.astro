@@ -1,0 +1,116 @@
+---
+import Base from "../layouts/Base.astro";
+import { detectLocale, t } from "../lib/i18n";
+import collaborators from "../data/collaborators.json";
+
+const locale = detectLocale(Astro.url.pathname);
+const isZh = locale === "zh";
+
+const filtered = collaborators.filter((c) => c.count >= 2);
+const principal = collaborators.filter((c) => c.count >= 5);
+const recurring = collaborators.filter((c) => c.count >= 2 && c.count < 5);
+const oneOff = collaborators.filter((c) => c.count === 1);
+
+// Strip institutional noise: OpenAlex sometimes attaches unrelated affiliations
+// (e.g. "Alex's Lemonade Stand Foundation"). Keep only obviously academic / lab.
+const RELEVANT_KEYWORDS = [
+  "university", "national lab", "argonne", "pacific northwest",
+  "oak ridge", "lawrence", "brookhaven", "fermilab", "berkeley",
+  "mit", "massachusetts institute", "stanford", "caltech", "princeton",
+  "cornell", "columbia", "harvard", "yale", "chicago", "northwestern",
+  "michigan", "illinois", "purdue", "tennessee", "delaware",
+  "academia sinica", "academy of sciences", "institute of",
+  "battelle", "pnnl", "csiro", "cnrs",
+];
+function topInst(institutions: string[]): string {
+  const cleaned = institutions.filter((i) => {
+    const lo = i.toLowerCase();
+    return RELEVANT_KEYWORDS.some((kw) => lo.includes(kw));
+  });
+  return (cleaned[0] || institutions[0] || "").replace(/\s*\(United States\)/g, "");
+}
+
+const TITLE_ZH = "科研合作者";
+const TITLE_EN = "Collaborators";
+---
+<Base title={(isZh ? TITLE_ZH + " — " : TITLE_EN + " — ") + "Lu Zhang"}>
+  <div class="container" style="padding-top: 3rem;">
+    <span class="eyebrow">{collaborators.length} {isZh ? "位独立合作者" : "unique collaborators"}</span>
+    <h1>{isZh ? TITLE_ZH : TITLE_EN}</h1>
+    <p class="lead">
+      {isZh
+        ? `汇总自我所有公开的同行评议论文（已按机构 affiliation 过滤至本人作品）。下表按合作论文数量排序，包括 Argonne、JCESR、PNNL、UIUC、MIT、UMichigan 等多机构网络的合作者。`
+        : `Compiled from all peer-reviewed publications (affiliation-verified to this Lu Zhang). Sorted by number of co-authored papers. Spans the Argonne / JCESR / PNNL / UIUC / MIT / UMichigan / FSU network plus international collaborators.`}
+    </p>
+
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 style="margin:0;">{isZh ? "主要合作者" : "Principal collaborators"} ({principal.length})</h2>
+      <span class="more">≥ 5 {isZh ? "篇论文" : "co-authored papers"}</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:60px; text-align:right;">#</th>
+          <th>{isZh ? "姓名" : "Name"}</th>
+          <th style="width:80px; text-align:right;">{isZh ? "篇数" : "Papers"}</th>
+          <th>{isZh ? "主要机构" : "Primary affiliation"}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {principal.map((c, i) => (
+          <tr>
+            <td style="text-align:right; color:var(--c-muted);">{i + 1}</td>
+            <td style="font-weight:600;">
+              {c.openalex_id
+                ? <a href={`https://openalex.org/${c.openalex_id}`} target="_blank" rel="noopener">{c.name}</a>
+                : c.name}
+            </td>
+            <td style="text-align:right;">{c.count}</td>
+            <td style="color:var(--c-muted); font-size:0.92em;">{topInst(c.institutions)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{isZh ? "经常合作者" : "Recurring collaborators"} ({recurring.length})</h2>
+      <span class="more">2 – 4 {isZh ? "篇" : "papers"}</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.5rem 1.5rem;">
+      {recurring.map((c) => (
+        <div style="font-size: 0.93rem; padding: 0.35rem 0; border-bottom: 1px dotted var(--c-border-soft);">
+          <span style="font-weight:500;">
+            {c.openalex_id
+              ? <a href={`https://openalex.org/${c.openalex_id}`} target="_blank" rel="noopener" style="color: var(--c-fg);">{c.name}</a>
+              : c.name}
+          </span>
+          <span style="color: var(--c-muted); font-size:0.82em;"> · {c.count}{isZh ? "篇" : ""}</span>
+        </div>
+      ))}
+    </div>
+
+    <details style="margin-top: 3rem;">
+      <summary style="cursor: pointer; font-family: var(--font-serif); font-weight: 600; font-size: 1.2rem; color: var(--c-ink);">
+        {isZh ? `单次合作者（${oneOff.length}）` : `One-time collaborators (${oneOff.length})`}
+      </summary>
+      <p style="color: var(--c-muted); font-size: 0.9em; margin-top: 0.5rem;">
+        {isZh ? "在某一篇论文上合作过一次。" : "Co-authored exactly once."}
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.2rem 1rem; margin-top: 0.8rem; font-size: 0.88rem;">
+        {oneOff.map((c) => (
+          <div style="padding: 0.15rem 0; color: var(--c-muted);">
+            {c.openalex_id
+              ? <a href={`https://openalex.org/${c.openalex_id}`} target="_blank" rel="noopener" style="color: var(--c-muted);">{c.name}</a>
+              : c.name}
+          </div>
+        ))}
+      </div>
+    </details>
+
+    <p style="color: var(--c-muted); font-size: 0.88rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border-soft);">
+      {isZh
+        ? "数据源：OpenAlex API（作者 ID A5100388687），按本人机构过滤后再统计。每位合作者姓名链接到其 OpenAlex 主页。"
+        : "Source: OpenAlex API (author ID A5100388687), filtered by my own affiliation. Each name links to that researcher's OpenAlex page."}
+    </p>
+  </div>
+</Base>
