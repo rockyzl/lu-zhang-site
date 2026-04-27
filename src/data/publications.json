@@ -464,6 +464,21 @@
     "kind": "conference"
   },
   {
+    "title": "Multiple charging and chemical stability of tripodal catholyte redoxmers",
+    "topic": "",
+    "authors": "Jingjing Zhang, I. Shkrob, Lily A. Robertson, Lu Zhang",
+    "journal": "Chemical Physics Letters",
+    "year": 2021,
+    "citations": 0,
+    "doi": "https://doi.org/10.1016/j.cplett.2021.139212",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true,
+    "kind": "journal"
+  },
+  {
     "title": "Restorable Neutralization of Poly(acrylic acid) Binders toward Balanced Processing Properties and Cycling Performance for Silicon Anodes in Lithium-Ion Batteries",
     "topic": "Advancements in Battery Materials",
     "authors": "Zhangxing Shi, Sisi Jiang, Lily A. Robertson, Yuyue Zhao, Erik Sarnello, Tao Li, et al.",
@@ -616,6 +631,21 @@
     ],
     "verified": true,
     "kind": "conference"
+  },
+  {
+    "title": "Unexpected electrochemical behaviors of 2,1,3-benzothiadiazole in various electrolytes: Solvation study to probe the interaction between redoxmer and cations",
+    "topic": "",
+    "authors": "Yuyue Zhao, Zhou Yu, Lily A. Robertson, Lei Cheng, Lu Zhang",
+    "journal": "",
+    "year": 2020,
+    "citations": 0,
+    "doi": "https://doi.org/10.1021/scimeetings.0c01875",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Re‐Engineering Poly(Acrylic Acid) Binder toward Optimized Electrochemical Performance for Silicon Lithium‐Ion Batteries: Branching Architecture Leads to Balanced Properties of Polymeric Binders",
@@ -1021,6 +1051,36 @@
     "kind": "journal"
   },
   {
+    "title": "“Wine-Dark Sea” in an Organic Flow Battery: Storing Negative Charge in 2,1,3-Benzothiadiazole Radicals Leads to Improved Cyclability",
+    "topic": "",
+    "authors": "Wentao Duan, Jinhua Huang, J. A. Kowalski, I. Shkrob, M. Vijayakumar, E. Walter, et al.",
+    "journal": "",
+    "year": 2017,
+    "citations": 160,
+    "doi": "https://doi.org/10.1021/acsenergylett.7b00261",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true,
+    "kind": "journal"
+  },
+  {
+    "title": "Functionality Selection Principle for High Voltage Lithium-ion Battery Electrolyte Additives.",
+    "topic": "",
+    "authors": "Chi‐Cheung Su, Meinan He, C. Peebles, Li Zeng, A. Tornheim, Chen Liao, et al.",
+    "journal": "ACS Applied Materials and Interfaces",
+    "year": 2017,
+    "citations": 86,
+    "doi": "https://doi.org/10.1021/acsami.7b08953",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true,
+    "kind": "journal"
+  },
+  {
     "title": "Annulated Dialkoxybenzenes as Catholyte Materials for Non‐aqueous Redox Flow Batteries: Achieving High Chemical Stability through Bicyclic Substitution",
     "topic": "Advanced battery technologies research",
     "authors": "Jingjing Zhang, Zheng Yang, Ilya A. Shkrob, Rajeev S. Assary, Siu on Tung, Benjamin Silcox, et al.",
@@ -1044,6 +1104,21 @@
     "citations": 33,
     "doi": "https://doi.org/10.1021/acs.jpcc.7b08281",
     "role": "corresponding",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true,
+    "kind": "journal"
+  },
+  {
+    "title": "Ionic Liquid as an Effective Additive for Rechargeable Magnesium Batteries",
+    "topic": "",
+    "authors": "Baofei Pan, Ka-Cheong Lau, J. Vaughey, Lu Zhang, Zhengcheng Zhang, Chen Liao",
+    "journal": "",
+    "year": 2017,
+    "citations": 23,
+    "doi": "https://doi.org/10.1149/2.1551704jes",
+    "role": "co",
     "affiliations": [
       "Argonne National Laboratory"
     ],
@@ -1189,6 +1264,21 @@
     "kind": "journal"
   },
   {
+    "title": "Polyanthraquinone‐Based Organic Cathode for High‐Performance Rechargeable Magnesium‐Ion Batteries",
+    "topic": "",
+    "authors": "Baofei Pan, Jinhua Huang, Zhenxing Feng, Li Zeng, Meinan He, Lu Zhang, et al.",
+    "journal": "",
+    "year": 2016,
+    "citations": 203,
+    "doi": "https://doi.org/10.1002/aenm.201600140",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true,
+    "kind": "journal"
+  },
+  {
     "title": "A symmetric organic-based nonaqueous redox flow battery and its state of charge diagnostics by FTIR",
     "topic": "Advanced battery technologies research",
     "authors": "Wentao Duan, R.S. Vemuri, Jarrod D. Milshtein, Sydney Laramie, Rylan Doyle Dmello, Jinhua Huang, et al.",
@@ -1229,6 +1319,21 @@
     "citations": 81,
     "doi": "https://doi.org/10.1038/srep32102",
     "role": "corresponding",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true,
+    "kind": "journal"
+  },
+  {
+    "title": "MgCl2: The Key Ingredient to Improve Chloride Containing Electrolytes for Rechargeable Magnesium-Ion Batteries",
+    "topic": "",
+    "authors": "Baofei Pan, Jinhua Huang, Niya Sa, Scott M. Brombosz, J. Vaughey, Lu Zhang, et al.",
+    "journal": "",
+    "year": 2016,
+    "citations": 49,
+    "doi": "https://doi.org/10.1149/2.0821608jes",
+    "role": "co",
     "affiliations": [
       "Argonne National Laboratory"
     ],
@@ -1352,6 +1457,36 @@
     "kind": "conference"
   },
   {
+    "title": "Building Stable Radical Cations for Non-Aqueous Redox Flow Batteries",
+    "topic": "",
+    "authors": "Lu Zhang, I. Shkrob, Wes Brogden, Wentao Duan, Xiaoliang Wei, R. Assary, et al.",
+    "journal": "",
+    "year": 2016,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2016-02/5/639",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true,
+    "kind": "journal"
+  },
+  {
+    "title": "Targeted Molecular Engineering of Dimethoxybenzenes for Non-Aqueous Redox Flow Batteries",
+    "topic": "",
+    "authors": "J. A. Kowalski, Jinhua Huang, Liang Su, Lu Zhang, F. Brushett",
+    "journal": "",
+    "year": 2016,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2016-01/32/1608",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true,
+    "kind": "journal"
+  },
+  {
     "title": "Radical Compatibility with Nonaqueous Electrolytes and Its Impact on an All‐Organic Redox Flow Battery",
     "topic": "Advanced battery technologies research",
     "authors": "Xiaoliang Wei, Wu Xu, Jinhua Huang, Lu Zhang, Éric Walter, Chad W. Lawrence, et al.",
@@ -1363,6 +1498,21 @@
     "affiliations": [
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
+    ],
+    "verified": true,
+    "kind": "journal"
+  },
+  {
+    "title": "Liquid Catholyte Molecules for Nonaqueous Redox Flow Batteries",
+    "topic": "",
+    "authors": "Jinhua Huang, Lei Cheng, R. Assary, Peiqi Wang, Z. Xue, A. Burrell, et al.",
+    "journal": "",
+    "year": 2015,
+    "citations": 138,
+    "doi": "https://doi.org/10.1002/aenm.201401782",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
     ],
     "verified": true,
     "kind": "journal"
@@ -1397,6 +1547,51 @@
       "Argonne National Laboratory",
       "University Surgical Associates",
       "Energy Storage Systems (United States)"
+    ],
+    "verified": true,
+    "kind": "journal"
+  },
+  {
+    "title": "A Lewis acid-free and phenolate-based magnesium electrolyte for rechargeable magnesium batteries.",
+    "topic": "",
+    "authors": "Baofei Pan, Junjie Zhang, Jinhua Huang, J. Vaughey, Lu Zhang, Sang‐Don Han, et al.",
+    "journal": "Chemical Communications",
+    "year": 2015,
+    "citations": 44,
+    "doi": "https://doi.org/10.1039/c5cc01225b",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true,
+    "kind": "journal"
+  },
+  {
+    "title": "1,4-Bis(trimethylsilyl)-2,5-dimethoxybenzene: a novel redox shuttle additive for overcharge protection in lithium-ion batteries that doubles as a mechanistic chemical probe",
+    "topic": "",
+    "authors": "Jinhua Huang, I. Shkrob, Peiqi Wang, Lei Cheng, Baofei Pan, Meinan He, et al.",
+    "journal": "",
+    "year": 2015,
+    "citations": 33,
+    "doi": "https://doi.org/10.1039/c5ta00899a",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true,
+    "kind": "journal"
+  },
+  {
+    "title": "An organophosphine oxide redox shuttle additive that delivers long-term overcharge protection for 4 V lithium-ion batteries",
+    "topic": "",
+    "authors": "Jinhua Huang, Nasim Azimi, Lei Cheng, I. Shkrob, Z. Xue, Junjie Zhang, et al.",
+    "journal": "",
+    "year": 2015,
+    "citations": 24,
+    "doi": "https://doi.org/10.1039/c5ta01326g",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
     ],
     "verified": true,
     "kind": "journal"
@@ -1640,6 +1835,21 @@
     ],
     "verified": true,
     "kind": "conference"
+  },
+  {
+    "title": "Tailored Redox Shuttle Additives for Overcharge Protection of Lithium-Ion Batteries",
+    "topic": "",
+    "authors": "Zhangcheng Zhang, Lu Zhang, Wei Weng, K. Amine",
+    "journal": "",
+    "year": 2012,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2012-02/12/1233",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Novel redox shuttle additive for high-voltage cathode materials",

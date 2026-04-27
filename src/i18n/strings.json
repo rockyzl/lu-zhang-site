@@ -35,7 +35,7 @@
 
   "home.eyebrow":    { "en": "Battery science · Machine learning · Industrial translation", "zh": "电池科学 · 机器学习 · 产业落地" },
   "home.role":       { "en": "Battery scientist with 14+ years at Argonne National Laboratory. Now bridging electrochemistry and ML for industrial-scale energy storage.", "zh": "电池科学家，于美国能源部阿贡国家实验室任职 14 年半（2009–2023）。当前致力于将电化学与机器学习结合，服务于工业级储能。" },
-  "home.lead":       { "en": "R&D 100 Award (2014) for redox-shuttle technology. 73 peer-reviewed publications, 28 issued US patents, 4,700+ citations. Built and led cross-institution Sprint teams under JCESR (DOE BES).", "zh": "2014 年 R&D 100 大奖获得者（氧化还原穿梭剂技术）。73 篇同行评议论文、28 项美国专利及申请、4,700+ 引用。曾在 JCESR（DOE BES 能源前沿研究中心）领导跨机构 Sprint 团队。" },
+  "home.lead":       { "en": "R&D 100 Award (2014) for redox-shuttle technology. 87 peer-reviewed publications, 28 issued US patents, 4,700+ citations. Built and led cross-institution Sprint teams under JCESR (DOE BES).", "zh": "2014 年 R&D 100 大奖获得者（氧化还原穿梭剂技术）。87 篇同行评议论文、28 项美国专利及申请、4,700+ 引用。曾在 JCESR（DOE BES 能源前沿研究中心）领导跨机构 Sprint 团队。" },
   "home.cta.publications":{ "en": "Publications →","zh": "论文 →" },
   "home.cta.ai":     { "en": "AI projects",     "zh": "AI 项目" },
   "home.cta.about":  { "en": "About",           "zh": "简介" },
@@ -72,7 +72,7 @@
 
   "page.publications.eyebrow":{ "en":"Peer-reviewed journal articles", "zh":"同行评议期刊论文" },
   "page.publications.title":{ "en":"Publications","zh":"论文" },
-  "page.publications.lead":{ "en":"73 peer-reviewed journal articles. Filter by topic, search by title or journal.","zh":"共 73 篇同行评议期刊论文。按主题筛选，按标题或期刊检索。" },
+  "page.publications.lead":{ "en":"87 peer-reviewed journal articles. Filter by topic, search by title or journal.","zh":"共 87 篇同行评议期刊论文。按主题筛选，按标题或期刊检索。" },
   "page.publications.search":{ "en":"Search title, authors, journal…","zh":"搜索标题、作者、期刊..." },
   "page.publications.alltopics":{ "en":"All topics","zh":"全部主题" },
   "page.publications.anyrole":{ "en":"Any role","zh":"全部位次" },
