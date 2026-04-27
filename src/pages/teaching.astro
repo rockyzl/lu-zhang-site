@@ -95,19 +95,20 @@ const TITLE = isZh ? "教学与团队培养" : "Teaching & Mentorship";
     </p>
 
     <div class="section-head" style="margin-top: 2.5rem;">
-      <h2 style="margin:0;">{isZh ? "直接指导学生（已确认）" : "Direct students (confirmed)"}</h2>
+      <h2 style="margin:0;">{isZh ? "直接指导研究生（学生时期, 多数后续转博士后）" : "Direct graduate students (later transitioned to postdoc roles)"}</h2>
       <span class="more">{CONFIRMED_STUDENTS.length} {isZh ? "人" : "people"}</span>
     </div>
     <p style="font-size: 0.92rem; color: var(--c-muted); margin-top: -0.5rem;">
       {isZh
-        ? "申报人 2026-04-27 直接确认。包含未发表论文的训练阶段学生，自动推导通常会漏。"
-        : "Lu Zhang directly confirmed (2026-04-27). Includes training-stage students with no published papers — those are typically missed by auto-derivation."}
+        ? "申报人 2026-04-27 直接确认 — 学生时期由张鲁直接指导或共同指导。多数后续转入博士后岗位（ANL 或其他机构），少数已进入业界。"
+        : "Lu Zhang directly confirmed (2026-04-27). Advised or co-advised these graduate students at ANL; most later transitioned to postdoc roles (at ANL or other institutions); some moved to industry."}
     </p>
     <table>
       <thead>
         <tr>
           <th style="width: 60px; text-align: right;">#</th>
           <th>{isZh ? "姓名" : "Name"}</th>
+          <th>{isZh ? "指导关系" : "Supervision"}</th>
           <th>{isZh ? "研究方向" : "Research thrust"}</th>
           <th>{isZh ? "当前去向" : "Current placement"}</th>
         </tr>
@@ -119,6 +120,7 @@ const TITLE = isZh ? "教学与团队培养" : "Teaching & Mentorship";
             <td style="font-weight: 600;">
               <a href={`https://scholar.google.com/scholar?q=${encodeURIComponent(m.name + " Argonne")}`} target="_blank" rel="noopener">{m.name}</a>
             </td>
+            <td style="font-size: 0.85rem; color: var(--c-muted);">{isZh ? m.role_zh : m.role_en}</td>
             <td style="font-size: 0.9rem;">{isZh ? m.thrust_zh : m.thrust_en}</td>
             <td style="font-size: 0.9rem; color: var(--c-muted);">{isZh ? m.current_zh : m.current_en}</td>
           </tr>
@@ -127,19 +129,20 @@ const TITLE = isZh ? "教学与团队培养" : "Teaching & Mentorship";
     </table>
 
     <div class="section-head" style="margin-top: 2.5rem;">
-      <h2 style="margin:0;">{isZh ? "直接指导博士后（已确认）" : "Direct postdocs (confirmed)"}</h2>
+      <h2 style="margin:0;">{isZh ? "直接指导博士后" : "Direct postdocs"}</h2>
       <span class="more">{CONFIRMED_POSTDOCS.length} {isZh ? "人" : "people"}</span>
     </div>
     <p style="font-size: 0.92rem; color: var(--c-muted); margin-top: -0.5rem;">
       {isZh
-        ? "申报人 2026-04-27 直接确认。多名已转入业界（Tesla / GM / PNNL / ORNL / industry）或留任 ANL Research Scientist 岗。"
-        : "Lu Zhang directly confirmed. Multiple have moved to industry (Tesla / GM / PNNL / ORNL) or to ANL Research Scientist roles."}
+        ? "以博士后身份在张鲁组工作的研究人员（直接指导或共同指导）。多名已转入业界（Tesla / GM / PNNL / ORNL）或留任 ANL Research Scientist 岗。"
+        : "Researchers who joined Lu Zhang's group as postdocs (direct or co-advised). Many moved to industry (Tesla / GM / PNNL / ORNL) or transitioned into ANL Research Scientist roles."}
     </p>
     <table>
       <thead>
         <tr>
           <th style="width: 60px; text-align: right;">#</th>
           <th>{isZh ? "姓名" : "Name"}</th>
+          <th>{isZh ? "指导关系" : "Supervision"}</th>
           <th>{isZh ? "研究方向" : "Research thrust"}</th>
           <th>{isZh ? "当前去向" : "Current placement"}</th>
         </tr>
@@ -151,6 +154,7 @@ const TITLE = isZh ? "教学与团队培养" : "Teaching & Mentorship";
             <td style="font-weight: 600;">
               <a href={`https://scholar.google.com/scholar?q=${encodeURIComponent(m.name + " Argonne")}`} target="_blank" rel="noopener">{m.name}</a>
             </td>
+            <td style="font-size: 0.85rem; color: var(--c-muted);">{isZh ? m.role_zh : m.role_en}</td>
             <td style="font-size: 0.9rem;">{isZh ? m.thrust_zh : m.thrust_en}</td>
             <td style="font-size: 0.9rem; color: var(--c-muted);">{isZh ? m.current_zh : m.current_en}</td>
           </tr>

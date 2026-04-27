@@ -1,31 +1,39 @@
 {
-  "_doc": "Curated mentee list — Lu Zhang directly confirmed 2026-04-27. Used by teaching.astro to override/augment auto-derived list from publication data. Includes mentees with no first-author papers (e.g. Peng Du) and mentees mis-typed by auto-derivation.",
+  "_doc": "Curated mentee list — Lu Zhang directly confirmed 2026-04-27. The 6 listed under 'students' were graduate students Lu Zhang directly advised or co-advised at ANL; most later transitioned to postdoc roles (some at ANL, some at other institutions). The 'postdocs' bucket lists people whose primary mentee period with Lu Zhang was as a postdoc.",
   "students": [
     {
       "name": "Zhangxing Shi",
-      "current_en": "industry placement (TBD)",
-      "current_zh": "工业界（去向待补）",
+      "current_en": "later postdoc; now industry placement (TBD)",
+      "current_zh": "后续转博士后, 现工业界（去向待补）",
+      "role_en": "graduate student (advised by Lu Zhang)",
+      "role_zh": "研究生（张鲁直接指导）",
       "thrust_en": "PAA binder + HFE solvent for Li-metal/Na/Mg/S",
       "thrust_zh": "PAA 粘合剂 + 氟化醚电解液（Li-metal / Na / Mg / S）"
     },
     {
       "name": "Zhiguang Li",
-      "current_en": "ANL",
-      "current_zh": "ANL",
+      "current_en": "ANL (postdoc transition)",
+      "current_zh": "ANL（已转博士后）",
+      "role_en": "graduate student (advised by Lu Zhang)",
+      "role_zh": "研究生（张鲁直接指导）",
       "thrust_en": "Redoxmer techno-economics + dialkoxyarene stability",
       "thrust_zh": "Redoxmer 技术经济分析 + 二烷氧苯稳定性"
     },
     {
       "name": "Sisi Jiang",
-      "current_en": "Tesla",
-      "current_zh": "Tesla",
+      "current_en": "Tesla (post graduate-student period; transitioned through postdoc)",
+      "current_zh": "Tesla（毕业后经博士后阶段进入工业界）",
+      "role_en": "graduate student (advised by Lu Zhang)",
+      "role_zh": "研究生（张鲁直接指导）",
       "thrust_en": "Silicon-anode binders + Si nanoparticle surface engineering",
       "thrust_zh": "硅负极粘合剂 + Si 纳米颗粒界面工程"
     },
     {
       "name": "Xiaoting Fang",
-      "current_en": "ANL",
-      "current_zh": "ANL",
+      "current_en": "ANL (postdoc transition)",
+      "current_zh": "ANL（已转博士后）",
+      "role_en": "graduate student (advised by Lu Zhang)",
+      "role_zh": "研究生（张鲁直接指导）",
       "thrust_en": "Multi-electron redoxmers + Wurster's Blue catholyte",
       "thrust_zh": "多电子 redoxmer + Wurster's Blue 正极液"
     },
@@ -33,6 +41,8 @@
       "name": "Peng Du",
       "current_en": "training stage (no publications yet)",
       "current_zh": "培训阶段（暂无发表）",
+      "role_en": "graduate student (advised by Lu Zhang)",
+      "role_zh": "研究生（张鲁直接指导）",
       "thrust_en": "—",
       "thrust_zh": "—"
     },
@@ -40,6 +50,8 @@
       "name": "Quinton J. Meisner",
       "current_en": "industry placement (TBD)",
       "current_zh": "工业界（去向待补）",
+      "role_en": "graduate student (co-advised by Lu Zhang)",
+      "role_zh": "研究生（张鲁共同指导）",
       "thrust_en": "Li-S fluorinated ether electrolytes",
       "thrust_zh": "Li-S 氟化醚电解液"
     }
@@ -49,6 +61,8 @@
       "name": "Wenbo (full name TBD)",
       "current_en": "TBD",
       "current_zh": "去向待补",
+      "role_en": "postdoc (advised by Lu Zhang)",
+      "role_zh": "博士后（张鲁直接指导）",
       "thrust_en": "TBD",
       "thrust_zh": "方向待补"
     },
@@ -56,6 +70,8 @@
       "name": "Jinhua Huang",
       "current_en": "ANL postdoc 2013–2018; later industry",
       "current_zh": "ANL 博士后 2013–2018, 之后入工业界",
+      "role_en": "postdoc (advised by Lu Zhang)",
+      "role_zh": "博士后（张鲁直接指导）",
       "thrust_en": "Catholyte molecular engineering for non-aqueous RFB",
       "thrust_zh": "非水液流电池正极液分子设计"
     },
@@ -63,6 +79,8 @@
       "name": "Bin Hu",
       "current_en": "ORNL",
       "current_zh": "ORNL",
+      "role_en": "postdoc (advised by Lu Zhang)",
+      "role_zh": "博士后（张鲁直接指导）",
       "thrust_en": "Silicon-anode binders + PAA molecular weight",
       "thrust_zh": "硅负极粘合剂 + PAA 分子量优化"
     },
@@ -70,6 +88,8 @@
       "name": "Baofei Pan",
       "current_en": "General Motors",
       "current_zh": "通用汽车 (GM)",
+      "role_en": "postdoc (co-advised by Lu Zhang)",
+      "role_zh": "博士后（张鲁共同指导）",
       "thrust_en": "Mg-ion electrolytes + organic Mg cathodes",
       "thrust_zh": "镁离子电解液 + 有机镁电池正极"
     },
@@ -77,13 +97,17 @@
       "name": "Wentao Duan",
       "current_en": "PNNL",
       "current_zh": "PNNL",
+      "role_en": "postdoc (advised by Lu Zhang)",
+      "role_zh": "博士后（张鲁直接指导）",
       "thrust_en": "Anolyte molecular design for non-aqueous RFB",
       "thrust_zh": "非水液流电池负极液分子设计"
     },
     {
       "name": "Lily A. Robertson",
       "current_en": "ANL (Argonne Postdoc Performance Award 2021)",
-      "current_zh": "ANL (2021 阿贡博士后绩效奖)",
+      "current_zh": "ANL（2021 阿贡博士后绩效奖）",
+      "role_en": "postdoc (advised by Lu Zhang)",
+      "role_zh": "博士后（张鲁直接指导）",
       "thrust_en": "Self-reporting fluorescent redoxmers + crowded electrolytes",
       "thrust_zh": "自报告荧光 redoxmer + 高浓度电解液结构"
     },
@@ -91,6 +115,8 @@
       "name": "Yuyue Zhao",
       "current_en": "Senior Research Scientist (TBD)",
       "current_zh": "高级研究科学家 (TBD)",
+      "role_en": "postdoc (advised by Lu Zhang)",
+      "role_zh": "博士后（张鲁直接指导）",
       "thrust_en": "Anolyte solvation engineering",
       "thrust_zh": "负极液溶剂化工程"
     },
@@ -98,6 +124,8 @@
       "name": "Jingjing Zhang",
       "current_en": "ANL Research Scientist",
       "current_zh": "ANL 研究科学家",
+      "role_en": "postdoc (advised by Lu Zhang)",
+      "role_zh": "博士后（张鲁直接指导）",
       "thrust_en": "Annulated dialkoxybenzenes + ML-driven stability",
       "thrust_zh": "环化二烷氧苯 + 机器学习驱动稳定性研究"
     }
@@ -107,6 +135,7 @@
     "postdocs_count": 8,
     "total": 14,
     "anl_period": "2013–2023",
+    "framing": "Most students later transitioned to postdoc roles (at ANL or other institutions). 'co-advised' marks shared supervision with another PI.",
     "last_confirmed": "2026-04-27 by Lu Zhang directly"
   }
 }
