@@ -120,12 +120,18 @@ const today = new Date().toISOString().slice(0, 10);
       /* Print rules */
       @page {
         size: letter;
-        margin: 0;
+        /* Per-page margin so EVERY page (incl. p2/p3) has top+bottom whitespace,
+           not just the first/last. Previous version had margin:0 on @page +
+           padding on .cv, which only padded the start/end of the flow. */
+        margin: 0.6in 0.65in;
       }
       @media print {
-        .cv { padding: 0.6in 0.65in; }
+        /* Drop container padding in print — the @page margin handles whitespace now. */
+        .cv { padding: 0; }
         h2 { break-after: avoid; }
         .entry, .pubitem { break-inside: avoid; }
+        /* Prevent orphan/widow lines at page edges */
+        p, li { orphans: 2; widows: 2; }
       }
     </style>
   </head>
@@ -141,7 +147,7 @@ const today = new Date().toISOString().slice(0, 10);
           <a href="mailto:zhanglu77@gmail.com">zhanglu77@gmail.com</a><br/>
           <a href="https://rockyzl.github.io/lu-zhang-site/">rockyzl.github.io/lu-zhang-site</a><br/>
           <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en">Google Scholar</a> ·
-          <a href="https://www.linkedin.com/in/rockyzl/">LinkedIn</a> ·
+          <a href="https://www.linkedin.com/in/lu-zhang-argonne/">LinkedIn</a> ·
           <a href="https://github.com/rockyzl">GitHub</a>
         </div>
       </div>

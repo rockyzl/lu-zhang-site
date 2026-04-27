@@ -42,7 +42,7 @@
       "client deployment"
     ],
     "image": null,
-    "gradient": "from-navy to-teal",
+    "gradient": "from-amber to-teal",
     "site": "https://capps-backend-cjkrzvaj3737y.ambitiousmushroom-bd0f5384.eastus2.azurecontainerapps.io/",
     "repo": "https://github.com/rockyzl/voice-rag"
   },
