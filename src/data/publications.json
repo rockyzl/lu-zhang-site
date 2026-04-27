@@ -7,6 +7,7 @@
     "year": 2015,
     "citations": 322,
     "doi": "https://doi.org/10.1002/anie.201501443",
+    "verified": true,
     "role": "co"
   },
   {
@@ -17,6 +18,7 @@
     "year": 2016,
     "citations": 237,
     "doi": "https://doi.org/10.1021/acsenergylett.6b00255",
+    "verified": true,
     "role": "co"
   },
   {
@@ -27,6 +29,7 @@
     "year": 2016,
     "citations": 196,
     "doi": "https://doi.org/10.1039/c6ta01177b",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -37,6 +40,7 @@
     "year": 2012,
     "citations": 126,
     "doi": "https://doi.org/10.1039/c2ee21977h",
+    "verified": true,
     "role": "first"
   },
   {
@@ -47,6 +51,7 @@
     "year": 2016,
     "citations": 107,
     "doi": "https://doi.org/10.1149/2.0021605jes",
+    "verified": true,
     "role": "co"
   },
   {
@@ -57,6 +62,7 @@
     "year": 2015,
     "citations": 104,
     "doi": "https://doi.org/10.1039/c5ta02380g",
+    "verified": true,
     "role": "corresponding"
   },
   {
@@ -67,6 +73,7 @@
     "year": 2016,
     "citations": 81,
     "doi": "https://doi.org/10.1038/srep32102",
+    "verified": true,
     "role": "corresponding"
   },
   {
@@ -77,6 +84,7 @@
     "year": 2011,
     "citations": 77,
     "doi": "https://doi.org/10.1039/c0ee00733a",
+    "verified": true,
     "role": "first"
   },
   {
@@ -87,6 +95,7 @@
     "year": 2018,
     "citations": 76,
     "doi": "https://doi.org/10.1021/acs.jpcc.8b02009",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -97,6 +106,7 @@
     "year": 2010,
     "citations": 73,
     "doi": "https://doi.org/10.1016/j.jpowsour.2010.02.075",
+    "verified": true,
     "role": "co"
   },
   {
@@ -107,6 +117,7 @@
     "year": 2018,
     "citations": 69,
     "doi": "https://doi.org/10.1002/adsu.201700131",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -117,6 +128,7 @@
     "year": 2017,
     "citations": 65,
     "doi": "https://doi.org/10.1002/aenm.201701272",
+    "verified": true,
     "role": "corresponding"
   },
   {
@@ -127,6 +139,7 @@
     "year": 2021,
     "citations": 64,
     "doi": "https://doi.org/10.1021/acsenergylett.1c01675",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -137,6 +150,7 @@
     "year": 2013,
     "citations": 51,
     "doi": "https://doi.org/10.1016/j.jpowsour.2013.08.044",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -147,6 +161,7 @@
     "year": 2015,
     "citations": 50,
     "doi": "https://doi.org/10.1002/ange.201501443",
+    "verified": true,
     "role": "co"
   },
   {
@@ -157,6 +172,7 @@
     "year": 2022,
     "citations": 48,
     "doi": "https://doi.org/10.1021/acsmaterialslett.1c00668",
+    "verified": false,
     "role": "co"
   },
   {
@@ -167,6 +183,7 @@
     "year": 2016,
     "citations": 47,
     "doi": "https://doi.org/10.1002/aenm.201600795",
+    "verified": true,
     "role": "co"
   },
   {
@@ -177,6 +194,7 @@
     "year": 2018,
     "citations": 46,
     "doi": "https://doi.org/10.1021/acs.jpcc.8b01434",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -187,6 +205,7 @@
     "year": 2018,
     "citations": 41,
     "doi": "https://doi.org/10.1039/c8ta01059e",
+    "verified": true,
     "role": "corresponding"
   },
   {
@@ -197,6 +216,7 @@
     "year": 2016,
     "citations": 39,
     "doi": "https://doi.org/10.1021/acs.jpcc.6b04263",
+    "verified": true,
     "role": "co"
   },
   {
@@ -207,6 +227,7 @@
     "year": 2017,
     "citations": 33,
     "doi": "https://doi.org/10.1021/acs.jpcc.7b08281",
+    "verified": true,
     "role": "corresponding"
   },
   {
@@ -217,6 +238,7 @@
     "year": 2021,
     "citations": 32,
     "doi": "https://doi.org/10.1016/j.molliq.2021.116533",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -227,6 +249,7 @@
     "year": 2018,
     "citations": 31,
     "doi": "https://doi.org/10.1016/j.jpowsour.2018.07.001",
+    "verified": true,
     "role": "co"
   },
   {
@@ -237,6 +260,7 @@
     "year": 2021,
     "citations": 29,
     "doi": "https://doi.org/10.1039/d1ta04297a",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -247,6 +271,7 @@
     "year": 2019,
     "citations": 29,
     "doi": "https://doi.org/10.1021/acs.jpcc.9b02230",
+    "verified": true,
     "role": "co"
   },
   {
@@ -257,6 +282,7 @@
     "year": 2020,
     "citations": 26,
     "doi": "https://doi.org/10.1039/d0ta02214d",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -267,6 +293,7 @@
     "year": 2019,
     "citations": 26,
     "doi": "https://doi.org/10.1016/j.mtener.2019.06.003",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -277,6 +304,7 @@
     "year": 2020,
     "citations": 25,
     "doi": "https://doi.org/10.1039/d0ta00836b",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -287,6 +315,7 @@
     "year": 2018,
     "citations": 24,
     "doi": "https://doi.org/10.1016/j.jpowsour.2017.12.059",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -297,6 +326,7 @@
     "year": 2020,
     "citations": 20,
     "doi": "https://doi.org/10.1021/acs.jpcb.0c07760",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -307,6 +337,7 @@
     "year": 2020,
     "citations": 18,
     "doi": "https://doi.org/10.1021/acsenergylett.0c01447",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -317,6 +348,7 @@
     "year": 2022,
     "citations": 16,
     "doi": "https://doi.org/10.1016/j.jpowsour.2022.231493",
+    "verified": true,
     "role": "co"
   },
   {
@@ -327,6 +359,7 @@
     "year": 2020,
     "citations": 14,
     "doi": "https://doi.org/10.1021/acs.jpcb.0c07647",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -337,6 +370,7 @@
     "year": 2022,
     "citations": 13,
     "doi": "https://doi.org/10.1039/d2cc04648b",
+    "verified": false,
     "role": "unknown"
   },
   {
@@ -347,6 +381,7 @@
     "year": 2023,
     "citations": 12,
     "doi": "https://doi.org/10.1002/asia.202201171",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -357,6 +392,7 @@
     "year": 2019,
     "citations": 10,
     "doi": "https://doi.org/10.1016/j.electacta.2019.135580",
+    "verified": true,
     "role": "co"
   },
   {
@@ -367,6 +403,7 @@
     "year": 2023,
     "citations": 9,
     "doi": "https://doi.org/10.1016/j.electacta.2023.142123",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -377,6 +414,7 @@
     "year": 2023,
     "citations": 8,
     "doi": "https://doi.org/10.1016/j.nxener.2023.100008",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -387,6 +425,7 @@
     "year": 2013,
     "citations": 6,
     "doi": "https://doi.org/10.1149/04529.0057ecst",
+    "verified": true,
     "role": "first"
   },
   {
@@ -397,6 +436,7 @@
     "year": 2023,
     "citations": 5,
     "doi": "https://doi.org/10.1002/cssc.202300043",
+    "verified": true,
     "role": "corresponding"
   },
   {
@@ -407,6 +447,7 @@
     "year": 2023,
     "citations": 5,
     "doi": "https://doi.org/10.1039/d2cp04220g",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -417,6 +458,7 @@
     "year": 2022,
     "citations": 5,
     "doi": "https://doi.org/10.1021/acsami.2c04926",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -427,6 +469,7 @@
     "year": 2024,
     "citations": 3,
     "doi": "https://doi.org/10.1016/j.jpowsour.2024.234689",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -437,6 +480,7 @@
     "year": 2023,
     "citations": 3,
     "doi": "https://doi.org/10.1039/d3dd00050h",
+    "verified": true,
     "role": "co"
   },
   {
@@ -447,6 +491,7 @@
     "year": 2021,
     "citations": 2,
     "doi": "https://doi.org/10.1021/acsmaterialslett.1c00424",
+    "verified": true,
     "role": "co"
   },
   {
@@ -457,6 +502,7 @@
     "year": 2016,
     "citations": 1,
     "doi": "",
+    "verified": true,
     "role": "corresponding"
   },
   {
@@ -467,6 +513,7 @@
     "year": 2016,
     "citations": 1,
     "doi": "",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -477,6 +524,7 @@
     "year": 2025,
     "citations": 0,
     "doi": "https://doi.org/10.1021/acsaem.5c02546",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -487,6 +535,7 @@
     "year": 2018,
     "citations": 0,
     "doi": "",
+    "verified": true,
     "role": "corresponding"
   },
   {
@@ -497,6 +546,7 @@
     "year": 2017,
     "citations": 0,
     "doi": "https://doi.org/10.1002/aenm.201770121",
+    "verified": true,
     "role": "corresponding"
   },
   {
@@ -507,6 +557,7 @@
     "year": 2020,
     "citations": 230,
     "doi": "https://doi.org/10.1038/s41467-020-17233-1",
+    "verified": false,
     "role": "first"
   },
   {
@@ -517,6 +568,7 @@
     "year": 2017,
     "citations": 24,
     "doi": "https://doi.org/10.1002/chem.201702075",
+    "verified": false,
     "role": "co"
   },
   {
@@ -527,6 +579,7 @@
     "year": 2019,
     "citations": 12,
     "doi": "https://doi.org/10.1021/acs.chemmater.8b05261",
+    "verified": true,
     "role": "co"
   },
   {
@@ -537,6 +590,7 @@
     "year": 2014,
     "citations": 11,
     "doi": "https://doi.org/10.1007/s12039-014-0592-1",
+    "verified": false,
     "role": "unknown"
   },
   {
@@ -547,6 +601,7 @@
     "year": 2014,
     "citations": 11,
     "doi": "https://doi.org/10.1149/2.0971414jes",
+    "verified": true,
     "role": "first"
   },
   {
@@ -557,6 +612,7 @@
     "year": 2022,
     "citations": 9,
     "doi": "https://doi.org/10.1002/celc.202200641",
+    "verified": true,
     "role": "first"
   },
   {
@@ -567,6 +623,7 @@
     "year": 2023,
     "citations": 6,
     "doi": "https://doi.org/10.1002/ange.202308724",
+    "verified": true,
     "role": "co"
   },
   {
@@ -577,6 +634,7 @@
     "year": 2019,
     "citations": 113,
     "doi": "https://doi.org/10.1002/adfm.201908558",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -587,6 +645,7 @@
     "year": 2018,
     "citations": 103,
     "doi": "https://doi.org/10.1016/j.jpowsour.2017.12.068",
+    "verified": true,
     "role": "corresponding"
   },
   {
@@ -597,6 +656,7 @@
     "year": 2018,
     "citations": 102,
     "doi": "https://doi.org/10.1021/acsami.8b17729",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -607,6 +667,7 @@
     "year": 2019,
     "citations": 80,
     "doi": "https://doi.org/10.1016/j.jpowsour.2019.01.068",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -617,6 +678,7 @@
     "year": 2020,
     "citations": 41,
     "doi": "https://doi.org/10.1021/acsami.0c18559",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -627,6 +689,7 @@
     "year": 2021,
     "citations": 35,
     "doi": "https://doi.org/10.1039/d1ta07112b",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -637,6 +700,7 @@
     "year": 2019,
     "citations": 24,
     "doi": "https://doi.org/10.1021/acsaem.9b01601",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -647,6 +711,7 @@
     "year": 2021,
     "citations": 17,
     "doi": "https://doi.org/10.1021/acsaem.1c00374",
+    "verified": false,
     "role": "unknown"
   },
   {
@@ -657,6 +722,7 @@
     "year": 2019,
     "citations": 13,
     "doi": "https://doi.org/10.1021/acsaem.9b00987",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -667,6 +733,7 @@
     "year": 2014,
     "citations": 13,
     "doi": "https://doi.org/10.1063/1.4864157",
+    "verified": false,
     "role": "co"
   },
   {
@@ -677,6 +744,7 @@
     "year": 2020,
     "citations": 5,
     "doi": "https://doi.org/10.1002/adfm.202070065",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -687,6 +755,7 @@
     "year": 2022,
     "citations": 4,
     "doi": "https://doi.org/10.1021/acsaem.1c03785",
+    "verified": false,
     "role": "co"
   },
   {
@@ -697,6 +766,7 @@
     "year": 2021,
     "citations": 72,
     "doi": "https://doi.org/10.1021/acs.chemmater.1c02040",
+    "verified": true,
     "role": "co"
   },
   {
@@ -707,6 +777,7 @@
     "year": 2024,
     "citations": 59,
     "doi": "https://doi.org/10.1038/s41467-024-47070-5",
+    "verified": true,
     "role": "co"
   },
   {
@@ -717,6 +788,7 @@
     "year": 2025,
     "citations": 2,
     "doi": "https://doi.org/10.1039/d4ta07050j",
+    "verified": false,
     "role": "unknown"
   },
   {
@@ -727,6 +799,7 @@
     "year": 2021,
     "citations": 106,
     "doi": "https://doi.org/10.1021/acsenergylett.0c02575",
+    "verified": false,
     "role": "unknown"
   },
   {
@@ -737,6 +810,7 @@
     "year": 2020,
     "citations": 98,
     "doi": "https://doi.org/10.1002/adfm.202002825",
+    "verified": false,
     "role": "co"
   },
   {
@@ -747,6 +821,7 @@
     "year": 2020,
     "citations": 74,
     "doi": "https://doi.org/10.1002/aenm.202001256",
+    "verified": false,
     "role": "co"
   },
   {
@@ -757,6 +832,7 @@
     "year": 2022,
     "citations": 30,
     "doi": "https://doi.org/10.1016/j.cej.2022.141019",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -767,6 +843,7 @@
     "year": 2022,
     "citations": 18,
     "doi": "https://doi.org/10.1039/d1ce01368h",
+    "verified": false,
     "role": "co"
   },
   {
@@ -777,6 +854,7 @@
     "year": 2021,
     "citations": 16,
     "doi": "https://doi.org/10.6023/a20090409",
+    "verified": false,
     "role": "first"
   },
   {
@@ -787,6 +865,7 @@
     "year": 2021,
     "citations": 133,
     "doi": "https://doi.org/10.1016/j.jcis.2021.01.053",
+    "verified": false,
     "role": "co"
   },
   {
@@ -797,6 +876,7 @@
     "year": 2018,
     "citations": 63,
     "doi": "https://doi.org/10.1002/smll.201703680",
+    "verified": false,
     "role": "co"
   },
   {
@@ -807,6 +887,7 @@
     "year": 2022,
     "citations": 59,
     "doi": "https://doi.org/10.1016/j.jcis.2022.06.142",
+    "verified": false,
     "role": "co"
   },
   {
@@ -817,6 +898,7 @@
     "year": 2018,
     "citations": 57,
     "doi": "https://doi.org/10.1039/c7ra13441j",
+    "verified": false,
     "role": "co"
   },
   {
@@ -827,6 +909,7 @@
     "year": 2018,
     "citations": 52,
     "doi": "https://doi.org/10.1016/j.carbon.2018.08.025",
+    "verified": false,
     "role": "co"
   },
   {
@@ -837,6 +920,7 @@
     "year": 2017,
     "citations": 50,
     "doi": "https://doi.org/10.1039/c7ra10292e",
+    "verified": false,
     "role": "first"
   },
   {
@@ -847,6 +931,7 @@
     "year": 2022,
     "citations": 14,
     "doi": "https://doi.org/10.1016/j.ijhydene.2022.03.019",
+    "verified": false,
     "role": "co"
   },
   {
@@ -857,6 +942,7 @@
     "year": 2019,
     "citations": 33,
     "doi": "https://doi.org/10.1016/j.jpowsour.2019.226939",
+    "verified": false,
     "role": "unknown"
   },
   {
@@ -867,6 +953,7 @@
     "year": 2016,
     "citations": 31,
     "doi": "https://doi.org/10.1002/cssc.201501557",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -877,6 +964,7 @@
     "year": 2019,
     "citations": 27,
     "doi": "https://doi.org/10.1016/j.elecom.2019.106599",
+    "verified": false,
     "role": "co"
   },
   {
@@ -887,6 +975,7 @@
     "year": 2022,
     "citations": 23,
     "doi": "https://doi.org/10.1002/inf2.12343",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -897,6 +986,7 @@
     "year": 2020,
     "citations": 21,
     "doi": "https://doi.org/10.1021/acs.jpcb.0c01197",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -907,6 +997,7 @@
     "year": 2016,
     "citations": 21,
     "doi": "https://doi.org/10.1002/celc.201500550",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -917,6 +1008,7 @@
     "year": 2020,
     "citations": 20,
     "doi": "https://doi.org/10.1002/celc.202000591",
+    "verified": true,
     "role": "co"
   },
   {
@@ -927,6 +1019,7 @@
     "year": 2022,
     "citations": 16,
     "doi": "https://doi.org/10.1016/j.jallcom.2022.163962",
+    "verified": false,
     "role": "first"
   },
   {
@@ -937,6 +1030,7 @@
     "year": 2020,
     "citations": 15,
     "doi": "https://doi.org/10.3390/en13082014",
+    "verified": false,
     "role": "co"
   },
   {
@@ -947,6 +1041,7 @@
     "year": 2018,
     "citations": 15,
     "doi": "https://doi.org/10.1007/s12613-018-1672-x",
+    "verified": false,
     "role": "unknown"
   },
   {
@@ -957,6 +1052,7 @@
     "year": 2019,
     "citations": 14,
     "doi": "https://doi.org/10.1021/jacs.9b02323",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -967,6 +1063,7 @@
     "year": 2021,
     "citations": 13,
     "doi": "https://doi.org/10.1016/j.jechem.2020.12.037",
+    "verified": false,
     "role": "co"
   },
   {
@@ -977,6 +1074,7 @@
     "year": 2024,
     "citations": 8,
     "doi": "https://doi.org/10.1021/acssuschemeng.3c06270",
+    "verified": false,
     "role": "co"
   },
   {
@@ -987,6 +1085,7 @@
     "year": 2017,
     "citations": 8,
     "doi": "https://doi.org/10.1039/c7ta08129d",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -997,6 +1096,7 @@
     "year": 2020,
     "citations": 6,
     "doi": "https://doi.org/10.1016/j.ceramint.2020.10.042",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1007,6 +1107,7 @@
     "year": 2024,
     "citations": 5,
     "doi": "https://doi.org/10.1039/d3ta07670a",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -1017,6 +1118,7 @@
     "year": 2025,
     "citations": 4,
     "doi": "https://doi.org/10.1016/j.cej.2025.162410",
+    "verified": true,
     "role": "first"
   },
   {
@@ -1027,6 +1129,7 @@
     "year": 2025,
     "citations": 1,
     "doi": "https://doi.org/10.1016/j.matt.2025.102492",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1037,6 +1140,7 @@
     "year": 2019,
     "citations": 0,
     "doi": "",
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -1047,6 +1151,7 @@
     "year": 2008,
     "citations": 57,
     "doi": "https://doi.org/10.1021/la703539k",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1057,6 +1162,7 @@
     "year": 2021,
     "citations": 45,
     "doi": "https://doi.org/10.1002/adma.202100210",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1067,6 +1173,7 @@
     "year": 2022,
     "citations": 28,
     "doi": "https://doi.org/10.1016/j.egyr.2022.02.256",
+    "verified": true,
     "role": "first"
   },
   {
@@ -1077,6 +1184,7 @@
     "year": 2020,
     "citations": 26,
     "doi": "https://doi.org/10.1016/j.foostr.2020.100149",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1087,6 +1195,7 @@
     "year": 2017,
     "citations": 19,
     "doi": "https://doi.org/10.1016/j.ijpharm.2017.11.040",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1097,6 +1206,7 @@
     "year": 2021,
     "citations": 18,
     "doi": "https://doi.org/10.1109/tcad.2021.3112637",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1107,6 +1217,7 @@
     "year": 2011,
     "citations": 18,
     "doi": "https://doi.org/10.1021/ma201715s",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1117,6 +1228,7 @@
     "year": 2023,
     "citations": 11,
     "doi": "https://doi.org/10.1021/acs.langmuir.3c03166",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1127,6 +1239,7 @@
     "year": 2017,
     "citations": 10,
     "doi": "https://doi.org/10.1039/c7ta08002f",
+    "verified": false,
     "role": "unknown"
   },
   {
@@ -1137,6 +1250,7 @@
     "year": 2000,
     "citations": 10,
     "doi": "https://doi.org/10.1088/0256-307x/17/3/018",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1147,6 +1261,7 @@
     "year": 2022,
     "citations": 9,
     "doi": "https://doi.org/10.1103/physreva.106.022811",
+    "verified": true,
     "role": "co"
   },
   {
@@ -1157,6 +1272,7 @@
     "year": 2025,
     "citations": 8,
     "doi": "https://doi.org/10.1016/j.drudis.2025.104290",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1167,6 +1283,7 @@
     "year": 2023,
     "citations": 8,
     "doi": "https://doi.org/10.1103/physreva.108.022816",
+    "verified": true,
     "role": "co"
   },
   {
@@ -1177,6 +1294,7 @@
     "year": 2020,
     "citations": 8,
     "doi": "https://doi.org/10.1016/j.jcp.2020.109608",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1187,6 +1305,7 @@
     "year": 2021,
     "citations": 7,
     "doi": "https://doi.org/10.1088/1741-4326/ac04f5",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1197,6 +1316,7 @@
     "year": 2023,
     "citations": 6,
     "doi": "https://doi.org/10.1016/j.cej.2023.147979",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1207,6 +1327,7 @@
     "year": 2022,
     "citations": 6,
     "doi": "https://doi.org/10.1016/j.electacta.2022.141074",
+    "verified": false,
     "role": "unknown"
   },
   {
@@ -1217,6 +1338,7 @@
     "year": 2020,
     "citations": 6,
     "doi": "https://doi.org/10.1016/j.rinp.2020.103583",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1227,6 +1349,7 @@
     "year": 2020,
     "citations": 5,
     "doi": "https://doi.org/10.1103/physreve.102.023204",
+    "verified": true,
     "role": "co"
   },
   {
@@ -1237,6 +1360,7 @@
     "year": 2018,
     "citations": 5,
     "doi": "https://doi.org/10.3390/s18092887",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1247,6 +1371,7 @@
     "year": 2015,
     "citations": 5,
     "doi": "https://doi.org/10.1063/1.4916058",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1257,6 +1382,7 @@
     "year": 2025,
     "citations": 3,
     "doi": "https://doi.org/10.1039/d5gc00784d",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1267,6 +1393,7 @@
     "year": 2024,
     "citations": 3,
     "doi": "https://doi.org/10.3390/coatings14050600",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1277,6 +1404,7 @@
     "year": 2023,
     "citations": 3,
     "doi": "https://doi.org/10.1007/s11581-023-04957-5",
+    "verified": true,
     "role": "co"
   },
   {
@@ -1287,6 +1415,7 @@
     "year": 2025,
     "citations": 2,
     "doi": "https://doi.org/10.1103/physreva.111.052803",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1297,6 +1426,7 @@
     "year": 2022,
     "citations": 1,
     "doi": "https://doi.org/10.1007/s12517-022-10237-9",
+    "verified": true,
     "role": "co"
   },
   {
@@ -1307,6 +1437,7 @@
     "year": 2019,
     "citations": 1,
     "doi": "https://doi.org/10.1080/15567036.2019.1602205",
+    "verified": false,
     "role": "unknown"
   },
   {
@@ -1317,6 +1448,7 @@
     "year": 2018,
     "citations": 1,
     "doi": "https://doi.org/10.1088/0253-6102/69/4/399",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1327,6 +1459,7 @@
     "year": 2006,
     "citations": 1,
     "doi": "https://doi.org/10.1016/s1005-9040(06)60178-5",
+    "verified": true,
     "role": "co"
   },
   {
@@ -1337,6 +1470,7 @@
     "year": 2025,
     "citations": 0,
     "doi": "https://doi.org/10.1039/d5gc00784d/v2/response1",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1347,6 +1481,7 @@
     "year": 2022,
     "citations": 0,
     "doi": "https://doi.org/10.1109/tocs56154.2022.10016040",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1357,6 +1492,7 @@
     "year": 2022,
     "citations": 0,
     "doi": "https://doi.org/10.1117/12.2620627",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1367,6 +1503,7 @@
     "year": 2022,
     "citations": 0,
     "doi": "https://doi.org/10.1117/12.2635995",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1377,6 +1514,7 @@
     "year": 2021,
     "citations": 0,
     "doi": "https://doi.org/10.1051/e3sconf/202124801012",
+    "verified": true,
     "role": "co"
   },
   {
@@ -1387,6 +1525,7 @@
     "year": 2020,
     "citations": 0,
     "doi": "https://doi.org/10.1117/12.2585159",
+    "verified": false,
     "role": "co"
   },
   {
@@ -1397,6 +1536,7 @@
     "year": 2007,
     "citations": 0,
     "doi": "https://doi.org/10.1109/issmdbs.2007.4338300",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1407,6 +1547,7 @@
     "year": 2006,
     "citations": 0,
     "doi": "https://doi.org/10.1117/12.688805",
+    "verified": true,
     "role": "co"
   },
   {
@@ -1417,6 +1558,7 @@
     "year": 2001,
     "citations": 0,
     "doi": "",
+    "verified": false,
     "role": "first"
   },
   {
@@ -1427,6 +1569,7 @@
     "year": 1988,
     "citations": 0,
     "doi": "",
+    "verified": false,
     "role": "first"
   }
 ]

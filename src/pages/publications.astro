@@ -4,14 +4,17 @@ import { detectLocale, t } from "../lib/i18n";
 import publications from "../data/publications.json";
 
 const locale = detectLocale(Astro.url.pathname);
-const sorted = [...publications].sort((a, b) => (b.year || 0) - (a.year || 0) || b.citations - a.citations);
-const topics = [...new Set(publications.map((p) => p.topic))].filter(Boolean);
+// Only show ANL-affiliated papers (filters out same-name authors via parser-set verified flag).
+const filtered = publications.filter((p) => p.verified);
+const sorted = [...filtered].sort((a, b) => (b.year || 0) - (a.year || 0) || b.citations - a.citations);
+const topics = [...new Set(filtered.map((p) => p.topic))].filter(Boolean);
+const scholarUrl = (title) => `https://scholar.google.com/scholar?q=${encodeURIComponent(title + " Lu Zhang Argonne")}`;
 ---
 <Base title={(locale === "zh" ? "论文 — " : "Publications — ") + "Lu Zhang"}>
   <div class="container" style="padding-top: 3rem;">
   <span class="eyebrow">{t("page.publications.eyebrow", locale)}</span>
   <h1>{t("page.publications.title", locale)}</h1>
-  <p class="lead">{t("page.publications.lead", locale)}</p>
+  <p class="lead">{t("page.publications.lead", locale)} <span style="color: var(--c-muted); font-size: 0.9em;">({filtered.length} verified)</span></p>
 
   <div class="toolbar">
     <input id="q" type="search" placeholder={t("page.publications.search", locale)} />
@@ -31,7 +34,7 @@ const topics = [...new Set(publications.map((p) => p.topic))].filter(Boolean);
     {sorted.map((p) => (
       <div class="entry" data-topic={p.topic} data-role={p.role} data-text={(p.title + " " + p.authors + " " + p.journal).toLowerCase()}>
         <div class="title">
-          {p.doi ? <a href={p.doi}>{p.title}</a> : p.title}
+          <a href={p.doi || scholarUrl(p.title)} target={p.doi ? "_blank" : "_self"}>{p.title}</a>
           {p.role === "first" && <span class="badge first">first</span>}
           {p.role === "corresponding" && <span class="badge corresponding">corresp.</span>}
         </div>

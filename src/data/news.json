@@ -5,15 +5,7 @@
     "title": "Submitted to JMCA: From machine learning to chemical insight — Darwinian chance and the stability of charge carriers in flow batteries",
     "blurb": "Co-authored manuscript (lead: Lily Robertson; co-authors: Ilya Shkrob, Rajeev Assary, Jingjing Zhang) under revision at Journal of Materials Chemistry A (TA-ART-01-2026-000771). Bridges ML-driven insight to charge-carrier stability in non-aqueous flow batteries — direct extension of the JCESR DMB redoxmer line.",
     "image": null,
-    "link": null
-  },
-  {
-    "date": "2025",
-    "tag": "Publication",
-    "title": "First-author paper on 4 V magnesium-battery electrolyte chemistry",
-    "blurb": "Extending non-nucleophilic Mg(TFSI)₂ as a 4 V magnesium-battery electrolyte. Continues the post-ANL collaborative line on next-generation battery chemistries beyond Li-ion.",
-    "image": null,
-    "link": null
+    "link": "https://scholar.google.com/scholar?q=From+machine+learning+to+chemical+insight+Darwinian+chance+stability+charge+carriers+flow+batteries+Robertson+Zhang"
   },
   {
     "date": "2025",
@@ -21,7 +13,7 @@
     "title": "Automation-accelerated electrolyte design — follow-up to Nature Comm 2024",
     "blurb": "Applying ML-guided automation to mitigate solubility competition in flow-battery electrolytes. Direct continuation of the 2024 robotic-platform work.",
     "image": null,
-    "link": null
+    "link": "https://scholar.google.com/scholar?q=Automation-Accelerated+Electrolyte+Design+Solubility+Competition+Lu+Zhang"
   },
   {
     "date": "2026-04",
@@ -29,7 +21,7 @@
     "title": "Building rfb-formulation-agent — AI scientist for redox flow battery formulation",
     "blurb": "A vertical AI alternative to general-purpose materials platforms. Distilling 14+ years of flow-battery intuition into automated electrolyte screening. Pre-v0.1.",
     "image": null,
-    "link": null
+    "link": "https://github.com/rockyzl"
   },
   {
     "date": "2026-02",
@@ -37,7 +29,7 @@
     "title": "Joined AAOS as Data Science Engineer",
     "blurb": "Building voice agents and clinical data systems for the American Academy of Orthopaedic Surgeons.",
     "image": null,
-    "link": null
+    "link": "https://www.aaos.org/"
   },
   {
     "date": "2024-04",
@@ -61,6 +53,6 @@
     "title": "Transitioned from ANL to industrial data science",
     "blurb": "After 14+ years at Argonne National Laboratory, started a new chapter in production data science (Cincinnati Insurance, Mercury Insurance, AAOS).",
     "image": null,
-    "link": null
+    "link": "https://www.linkedin.com/in/rockyzl/"
   }
 ]

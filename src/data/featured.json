@@ -6,19 +6,8 @@
     "role": "co-author",
     "highlight": "ML-driven insight into the stability of charge carriers in flow batteries. Submitted to JMCA (TA-ART-01-2026-000771); a direct extension of the JCESR DMB redoxmer line. With Robertson, Shkrob, Assary, J. Zhang.",
     "image": null,
-    "doi": null,
+    "doi": "https://scholar.google.com/scholar?q=From+machine+learning+to+chemical+insight+Darwinian+chance+stability+charge+carriers+flow+batteries+Robertson+Zhang",
     "gradient": "from-teal to-navy"
-  },
-  {
-    "title": "Deciphering the interfacial electrochemistry of non-nucleophilic Mg(TFSI)₂ as 4 V magnesium-battery electrolyte",
-    "journal": "Magnesium battery electrolyte study",
-    "year": 2025,
-    "citations": 4,
-    "role": "first",
-    "highlight": "First-author 2025 work on 4 V magnesium battery electrolytes — extending non-nucleophilic Mg(TFSI)₂ chemistry into high-voltage operation.",
-    "image": null,
-    "doi": null,
-    "gradient": "from-rust to-amber"
   },
   {
     "title": "Automation-Accelerated Electrolyte Design Mitigates Solubility Competition",
@@ -27,7 +16,7 @@
     "role": "co-author",
     "highlight": "2025 follow-up to the Nature Comm 2024 robotic platform — applying ML-guided automation to address solubility competition in flow-battery electrolytes.",
     "image": null,
-    "doi": null,
+    "doi": "https://scholar.google.com/scholar?q=Automation-Accelerated+Electrolyte+Design+Solubility+Competition+Lu+Zhang",
     "gradient": "from-amber to-teal"
   },
   {

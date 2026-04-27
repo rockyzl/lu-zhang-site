@@ -13,9 +13,11 @@ import aiProjects from "../../data/ai_projects.json";
 const locale = detectLocale(Astro.url.pathname);
 const lp = locale === "zh" ? "/zh" : "";
 
-const totalCitations = publications.reduce((s, p) => s + (p.citations || 0), 0);
-const firstAuthor = publications.filter((p) => p.role === "first").length;
-const corresponding = publications.filter((p) => p.role === "corresponding").length;
+// Filter to verified ANL-affiliated papers (excludes same-name authors).
+const verifiedPubs = publications.filter((p) => p.verified);
+const totalCitations = verifiedPubs.reduce((s, p) => s + (p.citations || 0), 0);
+const firstAuthor = verifiedPubs.filter((p) => p.role === "first").length;
+const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").length;
 const PATENT_COUNT_TOTAL = 28;
 ---
 <Base title="Lu Zhang — Battery Scientist & Data Engineer">
@@ -40,7 +42,7 @@ const PATENT_COUNT_TOTAL = 28;
     </section>
 
     <div class="stat-bar">
-      <div class="stat"><div class="num">{publications.length}</div><div class="label">{t("stat.papers", locale)}</div></div>
+      <div class="stat"><div class="num">{verifiedPubs.length}</div><div class="label">{t("stat.papers", locale)}</div></div>
       <div class="stat"><div class="num">{PATENT_COUNT_TOTAL}</div><div class="label">{t("stat.patents", locale)}</div></div>
       <div class="stat"><div class="num">{conferences.length}</div><div class="label">{t("stat.talks", locale)}</div></div>
       <div class="stat"><div class="num">{totalCitations.toLocaleString()}</div><div class="label">{t("stat.citations", locale)}</div></div>

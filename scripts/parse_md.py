@@ -162,6 +162,31 @@ for entry in patents:
 for entry in publications:
     entry["topic"] = TOPIC_MAP.get(entry["topic"], entry["topic"])
 
+# ---- Author-disambiguation filter ----
+# OpenAlex aggregates all "Lu Zhang"s into one author cluster, so we need a
+# whitelist of confirmed ANL/JCESR collaborators. A paper is "verified Lu
+# Zhang" only if at least one co-author surname matches the whitelist OR
+# the title is explicitly battery/electrolyte/redox related.
+ANL_COAUTHORS = {
+    "Amine", "Burrell", "Curtiss", "Shkrob", "Vaughey", "Jansen",
+    "Brushett", "Robertson", "Assary", "Lipson", "Cheng", "Patel",
+    "Bheemireddy", "Ferrandon", "Hollas", "Hu", "Duan",
+    "Zhengcheng Zhang", "Z. Zhang", "Jingjing Zhang", "J. Zhang",
+    "Jinhua Huang", "J. Huang", "Xiaoliang Wei", "X. Wei",
+    "Wei Wang", "W. Wang", "Wentao Duan", "Lily Robertson",
+    "Rajeev Assary", "Anthony Burrell", "Khalil Amine",
+    "Larry Curtiss", "Ilya Shkrob", "Anthony Jansen",
+    "John Vaughey", "Fikile Brushett", "Magali Ferrandon",
+    "Albert Lipson", "Shrayesh Patel", "Sambasiva Bheemireddy",
+}
+def is_verified_lu(authors_str: str) -> bool:
+    if not authors_str:
+        return False
+    return any(name in authors_str for name in ANL_COAUTHORS)
+
+for p in publications:
+    p["verified"] = is_verified_lu(p["authors"])
+
 # ---- Role detection (first / corresponding / co) ----
 # Strict policy:
 #   - "first"          if Lu Zhang is the first listed author
