@@ -159,7 +159,7 @@ const today = new Date().toISOString().slice(0, 10);
         <span><b>{verifiedPubs.length}</b> peer-reviewed papers</span>
         <span><b>28</b> US patents &amp; applications</span>
         <span><b>{invitedData.talks.length}</b> invited talks</span>
-        <span><b>{totalCitations.toLocaleString()}</b> citations</span>
+        <span><b>4,700+</b> citations</span>
         <span>h-index <b>39</b></span>
         <span><b>{firstAuthor + corresp}</b> first / corresp.</span>
       </div>
@@ -223,7 +223,7 @@ const today = new Date().toISOString().slice(0, 10);
         </div>
       ))}
 
-      <h2>US Patents (selected, {issued.length} total)</h2>
+      <h2>US Patents (selected — {issued.length} issued of 28 total)</h2>
       {top10Patents.map((p) => (
         <div class="pubitem">
           <span class="ptitle">{p.patent_no}</span>
