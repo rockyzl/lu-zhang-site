@@ -1,5 +1,19 @@
 [
   {
+    "title": "Electrolytes used in silicon anodes",
+    "title_cn": "硅负极电解液",
+    "authors": "Zhangxing Shi, Sisi Jiang, Lu Zhang",
+    "book": "Lithium-ion Batteries Enabled by Silicon Anodes",
+    "publisher": "Institution of Engineering and Technology (IET)",
+    "isbn": "9781785619557 (print) · 9781785619564 (e-book)",
+    "year": 2021,
+    "pages": "99–128",
+    "doi": "https://doi.org/10.1049/pbpo156e_ch4",
+    "url": "https://digital-library.theiet.org/doi/10.1049/pbpo156e_ch4",
+    "topic": "Silicon-anode electrolytes · additives",
+    "verified": true
+  },
+  {
     "title": "Redox Shuttle Additives for Lithium-Ion Battery",
     "title_cn": "锂离子电池氧化还原穿梭添加剂",
     "authors": "Lu Zhang, Zhengcheng Zhang, Khalil Amine",
@@ -11,19 +25,5 @@
     "url": "https://www.intechopen.com/chapters/29292",
     "topic": "Redox shuttles · overcharge protection",
     "verified": true
-  },
-  {
-    "title": "Silicon-electrode electrolytes and additives (chapter title TBC)",
-    "title_cn": "硅负极电解液与添加剂（书章标题待确认）",
-    "authors": "Lu Zhang et al.",
-    "book": "(book title to be confirmed)",
-    "publisher": "TBD",
-    "isbn": "",
-    "year": null,
-    "doi": null,
-    "url": "https://scholar.google.com/scholar?q=Lu+Zhang+silicon+anode+binder+electrolyte+book+chapter+Argonne",
-    "topic": "Silicon anode · electrolytes · additives",
-    "verified": false,
-    "note": "User-recalled second book chapter; public record not yet located. Placeholder until details confirmed."
   }
 ]

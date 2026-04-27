@@ -79,6 +79,7 @@ const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox fl
         <strong style="color: var(--c-fg);">{c.book}</strong>
         {c.publisher && ` · ${c.publisher}`}
         {c.year && ` · ${c.year}`}
+        {c.pages && ` · pp. ${c.pages}`}
         {c.isbn && ` · ISBN ${c.isbn}`}
       </div>
       {c.note && <div class="meta" style="font-style: italic;">{c.note}</div>}
