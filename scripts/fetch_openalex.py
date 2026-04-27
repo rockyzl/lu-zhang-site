@@ -15,6 +15,16 @@ PER_PAGE = 200
 
 # Employers / institutions that confirm "this Lu Zhang = our Lu Zhang"
 # Match by substring (case-insensitive) on institution display_name.
+# Co-author names that — combined with a CAS affiliation in 2001-2007 — confirm
+# a paper is from his PhD era. Without a co-author match, CAS-era hits are
+# treated as same-name false positives because OpenAlex's author cluster also
+# contains other "Lu Zhang"s active in China around that time.
+# Add names as the user confirms more PhD-era collaborators.
+CAS_VERIFY_COAUTHORS = [
+    "Li Yi", "Yi Li",
+    "李毅",
+]
+
 EMPLOYER_KEYWORDS = [
     "argonne national laboratory",
     "argonne",
@@ -59,13 +69,30 @@ def fetch_all_works():
     return works
 
 
-def is_our_lu_zhang(authorship: dict) -> bool:
-    """Check if this authorship entry is OUR Lu Zhang (by institution affiliation)."""
+def is_our_lu_zhang(authorship: dict, work: dict | None = None) -> bool:
+    """Check if this authorship entry is OUR Lu Zhang (by institution affiliation).
+
+    For CAS affiliations in the PhD-era window (2001-2007), additionally require
+    a confirmed CAS co-author since OpenAlex bundles same-name CAS researchers.
+    """
     if authorship["author"]["display_name"].lower() != "lu zhang":
         return False
     insts = authorship.get("institutions", [])
     inst_names = " ; ".join(i.get("display_name", "") for i in insts).lower()
-    return any(kw in inst_names for kw in EMPLOYER_KEYWORDS)
+    if not any(kw in inst_names for kw in EMPLOYER_KEYWORDS):
+        return False
+    # Extra check: CAS-era papers also require a known co-author
+    is_cas_match = any(kw in inst_names for kw in (
+        "chinese academy of sciences", "academia sinica",
+        "institute of chemistry, chinese academy of sciences",
+        "technical institute of physics and chemistry",
+    ))
+    if is_cas_match and work is not None:
+        year = work.get("publication_year", 0) or 0
+        if 2001 <= year <= 2007:
+            coauthor_names = " ; ".join(a["author"]["display_name"] for a in work.get("authorships", []))
+            return any(name in coauthor_names for name in CAS_VERIFY_COAUTHORS)
+    return True
 
 
 # Corresponding-author whitelist (titles where Lu Zhang is confirmed corresponding)
@@ -88,7 +115,7 @@ def transform_work(w: dict) -> dict:
     for i, a in enumerate(w["authorships"]):
         name = a["author"]["display_name"]
         authors.append(name)
-        if name.lower() == "lu zhang" and is_our_lu_zhang(a):
+        if name.lower() == "lu zhang" and is_our_lu_zhang(a, w):
             if lu_position is None:
                 lu_position = a.get("author_position", "middle")
             lu_affiliations = [inst["display_name"] for inst in a.get("institutions", [])]
@@ -130,7 +157,7 @@ def main():
     verified = []
     for w in works:
         # Only keep if at least one Lu Zhang authorship has confirmed institution
-        if any(is_our_lu_zhang(a) for a in w.get("authorships", [])):
+        if any(is_our_lu_zhang(a, w) for a in w.get("authorships", [])):
             verified.append(transform_work(w))
 
     print(f"  → {len(verified)} works confirmed (affiliation matches Argonne/FSU/etc)")
@@ -155,7 +182,7 @@ def main():
     coauthors: dict[str, dict] = {}
     for w in works:
         # Only count co-authors from verified papers
-        if not any(is_our_lu_zhang(a) for a in w.get("authorships", [])):
+        if not any(is_our_lu_zhang(a, w) for a in w.get("authorships", [])):
             continue
         for a in w["authorships"]:
             name = a["author"]["display_name"]
