@@ -1,0 +1,181 @@
+---
+import Base from "../layouts/Base.astro";
+import { detectLocale, t } from "../lib/i18n";
+
+const locale = detectLocale(Astro.url.pathname);
+const isZh = locale === "zh";
+
+const major = isZh
+  ? [
+      {
+        title: "R&D 100 Award 获奖（2014）",
+        subtitle: "锂电池氧化还原穿梭添加剂技术",
+        body: "由 R&D Magazine 颁发，业内称为「工业界奥斯卡」。系核心发明人之一，相关工作以 Energy & Environmental Science 第一作者论文为基础，奠定 ANL 后续 redox shuttle 专利簇。",
+        link: "https://www.rdworldonline.com/rd-100-archive/2014/",
+      },
+      {
+        title: "R&D 100 Award Finalist（2015）",
+        subtitle: "高电压锂电池氟化电解液技术",
+        body: "连续两年 R&D 100 提名。",
+        link: "https://www.anl.gov/article/argonne-researchers-win-two-rd-100-awards",
+      },
+    ]
+  : [
+      {
+        title: "R&D 100 Award (2014)",
+        subtitle: "Lithium-battery overcharge-protection redox-shuttle technology",
+        body: "The 'Oscars of Innovation' awarded annually by R&D Magazine. Core inventor on the redox-shuttle patent family — Energy & Environmental Science first-author paper laid the foundation, ANL patent cluster followed.",
+        link: "https://www.rdworldonline.com/rd-100-archive/2014/",
+      },
+      {
+        title: "R&D 100 Award Finalist (2015)",
+        subtitle: "High-voltage lithium-battery fluorinated electrolyte technology",
+        body: "Two consecutive R&D 100 nominations.",
+        link: "https://www.anl.gov/article/argonne-researchers-win-two-rd-100-awards",
+      },
+    ];
+
+const doeService = isZh
+  ? [
+      ["DOE Flow Batteries Technology Strategy Assessment 共同作者（2023）", "DOE 长时储能路线图；同时参与产业 listening session（22 名参会者，14 家相关企业）", "https://www.energy.gov/sites/default/files/2023-07/Technology%20Strategy%20Assessment%20-%20Flow%20Batteries.pdf"],
+      ["Storage Innovations 2030 贡献者", "DOE 长时储能框架，2022 年 Energy Storage Grand Challenge Summit 启动", "https://www.energy.gov/eere/storage-innovations-2030"],
+      ["JCESR Theme Lead / Sprint 团队领导（2015–2017）", "跨 3 所大学 + 2 个国家实验室的 Sprint 团队领导", null],
+      ["JCESR 2.0 自报告 redoxmer Y3 里程碑负责人（2020）", "Self-reporting fluorescent redoxmer 方向", null],
+    ]
+  : [
+      ["Co-author, DOE Flow Batteries Technology Strategy Assessment (2023)", "Long-duration storage roadmap; engaged industry listening session (22 attendees, 14 commercial entities)", "https://www.energy.gov/sites/default/files/2023-07/Technology%20Strategy%20Assessment%20-%20Flow%20Batteries.pdf"],
+      ["Storage Innovations 2030 contributor", "DOE framework launched at the 2022 Energy Storage Grand Challenge Summit", "https://www.energy.gov/eere/storage-innovations-2030"],
+      ["JCESR Theme / Sprint team leadership (2015 – 2017)", "Cross-institution Sprint team across 3 universities + 2 national labs", null],
+      ["JCESR 2.0 self-reporting redoxmer Y3 milestone leader (2020)", "Self-reporting fluorescent redoxmer direction", null],
+    ];
+
+const panelService = isZh
+  ? [
+      ["DOE SBIR Reviewer", "美国能源部小企业创新研究项目评审专家（2013 – 2022，10 年）", "https://www.energy.gov/technologytransitions/sbirsttr"],
+      ["NSF Review Panel for Energy Systems", "美国国家科学基金会能源系统方向评审 panel（2019）", "https://www.nsf.gov/"],
+      ["DOE Energy Storage Innovations Prize Reviewer", "长时储能创新奖评审专家（2023）", "https://americanmadechallenges.org/challenges/energystorage/"],
+    ]
+  : [
+      ["DOE SBIR Reviewer", "Department of Energy Small Business Innovation Research (2013 – 2022, 10 years)", "https://www.energy.gov/technologytransitions/sbirsttr"],
+      ["NSF Review Panel for Energy Systems", "National Science Foundation (2019)", "https://www.nsf.gov/"],
+      ["DOE Energy Storage Innovations Prize Reviewer", "Long-duration storage innovation awards (2023)", "https://americanmadechallenges.org/challenges/energystorage/"],
+    ];
+
+const peerJournals = [
+  ["Journal of Power Sources", "https://www.sciencedirect.com/journal/journal-of-power-sources"],
+  ["ACS Energy Letters", "https://pubs.acs.org/journal/aelccp"],
+  ["Chemical Communications", "https://pubs.rsc.org/en/journals/journalissues/cc"],
+  ["Advanced Energy Materials", "https://onlinelibrary.wiley.com/journal/16146840"],
+  ["Nano Energy", "https://www.sciencedirect.com/journal/nano-energy"],
+  ["Journal of Materials Chemistry A", "https://pubs.rsc.org/en/journals/journalissues/ta"],
+  ["Chemistry of Materials", "https://pubs.acs.org/journal/cmatex"],
+  ["ChemSusChem", "https://chemistry-europe.onlinelibrary.wiley.com/journal/1864564x"],
+  ["Electrochimica Acta", "https://www.sciencedirect.com/journal/electrochimica-acta"],
+  ["ACS Applied Energy Materials", "https://pubs.acs.org/journal/aaemcq"],
+];
+
+const featured = [
+  ["Argonne Today", "Liquid catholyte ANL-8/9 highlight", "https://www.anl.gov/"],
+  ["JCESR Research Highlights", "Multiple molecular-engineering breakthroughs", "https://www.anl.gov/jcesr"],
+  ["EurekAlert", "Self-reporting redox flow battery coverage", "https://www.eurekalert.org/news-releases/780281"],
+  ["Nature Communications", "2024 robotic platform + active learning paper", "https://www.nature.com/articles/s41467-024-47070-5"],
+];
+
+const metrics = isZh
+  ? [
+      ["4,700+ 总被引 · h-index 39 · i10-index 89", "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en"],
+      ["112 篇同行评议期刊论文 · 28 项美国专利及申请 · 38 篇会议摘要", "https://www.lu-zhang-site/publications/"],
+      ["13 次特邀报告 · 178 位独立合作者", null],
+    ]
+  : [
+      ["4,700+ citations · h-index 39 · i10-index 89", "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en"],
+      ["112 peer-reviewed papers · 28 US patents & applications · 38 conference abstracts", null],
+      ["13 invited / featured talks · 178 unique collaborators", null],
+    ];
+---
+<Base title={(isZh ? "荣誉 — " : "Awards — ") + "Lu Zhang"}>
+  <div class="container" style="padding-top: 3rem;">
+    <span class="eyebrow">{t("page.awards.eyebrow", locale)}</span>
+    <h1>{t("page.awards.title", locale)}</h1>
+    <p class="lead">{t("page.awards.lead", locale)}</p>
+
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 style="margin:0;">{t("page.awards.major", locale)}</h2>
+    </div>
+    {major.map((a) => (
+      <div class="entry">
+        <div class="title">
+          <a href={a.link} target="_blank" rel="noopener">{a.title}</a>
+        </div>
+        <div class="meta" style="font-style: italic; color: var(--c-fg);">{a.subtitle}</div>
+        <div class="meta" style="margin-top: 0.4rem;">{a.body}</div>
+      </div>
+    ))}
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{t("page.awards.doe", locale)}</h2>
+    </div>
+    {doeService.map(([title, body, link]) => (
+      <div class="entry">
+        <div class="title">
+          {link ? <a href={link} target="_blank" rel="noopener">{title}</a> : title}
+        </div>
+        <div class="meta">{body}</div>
+      </div>
+    ))}
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{t("page.awards.panel", locale)}</h2>
+    </div>
+    {panelService.map(([title, body, link]) => (
+      <div class="entry">
+        <div class="title">
+          <a href={link} target="_blank" rel="noopener">{title}</a>
+        </div>
+        <div class="meta">{body}</div>
+      </div>
+    ))}
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{t("page.awards.peer", locale)}</h2>
+    </div>
+    <p style="font-size: 0.95rem; color: var(--c-fg);">
+      {isZh ? "10+ 国际期刊审稿人，包括：" : "Reviewer for 10+ international journals including:"}
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.4rem 1.2rem; margin-top: 0.8rem;">
+      {peerJournals.map(([j, url]) => (
+        <div style="font-size: 0.92rem; padding: 0.25rem 0;">
+          <a href={url} target="_blank" rel="noopener">{j}</a>
+        </div>
+      ))}
+    </div>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{t("page.awards.media", locale)}</h2>
+    </div>
+    {featured.map(([outlet, desc, link]) => (
+      <div class="entry">
+        <div class="title">
+          <a href={link} target="_blank" rel="noopener">{outlet}</a>
+        </div>
+        <div class="meta">{desc}</div>
+      </div>
+    ))}
+    <p style="margin-top: 1rem; font-size: 0.93rem;">
+      <a href={isZh ? "/zh/press/" : "/press/"}>
+        {isZh ? "→ 完整媒体报道列表" : "→ Full press coverage list"}
+      </a>
+    </p>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{t("page.awards.metrics", locale)}</h2>
+    </div>
+    {metrics.map(([m, link]) => (
+      <div class="entry">
+        <div class="title">
+          {link ? <a href={link} target="_blank" rel="noopener">{m}</a> : m}
+        </div>
+      </div>
+    ))}
+  </div>
+</Base>

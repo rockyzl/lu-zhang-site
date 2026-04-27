@@ -7,7 +7,23 @@
   "nav.talks":       { "en": "Talks",          "zh": "报告" },
   "nav.press":       { "en": "Press",          "zh": "媒体" },
   "nav.collaborators":{"en": "Collaborators",  "zh": "合作者" },
+  "nav.awards":      { "en": "Awards",         "zh": "荣誉" },
+  "nav.reports":     { "en": "Reports",        "zh": "报告" },
   "nav.ai":          { "en": "AI",             "zh": "AI" },
+
+  "page.awards.eyebrow":{ "en":"Awards · Service · Recognition", "zh":"荣誉 · 服务 · 认可" },
+  "page.awards.title":{ "en":"Awards & Recognition","zh":"荣誉与认可" },
+  "page.awards.lead":{ "en":"R&D 100 Award (2014) for redox-shuttle technology, plus DOE / JCESR leadership, government panel & proposal review, peer review for 10+ journals, and media coverage across the Argonne / DOE / industry press.","zh":"2014 年 R&D 100 大奖（氧化还原穿梭剂技术），以及 DOE / JCESR 领导身份、政府机构评审与项目审批、10+ 期刊审稿，和阿贡 / DOE / 行业媒体的报道。" },
+  "page.awards.major":{ "en":"Major awards","zh":"主要奖项" },
+  "page.awards.doe":  { "en":"DOE / JCESR leadership","zh":"DOE / JCESR 领导身份" },
+  "page.awards.panel":{ "en":"Government panel & proposal review","zh":"政府机构评审与项目审批" },
+  "page.awards.peer": { "en":"Journal peer review","zh":"期刊同行评议" },
+  "page.awards.media":{ "en":"Featured in","zh":"媒体高亮" },
+  "page.awards.metrics":{ "en":"Bibliometrics","zh":"引文计量" },
+
+  "page.reports.eyebrow":{ "en":"DOE / Argonne LDRD","zh":"DOE / 阿贡 LDRD" },
+  "page.reports.title":{ "en":"Technical Reports","zh":"研究技术报告" },
+  "page.reports.lead":{ "en":"Selected technical reports authored at Argonne National Laboratory, including DOE-published strategy assessments and Argonne LDRD project reports. Each entry links to the public source where available.","zh":"在阿贡国家实验室期间撰写的代表性技术报告，包括 DOE 公开发布的战略评估和阿贡 LDRD 项目报告。每条尽可能指向公开来源。" },
 
   "footer.scholar":  { "en": "Google Scholar", "zh": "Google Scholar" },
   "footer.github":   { "en": "GitHub",         "zh": "GitHub" },

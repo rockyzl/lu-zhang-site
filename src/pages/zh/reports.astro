@@ -1,0 +1,40 @@
+---
+import Base from "../../layouts/Base.astro";
+import { detectLocale, t } from "../../lib/i18n";
+import techReports from "../../data/tech_reports.json";
+
+const locale = detectLocale(Astro.url.pathname);
+const isZh = locale === "zh";
+const sorted = [...techReports].sort((a, b) => b.year - a.year);
+---
+<Base title={(isZh ? "技术报告 — " : "Technical Reports — ") + "Lu Zhang"}>
+  <div class="container" style="padding-top: 3rem;">
+    <span class="eyebrow">{t("page.reports.eyebrow", locale)}</span>
+    <h1>{t("page.reports.title", locale)}</h1>
+    <p class="lead">{t("page.reports.lead", locale)}</p>
+
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 style="margin:0;">{sorted.length} {isZh ? "项报告" : "reports"}</h2>
+      <span class="more">2019 – 2023</span>
+    </div>
+
+    {sorted.map((r) => (
+      <div class="entry">
+        <div class="title">
+          <a href={r.url} target="_blank" rel="noopener">{r.title_en}</a>
+        </div>
+        {isZh && r.title_cn && <div class="meta">{r.title_cn}</div>}
+        <div class="meta">
+          <strong style="color: var(--c-fg);">{r.publisher}</strong> · {r.year} · {isZh ? "作者排序" : "author"} {r.author_position}
+        </div>
+        <div class="meta" style="color: var(--c-muted);"><em>{r.topic}</em></div>
+      </div>
+    ))}
+
+    <p style="color: var(--c-muted); font-size: 0.9rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border-soft);">
+      {isZh
+        ? "DOE 战略评估为公开报告（PDF 直链）；阿贡 LDRD 项目报告链接到 OSTI 搜索（具体年报可能在 OSTI 公开 LDRD Annual Report 中找到）。"
+        : "DOE strategy assessments link to the public PDF directly; Argonne LDRD project reports link to OSTI search (specific annual reports may appear in publicly-released LDRD Annual Reports)."}
+    </p>
+  </div>
+</Base>

@@ -3,7 +3,6 @@ import Base from "../layouts/Base.astro";
 import { detectLocale, t } from "../lib/i18n";
 import publications from "../data/publications.json";
 import bookChapters from "../data/book_chapters.json";
-import techReports from "../data/tech_reports.json";
 
 const locale = detectLocale(Astro.url.pathname);
 // Only show ANL-affiliated papers (filters out same-name authors via parser-set verified flag).
@@ -86,22 +85,11 @@ const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox fl
     </div>
   ))}
 
-  <div class="section-head" style="margin-top: 4rem;">
-    <h2 style="margin:0;">{t("page.publications.reports", locale)} ({techReports.length})</h2>
-    <span class="more">DOE / Argonne LDRD</span>
-  </div>
-  {techReports.map((r) => (
-    <div class="entry">
-      <div class="title">
-        <a href={r.url} target="_blank" rel="noopener">{r.title_en}</a>
-      </div>
-      {locale === "zh" && r.title_cn && <div class="meta">{r.title_cn}</div>}
-      <div class="meta">
-        <strong style="color: var(--c-fg);">{r.publisher}</strong> · {r.year} · {locale === "zh" ? "作者排序" : "author"} {r.author_position}
-      </div>
-      <div class="meta" style="color: var(--c-muted);"><em>{r.topic}</em></div>
-    </div>
-  ))}
+  <p style="margin-top: 2rem; font-size: 0.93rem;">
+    <a href={locale === "zh" ? "/zh/reports/" : "/reports/"}>
+      {locale === "zh" ? "→ 查看 5 项 DOE / 阿贡 LDRD 技术报告" : "→ See 5 DOE / Argonne LDRD technical reports"}
+    </a>
+  </p>
 
   <script is:inline>
     const q = document.getElementById("q");
