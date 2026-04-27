@@ -9,6 +9,7 @@
   "nav.collaborators":{"en": "Collaborators",  "zh": "合作者" },
   "nav.awards":      { "en": "Awards",         "zh": "荣誉" },
   "nav.reports":     { "en": "Reports",        "zh": "报告" },
+  "nav.teaching":    { "en": "Teaching",       "zh": "教学" },
   "nav.ai":          { "en": "AI",             "zh": "AI" },
 
   "page.awards.eyebrow":{ "en":"Awards · Service · Recognition", "zh":"荣誉 · 服务 · 认可" },

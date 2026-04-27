@@ -1,0 +1,195 @@
+---
+import Base from "../layouts/Base.astro";
+import { detectLocale, t } from "../lib/i18n";
+import publications from "../data/publications.json";
+
+const locale = detectLocale(Astro.url.pathname);
+const isZh = locale === "zh";
+
+// Derive likely direct-mentee list from publication data: first-authors of
+// papers where Lu Zhang is corresponding, plus high-frequency first-authors
+// in his publication record. Lists names with paper counts and OpenAlex link
+// (where possible — a search URL fallback).
+const verified = publications.filter((p) => p.verified);
+const firstCounts = new Map<string, number>();
+const correspCounts = new Map<string, number>();
+for (const p of verified) {
+  const first = p.authors.split(",")[0].trim();
+  if (!first || first === "Lu Zhang") continue;
+  firstCounts.set(first, (firstCounts.get(first) ?? 0) + 1);
+  if (p.role === "corresponding") {
+    correspCounts.set(first, (correspCounts.get(first) ?? 0) + 1);
+  }
+}
+
+// Direct mentees: people who first-authored papers where Lu Zhang was
+// corresponding (clearest signal of supervisor-supervisee relationship).
+const directMentees = [...correspCounts.entries()]
+  .map(([name, count]) => ({ name, count, total: firstCounts.get(name) ?? count }))
+  .sort((a, b) => b.count - a.count || b.total - a.total);
+
+// Team members: high-frequency first-authors with him on the byline.
+// Excludes Lu Zhang and obvious senior collaborators (Curtiss, Amine, etc.).
+const SENIOR_COLLABORATORS = new Set([
+  "Khalil Amine", "Larry A. Curtiss", "Anthony K. Burrell", "Jeffrey S. Moore",
+  "Fikile R. Brushett", "Anthony Burrell", "Larry Curtiss",
+  "Joaquín Rodríguez-López", "Joaquin Rodriguez-Lopez",
+  "Levi T. Thompson",
+]);
+const teamMembers = [...firstCounts.entries()]
+  .filter(([name, c]) => c >= 3 && !SENIOR_COLLABORATORS.has(name) && !directMentees.find((m) => m.name === name))
+  .map(([name, count]) => ({ name, count }))
+  .sort((a, b) => b.count - a.count);
+
+const teamGrowth = isZh
+  ? [
+      ["2013", "1 名博士后"],
+      ["2014", "1 博士后 + 1 学生"],
+      ["2015", "1 博士后 + 1 访问学生 · 领导 JCESR 低电位 Sprint 团队（3 所大学 + 2 个国家实验室）"],
+      ["2016 – 2017", "2 博士后 + 2 学生 · 领导 JCESR 电解液优化 Sprint 团队（UIUC + PNNL + ANL）"],
+      ["2018", "3 博士后 + 1 学生 · JCESR 2.0 Redoxmer 溶剂化子课题负责人"],
+      ["2020 – 2023", "3 博士后 + 1 学生 · JCESR Y3 里程碑负责人"],
+    ]
+  : [
+      ["2013", "1 postdoc"],
+      ["2014", "1 postdoc + 1 student"],
+      ["2015", "1 postdoc + visiting student · led JCESR low-potential Sprint (3 universities + 2 national labs)"],
+      ["2016 – 2017", "2 postdocs + 2 students · led electrolyte-optimization Sprint (UIUC + PNNL + ANL)"],
+      ["2018", "3 postdocs + 1 student · JCESR 2.0 sub-thrust lead"],
+      ["2020 – 2023", "3 postdocs + 1 student · JCESR Y3 milestone lead"],
+    ];
+
+const sprintTeams = isZh
+  ? [
+      ["JCESR 低电位 Sprint 团队（2015）", "成员来自 3 所大学 + 2 个国家实验室；通过周会和邮件协调，团队成果在 JCESR 年度评审会重点展示"],
+      ["JCESR 电解液优化 Sprint 团队（2016 – 2017）", "成员来自 UIUC、PNNL、ANL；双周会协调；致力于降低高浓度电解液粘度、提高导电率"],
+      ["JCESR 2.0 Redoxmer 溶剂化子课题（2018 – 2020）", "成员来自 UIUC、ANL；双周会协调；redoxmer 溶剂化机理深入研究"],
+      ["JCESR 2.0 Y3 里程碑（2020）", "自报告荧光 redoxmer 方向，跨机构协调"],
+    ]
+  : [
+      ["JCESR low-potential Sprint team (2015)", "Members across 3 universities + 2 national labs; weekly + email coordination; outcomes showcased at JCESR annual review"],
+      ["JCESR electrolyte-optimization Sprint team (2016 – 2017)", "Members from UIUC, PNNL, ANL; bi-weekly meetings; lowered high-concentration electrolyte viscosity and improved conductivity"],
+      ["JCESR 2.0 redoxmer-solvation sub-thrust (2018 – 2020)", "UIUC + ANL members; bi-weekly meetings; deep mechanistic investigation of redoxmer solvation"],
+      ["JCESR 2.0 Y3 milestone (2020)", "Self-reporting fluorescent redoxmer direction; cross-institution coordination"],
+    ];
+
+const TITLE = isZh ? "教学与团队培养" : "Teaching & Mentorship";
+---
+<Base title={TITLE + " — Lu Zhang"}>
+  <div class="container" style="padding-top: 3rem;">
+    <span class="eyebrow">
+      {isZh ? "ANL 团队 · JCESR Sprint 领导 · 跨机构合作" : "ANL group · JCESR Sprint leadership · Cross-institution collaboration"}
+    </span>
+    <h1>{TITLE}</h1>
+    <p class="lead">
+      {isZh
+        ? `于阿贡国家实验室（2013–2023）期间指导博士后、研究生与访问学者，领导 JCESR 跨机构 Sprint 团队（成员覆盖 MIT、PNNL、UIUC、UMichigan、Purdue）。团队规模从 1 名博士后扩展到 3 名博士后 + 1 名学生，多名学生与博士后已在高校或电池产业担任教职 / 骨干岗位。`
+        : `Supervised postdocs, graduate students, and visiting researchers at Argonne National Laboratory (2013 – 2023). Led cross-institution JCESR Sprint teams across MIT, PNNL, UIUC, UMichigan, Purdue. Team grew from 1 postdoc to 3 postdocs + 1 student. Several mentees have moved on to faculty positions and senior roles in the battery industry.`}
+    </p>
+
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 style="margin:0;">{isZh ? "直接指导（确认通讯作者）" : "Direct mentees (confirmed corresponding authorship)"}</h2>
+      <span class="more">{directMentees.length} {isZh ? "人" : "people"}</span>
+    </div>
+    <p style="font-size: 0.92rem; color: var(--c-muted); margin-top: -0.5rem;">
+      {isZh
+        ? "首发表论文中作者是博士后/学生身份、张鲁担任通讯作者的工作。"
+        : "First-authored papers where Lu Zhang served as corresponding author."}
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 60px; text-align: right;">#</th>
+          <th>{isZh ? "姓名" : "Name"}</th>
+          <th style="width: 120px; text-align: right;">{isZh ? "通讯作者论文数" : "Corresp. papers"}</th>
+          <th style="width: 80px; text-align: right;">{isZh ? "总一作" : "Total first"}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {directMentees.map((m, i) => (
+          <tr>
+            <td style="text-align: right; color: var(--c-muted);">{i + 1}</td>
+            <td style="font-weight: 600;">
+              <a href={`https://scholar.google.com/scholar?q=${encodeURIComponent(m.name + " Argonne")}`} target="_blank" rel="noopener">{m.name}</a>
+            </td>
+            <td style="text-align: right;">{m.count}</td>
+            <td style="text-align: right; color: var(--c-muted);">{m.total}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{isZh ? "团队成员（频繁一作合作者）" : "Team members (frequent first-author co-workers)"}</h2>
+      <span class="more">{teamMembers.length} {isZh ? "人 · ≥3 篇" : "people · ≥3 papers"}</span>
+    </div>
+    <p style="font-size: 0.92rem; color: var(--c-muted); margin-top: -0.5rem;">
+      {isZh
+        ? "在张鲁署名的论文中担任第一作者 ≥3 次的研究人员，多为他直接团队的博士后、学生或访问学者。"
+        : "Researchers who first-authored ≥3 papers in the verified record — typically direct group members or visiting postdocs."}
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.4rem 1.5rem;">
+      {teamMembers.map((m) => (
+        <div style="font-size: 0.93rem; padding: 0.35rem 0; border-bottom: 1px dotted var(--c-border-soft);">
+          <span style="font-weight: 500;">
+            <a href={`https://scholar.google.com/scholar?q=${encodeURIComponent(m.name + " Argonne")}`} target="_blank" rel="noopener" style="color: var(--c-fg);">{m.name}</a>
+          </span>
+          <span style="color: var(--c-muted); font-size: 0.82em;"> · {m.count} {isZh ? "篇一作" : "first-author papers"}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{isZh ? "团队规模成长" : "Group size over time"}</h2>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 180px;">{isZh ? "年份" : "Year"}</th>
+          <th>{isZh ? "团队规模 / 领导身份" : "Group / leadership"}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {teamGrowth.map(([y, g]) => (
+          <tr><td style="white-space: nowrap; font-weight: 500;">{y}</td><td>{g}</td></tr>
+        ))}
+      </tbody>
+    </table>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{isZh ? "JCESR Sprint 团队（跨机构）" : "JCESR Sprint teams (cross-institution)"}</h2>
+    </div>
+    {sprintTeams.map(([name, body]) => (
+      <div class="entry">
+        <div class="title">{name}</div>
+        <div class="meta">{body}</div>
+      </div>
+    ))}
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{isZh ? "其他指导与培训" : "Other teaching & invited service"}</h2>
+    </div>
+    <div class="entry">
+      <div class="title">
+        {isZh ? "佛罗里达州立大学特邀讲座 — Organic Molecules in Batteries（2014）" : "Florida State University invited seminar — Organic Molecules in Batteries (2014)"}
+      </div>
+      <div class="meta">
+        {isZh ? "回到博士后母校做特邀讲座，介绍有机分子在电池中的应用。" : "Invited talk at the alma mater of postdoc training, introducing organic molecules for battery applications."}
+      </div>
+    </div>
+    <div class="entry">
+      <div class="title">
+        {isZh ? "ANL 内部培训：项目管理 / 商业化创业 / 安全合规 / 电化学" : "ANL internal training: project management · commercial startup · safety · electrochemistry"}
+      </div>
+      <div class="meta">
+        {isZh ? "组织和参与 ANL 内部多轮培训，并对实验室成员开展安全培训。" : "Participated in and delivered multiple ANL internal trainings; led safety training for group members."}
+      </div>
+    </div>
+
+    <p style="color: var(--c-muted); font-size: 0.88rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border-soft);">
+      {isZh
+        ? "* 直接指导名单按 OpenAlex 已公开论文派生：博士后/学生在张鲁担任通讯作者的论文中担任第一作者。多名访问学生 / 实习生 / 兄弟实验室协作者未独立成稿，未列入此表。"
+        : "* Direct mentee list derived from public OpenAlex records — postdocs/students who first-authored papers with Lu Zhang as corresponding author. Visiting students, interns, and external collaborators without independent first-author papers are not listed here."}
+    </p>
+  </div>
+</Base>
