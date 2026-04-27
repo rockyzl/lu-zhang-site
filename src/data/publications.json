@@ -1906,9 +1906,9 @@
     "issue": 12,
     "pages": "5737-5743",
     "doi": "https://doi.org/10.1021/acsenergylett.4c01351",
-    "role": "co-author / corresponding (PI)",
+    "role": "corresponding",
     "verified": true,
-    "kind": "journal-article"
+    "kind": "journal"
   },
   {
     "title": "From machine learning to chemical insight: Darwinian chance and the stability of charge carriers in flow batteries",
@@ -1917,10 +1917,10 @@
     "journal": "Journal of Materials Chemistry A — under revision",
     "year": 2026,
     "doi": "https://scholar.google.com/scholar?q=Darwinian+chance+stability+charge+carriers+flow+batteries",
-    "role": "corresponding (PI)",
+    "role": "corresponding",
     "status": "in revision",
     "manuscript_id": "TA-ART-01-2026-000771",
     "verified": true,
-    "kind": "journal-article-in-revision"
+    "kind": "journal"
   }
 ]

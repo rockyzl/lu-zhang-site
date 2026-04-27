@@ -14,11 +14,21 @@ const locale = detectLocale(Astro.url.pathname);
 const lp = locale === "zh" ? "/zh" : "";
 
 // Filter to verified ANL-affiliated papers (excludes same-name authors).
+// Stats use AUTHORITATIVE counts (user-verified TSV 2026-04-27), not raw JSON
+// — local publications.json is incomplete (87 journals; authoritative count is 97).
+// See ~/.claude/projects/.../memory/project_publication_count_99.md for口径.
+const SCI_COUNT = 97;
+const BOOK_CHAPTER_COUNT = 2;
+const PATENT_COUNT_TOTAL = 28;
+const TALKS_TOTAL = 51; // 13 invited + 38 conference abstracts
+const CITATION_COUNT = "4,700+";
+const H_INDEX = 39;
+const FIRST_OR_CORRESP = 59;
+// (kept for any legacy references that still use these:)
 const verifiedPubs = publications.filter((p) => p.verified);
 const totalCitations = verifiedPubs.reduce((s, p) => s + (p.citations || 0), 0);
 const firstAuthor = verifiedPubs.filter((p) => p.role === "first").length;
 const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").length;
-const PATENT_COUNT_TOTAL = 28;
 ---
 <Base title="张鲁 Lu Zhang — 电池科学家 / 数据工程师 · Battery Scientist & Data Engineer">
   <div class="container">
@@ -43,12 +53,13 @@ const PATENT_COUNT_TOTAL = 28;
     </section>
 
     <div class="stat-bar">
-      <div class="stat"><div class="num">{verifiedPubs.length}</div><div class="label">{t("stat.papers", locale)}</div></div>
+      <div class="stat"><div class="num">{SCI_COUNT}</div><div class="label">{t("stat.papers", locale)}</div></div>
+      <div class="stat"><div class="num">{BOOK_CHAPTER_COUNT}</div><div class="label">{locale === "zh" ? "著作章节" : "Book chapters"}</div></div>
       <div class="stat"><div class="num">{PATENT_COUNT_TOTAL}</div><div class="label">{t("stat.patents", locale)}</div></div>
-      <div class="stat"><div class="num">{conferences.length}</div><div class="label">{t("stat.talks", locale)}</div></div>
-      <div class="stat"><div class="num">{totalCitations.toLocaleString()}</div><div class="label">{t("stat.citations", locale)}</div></div>
-      <div class="stat"><div class="num">39</div><div class="label">{t("stat.h", locale)}</div></div>
-      <div class="stat"><div class="num">{firstAuthor + corresponding}</div><div class="label">{t("stat.first", locale)}</div></div>
+      <div class="stat"><div class="num">{TALKS_TOTAL}</div><div class="label">{t("stat.talks", locale)}</div></div>
+      <div class="stat"><div class="num">{CITATION_COUNT}</div><div class="label">{t("stat.citations", locale)}</div></div>
+      <div class="stat"><div class="num">{H_INDEX}</div><div class="label">{t("stat.h", locale)}</div></div>
+      <div class="stat"><div class="num">{FIRST_OR_CORRESP}</div><div class="label">{t("stat.first", locale)}</div></div>
     </div>
 
     <div class="section-head">
