@@ -42,19 +42,65 @@ const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox fl
     </select>
   </div>
 
-  <div id="list">
-    {sorted.map((p) => (
-      <div class="entry" data-topic={p.topic} data-role={p.role} data-text={(p.title + " " + p.authors + " " + p.journal).toLowerCase()}>
-        <div class="title">
-          <a href={p.doi || scholarUrl(p.title)} target={p.doi ? "_blank" : "_self"}>{p.title}</a>
-          {p.role === "first" && <span class="badge first">first</span>}
-          {p.role === "corresponding" && <span class="badge corresponding">corresp.</span>}
-        </div>
-        <div class="meta">{p.authors}</div>
-        <div class="meta">{p.journal} · {p.year} · {p.citations} citations · <em>{p.topic}</em></div>
-      </div>
-    ))}
+  <div class="section-head" style="margin-top: 2.5rem;">
+    <h2 style="margin:0;">{t("page.publications.allpapers", locale)} ({sorted.length})</h2>
+    <span class="more">{locale === "zh" ? "按年份倒序" : "newest first"}</span>
   </div>
+  <div id="list">
+    {sorted.map((p) => {
+      const reviewBadge = reviews.includes(p);
+      return (
+        <div class="entry" data-topic={p.topic} data-role={p.role} data-text={(p.title + " " + p.authors + " " + p.journal).toLowerCase()}>
+          <div class="title">
+            <a href={p.doi || scholarUrl(p.title)} target={p.doi ? "_blank" : "_self"}>{p.title}</a>
+            {p.role === "first" && <span class="badge first">first</span>}
+            {p.role === "corresponding" && <span class="badge corresponding">corresp.</span>}
+            {reviewBadge && <span class="badge" style="background: #e1ecff; color: #2456a8;">review</span>}
+          </div>
+          <div class="meta">{p.authors}</div>
+          <div class="meta">{p.journal} · {p.year} · {p.citations} citations · <em>{p.topic}</em></div>
+        </div>
+      );
+    })}
+  </div>
+
+  <div class="section-head" style="margin-top: 4rem;">
+    <h2 style="margin:0;">{t("page.publications.chapters", locale)} ({bookChapters.length})</h2>
+  </div>
+  {bookChapters.map((c) => (
+    <div class="entry">
+      <div class="title">
+        <a href={c.url} target="_blank" rel="noopener">{c.title}</a>
+        {c.verified === false && <span class="badge" style="background: #f0ece2; color: #6b5c30;">{locale === "zh" ? "占位 · 待确认" : "placeholder"}</span>}
+      </div>
+      {c.title_cn && c.title_cn !== c.title && <div class="meta">{c.title_cn}</div>}
+      <div class="meta">{c.authors}</div>
+      <div class="meta">
+        <strong style="color: var(--c-fg);">{c.book}</strong>
+        {c.publisher && ` · ${c.publisher}`}
+        {c.year && ` · ${c.year}`}
+        {c.isbn && ` · ISBN ${c.isbn}`}
+      </div>
+      {c.note && <div class="meta" style="font-style: italic;">{c.note}</div>}
+    </div>
+  ))}
+
+  <div class="section-head" style="margin-top: 4rem;">
+    <h2 style="margin:0;">{t("page.publications.reports", locale)} ({techReports.length})</h2>
+    <span class="more">DOE / Argonne LDRD</span>
+  </div>
+  {techReports.map((r) => (
+    <div class="entry">
+      <div class="title">
+        <a href={r.url} target="_blank" rel="noopener">{r.title_en}</a>
+      </div>
+      {locale === "zh" && r.title_cn && <div class="meta">{r.title_cn}</div>}
+      <div class="meta">
+        <strong style="color: var(--c-fg);">{r.publisher}</strong> · {r.year} · {locale === "zh" ? "作者排序" : "author"} {r.author_position}
+      </div>
+      <div class="meta" style="color: var(--c-muted);"><em>{r.topic}</em></div>
+    </div>
+  ))}
 
   <script is:inline>
     const q = document.getElementById("q");
