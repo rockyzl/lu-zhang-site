@@ -147,26 +147,24 @@ const featuredIn = isZh
   </ul>
 
   <h2>{t("about.recognition", locale)}</h2>
-  <h3 style="margin-top: 1.5rem;">{t("about.major", locale)}</h3>
-  <ul>{majorAwards.map((a) => <li set:html={a.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")}></li>)}</ul>
-
-  <h3 style="margin-top: 1.5rem;">{t("about.bibliometrics", locale)}</h3>
-  <ul>{bibliometrics.map((b) => <li>{b}</li>)}</ul>
-
-  <h3 style="margin-top: 1.5rem;">{t("about.doe", locale)}</h3>
-  <ul>{doeService.map((s) => <li set:html={s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")}></li>)}</ul>
-
-  <h3 style="margin-top: 1.5rem;">{t("about.panel", locale)}</h3>
-  <ul>{panelService.map((s) => <li set:html={s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")}></li>)}</ul>
-
-  <h3 style="margin-top: 1.5rem;">{t("about.peer", locale)}</h3>
-  <p style="font-size: 0.95rem; color: var(--c-fg);">{peerLead}</p>
-
-  <h3 style="margin-top: 1.5rem;">{t("about.other", locale)}</h3>
-  <ul>{otherService.map((s) => <li set:html={s.replace(/\*(.+?)\*/g, "<em>$1</em>")}></li>)}</ul>
-
-  <h3 style="margin-top: 1.5rem;">{t("about.featured", locale)}</h3>
-  <ul>{featuredIn.map((f) => <li set:html={f.replace(/\*(.+?)\*/g, "<em>$1</em>")}></li>)}</ul>
+  <p style="font-size: 1rem; color: var(--c-fg);">
+    {isZh
+      ? "2014 年 R&D 100 大奖获得者（氧化还原穿梭剂技术），2015 年 Finalist。DOE Flow Battery Strategy Assessment 共同作者，JCESR Theme Lead，DOE SBIR / NSF / DOE ES Prize 评审专家，10+ 期刊审稿人。"
+      : "R&D 100 Award (2014, redox-shuttle technology) and Finalist (2015). Co-author of DOE Flow Batteries Strategy Assessment, JCESR Theme Lead, DOE SBIR / NSF / DOE ES Prize panel reviewer, peer reviewer for 10+ journals."}
+  </p>
+  <p style="font-size: 0.95rem; color: var(--c-muted); margin-top: 0.6rem;">
+    <strong style="color: var(--c-fg);">112</strong> {isZh ? "篇期刊论文" : "peer-reviewed papers"} ·
+    <strong style="color: var(--c-fg);">28</strong> {isZh ? "项美国专利及申请" : "US patents & applications"} ·
+    <strong style="color: var(--c-fg);">13</strong> {isZh ? "次特邀报告" : "invited talks"} ·
+    <strong style="color: var(--c-fg);">178</strong> {isZh ? "位独立合作者" : "unique collaborators"} ·
+    h-index <strong style="color: var(--c-fg);">39</strong> ·
+    4,700+ {isZh ? "总被引" : "citations"}
+  </p>
+  <p style="margin-top: 1rem;">
+    <a href={isZh ? "/zh/awards/" : "/awards/"} style="font-weight: 500;">
+      {isZh ? "→ 查看完整荣誉与认可（含所有链接）" : "→ See full Awards & Recognition page (all links)"}
+    </a>
+  </p>
 
   <h2>{t("about.contact", locale)}</h2>
   <p>
