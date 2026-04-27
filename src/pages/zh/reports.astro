@@ -7,7 +7,7 @@ const locale = detectLocale(Astro.url.pathname);
 const isZh = locale === "zh";
 const sorted = [...techReports].sort((a, b) => b.year - a.year);
 ---
-<Base title={(isZh ? "技术报告 — " : "Technical Reports — ") + "Lu Zhang"}>
+<Base title={(isZh ? "技术报告 — " : "Technical Reports — ") + "张鲁 Lu Zhang"}>
   <div class="container" style="padding-top: 3rem;">
     <span class="eyebrow">{t("page.reports.eyebrow", locale)}</span>
     <h1>{t("page.reports.title", locale)}</h1>

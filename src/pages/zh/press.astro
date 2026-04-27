@@ -9,7 +9,7 @@ const profiles = press.items.filter((p) => p.date === "—");
 dated.sort((a, b) => (b.date > a.date ? 1 : -1));
 const videos = press.videos ?? [];
 ---
-<Base title={(locale === "zh" ? "媒体 — " : "Press — ") + "Lu Zhang"}>
+<Base title={(locale === "zh" ? "媒体 — " : "Press — ") + "张鲁 Lu Zhang"}>
   <div class="container" style="padding-top: 3rem;">
     <span class="eyebrow">{t("page.press.eyebrow", locale)}</span>
     <h1>{t("page.press.title", locale)}</h1>
