@@ -35,79 +35,9 @@ const career = isZh
       ["Postdoctoral Researcher", "Florida State University", "2006 – 2008"],
     ];
 
-const majorAwards = isZh
-  ? [
-      "**2014 R&D 100 Award 获奖** — 表彰锂电氧化还原穿梭添加剂技术。R&D Magazine 颁发，业内称为「工业界奥斯卡」。系核心发明人之一。",
-      "**2015 R&D 100 Award 入围（Finalist）**— 表彰高电压锂电氟化电解液技术。",
-    ]
-  : [
-      "**R&D 100 Award (2014)** — for redox-shuttle additive technology. The 'Oscars of Innovation' awarded annually by R&D Magazine. Core inventor on lithium-battery overcharge-protection redox-shuttle patents.",
-      "**R&D 100 Award Finalist (2015)** — for high-voltage lithium-battery fluorinated electrolyte technology.",
-    ];
-
-const bibliometrics = isZh
-  ? [
-      "4,700+ 总被引 · h-index 39 · i10-index 89（Google Scholar）",
-      "112 篇同行评议期刊论文 · 28 项美国专利及申请 · 38 篇会议摘要",
-      "13 次特邀报告：MRS、ECS、IBS、ICESI、大学讲座等",
-    ]
-  : [
-      "4,700+ citations · h-index 39 · i10-index 89 (Google Scholar)",
-      "112 peer-reviewed journal articles · 28 issued US patents & applications · 38 conference abstracts",
-      "13 invited / featured talks at MRS, ECS, IBS, ICESI, and university seminars",
-    ];
-
-const doeService = isZh
-  ? [
-      "**2023 DOE Flow Batteries Technology Strategy Assessment 共同作者** — 长时储能路线图；参与产业 listening session（22 名参会者，14 家相关企业）",
-      "**Storage Innovations 2030** 贡献者 — DOE 长时储能框架，2022 年 Energy Storage Grand Challenge Summit 启动",
-      "JCESR Theme Lead / Sprint 团队领导（3 所大学 + 2 个国家实验室，2015–2017）",
-      "JCESR 2.0 自报告 redoxmer Y3 里程碑负责人（2020）",
-    ]
-  : [
-      "**Co-author, DOE Flow Batteries Technology Strategy Assessment (2023)** — long-duration storage roadmap; engaged industry listening session (22 attendees, 14 commercial entities)",
-      "**Storage Innovations 2030** contributor — DOE framework launched at the 2022 Energy Storage Grand Challenge Summit",
-      "JCESR Theme / Sprint team leadership (3 universities + 2 national labs, 2015 – 2017)",
-      "JCESR 2.0 self-reporting redoxmer Y3 milestone leader (2020)",
-    ];
-
-const panelService = isZh
-  ? [
-      "**DOE SBIR Reviewer** — 美国能源部小企业创新研究项目评审专家（2013 – 2022，10 年）",
-      "**NSF Review Panel for Energy Systems** — 美国国家科学基金会能源系统方向评审 panel（2019）",
-      "**DOE Energy Storage Innovations Prize Reviewer** — 长时储能创新奖评审专家（2023）",
-    ]
-  : [
-      "**DOE SBIR Reviewer** — Department of Energy Small Business Innovation Research (2013 – 2022, 10 years)",
-      "**NSF Review Panel for Energy Systems** — National Science Foundation (2019)",
-      "**DOE Energy Storage Innovations Prize Reviewer** — long-duration storage innovation awards (2023)",
-    ];
-
-const peerLead = isZh
-  ? "10+ 国际期刊审稿人，包括 J. Power Sources、ACS Energy Letters、Chemical Communications、Advanced Energy Materials、Nano Energy、J. Materials Chemistry A、Chemistry of Materials、ChemSusChem、Electrochimica Acta、ACS Applied Energy Materials。"
-  : "Reviewer for 10+ international journals including J. Power Sources, ACS Energy Letters, Chemical Communications, Advanced Energy Materials, Nano Energy, J. Materials Chemistry A, Chemistry of Materials, ChemSusChem, Electrochimica Acta, ACS Applied Energy Materials.";
-
-const otherService = isZh
-  ? [
-      "*Organic Molecules in Batteries* — 佛罗里达州立大学特邀讲座（博士后母校，2014）",
-      "在 ANL 期间指导 6 名博士后和 3 名研究生；领导跨机构 Sprint 团队（MIT、PNNL、UIUC、UMichigan、Purdue）",
-    ]
-  : [
-      "*Organic Molecules in Batteries* — invited seminar at Florida State University (alma mater of postdoc training, 2014)",
-      "Mentored 6 postdocs and 3 graduate students at ANL; supervised cross-institution Sprint teams (MIT, PNNL, UIUC, UMichigan, Purdue)",
-    ];
-
-const featuredIn = isZh
-  ? [
-      "*Argonne Today* — 液态正极 ANL-8/9 高亮报道",
-      "*JCESR Research Highlights* — 多项分子工程突破",
-      "*EurekAlert* — 自报告液流电池新闻稿",
-    ]
-  : [
-      "*Argonne Today* — liquid catholyte ANL-8/9 highlight",
-      "*JCESR Research Highlights* — multiple molecular-engineering breakthroughs",
-      "*EurekAlert* — self-reporting redox flow battery coverage",
-    ];
+// Detailed Recognition lists used to live here but were consolidated
+// onto /awards/. About-page Recognition is now a 1-paragraph summary
+// + cross-link.
 ---
 <Base title={isZh ? "简介 — 张鲁" : "About — Lu Zhang"}>
   <div class="container" style="padding-top: 3rem;">

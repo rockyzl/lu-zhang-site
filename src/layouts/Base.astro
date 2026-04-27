@@ -22,16 +22,16 @@ const canonicalUrl = new URL(pathname, siteUrl).href;
 const canonical = canonicalUrl;
 const ogImageUrl = ogImage ?? "https://rockyzl.github.io/lu-zhang-site/og-default.png";
 
+// Nav slimmed to 9 items. /reports/ and /press/ are still live but
+// reached via cross-links from /publications/ and /awards/.
 const nav = [
   { href: `${langPrefix}/about/`,        key: "nav.about" },
   { href: `${langPrefix}/publications/`, key: "nav.publications" },
   { href: `${langPrefix}/patents/`,      key: "nav.patents" },
   { href: `${langPrefix}/projects/`,     key: "nav.projects" },
   { href: `${langPrefix}/talks/`,        key: "nav.talks" },
-  { href: `${langPrefix}/press/`,        key: "nav.press" },
   { href: `${langPrefix}/collaborators/`,key: "nav.collaborators" },
   { href: `${langPrefix}/awards/`,       key: "nav.awards" },
-  { href: `${langPrefix}/reports/`,      key: "nav.reports" },
   { href: `${langPrefix}/teaching/`,     key: "nav.teaching" },
   { href: `${langPrefix}/ai/`,           key: "nav.ai" },
 ];
