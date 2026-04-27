@@ -47,6 +47,10 @@ EMPLOYER_KEYWORDS = [
     "aaos",
     "mercury insurance",
     "cincinnati insurance",
+    # OpenAlex sometimes tags ANL-funded work with a DOE program identifier
+    # instead of "Argonne". Treat this as an ANL signal too.
+    "energy storage systems (united states)",
+    "energy storage systems",
 ]
 
 # Fallback: when OpenAlex has NO institution data on the Lu Zhang authorship,
@@ -143,8 +147,11 @@ def is_our_lu_zhang(authorship: dict, work: dict | None = None) -> bool:
                 return any(name in coauthor_names for name in CAS_VERIFY_COAUTHORS)
         return True
 
-    # Path 3: missing institution, fallback to ANL co-author signal
-    if not insts and work is not None and has_anl_coauthor(work):
+    # Path 3 (relaxed fallback): if no whitelisted affiliation but a known
+    # ANL/JCESR collaborator is on the author list, accept the paper.
+    # OpenAlex sometimes tags Lu Zhang at unrelated institutions even on
+    # ANL work — strong co-author signal compensates.
+    if work is not None and has_anl_coauthor(work):
         return True
 
     return False

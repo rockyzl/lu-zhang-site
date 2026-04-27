@@ -563,6 +563,20 @@
     "verified": true
   },
   {
+    "title": "Modeling and Understanding Variations in Redoxmer Cyclability",
+    "topic": "Advanced battery technologies research",
+    "authors": "Benjamin Silcox, Jingjing Zhang, Lu Zhang, Levi T. Thompson",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2020,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2020-022221mtgabs",
+    "role": "co",
+    "affiliations": [
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
+  },
+  {
     "title": "Re‐Engineering Poly(Acrylic Acid) Binder toward Optimized Electrochemical Performance for Silicon Lithium‐Ion Batteries: Branching Architecture Leads to Balanced Properties of Polymeric Binders",
     "topic": "Advancements in Battery Materials",
     "authors": "Sisi Jiang, Bin Hu, Zhangxing Shi, Wei Chen, Zhengcheng Zhang, Lu Zhang",
@@ -727,6 +741,20 @@
     "verified": true
   },
   {
+    "title": "(Invited) Understanding Benzothiadiazole Based Anolyte Materials for Nonaqueous Redox Flow Cells",
+    "topic": "Water Quality Monitoring and Analysis",
+    "authors": "Lu Zhang, Jingjing Zhang, Xiaoliang Wei, Fikile R. Brushett, Ilya A. Shkrob",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2019,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2019-01/3/445",
+    "role": "first",
+    "affiliations": [
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
+  },
+  {
     "title": "The existence of optimal molecular weight for poly(acrylic acid) binders in silicon/graphite composite anode for lithium-ion batteries",
     "topic": "Advancements in Battery Materials",
     "authors": "Bin Hu, Ilya A. Shkrob, Shuo Zhang, Linghong Zhang, Linghong Zhang, Jingjing Zhang, et al.",
@@ -855,6 +883,34 @@
     "verified": true
   },
   {
+    "title": "2,1,3-Benzothiadiazole Derivatives As Anolyte Materials for Non-Aqueous Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jingjing Zhang, Jinhua Huang, Wentao Duan, Jeffrey A. Kowalski, Bin Hu, Ilya A. Shkrob, et al.",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2018,
+    "citations": 1,
+    "doi": "https://doi.org/10.1149/ma2018-01/2/230",
+    "role": "co",
+    "affiliations": [
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Surface Chemical Modification of Si Nanoparticles for Application in Si-Based Anode",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Sisi Jiang, Bin Hu, Adam Tornheim, Lu Zhang, Bin Zhao, Zhengcheng Zhang",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2018,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2018-01/3/472",
+    "role": "co",
+    "affiliations": [
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
+  },
+  {
     "title": "New Avenues into Fluorinated Organic Electrolytes for Li-S Cells",
     "topic": "Advanced Battery Materials and Technologies",
     "authors": "Quinton J. Meisner, Tobias Glossmann, Andreas Hintennach, Lei Zhu, Lu Zhang, Zhengcheng Zhang",
@@ -865,6 +921,20 @@
     "role": "co",
     "affiliations": [
       "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Thiadiazoles As Anolytes for Nonaqueous Redox Flow Cells",
+    "topic": "Electrochemical Analysis and Applications",
+    "authors": "Jinhua Huang, Wentao Duan, Jingjing Zhang, Ilya A. Shkrob, Rajeev S. Assary, Xiaoliang Wei, et al.",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2018,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2018-02/5/377",
+    "role": "co",
+    "affiliations": [
+      "Energy Storage Systems (United States)"
     ],
     "verified": true
   },
@@ -927,6 +997,20 @@
     "verified": true
   },
   {
+    "title": "Development and Mechanism Investigation of Novel Fluorinated Ethers As Secondary Solvent in Electrolyte for Lithium-Sulfur Batteries",
+    "topic": "Synthesis and properties of polymers",
+    "authors": "Shuo Zhang, Chang-Wook Lee, Jyotsana Lal, Bin Hu, Jingjing Zhang, Lu Zhang, et al.",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2017,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2017-01/3/249",
+    "role": "co",
+    "affiliations": [
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
+  },
+  {
     "title": "Molecular Weight Effect of Poly(Acrylic Acid) on the Silicon Anode of Lithium-Ion Batteries",
     "topic": "Biopolymer Synthesis and Applications",
     "authors": "Bin Hu, Jingjing Zhang, Shuo Zhang, Zhengcheng Zhang, Lu Zhang",
@@ -937,6 +1021,34 @@
     "role": "co",
     "affiliations": [
       "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Stable Organic Redox Flow Batteries in Nonaqueous Electrolytes",
+    "topic": "Advanced battery technologies research",
+    "authors": "Xiaoliang Wei, Lu Zhang, Wentao Duan, Dehong Hu, Zheng Yang, Vijayakumar Murugesan, et al.",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2017,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2017-01/2/197",
+    "role": "co",
+    "affiliations": [
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Highly Stable Hydroquinone Ether-Based Catholyte for Non-Aqueous Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jingjing Zhang, Ilya A. Shkrob, Siu on Tung, Wentao Duan, Bin Hu, Levi T. Thompson, et al.",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2017,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2017-01/2/163",
+    "role": "co",
+    "affiliations": [
+      "Energy Storage Systems (United States)"
     ],
     "verified": true
   },
