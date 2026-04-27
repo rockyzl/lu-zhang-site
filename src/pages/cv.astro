@@ -7,9 +7,15 @@ import techReports from "../data/tech_reports.json";
 import invitedData from "../data/invited_talks.json";
 import conferences from "../data/conferences.json";
 import projectsData from "../data/projects.json";
+import menteesData from "../data/mentees.json";
 
 // Total conference presentations = invited talks + conference abstracts
 const totalTalks = invitedData.talks.length + conferences.length;
+// Mentees (graduate students + postdocs at ANL 2013–2023)
+const studentList = menteesData.students;
+const postdocList = menteesData.postdocs;
+const studentNames = studentList.map((m) => m.name).join(", ");
+const postdocNames = postdocList.map((m) => m.name).join(", ");
 import { detectLocale, t } from "../lib/i18n";
 
 // Sort + filter — only journal articles count as "papers"
@@ -270,7 +276,19 @@ const today = new Date().toISOString().slice(0, 10);
 
       <h2>Mentorship</h2>
       <p style="font-size: 9.5pt; margin: 0.2em 0 0.4em;">
-        Supervised <b>6 postdoctoral fellows + 3 graduate students</b> at ANL (2013 – 2023). Direct mentees who first-authored papers under my supervision: Jinhua Huang, Jingjing Zhang, Lily A. Robertson, Bin Hu. Other group members include Sisi Jiang, Zhangxing Shi, Sambasiva R. Bheemireddy, Wentao Duan, Hossam Farag, Aman Preet Kaur. Cross-institution Sprint teams spanned MIT, PNNL, UIUC, UMichigan, Purdue.
+        Direct mentees at ANL (2013 – 2023): <b>{postdocList.length} postdoctoral fellows + {studentList.length} graduate students</b> ({postdocList.length + studentList.length} total).
+      </p>
+      <p style="font-size: 9.5pt; margin: 0.2em 0 0.4em;">
+        <b>Postdocs:</b> {postdocNames}.
+      </p>
+      <p style="font-size: 9.5pt; margin: 0.2em 0 0.4em;">
+        <b>Graduate students</b> (advised or co-advised; several were later co-advised with Xiaoliang Wei @ Purdue, Lei Zhu @ FSU, Shrayesh Patel @ UChicago): {studentNames}.
+      </p>
+      <p style="font-size: 9.5pt; margin: 0.2em 0 0.4em;">
+        Notable trajectory — <b>Zhiguang Li</b> (graduate student → entrepreneur): founded <b>Zhejiang Erge Technology</b> (浙江尔格科技) after returning to China; now Lu Zhang's talent-program sponsoring company. Mentee→sponsor full-circle.
+      </p>
+      <p style="font-size: 9.5pt; margin: 0.2em 0 0.4em;">
+        Other current placements: Tesla (Sisi Jiang, Quinton J. Meisner), Factorial Energy (Zhangxing Shi), Wildcat Discovery Technologies (Jinhua Huang), Living Proof Inc. (Jingjing Zhang), CNPC JICHAI POWER (Yuyue Zhao), ORNL (Bin Hu), ANL CSE Division Assistant Chemist + 2021 Argonne Postdoc Performance Award (Lily A. Robertson). Cross-institution JCESR Sprint teams spanned MIT, PNNL, UIUC, UMichigan, Purdue.
       </p>
 
       <div class="footer">
