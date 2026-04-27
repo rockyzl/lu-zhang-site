@@ -38,10 +38,10 @@ const today = new Date().toISOString().slice(0, 10);
     />
     <style>
       :root {
-        --c-fg: #0f1c2e;
-        --c-muted: #5a6b7d;
-        --c-accent: #0e8542;
-        --c-rule: #d8dde3;
+        --c-fg: #1e293b;
+        --c-muted: #64748b;
+        --c-accent: #0066ff;
+        --c-rule: #e2e8f0;
       }
       * { box-sizing: border-box; }
       html, body { margin: 0; padding: 0; }
@@ -210,7 +210,7 @@ const today = new Date().toISOString().slice(0, 10);
         <div class="pubitem">
           <span class="ptitle">{p.title}</span>
           <span class="pmeta"> — {p.journal}, {p.year}; {p.citations} citations.</span>
-          {p.role === "first" && <span style="color:#086633; font-weight:500;"> [first author]</span>}
+          {p.role === "first" && <span style="color:#1e40af; font-weight:500;"> [first author]</span>}
           {p.role === "corresponding" && <span style="color:#2456a8; font-weight:500;"> [corresponding]</span>}
         </div>
       ))}
