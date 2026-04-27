@@ -31,7 +31,16 @@ for (const p of verified) {
 
 // Direct mentees: people who first-authored papers where Lu Zhang was
 // corresponding (clearest signal of supervisor-supervisee relationship).
+// Filter OUT names already in curated CONFIRMED_STUDENTS / CONFIRMED_POSTDOCS
+// so this section is purely additive (publication-derived collaborators NOT
+// already covered above).
+const curatedNames = new Set([
+  ...CONFIRMED_STUDENTS.map((m) => m.name),
+  ...CONFIRMED_POSTDOCS.map((m) => m.name),
+  ...CONFIRMED_STUDENTS.map((m) => m.name.split(" (")[0]), // strip parenthetical e.g. "Zhiguang Li (黎之光)"
+]);
 const directMentees = [...correspCounts.entries()]
+  .filter(([name]) => !curatedNames.has(name))
   .map(([name, count]) => ({ name, count, total: firstCounts.get(name) ?? count }))
   .sort((a, b) => b.count - a.count || b.total - a.total);
 
