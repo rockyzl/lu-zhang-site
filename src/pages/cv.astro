@@ -8,10 +8,9 @@ import invitedData from "../data/invited_talks.json";
 import projectsData from "../data/projects.json";
 import { detectLocale, t } from "../lib/i18n";
 
-// Sort + filter
-const verifiedPubs = publications.filter((p) => p.verified);
+// Sort + filter — only journal articles count as "papers"
+const verifiedPubs = publications.filter((p) => p.verified && p.kind === "journal");
 const top10 = [...verifiedPubs].sort((a, b) => b.citations - a.citations).slice(0, 10);
-const totalCitations = verifiedPubs.reduce((s, p) => s + (p.citations || 0), 0);
 const firstAuthor = verifiedPubs.filter((p) => p.role === "first").length;
 const corresp = verifiedPubs.filter((p) => p.role === "corresponding").length;
 

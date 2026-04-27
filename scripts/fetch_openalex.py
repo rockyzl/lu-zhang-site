@@ -102,7 +102,7 @@ def fetch_all_works():
             f"https://api.openalex.org/works"
             f"?filter=author.id:{AUTHOR_ID}"
             f"&per-page={PER_PAGE}"
-            f"&select=id,doi,title,publication_year,cited_by_count,primary_location,authorships,topics"
+            f"&select=id,doi,title,publication_year,cited_by_count,primary_location,authorships,topics,type"
             f"&cursor={cursor}"
         )
         req = urllib.request.Request(url, headers={"User-Agent": "lu-zhang-site/1.0 (mailto:zhanglu77@gmail.com)"})
@@ -168,6 +168,34 @@ def is_corresponding(title: str) -> bool:
     return any(k in t for k in _CORRESP_KEYS)
 
 
+CONFERENCE_JOURNALS = {
+    "ecs meeting abstracts",
+    "bulletin of the american physical society",
+    "aps march meeting",
+    "abstracts of papers of the american chemical society",
+    "abstracts, 25th central regional meeting",
+    "ecs prime meeting abstracts",
+}
+PREPRINT_HOSTS = {"arxiv", "chemrxiv", "biorxiv", "ssrn", "research square", "preprints"}
+
+
+def classify_work(work: dict, journal: str) -> str:
+    """Categorize a work as 'journal', 'conference', 'preprint', 'book-chapter', or 'other'."""
+    j = (journal or "").lower()
+    if any(c in j for c in CONFERENCE_JOURNALS):
+        return "conference"
+    if any(p in j for p in PREPRINT_HOSTS):
+        return "preprint"
+    t = (work.get("type") or "").lower()
+    if t == "book-chapter":
+        return "book-chapter"
+    if t == "preprint" or "preprint" in j:
+        return "preprint"
+    if t in ("review", "article", "letter") and j:
+        return "journal"
+    return "other"
+
+
 def transform_work(w: dict) -> dict:
     """Convert OpenAlex work to our publications.json schema."""
     # Find Lu Zhang authorship + position
@@ -208,6 +236,7 @@ def transform_work(w: dict) -> dict:
         "role": role,
         "affiliations": lu_affiliations,
         "verified": True,  # only verified papers are included
+        "kind": classify_work(w, journal),
     }
 
 

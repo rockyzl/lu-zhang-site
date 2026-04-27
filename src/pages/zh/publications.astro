@@ -5,8 +5,10 @@ import publications from "../../data/publications.json";
 import bookChapters from "../../data/book_chapters.json";
 
 const locale = detectLocale(Astro.url.pathname);
-// Only show ANL-affiliated papers (filters out same-name authors via parser-set verified flag).
-const filtered = publications.filter((p) => p.verified);
+// Only show verified journal articles. Conference abstracts, preprints,
+// and book-chapters live elsewhere (/talks/, dedicated section).
+const filtered = publications.filter((p) => p.verified && p.kind === "journal");
+const preprints = publications.filter((p) => p.verified && p.kind === "preprint");
 const sorted = [...filtered].sort((a, b) => (b.year || 0) - (a.year || 0) || b.citations - a.citations);
 const topics = [...new Set(filtered.map((p) => p.topic))].filter(Boolean);
 const years = [...new Set(filtered.map((p) => p.year))].filter(Boolean).sort((a, b) => b - a);
@@ -91,9 +93,30 @@ const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox fl
     </div>
   ))}
 
+  {preprints.length > 0 && (
+    <>
+      <div class="section-head" style="margin-top: 4rem;">
+        <h2 style="margin:0;">{locale === "zh" ? "预印本" : "Preprints"} ({preprints.length})</h2>
+      </div>
+      {preprints.map((p) => (
+        <div class="entry">
+          <div class="title">
+            <a href={p.doi || `https://scholar.google.com/scholar?q=${encodeURIComponent(p.title)}`} target="_blank" rel="noopener">{p.title}</a>
+          </div>
+          <div class="meta">{p.authors}</div>
+          <div class="meta">{p.journal} · {p.year}</div>
+        </div>
+      ))}
+    </>
+  )}
+
   <p style="margin-top: 2rem; font-size: 0.93rem;">
+    <a href={locale === "zh" ? "/lu-zhang-site/zh/talks/" : "/lu-zhang-site/talks/"}>
+      {locale === "zh" ? "→ 38 篇会议摘要 + 13 项特邀报告" : "→ 38 conference abstracts + 13 invited talks"}
+    </a>
+    {" · "}
     <a href={locale === "zh" ? "/lu-zhang-site/zh/reports/" : "/lu-zhang-site/reports/"}>
-      {locale === "zh" ? "→ 查看 5 项 DOE / 阿贡 LDRD 技术报告" : "→ See 5 DOE / Argonne LDRD technical reports"}
+      {locale === "zh" ? "5 项技术报告" : "5 technical reports"}
     </a>
   </p>
 

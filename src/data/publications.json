@@ -11,7 +11,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Automation-Accelerated Electrolyte Design Mitigates Solubility Competition between Redox-Active Molecules and Supporting Salts",
@@ -25,7 +26,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "An integrated high-throughput robotic platform and active learning approach for accelerated discovery of optimal electrolyte formulations",
@@ -39,7 +41,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Simulation guided molecular design of hydrofluoroether solvent for high energy batteries",
@@ -53,7 +56,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Multifaceted effects of ring fusion on the stability of charged dialkoxyarene redoxmers",
@@ -67,7 +71,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Publisher Correction: An integrated high-throughput robotic platform and active learning approach for accelerated discovery of optimal electrolyte formulations",
@@ -81,7 +86,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "other"
   },
   {
     "title": "Repurposing Plastics into Membranes for Redox Flow Batteries",
@@ -93,7 +99,8 @@
     "doi": "https://doi.org/10.1149/ma2024-0218mtgabs",
     "role": "co",
     "affiliations": [],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Concentration‐dependent Cycling of Phenothiazine‐based Electrolytes in Nonaqueous Redox Flow Cells",
@@ -107,7 +114,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Colocalized Raman spectroscopy – scanning electrochemical microscopy investigation of redox flow battery dialkoxybenzene redoxmer degradation pathways",
@@ -121,7 +129,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "A cooperative degradation pathway for organic phenoxazine catholytes in aqueous redox flow batteries",
@@ -136,7 +145,8 @@
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Liquid Redoxmers for Nonaqueous Redox Flow Batteries",
@@ -150,7 +160,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Softening by charging: how collective modes of ionic association in concentrated redoxmer/electrolyte solutions define the structural and dynamic properties in different states of charge",
@@ -165,7 +176,8 @@
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "<i>In silico</i>discovery of a new class of anolyte redoxmers for non-aqueous redox flow batteries",
@@ -179,7 +191,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Multifaceted Effects of Ring Fusion in Charged Dialkoxyarene Redoxmers",
@@ -193,7 +206,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Simulation Guided Molecular Design of Hydrofluoroether Solvent for High Energy Batteries",
@@ -205,7 +219,8 @@
     "doi": "https://doi.org/10.48550/arxiv.2310.02188",
     "role": "co",
     "affiliations": [],
-    "verified": true
+    "verified": true,
+    "kind": "preprint"
   },
   {
     "title": "Multifaceted Effects of Ring Fusion on the Stability of Charged Dialkoxyarene Redoxmers",
@@ -220,7 +235,8 @@
       "Argonne National Laboratory",
       "Government of the United States of America"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "preprint"
   },
   {
     "title": "Multielectron Organic Redoxmers for Energy-Dense Redox Flow Batteries",
@@ -234,7 +250,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Techno-economic analysis of non-aqueous hybrid redox flow batteries",
@@ -248,7 +265,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Six-electron organic redoxmers for aqueous redox flow batteries",
@@ -262,7 +280,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Fluorination Enables Simultaneous Improvements of a Dialkoxybenzene-Based Redoxmer for Nonaqueous Redox Flow Batteries",
@@ -276,7 +295,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Discovery of Energy Storage Molecular Materials Using Quantum Chemistry-Guided Multiobjective Bayesian Optimization",
@@ -291,7 +311,8 @@
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Experimental Protocols for Studying Organic Non-aqueous Redox Flow Batteries",
@@ -305,7 +326,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "A chemical switch enabled autonomous two-stage crosslinking polymeric binder for high performance silicon anodes",
@@ -320,7 +342,8 @@
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Crowded electrolytes containing redoxmers in different states of charge: Solution structure, properties, and fundamental limits on energy density",
@@ -334,7 +357,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "TEMPO allegro: liquid catholyte redoxmers for nonaqueous redox flow batteries",
@@ -349,7 +373,8 @@
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Engineering the Si Anode Interface via Particle Surface Modification: Embedded Organic Carbonates Lead to Enhanced Performance",
@@ -363,7 +388,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Cross-Platform Classifier of Chemical Stability for Charged Redoxmers",
@@ -377,7 +403,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Dynamic diversity of soft medium-range homo-radical self-assembly and rigid metal-organic network in non-aqueous redox flow batteries",
@@ -389,7 +416,8 @@
     "doi": "",
     "role": "co",
     "affiliations": [],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Self-Reporting Redoxmers: State of Health Metrics for Redox Flow Batteries",
@@ -404,7 +432,8 @@
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Stable and Highly Soluble Anolyte for Non-Aqueous Redox Flow Batteries",
@@ -418,7 +447,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Natural Product Based Small Molecule Redoxmer for Redox Flow Batteries",
@@ -430,7 +460,8 @@
     "doi": "https://doi.org/10.1149/ma2021-02185mtgabs",
     "role": "co",
     "affiliations": [],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Restorable Neutralization of Poly(acrylic acid) Binders toward Balanced Processing Properties and Cycling Performance for Silicon Anodes in Lithium-Ion Batteries",
@@ -445,7 +476,8 @@
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Unexpected electrochemical behavior of an anolyte redoxmer in flow battery electrolytes: solvating cations help to fight against the thermodynamic–kinetic dilemma",
@@ -461,7 +493,8 @@
       "Energy Storage Systems (United States)",
       "Alex's Lemonade Stand Foundation"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "A combined SECM and electrochemical AFM approach to probe interfacial processes affecting molecular reactivity at redox flow battery electrodes",
@@ -476,7 +509,8 @@
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Self-Assembled Solute Networks in Crowded Electrolyte Solutions and Nanoconfinement of Charged Redoxmer Molecules",
@@ -490,7 +524,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Realistic Ion Dynamics through Charge Renormalization in Nonaqueous Electrolytes",
@@ -504,7 +539,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Fluorescence-Enabled Self-Reporting for Redox Flow Batteries",
@@ -518,7 +554,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Effect of Aluminum Oxide on the Performance of Ionic Liquid-Based Aluminum–Air Battery",
@@ -532,7 +569,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Competitive Pi-Stacking and H-Bond Piling Increase Solubility of Heterocyclic Redoxmers",
@@ -546,7 +584,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Poly(Acrylic Acid) Binders: Re‐Engineering Poly(Acrylic Acid) Binder toward Optimized Electrochemical Performance for Silicon Lithium‐Ion Batteries: Branching Architecture Leads to Balanced Properties of Polymeric Binders (Adv. Funct. Mater. 10/2020)",
@@ -560,7 +599,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Modeling and Understanding Variations in Redoxmer Cyclability",
@@ -574,7 +614,8 @@
     "affiliations": [
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Re‐Engineering Poly(Acrylic Acid) Binder toward Optimized Electrochemical Performance for Silicon Lithium‐Ion Batteries: Branching Architecture Leads to Balanced Properties of Polymeric Binders",
@@ -588,7 +629,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Understanding of pre-lithiation of poly(acrylic acid) binder: Striking the balances between the cycling performance and slurry stability for silicon-graphite composite electrodes in Li-ion batteries",
@@ -602,7 +644,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Lithium–sulfur battery with partially fluorinated ether electrolytes: Interplay between capacity, coulombic efficiency and Li anode protection",
@@ -616,7 +659,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "On Transferability of Performance Metrics for Redox-Active Molecules",
@@ -630,7 +674,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "An extremely durable redox shuttle additive for overcharge protection of lithium-ion batteries",
@@ -644,7 +689,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Tailoring the Surface of Silicon Nanoparticles for Enhanced Chemical and Electrochemical Stability for Li-Ion Batteries",
@@ -658,7 +704,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Observation of Microheterogeneity in Highly Concentrated Nonaqueous Electrolyte Solutions",
@@ -672,7 +719,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Poly(4-vinylbenzoic acid): A Re-Engineered Binder for Improved Performance from Water-Free Slurry Processing for Silicon Graphite Composite Electrodes",
@@ -686,7 +734,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Facile in Situ Syntheses of Cathode Protective Electrolyte Additives for High Energy Density Li-Ion Cells",
@@ -700,7 +749,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "An investigation on the impact of halidization on substituted dimethoxybenzenes",
@@ -714,7 +764,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "When Dynamics Matters: Structure-Matching Alone is Insufficient in the Development of Realistic Force Fields for Nonaqueous Electrolytes",
@@ -726,7 +777,8 @@
     "doi": "",
     "role": "co",
     "affiliations": [],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Tuning PAA-Based Binders Towards Optimized Performance for Silicon Anode in Lithium-Ion Batteries",
@@ -738,7 +790,8 @@
     "doi": "https://doi.org/10.1149/ma2019-02/5/222",
     "role": "co",
     "affiliations": [],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "(Invited) Understanding Benzothiadiazole Based Anolyte Materials for Nonaqueous Redox Flow Cells",
@@ -752,7 +805,8 @@
     "affiliations": [
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "The existence of optimal molecular weight for poly(acrylic acid) binders in silicon/graphite composite anode for lithium-ion batteries",
@@ -766,7 +820,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Surface-Functionalized Silicon Nanoparticles as Anode Material for Lithium-Ion Battery",
@@ -780,7 +835,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Solution Properties and Practical Limits of Concentrated Electrolytes for Nonaqueous Redox Flow Batteries",
@@ -794,7 +850,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "A Two‐Electron Storage Nonaqueous Organic Redox Flow Battery",
@@ -809,7 +866,8 @@
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Elucidating Factors Controlling Long-Term Stability of Radical Anions for Negative Charge Storage in Nonaqueous Redox Flow Batteries",
@@ -823,7 +881,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Substituted thiadiazoles as energy-rich anolytes for nonaqueous redox flow cells",
@@ -838,7 +897,8 @@
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Comparing calendar and cycle life stability of redox active organic molecules for nonaqueous redox flow batteries",
@@ -852,7 +912,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Dual overcharge protection and solid electrolyte interphase-improving action in Li-ion cells containing a bis-annulated dialkoxyarene electrolyte additive",
@@ -866,7 +927,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Lithiation Effect of the Poly(Acrylic Acid) Binders on the Silicon Anode of Lithium-Ion Batteries",
@@ -880,7 +942,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "2,1,3-Benzothiadiazole Derivatives As Anolyte Materials for Non-Aqueous Redox Flow Batteries",
@@ -894,7 +957,8 @@
     "affiliations": [
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Surface Chemical Modification of Si Nanoparticles for Application in Si-Based Anode",
@@ -908,7 +972,8 @@
     "affiliations": [
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "New Avenues into Fluorinated Organic Electrolytes for Li-S Cells",
@@ -922,7 +987,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Thiadiazoles As Anolytes for Nonaqueous Redox Flow Cells",
@@ -936,7 +1002,8 @@
     "affiliations": [
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Substituted thiadiazoles as energy-rich anolytes for nonaqueous redox flow cells",
@@ -950,7 +1017,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Annulated Dialkoxybenzenes as Catholyte Materials for Non‐aqueous Redox Flow Batteries: Achieving High Chemical Stability through Bicyclic Substitution",
@@ -964,7 +1032,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Toward Improved Catholyte Materials for Redox Flow Batteries: What Controls Chemical Stability of Persistent Radical Cations?",
@@ -978,7 +1047,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Improved performance through tight coupling of redox cycles of sulfur and 2,6-polyanthraquinone in lithium–sulfur batteries",
@@ -994,7 +1064,8 @@
       "Energy Storage Systems (United States)",
       "Alex's Lemonade Stand Foundation"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Development and Mechanism Investigation of Novel Fluorinated Ethers As Secondary Solvent in Electrolyte for Lithium-Sulfur Batteries",
@@ -1008,7 +1079,8 @@
     "affiliations": [
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Molecular Weight Effect of Poly(Acrylic Acid) on the Silicon Anode of Lithium-Ion Batteries",
@@ -1022,7 +1094,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Stable Organic Redox Flow Batteries in Nonaqueous Electrolytes",
@@ -1036,7 +1109,8 @@
     "affiliations": [
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Highly Stable Hydroquinone Ether-Based Catholyte for Non-Aqueous Redox Flow Batteries",
@@ -1050,7 +1124,8 @@
     "affiliations": [
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "A Tetrasubstituted Hydroquinone Ether Catholyte for Non-Aqueous Redox Flow Batteries: Bicyclic Substitution Enabling High Stability",
@@ -1065,7 +1140,8 @@
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Functionalized Polysiloxane Binders Towards the Better Performance of the Silicon Anode of Lithium-Ion Batteries",
@@ -1079,7 +1155,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Redox Flow Batteries: Annulated Dialkoxybenzenes as Catholyte Materials for Non‐aqueous Redox Flow Batteries: Achieving High Chemical Stability through Bicyclic Substitution (Adv. Energy Mater. 21/2017)",
@@ -1093,7 +1170,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "A High-Current, Stable Nonaqueous Organic Redox Flow Battery",
@@ -1107,7 +1185,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "A symmetric organic-based nonaqueous redox flow battery and its state of charge diagnostics by FTIR",
@@ -1123,7 +1202,8 @@
       "Energy Storage Systems (United States)",
       "Alex's Lemonade Stand Foundation"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "2,5-Dimethoxy-1,4-Benzoquinone (DMBQ) as Organic Cathode for Rechargeable Magnesium-Ion Batteries",
@@ -1137,7 +1217,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "The lightest organic radical cation for charge storage in redox flow batteries",
@@ -1151,7 +1232,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Redox Shuttles with Axisymmetric Scaffold for Overcharge Protection of Lithium‐Ion Batteries",
@@ -1165,7 +1247,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Molecular Level Understanding of the Factors Affecting the Stability of Dimethoxy Benzene Catholyte Candidates from First-Principles Investigations",
@@ -1179,7 +1262,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "The Role of MgCl<sub>2</sub> as a Lewis Base in ROMgCl–MgCl<sub>2</sub> Electrolytes for Magnesium‐Ion Batteries",
@@ -1193,7 +1277,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Alkyl Substitution Effect on Oxidation Stability of Sulfone‐Based Electrolytes",
@@ -1207,7 +1292,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "A symmetric organic-based nonaqueous redox flow battery and its state of charge diagnostics by FTIR",
@@ -1219,7 +1305,8 @@
     "doi": "",
     "role": "co",
     "affiliations": [],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "The lightest organic radical cation for charge storage in redox flow batteries",
@@ -1231,7 +1318,8 @@
     "doi": "",
     "role": "corresponding",
     "affiliations": [],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "A New Series of Anolyte Molecules for Non-Aqueous Redox Flow Batteries",
@@ -1245,7 +1333,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "High-Performance Organic Redox Flow Batteries in Aqueous and Nonaqueous Electrolytes",
@@ -1259,7 +1348,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Radical Compatibility with Nonaqueous Electrolytes and Its Impact on an All‐Organic Redox Flow Battery",
@@ -1274,7 +1364,8 @@
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "A subtractive approach to molecular engineering of dimethoxybenzene-based redox materials for non-aqueous flow batteries",
@@ -1290,7 +1381,8 @@
       "Energy Storage Systems (United States)",
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Radical Compatibility with Nonaqueous Electrolytes and Its Impact on an All‐Organic Redox Flow Battery",
@@ -1306,7 +1398,8 @@
       "University Surgical Associates",
       "Energy Storage Systems (United States)"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Liquid Catholyte Molecules for Non-Aqueous Redox Flow Batteries",
@@ -1320,7 +1413,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Development of Anolyte Materials for All-Organic Redox Flow Batteries",
@@ -1334,7 +1428,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Catholyte Development for Non-Aqueous Redox Flow Batteries",
@@ -1348,7 +1443,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "High-Performance Non-Aqueous All-Organic Redox Flow Batteries",
@@ -1362,7 +1458,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Development of High Capacity Catholyte Material for Non-Aqueous Redox Flow Batteries",
@@ -1376,7 +1473,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Molecular Engineering toward Stabilized Interface: An Electrolyte Additive for High-Performance Li-Ion Battery",
@@ -1390,7 +1488,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Organic Redox Active Molecular Engineer for NRF",
@@ -1404,7 +1503,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Redox Active Molecules for Non-Aquoes Flow Battery",
@@ -1418,7 +1518,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Organic Redox Active Molecular Engineer for Non-Aqueous Redox Flow Battery",
@@ -1432,7 +1533,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Thermal and overcharge abuse analysis of a redox shuttle for overcharge protection of LiFePO 4",
@@ -1446,7 +1548,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Redox Shuttles for Overcharge Protection of Lithium-Ion Battery",
@@ -1460,7 +1563,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Thermal and Overcharge Abuse Analysis of a Redox Shuttle for Overcharge Protection of LiFePO<sub>4</sub>",
@@ -1474,7 +1578,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Redox Active Molecular Engineer for Energy Storage",
@@ -1488,7 +1593,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Molecular engineering towards safer lithium-ion batteries: a highly stable and compatible redox shuttle for overcharge protection",
@@ -1502,7 +1608,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Redox Shuttle Additives for Lithium-Ion Battery",
@@ -1516,7 +1623,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "book-chapter"
   },
   {
     "title": "Redox Shuttles for Overcharge Protection of Lithium-Ion Battery",
@@ -1530,7 +1638,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   },
   {
     "title": "Novel redox shuttle additive for high-voltage cathode materials",
@@ -1544,7 +1653,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "Understanding the redox shuttle stability of 3,5-di-tert-butyl-1,2-dimethoxybenzene for overcharge protection of lithium-ion batteries",
@@ -1558,7 +1668,8 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "journal"
   },
   {
     "title": "A Comparative Study of 3,5-di-tert-butyl-1,2-dimethoxybezene and 2,5-di-tert-butyl-1,4-dimethoxybenzene for Overcharge Protection of Lithium-Ion Batteries",
@@ -1572,6 +1683,7 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
-    "verified": true
+    "verified": true,
+    "kind": "conference"
   }
 ]
