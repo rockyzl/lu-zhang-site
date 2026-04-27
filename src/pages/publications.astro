@@ -9,6 +9,7 @@ const locale = detectLocale(Astro.url.pathname);
 const filtered = publications.filter((p) => p.verified);
 const sorted = [...filtered].sort((a, b) => (b.year || 0) - (a.year || 0) || b.citations - a.citations);
 const topics = [...new Set(filtered.map((p) => p.topic))].filter(Boolean);
+const years = [...new Set(filtered.map((p) => p.year))].filter(Boolean).sort((a, b) => b - a);
 const scholarUrl = (title) => `https://scholar.google.com/scholar?q=${encodeURIComponent(title + " Lu Zhang Argonne")}`;
 
 // Reviews: known review articles (currently marked manually by DOI).
@@ -29,6 +30,10 @@ const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox fl
 
   <div class="toolbar">
     <input id="q" type="search" placeholder={t("page.publications.search", locale)} />
+    <select id="year">
+      <option value="">{t("page.publications.allyears", locale)}</option>
+      {years.map((y) => <option value={y}>{y}</option>)}
+    </select>
     <select id="topic">
       <option value="">{t("page.publications.alltopics", locale)}</option>
       {topics.map((tp) => <option value={tp}>{tp}</option>)}
@@ -39,6 +44,7 @@ const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox fl
       <option value="corresponding">{t("page.publications.corresp", locale)}</option>
       <option value="co">{t("page.publications.co", locale)}</option>
     </select>
+    <span id="match-count" style="align-self: center; color: var(--c-muted); font-size: 0.88rem; margin-left: auto; padding: 0 0.5rem;"></span>
   </div>
 
   <div class="section-head" style="margin-top: 2.5rem;">
@@ -49,7 +55,7 @@ const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox fl
     {sorted.map((p) => {
       const reviewBadge = reviews.includes(p);
       return (
-        <div class="entry" data-topic={p.topic} data-role={p.role} data-text={(p.title + " " + p.authors + " " + p.journal).toLowerCase()}>
+        <div class="entry" data-topic={p.topic} data-role={p.role} data-year={p.year} data-text={(p.title + " " + p.authors + " " + p.journal).toLowerCase()}>
           <div class="title">
             <a href={p.doi || scholarUrl(p.title)} target={p.doi ? "_blank" : "_self"}>{p.title}</a>
             {p.role === "first" && <span class="badge first">first</span>}
@@ -91,23 +97,36 @@ const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox fl
     </a>
   </p>
 
-  <script is:inline>
+  <script is:inline define:vars={{ matchedLabel: t("page.publications.matched", locale) }}>
     const q = document.getElementById("q");
+    const year = document.getElementById("year");
     const topic = document.getElementById("topic");
     const role = document.getElementById("role");
+    const counter = document.getElementById("match-count");
     function apply() {
       const qv = q.value.trim().toLowerCase();
+      const yv = year.value;
       const tv = topic.value;
       const rv = role.value;
+      let visible = 0;
+      let total = 0;
       document.querySelectorAll("#list .entry").forEach((el) => {
+        total += 1;
         const text = el.dataset.text || "";
         const matchQ = !qv || text.includes(qv);
+        const matchY = !yv || el.dataset.year === yv;
         const matchT = !tv || el.dataset.topic === tv;
         const matchR = !rv || el.dataset.role === rv;
-        el.style.display = matchQ && matchT && matchR ? "" : "none";
+        const show = matchQ && matchY && matchT && matchR;
+        el.style.display = show ? "" : "none";
+        if (show) visible += 1;
       });
+      counter.textContent = (visible === total)
+        ? `${total} ${matchedLabel}`
+        : `${visible} / ${total} ${matchedLabel}`;
     }
-    [q, topic, role].forEach((el) => el.addEventListener("input", apply));
+    [q, year, topic, role].forEach((el) => el.addEventListener("input", apply));
+    apply();
   </script>
   </div>
 </Base>

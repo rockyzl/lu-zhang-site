@@ -78,6 +78,8 @@
   "page.publications.first":{ "en":"First author","zh":"第一作者" },
   "page.publications.corresp":{ "en":"Corresponding (heuristic)","zh":"通讯作者（白名单）" },
   "page.publications.co":{ "en":"Co-author","zh":"共同作者" },
+  "page.publications.allyears":{ "en":"All years","zh":"全部年份" },
+  "page.publications.matched":{ "en":"matched","zh":"匹配" },
   "page.publications.review":{ "en":"Review article","zh":"综述文章" },
   "page.publications.chapters":{ "en":"Books & Chapters","zh":"书籍章节" },
   "page.publications.reports":{ "en":"Technical Reports","zh":"研究技术报告" },
