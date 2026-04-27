@@ -1,16 +1,14 @@
 {
-  "_doc": "Curated mentee list — Lu Zhang directly confirmed 2026-04-27. Major correction: Zhiguang Li (publications coauthor) IS 黎之光 (founder of Zhejiang Erge — Lu Zhang's talent-program sponsoring company). Mentee→entrepreneur full circle. Zhangxing Shi & Peng Du were postdocs (not students). Wentao Duan and Baofei Pan removed: collaborators only, not direct mentees.",
+  "_doc": "Curated mentee list — Lu Zhang directly confirmed 2026-04-27. Zhangxing Shi & Peng Du were postdocs (not students). Wentao Duan and Baofei Pan removed: collaborators only, not direct mentees.",
   "students": [
     {
-      "name": "Zhiguang Li (黎之光)",
-      "current_en": "Founder & CEO, Zhejiang Erge Technology (浙江尔格科技) — Lu Zhang's talent-program sponsoring company. Returned to China to start the company.",
-      "current_zh": "浙江尔格科技股份有限公司创始人 / 老板（已回国创业）。本次海外引才计划申报的依托单位。",
+      "name": "Zhiguang Li",
+      "current_en": "private (not publicly listed)",
+      "current_zh": "暂不公开",
       "role_en": "graduate student (co-advised by Lu Zhang and Xiaoliang Wei, Purdue)",
       "role_zh": "研究生（张鲁与 Xiaoliang Wei @ Purdue 共同指导）",
       "thrust_en": "Redoxmer techno-economics + dialkoxyarene stability for non-aqueous RFBs",
-      "thrust_zh": "Redoxmer 技术经济分析 + 二烷氧苯稳定性（非水液流电池）",
-      "highlight_en": "Mentee → entrepreneur full circle: founded the new-energy company that is now sponsoring Lu Zhang's return-to-China talent program.",
-      "highlight_zh": "学生→创业→反向邀请前导师的完整闭环：创办的新能源公司正是张鲁本次回国申报的依托单位。"
+      "thrust_zh": "Redoxmer 技术经济分析 + 二烷氧苯稳定性（非水液流电池）"
     },
     {
       "name": "Sisi Jiang",
@@ -129,7 +127,6 @@
     "total": 13,
     "anl_period": "2013–2023",
     "framing": "Direct mentees only. Wentao Duan and Baofei Pan removed in 2026-04-27 round — they are collaborators / other-group postdocs, not Lu Zhang's direct mentees. Quinton Meisner, Sisi Jiang, Xiaoting Fang were grad students who later did postdocs (some elsewhere, some at ANL but not in Lu Zhang's group) before industry/academic placements.",
-    "highlight": "Zhiguang Li (黎之光) — graduate student → entrepreneur → founded Zhejiang Erge, the talent-program sponsoring company. Mentee→sponsor full-circle narrative.",
     "last_confirmed": "2026-04-27 by Lu Zhang directly + LinkedIn / institutional verification"
   }
 }
