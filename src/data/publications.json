@@ -1895,5 +1895,32 @@
     ],
     "verified": true,
     "kind": "conference"
+  },
+  {
+    "title": "Kinetic Control over Disproportionation Stabilizes Wurster's Blue Catholyte for Nonaqueous Redox Flow Batteries",
+    "topic": "Flow battery — Wurster's Blue (TMPD) catholyte",
+    "authors": "Fang, X.; Li, Z.; Zeng, L.; Jeong, H.; Yue, D.; Robertson, L. A.; Zhao, Y.; Cheng, L.; Shkrob, I. A.; Wei, X.; Zhang, L.",
+    "journal": "ACS Energy Letters",
+    "year": 2024,
+    "volume": 9,
+    "issue": 12,
+    "pages": "5737-5743",
+    "doi": "https://doi.org/10.1021/acsenergylett.4c01351",
+    "role": "co-author / corresponding (PI)",
+    "verified": true,
+    "kind": "journal-article"
+  },
+  {
+    "title": "From machine learning to chemical insight: Darwinian chance and the stability of charge carriers in flow batteries",
+    "topic": "ML for electrolyte stability / DMB redoxmer",
+    "authors": "Zhang, J.; Robertson, L. A.; Shkrob, I. A.; Assary, R. S.; Zhang, L.",
+    "journal": "Journal of Materials Chemistry A — under revision",
+    "year": 2026,
+    "doi": "https://scholar.google.com/scholar?q=Darwinian+chance+stability+charge+carriers+flow+batteries",
+    "role": "corresponding (PI)",
+    "status": "in revision",
+    "manuscript_id": "TA-ART-01-2026-000771",
+    "verified": true,
+    "kind": "journal-article-in-revision"
   }
 ]
