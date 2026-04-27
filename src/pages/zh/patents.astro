@@ -45,7 +45,7 @@ const TOTAL = ISSUED + APPS;
             <div class="title">
               <a href={`https://patents.google.com/patent/${p.patent_no.replace(/\s|,/g, "")}`}>{p.patent_no}</a>
               <span style="color: var(--c-muted); font-weight: 400;"> ({p.year})</span>
-              {p.note && <span class="badge" style="background: #e1ecff; color: #2456a8;">continuation</span>}
+              {p.note && <span class="badge" style="background: #dbeafe; color: #1e40af;">continuation</span>}
             </div>
             <div class="meta">{p.title_en}</div>
             <div class="meta" style="font-style: italic;">Inventors: {p.inventors}</div>
@@ -60,7 +60,7 @@ const TOTAL = ISSUED + APPS;
         <div class="title">
           <a href={a.link}>{a.app_no}</a>
           <span style="color: var(--c-muted); font-weight: 400;"> ({a.year})</span>
-          <span class="badge" style={`background: ${a.status === 'Pending' ? '#e3f1ee' : '#f0ece2'}; color: ${a.status === 'Pending' ? '#2d5d5e' : '#6b5c30'};`}>{a.status.toLowerCase()}</span>
+          <span class="badge" style={`background: ${a.status === 'Pending' ? '#cffafe' : '#f1f5f9'}; color: ${a.status === 'Pending' ? '#155e75' : '#475569'};`}>{a.status.toLowerCase()}</span>
         </div>
         <div class="meta">{a.title_en}</div>
         <div class="meta" style="font-style: italic;">Inventors: {a.inventors}</div>
@@ -74,7 +74,7 @@ const TOTAL = ISSUED + APPS;
         <div class="title">
           {a.name}
           <span style="color: var(--c-muted); font-weight: 400;"> ({a.year})</span>
-          <span class="badge" style="background: #f0ece2; color: #6b5c30;">non-provisional</span>
+          <span class="badge" style="background: #f1f5f9; color: #475569;">non-provisional</span>
         </div>
         <div class="meta">{a.title_en}</div>
         <div class="meta">Provisional: {a.provisional_no}. {a.status}.</div>

@@ -60,7 +60,7 @@ const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox fl
             <a href={p.doi || scholarUrl(p.title)} target={p.doi ? "_blank" : "_self"}>{p.title}</a>
             {p.role === "first" && <span class="badge first">first</span>}
             {p.role === "corresponding" && <span class="badge corresponding">corresp.</span>}
-            {reviewBadge && <span class="badge" style="background: #e1ecff; color: #2456a8;">review</span>}
+            {reviewBadge && <span class="badge" style="background: #e0e7ff; color: #4338ca;">review</span>}
           </div>
           <div class="meta">{p.authors}</div>
           <div class="meta">{p.journal} · {p.year} · {p.citations} citations · <em>{p.topic}</em></div>
@@ -76,7 +76,7 @@ const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox fl
     <div class="entry">
       <div class="title">
         <a href={c.url} target="_blank" rel="noopener">{c.title}</a>
-        {c.verified === false && <span class="badge" style="background: #f0ece2; color: #6b5c30;">{locale === "zh" ? "占位 · 待确认" : "placeholder"}</span>}
+        {c.verified === false && <span class="badge" style="background: #f1f5f9; color: #475569;">{locale === "zh" ? "占位 · 待确认" : "placeholder"}</span>}
       </div>
       {c.title_cn && c.title_cn !== c.title && <div class="meta">{c.title_cn}</div>}
       <div class="meta">{c.authors}</div>
