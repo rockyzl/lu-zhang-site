@@ -6,6 +6,10 @@ import projectsData from "../data/projects.json";
 const locale = detectLocale(Astro.url.pathname);
 const totalCount = projectsData.categories.reduce((s, c) => s + c.items.length, 0);
 
+// Search fallback so every project links somewhere meaningful.
+const projectUrl = (p) =>
+  p.url ?? `https://www.osti.gov/search/semantic:${encodeURIComponent(p.name + " Lu Zhang Argonne")}`;
+
 const collaborations = [
   ["MIT", "Prof. Fikile Brushett — anolyte molecule design", "since 2014"],
   ["PNNL", "Flow battery testing & cell engineering", "since 2015"],
@@ -38,7 +42,7 @@ const teamGrowth = [
         <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">{cat.subtitle}</p>
         {cat.items.map((p) => (
           <div class="entry">
-            <div class="title">{p.name}</div>
+            <div class="title"><a href={projectUrl(p)} target="_blank" rel="noopener">{p.name}</a></div>
             <div class="meta">
               <strong style="color: var(--c-fg);">{p.funder}</strong> · {p.years} · {p.role}
             </div>
