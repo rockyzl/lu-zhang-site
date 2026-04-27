@@ -2,9 +2,16 @@
 import Base from "../layouts/Base.astro";
 import { detectLocale, t } from "../lib/i18n";
 import publications from "../data/publications.json";
+import menteesData from "../data/mentees.json";
 
 const locale = detectLocale(Astro.url.pathname);
 const isZh = locale === "zh";
+
+// User-confirmed mentees (Lu Zhang directly confirmed 2026-04-27). Auto-derivation
+// from publication data alone misses students with no first-author papers (Peng Du)
+// or mis-classifies grad students as postdocs (Sisi Jiang, Xiaoting Fang).
+const CONFIRMED_STUDENTS = menteesData.students;
+const CONFIRMED_POSTDOCS = menteesData.postdocs;
 
 // Derive likely direct-mentee list from publication data: first-authors of
 // papers where Lu Zhang is corresponding, plus high-frequency first-authors
@@ -88,7 +95,71 @@ const TITLE = isZh ? "教学与团队培养" : "Teaching & Mentorship";
     </p>
 
     <div class="section-head" style="margin-top: 2.5rem;">
-      <h2 style="margin:0;">{isZh ? "直接指导（确认通讯作者）" : "Direct mentees (confirmed corresponding authorship)"}</h2>
+      <h2 style="margin:0;">{isZh ? "直接指导学生（已确认）" : "Direct students (confirmed)"}</h2>
+      <span class="more">{CONFIRMED_STUDENTS.length} {isZh ? "人" : "people"}</span>
+    </div>
+    <p style="font-size: 0.92rem; color: var(--c-muted); margin-top: -0.5rem;">
+      {isZh
+        ? "申报人 2026-04-27 直接确认。包含未发表论文的训练阶段学生，自动推导通常会漏。"
+        : "Lu Zhang directly confirmed (2026-04-27). Includes training-stage students with no published papers — those are typically missed by auto-derivation."}
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 60px; text-align: right;">#</th>
+          <th>{isZh ? "姓名" : "Name"}</th>
+          <th>{isZh ? "研究方向" : "Research thrust"}</th>
+          <th>{isZh ? "当前去向" : "Current placement"}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {CONFIRMED_STUDENTS.map((m, i) => (
+          <tr>
+            <td style="text-align: right; color: var(--c-muted);">{i + 1}</td>
+            <td style="font-weight: 600;">
+              <a href={`https://scholar.google.com/scholar?q=${encodeURIComponent(m.name + " Argonne")}`} target="_blank" rel="noopener">{m.name}</a>
+            </td>
+            <td style="font-size: 0.9rem;">{isZh ? m.thrust_zh : m.thrust_en}</td>
+            <td style="font-size: 0.9rem; color: var(--c-muted);">{isZh ? m.current_zh : m.current_en}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 style="margin:0;">{isZh ? "直接指导博士后（已确认）" : "Direct postdocs (confirmed)"}</h2>
+      <span class="more">{CONFIRMED_POSTDOCS.length} {isZh ? "人" : "people"}</span>
+    </div>
+    <p style="font-size: 0.92rem; color: var(--c-muted); margin-top: -0.5rem;">
+      {isZh
+        ? "申报人 2026-04-27 直接确认。多名已转入业界（Tesla / GM / PNNL / ORNL / industry）或留任 ANL Research Scientist 岗。"
+        : "Lu Zhang directly confirmed. Multiple have moved to industry (Tesla / GM / PNNL / ORNL) or to ANL Research Scientist roles."}
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 60px; text-align: right;">#</th>
+          <th>{isZh ? "姓名" : "Name"}</th>
+          <th>{isZh ? "研究方向" : "Research thrust"}</th>
+          <th>{isZh ? "当前去向" : "Current placement"}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {CONFIRMED_POSTDOCS.map((m, i) => (
+          <tr>
+            <td style="text-align: right; color: var(--c-muted);">{i + 1}</td>
+            <td style="font-weight: 600;">
+              <a href={`https://scholar.google.com/scholar?q=${encodeURIComponent(m.name + " Argonne")}`} target="_blank" rel="noopener">{m.name}</a>
+            </td>
+            <td style="font-size: 0.9rem;">{isZh ? m.thrust_zh : m.thrust_en}</td>
+            <td style="font-size: 0.9rem; color: var(--c-muted);">{isZh ? m.current_zh : m.current_en}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <div class="section-head" style="margin-top: 2.5rem;">
+      <h2 style="margin:0;">{isZh ? "其他出现在论文 byline 的合作者" : "Other publication-derived collaborators"}</h2>
       <span class="more">{directMentees.length} {isZh ? "人" : "people"}</span>
     </div>
     <p style="font-size: 0.92rem; color: var(--c-muted); margin-top: -0.5rem;">
