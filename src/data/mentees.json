@@ -70,10 +70,10 @@
     },
     {
       "name": "Zhongbo Zhang",
-      "current_en": "Postdoctoral Researcher, UChicago PME (Patel group; co-advised by Lu Zhang)",
-      "current_zh": "UChicago PME 博士后（Patel 组，张鲁联合指导）",
-      "role_en": "postdoc (advised by Lu Zhang, plastic upcycling LDRD with UChicago)",
-      "role_zh": "博士后（张鲁直接指导, 废塑料制膜 LDRD, 与 UChicago 联合）",
+      "current_en": "industry (specific company TBD); previously UChicago PME postdoc (Patel group; co-advised by Lu Zhang) on plastic upcycling LDRD",
+      "current_zh": "工业界（具体公司待补）；此前 UChicago PME 博士后（Patel 组，张鲁联合指导，废塑料制膜 LDRD）",
+      "role_en": "postdoc (co-advised by Lu Zhang, plastic upcycling LDRD with UChicago)",
+      "role_zh": "博士后（张鲁联合指导, 废塑料制膜 LDRD, 与 UChicago 联合）",
       "thrust_en": "Repurposing plastics into ion-exchange membranes for RFBs",
       "thrust_zh": "废塑料升级再造离子交换膜（液流电池方向）"
     },
