@@ -110,6 +110,7 @@
   "page.press.lead":{ "en":"Selected coverage of research at Argonne — flow batteries, redox shuttles, self-reporting redoxmers, and AI-driven materials discovery — across the laboratory's own press room, science press syndication, and industry trade publications.","zh":"阿贡时期研究工作的公开报道精选，涵盖液流电池、氧化还原穿梭剂、自报告 redoxmer、AI 驱动材料发现等方向，来源包括实验室自家新闻、科技媒体转载与行业期刊。" },
   "page.press.news":{ "en":"In the news","zh":"媒体报道" },
   "page.press.profiles":{ "en":"Reference profiles","zh":"参考主页" },
+  "page.press.videos":{ "en":"Featured video","zh":"视频" },
 
   "page.ai.eyebrow":{ "en":"AI · Tooling · Industrial ML","zh":"AI · 工具 · 工业 ML" },
   "page.ai.title":{ "en":"Where chemistry meets code","zh":"化学与代码的交汇" },

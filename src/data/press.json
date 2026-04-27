@@ -1,5 +1,15 @@
 {
   "_doc": "Public press / news mentions of Lu Zhang's research at Argonne. Compiled 2026-04-26 from web search; add new entries as discovered.",
+  "videos": [
+    {
+      "id": "qfTi0M-dJQk",
+      "title": "JCESR Scientific Sprints — Better Polymers for Better Batteries",
+      "outlet": "Argonne / JCESR",
+      "year": 2016,
+      "summary": "JCESR scientific sprint feature on polymer redoxmer chemistry for next-generation batteries. Lu Zhang appears as one of the featured presenters explaining the team's flow-battery work.",
+      "youtube_url": "https://youtu.be/qfTi0M-dJQk"
+    }
+  ],
   "items": [
     {
       "date": "2024-03",
