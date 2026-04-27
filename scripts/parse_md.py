@@ -165,24 +165,40 @@ for entry in publications:
 # ---- Author-disambiguation filter ----
 # OpenAlex aggregates all "Lu Zhang"s into one author cluster, so we need a
 # whitelist of confirmed ANL/JCESR collaborators. A paper is "verified Lu
-# Zhang" only if at least one co-author surname matches the whitelist OR
-# the title is explicitly battery/electrolyte/redox related.
-ANL_COAUTHORS = {
-    "Amine", "Burrell", "Curtiss", "Shkrob", "Vaughey", "Jansen",
-    "Brushett", "Robertson", "Assary", "Lipson", "Cheng", "Patel",
-    "Bheemireddy", "Ferrandon", "Hollas", "Hu", "Duan",
-    "Zhengcheng Zhang", "Z. Zhang", "Jingjing Zhang", "J. Zhang",
-    "Jinhua Huang", "J. Huang", "Xiaoliang Wei", "X. Wei",
-    "Wei Wang", "W. Wang", "Wentao Duan", "Lily Robertson",
-    "Rajeev Assary", "Anthony Burrell", "Khalil Amine",
-    "Larry Curtiss", "Ilya Shkrob", "Anthony Jansen",
-    "John Vaughey", "Fikile Brushett", "Magali Ferrandon",
-    "Albert Lipson", "Shrayesh Patel", "Sambasiva Bheemireddy",
-}
+# Zhang" only if at least one co-author from the whitelist appears, matched
+# at WORD BOUNDARY (so "Cheng" doesn't accidentally match "Cheng-Long").
+import re as _re
+
+ANL_COAUTHORS = [
+    # Senior collaborators — match by full name to be safe
+    "Khalil Amine", "Anthony K. Burrell", "Anthony Burrell",
+    "Larry A. Curtiss", "Larry Curtiss",
+    "Ilya A. Shkrob", "Ilya Shkrob",
+    "John T. Vaughey", "John Vaughey", "Anthony N. Jansen", "Anthony Jansen",
+    "Fikile R. Brushett", "Fikile Brushett",
+    "Lily A. Robertson", "Lily Robertson",
+    "Rajeev S. Assary", "Rajeev Assary",
+    "Albert L. Lipson", "Albert Lipson",
+    "Lei Cheng",
+    "Shrayesh N. Patel", "Shrayesh Patel",
+    "Sambasiva R. Bheemireddy", "Sambasiva Bheemireddy",
+    "Magali S. Ferrandon", "Magali Ferrandon",
+    "Aaron Hollas",
+    "Jingjing Zhang", "Zhengcheng Zhang",
+    "Jinhua Huang",
+    "Xiaoliang Wei", "Wentao Duan",
+    "Wei Wang", "Joaquín Rodríguez-López", "Joaquin Rodriguez-Lopez",
+    "Jeffrey S. Moore", "Michael J. Counihan",
+    "Garvit Agarwal", "Bin Hu",
+    "Paul C. Redfern",
+]
+# Compile word-boundary regex for exact matching
+_AUTHOR_PATTERNS = [_re.compile(r"\b" + _re.escape(n) + r"\b") for n in ANL_COAUTHORS]
+
 def is_verified_lu(authors_str: str) -> bool:
     if not authors_str:
         return False
-    return any(name in authors_str for name in ANL_COAUTHORS)
+    return any(p.search(authors_str) for p in _AUTHOR_PATTERNS)
 
 for p in publications:
     p["verified"] = is_verified_lu(p["authors"])

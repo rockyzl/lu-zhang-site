@@ -612,7 +612,7 @@
     "year": 2022,
     "citations": 9,
     "doi": "https://doi.org/10.1002/celc.202200641",
-    "verified": true,
+    "verified": false,
     "role": "first"
   },
   {
@@ -623,7 +623,7 @@
     "year": 2023,
     "citations": 6,
     "doi": "https://doi.org/10.1002/ange.202308724",
-    "verified": true,
+    "verified": false,
     "role": "co"
   },
   {
@@ -788,7 +788,7 @@
     "year": 2025,
     "citations": 2,
     "doi": "https://doi.org/10.1039/d4ta07050j",
-    "verified": false,
+    "verified": true,
     "role": "unknown"
   },
   {
@@ -832,7 +832,7 @@
     "year": 2022,
     "citations": 30,
     "doi": "https://doi.org/10.1016/j.cej.2022.141019",
-    "verified": true,
+    "verified": false,
     "role": "unknown"
   },
   {
@@ -975,7 +975,7 @@
     "year": 2022,
     "citations": 23,
     "doi": "https://doi.org/10.1002/inf2.12343",
-    "verified": true,
+    "verified": false,
     "role": "unknown"
   },
   {
@@ -1008,7 +1008,7 @@
     "year": 2020,
     "citations": 20,
     "doi": "https://doi.org/10.1002/celc.202000591",
-    "verified": true,
+    "verified": false,
     "role": "co"
   },
   {
@@ -1118,7 +1118,7 @@
     "year": 2025,
     "citations": 4,
     "doi": "https://doi.org/10.1016/j.cej.2025.162410",
-    "verified": true,
+    "verified": false,
     "role": "first"
   },
   {
@@ -1173,7 +1173,7 @@
     "year": 2022,
     "citations": 28,
     "doi": "https://doi.org/10.1016/j.egyr.2022.02.256",
-    "verified": true,
+    "verified": false,
     "role": "first"
   },
   {
@@ -1261,7 +1261,7 @@
     "year": 2022,
     "citations": 9,
     "doi": "https://doi.org/10.1103/physreva.106.022811",
-    "verified": true,
+    "verified": false,
     "role": "co"
   },
   {
@@ -1283,7 +1283,7 @@
     "year": 2023,
     "citations": 8,
     "doi": "https://doi.org/10.1103/physreva.108.022816",
-    "verified": true,
+    "verified": false,
     "role": "co"
   },
   {
@@ -1349,7 +1349,7 @@
     "year": 2020,
     "citations": 5,
     "doi": "https://doi.org/10.1103/physreve.102.023204",
-    "verified": true,
+    "verified": false,
     "role": "co"
   },
   {
@@ -1404,7 +1404,7 @@
     "year": 2023,
     "citations": 3,
     "doi": "https://doi.org/10.1007/s11581-023-04957-5",
-    "verified": true,
+    "verified": false,
     "role": "co"
   },
   {
@@ -1426,7 +1426,7 @@
     "year": 2022,
     "citations": 1,
     "doi": "https://doi.org/10.1007/s12517-022-10237-9",
-    "verified": true,
+    "verified": false,
     "role": "co"
   },
   {
@@ -1459,7 +1459,7 @@
     "year": 2006,
     "citations": 1,
     "doi": "https://doi.org/10.1016/s1005-9040(06)60178-5",
-    "verified": true,
+    "verified": false,
     "role": "co"
   },
   {
@@ -1514,7 +1514,7 @@
     "year": 2021,
     "citations": 0,
     "doi": "https://doi.org/10.1051/e3sconf/202124801012",
-    "verified": true,
+    "verified": false,
     "role": "co"
   },
   {
@@ -1547,7 +1547,7 @@
     "year": 2006,
     "citations": 0,
     "doi": "https://doi.org/10.1117/12.688805",
-    "verified": true,
+    "verified": false,
     "role": "co"
   },
   {

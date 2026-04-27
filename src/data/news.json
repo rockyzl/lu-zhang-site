@@ -10,10 +10,18 @@
   {
     "date": "2025",
     "tag": "Publication",
-    "title": "Automation-accelerated electrolyte design — follow-up to Nature Comm 2024",
-    "blurb": "Applying ML-guided automation to mitigate solubility competition in flow-battery electrolytes. Direct continuation of the 2024 robotic-platform work.",
+    "title": "Automation-Accelerated Electrolyte Design — ACS Applied Energy Materials",
+    "blurb": "ML-guided HTE for paired BTZ/LiTFSI solubility — m-xylene/acetonitrile mixture dissolves ~3 M of both, surpassing the 2 M ceiling for neat acetonitrile. With Lily Robertson, Hieu Doan, Kee Sung Han.",
     "image": null,
-    "link": "https://scholar.google.com/scholar?q=Automation-Accelerated+Electrolyte+Design+Solubility+Competition+Lu+Zhang"
+    "link": "https://doi.org/10.1021/acsaem.5c02546"
+  },
+  {
+    "date": "2025",
+    "tag": "Publication",
+    "title": "Comparative SECM + computational study of graphite-electrolyte interface — JMCA",
+    "blurb": "H-functionalization on graphitic electrodes increases electron-transfer kinetics in non-aqueous redox media. With Curtiss, Assary, Counihan, Rodríguez-López, J. Zhang.",
+    "image": null,
+    "link": "https://doi.org/10.1039/d4ta07050j"
   },
   {
     "date": "2026-04",

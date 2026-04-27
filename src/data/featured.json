@@ -10,14 +10,24 @@
     "gradient": "from-teal to-navy"
   },
   {
-    "title": "Automation-Accelerated Electrolyte Design Mitigates Solubility Competition",
-    "journal": "Electrolyte automation study",
+    "title": "Automation-Accelerated Electrolyte Design Mitigates Solubility Competition between Redox-Active Molecules and Supporting Salts",
+    "journal": "ACS Applied Energy Materials",
     "year": 2025,
     "role": "co-author",
-    "highlight": "2025 follow-up to the Nature Comm 2024 robotic platform — applying ML-guided automation to address solubility competition in flow-battery electrolytes.",
+    "highlight": "2025 follow-up to the Nature Comm robotic platform — automated HTE + ML for paired BTZ/LiTFSI solubility (~3 M, surpassing the 2 M ceiling). With Robertson, Doan, Han.",
     "image": null,
-    "doi": "https://scholar.google.com/scholar?q=Automation-Accelerated+Electrolyte+Design+Solubility+Competition+Lu+Zhang",
+    "doi": "https://doi.org/10.1021/acsaem.5c02546",
     "gradient": "from-amber to-teal"
+  },
+  {
+    "title": "A comparative computational and SECM study of factors influencing electron transfer at hydrogenated and pristine graphite-propylene carbonate interface",
+    "journal": "Journal of Materials Chemistry A",
+    "year": 2025,
+    "role": "co-author",
+    "highlight": "2025 SECM + computational study showing H-functionalization on graphitic electrodes increases electron-transfer kinetics. With Curtiss, Assary, Counihan, Rodríguez-López, J. Zhang.",
+    "image": null,
+    "doi": "https://doi.org/10.1039/d4ta07050j",
+    "gradient": "from-rust to-amber"
   },
   {
     "title": "An integrated high-throughput robotic platform and active learning approach for accelerated discovery of optimal electrolyte formulations",
