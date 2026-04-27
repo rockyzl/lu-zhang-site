@@ -4,24 +4,24 @@
    ============================================================ */
 
 :root {
-  /* Warm paper palette */
-  --c-bg: #f7f4ed;
-  --c-bg-soft: #fbf8f1;
-  --c-fg: #1a1714;
-  --c-muted: #6b6356;
-  --c-muted-2: #8a8275;
-  --c-accent: #b8531a;        /* burnt orange — Argonne energy */
-  --c-accent-soft: #e8b07a;
-  --c-rust: #9a3a16;
-  --c-teal: #2d5d5e;
-  --c-navy: #1d3557;
-  --c-rose: #c2587e;
-  --c-amber: #d8862a;
-  --c-orange: #e07a3c;
-  --c-border: #e3ddcf;
-  --c-border-soft: #ece7d9;
+  /* Cool gray + Argonne green palette */
+  --c-bg: #f5f7f9;
+  --c-bg-soft: #ffffff;
+  --c-fg: #0f1c2e;            /* deep slate */
+  --c-muted: #5a6b7d;
+  --c-muted-2: #8190a0;
+  --c-accent: #0e8542;        /* Argonne-inspired green */
+  --c-accent-soft: #7dc99d;
+  --c-rust: #086633;          /* deep forest green (formerly rust) */
+  --c-teal: #1d5b6a;          /* cool teal, kept */
+  --c-navy: #0e2240;
+  --c-rose: #4a8db0;          /* cool slate-blue (formerly warm rose) */
+  --c-amber: #2b6eb6;         /* cobalt (formerly amber/orange) */
+  --c-orange: #4a8db0;        /* cool blue (formerly orange) */
+  --c-border: #d8dde3;
+  --c-border-soft: #e6eaef;
   --c-card: #ffffff;
-  --c-ink: #11100e;
+  --c-ink: #061226;
 
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -233,8 +233,8 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   /* Fallback gradient shows through when no portrait.jpg present */
   background:
     radial-gradient(circle at 28% 30%, rgba(255,255,255,0.18) 0%, transparent 38%),
-    radial-gradient(circle at 78% 72%, rgba(0,0,0,0.18) 0%, transparent 45%),
-    linear-gradient(140deg, #d8862a 0%, #b8531a 45%, #2d5d5e 100%);
+    radial-gradient(circle at 78% 72%, rgba(0,0,0,0.20) 0%, transparent 45%),
+    linear-gradient(140deg, #1eb053 0%, #0e8542 45%, #0e2240 100%);
 }
 .portrait > img {
   position: absolute; inset: 0;
@@ -370,10 +370,10 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   margin-top: 0.4rem;
   font-weight: 600;
 }
-.news-tag.AI { background: #fde7d6; color: #b8531a; border-color: transparent; }
-.news-tag.Publication { background: #e1ecff; color: #2456a8; border-color: transparent; }
-.news-tag.Patent { background: #f0ece2; color: #6b5c30; border-color: transparent; }
-.news-tag.Career { background: #e3f1ee; color: #2d5d5e; border-color: transparent; }
+.news-tag.AI { background: #d4ebf9; color: #2b6eb6; border-color: transparent; }
+.news-tag.Publication { background: #d4ecdb; color: #086633; border-color: transparent; }
+.news-tag.Patent { background: #e6eaef; color: #5a6b7d; border-color: transparent; }
+.news-tag.Career { background: #e3f1ee; color: #1d5b6a; border-color: transparent; }
 .news-body .title { font-weight: 600; color: var(--c-ink); margin-bottom: 0.35rem; }
 .news-body .blurb { font-size: 0.95rem; color: var(--c-muted); }
 /* Thumbnail-style preview: small, contained, sits to the right of text on
@@ -471,12 +471,12 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   border-top: 1px solid var(--c-border-soft);
 }
 
-/* Gradient cover variants */
-.gradient.from-amber.to-rust { background: linear-gradient(135deg, #d8862a, #9a3a16); }
-.gradient.from-teal.to-navy { background: linear-gradient(135deg, #2d5d5e, #1d3557); }
-.gradient.from-rose.to-orange { background: linear-gradient(135deg, #c2587e, #e07a3c); }
-.gradient.from-rust.to-amber { background: linear-gradient(135deg, #9a3a16, #d8862a); }
-.gradient.from-amber.to-teal { background: linear-gradient(135deg, #d8862a, #2d5d5e); }
+/* Gradient cover variants — refreshed for cool palette */
+.gradient.from-amber.to-rust { background: linear-gradient(135deg, #1eb053, #086633); }   /* greens */
+.gradient.from-teal.to-navy { background: linear-gradient(135deg, #1d5b6a, #0e2240); }   /* cool blues */
+.gradient.from-rose.to-orange { background: linear-gradient(135deg, #4a8db0, #2b6eb6); } /* slate to cobalt */
+.gradient.from-rust.to-amber { background: linear-gradient(135deg, #086633, #1eb053); }  /* deep to bright green */
+.gradient.from-amber.to-teal { background: linear-gradient(135deg, #0e8542, #1d5b6a); }  /* green to teal */
 
 /* ============================================================
    AI / PROJECT CARDS  (richer)
@@ -580,13 +580,13 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   letter-spacing: 0.05em;
   padding: 1px 7px;
   border-radius: 4px;
-  background: #f0ece2;
-  color: #6b5c30;
+  background: #e6eaef;
+  color: #5a6b7d;
   margin-left: 6px;
   vertical-align: middle;
 }
-.badge.first { background: #fde7d6; color: #b8531a; }
-.badge.corresponding { background: #e1ecff; color: #2456a8; }
+.badge.first { background: #d4ecdb; color: #086633; }
+.badge.corresponding { background: #d4ebf9; color: #2b6eb6; }
 
 /* toolbar (pubs filtering) — sticky below the site header so filters
    are always reachable on long-list pages */
