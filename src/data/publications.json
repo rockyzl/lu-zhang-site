@@ -1,1575 +1,1369 @@
 [
   {
-    "title": "Radical Compatibility with Nonaqueous Electrolytes and Its Impact on an All‐Organic Redox Flow Battery",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Xiaoliang Wei, Wu Xu, Jinhua Huang, Lu Zhang, Éric Walter, et al.",
-    "journal": "Angewandte Chemie International Edition",
-    "year": 2015,
-    "citations": 322,
-    "doi": "https://doi.org/10.1002/anie.201501443",
-    "verified": true,
-    "role": "co"
-  },
-  {
-    "title": "A High-Current, Stable Nonaqueous Organic Redox Flow Battery",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Xiaoliang Wei, Wentao Duan, Jinhua Huang, Lu Zhang, Bin Li, et al.",
-    "journal": "ACS Energy Letters",
-    "year": 2016,
-    "citations": 237,
-    "doi": "https://doi.org/10.1021/acsenergylett.6b00255",
-    "verified": true,
-    "role": "co"
-  },
-  {
-    "title": "A symmetric organic-based nonaqueous redox flow battery and its state of charge diagnostics by FTIR",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Wentao Duan, R.S. Vemuri, Jarrod D. Milshtein, Sydney Laramie, Rylan Doyle Dmello, et al.",
+    "title": "A comparative computational and scanning electrochemical microscopy study of factors influencing electron transfer at the hydrogenated and pristine graphite – propylene carbonate electrochemical interface",
+    "topic": "Electrochemical Analysis and Applications",
+    "authors": "Jason D. Howard, Dipobrato Sarbapalli, Abhiroop Mishra, Nannan Shan, Garvit Agarwal, Jingjing Zhang, et al.",
     "journal": "Journal of Materials Chemistry A",
-    "year": 2016,
-    "citations": 196,
-    "doi": "https://doi.org/10.1039/c6ta01177b",
-    "verified": true,
-    "role": "unknown"
+    "year": 2025,
+    "citations": 2,
+    "doi": "https://doi.org/10.1039/d4ta07050j",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Molecular engineering towards safer lithium-ion batteries: a highly stable and compatible redox shuttle for overcharge protection",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Lu Zhang, Zhengcheng Zhang, Paul C. Redfern, Larry A. Curtiss, Khalil Amine",
-    "journal": "Energy & Environmental Science",
-    "year": 2012,
-    "citations": 126,
-    "doi": "https://doi.org/10.1039/c2ee21977h",
-    "verified": true,
-    "role": "first"
+    "title": "Automation-Accelerated Electrolyte Design Mitigates Solubility Competition between Redox-Active Molecules and Supporting Salts",
+    "topic": "Advanced battery technologies research",
+    "authors": "Juran Noh, Heather Job, Hieu A. Doan, Kee Sung Han, Lily A. Robertson, Lu Zhang, et al.",
+    "journal": "ACS Applied Energy Materials",
+    "year": 2025,
+    "citations": 0,
+    "doi": "https://doi.org/10.1021/acsaem.5c02546",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "2,5-Dimethoxy-1,4-Benzoquinone (DMBQ) as Organic Cathode for Rechargeable Magnesium-Ion Batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Baofei Pan, Dehua Zhou, Jinhua Huang, Lu Zhang, Anthony K. Burrell, et al.",
-    "journal": "Journal of The Electrochemical Society",
-    "year": 2016,
-    "citations": 107,
-    "doi": "https://doi.org/10.1149/2.0021605jes",
-    "verified": true,
-    "role": "co"
+    "title": "An integrated high-throughput robotic platform and active learning approach for accelerated discovery of optimal electrolyte formulations",
+    "topic": "Advanced battery technologies research",
+    "authors": "Juran Noh, Hieu A. Doan, Heather Job, Lily A. Robertson, Lu Zhang, Rajeev S. Assary, et al.",
+    "journal": "Nature Communications",
+    "year": 2024,
+    "citations": 62,
+    "doi": "https://doi.org/10.1038/s41467-024-47070-5",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "A subtractive approach to molecular engineering of dimethoxybenzene-based redox materials for non-aqueous flow batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jinhua Huang, Liang Su, Jeffrey A. Kowalski, John L. Barton, Magali Ferrandon, et al.",
+    "title": "Simulation guided molecular design of hydrofluoroether solvent for high energy batteries",
+    "topic": "Advanced Battery Materials and Technologies",
+    "authors": "Yu Zhou, Zhangxing Shi, Sambasiva R. Bheemireddy, Ethan P. Kamphaus, Xingyi Lyu, Mohammad Afsar Uddin, et al.",
     "journal": "Journal of Materials Chemistry A",
-    "year": 2015,
-    "citations": 104,
-    "doi": "https://doi.org/10.1039/c5ta02380g",
-    "verified": true,
-    "role": "corresponding"
+    "year": 2024,
+    "citations": 5,
+    "doi": "https://doi.org/10.1039/d3ta07670a",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "The lightest organic radical cation for charge storage in redox flow batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jinhua Huang, Baofei Pan, Wentao Duan, Xiaoliang Wei, Rajeev S. Assary, et al.",
-    "journal": "Scientific Reports",
-    "year": 2016,
-    "citations": 81,
-    "doi": "https://doi.org/10.1038/srep32102",
-    "verified": true,
-    "role": "corresponding"
-  },
-  {
-    "title": "Novel redox shuttle additive for high-voltage cathode materials",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Lu Zhang, Zhengcheng Zhang, Huiming Wu, Khalil Amine",
-    "journal": "Energy & Environmental Science",
-    "year": 2011,
-    "citations": 77,
-    "doi": "https://doi.org/10.1039/c0ee00733a",
-    "verified": true,
-    "role": "first"
-  },
-  {
-    "title": "Solution Properties and Practical Limits of Concentrated Electrolytes for Nonaqueous Redox Flow Batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jingjing Zhang, R. E. Corman, Jonathon K. Schuh, Randy H. Ewoldt, Ilya A. Shkrob, et al.",
-    "journal": "The Journal of Physical Chemistry C",
-    "year": 2018,
-    "citations": 76,
-    "doi": "https://doi.org/10.1021/acs.jpcc.8b02009",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Understanding the redox shuttle stability of 3,5-di-tert-butyl-1,2-dimethoxybenzene for overcharge protection of lithium-ion batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Zhengcheng Zhang, Lu Zhang, John A. Schlueter, Paul C. Redfern, Larry A. Curtiss, et al.",
+    "title": "Multifaceted effects of ring fusion on the stability of charged dialkoxyarene redoxmers",
+    "topic": "Advanced battery technologies research",
+    "authors": "Zhiguang Li, Heonjae Jeong, Xiaoting Fang, Yuyue Zhao, Lily A. Robertson, Jingjing Zhang, et al.",
     "journal": "Journal of Power Sources",
-    "year": 2010,
-    "citations": 73,
-    "doi": "https://doi.org/10.1016/j.jpowsour.2010.02.075",
-    "verified": true,
-    "role": "co"
+    "year": 2024,
+    "citations": 3,
+    "doi": "https://doi.org/10.1016/j.jpowsour.2024.234689",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "A Two‐Electron Storage Nonaqueous Organic Redox Flow Battery",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jinhua Huang, Zheng Yang, Vijayakumar Murugesan, Wentao Duan, Aaron Hollas, et al.",
-    "journal": "Advanced Sustainable Systems",
-    "year": 2018,
-    "citations": 69,
-    "doi": "https://doi.org/10.1002/adsu.201700131",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Annulated Dialkoxybenzenes as Catholyte Materials for Non‐aqueous Redox Flow Batteries: Achieving High Chemical Stability through Bicyclic Substitution",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jingjing Zhang, Zheng Yang, Ilya A. Shkrob, Rajeev S. Assary, Siu on Tung, et al.",
-    "journal": "Advanced Energy Materials",
-    "year": 2017,
-    "citations": 65,
-    "doi": "https://doi.org/10.1002/aenm.201701272",
-    "verified": true,
-    "role": "corresponding"
-  },
-  {
-    "title": "Experimental Protocols for Studying Organic Non-aqueous Redox Flow Batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Min Li, Susan A. Odom, Adam R. Pancoast, Lily A. Robertson, Thomas P. Vaid, et al.",
-    "journal": "ACS Energy Letters",
-    "year": 2021,
-    "citations": 64,
-    "doi": "https://doi.org/10.1021/acsenergylett.1c01675",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Thermal and overcharge abuse analysis of a redox shuttle for overcharge protection of LiFePO 4",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Joshua Lamb, Christopher J. Orendorff, Khalil Amine, Gregory Krumdick, Zhengcheng Zhang, et al.",
-    "journal": "Journal of Power Sources",
-    "year": 2013,
-    "citations": 51,
-    "doi": "https://doi.org/10.1016/j.jpowsour.2013.08.044",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Radical Compatibility with Nonaqueous Electrolytes and Its Impact on an All‐Organic Redox Flow Battery",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Xiaoliang Wei, Wu Xu, Jinhua Huang, Lu Zhang, Éric Walter, et al.",
-    "journal": "Angewandte Chemie",
-    "year": 2015,
-    "citations": 50,
-    "doi": "https://doi.org/10.1002/ange.201501443",
-    "verified": true,
-    "role": "co"
-  },
-  {
-    "title": "Multielectron Organic Redoxmers for Energy-Dense Redox Flow Batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Xiaoting Fang, Zhiguang Li, Yuyue Zhao, Diqing Yue, Lu Zhang, et al.",
-    "journal": "ACS Materials Letters",
-    "year": 2022,
-    "citations": 48,
-    "doi": "https://doi.org/10.1021/acsmaterialslett.1c00668",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Redox Shuttles with Axisymmetric Scaffold for Overcharge Protection of Lithium‐Ion Batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Wei Weng, Jinhua Huang, Ilya A. Shkrob, Lu Zhang, Zhengcheng Zhang",
-    "journal": "Advanced Energy Materials",
-    "year": 2016,
-    "citations": 47,
-    "doi": "https://doi.org/10.1002/aenm.201600795",
-    "verified": true,
-    "role": "co"
-  },
-  {
-    "title": "Elucidating Factors Controlling Long-Term Stability of Radical Anions for Negative Charge Storage in Nonaqueous Redox Flow Batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jingjing Zhang, Jinhua Huang, Lily A. Robertson, Rajeev S. Assary, Ilya A. Shkrob, et al.",
-    "journal": "The Journal of Physical Chemistry C",
-    "year": 2018,
-    "citations": 46,
-    "doi": "https://doi.org/10.1021/acs.jpcc.8b01434",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Substituted thiadiazoles as energy-rich anolytes for nonaqueous redox flow cells",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jinhua Huang, Wentao Duan, Jingjing Zhang, Ilya A. Shkrob, Rajeev S. Assary, et al.",
-    "journal": "Journal of Materials Chemistry A",
-    "year": 2018,
-    "citations": 41,
-    "doi": "https://doi.org/10.1039/c8ta01059e",
-    "verified": true,
-    "role": "corresponding"
-  },
-  {
-    "title": "Molecular Level Understanding of the Factors Affecting the Stability of Dimethoxy Benzene Catholyte Candidates from First-Principles Investigations",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Rajeev S. Assary, Lu Zhang, Jinhua Huang, Larry A. Curtiss",
-    "journal": "The Journal of Physical Chemistry C",
-    "year": 2016,
-    "citations": 39,
-    "doi": "https://doi.org/10.1021/acs.jpcc.6b04263",
-    "verified": true,
-    "role": "co"
-  },
-  {
-    "title": "Toward Improved Catholyte Materials for Redox Flow Batteries: What Controls Chemical Stability of Persistent Radical Cations?",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jingjing Zhang, Ilya A. Shkrob, Rajeev S. Assary, Siu on Tung, Benjamin Silcox, et al.",
-    "journal": "The Journal of Physical Chemistry C",
-    "year": 2017,
-    "citations": 33,
-    "doi": "https://doi.org/10.1021/acs.jpcc.7b08281",
-    "verified": true,
-    "role": "corresponding"
-  },
-  {
-    "title": "Crowded electrolytes containing redoxmers in different states of charge: Solution structure, properties, and fundamental limits on energy density",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Ilya A. Shkrob, Lily A. Robertson, Yu Zhou, Rajeev S. Assary, Lei Cheng, et al.",
-    "journal": "Journal of Molecular Liquids",
-    "year": 2021,
-    "citations": 32,
-    "doi": "https://doi.org/10.1016/j.molliq.2021.116533",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Comparing calendar and cycle life stability of redox active organic molecules for nonaqueous redox flow batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jingjing Zhang, Jinhua Huang, Lily A. Robertson, Ilya A. Shkrob, Lu Zhang",
-    "journal": "Journal of Power Sources",
-    "year": 2018,
-    "citations": 31,
-    "doi": "https://doi.org/10.1016/j.jpowsour.2018.07.001",
-    "verified": true,
-    "role": "co"
-  },
-  {
-    "title": "TEMPO allegro: liquid catholyte redoxmers for nonaqueous redox flow batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Yuyue Zhao, Jingjing Zhang, Garvit Agarwal, Yu Zhou, R. E. Corman, et al.",
-    "journal": "Journal of Materials Chemistry A",
-    "year": 2021,
-    "citations": 29,
-    "doi": "https://doi.org/10.1039/d1ta04297a",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "On Transferability of Performance Metrics for Redox-Active Molecules",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Benjamin Silcox, Jingjing Zhang, Ilya A. Shkrob, Levi T. Thompson, Lu Zhang",
-    "journal": "The Journal of Physical Chemistry C",
-    "year": 2019,
-    "citations": 29,
-    "doi": "https://doi.org/10.1021/acs.jpcc.9b02230",
-    "verified": true,
-    "role": "co"
-  },
-  {
-    "title": "Unexpected electrochemical behavior of an anolyte redoxmer in flow battery electrolytes: solvating cations help to fight against the thermodynamic–kinetic dilemma",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Yuyue Zhao, Yu Zhou, Lily A. Robertson, Jingjing Zhang, Zhangxing Shi, et al.",
-    "journal": "Journal of Materials Chemistry A",
-    "year": 2020,
-    "citations": 26,
-    "doi": "https://doi.org/10.1039/d0ta02214d",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "An extremely durable redox shuttle additive for overcharge protection of lithium-ion batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jingjing Zhang, Ilya A. Shkrob, Rajeev S. Assary, Ronald J. Clark, Richard E. Wilson, et al.",
-    "journal": "Materials Today Energy",
-    "year": 2019,
-    "citations": 26,
-    "doi": "https://doi.org/10.1016/j.mtener.2019.06.003",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "A combined SECM and electrochemical AFM approach to probe interfacial processes affecting molecular reactivity at redox flow battery electrodes",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Tylan Watkins, Dipobrato Sarbapalli, Michael J. Counihan, Andrew S. Danis, Jingjing Zhang, et al.",
-    "journal": "Journal of Materials Chemistry A",
-    "year": 2020,
-    "citations": 25,
-    "doi": "https://doi.org/10.1039/d0ta00836b",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Dual overcharge protection and solid electrolyte interphase-improving action in Li-ion cells containing a bis-annulated dialkoxyarene electrolyte additive",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jingjing Zhang, Ilya A. Shkrob, Rajeev S. Assary, Shuo Zhang, Bin Hu, et al.",
-    "journal": "Journal of Power Sources",
-    "year": 2018,
-    "citations": 24,
-    "doi": "https://doi.org/10.1016/j.jpowsour.2017.12.059",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Self-Assembled Solute Networks in Crowded Electrolyte Solutions and Nanoconfinement of Charged Redoxmer Molecules",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Ilya A. Shkrob, Tao Li, Erik Sarnello, Lily A. Robertson, Yuyue Zhao, et al.",
-    "journal": "The Journal of Physical Chemistry B",
-    "year": 2020,
-    "citations": 20,
-    "doi": "https://doi.org/10.1021/acs.jpcb.0c07760",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Fluorescence-Enabled Self-Reporting for Redox Flow Batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Lily A. Robertson, Ilya A. Shkrob, Garvit Agarwal, Yuyue Zhao, Yu Zhou, et al.",
-    "journal": "ACS Energy Letters",
-    "year": 2020,
-    "citations": 18,
-    "doi": "https://doi.org/10.1021/acsenergylett.0c01447",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Techno-economic analysis of non-aqueous hybrid redox flow batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Zhiguang Li, Xiaoting Fang, Lei Cheng, Xiaoliang Wei, Lu Zhang",
-    "journal": "Journal of Power Sources",
-    "year": 2022,
-    "citations": 16,
-    "doi": "https://doi.org/10.1016/j.jpowsour.2022.231493",
-    "verified": true,
-    "role": "co"
-  },
-  {
-    "title": "Competitive Pi-Stacking and H-Bond Piling Increase Solubility of Heterocyclic Redoxmers",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Yuyue Zhao, Erik Sarnello, Lily A. Robertson, Jingjing Zhang, Zhangxing Shi, et al.",
-    "journal": "The Journal of Physical Chemistry B",
-    "year": 2020,
-    "citations": 14,
-    "doi": "https://doi.org/10.1021/acs.jpcb.0c07647",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Six-electron organic redoxmers for aqueous redox flow batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Xiaoting Fang, Andres T. Cavazos, Zhiguang Li, Chenzhao Li, Jian Xie, et al.",
-    "journal": "Chemical Communications",
-    "year": 2022,
-    "citations": 13,
-    "doi": "https://doi.org/10.1039/d2cc04648b",
-    "verified": false,
-    "role": "unknown"
+    "title": "Publisher Correction: An integrated high-throughput robotic platform and active learning approach for accelerated discovery of optimal electrolyte formulations",
+    "topic": "Innovative Microfluidic and Catalytic Techniques Innovation",
+    "authors": "Juran Noh, Hieu A. Doan, Heather Job, Lily A. Robertson, Lu Zhang, Rajeev S. Assary, et al.",
+    "journal": "Nature Communications",
+    "year": 2024,
+    "citations": 0,
+    "doi": "https://doi.org/10.1038/s41467-024-47608-7",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
     "title": "Concentration‐dependent Cycling of Phenothiazine‐based Electrolytes in Nonaqueous Redox Flow Cells",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Aman Preet Kaur, Bertrand J. Neyhouse, Ilya A. Shkrob, Yilin Wang, N. Harsha Attanayake, et al.",
+    "topic": "Advanced battery technologies research",
+    "authors": "Aman Preet Kaur, Bertrand J. Neyhouse, Ilya A. Shkrob, Yilin Wang, N. Harsha Attanayake, Rahul Kant Jha, et al.",
     "journal": "Chemistry - An Asian Journal",
     "year": 2023,
     "citations": 12,
     "doi": "https://doi.org/10.1002/asia.202201171",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "An investigation on the impact of halidization on substituted dimethoxybenzenes",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jeffrey A. Kowalski, Thomas J. Carney, Jinhua Huang, Lu Zhang, Fikile R. Brushett",
-    "journal": "Electrochimica Acta",
-    "year": 2019,
-    "citations": 10,
-    "doi": "https://doi.org/10.1016/j.electacta.2019.135580",
-    "verified": true,
-    "role": "co"
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
     "title": "Colocalized Raman spectroscopy – scanning electrochemical microscopy investigation of redox flow battery dialkoxybenzene redoxmer degradation pathways",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Andrew S. Danis, Michael J. Counihan, Kendrich O. Hatfield, Jingjing Zhang, Garvit Agarwal, et al.",
+    "topic": "Electrochemical Analysis and Applications",
+    "authors": "Andrew S. Danis, Michael J. Counihan, Kendrich O. Hatfield, Jingjing Zhang, Garvit Agarwal, Lu Zhang, et al.",
     "journal": "Electrochimica Acta",
     "year": 2023,
-    "citations": 9,
+    "citations": 10,
     "doi": "https://doi.org/10.1016/j.electacta.2023.142123",
-    "verified": true,
-    "role": "unknown"
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
     "title": "A cooperative degradation pathway for organic phenoxazine catholytes in aqueous redox flow batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Xiaoting Fang, Li‐Fan Zeng, Zhiguang Li, Lily A. Robertson, Ilya A. Shkrob, et al.",
+    "topic": "Advanced battery technologies research",
+    "authors": "Xiaoting Fang, Li‐Fan Zeng, Zhiguang Li, Lily A. Robertson, Ilya A. Shkrob, Lu Zhang, et al.",
     "journal": "Next Energy",
     "year": 2023,
-    "citations": 8,
+    "citations": 9,
     "doi": "https://doi.org/10.1016/j.nxener.2023.100008",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Redox Shuttles for Overcharge Protection of Lithium-Ion Battery",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Lu Zhang, Zhengcheng Zhang, Khalil Amine",
-    "journal": "ECS Transactions",
-    "year": 2013,
-    "citations": 6,
-    "doi": "https://doi.org/10.1149/04529.0057ecst",
-    "verified": true,
-    "role": "first"
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
   },
   {
     "title": "Liquid Redoxmers for Nonaqueous Redox Flow Batteries",
-    "topic": "Flow battery / redox-active molecules",
+    "topic": "Advanced battery technologies research",
     "authors": "Lily A. Robertson, Mohammad Afsar Uddin, Ilya A. Shkrob, Jeffrey S. Moore, Lu Zhang",
     "journal": "ChemSusChem",
     "year": 2023,
     "citations": 5,
     "doi": "https://doi.org/10.1002/cssc.202300043",
-    "verified": true,
-    "role": "corresponding"
+    "role": "corresponding",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
     "title": "Softening by charging: how collective modes of ionic association in concentrated redoxmer/electrolyte solutions define the structural and dynamic properties in different states of charge",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Hossam Farag, Aman Preet Kaur, Lily A. Robertson, Erik Sarnello, Xinyi Liu, et al.",
+    "topic": "Spectroscopy and Quantum Chemical Studies",
+    "authors": "Hossam Farag, Aman Preet Kaur, Lily A. Robertson, Erik Sarnello, Xinyi Liu, Yilin Wang, et al.",
     "journal": "Physical Chemistry Chemical Physics",
     "year": 2023,
     "citations": 5,
     "doi": "https://doi.org/10.1039/d2cp04220g",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Fluorination Enables Simultaneous Improvements of a Dialkoxybenzene-Based Redoxmer for Nonaqueous Redox Flow Batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Sambasiva R. Bheemireddy, Zhiguang Li, Jingjing Zhang, Garvit Agarwal, Lily A. Robertson, et al.",
-    "journal": "ACS Applied Materials & Interfaces",
-    "year": 2022,
-    "citations": 5,
-    "doi": "https://doi.org/10.1021/acsami.2c04926",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Multifaceted effects of ring fusion on the stability of charged dialkoxyarene redoxmers",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Zhiguang Li, Heonjae Jeong, Xiaoting Fang, Yuyue Zhao, Lily A. Robertson, et al.",
-    "journal": "Journal of Power Sources",
-    "year": 2024,
-    "citations": 3,
-    "doi": "https://doi.org/10.1016/j.jpowsour.2024.234689",
-    "verified": true,
-    "role": "unknown"
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
   },
   {
     "title": "<i>In silico</i>discovery of a new class of anolyte redoxmers for non-aqueous redox flow batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Akash Jain, Ilya A. Shkrob, Hieu A. Doan, Lily A. Robertson, Lu Zhang, et al.",
+    "topic": "Advanced battery technologies research",
+    "authors": "Akash Jain, Ilya A. Shkrob, Hieu A. Doan, Lily A. Robertson, Lu Zhang, Rajeev S. Assary",
     "journal": "Digital Discovery",
     "year": 2023,
     "citations": 3,
     "doi": "https://doi.org/10.1039/d3dd00050h",
-    "verified": true,
-    "role": "co"
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Cross-Platform Classifier of Chemical Stability for Charged Redoxmers",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Benjamin Silcox, Jingjing Zhang, Siu on Tung, Ilya A. Shkrob, Lu Zhang, et al.",
-    "journal": "ACS Materials Letters",
-    "year": 2021,
-    "citations": 2,
-    "doi": "https://doi.org/10.1021/acsmaterialslett.1c00424",
-    "verified": true,
-    "role": "co"
-  },
-  {
-    "title": "The lightest organic radical cation for charge storage in redox flow batteries",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jinhua Huang, Baofei Pan, Wentao Duan, Xiaoliang Wei, Rajeev S. Assary, et al.",
-    "journal": "DSpace@MIT (Massachusetts Institute of Technology)",
-    "year": 2016,
-    "citations": 1,
-    "doi": "",
-    "verified": true,
-    "role": "corresponding"
-  },
-  {
-    "title": "A symmetric organic-based nonaqueous redox flow battery and its state of charge diagnostics by FTIR",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Wentao Duan, R.S. Vemuri, Jarrod D. Milshtein, Sydney Laramie, Rylan Doyle Dmello, et al.",
-    "journal": "DSpace@MIT (Massachusetts Institute of Technology)",
-    "year": 2016,
-    "citations": 1,
-    "doi": "",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Automation-Accelerated Electrolyte Design Mitigates Solubility Competition between Redox-Active Molecules and Supporting Salts",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Juran Noh, Heather Job, Hieu A. Doan, Kee Sung Han, Lily A. Robertson, et al.",
-    "journal": "ACS Applied Energy Materials",
-    "year": 2025,
-    "citations": 0,
-    "doi": "https://doi.org/10.1021/acsaem.5c02546",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Substituted thiadiazoles as energy-rich anolytes for nonaqueous redox flow cells",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jinhua Huang, Wentao Duan, Jingjing Zhang, Ilya A. Shkrob, Rajeev S. Assary, et al.",
-    "journal": "Publisher",
-    "year": 2018,
-    "citations": 0,
-    "doi": "",
-    "verified": true,
-    "role": "corresponding"
-  },
-  {
-    "title": "Redox Flow Batteries: Annulated Dialkoxybenzenes as Catholyte Materials for Non‐aqueous Redox Flow Batteries: Achieving High Chemical Stability through Bicyclic Substitution (Adv. Energy Mater. 21/2017)",
-    "topic": "Flow battery / redox-active molecules",
-    "authors": "Jingjing Zhang, Zheng Yang, Ilya A. Shkrob, Rajeev S. Assary, Siu on Tung, et al.",
-    "journal": "Advanced Energy Materials",
-    "year": 2017,
-    "citations": 0,
-    "doi": "https://doi.org/10.1002/aenm.201770121",
-    "verified": true,
-    "role": "corresponding"
-  },
-  {
-    "title": "Lithium lanthanum titanate perovskite as an anode for lithium ion batteries",
-    "topic": "Li-ion electrolytes",
-    "authors": "Lu Zhang, Xiaohua Zhang, Guiying Tian, Qinghua Zhang, Michael Knapp, et al.",
-    "journal": "Nature Communications",
-    "year": 2020,
-    "citations": 230,
-    "doi": "https://doi.org/10.1038/s41467-020-17233-1",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "Exploration of Spinel LiCrTiO<sub>4</sub> as Cathode Material for Rechargeable Mg‐Li Hybrid Batteries",
-    "topic": "Li-ion electrolytes",
-    "authors": "Ye Yao, Lu Zhang, Xiaofei Bie, Hong Chen, Chunzhong Wang, et al.",
-    "journal": "Chemistry - A European Journal",
-    "year": 2017,
-    "citations": 24,
-    "doi": "https://doi.org/10.1002/chem.201702075",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Facile in Situ Syntheses of Cathode Protective Electrolyte Additives for High Energy Density Li-Ion Cells",
-    "topic": "Li-ion electrolytes",
-    "authors": "Ilya A. Shkrob, Binghong Han, Ritu Sahore, Adam Tornheim, Lu Zhang, et al.",
-    "journal": "Chemistry of Materials",
-    "year": 2019,
-    "citations": 12,
-    "doi": "https://doi.org/10.1021/acs.chemmater.8b05261",
-    "verified": true,
-    "role": "co"
-  },
-  {
-    "title": "Mn3O4 nano-sized crystals: Rapid synthesis and extension to preparation of nanosized LiMn2O4 materials",
-    "topic": "Li-ion electrolytes",
-    "authors": "Xiaoling Cui, Yongli Li, Shiyou Li, Guo‐cun Sun, Jinxia Ma, et al.",
-    "journal": "Journal of Chemical Sciences",
-    "year": 2014,
-    "citations": 11,
-    "doi": "https://doi.org/10.1007/s12039-014-0592-1",
-    "verified": false,
-    "role": "unknown"
-  },
-  {
-    "title": "Molecular Engineering toward Stabilized Interface: An Electrolyte Additive for High-Performance Li-Ion Battery",
-    "topic": "Li-ion electrolytes",
-    "authors": "Lu Zhang, Jinhua Huang, Kyrrilos Youssef, Paul C. Redfern, Larry A. Curtiss, et al.",
-    "journal": "Journal of The Electrochemical Society",
-    "year": 2014,
-    "citations": 11,
-    "doi": "https://doi.org/10.1149/2.0971414jes",
-    "verified": true,
-    "role": "first"
-  },
-  {
-    "title": "Synergistic Coupling of Li<sub>6.4</sub>La<sub>3</sub>Zr<sub>1.4</sub>Ta<sub>0.6</sub>O<sub>12</sub> and Fluoroethylene Carbonate Boosts Electrochemical Performances of Poly(Ethylene Oxide)‐Based All‐Solid‐State Lithium Batteries",
-    "topic": "Li-ion electrolytes",
-    "authors": "Lu Zhang, Zhitao Wang, Hu Zhou, Xiaogang Li, Qian Liu, et al.",
-    "journal": "ChemElectroChem",
-    "year": 2022,
-    "citations": 9,
-    "doi": "https://doi.org/10.1002/celc.202200641",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "Designing F/P Hybrid Polymer as Ultrastable Cationic Shielding Interphase for High‐Performance Lithium Metal Batteries",
-    "topic": "Li-ion electrolytes",
-    "authors": "Shantao Han, Baifei Wu, Huaijiao Wang, Peng Wen, Lu Zhang, et al.",
-    "journal": "Angewandte Chemie",
+    "title": "Multifaceted Effects of Ring Fusion in Charged Dialkoxyarene Redoxmers",
+    "topic": "Advanced battery technologies research",
+    "authors": "Zhiguang Li, Heonjae Jeong, Xiaoting Fang, Yuyue Zhao, Jingjing Zhang, Ilya A. Shkrob, et al.",
+    "journal": "ECS Meeting Abstracts",
     "year": 2023,
-    "citations": 6,
-    "doi": "https://doi.org/10.1002/ange.202308724",
-    "verified": false,
-    "role": "co"
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2023-0172846mtgabs",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Re‐Engineering Poly(Acrylic Acid) Binder toward Optimized Electrochemical Performance for Silicon Lithium‐Ion Batteries: Branching Architecture Leads to Balanced Properties of Polymeric Binders",
-    "topic": "Silicon-anode binders",
-    "authors": "Sisi Jiang, Bin Hu, Zhangxing Shi, Wei Chen, Zhengcheng Zhang, et al.",
-    "journal": "Advanced Functional Materials",
-    "year": 2019,
-    "citations": 113,
-    "doi": "https://doi.org/10.1002/adfm.201908558",
-    "verified": true,
-    "role": "unknown"
+    "title": "Multifaceted Effects of Ring Fusion on the Stability of Charged Dialkoxyarene Redoxmers",
+    "topic": "Porphyrin and Phthalocyanine Chemistry",
+    "authors": "Zhiguang Li, Heonjae Jeong, Xiaoting Fang, Yuyue Zhao, Lily A. Robertson, Jingjing Zhang, et al.",
+    "journal": "SSRN Electronic Journal",
+    "year": 2023,
+    "citations": 0,
+    "doi": "https://doi.org/10.2139/ssrn.4642743",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Government of the United States of America"
+    ],
+    "verified": true
   },
   {
-    "title": "The existence of optimal molecular weight for poly(acrylic acid) binders in silicon/graphite composite anode for lithium-ion batteries",
-    "topic": "Silicon-anode binders",
-    "authors": "Bin Hu, Ilya A. Shkrob, Shuo Zhang, Linghong Zhang, Linghong Zhang, et al.",
+    "title": "Multielectron Organic Redoxmers for Energy-Dense Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Xiaoting Fang, Zhiguang Li, Yuyue Zhao, Diqing Yue, Lu Zhang, Xiaoliang Wei",
+    "journal": "ACS Materials Letters",
+    "year": 2022,
+    "citations": 52,
+    "doi": "https://doi.org/10.1021/acsmaterialslett.1c00668",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Techno-economic analysis of non-aqueous hybrid redox flow batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Zhiguang Li, Xiaoting Fang, Lei Cheng, Xiaoliang Wei, Lu Zhang",
     "journal": "Journal of Power Sources",
-    "year": 2018,
-    "citations": 103,
-    "doi": "https://doi.org/10.1016/j.jpowsour.2017.12.068",
-    "verified": true,
-    "role": "corresponding"
+    "year": 2022,
+    "citations": 16,
+    "doi": "https://doi.org/10.1016/j.jpowsour.2022.231493",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Surface-Functionalized Silicon Nanoparticles as Anode Material for Lithium-Ion Battery",
-    "topic": "Silicon-anode binders",
-    "authors": "Sisi Jiang, Bin Hu, Ritu Sahore, Linghong Zhang, Haihua Liu, et al.",
+    "title": "Six-electron organic redoxmers for aqueous redox flow batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Xiaoting Fang, Andres T. Cavazos, Zhiguang Li, Chenzhao Li, Jian Xie, Stephen R. Wassall, et al.",
+    "journal": "Chemical Communications",
+    "year": 2022,
+    "citations": 14,
+    "doi": "https://doi.org/10.1039/d2cc04648b",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Fluorination Enables Simultaneous Improvements of a Dialkoxybenzene-Based Redoxmer for Nonaqueous Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Sambasiva R. Bheemireddy, Zhiguang Li, Jingjing Zhang, Garvit Agarwal, Lily A. Robertson, Ilya A. Shkrob, et al.",
     "journal": "ACS Applied Materials & Interfaces",
-    "year": 2018,
-    "citations": 102,
-    "doi": "https://doi.org/10.1021/acsami.8b17729",
-    "verified": true,
-    "role": "unknown"
+    "year": 2022,
+    "citations": 5,
+    "doi": "https://doi.org/10.1021/acsami.2c04926",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Understanding of pre-lithiation of poly(acrylic acid) binder: Striking the balances between the cycling performance and slurry stability for silicon-graphite composite electrodes in Li-ion batteries",
-    "topic": "Silicon-anode binders",
-    "authors": "Bin Hu, Sisi Jiang, Ilya A. Shkrob, Jingjing Zhang, Stephen E. Trask, et al.",
-    "journal": "Journal of Power Sources",
-    "year": 2019,
-    "citations": 80,
-    "doi": "https://doi.org/10.1016/j.jpowsour.2019.01.068",
-    "verified": true,
-    "role": "unknown"
+    "title": "Discovery of Energy Storage Molecular Materials Using Quantum Chemistry-Guided Multiobjective Bayesian Optimization",
+    "topic": "Machine Learning in Materials Science",
+    "authors": "Garvit Agarwal, Hieu A. Doan, Lily A. Robertson, Lu Zhang, Rajeev S. Assary",
+    "journal": "Chemistry of Materials",
+    "year": 2021,
+    "citations": 73,
+    "doi": "https://doi.org/10.1021/acs.chemmater.1c02040",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
   },
   {
-    "title": "Restorable Neutralization of Poly(acrylic acid) Binders toward Balanced Processing Properties and Cycling Performance for Silicon Anodes in Lithium-Ion Batteries",
-    "topic": "Silicon-anode binders",
-    "authors": "Zhangxing Shi, Sisi Jiang, Lily A. Robertson, Yuyue Zhao, Erik Sarnello, et al.",
-    "journal": "ACS Applied Materials & Interfaces",
-    "year": 2020,
-    "citations": 41,
-    "doi": "https://doi.org/10.1021/acsami.0c18559",
-    "verified": true,
-    "role": "unknown"
+    "title": "Experimental Protocols for Studying Organic Non-aqueous Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Min Li, Susan A. Odom, Adam R. Pancoast, Lily A. Robertson, Thomas P. Vaid, Garvit Agarwal, et al.",
+    "journal": "ACS Energy Letters",
+    "year": 2021,
+    "citations": 65,
+    "doi": "https://doi.org/10.1021/acsenergylett.1c01675",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
     "title": "A chemical switch enabled autonomous two-stage crosslinking polymeric binder for high performance silicon anodes",
-    "topic": "Silicon-anode binders",
-    "authors": "Zhangxing Shi, Qian Liu, Zhenzhen Yang, Lily A. Robertson, Sambasiva R. Bheemireddy, et al.",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Zhangxing Shi, Qian Liu, Zhenzhen Yang, Lily A. Robertson, Sambasiva R. Bheemireddy, Yuyue Zhao, et al.",
     "journal": "Journal of Materials Chemistry A",
     "year": 2021,
     "citations": 35,
     "doi": "https://doi.org/10.1039/d1ta07112b",
-    "verified": true,
-    "role": "unknown"
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
   },
   {
-    "title": "Tailoring the Surface of Silicon Nanoparticles for Enhanced Chemical and Electrochemical Stability for Li-Ion Batteries",
-    "topic": "Silicon-anode binders",
-    "authors": "Sisi Jiang, Bin Hu, Ritu Sahore, Haihua Liu, Gregory F. Pach, et al.",
-    "journal": "ACS Applied Energy Materials",
-    "year": 2019,
-    "citations": 24,
-    "doi": "https://doi.org/10.1021/acsaem.9b01601",
-    "verified": true,
-    "role": "unknown"
+    "title": "Crowded electrolytes containing redoxmers in different states of charge: Solution structure, properties, and fundamental limits on energy density",
+    "topic": "Advanced battery technologies research",
+    "authors": "Ilya A. Shkrob, Lily A. Robertson, Yu Zhou, Rajeev S. Assary, Lei Cheng, Lu Zhang, et al.",
+    "journal": "Journal of Molecular Liquids",
+    "year": 2021,
+    "citations": 32,
+    "doi": "https://doi.org/10.1016/j.molliq.2021.116533",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "TEMPO allegro: liquid catholyte redoxmers for nonaqueous redox flow batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Yuyue Zhao, Jingjing Zhang, Garvit Agarwal, Yu Zhou, R. E. Corman, Yilin Wang, et al.",
+    "journal": "Journal of Materials Chemistry A",
+    "year": 2021,
+    "citations": 29,
+    "doi": "https://doi.org/10.1039/d1ta04297a",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
   },
   {
     "title": "Engineering the Si Anode Interface via Particle Surface Modification: Embedded Organic Carbonates Lead to Enhanced Performance",
-    "topic": "Silicon-anode binders",
-    "authors": "Sisi Jiang, Zhenzhen Yang, Yuzi Liu, Noah M. Johnson, Ira Bloom, et al.",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Sisi Jiang, Zhenzhen Yang, Yuzi Liu, Noah M. Johnson, Ira Bloom, Lu Zhang, et al.",
     "journal": "ACS Applied Energy Materials",
     "year": 2021,
     "citations": 17,
     "doi": "https://doi.org/10.1021/acsaem.1c00374",
-    "verified": false,
-    "role": "unknown"
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Poly(4-vinylbenzoic acid): A Re-Engineered Binder for Improved Performance from Water-Free Slurry Processing for Silicon Graphite Composite Electrodes",
-    "topic": "Silicon-anode binders",
-    "authors": "Bin Hu, Sisi Jiang, Ilya A. Shkrob, Shuo Zhang, Jingjing Zhang, et al.",
-    "journal": "ACS Applied Energy Materials",
-    "year": 2019,
-    "citations": 13,
-    "doi": "https://doi.org/10.1021/acsaem.9b00987",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "The M-band transmission flux of the plastic foil with a coated layer of silicon or germanium",
-    "topic": "Silicon-anode binders",
-    "authors": "Liling Li, Lu Zhang, Shaoen Jiang, Liang Guo, Bo Qing, et al.",
-    "journal": "Applied Physics Letters",
-    "year": 2014,
-    "citations": 13,
-    "doi": "https://doi.org/10.1063/1.4864157",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Poly(Acrylic Acid) Binders: Re‐Engineering Poly(Acrylic Acid) Binder toward Optimized Electrochemical Performance for Silicon Lithium‐Ion Batteries: Branching Architecture Leads to Balanced Properties of Polymeric Binders (Adv. Funct. Mater. 10/2020)",
-    "topic": "Silicon-anode binders",
-    "authors": "Sisi Jiang, Bin Hu, Zhangxing Shi, Wei Chen, Zhengcheng Zhang, et al.",
-    "journal": "Advanced Functional Materials",
-    "year": 2020,
-    "citations": 5,
-    "doi": "https://doi.org/10.1002/adfm.202070065",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "High S Filling and Binder-Free Cathodes Enabled by Thick Arrayed Nanoframeworks and Subtle Interfacial Engineering",
-    "topic": "Silicon-anode binders",
-    "authors": "Yifei Liu, Chang Sun, Lu Zhang, Pan Zheng, Qing Meng, et al.",
-    "journal": "ACS Applied Energy Materials",
-    "year": 2022,
-    "citations": 4,
-    "doi": "https://doi.org/10.1021/acsaem.1c03785",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Discovery of Energy Storage Molecular Materials Using Quantum Chemistry-Guided Multiobjective Bayesian Optimization",
-    "topic": "ML / computational chemistry",
-    "authors": "Garvit Agarwal, Hieu A. Doan, Lily A. Robertson, Lu Zhang, Rajeev S. Assary",
-    "journal": "Chemistry of Materials",
+    "title": "Cross-Platform Classifier of Chemical Stability for Charged Redoxmers",
+    "topic": "Advanced battery technologies research",
+    "authors": "Benjamin Silcox, Jingjing Zhang, Siu on Tung, Ilya A. Shkrob, Lu Zhang, Levi T. Thompson",
+    "journal": "ACS Materials Letters",
     "year": 2021,
-    "citations": 72,
-    "doi": "https://doi.org/10.1021/acs.chemmater.1c02040",
-    "verified": true,
-    "role": "co"
-  },
-  {
-    "title": "An integrated high-throughput robotic platform and active learning approach for accelerated discovery of optimal electrolyte formulations",
-    "topic": "ML / computational chemistry",
-    "authors": "Juran Noh, Hieu A. Doan, Heather Job, Lily A. Robertson, Lu Zhang, et al.",
-    "journal": "Nature Communications",
-    "year": 2024,
-    "citations": 59,
-    "doi": "https://doi.org/10.1038/s41467-024-47070-5",
-    "verified": true,
-    "role": "co"
-  },
-  {
-    "title": "A comparative computational and scanning electrochemical microscopy study of factors influencing electron transfer at the hydrogenated and pristine graphite – propylene carbonate electrochemical interface",
-    "topic": "ML / computational chemistry",
-    "authors": "Jason D. Howard, Dipobrato Sarbapalli, Abhiroop Mishra, Nannan Shan, Garvit Agarwal, et al.",
-    "journal": "Journal of Materials Chemistry A",
-    "year": 2025,
     "citations": 2,
-    "doi": "https://doi.org/10.1039/d4ta07050j",
-    "verified": true,
-    "role": "unknown"
+    "doi": "https://doi.org/10.1021/acsmaterialslett.1c00424",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Reversible Insertion of I–Cl Interhalogen in a Graphite Cathode for Aqueous Dual-Ion Batteries",
-    "topic": "Zn / aqueous batteries",
-    "authors": "Qiubo Guo, Keun‐il Kim, Shuang Li, Alexis M. Scida, Pengfei Yu, et al.",
-    "journal": "ACS Energy Letters",
+    "title": "Self-Reporting Redoxmers: State of Health Metrics for Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Lily A. Robertson, Ilya A. Shkrob, Garvit Agarwal, Yu Zhou, Yuyue Zhao, Rajeev S. Assary, et al.",
+    "journal": "ECS Meeting Abstracts",
     "year": 2021,
-    "citations": 106,
-    "doi": "https://doi.org/10.1021/acsenergylett.0c02575",
-    "verified": false,
-    "role": "unknown"
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2021-01133mtgabs",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
   },
   {
-    "title": "A High‐Potential Anion‐Insertion Carbon Cathode for Aqueous Zinc Dual‐Ion Battery",
-    "topic": "Zn / aqueous batteries",
-    "authors": "Qiubo Guo, Keun‐il Kim, Heng Jiang, Lu Zhang, Chong Zhang, et al.",
-    "journal": "Advanced Functional Materials",
+    "title": "Stable and Highly Soluble Anolyte for Non-Aqueous Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Sambasiva R. Bheemireddy, Yuyue Zhao, Zhiguang Li, Lu Zhang",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2021,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2021-013227mtgabs",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Restorable Neutralization of Poly(acrylic acid) Binders toward Balanced Processing Properties and Cycling Performance for Silicon Anodes in Lithium-Ion Batteries",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Zhangxing Shi, Sisi Jiang, Lily A. Robertson, Yuyue Zhao, Erik Sarnello, Tao Li, et al.",
+    "journal": "ACS Applied Materials & Interfaces",
     "year": 2020,
-    "citations": 98,
-    "doi": "https://doi.org/10.1002/adfm.202002825",
-    "verified": false,
-    "role": "co"
+    "citations": 41,
+    "doi": "https://doi.org/10.1021/acsami.0c18559",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
   },
   {
-    "title": "Enabling Natural Graphite in High‐Voltage Aqueous Graphite // Zn Metal Dual‐Ion Batteries",
-    "topic": "Zn / aqueous batteries",
-    "authors": "Ismael A. Rodríguez‐Pérez, Lu Zhang, Jens Matthies Wrogemann, Darren M. Driscoll, Maria L. Sushko, et al.",
-    "journal": "Advanced Energy Materials",
+    "title": "Unexpected electrochemical behavior of an anolyte redoxmer in flow battery electrolytes: solvating cations help to fight against the thermodynamic–kinetic dilemma",
+    "topic": "Advanced battery technologies research",
+    "authors": "Yuyue Zhao, Yu Zhou, Lily A. Robertson, Jingjing Zhang, Zhangxing Shi, Sambasiva R. Bheemireddy, et al.",
+    "journal": "Journal of Materials Chemistry A",
     "year": 2020,
-    "citations": 74,
-    "doi": "https://doi.org/10.1002/aenm.202001256",
-    "verified": false,
-    "role": "co"
+    "citations": 26,
+    "doi": "https://doi.org/10.1039/d0ta02214d",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)",
+      "Alex's Lemonade Stand Foundation"
+    ],
+    "verified": true
   },
   {
-    "title": "A long-life aqueous Zn battery enabled by simultaneous suppressing cathode dissolution and Zn dendrites via a novel water-in-deep eutectic solvent electrolyte",
-    "topic": "Zn / aqueous batteries",
-    "authors": "Wenfeng Wang, Ruyue Li, Zeang Duan, Jiajin Zhao, Yadi Qi, et al.",
-    "journal": "Chemical Engineering Journal",
-    "year": 2022,
-    "citations": 30,
-    "doi": "https://doi.org/10.1016/j.cej.2022.141019",
-    "verified": false,
-    "role": "unknown"
+    "title": "A combined SECM and electrochemical AFM approach to probe interfacial processes affecting molecular reactivity at redox flow battery electrodes",
+    "topic": "Advanced battery technologies research",
+    "authors": "Tylan Watkins, Dipobrato Sarbapalli, Michael J. Counihan, Andrew S. Danis, Jingjing Zhang, Lu Zhang, et al.",
+    "journal": "Journal of Materials Chemistry A",
+    "year": 2020,
+    "citations": 25,
+    "doi": "https://doi.org/10.1039/d0ta00836b",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
   },
   {
-    "title": "A rapid <i>in situ</i> electrochemical transformation of the biphase Zn<sub>3</sub>(OH)<sub>2</sub>V<sub>2</sub>O<sub>7</sub>·2H<sub>2</sub>O/NH<sub>4</sub>V<sub>4</sub>O<sub>10</sub> composite for high capacity and long cycling life aqueous rechargeable zinc ion batteries",
-    "topic": "Zn / aqueous batteries",
-    "authors": "Yuanxiang Gu, Lu Zhang, Di Li, Rui Sheng, Feng Li, et al.",
-    "journal": "CrystEngComm",
-    "year": 2022,
-    "citations": 18,
-    "doi": "https://doi.org/10.1039/d1ce01368h",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Research Progress and Challenge of Aqueous Zinc Ion Battery",
-    "topic": "Zn / aqueous batteries",
-    "authors": "Lu Zhang, Wenfeng Wang, Hongming Zhang, Shumin Han, Limin Wang",
-    "journal": "Acta Chimica Sinica",
-    "year": 2021,
-    "citations": 16,
-    "doi": "https://doi.org/10.6023/a20090409",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "Mn, N, P-tridoped bamboo-like carbon nanotubes decorated with ultrafine Co2P/FeCo nanoparticles as bifunctional oxygen electrocatalyst for long-term rechargeable Zn-air battery",
-    "topic": "Supercapacitors / energy storage",
-    "authors": "Han Zhu, Jiu‐Ju Feng, Youqiang Yao, Zhigang Wang, Lu Zhang, et al.",
-    "journal": "Journal of Colloid and Interface Science",
-    "year": 2021,
-    "citations": 133,
-    "doi": "https://doi.org/10.1016/j.jcis.2021.01.053",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Novel 2D Layered Molybdenum Ditelluride Encapsulated in Few‐Layer Graphene as High‐Performance Anode for Lithium‐Ion Batteries",
-    "topic": "Supercapacitors / energy storage",
-    "authors": "Ning Ma, Xiaoyu Jiang, Lu Zhang, Xiaoshuang Wang, Yuliang Cao, et al.",
-    "journal": "Small",
-    "year": 2018,
-    "citations": 63,
-    "doi": "https://doi.org/10.1002/smll.201703680",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "V2CTx MXene as novel anode for aqueous asymmetric supercapacitor with superb durability in ZnSO4 electrolyte",
-    "topic": "Supercapacitors / energy storage",
-    "authors": "Wenxiao Chen, Lu Zhang, Hao Ren, Tianyu Miao, Zhuo Wang, et al.",
-    "journal": "Journal of Colloid and Interface Science",
-    "year": 2022,
-    "citations": 59,
-    "doi": "https://doi.org/10.1016/j.jcis.2022.06.142",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Assembly of Na<sub>3</sub>V<sub>2</sub>(PO<sub>4</sub>)<sub>2</sub>F<sub>3</sub>@C nanoparticles in reduced graphene oxide enabling superior Na<sup>+</sup> storage for symmetric sodium batteries",
-    "topic": "Supercapacitors / energy storage",
-    "authors": "Ye Yao, Lu Zhang, Yu Gao, Gang Chen, Chunzhong Wang, et al.",
-    "journal": "RSC Advances",
-    "year": 2018,
-    "citations": 57,
-    "doi": "https://doi.org/10.1039/c7ra13441j",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Integrated graphene-sulfur cathode and separator with plasma enhancement for Li-S batteries",
-    "topic": "Supercapacitors / energy storage",
-    "authors": "Yu-Yun Hsieh, Lu Zhang, Derek DeArmond, Sathya Narayan Kanakaraj, Paa Kwasi Adusei, et al.",
-    "journal": "Carbon",
-    "year": 2018,
-    "citations": 52,
-    "doi": "https://doi.org/10.1016/j.carbon.2018.08.025",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Multifunctional Prussian blue analogous@polyaniline core–shell nanocubes for lithium storage and overall water splitting",
-    "topic": "Supercapacitors / energy storage",
-    "authors": "Lu Zhang, Tao Meng, Baoguang Mao, Donglei Guo, Jinwen Qin, et al.",
-    "journal": "RSC Advances",
-    "year": 2017,
-    "citations": 50,
-    "doi": "https://doi.org/10.1039/c7ra10292e",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "Boosting the high-temperature discharge performance of nickel-hydrogen batteries based on perovskite oxide Co-coated LaFeO3 as proton insertion anode",
-    "topic": "Supercapacitors / energy storage",
-    "authors": "Kailiang Ren, Lu Zhang, Jiajia Miao, Jiajin Zhao, Shuqin Yang, et al.",
-    "journal": "International Journal of Hydrogen Energy",
-    "year": 2022,
-    "citations": 14,
-    "doi": "https://doi.org/10.1016/j.ijhydene.2022.03.019",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Lithium–sulfur battery with partially fluorinated ether electrolytes: Interplay between capacity, coulombic efficiency and Li anode protection",
-    "topic": "Energy storage (broad)",
-    "authors": "Quinton J. Meisner, Tomás Rojas, Nancy L. Dietz Rago, Jiayu Cao, Javier Bareño, et al.",
-    "journal": "Journal of Power Sources",
-    "year": 2019,
-    "citations": 33,
-    "doi": "https://doi.org/10.1016/j.jpowsour.2019.226939",
-    "verified": false,
-    "role": "unknown"
-  },
-  {
-    "title": "The Role of MgCl<sub>2</sub> as a Lewis Base in ROMgCl–MgCl<sub>2</sub> Electrolytes for Magnesium‐Ion Batteries",
-    "topic": "Energy storage (broad)",
-    "authors": "Baofei Pan, Jinhua Huang, Meinan He, Scott M. Brombosz, John T. Vaughey, et al.",
-    "journal": "ChemSusChem",
-    "year": 2016,
-    "citations": 31,
-    "doi": "https://doi.org/10.1002/cssc.201501557",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Aqueous anion insertion into a hydrocarbon cathode via a water-in-salt electrolyte",
-    "topic": "Energy storage (broad)",
-    "authors": "Ismael A. Rodríguez‐Pérez, Lu Zhang, Daniel P. Leonard, Xiulei Ji",
-    "journal": "Electrochemistry Communications",
-    "year": 2019,
-    "citations": 27,
-    "doi": "https://doi.org/10.1016/j.elecom.2019.106599",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "CeO<sub>2</sub> quantum‐dots engineering 3D carbon architectures toward dendrite‐free Na anode and reversible Te cathode for high‐performance Na‐Te batteries",
-    "topic": "Energy storage (broad)",
-    "authors": "Yangjie Liu, Junwei Li, Xiang Hu, Jun Yuan, Guobao Zhong, et al.",
-    "journal": "InfoMat",
-    "year": 2022,
-    "citations": 23,
-    "doi": "https://doi.org/10.1002/inf2.12343",
-    "verified": false,
-    "role": "unknown"
+    "title": "Self-Assembled Solute Networks in Crowded Electrolyte Solutions and Nanoconfinement of Charged Redoxmer Molecules",
+    "topic": "Advanced battery technologies research",
+    "authors": "Ilya A. Shkrob, Tao Li, Erik Sarnello, Lily A. Robertson, Yuyue Zhao, Hossam Farag, et al.",
+    "journal": "The Journal of Physical Chemistry B",
+    "year": 2020,
+    "citations": 21,
+    "doi": "https://doi.org/10.1021/acs.jpcb.0c07760",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
     "title": "Realistic Ion Dynamics through Charge Renormalization in Nonaqueous Electrolytes",
-    "topic": "Energy storage (broad)",
-    "authors": "Zhixia Li, Lily A. Robertson, Ilya A. Shkrob, Kyle C. Smith, Lei Cheng, et al.",
+    "topic": "Spectroscopy and Quantum Chemical Studies",
+    "authors": "Zhixia Li, Lily A. Robertson, Ilya A. Shkrob, Kyle C. Smith, Lei Cheng, Lu Zhang, et al.",
     "journal": "The Journal of Physical Chemistry B",
     "year": 2020,
     "citations": 21,
     "doi": "https://doi.org/10.1021/acs.jpcb.0c01197",
-    "verified": true,
-    "role": "unknown"
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Alkyl Substitution Effect on Oxidation Stability of Sulfone‐Based Electrolytes",
-    "topic": "Energy storage (broad)",
-    "authors": "Chicheung Su, Meinan He, Paul C. Redfern, Larry A. Curtiss, Chen Liao, et al.",
-    "journal": "ChemElectroChem",
-    "year": 2016,
-    "citations": 21,
-    "doi": "https://doi.org/10.1002/celc.201500550",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Anion‐Immobilized and Fiber‐Reinforced Hybrid Polymer Electrolyte for Advanced Lithium‐Metal Batteries",
-    "topic": "Energy storage (broad)",
-    "authors": "Zhitao Wang, Hu Zhou, Chunfeng Meng, Lu Zhang, Yueji Cai, et al.",
-    "journal": "ChemElectroChem",
+    "title": "Fluorescence-Enabled Self-Reporting for Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Lily A. Robertson, Ilya A. Shkrob, Garvit Agarwal, Yuyue Zhao, Yu Zhou, Rajeev S. Assary, et al.",
+    "journal": "ACS Energy Letters",
     "year": 2020,
-    "citations": 20,
-    "doi": "https://doi.org/10.1002/celc.202000591",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Enhancing the electrochemical performance of Li4Ti5O12 anode materials by codoping with Na and Br",
-    "topic": "Energy storage (broad)",
-    "authors": "Lu Zhang, Jiandong Zhang, Benjun Xu",
-    "journal": "Journal of Alloys and Compounds",
-    "year": 2022,
-    "citations": 16,
-    "doi": "https://doi.org/10.1016/j.jallcom.2022.163962",
-    "verified": false,
-    "role": "first"
+    "citations": 18,
+    "doi": "https://doi.org/10.1021/acsenergylett.0c01447",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
     "title": "Effect of Aluminum Oxide on the Performance of Ionic Liquid-Based Aluminum–Air Battery",
-    "topic": "Energy storage (broad)",
+    "topic": "Advanced Battery Materials and Technologies",
     "authors": "Christopher J. Welch, Abdul Kaleem Mohammad, Narayan S. Hosmane, Lu Zhang, Kyu Taek Cho",
     "journal": "Energies",
     "year": 2020,
     "citations": 15,
     "doi": "https://doi.org/10.3390/en13082014",
-    "verified": false,
-    "role": "co"
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Enhanced electrochemical properties of LaFeO3 with Ni modification for MH–Ni batteries",
-    "topic": "Energy storage (broad)",
-    "authors": "Zhentao Dong, Yuan Li, Kailiang Ren, Shuqin Yang, Yumeng Zhao, et al.",
-    "journal": "International Journal of Minerals Metallurgy and Materials",
-    "year": 2018,
+    "title": "Competitive Pi-Stacking and H-Bond Piling Increase Solubility of Heterocyclic Redoxmers",
+    "topic": "Advanced battery technologies research",
+    "authors": "Yuyue Zhao, Erik Sarnello, Lily A. Robertson, Jingjing Zhang, Zhangxing Shi, Yu Zhou, et al.",
+    "journal": "The Journal of Physical Chemistry B",
+    "year": 2020,
     "citations": 15,
-    "doi": "https://doi.org/10.1007/s12613-018-1672-x",
-    "verified": false,
-    "role": "unknown"
+    "doi": "https://doi.org/10.1021/acs.jpcb.0c07647",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Poly(Acrylic Acid) Binders: Re‐Engineering Poly(Acrylic Acid) Binder toward Optimized Electrochemical Performance for Silicon Lithium‐Ion Batteries: Branching Architecture Leads to Balanced Properties of Polymeric Binders (Adv. Funct. Mater. 10/2020)",
+    "topic": "Extraction and Separation Processes",
+    "authors": "Sisi Jiang, Bin Hu, Zhangxing Shi, Wei Chen, Zhengcheng Zhang, Lu Zhang",
+    "journal": "Advanced Functional Materials",
+    "year": 2020,
+    "citations": 5,
+    "doi": "https://doi.org/10.1002/adfm.202070065",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Re‐Engineering Poly(Acrylic Acid) Binder toward Optimized Electrochemical Performance for Silicon Lithium‐Ion Batteries: Branching Architecture Leads to Balanced Properties of Polymeric Binders",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Sisi Jiang, Bin Hu, Zhangxing Shi, Wei Chen, Zhengcheng Zhang, Lu Zhang",
+    "journal": "Advanced Functional Materials",
+    "year": 2019,
+    "citations": 114,
+    "doi": "https://doi.org/10.1002/adfm.201908558",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Understanding of pre-lithiation of poly(acrylic acid) binder: Striking the balances between the cycling performance and slurry stability for silicon-graphite composite electrodes in Li-ion batteries",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Bin Hu, Sisi Jiang, Ilya A. Shkrob, Jingjing Zhang, Stephen E. Trask, Bryant J. Polzin, et al.",
+    "journal": "Journal of Power Sources",
+    "year": 2019,
+    "citations": 82,
+    "doi": "https://doi.org/10.1016/j.jpowsour.2019.01.068",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Lithium–sulfur battery with partially fluorinated ether electrolytes: Interplay between capacity, coulombic efficiency and Li anode protection",
+    "topic": "Advanced Battery Materials and Technologies",
+    "authors": "Quinton J. Meisner, Tomás Rojas, Nancy L. Dietz Rago, Jiayu Cao, Javier Bareño, Tobias Glossmann, et al.",
+    "journal": "Journal of Power Sources",
+    "year": 2019,
+    "citations": 34,
+    "doi": "https://doi.org/10.1016/j.jpowsour.2019.226939",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "On Transferability of Performance Metrics for Redox-Active Molecules",
+    "topic": "Advanced battery technologies research",
+    "authors": "Benjamin Silcox, Jingjing Zhang, Ilya A. Shkrob, Levi T. Thompson, Lu Zhang",
+    "journal": "The Journal of Physical Chemistry C",
+    "year": 2019,
+    "citations": 29,
+    "doi": "https://doi.org/10.1021/acs.jpcc.9b02230",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "An extremely durable redox shuttle additive for overcharge protection of lithium-ion batteries",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Jingjing Zhang, Ilya A. Shkrob, Rajeev S. Assary, Ronald J. Clark, Richard E. Wilson, Sisi Jiang, et al.",
+    "journal": "Materials Today Energy",
+    "year": 2019,
+    "citations": 26,
+    "doi": "https://doi.org/10.1016/j.mtener.2019.06.003",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Tailoring the Surface of Silicon Nanoparticles for Enhanced Chemical and Electrochemical Stability for Li-Ion Batteries",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Sisi Jiang, Bin Hu, Ritu Sahore, Haihua Liu, Gregory F. Pach, Gerard M. Carroll, et al.",
+    "journal": "ACS Applied Energy Materials",
+    "year": 2019,
+    "citations": 24,
+    "doi": "https://doi.org/10.1021/acsaem.9b01601",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
     "title": "Observation of Microheterogeneity in Highly Concentrated Nonaqueous Electrolyte Solutions",
-    "topic": "Energy storage (broad)",
-    "authors": "Lily A. Robertson, Zhixia Li, Yu Cao, Ilya A. Shkrob, Madhusudan Tyagi, et al.",
+    "topic": "Thermodynamic properties of mixtures",
+    "authors": "Lily A. Robertson, Zhixia Li, Yu Cao, Ilya A. Shkrob, Madhusudan Tyagi, Kyle C. Smith, et al.",
     "journal": "Journal of the American Chemical Society",
     "year": 2019,
     "citations": 14,
     "doi": "https://doi.org/10.1021/jacs.9b02323",
-    "verified": true,
-    "role": "unknown"
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "The effect of electrochemically inactive Ti substituted for Ru in Li2Ru1-Ti O3 on structure and electrochemical performance",
-    "topic": "Energy storage (broad)",
-    "authors": "Ye Yao, Lu Zhang, Florian Sigel, Björn Schwarz, Helmut Ehrenberg, et al.",
-    "journal": "Journal of Energy Chemistry",
-    "year": 2021,
+    "title": "Poly(4-vinylbenzoic acid): A Re-Engineered Binder for Improved Performance from Water-Free Slurry Processing for Silicon Graphite Composite Electrodes",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Bin Hu, Sisi Jiang, Ilya A. Shkrob, Shuo Zhang, Jingjing Zhang, Zhengcheng Zhang, et al.",
+    "journal": "ACS Applied Energy Materials",
+    "year": 2019,
     "citations": 13,
-    "doi": "https://doi.org/10.1016/j.jechem.2020.12.037",
-    "verified": false,
-    "role": "co"
+    "doi": "https://doi.org/10.1021/acsaem.9b00987",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Efficient and Stable Magnesium Plating/Stripping in High-Capacity Novel Mg//Ni<sub>0.6</sub>Co<sub>0.4</sub>Se<sub>2</sub> Batteries Enabled by Interfacial Chemistry Modulation",
-    "topic": "Energy storage (broad)",
-    "authors": "Zhihong Cui, Peng Chen, Yuping Liu, Lu Zhang, Jingna Nie, et al.",
-    "journal": "ACS Sustainable Chemistry & Engineering",
-    "year": 2024,
-    "citations": 8,
-    "doi": "https://doi.org/10.1021/acssuschemeng.3c06270",
-    "verified": false,
-    "role": "co"
+    "title": "Facile in Situ Syntheses of Cathode Protective Electrolyte Additives for High Energy Density Li-Ion Cells",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Ilya A. Shkrob, Binghong Han, Ritu Sahore, Adam Tornheim, Lu Zhang, Daniel P. Abraham, et al.",
+    "journal": "Chemistry of Materials",
+    "year": 2019,
+    "citations": 12,
+    "doi": "https://doi.org/10.1021/acs.chemmater.8b05261",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "An investigation on the impact of halidization on substituted dimethoxybenzenes",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jeffrey A. Kowalski, Thomas J. Carney, Jinhua Huang, Lu Zhang, Fikile R. Brushett",
+    "journal": "Electrochimica Acta",
+    "year": 2019,
+    "citations": 10,
+    "doi": "https://doi.org/10.1016/j.electacta.2019.135580",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "The existence of optimal molecular weight for poly(acrylic acid) binders in silicon/graphite composite anode for lithium-ion batteries",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Bin Hu, Ilya A. Shkrob, Shuo Zhang, Linghong Zhang, Linghong Zhang, Jingjing Zhang, et al.",
+    "journal": "Journal of Power Sources",
+    "year": 2018,
+    "citations": 104,
+    "doi": "https://doi.org/10.1016/j.jpowsour.2017.12.068",
+    "role": "corresponding",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Surface-Functionalized Silicon Nanoparticles as Anode Material for Lithium-Ion Battery",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Sisi Jiang, Bin Hu, Ritu Sahore, Linghong Zhang, Haihua Liu, Lu Zhang, et al.",
+    "journal": "ACS Applied Materials & Interfaces",
+    "year": 2018,
+    "citations": 102,
+    "doi": "https://doi.org/10.1021/acsami.8b17729",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Solution Properties and Practical Limits of Concentrated Electrolytes for Nonaqueous Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jingjing Zhang, R. E. Corman, Jonathon K. Schuh, Randy H. Ewoldt, Ilya A. Shkrob, Lu Zhang",
+    "journal": "The Journal of Physical Chemistry C",
+    "year": 2018,
+    "citations": 77,
+    "doi": "https://doi.org/10.1021/acs.jpcc.8b02009",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "A Two‐Electron Storage Nonaqueous Organic Redox Flow Battery",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jinhua Huang, Zheng Yang, Vijayakumar Murugesan, Wentao Duan, Aaron Hollas, Baofei Pan, et al.",
+    "journal": "Advanced Sustainable Systems",
+    "year": 2018,
+    "citations": 70,
+    "doi": "https://doi.org/10.1002/adsu.201700131",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Elucidating Factors Controlling Long-Term Stability of Radical Anions for Negative Charge Storage in Nonaqueous Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jingjing Zhang, Jinhua Huang, Lily A. Robertson, Rajeev S. Assary, Ilya A. Shkrob, Lu Zhang",
+    "journal": "The Journal of Physical Chemistry C",
+    "year": 2018,
+    "citations": 47,
+    "doi": "https://doi.org/10.1021/acs.jpcc.8b01434",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Substituted thiadiazoles as energy-rich anolytes for nonaqueous redox flow cells",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jinhua Huang, Wentao Duan, Jingjing Zhang, Ilya A. Shkrob, Rajeev S. Assary, Baofei Pan, et al.",
+    "journal": "Journal of Materials Chemistry A",
+    "year": 2018,
+    "citations": 41,
+    "doi": "https://doi.org/10.1039/c8ta01059e",
+    "role": "corresponding",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Comparing calendar and cycle life stability of redox active organic molecules for nonaqueous redox flow batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jingjing Zhang, Jinhua Huang, Lily A. Robertson, Ilya A. Shkrob, Lu Zhang",
+    "journal": "Journal of Power Sources",
+    "year": 2018,
+    "citations": 31,
+    "doi": "https://doi.org/10.1016/j.jpowsour.2018.07.001",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Dual overcharge protection and solid electrolyte interphase-improving action in Li-ion cells containing a bis-annulated dialkoxyarene electrolyte additive",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Jingjing Zhang, Ilya A. Shkrob, Rajeev S. Assary, Shuo Zhang, Bin Hu, Chen Liao, et al.",
+    "journal": "Journal of Power Sources",
+    "year": 2018,
+    "citations": 25,
+    "doi": "https://doi.org/10.1016/j.jpowsour.2017.12.059",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Lithiation Effect of the Poly(Acrylic Acid) Binders on the Silicon Anode of Lithium-Ion Batteries",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Bin Hu, Sisi Jiang, Jingjing Zhang, Zhengcheng Zhang, Lu Zhang",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2018,
+    "citations": 2,
+    "doi": "https://doi.org/10.1149/ma2018-01/3/461",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "New Avenues into Fluorinated Organic Electrolytes for Li-S Cells",
+    "topic": "Advanced Battery Materials and Technologies",
+    "authors": "Quinton J. Meisner, Tobias Glossmann, Andreas Hintennach, Lei Zhu, Lu Zhang, Zhengcheng Zhang",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2018,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2018-01/3/278",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Substituted thiadiazoles as energy-rich anolytes for nonaqueous redox flow cells",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jinhua Huang, Wentao Duan, Jingjing Zhang, Ilya A. Shkrob, Rajeev S. Assary, Baofei Pan, et al.",
+    "journal": "Publisher",
+    "year": 2018,
+    "citations": 0,
+    "doi": "",
+    "role": "corresponding",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Annulated Dialkoxybenzenes as Catholyte Materials for Non‐aqueous Redox Flow Batteries: Achieving High Chemical Stability through Bicyclic Substitution",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jingjing Zhang, Zheng Yang, Ilya A. Shkrob, Rajeev S. Assary, Siu on Tung, Benjamin Silcox, et al.",
+    "journal": "Advanced Energy Materials",
+    "year": 2017,
+    "citations": 65,
+    "doi": "https://doi.org/10.1002/aenm.201701272",
+    "role": "corresponding",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Toward Improved Catholyte Materials for Redox Flow Batteries: What Controls Chemical Stability of Persistent Radical Cations?",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jingjing Zhang, Ilya A. Shkrob, Rajeev S. Assary, Siu on Tung, Benjamin Silcox, Larry A. Curtiss, et al.",
+    "journal": "The Journal of Physical Chemistry C",
+    "year": 2017,
+    "citations": 33,
+    "doi": "https://doi.org/10.1021/acs.jpcc.7b08281",
+    "role": "corresponding",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
     "title": "Improved performance through tight coupling of redox cycles of sulfur and 2,6-polyanthraquinone in lithium–sulfur batteries",
-    "topic": "Energy storage (broad)",
-    "authors": "Ka-Cheong Lau, Ilya A. Shkrob, Nancy L. Dietz Rago, Justin G. Connell, Daniel Phelan, et al.",
+    "topic": "Advanced Battery Materials and Technologies",
+    "authors": "Ka-Cheong Lau, Ilya A. Shkrob, Nancy L. Dietz Rago, Justin G. Connell, Daniel Phelan, Bin Hu, et al.",
     "journal": "Journal of Materials Chemistry A",
     "year": 2017,
     "citations": 8,
     "doi": "https://doi.org/10.1039/c7ta08129d",
-    "verified": true,
-    "role": "unknown"
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)",
+      "Alex's Lemonade Stand Foundation"
+    ],
+    "verified": true
   },
   {
-    "title": "Electrochemical performance of Li4Ti5O12 anode material synthesised using polyethylene glycol as a template agent",
-    "topic": "Energy storage (broad)",
-    "authors": "Lu Zhang, Jiandong Zhang, Xian Luo, Yongfu Long, Xin Xue, et al.",
-    "journal": "Ceramics International",
-    "year": 2020,
-    "citations": 6,
-    "doi": "https://doi.org/10.1016/j.ceramint.2020.10.042",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "Simulation guided molecular design of hydrofluoroether solvent for high energy batteries",
-    "topic": "Energy storage (broad)",
-    "authors": "Yu Zhou, Zhangxing Shi, Sambasiva R. Bheemireddy, Ethan P. Kamphaus, Xingyi Lyu, et al.",
-    "journal": "Journal of Materials Chemistry A",
-    "year": 2024,
-    "citations": 5,
-    "doi": "https://doi.org/10.1039/d3ta07670a",
-    "verified": true,
-    "role": "unknown"
-  },
-  {
-    "title": "Deciphering the interfacial electrochemistry of non-nucleophilic Mg(TFSI)2 as 4 V-class electrolyte for Mg batteries",
-    "topic": "Energy storage (broad)",
-    "authors": "Lu Zhang, Yuping Liu, Xiaolei Wang, Zhihong Cui, Cheng‐Long Xiao, et al.",
-    "journal": "Chemical Engineering Journal",
-    "year": 2025,
-    "citations": 4,
-    "doi": "https://doi.org/10.1016/j.cej.2025.162410",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "Modulating diffusion kinetics and interfacial stability via in situ constructed fluoronitrided interfaces for highly durable sodium-metal batteries",
-    "topic": "Energy storage (broad)",
-    "authors": "Yangjie Liu, Han Fang, Lu Zhang, Qirui Wu, Mujtaba Aminu Muhammad, et al.",
-    "journal": "Matter",
-    "year": 2025,
-    "citations": 1,
-    "doi": "https://doi.org/10.1016/j.matt.2025.102492",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "When Dynamics Matters: Structure-Matching Alone is Insufficient in the Development of Realistic Force Fields for Nonaqueous Electrolytes",
-    "topic": "Energy storage (broad)",
-    "authors": "Zhixia Li, Lily A. Robertson, Ilya A. Shkrob, Jöerg C. Neuefeind, Kyle C. Smith, et al.",
-    "journal": "APS March Meeting Abstracts",
-    "year": 2019,
+    "title": "Molecular Weight Effect of Poly(Acrylic Acid) on the Silicon Anode of Lithium-Ion Batteries",
+    "topic": "Biopolymer Synthesis and Applications",
+    "authors": "Bin Hu, Jingjing Zhang, Shuo Zhang, Zhengcheng Zhang, Lu Zhang",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2017,
     "citations": 0,
-    "doi": "",
-    "verified": true,
-    "role": "unknown"
+    "doi": "https://doi.org/10.1149/ma2017-01/5/378",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Evaporative Self-Assembly from Complex DNA−Colloid Suspensions",
-    "topic": "Other",
-    "authors": "Lu Zhang, Siddharth Maheshwari, Hsueh‐Chia Chang, Yingxi Zhu",
-    "journal": "Langmuir",
-    "year": 2008,
-    "citations": 57,
-    "doi": "https://doi.org/10.1021/la703539k",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "Polymorph Engineering for Boosted Volumetric Na‐Ion and Li‐Ion Storage",
-    "topic": "Other",
-    "authors": "Lu Zhang, Zhixuan Wei, Shiyu Yao, Yu Gao, Jin Xu, et al.",
-    "journal": "Advanced Materials",
-    "year": 2021,
-    "citations": 45,
-    "doi": "https://doi.org/10.1002/adma.202100210",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "Probability prediction of short-term user-level load based on random forest and kernel density estimation",
-    "topic": "Other",
-    "authors": "Lu Zhang, Siyue Lu, Yifeng Ding, Dapeng Duan, Yansong Wang, et al.",
-    "journal": "Energy Reports",
-    "year": 2022,
-    "citations": 28,
-    "doi": "https://doi.org/10.1016/j.egyr.2022.02.256",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "Optimization of enzyme-assisted preparation and characterization of Arenga pinnata resistant starch",
-    "topic": "Other",
-    "authors": "Lu Zhang, Jiang‐Yang Mei, Minhong Ren, Zhen Fu",
-    "journal": "Food Structure",
-    "year": 2020,
-    "citations": 26,
-    "doi": "https://doi.org/10.1016/j.foostr.2020.100149",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "Incorporation of surface-modified dry micronized poorly water-soluble drug powders into polymer strip films",
-    "topic": "Other",
-    "authors": "Lu Zhang, Yidong Li, Manal Abed, Rajesh N. Davé",
-    "journal": "International Journal of Pharmaceutics",
+    "title": "A Tetrasubstituted Hydroquinone Ether Catholyte for Non-Aqueous Redox Flow Batteries: Bicyclic Substitution Enabling High Stability",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jingjing Zhang, Zheng Yang, Ilya A. Shkrob, Rajeev S. Assary, Siu on Tung, Benjamin Silcox, et al.",
+    "journal": "ECS Meeting Abstracts",
     "year": 2017,
-    "citations": 19,
-    "doi": "https://doi.org/10.1016/j.ijpharm.2017.11.040",
-    "verified": false,
-    "role": "first"
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2017-02/5/558",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
   },
   {
-    "title": "Hotspot Detection via Attention-Based Deep Layout Metric Learning",
-    "topic": "Other",
-    "authors": "Hao Geng, Haoyu Yang, Lu Zhang, Fan Yang, Xuan Zeng, et al.",
-    "journal": "IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems",
-    "year": 2021,
-    "citations": 18,
-    "doi": "https://doi.org/10.1109/tcad.2021.3112637",
-    "verified": false,
-    "role": "co"
+    "title": "Functionalized Polysiloxane Binders Towards the Better Performance of the Silicon Anode of Lithium-Ion Batteries",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Bin Hu, Jingjing Zhang, Shuo Zhang, Zhengcheng Zhang, Lu Zhang",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2017,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2017-02/4/405",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Ion Conduction in Poly(ethylene oxide) Ionically Assembled Complexes",
-    "topic": "Other",
-    "authors": "Lu Zhang, Brian L. Chaloux, Tomonori Saito, Michael A. Hickner, Jodie L. Lutkenhaus",
-    "journal": "Macromolecules",
-    "year": 2011,
-    "citations": 18,
-    "doi": "https://doi.org/10.1021/ma201715s",
-    "verified": false,
-    "role": "first"
+    "title": "Redox Flow Batteries: Annulated Dialkoxybenzenes as Catholyte Materials for Non‐aqueous Redox Flow Batteries: Achieving High Chemical Stability through Bicyclic Substitution (Adv. Energy Mater. 21/2017)",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jingjing Zhang, Zheng Yang, Ilya A. Shkrob, Rajeev S. Assary, Siu on Tung, Benjamin Silcox, et al.",
+    "journal": "Advanced Energy Materials",
+    "year": 2017,
+    "citations": 0,
+    "doi": "https://doi.org/10.1002/aenm.201770121",
+    "role": "corresponding",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Silane Effects on Adhesion Enhancement of 2K Polyurethane Adhesives",
-    "topic": "Other",
-    "authors": "Yuchen Wu, Tianle Wang, Jonathan D. B. Fay, Lu Zhang, Sabine Hirth, et al.",
-    "journal": "Langmuir",
-    "year": 2023,
-    "citations": 11,
-    "doi": "https://doi.org/10.1021/acs.langmuir.3c03166",
-    "verified": false,
-    "role": "co"
+    "title": "A High-Current, Stable Nonaqueous Organic Redox Flow Battery",
+    "topic": "Advanced battery technologies research",
+    "authors": "Xiaoliang Wei, Wentao Duan, Jinhua Huang, Lu Zhang, Bin Li, David Reed, et al.",
+    "journal": "ACS Energy Letters",
+    "year": 2016,
+    "citations": 237,
+    "doi": "https://doi.org/10.1021/acsenergylett.6b00255",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Stomata-like metal peptide coordination polymer",
-    "topic": "Other",
-    "authors": "Ning Ma, Cong Lin, Nian Wu, Qi Liu, Jiale Ma, et al.",
+    "title": "A symmetric organic-based nonaqueous redox flow battery and its state of charge diagnostics by FTIR",
+    "topic": "Advanced battery technologies research",
+    "authors": "Wentao Duan, R.S. Vemuri, Jarrod D. Milshtein, Sydney Laramie, Rylan Doyle Dmello, Jinhua Huang, et al.",
     "journal": "Journal of Materials Chemistry A",
-    "year": 2017,
-    "citations": 10,
-    "doi": "https://doi.org/10.1039/c7ta08002f",
-    "verified": false,
-    "role": "unknown"
+    "year": 2016,
+    "citations": 198,
+    "doi": "https://doi.org/10.1039/c6ta01177b",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)",
+      "Alex's Lemonade Stand Foundation"
+    ],
+    "verified": true
   },
   {
-    "title": "Fourth-Order Interference on Polarization Beats with Phase-Conjugation Geometry",
-    "topic": "Other",
-    "authors": "Yanpeng Zhang, Liqun Sun, Tiantong Tang, Lu Zhang, Panming Fu",
-    "journal": "Chinese Physics Letters",
-    "year": 2000,
-    "citations": 10,
-    "doi": "https://doi.org/10.1088/0256-307x/17/3/018",
-    "verified": false,
-    "role": "co"
+    "title": "2,5-Dimethoxy-1,4-Benzoquinone (DMBQ) as Organic Cathode for Rechargeable Magnesium-Ion Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Baofei Pan, Dehua Zhou, Jinhua Huang, Lu Zhang, Anthony K. Burrell, John T. Vaughey, et al.",
+    "journal": "Journal of The Electrochemical Society",
+    "year": 2016,
+    "citations": 108,
+    "doi": "https://doi.org/10.1149/2.0021605jes",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Vibronic fine structure in the nitrogen <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mrow><mml:mn>1</mml:mn><mml:mi>s</mml:mi></mml:mrow></mml:math> photoelectron spectra of molecules from Franck-Condon simulations: Azines",
-    "topic": "Other",
-    "authors": "Minrui Wei, Xiao Cheng, Lu Zhang, Jun-Rong Zhang, Sheng-Yu Wang, et al.",
-    "journal": "Physical review. A/Physical review, A",
-    "year": 2022,
-    "citations": 9,
-    "doi": "https://doi.org/10.1103/physreva.106.022811",
-    "verified": false,
-    "role": "co"
+    "title": "The lightest organic radical cation for charge storage in redox flow batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jinhua Huang, Baofei Pan, Wentao Duan, Xiaoliang Wei, Rajeev S. Assary, Liang Su, et al.",
+    "journal": "Scientific Reports",
+    "year": 2016,
+    "citations": 81,
+    "doi": "https://doi.org/10.1038/srep32102",
+    "role": "corresponding",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Applications and emerging challenges of single-cell RNA sequencing technology in tumor drug discovery",
-    "topic": "Other",
-    "authors": "Lu Zhang, Yueying Yang, Jianjun Tan",
-    "journal": "Drug Discovery Today",
-    "year": 2025,
-    "citations": 8,
-    "doi": "https://doi.org/10.1016/j.drudis.2025.104290",
-    "verified": false,
-    "role": "first"
+    "title": "Redox Shuttles with Axisymmetric Scaffold for Overcharge Protection of Lithium‐Ion Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Wei Weng, Jinhua Huang, Ilya A. Shkrob, Lu Zhang, Zhengcheng Zhang",
+    "journal": "Advanced Energy Materials",
+    "year": 2016,
+    "citations": 47,
+    "doi": "https://doi.org/10.1002/aenm.201600795",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Vibronic fine structure in the nitrogen <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mrow><mml:mn>1</mml:mn><mml:mi>s</mml:mi></mml:mrow></mml:math> photoelectron spectra from Franck-Condon simulation. II. Indoles",
-    "topic": "Other",
-    "authors": "Minrui Wei, Lu Zhang, Guangjun Tian, Weijie Hua",
-    "journal": "Physical review. A/Physical review, A",
-    "year": 2023,
-    "citations": 8,
-    "doi": "https://doi.org/10.1103/physreva.108.022816",
-    "verified": false,
-    "role": "co"
+    "title": "Molecular Level Understanding of the Factors Affecting the Stability of Dimethoxy Benzene Catholyte Candidates from First-Principles Investigations",
+    "topic": "Advanced battery technologies research",
+    "authors": "Rajeev S. Assary, Lu Zhang, Jinhua Huang, Larry A. Curtiss",
+    "journal": "The Journal of Physical Chemistry C",
+    "year": 2016,
+    "citations": 39,
+    "doi": "https://doi.org/10.1021/acs.jpcc.6b04263",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "An energy-based discontinuous Galerkin method for semilinear wave equations",
-    "topic": "Other",
-    "authors": "Daniel Appelö, Thomas Hagstrom, Qi Wang, Lu Zhang",
-    "journal": "Journal of Computational Physics",
-    "year": 2020,
-    "citations": 8,
-    "doi": "https://doi.org/10.1016/j.jcp.2020.109608",
-    "verified": false,
-    "role": "co"
+    "title": "The Role of MgCl<sub>2</sub> as a Lewis Base in ROMgCl–MgCl<sub>2</sub> Electrolytes for Magnesium‐Ion Batteries",
+    "topic": "Layered Double Hydroxides Synthesis and Applications",
+    "authors": "Baofei Pan, Jinhua Huang, Meinan He, Scott M. Brombosz, John T. Vaughey, Lu Zhang, et al.",
+    "journal": "ChemSusChem",
+    "year": 2016,
+    "citations": 32,
+    "doi": "https://doi.org/10.1002/cssc.201501557",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Mitigating wall plasma expansion and enhancing x-ray emission by using multilayer gold films as hohlraum material",
-    "topic": "Other",
-    "authors": "Jinhua Zheng, Longyu Kuang, Shaoen Jiang, Lu Zhang, Hang Li, et al.",
-    "journal": "Nuclear Fusion",
-    "year": 2021,
-    "citations": 7,
-    "doi": "https://doi.org/10.1088/1741-4326/ac04f5",
-    "verified": false,
-    "role": "co"
+    "title": "Alkyl Substitution Effect on Oxidation Stability of Sulfone‐Based Electrolytes",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Chicheung Su, Meinan He, Paul C. Redfern, Larry A. Curtiss, Chen Liao, Lu Zhang, et al.",
+    "journal": "ChemElectroChem",
+    "year": 2016,
+    "citations": 21,
+    "doi": "https://doi.org/10.1002/celc.201500550",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Semiconductor-to-metal transition renders intrinsic pseudocapacitance and high volumetric capacity for iron chalcogenide anode",
-    "topic": "Other",
-    "authors": "Xi Chen, Lu Zhang, Jingwen Cui, Xing Meng, Jingyi Liu, et al.",
-    "journal": "Chemical Engineering Journal",
-    "year": 2023,
-    "citations": 6,
-    "doi": "https://doi.org/10.1016/j.cej.2023.147979",
-    "verified": false,
-    "role": "co"
+    "title": "A New Series of Anolyte Molecules for Non-Aqueous Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Wentao Duan, Jinhua Huang, Fikile R. Brushett, Wei Wang, Jeffery S. Moore, Jun Liu, et al.",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2016,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2016-01/3/374",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Ameliorating discharge capability of Co-free flower-like spherical α-Ni(OH)2 by NiS coating",
-    "topic": "Other",
-    "authors": "Yunpeng Pan, Lei Tian, Wenfeng Wang, Jiajin Zhao, Yuan Li, et al.",
-    "journal": "Electrochimica Acta",
-    "year": 2022,
-    "citations": 6,
-    "doi": "https://doi.org/10.1016/j.electacta.2022.141074",
-    "verified": false,
-    "role": "unknown"
+    "title": "High-Performance Organic Redox Flow Batteries in Aqueous and Nonaqueous Electrolytes",
+    "topic": "Advanced battery technologies research",
+    "authors": "Xiaoliang Wei, Wu Xu, Wentao Duan, Tianbiao Liu, Jinhua Huang, Rama Sesha Vemuri, et al.",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2016,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2016-01/3/376",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "High-rate performance of polyethylene glycol-modified Li4Ti5O12 anode materials",
-    "topic": "Other",
-    "authors": "Lu Zhang, Jian-dong Zhang, Benjun Xu",
-    "journal": "Results in Physics",
-    "year": 2020,
-    "citations": 6,
-    "doi": "https://doi.org/10.1016/j.rinp.2020.103583",
-    "verified": false,
-    "role": "first"
+    "title": "Radical Compatibility with Nonaqueous Electrolytes and Its Impact on an All‐Organic Redox Flow Battery",
+    "topic": "Advanced battery technologies research",
+    "authors": "Xiaoliang Wei, Wu Xu, Jinhua Huang, Lu Zhang, Éric Walter, Chad W. Lawrence, et al.",
+    "journal": "Angewandte Chemie International Edition",
+    "year": 2015,
+    "citations": 322,
+    "doi": "https://doi.org/10.1002/anie.201501443",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
   },
   {
-    "title": "Chunk mixing implosion experiments using deuterated foam capsules with gold dopant",
-    "topic": "Other",
-    "authors": "Yudong Pu, Xuan Luo, Lu Zhang, Chuankui Sun, Zhimin Hu, et al.",
-    "journal": "Physical review. E",
-    "year": 2020,
-    "citations": 5,
-    "doi": "https://doi.org/10.1103/physreve.102.023204",
-    "verified": false,
-    "role": "co"
+    "title": "A subtractive approach to molecular engineering of dimethoxybenzene-based redox materials for non-aqueous flow batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jinhua Huang, Liang Su, Jeffrey A. Kowalski, John L. Barton, Magali Ferrandon, Anthony K. Burrell, et al.",
+    "journal": "Journal of Materials Chemistry A",
+    "year": 2015,
+    "citations": 104,
+    "doi": "https://doi.org/10.1039/c5ta02380g",
+    "role": "corresponding",
+    "affiliations": [
+      "Alex's Lemonade Stand Foundation",
+      "Energy Storage Systems (United States)",
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "A High-Efficiency Data Collection Method Based on Maximum Recharging Benefit in Sensor Networks",
-    "topic": "Other",
-    "authors": "Chao Sha, Qiwei Wang, Lu Zhang, Ruchuan Wang",
-    "journal": "Sensors",
-    "year": 2018,
-    "citations": 5,
-    "doi": "https://doi.org/10.3390/s18092887",
-    "verified": false,
-    "role": "co"
+    "title": "Radical Compatibility with Nonaqueous Electrolytes and Its Impact on an All‐Organic Redox Flow Battery",
+    "topic": "Advanced battery technologies research",
+    "authors": "Xiaoliang Wei, Wu Xu, Jinhua Huang, Lu Zhang, Éric Walter, Chad W. Lawrence, et al.",
+    "journal": "Angewandte Chemie",
+    "year": 2015,
+    "citations": 50,
+    "doi": "https://doi.org/10.1002/ange.201501443",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory",
+      "University Surgical Associates",
+      "Energy Storage Systems (United States)"
+    ],
+    "verified": true
   },
   {
-    "title": "A method for evaluating the mean preheat temperature in X-ray driven ablation",
-    "topic": "Other",
-    "authors": "Liling Li, Shaoen Jiang, Hang Li, Lu Zhang, Yunsong Dong, et al.",
-    "journal": "Physics of Plasmas",
+    "title": "Liquid Catholyte Molecules for Non-Aqueous Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Lu Zhang, Jinhua Huang, Lei Cheng, Rajeev S. Assary, Peiqi Wang, Zheng Xue, et al.",
+    "journal": "ECS Meeting Abstracts",
     "year": 2015,
     "citations": 5,
-    "doi": "https://doi.org/10.1063/1.4916058",
-    "verified": false,
-    "role": "co"
+    "doi": "https://doi.org/10.1149/ma2015-01/2/422",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "N-Coordinated Pd–Rh synergy for highly selective ethylene glycol oxidation and efficient hydrogen evolution",
-    "topic": "Other",
-    "authors": "Hai-Yan Guo, Jinwei Kang, Yikui Du, Lu Zhang, Jiu‐Ju Feng, et al.",
-    "journal": "Green Chemistry",
-    "year": 2025,
-    "citations": 3,
-    "doi": "https://doi.org/10.1039/d5gc00784d",
-    "verified": false,
-    "role": "co"
+    "title": "Development of Anolyte Materials for All-Organic Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jinhua Huang, Wentao Duan, Jeffrey A. Kowalski, Ilya A. Shkrob, Fikile R. Brushett, Xiaoliang Wei, et al.",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2015,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2015-02/3/246",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Controlling the Polymer Ink’s Rheological Properties to Form Single and Stable Droplet",
-    "topic": "Other",
-    "authors": "Zhonghui Du, Lu Zhang, Yushuang Du, Xiaoqing Wei, Xiang Du, et al.",
-    "journal": "Coatings",
-    "year": 2024,
-    "citations": 3,
-    "doi": "https://doi.org/10.3390/coatings14050600",
-    "verified": false,
-    "role": "co"
+    "title": "Catholyte Development for Non-Aqueous Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Lu Zhang, Jinhua Huang, Ilya A. Shkrob, Fikile R. Brushett, Xiaoliang Wei, Anthony K. Burrell, et al.",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2015,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2015-02/3/247",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Porous CoP/C derived from metal–organic framework as high-performance anode materials for superior lithium storage",
-    "topic": "Other",
-    "authors": "Binqi Huang, Jiaming Liu, HU Xing-rong, Xing Lin, Lu Zhang, et al.",
-    "journal": "Ionics",
-    "year": 2023,
-    "citations": 3,
-    "doi": "https://doi.org/10.1007/s11581-023-04957-5",
-    "verified": false,
-    "role": "co"
+    "title": "High-Performance Non-Aqueous All-Organic Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Xiaoliang Wei, Jinhua Huang, Lu Zhang, Wu Xu, Lelia Cosimbescu, Vijayakumar Murugesan, et al.",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2015,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2015-02/3/242",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Predicting accurate x-ray absorption spectra for interstellar molecules <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:msup><mml:mi mathvariant=\"normal\">CN</mml:mi><mml:mo>+</mml:mo></mml:msup></mml:math>, CN, and <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:msup><mml:mi mathvariant=\"normal\">CN</mml:mi><mml:mo>−</mml:mo></mml:msup></mml:math>: Insights from <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\"><mml:mrow><mml:mi>a</mml:mi><mml:mi>b</mml:mi></mml:mrow><mml:mo> </mml:mo><mml:mrow><mml:mi>i</mml:mi><mml:mi>n</mml:mi><mml:mi>i</mml:mi><mml:mi>t</mml:mi><mml:mi>i</mml:mi><mml:mi>o</mml:mi></mml:mrow></mml:math> simulations",
-    "topic": "Other",
-    "authors": "Jinyu Li, Shengyu Wang, Lu Zhang, Guoyan Ge, Minrui Wei, et al.",
-    "journal": "Physical review. A/Physical review, A",
-    "year": 2025,
+    "title": "Development of High Capacity Catholyte Material for Non-Aqueous Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jinhua Huang, Liang Su, Magali Ferrandon, Fikile R. Brushett, Anthony K. Burrell, Lu Zhang",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2015,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2015-01/3/689",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Molecular Engineering toward Stabilized Interface: An Electrolyte Additive for High-Performance Li-Ion Battery",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Lu Zhang, Jinhua Huang, Kyrrilos Youssef, Paul C. Redfern, Larry A. Curtiss, Khalil Amine, et al.",
+    "journal": "Journal of The Electrochemical Society",
+    "year": 2014,
+    "citations": 11,
+    "doi": "https://doi.org/10.1149/2.0971414jes",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Organic Redox Active Molecular Engineer for NRF",
+    "topic": "Advanced battery technologies research",
+    "authors": "Lu Zhang, Jinhua Huang, John T. Vaughey, Anthony K. Burrell",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2014,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2014-01/4/394",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Redox Active Molecules for Non-Aquoes Flow Battery",
+    "topic": "Advanced battery technologies research",
+    "authors": "Lu Zhang, Jinhua Huang, Anthony K. Burrell",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2014,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2014-02/2/102",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Organic Redox Active Molecular Engineer for Non-Aqueous Redox Flow Battery",
+    "topic": "Advanced battery technologies research",
+    "authors": "Lu Zhang, Jinhua Huang, John T. Vaughey, Anthony K. Burrell",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2014,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2014-03/2/7",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Thermal and overcharge abuse analysis of a redox shuttle for overcharge protection of LiFePO 4",
+    "topic": "Advanced Battery Technologies Research",
+    "authors": "Joshua Lamb, Christopher J. Orendorff, Khalil Amine, Gregory Krumdick, Zhengcheng Zhang, Lu Zhang, et al.",
+    "journal": "Journal of Power Sources",
+    "year": 2013,
+    "citations": 51,
+    "doi": "https://doi.org/10.1016/j.jpowsour.2013.08.044",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Redox Shuttles for Overcharge Protection of Lithium-Ion Battery",
+    "topic": "Advanced battery technologies research",
+    "authors": "Lu Zhang, Zhengcheng Zhang, Khalil Amine",
+    "journal": "ECS Transactions",
+    "year": 2013,
+    "citations": 6,
+    "doi": "https://doi.org/10.1149/04529.0057ecst",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
+  },
+  {
+    "title": "Thermal and Overcharge Abuse Analysis of a Redox Shuttle for Overcharge Protection of LiFePO<sub>4</sub>",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Joshua Lamb, Christopher J. Orendorff, Khalil Amine, Gregory Krumdick, Zhengcheng Zhang, Lu Zhang, et al.",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2013,
     "citations": 2,
-    "doi": "https://doi.org/10.1103/physreva.111.052803",
-    "verified": false,
-    "role": "co"
+    "doi": "https://doi.org/10.1149/ma2013-02/7/542",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Polymer molecular morphology in alkali-surfactant-polymer (ASP) ternary composite system and its influence on rock pore structure",
-    "topic": "Other",
-    "authors": "Xiaohan Nan, Bin Huang, Yihuan Wang, Da Guo, Lu Zhang, et al.",
-    "journal": "Arabian Journal of Geosciences",
-    "year": 2022,
-    "citations": 1,
-    "doi": "https://doi.org/10.1007/s12517-022-10237-9",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "A new method to calculate sedimentation velocity of particle group with three-plane ECT based on the best correlation function",
-    "topic": "Other",
-    "authors": "Fanglei Dai, Jianjun Deng, Ming Chen, Yanan Yan, Panting Li, et al.",
-    "journal": "Energy Sources Part A Recovery Utilization and Environmental Effects",
-    "year": 2019,
-    "citations": 1,
-    "doi": "https://doi.org/10.1080/15567036.2019.1602205",
-    "verified": false,
-    "role": "unknown"
-  },
-  {
-    "title": "Repulsive Effect for Unbound High Energy Particles Along Rotation Axis in Kerr-Taub-NUT Spacetime",
-    "topic": "Other",
-    "authors": "Lu Zhang, Song-Bai Chen",
-    "journal": "Communications in Theoretical Physics",
-    "year": 2018,
-    "citations": 1,
-    "doi": "https://doi.org/10.1088/0253-6102/69/4/399",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "Theoretical Studies on Reaction Mechanisms of HNCS with NH(X3Σ)1",
-    "topic": "Other",
-    "authors": "Peng Liu, Lu Zhang, Huaxing Sun, Yan‐Zin Chang, R WANG",
-    "journal": "Chemical Research in Chinese Universities",
-    "year": 2006,
-    "citations": 1,
-    "doi": "https://doi.org/10.1016/s1005-9040(06)60178-5",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Author response for \"N-Coordinated PdRh Synergy for High-Selective Ethylene Glycol Oxidation and Efficient Hydrogen Evolution\"",
-    "topic": "Other",
-    "authors": "Hai-Yan Guo, Jinwei Kang, Yikui Du, Lu Zhang, Jiu‐Ju Feng, et al.",
-    "journal": "",
-    "year": 2025,
+    "title": "Redox Active Molecular Engineer for Energy Storage",
+    "topic": "Advanced battery technologies research",
+    "authors": "Lu Zhang, John T. Vaughey, Anthony K. Burrell",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2013,
     "citations": 0,
-    "doi": "https://doi.org/10.1039/d5gc00784d/v2/response1",
-    "verified": false,
-    "role": "co"
+    "doi": "https://doi.org/10.1149/ma2013-02/6/511",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "A Forecasting Method for User-Side Power-Related Carbon Emissions",
-    "topic": "Other",
-    "authors": "Lu Zhang, Jiahui Yan, Liyong Wang, Xianglong Li, Weixian Wang, et al.",
-    "journal": "2022 IEEE Conference on Telecommunications, Optics and Computer Science (TOCS)",
-    "year": 2022,
-    "citations": 0,
-    "doi": "https://doi.org/10.1109/tocs56154.2022.10016040",
-    "verified": false,
-    "role": "first"
+    "title": "Molecular engineering towards safer lithium-ion batteries: a highly stable and compatible redox shuttle for overcharge protection",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Lu Zhang, Zhengcheng Zhang, Paul C. Redfern, Larry A. Curtiss, Khalil Amine",
+    "journal": "Energy & Environmental Science",
+    "year": 2012,
+    "citations": 126,
+    "doi": "https://doi.org/10.1039/c2ee21977h",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "A piston detection method for segments via convolutional neural networks and its robustness analysis",
-    "topic": "Other",
-    "authors": "Hao Wang, Gang Liu, Weirui Zhao, Lu Zhang, Yuejin Zhao",
-    "journal": "",
-    "year": 2022,
-    "citations": 0,
-    "doi": "https://doi.org/10.1117/12.2620627",
-    "verified": false,
-    "role": "co"
+    "title": "Redox Shuttle Additives for Lithium-Ion Battery",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Lu Zhang, Zhengcheng Zhang, Khalil Amine",
+    "journal": "InTech eBooks",
+    "year": 2012,
+    "citations": 11,
+    "doi": "https://doi.org/10.5772/26572",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Three-dimensional stowage optimization of general cargo ships considering stevedoring complexity in multiple ports",
-    "topic": "Other",
-    "authors": "Lu Zhang, Ming Yang, Bin Xu",
-    "journal": "",
-    "year": 2022,
+    "title": "Redox Shuttles for Overcharge Protection of Lithium-Ion Battery",
+    "topic": "Extraction and Separation Processes",
+    "authors": "Lu Zhang, Zhengcheng Zhang, Nasim Azimi, Khalil Amine",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2012,
     "citations": 0,
-    "doi": "https://doi.org/10.1117/12.2635995",
-    "verified": false,
-    "role": "first"
+    "doi": "https://doi.org/10.1149/ma2012-01/6/336",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Study on Fine Particle Flow Characteristics with Different Air Supply Parameters",
-    "topic": "Other",
-    "authors": "Min Dong, Chengzhi Wang, Lu Zhang",
-    "journal": "E3S Web of Conferences",
-    "year": 2021,
-    "citations": 0,
-    "doi": "https://doi.org/10.1051/e3sconf/202124801012",
-    "verified": false,
-    "role": "co"
+    "title": "Novel redox shuttle additive for high-voltage cathode materials",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Lu Zhang, Zhengcheng Zhang, Huiming Wu, Khalil Amine",
+    "journal": "Energy & Environmental Science",
+    "year": 2011,
+    "citations": 77,
+    "doi": "https://doi.org/10.1039/c0ee00733a",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Analytical solution of few-body fermionic model in synthetic gauge field",
-    "topic": "Other",
-    "authors": "Xing Chen, Lu Zhang, Y.-J. Jiang, Peng Fei, Honglei Yang, et al.",
-    "journal": "International Conference on Optoelectronic and Microelectronic Technology and Application",
-    "year": 2020,
-    "citations": 0,
-    "doi": "https://doi.org/10.1117/12.2585159",
-    "verified": false,
-    "role": "co"
+    "title": "Understanding the redox shuttle stability of 3,5-di-tert-butyl-1,2-dimethoxybenzene for overcharge protection of lithium-ion batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Zhengcheng Zhang, Lu Zhang, John A. Schlueter, Paul C. Redfern, Larry A. Curtiss, Khalil Amine",
+    "journal": "Journal of Power Sources",
+    "year": 2010,
+    "citations": 73,
+    "doi": "https://doi.org/10.1016/j.jpowsour.2010.02.075",
+    "role": "co",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   },
   {
-    "title": "Real-Time Signal Processing Method for Obtaining Charge Distribution on Aerosols Produced by Medical Inhalers",
-    "topic": "Other",
-    "authors": "Lu Zhang, Janusz Kulon",
-    "journal": "",
-    "year": 2007,
+    "title": "A Comparative Study of 3,5-di-tert-butyl-1,2-dimethoxybezene and 2,5-di-tert-butyl-1,4-dimethoxybenzene for Overcharge Protection of Lithium-Ion Batteries",
+    "topic": "Advanced Battery Technologies Research",
+    "authors": "Lu Zhang, Zhengcheng Zhang, Khalil Amine",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2010,
     "citations": 0,
-    "doi": "https://doi.org/10.1109/issmdbs.2007.4338300",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "Comparison of the propagation properties among polarization-maintaining photonic crystal fibers with different air-holes configurations",
-    "topic": "Other",
-    "authors": "Peng Song, Lu Zhang, Qianggao Hu, Shengzhi Zhao, Shan Jiang",
-    "journal": "Proceedings of SPIE, the International Society for Optical Engineering/Proceedings of SPIE",
-    "year": 2006,
-    "citations": 0,
-    "doi": "https://doi.org/10.1117/12.688805",
-    "verified": false,
-    "role": "co"
-  },
-  {
-    "title": "Synthesis of barium mercaptides and application of antimony/barium mercaptides",
-    "topic": "Other",
-    "authors": "Lu Zhang",
-    "journal": "中国有色金属学会会刊(英文版)",
-    "year": 2001,
-    "citations": 0,
-    "doi": "",
-    "verified": false,
-    "role": "first"
-  },
-  {
-    "title": "NUCLEAR CHARGE DISPERSION OF FRAGMENTS IN HIGH ENERGY PROTON-NUCLEUS COLLISION",
-    "topic": "Other",
-    "authors": "Lu Zhang, Baisheng Sa",
-    "journal": "High Energy Physics and Unclear Physics",
-    "year": 1988,
-    "citations": 0,
-    "doi": "",
-    "verified": false,
-    "role": "first"
+    "doi": "https://doi.org/10.1149/ma2010-02/5/330",
+    "role": "first",
+    "affiliations": [
+      "Argonne National Laboratory"
+    ],
+    "verified": true
   }
 ]
