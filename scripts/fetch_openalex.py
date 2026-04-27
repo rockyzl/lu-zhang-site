@@ -19,10 +19,16 @@ PER_PAGE = 200
 # a paper is from his PhD era. Without a co-author match, CAS-era hits are
 # treated as same-name false positives because OpenAlex's author cluster also
 # contains other "Lu Zhang"s active in China around that time.
-# Add names as the user confirms more PhD-era collaborators.
+#
+# PhD advisor: 李嫕 (Li Yi / Yi Li), 研究员 at 中国科学院理化技术研究所
+# (Technical Institute of Physics and Chemistry, Chinese Academy of Sciences).
+# Photochemistry / organic photophysics group.
+# Add more PhD-era lab members here as confirmed.
 CAS_VERIFY_COAUTHORS = [
-    "Li Yi", "Yi Li",
-    "李毅",
+    # Advisor — multiple romanizations + Chinese
+    "Yi Li", "Li Yi",
+    "李嫕",  # canonical character (different from 李毅 which is a male name)
+    "Y. Li", "Y Li",
 ]
 
 EMPLOYER_KEYWORDS = [
