@@ -5,7 +5,11 @@ import patentsExtra from "../data/patents_extra.json";
 import bookChapters from "../data/book_chapters.json";
 import techReports from "../data/tech_reports.json";
 import invitedData from "../data/invited_talks.json";
+import conferences from "../data/conferences.json";
 import projectsData from "../data/projects.json";
+
+// Total conference presentations = invited talks + conference abstracts
+const totalTalks = invitedData.talks.length + conferences.length;
 import { detectLocale, t } from "../lib/i18n";
 
 // Sort + filter — only journal articles count as "papers"
@@ -163,7 +167,7 @@ const today = new Date().toISOString().slice(0, 10);
       <div class="metrics">
         <span><b>{verifiedPubs.length}</b> peer-reviewed papers</span>
         <span><b>28</b> US patents &amp; applications</span>
-        <span><b>{invitedData.talks.length}</b> invited talks</span>
+        <span><b>{totalTalks}</b> conference talks <span style="color: var(--c-muted); font-weight: 400;">(incl. {invitedData.talks.length} invited)</span></span>
         <span><b>4,700+</b> citations</span>
         <span>h-index <b>39</b></span>
         <span><b>{firstAuthor + corresp}</b> first / corresp.</span>
