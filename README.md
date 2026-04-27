@@ -27,16 +27,20 @@ npm run build   # static output to dist/
 
 ### Data source for `npm run data`
 
-The `parse_md.py` script reads a master ledger from a separate, private repo
-(申报材料 / application materials). It looks up the file in this order:
+`parse_md.py` reads a master ledger from a separate private data repo.
+Lookup order:
 
-1. `$LU_SITE_DATA_SOURCE` env var, if set — absolute path to `学术成果完整记录.md`
-2. Default fallback — `../zip/张鲁-申报材料-工作文档/研究报告/学术成果完整记录.md`
-   relative to this repo, i.e., a sibling-repo layout.
+1. `$LU_SITE_DATA_SOURCE` env var, if set — absolute path to the markdown
+2. Default fallback — `../zip/data/academic_record.md` (sibling-repo layout)
+
+If neither is found the script exits with a clear error. The private data
+repo is not part of this distribution and contents are out of scope.
 
 Most JSON files in `src/data/` are NOT auto-generated and live independently
-(news, featured, ai_projects, projects, invited_talks, patents_extra). Edit
-those by hand when content changes.
+(news, featured, ai_projects, projects, invited_talks, patents_extra,
+book_chapters, tech_reports, press, collaborators). Edit those by hand when
+content changes; `npm run data` only regenerates publications + patents +
+conferences from the private master.
 
 ## Layout
 

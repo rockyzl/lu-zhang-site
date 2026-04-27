@@ -1,5 +1,5 @@
 {
-  "_doc": "Invited and featured talks. Source: 张鲁-申报材料-工作文档/写稿过程/成果总表_2026-04-26/01_会议与报告全面总结.md (canonical 2026-04-26 ledger).",
+  "_doc": "Invited and featured talks. Curated from a private master ledger.",
   "talks": [
     {"year": 2024, "venue": "MRS Spring Meeting — ES05",                              "location": "Seattle, WA",          "type": "Invited speaker",                          "title": "Invited speaker (title not yet captured)"},
     {"year": 2022, "venue": "ECS 241st Meeting — Lithium Ion Batteries",              "location": "Vancouver, Canada",    "type": "Invited speaker",                          "title": "Invited speaker (title not yet captured)"},

@@ -16,9 +16,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_SRC = (
     REPO_ROOT.parent
     / "zip"
-    / "张鲁-申报材料-工作文档"
-    / "研究报告"
-    / "学术成果完整记录.md"
+    / "data"
+    / "academic_record.md"
 )
 SRC = Path(os.environ.get("LU_SITE_DATA_SOURCE", str(DEFAULT_SRC)))
 OUT = REPO_ROOT / "src" / "data"
@@ -27,8 +26,8 @@ OUT.mkdir(parents=True, exist_ok=True)
 if not SRC.exists():
     sys.exit(
         f"ERROR: data source not found at {SRC}\n"
-        "Set LU_SITE_DATA_SOURCE to the absolute path of 学术成果完整记录.md, "
-        "or place the source repo as a sibling of lu-zhang-site/."
+        "Set LU_SITE_DATA_SOURCE env var to the absolute path of the source\n"
+        "markdown, or place a sibling data repo with the expected layout."
     )
 
 text = SRC.read_text(encoding="utf-8")
