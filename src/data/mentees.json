@@ -1,120 +1,104 @@
 {
-  "_doc": "Curated mentee list — Lu Zhang directly confirmed 2026-04-27. The 6 listed under 'students' were graduate students Lu Zhang directly advised or co-advised at ANL; most later transitioned to postdoc roles (some at ANL, some at other institutions). The 'postdocs' bucket lists people whose primary mentee period with Lu Zhang was as a postdoc.",
+  "_doc": "Curated mentee list — Lu Zhang directly confirmed 2026-04-27. Major correction: Zhiguang Li (publications coauthor) IS 黎之光 (founder of Zhejiang Erge — Lu Zhang's talent-program sponsoring company). Mentee→entrepreneur full circle. Zhangxing Shi & Peng Du were postdocs (not students). Wentao Duan and Baofei Pan removed: collaborators only, not direct mentees.",
   "students": [
     {
-      "name": "Zhangxing Shi",
-      "current_en": "Factorial Energy, Greater Boston (battery startup)",
-      "current_zh": "Factorial Energy（波士顿地区电池创业公司）",
-      "role_en": "graduate student (advised by Lu Zhang)",
-      "role_zh": "研究生（张鲁直接指导）",
-      "thrust_en": "PAA binder + HFE solvent for Li-metal/Na/Mg/S",
-      "thrust_zh": "PAA 粘合剂 + 氟化醚电解液（Li-metal / Na / Mg / S）"
-    },
-    {
-      "name": "Zhiguang Li",
-      "current_en": "Argonne National Laboratory (anl.gov/profile/zhiguang-li)",
-      "current_zh": "Argonne 国家实验室（anl.gov 个人页在线）",
-      "role_en": "graduate student (advised by Lu Zhang)",
-      "role_zh": "研究生（张鲁直接指导）",
-      "thrust_en": "Redoxmer techno-economics + dialkoxyarene stability",
-      "thrust_zh": "Redoxmer 技术经济分析 + 二烷氧苯稳定性"
+      "name": "Zhiguang Li (黎之光)",
+      "current_en": "Founder & CEO, Zhejiang Erge Technology (浙江尔格科技) — Lu Zhang's talent-program sponsoring company. Returned to China to start the company.",
+      "current_zh": "浙江尔格科技股份有限公司创始人 / 老板（已回国创业）。本次海外引才计划申报的依托单位。",
+      "role_en": "graduate student (co-advised by Lu Zhang and Xiaoliang Wei, Purdue)",
+      "role_zh": "研究生（张鲁与 Xiaoliang Wei @ Purdue 共同指导）",
+      "thrust_en": "Redoxmer techno-economics + dialkoxyarene stability for non-aqueous RFBs",
+      "thrust_zh": "Redoxmer 技术经济分析 + 二烷氧苯稳定性（非水液流电池）",
+      "highlight_en": "Mentee → entrepreneur full circle: founded the new-energy company that is now sponsoring Lu Zhang's return-to-China talent program.",
+      "highlight_zh": "学生→创业→反向邀请前导师的完整闭环：创办的新能源公司正是张鲁本次回国申报的依托单位。"
     },
     {
       "name": "Sisi Jiang",
-      "current_en": "Staff Material Engineer, Tesla (Louisville, CO)",
-      "current_zh": "Tesla 主任材料工程师（科罗拉多 Louisville）",
-      "role_en": "graduate student (advised by Lu Zhang)",
-      "role_zh": "研究生（张鲁直接指导）",
+      "current_en": "Staff Material Engineer, Tesla (Louisville, CO) — graduated, did postdoc elsewhere (not Lu Zhang's group), then joined Tesla",
+      "current_zh": "Tesla 主任材料工程师（科罗拉多 Louisville）— 毕业后在他组做博士后, 后入 Tesla",
+      "role_en": "graduate student (advised by Lu Zhang at ANL)",
+      "role_zh": "研究生（张鲁直接指导, ANL）",
       "thrust_en": "Silicon-anode binders + Si nanoparticle surface engineering",
       "thrust_zh": "硅负极粘合剂 + Si 纳米颗粒界面工程"
     },
     {
       "name": "Xiaoting Fang",
-      "current_en": "PhD candidate, Mechanical Engineering, Purdue University (ANL JCESR joint training)",
-      "current_zh": "普渡大学机械工程系博士候选人（ANL JCESR 联合培养）",
-      "role_en": "graduate student (advised by Lu Zhang)",
-      "role_zh": "研究生（张鲁直接指导）",
+      "current_en": "ANL postdoc (NOT in Lu Zhang's group); previously Purdue ME PhD (joint training with ANL JCESR)",
+      "current_zh": "现 ANL 博士后（不在张鲁组）；此前 Purdue 机械工程系博士（ANL JCESR 联合培养）",
+      "role_en": "graduate student (co-advised by Lu Zhang and Xiaoliang Wei, Purdue)",
+      "role_zh": "研究生（张鲁与 Xiaoliang Wei @ Purdue 共同指导）",
       "thrust_en": "Multi-electron redoxmers + Wurster's Blue catholyte",
       "thrust_zh": "多电子 redoxmer + Wurster's Blue 正极液"
     },
     {
-      "name": "Peng Du",
-      "current_en": "industry (specific company not verifiable from public LinkedIn)",
-      "current_zh": "工业界（具体公司公开渠道无法唯一核实）",
-      "role_en": "graduate student (advised by Lu Zhang for 1 year; no co-authored papers)",
-      "role_zh": "研究生（张鲁指导一年, 未合作发表论文）",
-      "thrust_en": "Battery research training",
-      "thrust_zh": "电池研究培训"
-    },
-    {
       "name": "Quinton J. Meisner",
-      "current_en": "Staff Materials Engineer (Electrolyte team), Tesla",
-      "current_zh": "Tesla 主任材料工程师（电解液团队）",
+      "current_en": "Staff Materials Engineer (Electrolyte team), Tesla — graduated, did postdoc, then Tesla",
+      "current_zh": "Tesla 主任材料工程师（电解液团队）— 毕业后做博士后, 后入 Tesla",
       "role_en": "graduate student (co-advised by Lu Zhang and Lei Zhu, FSU)",
-      "role_zh": "研究生（张鲁与 FSU Lei Zhu 共同指导）",
+      "role_zh": "研究生（张鲁与 Lei Zhu @ FSU 共同指导）",
       "thrust_en": "Li-S fluorinated ether electrolytes (FSU↔ANL cross-institution)",
       "thrust_zh": "Li-S 氟化醚电解液（FSU↔ANL 跨机构）"
     },
     {
       "name": "Andrea Diaz",
       "current_en": "PhD candidate, UChicago Pritzker School of Molecular Engineering (Patel group)",
-      "current_zh": "UChicago PME 博士候选人（Patel 组）",
+      "current_zh": "UChicago Pritzker 分子工程学院博士候选人（Patel 组）",
       "role_en": "graduate student (co-advised by Lu Zhang and Shrayesh Patel, UChicago; plastic-to-membrane LDRD)",
-      "role_zh": "研究生（张鲁与 UChicago Shrayesh Patel 共同指导, 废塑料制膜 LDRD）",
+      "role_zh": "研究生（张鲁与 Shrayesh Patel @ UChicago 共同指导, 废塑料制膜 LDRD）",
       "thrust_en": "Repurposing plastics into ion-exchange membranes for RFBs (LDRD lead author)",
       "thrust_zh": "废塑料升级再造液流电池膜（LDRD 第一作者）"
     }
   ],
   "postdocs": [
     {
+      "name": "Zhangxing Shi",
+      "current_en": "Factorial Energy, Greater Boston (battery startup)",
+      "current_zh": "Factorial Energy（波士顿地区电池创业公司）",
+      "role_en": "postdoc (advised by Lu Zhang at ANL)",
+      "role_zh": "博士后（张鲁直接指导, ANL）",
+      "thrust_en": "PAA binder + HFE solvent for Li-metal/Na/Mg/S batteries",
+      "thrust_zh": "PAA 粘合剂 + 氟化醚电解液（Li-metal / Na / Mg / S）"
+    },
+    {
+      "name": "Peng Du",
+      "current_en": "industry (specific company not yet verified via public LinkedIn)",
+      "current_zh": "工业界（具体公司公开渠道暂未唯一核实）",
+      "role_en": "postdoc (advised by Lu Zhang for 1 year; no co-authored papers)",
+      "role_zh": "博士后（张鲁直接指导一年, 未合作发表论文）",
+      "thrust_en": "Battery research training",
+      "thrust_zh": "电池研究培训"
+    },
+    {
       "name": "Zhongbo Zhang",
-      "current_en": "Postdoctoral Researcher, UChicago Pritzker School of Molecular Engineering (Patel group; co-advised by Lu Zhang)",
+      "current_en": "Postdoctoral Researcher, UChicago PME (Patel group; co-advised by Lu Zhang)",
       "current_zh": "UChicago PME 博士后（Patel 组，张鲁联合指导）",
-      "role_en": "postdoc (advised by Lu Zhang, plastic upcycling LDRD)",
-      "role_zh": "博士后（张鲁直接指导, 废塑料制膜 LDRD）",
-      "thrust_en": "Repurposing plastics into ion-exchange membranes for redox flow batteries",
+      "role_en": "postdoc (advised by Lu Zhang, plastic upcycling LDRD with UChicago)",
+      "role_zh": "博士后（张鲁直接指导, 废塑料制膜 LDRD, 与 UChicago 联合）",
+      "thrust_en": "Repurposing plastics into ion-exchange membranes for RFBs",
       "thrust_zh": "废塑料升级再造离子交换膜（液流电池方向）"
     },
     {
       "name": "Jinhua Huang",
       "current_en": "Wildcat Discovery Technologies, Greater San Diego",
       "current_zh": "Wildcat Discovery Technologies（圣地亚哥）",
-      "role_en": "postdoc (advised by Lu Zhang)",
-      "role_zh": "博士后（张鲁直接指导）",
+      "role_en": "postdoc (advised by Lu Zhang, ANL 2013–2018)",
+      "role_zh": "博士后（张鲁直接指导, ANL 2013–2018）",
       "thrust_en": "Catholyte molecular engineering for non-aqueous RFB",
       "thrust_zh": "非水液流电池正极液分子设计"
     },
     {
       "name": "Bin Hu",
-      "current_en": "ORNL (CV hosted at ornl.gov; specific group/title not publicly listed)",
-      "current_zh": "ORNL（CV 在 ornl.gov；具体组别公开页未列）",
+      "current_en": "ORNL (CV hosted at ornl.gov; specific group not publicly listed)",
+      "current_zh": "ORNL（CV 在 ornl.gov，具体组别公开页未列）",
       "role_en": "postdoc (advised by Lu Zhang)",
       "role_zh": "博士后（张鲁直接指导）",
-      "thrust_en": "Silicon-anode binders + PAA molecular weight",
+      "thrust_en": "Silicon-anode binders + PAA molecular weight optimization",
       "thrust_zh": "硅负极粘合剂 + PAA 分子量优化"
     },
     {
-      "name": "Baofei Pan",
-      "current_en": "General Motors (battery; specific title not public)",
-      "current_zh": "通用汽车 GM（电池方向；具体职位未公开）",
-      "role_en": "postdoc (co-advised by Lu Zhang)",
-      "role_zh": "博士后（张鲁共同指导）",
-      "thrust_en": "Mg-ion electrolytes + organic Mg cathodes",
-      "thrust_zh": "镁离子电解液 + 有机镁电池正极"
-    },
-    {
-      "name": "Wentao Duan",
-      "current_en": "previously PNNL JCESR collaborator; current employer not verifiable from public sources",
-      "current_zh": "曾 PNNL JCESR 合作；当前去向公开渠道无法核实",
-      "role_en": "postdoc (advised by Lu Zhang)",
-      "role_zh": "博士后（张鲁直接指导）",
-      "thrust_en": "Anolyte molecular design for non-aqueous RFB",
-      "thrust_zh": "非水液流电池负极液分子设计"
-    },
-    {
       "name": "Lily A. Robertson",
-      "current_en": "Assistant Chemist (staff scientist), Argonne National Laboratory CSE Division (2021 Argonne Postdoc Performance Award)",
-      "current_zh": "ANL 助理化学家（正式员工, CSE 化学科学与工程部；2021 阿贡博士后绩效奖）",
+      "current_en": "Assistant Chemist (staff scientist), Argonne National Laboratory CSE Division — 2021 Argonne Postdoc Performance Award winner",
+      "current_zh": "ANL 助理化学家（CSE 化学科学与工程部, 正式员工）— 2021 阿贡博士后绩效奖得主",
       "role_en": "postdoc (advised by Lu Zhang)",
       "role_zh": "博士后（张鲁直接指导）",
       "thrust_en": "Self-reporting fluorescent redoxmers + crowded electrolytes",
@@ -122,7 +106,7 @@
     },
     {
       "name": "Yuyue Zhao",
-      "current_en": "Scientist, CNPC JICHAI POWER (Salt Lake City); previously Sr. Research Scientist at Storagenergy",
+      "current_en": "Scientist, CNPC JICHAI POWER (Salt Lake City); previously Sr. Research Scientist at Storagenergy Technologies",
       "current_zh": "中石油济柴动力科学家（盐湖城）；曾任 Storagenergy Technologies 高级研究科学家",
       "role_en": "postdoc (advised by Lu Zhang)",
       "role_zh": "博士后（张鲁直接指导）",
@@ -140,12 +124,12 @@
     }
   ],
   "_meta": {
-    "students_count": 7,
+    "students_count": 5,
     "postdocs_count": 8,
-    "total": 15,
+    "total": 13,
     "anl_period": "2013–2023",
-    "framing": "Most students later transitioned to postdoc roles (at ANL or other institutions). 'co-advised' marks shared supervision with another PI.",
-    "last_confirmed": "2026-04-27 — placements verified via LinkedIn / Google Scholar / institutional pages by sub-agent",
-    "linkedin_lookup_2026_04_27": "13 of 15 placements verified; Peng Du + Wentao Duan unverified"
+    "framing": "Direct mentees only. Wentao Duan and Baofei Pan removed in 2026-04-27 round — they are collaborators / other-group postdocs, not Lu Zhang's direct mentees. Quinton Meisner, Sisi Jiang, Xiaoting Fang were grad students who later did postdocs (some elsewhere, some at ANL but not in Lu Zhang's group) before industry/academic placements.",
+    "highlight": "Zhiguang Li (黎之光) — graduate student → entrepreneur → founded Zhejiang Erge, the talent-program sponsoring company. Mentee→sponsor full-circle narrative.",
+    "last_confirmed": "2026-04-27 by Lu Zhang directly + LinkedIn / institutional verification"
   }
 }
