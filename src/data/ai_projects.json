@@ -2,7 +2,7 @@
   {
     "name": "lu-zhang-site",
     "tagline": "This site — academic homepage with structured data layer",
-    "description": "Astro static site driven by JSON data extracted from a master research record. 143 publications, 28 patents, 38 talks, all filterable. Open source.",
+    "description": "Astro static site driven by JSON data extracted from a master research record. 112 publications, 28 patents, 38 talks, all filterable. Open source.",
     "status": "Live",
     "tags": ["Astro", "open source", "data-driven"],
     "image": null,
