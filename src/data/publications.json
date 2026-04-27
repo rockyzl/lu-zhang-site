@@ -84,6 +84,18 @@
     "verified": true
   },
   {
+    "title": "Repurposing Plastics into Membranes for Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Andrea Diaz, Zhongbo Zhang, Lu Zhang, Shrayesh N. Patel",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2024,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2024-0218mtgabs",
+    "role": "co",
+    "affiliations": [],
+    "verified": true
+  },
+  {
     "title": "Concentration‐dependent Cycling of Phenothiazine‐based Electrolytes in Nonaqueous Redox Flow Cells",
     "topic": "Advanced battery technologies research",
     "authors": "Aman Preet Kaur, Bertrand J. Neyhouse, Ilya A. Shkrob, Yilin Wang, N. Harsha Attanayake, Rahul Kant Jha, et al.",
@@ -181,6 +193,18 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
+    "verified": true
+  },
+  {
+    "title": "Simulation Guided Molecular Design of Hydrofluoroether Solvent for High Energy Batteries",
+    "topic": "Advanced Battery Materials and Technologies",
+    "authors": "Yu Zhou, Zhangxing Shi, Sambasiva R. Bheemireddy, Ethan Kamphause, Xingyi Lyu, Mohammad Afsar Uddin, et al.",
+    "journal": "arXiv (Cornell University)",
+    "year": 2023,
+    "citations": 0,
+    "doi": "https://doi.org/10.48550/arxiv.2310.02188",
+    "role": "co",
+    "affiliations": [],
     "verified": true
   },
   {
@@ -356,6 +380,18 @@
     "verified": true
   },
   {
+    "title": "Dynamic diversity of soft medium-range homo-radical self-assembly and rigid metal-organic network in non-aqueous redox flow batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Hossam Farag, Aman Preet Kaur, Lily A. Robertson, Ilya A. Shkrob, Lu Zhang, Susan A. Odom, et al.",
+    "journal": "Bulletin of the American Physical Society",
+    "year": 2021,
+    "citations": 0,
+    "doi": "",
+    "role": "co",
+    "affiliations": [],
+    "verified": true
+  },
+  {
     "title": "Self-Reporting Redoxmers: State of Health Metrics for Redox Flow Batteries",
     "topic": "Advanced battery technologies research",
     "authors": "Lily A. Robertson, Ilya A. Shkrob, Garvit Agarwal, Yu Zhou, Yuyue Zhao, Rajeev S. Assary, et al.",
@@ -382,6 +418,18 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
+    "verified": true
+  },
+  {
+    "title": "Natural Product Based Small Molecule Redoxmer for Redox Flow Batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Sambasiva R. Bheemireddy, Zhiguang Li, Yuyue Zhao, Zhengcheng Zhang, Lu Zhang",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2021,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2021-02185mtgabs",
+    "role": "co",
+    "affiliations": [],
     "verified": true
   },
   {
@@ -652,6 +700,30 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
+    "verified": true
+  },
+  {
+    "title": "When Dynamics Matters: Structure-Matching Alone is Insufficient in the Development of Realistic Force Fields for Nonaqueous Electrolytes",
+    "topic": "Electrostatics and Colloid Interactions",
+    "authors": "Zhixia Li, Lily A. Robertson, Ilya A. Shkrob, Jöerg C. Neuefeind, Kyle C. Smith, Lu Zhang, et al.",
+    "journal": "APS March Meeting Abstracts",
+    "year": 2019,
+    "citations": 0,
+    "doi": "",
+    "role": "co",
+    "affiliations": [],
+    "verified": true
+  },
+  {
+    "title": "Tuning PAA-Based Binders Towards Optimized Performance for Silicon Anode in Lithium-Ion Batteries",
+    "topic": "Advancements in Battery Materials",
+    "authors": "Zhangxing Shi, Sisi Jiang, Ján Ilavský, Tao Li, Lu Zhang",
+    "journal": "ECS Meeting Abstracts",
+    "year": 2019,
+    "citations": 0,
+    "doi": "https://doi.org/10.1149/ma2019-02/5/222",
+    "role": "co",
+    "affiliations": [],
     "verified": true
   },
   {
@@ -1023,6 +1095,30 @@
     "affiliations": [
       "Argonne National Laboratory"
     ],
+    "verified": true
+  },
+  {
+    "title": "A symmetric organic-based nonaqueous redox flow battery and its state of charge diagnostics by FTIR",
+    "topic": "Advanced battery technologies research",
+    "authors": "Wentao Duan, R.S. Vemuri, Jarrod D. Milshtein, Sydney Laramie, Rylan Doyle Dmello, Jinhua Huang, et al.",
+    "journal": "DSpace@MIT (Massachusetts Institute of Technology)",
+    "year": 2016,
+    "citations": 1,
+    "doi": "",
+    "role": "co",
+    "affiliations": [],
+    "verified": true
+  },
+  {
+    "title": "The lightest organic radical cation for charge storage in redox flow batteries",
+    "topic": "Advanced battery technologies research",
+    "authors": "Jinhua Huang, Baofei Pan, Wentao Duan, Xiaoliang Wei, Rajeev S. Assary, Liang Su, et al.",
+    "journal": "DSpace@MIT (Massachusetts Institute of Technology)",
+    "year": 2016,
+    "citations": 1,
+    "doi": "",
+    "role": "corresponding",
+    "affiliations": [],
     "verified": true
   },
   {

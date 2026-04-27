@@ -49,6 +49,42 @@ EMPLOYER_KEYWORDS = [
     "cincinnati insurance",
 ]
 
+# Fallback: when OpenAlex has NO institution data on the Lu Zhang authorship,
+# check whether any well-known ANL/JCESR collaborator is in the author list.
+# A match here strongly suggests the paper is his even without affiliation.
+import re as _re
+ANL_COLLAB_NAMES = [
+    "Khalil Amine", "Anthony K. Burrell", "Anthony Burrell",
+    "Larry A. Curtiss", "Larry Curtiss",
+    "Ilya A. Shkrob", "Ilya Shkrob",
+    "John T. Vaughey", "John Vaughey", "Anthony N. Jansen", "Anthony Jansen",
+    "Fikile R. Brushett", "Fikile Brushett",
+    "Lily A. Robertson", "Lily Robertson",
+    "Rajeev S. Assary", "Rajeev Assary",
+    "Albert L. Lipson", "Albert Lipson",
+    "Lei Cheng",
+    "Shrayesh N. Patel", "Shrayesh Patel",
+    "Sambasiva R. Bheemireddy", "Sambasiva Bheemireddy",
+    "Magali S. Ferrandon", "Magali Ferrandon",
+    "Aaron Hollas",
+    "Jingjing Zhang", "Zhengcheng Zhang",
+    "Jinhua Huang",
+    "Xiaoliang Wei", "Wentao Duan",
+    "Wei Wang", "Joaquín Rodríguez-López", "Joaquin Rodriguez-Lopez",
+    "Jeffrey S. Moore", "Michael J. Counihan",
+    "Garvit Agarwal", "Bin Hu",
+    "Paul C. Redfern",
+    "Jarrod D. Milshtein",
+    "Baofei Pan", "Zhangxing Shi", "Sisi Jiang",
+    "Aman Preet Kaur", "Hossam Farag",
+]
+_ANL_PATTERNS = [_re.compile(r"\b" + _re.escape(n) + r"\b") for n in ANL_COLLAB_NAMES]
+
+
+def has_anl_coauthor(work: dict) -> bool:
+    authors_str = " ; ".join(a["author"]["display_name"] for a in work.get("authorships", []))
+    return any(p.search(authors_str) for p in _ANL_PATTERNS)
+
 OUT = Path(__file__).parent.parent / "src" / "data" / "publications.json"
 OUT_COAUTHORS = Path(__file__).parent.parent / "src" / "data" / "collaborators.json"
 
@@ -76,29 +112,42 @@ def fetch_all_works():
 
 
 def is_our_lu_zhang(authorship: dict, work: dict | None = None) -> bool:
-    """Check if this authorship entry is OUR Lu Zhang (by institution affiliation).
+    """Check if this authorship entry is OUR Lu Zhang.
 
-    For CAS affiliations in the PhD-era window (2001-2007), additionally require
-    a confirmed CAS co-author since OpenAlex bundles same-name CAS researchers.
+    Decision tree:
+      1. Author display name must be "Lu Zhang"
+      2. If institution matches employer whitelist → YES (with CAS-era extra check)
+      3. If NO institution data AND a known ANL/JCESR collaborator is on
+         the author list → YES (OpenAlex fallback for poorly-tagged papers)
+      4. Otherwise → NO
     """
     if authorship["author"]["display_name"].lower() != "lu zhang":
         return False
+
     insts = authorship.get("institutions", [])
     inst_names = " ; ".join(i.get("display_name", "") for i in insts).lower()
-    if not any(kw in inst_names for kw in EMPLOYER_KEYWORDS):
-        return False
-    # Extra check: CAS-era papers also require a known co-author
-    is_cas_match = any(kw in inst_names for kw in (
-        "chinese academy of sciences", "academia sinica",
-        "institute of chemistry, chinese academy of sciences",
-        "technical institute of physics and chemistry",
-    ))
-    if is_cas_match and work is not None:
-        year = work.get("publication_year", 0) or 0
-        if 2001 <= year <= 2007:
-            coauthor_names = " ; ".join(a["author"]["display_name"] for a in work.get("authorships", []))
-            return any(name in coauthor_names for name in CAS_VERIFY_COAUTHORS)
-    return True
+
+    # Path 2: institution-based
+    if any(kw in inst_names for kw in EMPLOYER_KEYWORDS):
+        # CAS-era extra check: require a known PhD co-author
+        is_cas_match = any(kw in inst_names for kw in (
+            "chinese academy of sciences", "academia sinica",
+            "institute of chemistry, chinese academy of sciences",
+            "technical institute of physics and chemistry",
+        ))
+        if is_cas_match and work is not None:
+            year = work.get("publication_year", 0) or 0
+            if 2001 <= year <= 2007:
+                coauthor_names = " ; ".join(
+                    a["author"]["display_name"] for a in work.get("authorships", []))
+                return any(name in coauthor_names for name in CAS_VERIFY_COAUTHORS)
+        return True
+
+    # Path 3: missing institution, fallback to ANL co-author signal
+    if not insts and work is not None and has_anl_coauthor(work):
+        return True
+
+    return False
 
 
 # Corresponding-author whitelist (titles where Lu Zhang is confirmed corresponding)

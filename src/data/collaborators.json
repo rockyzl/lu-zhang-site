@@ -1,17 +1,7 @@
 [
   {
-    "name": "Zhengcheng Zhang",
-    "count": 41,
-    "institutions": [
-      "Alex's Lemonade Stand Foundation",
-      "Argonne National Laboratory",
-      "Energy Storage Systems (United States)"
-    ],
-    "openalex_id": "A5089644488"
-  },
-  {
     "name": "Ilya A. Shkrob",
-    "count": 40,
+    "count": 43,
     "institutions": [
       "Alex's Lemonade Stand Foundation",
       "Argonne National Laboratory",
@@ -19,6 +9,16 @@
       "Government of the United States of America"
     ],
     "openalex_id": "A5083014857"
+  },
+  {
+    "name": "Zhengcheng Zhang",
+    "count": 43,
+    "institutions": [
+      "Alex's Lemonade Stand Foundation",
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "openalex_id": "A5089644488"
   },
   {
     "name": "Jingjing Zhang",
@@ -33,7 +33,7 @@
   },
   {
     "name": "Jinhua Huang",
-    "count": 27,
+    "count": 29,
     "institutions": [
       "Alex's Lemonade Stand Foundation",
       "Argonne National Laboratory",
@@ -44,7 +44,7 @@
   },
   {
     "name": "Rajeev S. Assary",
-    "count": 27,
+    "count": 28,
     "institutions": [
       "Argonne National Laboratory",
       "Division of Materials Science and Engineering",
@@ -56,7 +56,7 @@
   },
   {
     "name": "Lily A. Robertson",
-    "count": 25,
+    "count": 27,
     "institutions": [
       "Alex's Lemonade Stand Foundation",
       "Argonne National Laboratory",
@@ -68,7 +68,7 @@
   },
   {
     "name": "Xiaoliang Wei",
-    "count": 24,
+    "count": 26,
     "institutions": [
       "Argonne National Laboratory",
       "Battelle",
@@ -85,7 +85,7 @@
   },
   {
     "name": "Lei Cheng",
-    "count": 18,
+    "count": 20,
     "institutions": [
       "Alex's Lemonade Stand Foundation",
       "Argonne National Laboratory",
@@ -108,7 +108,7 @@
   },
   {
     "name": "Chen Liao",
-    "count": 14,
+    "count": 15,
     "institutions": [
       "Alex's Lemonade Stand Foundation",
       "Argonne National Laboratory",
@@ -117,16 +117,8 @@
     "openalex_id": "A5046347045"
   },
   {
-    "name": "Larry A. Curtiss",
-    "count": 13,
-    "institutions": [
-      "Argonne National Laboratory"
-    ],
-    "openalex_id": "A5058864798"
-  },
-  {
     "name": "Wentao Duan",
-    "count": 13,
+    "count": 15,
     "institutions": [
       "Argonne National Laboratory",
       "Battelle",
@@ -138,8 +130,16 @@
     "openalex_id": "A5053976378"
   },
   {
+    "name": "Larry A. Curtiss",
+    "count": 14,
+    "institutions": [
+      "Argonne National Laboratory"
+    ],
+    "openalex_id": "A5058864798"
+  },
+  {
     "name": "Yuyue Zhao",
-    "count": 13,
+    "count": 14,
     "institutions": [
       "Alex's Lemonade Stand Foundation",
       "Argonne National Laboratory",
@@ -152,7 +152,7 @@
   },
   {
     "name": "Anthony K. Burrell",
-    "count": 12,
+    "count": 13,
     "institutions": [
       "Alex's Lemonade Stand Foundation",
       "Argonne National Laboratory",
@@ -162,7 +162,7 @@
   },
   {
     "name": "Wei Wang",
-    "count": 11,
+    "count": 13,
     "institutions": [
       "Argonne National Laboratory",
       "Battelle",
@@ -176,7 +176,7 @@
   },
   {
     "name": "Fikile R. Brushett",
-    "count": 10,
+    "count": 12,
     "institutions": [
       "Alex's Lemonade Stand Foundation",
       "Argonne National Laboratory",
@@ -184,6 +184,27 @@
       "Massachusetts Institute of Technology"
     ],
     "openalex_id": "A5042249105"
+  },
+  {
+    "name": "Zhiguang Li",
+    "count": 12,
+    "institutions": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)",
+      "Indiana University – Purdue University Indianapolis",
+      "Purdue University West Lafayette",
+      "University of Indianapolis"
+    ],
+    "openalex_id": "A5101692055"
+  },
+  {
+    "name": "Sisi Jiang",
+    "count": 11,
+    "institutions": [
+      "Argonne National Laboratory",
+      "University of Tennessee at Knoxville"
+    ],
+    "openalex_id": "A5102829084"
   },
   {
     "name": "Khalil Amine",
@@ -195,34 +216,76 @@
     "openalex_id": "A5030304672"
   },
   {
-    "name": "Sisi Jiang",
+    "name": "Sambasiva R. Bheemireddy",
     "count": 10,
     "institutions": [
+      "Alex's Lemonade Stand Foundation",
       "Argonne National Laboratory",
-      "University of Tennessee at Knoxville"
+      "Energy Storage Systems (United States)"
     ],
-    "openalex_id": "A5102829084"
+    "openalex_id": "A5003201895"
   },
   {
-    "name": "Zhiguang Li",
+    "name": "Zhangxing Shi",
     "count": 10,
     "institutions": [
-      "Argonne National Laboratory",
-      "Energy Storage Systems (United States)",
-      "Indiana University – Purdue University Indianapolis",
-      "Purdue University West Lafayette",
-      "University of Indianapolis"
+      "Alex's Lemonade Stand Foundation",
+      "Argonne National Laboratory"
     ],
-    "openalex_id": "A5101692055"
+    "openalex_id": "A5041003337"
   },
   {
     "name": "Baofei Pan",
-    "count": 8,
+    "count": 9,
     "institutions": [
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)"
     ],
     "openalex_id": "A5037223560"
+  },
+  {
+    "name": "Jeffrey S. Moore",
+    "count": 9,
+    "institutions": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)",
+      "University of Illinois Urbana-Champaign"
+    ],
+    "openalex_id": "A5082797451"
+  },
+  {
+    "name": "Tao Li",
+    "count": 9,
+    "institutions": [
+      "Alex's Lemonade Stand Foundation",
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)",
+      "Northern Illinois University"
+    ],
+    "openalex_id": "A5100455306"
+  },
+  {
+    "name": "Yang Zhang",
+    "count": 9,
+    "institutions": [
+      "Alex's Lemonade Stand Foundation",
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)",
+      "Plasma (Russia)",
+      "University of Illinois Urbana-Champaign"
+    ],
+    "openalex_id": "A5113215889"
+  },
+  {
+    "name": "Yu Zhou",
+    "count": 9,
+    "institutions": [
+      "Alex's Lemonade Stand Foundation",
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)",
+      "MSSCORPS (Taiwan)"
+    ],
+    "openalex_id": "A5058847788"
   },
   {
     "name": "Garvit Agarwal",
@@ -236,34 +299,17 @@
     "openalex_id": "A5042552994"
   },
   {
-    "name": "Sambasiva R. Bheemireddy",
+    "name": "Levi T. Thompson",
     "count": 8,
     "institutions": [
-      "Alex's Lemonade Stand Foundation",
-      "Argonne National Laboratory",
-      "Energy Storage Systems (United States)"
-    ],
-    "openalex_id": "A5003201895"
-  },
-  {
-    "name": "Yu Zhou",
-    "count": 8,
-    "institutions": [
-      "Alex's Lemonade Stand Foundation",
+      "Ann Arbor Center for Independent Living",
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)",
-      "MSSCORPS (Taiwan)"
+      "University of Delaware",
+      "University of Michigan",
+      "University of Michigan–Ann Arbor"
     ],
-    "openalex_id": "A5058847788"
-  },
-  {
-    "name": "Zhangxing Shi",
-    "count": 8,
-    "institutions": [
-      "Alex's Lemonade Stand Foundation",
-      "Argonne National Laboratory"
-    ],
-    "openalex_id": "A5041003337"
+    "openalex_id": "A5061642273"
   },
   {
     "name": "Hieu A. Doan",
@@ -276,29 +322,6 @@
     "openalex_id": "A5038909418"
   },
   {
-    "name": "Jeffrey S. Moore",
-    "count": 7,
-    "institutions": [
-      "Argonne National Laboratory",
-      "Energy Storage Systems (United States)",
-      "University of Illinois Urbana-Champaign"
-    ],
-    "openalex_id": "A5082797451"
-  },
-  {
-    "name": "Levi T. Thompson",
-    "count": 7,
-    "institutions": [
-      "Ann Arbor Center for Independent Living",
-      "Argonne National Laboratory",
-      "Energy Storage Systems (United States)",
-      "University of Delaware",
-      "University of Michigan",
-      "University of Michigan–Ann Arbor"
-    ],
-    "openalex_id": "A5061642273"
-  },
-  {
     "name": "Randy H. Ewoldt",
     "count": 7,
     "institutions": [
@@ -309,15 +332,14 @@
     "openalex_id": "A5031482147"
   },
   {
-    "name": "Tao Li",
+    "name": "Vijayakumar Murugesan",
     "count": 7,
     "institutions": [
-      "Alex's Lemonade Stand Foundation",
-      "Argonne National Laboratory",
+      "Battelle",
       "Energy Storage Systems (United States)",
-      "Northern Illinois University"
+      "Pacific Northwest National Laboratory"
     ],
-    "openalex_id": "A5100455306"
+    "openalex_id": "A5064389955"
   },
   {
     "name": "Xiaoting Fang",
@@ -331,18 +353,6 @@
     "openalex_id": "A5006641862"
   },
   {
-    "name": "Yang Zhang",
-    "count": 7,
-    "institutions": [
-      "Alex's Lemonade Stand Foundation",
-      "Argonne National Laboratory",
-      "Energy Storage Systems (United States)",
-      "Plasma (Russia)",
-      "University of Illinois Urbana-Champaign"
-    ],
-    "openalex_id": "A5113215889"
-  },
-  {
     "name": "Benjamin Silcox",
     "count": 6,
     "institutions": [
@@ -351,16 +361,6 @@
       "University of Michigan–Ann Arbor"
     ],
     "openalex_id": "A5029721259"
-  },
-  {
-    "name": "Vijayakumar Murugesan",
-    "count": 6,
-    "institutions": [
-      "Battelle",
-      "Energy Storage Systems (United States)",
-      "Pacific Northwest National Laboratory"
-    ],
-    "openalex_id": "A5064389955"
   },
   {
     "name": "Erik Sarnello",
@@ -378,6 +378,28 @@
       "Argonne National Laboratory"
     ],
     "openalex_id": "A5052133858"
+  },
+  {
+    "name": "Jun Liu",
+    "count": 5,
+    "institutions": [
+      "Battelle",
+      "Energy Storage Systems (United States)",
+      "Pacific Northwest National Laboratory",
+      "Richland College"
+    ],
+    "openalex_id": "A5100361698"
+  },
+  {
+    "name": "Kyle C. Smith",
+    "count": 5,
+    "institutions": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)",
+      "University of Illinois Urbana-Champaign",
+      "Urbana University"
+    ],
+    "openalex_id": "A5040752692"
   },
   {
     "name": "Paul C. Redfern",
@@ -405,6 +427,16 @@
       "University of Michigan–Ann Arbor"
     ],
     "openalex_id": "A5061680612"
+  },
+  {
+    "name": "Susan A. Odom",
+    "count": 5,
+    "institutions": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)",
+      "University of Kentucky"
+    ],
+    "openalex_id": "A5014392016"
   },
   {
     "name": "Vincent Sprenkle",
@@ -435,15 +467,33 @@
     "openalex_id": "A5100449861"
   },
   {
-    "name": "Jun Liu",
+    "name": "Aman Preet Kaur",
     "count": 4,
     "institutions": [
-      "Battelle",
       "Energy Storage Systems (United States)",
-      "Pacific Northwest National Laboratory",
-      "Richland College"
+      "University of Kentucky"
     ],
-    "openalex_id": "A5100361698"
+    "openalex_id": "A5032298186"
+  },
+  {
+    "name": "Hossam Farag",
+    "count": 4,
+    "institutions": [
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)",
+      "University of Illinois Urbana-Champaign"
+    ],
+    "openalex_id": "A5047540021"
+  },
+  {
+    "name": "Jeffery S. Moore",
+    "count": 4,
+    "institutions": [
+      "Energy Storage Systems (United States)",
+      "University of Illinois Urbana-Champaign",
+      "Urbana University"
+    ],
+    "openalex_id": "A5103751888"
   },
   {
     "name": "Lelia Cosimbescu",
@@ -455,14 +505,25 @@
     "openalex_id": "A5001444898"
   },
   {
-    "name": "Susan A. Odom",
+    "name": "Liang Su",
     "count": 4,
     "institutions": [
+      "Alex's Lemonade Stand Foundation",
       "Argonne National Laboratory",
       "Energy Storage Systems (United States)",
-      "University of Kentucky"
+      "Massachusetts Institute of Technology"
     ],
-    "openalex_id": "A5014392016"
+    "openalex_id": "A5107791048"
+  },
+  {
+    "name": "Magali Ferrandon",
+    "count": 4,
+    "institutions": [
+      "Alex's Lemonade Stand Foundation",
+      "Argonne National Laboratory",
+      "Energy Storage Systems (United States)"
+    ],
+    "openalex_id": "A5047499908"
   },
   {
     "name": "Tianbiao Liu",
@@ -496,13 +557,12 @@
     "openalex_id": "A5078511514"
   },
   {
-    "name": "Aman Preet Kaur",
-    "count": 3,
+    "name": "Zhenzhen Yang",
+    "count": 4,
     "institutions": [
-      "Energy Storage Systems (United States)",
-      "University of Kentucky"
+      "Argonne National Laboratory"
     ],
-    "openalex_id": "A5032298186"
+    "openalex_id": "A5101447181"
   },
   {
     "name": "Bin Li",
@@ -529,26 +589,6 @@
       "Gachon University"
     ],
     "openalex_id": "A5022757375"
-  },
-  {
-    "name": "Hossam Farag",
-    "count": 3,
-    "institutions": [
-      "Argonne National Laboratory",
-      "Energy Storage Systems (United States)",
-      "University of Illinois Urbana-Champaign"
-    ],
-    "openalex_id": "A5047540021"
-  },
-  {
-    "name": "Jeffery S. Moore",
-    "count": 3,
-    "institutions": [
-      "Energy Storage Systems (United States)",
-      "University of Illinois Urbana-Champaign",
-      "Urbana University"
-    ],
-    "openalex_id": "A5103751888"
   },
   {
     "name": "Jeffrey A. Kowalski",
@@ -589,28 +629,6 @@
     "openalex_id": "A5049626346"
   },
   {
-    "name": "Kyle C. Smith",
-    "count": 3,
-    "institutions": [
-      "Argonne National Laboratory",
-      "Energy Storage Systems (United States)",
-      "University of Illinois Urbana-Champaign",
-      "Urbana University"
-    ],
-    "openalex_id": "A5040752692"
-  },
-  {
-    "name": "Liang Su",
-    "count": 3,
-    "institutions": [
-      "Alex's Lemonade Stand Foundation",
-      "Argonne National Laboratory",
-      "Energy Storage Systems (United States)",
-      "Massachusetts Institute of Technology"
-    ],
-    "openalex_id": "A5107791048"
-  },
-  {
     "name": "Linghong Zhang",
     "count": 3,
     "institutions": [
@@ -630,16 +648,6 @@
     "openalex_id": ""
   },
   {
-    "name": "Magali Ferrandon",
-    "count": 3,
-    "institutions": [
-      "Alex's Lemonade Stand Foundation",
-      "Argonne National Laboratory",
-      "Energy Storage Systems (United States)"
-    ],
-    "openalex_id": "A5047499908"
-  },
-  {
     "name": "Michael J. Counihan",
     "count": 3,
     "institutions": [
@@ -649,6 +657,16 @@
       "Urbana University"
     ],
     "openalex_id": "A5057784778"
+  },
+  {
+    "name": "Mohammad Afsar Uddin",
+    "count": 3,
+    "institutions": [
+      "Argonne National Laboratory",
+      "Instituto de Ciencia de Materiales de Madrid",
+      "University of Illinois Urbana-Champaign"
+    ],
+    "openalex_id": "A5051274591"
   },
   {
     "name": "Quinton J. Meisner",
@@ -678,12 +696,13 @@
     "openalex_id": "A5090379200"
   },
   {
-    "name": "Zhenzhen Yang",
+    "name": "Zhixia Li",
     "count": 3,
     "institutions": [
-      "Argonne National Laboratory"
+      "Argonne National Laboratory",
+      "University of Illinois Urbana-Champaign"
     ],
-    "openalex_id": "A5101447181"
+    "openalex_id": "A5101962259"
   },
   {
     "name": "Andreas Hintennach",
@@ -749,6 +768,16 @@
     "openalex_id": "A5015111176"
   },
   {
+    "name": "Dehong Hu",
+    "count": 2,
+    "institutions": [
+      "Battelle",
+      "Pacific Northwest National Laboratory",
+      "Richland College"
+    ],
+    "openalex_id": "A5032206900"
+  },
+  {
     "name": "Dipobrato Sarbapalli",
     "count": 2,
     "institutions": [
@@ -784,6 +813,15 @@
     "openalex_id": "A5084043590"
   },
   {
+    "name": "Jarrod D. Milshtein",
+    "count": 2,
+    "institutions": [
+      "Energy Storage Systems (United States)",
+      "Massachusetts Institute of Technology"
+    ],
+    "openalex_id": "A5062736313"
+  },
+  {
     "name": "Joshua Lamb",
     "count": 2,
     "institutions": [
@@ -817,16 +855,6 @@
     "openalex_id": "A5016348338"
   },
   {
-    "name": "Mohammad Afsar Uddin",
-    "count": 2,
-    "institutions": [
-      "Argonne National Laboratory",
-      "Instituto de Ciencia de Materiales de Madrid",
-      "University of Illinois Urbana-Champaign"
-    ],
-    "openalex_id": "A5051274591"
-  },
-  {
     "name": "Nancy L. Dietz Rago",
     "count": 2,
     "institutions": [
@@ -844,6 +872,48 @@
       "University of Illinois Urbana-Champaign"
     ],
     "openalex_id": "A5064079045"
+  },
+  {
+    "name": "R.S. Vemuri",
+    "count": 2,
+    "institutions": [
+      "Battelle",
+      "Energy Storage Systems (United States)",
+      "Pacific Northwest National Laboratory",
+      "Richland College"
+    ],
+    "openalex_id": "A5034993973"
+  },
+  {
+    "name": "Robert M. Darling",
+    "count": 2,
+    "institutions": [
+      "Energy Storage Systems (United States)",
+      "Hartford Financial Services (United States)",
+      "Raytheon Technologies (Finland)",
+      "United Technologies Research Center"
+    ],
+    "openalex_id": "A5005863447"
+  },
+  {
+    "name": "Rylan Doyle Dmello",
+    "count": 2,
+    "institutions": [
+      "Energy Storage Systems (United States)",
+      "University of Illinois Urbana-Champaign",
+      "Urbana University"
+    ],
+    "openalex_id": "A5089134367"
+  },
+  {
+    "name": "Sydney Laramie",
+    "count": 2,
+    "institutions": [
+      "Ann Arbor Center for Independent Living",
+      "Energy Storage Systems (United States)",
+      "University of Michigan"
+    ],
+    "openalex_id": "A5050219268"
   },
   {
     "name": "T. Malsha Suduwella",
@@ -880,6 +950,14 @@
     "openalex_id": "A5017537693"
   },
   {
+    "name": "Xingyi Lyu",
+    "count": 2,
+    "institutions": [
+      "Northern Illinois University"
+    ],
+    "openalex_id": "A5036065109"
+  },
+  {
     "name": "Xinyi Liu",
     "count": 2,
     "institutions": [
@@ -887,15 +965,6 @@
       "Northern Illinois University"
     ],
     "openalex_id": "A5100395652"
-  },
-  {
-    "name": "Zhixia Li",
-    "count": 2,
-    "institutions": [
-      "Argonne National Laboratory",
-      "University of Illinois Urbana-Champaign"
-    ],
-    "openalex_id": "A5101962259"
   },
   {
     "name": "Éric Walter",
@@ -956,6 +1025,12 @@
       "Argonne National Laboratory"
     ],
     "openalex_id": "A5055690456"
+  },
+  {
+    "name": "Andrea Diaz",
+    "count": 1,
+    "institutions": [],
+    "openalex_id": "A5109723268"
   },
   {
     "name": "Andres T. Cavazos",
@@ -1068,16 +1143,6 @@
     "openalex_id": "A5101875678"
   },
   {
-    "name": "Dehong Hu",
-    "count": 1,
-    "institutions": [
-      "Battelle",
-      "Pacific Northwest National Laboratory",
-      "Richland College"
-    ],
-    "openalex_id": "A5032206900"
-  },
-  {
     "name": "Dehua Zhou",
     "count": 1,
     "institutions": [
@@ -1093,6 +1158,12 @@
       "Purdue University West Lafayette"
     ],
     "openalex_id": "A5054710955"
+  },
+  {
+    "name": "Ethan Kamphause",
+    "count": 1,
+    "institutions": [],
+    "openalex_id": "A5093006100"
   },
   {
     "name": "Ethan P. Kamphaus",
@@ -1135,13 +1206,10 @@
     "openalex_id": "A5086924109"
   },
   {
-    "name": "Jarrod D. Milshtein",
+    "name": "J. M. Moore",
     "count": 1,
-    "institutions": [
-      "Energy Storage Systems (United States)",
-      "Massachusetts Institute of Technology"
-    ],
-    "openalex_id": "A5062736313"
+    "institutions": [],
+    "openalex_id": "A5027781676"
   },
   {
     "name": "Jason D. Howard",
@@ -1212,6 +1280,18 @@
       "Energy Storage Systems (United States)"
     ],
     "openalex_id": "A5046520763"
+  },
+  {
+    "name": "Ján Ilavský",
+    "count": 1,
+    "institutions": [],
+    "openalex_id": "A5074151270"
+  },
+  {
+    "name": "Jöerg C. Neuefeind",
+    "count": 1,
+    "institutions": [],
+    "openalex_id": "A5034855435"
   },
   {
     "name": "Ka-Cheong Lau",
@@ -1377,17 +1457,6 @@
     "openalex_id": "A5101796678"
   },
   {
-    "name": "R.S. Vemuri",
-    "count": 1,
-    "institutions": [
-      "Battelle",
-      "Energy Storage Systems (United States)",
-      "Pacific Northwest National Laboratory",
-      "Richland College"
-    ],
-    "openalex_id": "A5034993973"
-  },
-  {
     "name": "Rahul Kant Jha",
     "count": 1,
     "institutions": [
@@ -1412,33 +1481,12 @@
     "openalex_id": "A5060248296"
   },
   {
-    "name": "Robert M. Darling",
-    "count": 1,
-    "institutions": [
-      "Energy Storage Systems (United States)",
-      "Hartford Financial Services (United States)",
-      "Raytheon Technologies (Finland)",
-      "United Technologies Research Center"
-    ],
-    "openalex_id": "A5005863447"
-  },
-  {
     "name": "Ronald J. Clark",
     "count": 1,
     "institutions": [
       "Florida State University"
     ],
     "openalex_id": "A5113499780"
-  },
-  {
-    "name": "Rylan Doyle Dmello",
-    "count": 1,
-    "institutions": [
-      "Energy Storage Systems (United States)",
-      "University of Illinois Urbana-Champaign",
-      "Urbana University"
-    ],
-    "openalex_id": "A5089134367"
   },
   {
     "name": "Scott M. Brombosz",
@@ -1456,6 +1504,12 @@
       "University of Utah"
     ],
     "openalex_id": "A5060498869"
+  },
+  {
+    "name": "Shrayesh N. Patel",
+    "count": 1,
+    "institutions": [],
+    "openalex_id": "A5003276517"
   },
   {
     "name": "Stephen E. Trask",
@@ -1481,16 +1535,6 @@
       "Argonne National Laboratory"
     ],
     "openalex_id": "A5062600925"
-  },
-  {
-    "name": "Sydney Laramie",
-    "count": 1,
-    "institutions": [
-      "Ann Arbor Center for Independent Living",
-      "Energy Storage Systems (United States)",
-      "University of Michigan"
-    ],
-    "openalex_id": "A5050219268"
   },
   {
     "name": "Thomas J. Carney",
@@ -1548,14 +1592,6 @@
     "openalex_id": "A5063607025"
   },
   {
-    "name": "Xingyi Lyu",
-    "count": 1,
-    "institutions": [
-      "Northern Illinois University"
-    ],
-    "openalex_id": "A5036065109"
-  },
-  {
     "name": "Yan Li",
     "count": 1,
     "institutions": [
@@ -1587,5 +1623,11 @@
       "Argonne National Laboratory"
     ],
     "openalex_id": "A5019657497"
+  },
+  {
+    "name": "Zhongbo Zhang",
+    "count": 1,
+    "institutions": [],
+    "openalex_id": "A5101850935"
   }
 ]
