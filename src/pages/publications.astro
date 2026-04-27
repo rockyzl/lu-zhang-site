@@ -2,6 +2,8 @@
 import Base from "../layouts/Base.astro";
 import { detectLocale, t } from "../lib/i18n";
 import publications from "../data/publications.json";
+import bookChapters from "../data/book_chapters.json";
+import techReports from "../data/tech_reports.json";
 
 const locale = detectLocale(Astro.url.pathname);
 // Only show ANL-affiliated papers (filters out same-name authors via parser-set verified flag).
@@ -9,6 +11,16 @@ const filtered = publications.filter((p) => p.verified);
 const sorted = [...filtered].sort((a, b) => (b.year || 0) - (a.year || 0) || b.citations - a.citations);
 const topics = [...new Set(filtered.map((p) => p.topic))].filter(Boolean);
 const scholarUrl = (title) => `https://scholar.google.com/scholar?q=${encodeURIComponent(title + " Lu Zhang Argonne")}`;
+
+// Reviews: known review articles (currently marked manually by DOI).
+const REVIEW_DOIS = new Set([
+  "https://doi.org/10.1146/annurev-matsci-080222-114725",
+  "https://doi.org/10.1021/acs.chemrev.0c00800",
+]);
+const isReview = (p) => p.doi && REVIEW_DOIS.has(p.doi.toLowerCase());
+
+// Take the highest-cited review-style paper for surfacing
+const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox flow batteries/i.test(p.title));
 ---
 <Base title={(locale === "zh" ? "论文 — " : "Publications — ") + "Lu Zhang"}>
   <div class="container" style="padding-top: 3rem;">

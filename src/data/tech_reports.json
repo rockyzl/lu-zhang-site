@@ -1,0 +1,47 @@
+[
+  {
+    "title_en": "Flow Batteries Technology Strategy Assessment",
+    "title_cn": "液流电池技术战略评估",
+    "year": 2023,
+    "author_position": "3 of 6",
+    "publisher": "U.S. Department of Energy",
+    "topic": "Long-duration storage roadmap",
+    "url": "https://www.energy.gov/sites/default/files/2023-07/Technology%20Strategy%20Assessment%20-%20Flow%20Batteries.pdf"
+  },
+  {
+    "title_en": "Scalable Membrane Architecture with Robust Nanoscale Channels Advancing Low-Cost Redox Flow Batteries",
+    "title_cn": "具备稳健纳米通道的可规模化膜结构促进低成本液流电池",
+    "year": 2023,
+    "author_position": "1 of 2",
+    "publisher": "Argonne LDRD 2022-0196",
+    "topic": "Plastic-to-membrane upcycling for RFB",
+    "url": "https://www.osti.gov/search/semantic:Scalable%20Membrane%20Architecture%20Robust%20Nanoscale%20Channels%20Lu%20Zhang%20Argonne"
+  },
+  {
+    "title_en": "Processing Silicon Composite Electrode Components: Binders and Related Materials",
+    "title_cn": "硅复合电极组分加工：粘合剂及相关材料",
+    "year": 2020,
+    "author_position": "2 of 2",
+    "publisher": "U.S. DOE / NREL Silicon Consortium",
+    "topic": "Silicon-anode binder processing",
+    "url": "https://www.osti.gov/search/semantic:Processing%20Silicon%20Composite%20Electrode%20Binders%20Lu%20Zhang%20Argonne"
+  },
+  {
+    "title_en": "High-Density Energy Storage in Solvent-Free Redox Flow Batteries for Flexible Electric Grid",
+    "title_cn": "面向灵活电网的无溶剂液流电池高能量密度储能",
+    "year": 2020,
+    "author_position": "1 of 2",
+    "publisher": "Argonne LDRD 2018-100",
+    "topic": "Multi-electron redoxmers · grid-scale storage",
+    "url": "https://www.osti.gov/search/semantic:High-Density%20Energy%20Storage%20Solvent-Free%20Redox%20Flow%20Lu%20Zhang"
+  },
+  {
+    "title_en": "Binders and Surfaces for Composite Silicon/Graphite Electrodes",
+    "title_cn": "硅/石墨复合电极粘合剂与表面研究",
+    "year": 2019,
+    "author_position": "5 of 5",
+    "publisher": "U.S. DOE Silicon Deep Dive",
+    "topic": "Silicon-anode interface chemistry",
+    "url": "https://www.osti.gov/search/semantic:Binders%20Surfaces%20Composite%20Silicon%20Graphite%20Lu%20Zhang"
+  }
+]

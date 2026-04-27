@@ -62,6 +62,10 @@
   "page.publications.first":{ "en":"First author","zh":"第一作者" },
   "page.publications.corresp":{ "en":"Corresponding (heuristic)","zh":"通讯作者（白名单）" },
   "page.publications.co":{ "en":"Co-author","zh":"共同作者" },
+  "page.publications.review":{ "en":"Review article","zh":"综述文章" },
+  "page.publications.chapters":{ "en":"Books & Chapters","zh":"书籍章节" },
+  "page.publications.reports":{ "en":"Technical Reports","zh":"研究技术报告" },
+  "page.publications.allpapers":{ "en":"All journal articles","zh":"全部期刊论文" },
 
   "page.patents.eyebrow":{ "en":"28 issued + applications","zh":"已授权 28 项 · 申请待补" },
   "page.patents.title":{ "en":"US Patents","zh":"美国专利" },
