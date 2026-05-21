@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { detectLocale, t } from "../../lib/i18n";
+import { u } from "../../lib/url";
 
 const locale = detectLocale(Astro.url.pathname);
 const isZh = locale === "zh";
@@ -177,5 +178,35 @@ const metrics = isZh
         </div>
       </div>
     ))}
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{t("page.awards.certifications", locale)}</h2>
+    </div>
+    <div class="entry">
+      <div class="title">
+        {isZh
+          ? "Certified Meditation & Mindfulness Teacher（2026）"
+          : "Certified Meditation & Mindfulness Teacher (2026)"}
+      </div>
+      <div class="meta" style="font-style: italic;">
+        {isZh
+          ? "School of Positive Transformation · 颁发人：Dr. Itai Ivtzan · 课程导师：Wendy Quan · 颁发日期：2026-05-15"
+          : "School of Positive Transformation · Awarded by Dr. Itai Ivtzan · Course lead: Wendy Quan · Issued 2026-05-15"}
+      </div>
+      <div class="meta" style="margin-top: 0.4rem;">
+        {isZh
+          ? "完成「Meditation & Mindfulness Teacher Training」全课程；课程具 CPD 认证 + IMMA（International Meditation & Mindfulness Alliance）资质认可。"
+          : "Completed the full Meditation & Mindfulness Teacher Training programme. CPD-accredited and IMMA-recognised (International Meditation & Mindfulness Alliance)."}
+      </div>
+      <div style="margin-top: 1rem; max-width: 520px;">
+        <a href={u("/images/meditation-mindfulness-teacher-cert.png")} target="_blank" rel="noopener">
+          <img
+            src={u("/images/meditation-mindfulness-teacher-cert.png")}
+            alt={isZh ? "Lu Zhang Meditation & Mindfulness Teacher 证书" : "Lu Zhang Meditation & Mindfulness Teacher certificate"}
+            style="width: 100%; height: auto; border: 1px solid var(--c-border, #e5e5e5); border-radius: 4px;"
+          />
+        </a>
+      </div>
+    </div>
   </div>
 </Base>
