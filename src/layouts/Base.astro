@@ -4,8 +4,8 @@ import { u } from "../lib/url";
 import { detectLocale, t, altLocalePath, type Locale } from "../lib/i18n";
 
 const {
-  title = "Lu Zhang — Battery Scientist & Data Engineer",
-  description = "Lu Zhang (张鲁), Ph.D. — Battery scientist with 14+ years at Argonne National Laboratory. R&D 100 Award (2014). 99 publications (97 SCI + 2 book chapters), 28 patents & applications, 180 collaborators. Now bridging electrochemistry and ML for industrial-scale energy storage.",
+  title = "Lu Zhang — AI for Science & Scientific Agent Systems",
+  description = "Lu Zhang, Ph.D. — AI/ML engineer and former Argonne scientist building scientific agents, RAG, MLOps workflows, and AI-enabled materials discovery systems across battery science, autonomous discovery, and production ML.",
   ogImage,
 } = Astro.props;
 
@@ -57,6 +57,10 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
     <meta property="og:site_name" content="Lu Zhang" />
     <meta property="og:locale" content={locale === "zh" ? "zh_CN" : "en_US"} />
     <meta property="og:locale:alternate" content={locale === "zh" ? "en_US" : "zh_CN"} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Lu Zhang — AI for Science and Scientific Agent Systems" />
     <meta property="profile:first_name" content="Lu" />
     <meta property="profile:last_name" content="Zhang" />
 
@@ -64,6 +68,7 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- Hreflang for bilingual -->
     <link rel="alternate" hreflang={locale === "zh" ? "en" : "zh-CN"} href={new URL(altPath, siteUrl).href} />

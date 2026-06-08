@@ -121,16 +121,16 @@
     "zh": "中文"
   },
   "home.eyebrow": {
-    "en": "Battery science · Machine learning · Industrial translation",
-    "zh": "电池科学 · 机器学习 · 产业落地"
+    "en": "AI for Science · Scientific agents · Battery materials",
+    "zh": "AI for Science · 科学智能体 · 电池材料"
   },
   "home.role": {
-    "en": "Battery scientist with 14+ years at Argonne National Laboratory. Now bridging electrochemistry and ML for industrial-scale energy storage.",
-    "zh": "电池科学家，于美国能源部阿贡国家实验室任职 14 年半（2009–2023）。当前致力于将电化学与机器学习结合，服务于工业级储能。"
+    "en": "AI/ML engineer and former Argonne scientist building scientific agents, RAG, MLOps workflows, and AI-enabled materials discovery systems.",
+    "zh": "AI/ML 工程师，曾任阿贡国家实验室科学家；当前构建科学智能体、RAG、MLOps 工作流和 AI 驱动的材料发现系统。"
   },
   "home.lead": {
-    "en": "R&D 100 Award (2014) for redox-shuttle technology. 99 peer-reviewed publications (97 SCI + 2 book chapters), 28 patents & applications (25 issued), 4,700+ citations. Built and led cross-institution Sprint teams under JCESR (DOE BES).",
-    "zh": "2014 年 R&D 100 大奖获得者（氧化还原穿梭剂技术）。99 项同行评议论著（97 篇 SCI + 2 章著作）、28 项美国专利及申请、4,700+ 引用。曾在 JCESR（DOE BES 能源前沿研究中心）领导跨机构 Sprint 团队。"
+    "en": "14+ years of DOE battery research at Argonne, 100+ publications, 23 granted U.S. patents, 4,700+ citations, and recent production AI work spanning agent orchestration, Azure AI Search, evaluation, observability, and deployment readiness.",
+    "zh": "在阿贡拥有 14+ 年 DOE 电池研究经验，100+ 论文、23 项授权美国专利、4,700+ 引用；近期生产级 AI 工作覆盖智能体编排、Azure AI Search、评估、可观测性和部署准备。"
   },
   "home.cta.publications": {
     "en": "Publications →",

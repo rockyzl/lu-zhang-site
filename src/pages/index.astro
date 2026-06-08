@@ -28,7 +28,10 @@ const totalCitations = verifiedPubs.reduce((s, p) => s + (p.citations || 0), 0);
 const firstAuthor = verifiedPubs.filter((p) => p.role === "first").length;
 const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").length;
 ---
-<Base title="Lu Zhang — Battery Scientist & Data Engineer">
+<Base
+  title="Lu Zhang — AI for Science & Scientific Agent Systems"
+  description="AI/ML engineer and former Argonne scientist building scientific agents, RAG, MLOps workflows, and AI-enabled materials discovery systems across battery science, autonomous discovery, and production ML."
+>
   <div class="container">
     <section class="hero">
       <div>
