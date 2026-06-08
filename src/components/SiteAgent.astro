@@ -1,0 +1,187 @@
+---
+import { u } from "../lib/url";
+import type { Locale } from "../lib/i18n";
+
+const { locale = "en" } = Astro.props as { locale?: Locale };
+
+const copy = locale === "zh"
+  ? {
+      eyebrow: "站内智能体",
+      title: "问 Lu Zhang 网站智能体",
+      lead: "这是一个安全的静态站内助手：它不会调用外部模型，也不会收集输入。它会根据网站已有内容，把访客导向最相关的论文、项目、简历和联系方式。",
+      placeholder: "选择一个问题，或输入关键词：agent, RAG, battery, publications, contact...",
+      send: "查询",
+      starter: "可以先问：",
+      note: "当前版本是浏览器端规则助手。未来可以接入 scientificloop.com 后端，升级成真正的 RAG / agent API。",
+      fallback: "我现在只能回答职业主页里的核心主题。你可以试试 agent、AI for science、battery、publication、patent、CV、contact、VoiceRAG。",
+      actions: {
+        ai: "看 AI 项目",
+        publications: "看论文",
+        cv: "下载 CV",
+        contact: "联系 Lu",
+      },
+      prompts: [
+        "Lu 的 AI for Science 方向是什么？",
+        "哪些项目最能体现 agent 能力？",
+        "他的电池和液流电池背景是什么？",
+        "我应该先看哪些论文或专利？",
+      ],
+    }
+  : {
+      eyebrow: "Site Agent",
+      title: "Ask Lu Zhang's Website Agent",
+      lead: "A safe static assistant for this portfolio. It does not call an external model or collect input. It routes visitors to the most relevant research, AI projects, CV, and contact links based on the public site content.",
+      placeholder: "Choose a question or type keywords: agent, RAG, battery, publications, contact...",
+      send: "Ask",
+      starter: "Try asking:",
+      note: "This version is a browser-side rules agent. It can later be connected to a scientificloop.com backend for a real RAG / agent API.",
+      fallback: "I can answer the core portfolio topics for now. Try agent, AI for science, battery, publication, patent, CV, contact, or VoiceRAG.",
+      actions: {
+        ai: "View AI projects",
+        publications: "View publications",
+        cv: "Download CV",
+        contact: "Contact Lu",
+      },
+      prompts: [
+        "What is Lu's AI for Science direction?",
+        "Which projects best show agent skills?",
+        "What is his battery and redox-flow background?",
+        "Which papers or patents should I look at first?",
+      ],
+    };
+
+const links = {
+  ai: u(locale === "zh" ? "/zh/ai/" : "/ai/"),
+  publications: u(locale === "zh" ? "/zh/publications/" : "/publications/"),
+  patents: u(locale === "zh" ? "/zh/patents/" : "/patents/"),
+  projects: u(locale === "zh" ? "/zh/projects/" : "/projects/"),
+  cv: u("/files/Lu_Zhang_CV.pdf"),
+  scholar: "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en",
+  github: "https://github.com/rockyzl",
+  linkedin: "https://www.linkedin.com/in/lu-zhang-argonne/",
+  email: "mailto:zhanglu77@gmail.com",
+  voicerag: "https://voicerag.sciencesloop.com/",
+};
+---
+
+<section class="agent-shell" data-site-agent data-locale={locale}>
+  <div class="agent-panel">
+    <div class="agent-copy">
+      <span class="eyebrow">{copy.eyebrow}</span>
+      <h1>{copy.title}</h1>
+      <p class="lead">{copy.lead}</p>
+      <div class="agent-actions">
+        <a class="btn btn-primary" href={links.ai}>{copy.actions.ai}</a>
+        <a class="btn btn-ghost" href={links.publications}>{copy.actions.publications}</a>
+        <a class="btn btn-ghost" href={links.cv} target="_blank" rel="noopener">{copy.actions.cv}</a>
+        <a class="btn btn-ghost" href={links.email}>{copy.actions.contact}</a>
+      </div>
+    </div>
+
+    <div class="agent-card" aria-live="polite">
+      <div class="agent-card-header">
+        <div>
+          <div class="agent-title">ScientificLoop Agent</div>
+          <div class="agent-subtitle">Static portfolio router</div>
+        </div>
+        <span class="agent-status">offline-safe</span>
+      </div>
+
+      <div class="agent-answer" data-agent-answer>
+        {locale === "zh"
+          ? "你好。我可以帮你快速了解 Lu 的 AI for Science、agent 系统、电池材料、论文专利和职业背景。"
+          : "Hi. I can help you navigate Lu's AI for Science, agent systems, battery materials, publications, patents, and career background."}
+      </div>
+
+      <div class="agent-suggestions">
+        <div class="agent-label">{copy.starter}</div>
+        {copy.prompts.map((prompt) => (
+          <button type="button" data-agent-prompt={prompt}>{prompt}</button>
+        ))}
+      </div>
+
+      <form class="agent-form" data-agent-form>
+        <input name="query" type="text" autocomplete="off" placeholder={copy.placeholder} />
+        <button type="submit">{copy.send}</button>
+      </form>
+      <p class="agent-note">{copy.note}</p>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ links, fallback: copy.fallback }}>
+  const answerSets = {
+    en: [
+      {
+        keys: ["agent", "agents", "rag", "mcp", "langgraph", "workflow", "harness", "ai for science"],
+        html: `Lu's current direction is AI for Science through practical agent systems: RAG, tool use, evaluation harnesses, MLOps, traceable workflow execution, and human-in-the-loop scientific decision support. Start with <a href="${links.ai}">AI projects</a>, then review GitHub for implementation artifacts.`,
+      },
+      {
+        keys: ["battery", "redox", "flow", "electrolyte", "redoxmer", "materials"],
+        html: `Lu's scientific base is battery materials and electrochemistry: redox-flow batteries, redox-active organic molecules, Li-ion electrolyte additives, redox shuttles, silicon-anode binders, and molecular design. See <a href="${links.publications}">publications</a> and <a href="${links.patents}">patents</a>.`,
+      },
+      {
+        keys: ["publication", "paper", "citation", "scholar", "patent"],
+        html: `For publication depth, use the <a href="${links.publications}">publication list</a> and <a href="${links.scholar}" target="_blank" rel="noopener">Google Scholar</a>. For invention output, see <a href="${links.patents}">patents</a>.`,
+      },
+      {
+        keys: ["voicerag", "voice", "guangnian", "lightyear", "sciencesloop"],
+        html: `The VoiceRAG / Lightyear demo is a deployed voice RAG assistant using realtime voice interaction and retrieval. Open <a href="${links.voicerag}" target="_blank" rel="noopener">voicerag.sciencesloop.com</a>.`,
+      },
+      {
+        keys: ["cv", "resume", "linkedin", "github", "contact", "email"],
+        html: `Use <a href="${links.cv}" target="_blank" rel="noopener">CV PDF</a> for the academic record, <a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a> for career context, <a href="${links.github}" target="_blank" rel="noopener">GitHub</a> for code, or <a href="${links.email}">email Lu</a>.`,
+      },
+    ],
+    zh: [
+      {
+        keys: ["agent", "智能体", "rag", "mcp", "langgraph", "workflow", "工作流", "ai for science"],
+        html: `Lu 现在的主线是把 agent 系统用于 AI for Science：RAG、工具调用、evaluation harness、MLOps、可追踪工作流和 human-in-the-loop 科学决策支持。先看 <a href="${links.ai}">AI 项目</a>，再看 GitHub 实现。`,
+      },
+      {
+        keys: ["battery", "电池", "redox", "flow", "液流", "electrolyte", "电解液", "redoxmer", "materials", "材料"],
+        html: `Lu 的科学基础是电池材料和电化学：液流电池、氧化还原活性有机分子、锂离子电解液添加剂、redox shuttle、硅负极粘合剂和分子设计。可看 <a href="${links.publications}">论文</a> 和 <a href="${links.patents}">专利</a>。`,
+      },
+      {
+        keys: ["publication", "paper", "论文", "citation", "引用", "scholar", "patent", "专利"],
+        html: `论文和引用看 <a href="${links.publications}">publication list</a> 与 <a href="${links.scholar}" target="_blank" rel="noopener">Google Scholar</a>。发明成果看 <a href="${links.patents}">专利</a>。`,
+      },
+      {
+        keys: ["voicerag", "voice", "语音", "guangnian", "光年", "lightyear", "sciencesloop"],
+        html: `VoiceRAG / Lightyear demo 是一个已部署的语音 RAG 助手，结合 realtime voice interaction 和检索。打开 <a href="${links.voicerag}" target="_blank" rel="noopener">voicerag.sciencesloop.com</a>。`,
+      },
+      {
+        keys: ["cv", "resume", "简历", "linkedin", "github", "contact", "email", "联系"],
+        html: `学术记录看 <a href="${links.cv}" target="_blank" rel="noopener">CV PDF</a>，职业背景看 <a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a>，代码看 <a href="${links.github}" target="_blank" rel="noopener">GitHub</a>，也可以 <a href="${links.email}">邮件联系 Lu</a>。`,
+      },
+    ],
+  };
+
+  function reply(locale, query) {
+    const normalized = query.toLowerCase();
+    const set = answerSets[locale] || answerSets.en;
+    const match = set.find((item) => item.keys.some((key) => normalized.includes(key.toLowerCase())));
+    return match ? match.html : fallback;
+  }
+
+  document.querySelectorAll("[data-site-agent]").forEach((root) => {
+    const locale = root.getAttribute("data-locale") || "en";
+    const answer = root.querySelector("[data-agent-answer]");
+    const form = root.querySelector("[data-agent-form]");
+    const input = form?.querySelector("input[name='query']");
+
+    root.querySelectorAll("[data-agent-prompt]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const query = button.getAttribute("data-agent-prompt") || "";
+        if (input) input.value = query;
+        if (answer) answer.innerHTML = reply(locale, query);
+      });
+    });
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const query = input?.value || "";
+      if (answer) answer.innerHTML = reply(locale, query);
+    });
+  });
+</script>

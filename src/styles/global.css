@@ -553,6 +553,171 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
 }
 
 /* ============================================================
+   SITE AGENT
+   ============================================================ */
+.agent-shell {
+  padding: 3rem 0 1rem;
+}
+.agent-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+  gap: 2rem;
+  align-items: start;
+}
+.agent-copy .lead {
+  font-size: 1.03rem;
+  color: var(--c-fg);
+  max-width: 620px;
+}
+.agent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+}
+.agent-card {
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.1rem;
+}
+.agent-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--c-border-soft);
+  padding-bottom: 0.9rem;
+  margin-bottom: 1rem;
+}
+.agent-title {
+  font-family: var(--font-mono);
+  color: var(--c-ink);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.agent-subtitle {
+  color: var(--c-muted);
+  font-size: 0.82rem;
+  margin-top: 0.1rem;
+}
+.agent-status {
+  flex-shrink: 0;
+  border: 1px solid var(--c-border);
+  border-radius: 999px;
+  color: var(--c-muted);
+  background: var(--c-bg-soft);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+}
+.agent-answer {
+  min-height: 7rem;
+  background:
+    linear-gradient(180deg, rgba(219, 234, 254, 0.52), rgba(255, 255, 255, 0.92));
+  border: 1px solid var(--c-border-soft);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  color: var(--c-fg);
+  font-size: 0.95rem;
+}
+.agent-answer a {
+  font-weight: 600;
+}
+.agent-suggestions {
+  margin-top: 1rem;
+}
+.agent-label {
+  color: var(--c-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.agent-suggestions button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--c-border);
+  background: var(--c-bg-soft);
+  color: var(--c-fg);
+  border-radius: var(--radius-sm);
+  padding: 0.58rem 0.72rem;
+  margin-top: 0.45rem;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color .15s, color .15s, background .15s;
+}
+.agent-suggestions button:hover {
+  border-color: var(--c-accent-soft);
+  color: var(--c-accent);
+  background: #f8fbff;
+}
+.agent-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+.agent-form input {
+  min-width: 0;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.75rem;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--c-fg);
+  background: var(--c-bg-soft);
+}
+.agent-form input:focus {
+  outline: none;
+  border-color: var(--c-accent-soft);
+  background: var(--c-card);
+}
+.agent-form button {
+  border: 1px solid var(--c-accent);
+  border-radius: var(--radius-sm);
+  background: var(--c-accent);
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.65rem 0.9rem;
+  cursor: pointer;
+}
+.agent-form button:hover {
+  background: var(--c-rust);
+  border-color: var(--c-rust);
+}
+.agent-note {
+  color: var(--c-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  margin: 0.75rem 0 0;
+}
+@media (max-width: 860px) {
+  .agent-panel {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .agent-shell {
+    padding-top: 2rem;
+  }
+  .agent-card {
+    padding: 0.85rem;
+  }
+  .agent-form {
+    grid-template-columns: 1fr;
+  }
+  .agent-form button {
+    width: 100%;
+  }
+}
+
+/* ============================================================
    LISTS  (publications / patents / talks entries)
    ============================================================ */
 .entry {

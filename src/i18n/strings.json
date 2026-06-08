@@ -44,6 +44,10 @@
     "en": "AI",
     "zh": "AI"
   },
+  "nav.agent": {
+    "en": "Agent",
+    "zh": "智能体"
+  },
   "page.awards.eyebrow": {
     "en": "Awards · Service · Recognition",
     "zh": "荣誉 · 服务 · 认可"
@@ -135,6 +139,10 @@
   "home.cta.ai": {
     "en": "AI projects",
     "zh": "AI 项目"
+  },
+  "home.cta.agent": {
+    "en": "Ask the agent",
+    "zh": "问智能体"
   },
   "home.cta.about": {
     "en": "About",
