@@ -8,21 +8,26 @@ const copy = locale === "zh"
   ? {
       eyebrow: "站内智能体",
       title: "问 Lu Zhang 网站智能体",
-      lead: "这是一个安全的静态站内助手：它不会调用外部模型，也不会收集输入。它会根据网站已有内容，把访客导向最相关的论文、项目、简历和联系方式。",
-      placeholder: "选择一个问题，或输入关键词：agent, RAG, battery, publications, contact...",
+      lead: "这是一个公开安全的站内智能体：它不会调用外部模型，也不会收集输入。它把访客的问题映射到网站里的论文、项目、简历、AI 工作和联系方式。",
+      placeholder: "输入关键词：agent, RAG, MLOps, battery, Argonne, publications, contact...",
       send: "查询",
       starter: "可以先问：",
-      note: "当前版本是浏览器端规则助手。未来可以接入 scientificloop.com 后端，升级成真正的 RAG / agent API。",
-      fallback: "我现在只能回答职业主页里的核心主题。你可以试试 agent、AI for science、battery、publication、patent、CV、contact、VoiceRAG。",
+      status: "public-safe static agent",
+      matched: "匹配主题",
+      next: "建议下一步",
+      note: "当前版本在浏览器端运行，只基于公开网站内容做导航。下一阶段会接入 scientificloop.com 后端，升级为带引用的 RAG / agent API。",
+      fallback: "我现在只能回答公开职业主页里的核心主题。可以试试 agent、AI for science、MLOps、battery、Argonne、publication、patent、CV、contact、VoiceRAG。",
       actions: {
         ai: "看 AI 项目",
         publications: "看论文",
         cv: "下载 CV",
         contact: "联系 Lu",
+        roadmap: "查看路线图",
       },
       prompts: [
         "Lu 的 AI for Science 方向是什么？",
         "哪些项目最能体现 agent 能力？",
+        "他有哪些 MLOps / evaluation 经验？",
         "他的电池和液流电池背景是什么？",
         "我应该先看哪些论文或专利？",
       ],
@@ -30,21 +35,26 @@ const copy = locale === "zh"
   : {
       eyebrow: "Site Agent",
       title: "Ask Lu Zhang's Website Agent",
-      lead: "A safe static assistant for this portfolio. It does not call an external model or collect input. It routes visitors to the most relevant research, AI projects, CV, and contact links based on the public site content.",
-      placeholder: "Choose a question or type keywords: agent, RAG, battery, publications, contact...",
+      lead: "A public-safe site agent for this portfolio. It does not call an external model or collect input. It maps visitor questions to the most relevant public research, AI work, CV, and contact paths.",
+      placeholder: "Type keywords: agent, RAG, MLOps, battery, Argonne, publications, contact...",
       send: "Ask",
       starter: "Try asking:",
-      note: "This version is a browser-side rules agent. It can later be connected to a scientificloop.com backend for a real RAG / agent API.",
-      fallback: "I can answer the core portfolio topics for now. Try agent, AI for science, battery, publication, patent, CV, contact, or VoiceRAG.",
+      status: "public-safe static agent",
+      matched: "Matched topic",
+      next: "Suggested next step",
+      note: "This version runs in the browser and only routes across public site content. The next phase is a scientificloop.com backend with cited RAG / agent API responses.",
+      fallback: "I can answer the core public portfolio topics for now. Try agent, AI for science, MLOps, battery, Argonne, publication, patent, CV, contact, or VoiceRAG.",
       actions: {
         ai: "View AI projects",
         publications: "View publications",
         cv: "Download CV",
         contact: "Contact Lu",
+        roadmap: "View roadmap",
       },
       prompts: [
         "What is Lu's AI for Science direction?",
         "Which projects best show agent skills?",
+        "What MLOps and evaluation experience does he have?",
         "What is his battery and redox-flow background?",
         "Which papers or patents should I look at first?",
       ],
@@ -55,6 +65,8 @@ const links = {
   publications: u(locale === "zh" ? "/zh/publications/" : "/publications/"),
   patents: u(locale === "zh" ? "/zh/patents/" : "/patents/"),
   projects: u(locale === "zh" ? "/zh/projects/" : "/projects/"),
+  about: u(locale === "zh" ? "/zh/about/" : "/about/"),
+  awards: u(locale === "zh" ? "/zh/awards/" : "/awards/"),
   cv: u("/files/Lu_Zhang_CV.pdf"),
   scholar: "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en",
   github: "https://github.com/rockyzl",
@@ -82,15 +94,19 @@ const links = {
       <div class="agent-card-header">
         <div>
           <div class="agent-title">ScientificLoop Agent</div>
-          <div class="agent-subtitle">Static portfolio router</div>
+          <div class="agent-subtitle">{copy.status}</div>
         </div>
-        <span class="agent-status">offline-safe</span>
+        <span class="agent-status">no data collection</span>
       </div>
 
       <div class="agent-answer" data-agent-answer>
-        {locale === "zh"
-          ? "你好。我可以帮你快速了解 Lu 的 AI for Science、agent 系统、电池材料、论文专利和职业背景。"
-          : "Hi. I can help you navigate Lu's AI for Science, agent systems, battery materials, publications, patents, and career background."}
+        <div class="agent-topic">{copy.matched}: {locale === "zh" ? "开始" : "Start"}</div>
+        <div>
+          {locale === "zh"
+            ? "你好。我可以帮你快速了解 Lu 的 AI for Science、agent 系统、电池材料、论文专利和职业背景。"
+            : "Hi. I can help you navigate Lu's AI for Science, agent systems, battery materials, publications, patents, and career background."}
+        </div>
+        <div class="agent-next">{copy.next}: <a href={links.ai}>{copy.actions.ai}</a></div>
       </div>
 
       <div class="agent-suggestions">
@@ -104,53 +120,103 @@ const links = {
         <input name="query" type="text" autocomplete="off" placeholder={copy.placeholder} />
         <button type="submit">{copy.send}</button>
       </form>
+      <div class="agent-quicklinks" aria-label="Agent quick links">
+        <a href={links.ai}>{copy.actions.ai}</a>
+        <a href={links.projects}>{locale === "zh" ? "项目" : "Projects"}</a>
+        <a href={links.publications}>{copy.actions.publications}</a>
+        <a href={links.about}>{locale === "zh" ? "背景" : "Background"}</a>
+      </div>
       <p class="agent-note">{copy.note}</p>
     </div>
   </div>
 </section>
 
-<script define:vars={{ links, fallback: copy.fallback }}>
+<script define:vars={{ links, fallback: copy.fallback, labels: { matched: copy.matched, next: copy.next } }}>
   const answerSets = {
     en: [
       {
-        keys: ["agent", "agents", "rag", "mcp", "langgraph", "workflow", "harness", "ai for science"],
-        html: `Lu's current direction is AI for Science through practical agent systems: RAG, tool use, evaluation harnesses, MLOps, traceable workflow execution, and human-in-the-loop scientific decision support. Start with <a href="${links.ai}">AI projects</a>, then review GitHub for implementation artifacts.`,
+        topic: "AI for Science agents",
+        next: `<a href="${links.ai}">Open AI projects</a>`,
+        keys: ["agent", "agents", "rag", "mcp", "langgraph", "workflow", "harness", "ai for science", "scientific agent"],
+        html: `Lu's current direction is AI for Science through practical agent systems: RAG, tool use, evaluation harnesses, traceable workflow execution, and human-in-the-loop scientific decision support. The public site highlights this as a bridge between battery science and applied AI systems.`,
       },
       {
+        topic: "MLOps and evaluation",
+        next: `<a href="${links.ai}">Review AI systems work</a>`,
+        keys: ["mlops", "eval", "evaluation", "observability", "trace", "smoke test", "deployment", "azure", "docker", "search"],
+        html: `Lu's recent AI engineering work emphasizes production readiness: retrieval evaluation, smoke tests, trace review, Azure deployment readiness, Docker runtime configuration, and rollback-oriented search-index workflows. This is application-layer AI/MLOps experience, not model pretraining research.`,
+      },
+      {
+        topic: "Battery materials and redox-flow background",
+        next: `<a href="${links.publications}">Browse publications</a>`,
         keys: ["battery", "redox", "flow", "electrolyte", "redoxmer", "materials"],
         html: `Lu's scientific base is battery materials and electrochemistry: redox-flow batteries, redox-active organic molecules, Li-ion electrolyte additives, redox shuttles, silicon-anode binders, and molecular design. See <a href="${links.publications}">publications</a> and <a href="${links.patents}">patents</a>.`,
       },
       {
+        topic: "Publications and patents",
+        next: `<a href="${links.scholar}" target="_blank" rel="noopener">Open Google Scholar</a>`,
         keys: ["publication", "paper", "citation", "scholar", "patent"],
         html: `For publication depth, use the <a href="${links.publications}">publication list</a> and <a href="${links.scholar}" target="_blank" rel="noopener">Google Scholar</a>. For invention output, see <a href="${links.patents}">patents</a>.`,
       },
       {
+        topic: "Argonne and autonomous discovery",
+        next: `<a href="${links.projects}">Review research projects</a>`,
+        keys: ["argonne", "anl", "autonomous", "discovery", "robotic", "jcesr", "doe", "national lab"],
+        html: `Lu spent 14+ years at Argonne working on battery materials, redox molecules, DOE/JCESR programs, and selected AI/ML, high-throughput, and autonomous-discovery collaborations. The strongest positioning is AI for Science built on deep scientific domain expertise.`,
+      },
+      {
+        topic: "VoiceRAG / Lightyear demo",
+        next: `<a href="${links.voicerag}" target="_blank" rel="noopener">Open VoiceRAG</a>`,
         keys: ["voicerag", "voice", "guangnian", "lightyear", "sciencesloop"],
         html: `The VoiceRAG / Lightyear demo is a deployed voice RAG assistant using realtime voice interaction and retrieval. Open <a href="${links.voicerag}" target="_blank" rel="noopener">voicerag.sciencesloop.com</a>.`,
       },
       {
+        topic: "Contact and profile links",
+        next: `<a href="${links.cv}" target="_blank" rel="noopener">Download CV</a>`,
         keys: ["cv", "resume", "linkedin", "github", "contact", "email"],
         html: `Use <a href="${links.cv}" target="_blank" rel="noopener">CV PDF</a> for the academic record, <a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a> for career context, <a href="${links.github}" target="_blank" rel="noopener">GitHub</a> for code, or <a href="${links.email}">email Lu</a>.`,
       },
     ],
     zh: [
       {
+        topic: "AI for Science 智能体",
+        next: `<a href="${links.ai}">打开 AI 项目</a>`,
         keys: ["agent", "智能体", "rag", "mcp", "langgraph", "workflow", "工作流", "ai for science"],
-        html: `Lu 现在的主线是把 agent 系统用于 AI for Science：RAG、工具调用、evaluation harness、MLOps、可追踪工作流和 human-in-the-loop 科学决策支持。先看 <a href="${links.ai}">AI 项目</a>，再看 GitHub 实现。`,
+        html: `Lu 现在的主线是把 agent 系统用于 AI for Science：RAG、工具调用、evaluation harness、可追踪工作流和 human-in-the-loop 科学决策支持。这个方向把电池材料科学背景和应用层 AI 系统结合起来。`,
       },
       {
+        topic: "MLOps 与 evaluation",
+        next: `<a href="${links.ai}">查看 AI 系统工作</a>`,
+        keys: ["mlops", "eval", "evaluation", "评估", "观测", "trace", "smoke test", "部署", "azure", "docker", "search"],
+        html: `Lu 最近的 AI 工程重点是生产准备度：retrieval evaluation、smoke tests、trace review、Azure deployment readiness、Docker runtime configuration，以及可回滚的 search-index 工作流。这是应用层 AI/MLOps 经验，不是模型预训练研究。`,
+      },
+      {
+        topic: "电池材料与液流电池",
+        next: `<a href="${links.publications}">浏览论文</a>`,
         keys: ["battery", "电池", "redox", "flow", "液流", "electrolyte", "电解液", "redoxmer", "materials", "材料"],
         html: `Lu 的科学基础是电池材料和电化学：液流电池、氧化还原活性有机分子、锂离子电解液添加剂、redox shuttle、硅负极粘合剂和分子设计。可看 <a href="${links.publications}">论文</a> 和 <a href="${links.patents}">专利</a>。`,
       },
       {
+        topic: "论文与专利",
+        next: `<a href="${links.scholar}" target="_blank" rel="noopener">打开 Google Scholar</a>`,
         keys: ["publication", "paper", "论文", "citation", "引用", "scholar", "patent", "专利"],
         html: `论文和引用看 <a href="${links.publications}">publication list</a> 与 <a href="${links.scholar}" target="_blank" rel="noopener">Google Scholar</a>。发明成果看 <a href="${links.patents}">专利</a>。`,
       },
       {
+        topic: "Argonne 与 autonomous discovery",
+        next: `<a href="${links.projects}">查看科研项目</a>`,
+        keys: ["argonne", "anl", "阿贡", "autonomous", "自主发现", "discovery", "robotic", "机器人", "jcesr", "doe", "国家实验室"],
+        html: `Lu 在 Argonne 有 14+ 年电池材料、redox molecules、DOE/JCESR 项目经验，并参与过部分 AI/ML、高通量和 autonomous-discovery 合作。最强定位是以深厚科学背景为基础的 AI for Science。`,
+      },
+      {
+        topic: "VoiceRAG / Lightyear demo",
+        next: `<a href="${links.voicerag}" target="_blank" rel="noopener">打开 VoiceRAG</a>`,
         keys: ["voicerag", "voice", "语音", "guangnian", "光年", "lightyear", "sciencesloop"],
         html: `VoiceRAG / Lightyear demo 是一个已部署的语音 RAG 助手，结合 realtime voice interaction 和检索。打开 <a href="${links.voicerag}" target="_blank" rel="noopener">voicerag.sciencesloop.com</a>。`,
       },
       {
+        topic: "联系与公开链接",
+        next: `<a href="${links.cv}" target="_blank" rel="noopener">下载 CV</a>`,
         keys: ["cv", "resume", "简历", "linkedin", "github", "contact", "email", "联系"],
         html: `学术记录看 <a href="${links.cv}" target="_blank" rel="noopener">CV PDF</a>，职业背景看 <a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a>，代码看 <a href="${links.github}" target="_blank" rel="noopener">GitHub</a>，也可以 <a href="${links.email}">邮件联系 Lu</a>。`,
       },
@@ -161,7 +227,14 @@ const links = {
     const normalized = query.toLowerCase();
     const set = answerSets[locale] || answerSets.en;
     const match = set.find((item) => item.keys.some((key) => normalized.includes(key.toLowerCase())));
-    return match ? match.html : fallback;
+    const topic = match ? match.topic : "Fallback";
+    const html = match ? match.html : fallback;
+    const next = match ? match.next : `<a href="${links.ai}">AI projects</a>`;
+    return `
+      <div class="agent-topic">${labels.matched}: ${topic}</div>
+      <div>${html}</div>
+      <div class="agent-next">${labels.next}: ${next}</div>
+    `;
   }
 
   document.querySelectorAll("[data-site-agent]").forEach((root) => {

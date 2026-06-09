@@ -625,6 +625,22 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
 .agent-answer a {
   font-weight: 600;
 }
+.agent-topic {
+  font-family: var(--font-mono);
+  color: var(--c-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 0.55rem;
+}
+.agent-next {
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--c-border-soft);
+  color: var(--c-muted);
+  font-size: 0.86rem;
+}
 .agent-suggestions {
   margin-top: 1rem;
 }
@@ -696,6 +712,25 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   font-size: 0.78rem;
   line-height: 1.45;
   margin: 0.75rem 0 0;
+}
+.agent-quicklinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+}
+.agent-quicklinks a {
+  border: 1px solid var(--c-border-soft);
+  border-radius: 999px;
+  background: var(--c-card);
+  color: var(--c-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.22rem 0.58rem;
+}
+.agent-quicklinks a:hover {
+  border-color: var(--c-accent-soft);
+  color: var(--c-accent);
 }
 @media (max-width: 860px) {
   .agent-panel {
