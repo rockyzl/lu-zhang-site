@@ -27,7 +27,7 @@
     "date": "2026-04",
     "tag": "AI",
     "title": "Building rfb-formulation-agent — AI scientist for redox flow battery formulation",
-    "blurb": "A vertical AI alternative to general-purpose materials platforms. Distilling 14+ years of flow-battery intuition into automated electrolyte screening. Pre-v0.1.",
+    "blurb": "A pre-v0.1 vertical AI prototype for redox-flow-battery formulation support. The goal is to connect 14+ years of flow-battery intuition with structured retrieval, reasoning, and validation workflows.",
     "image": null,
     "link": "https://github.com/rockyzl"
   },

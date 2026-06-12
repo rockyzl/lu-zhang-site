@@ -49,7 +49,7 @@
   {
     "name": "rfb-formulation-agent",
     "tagline": "AI scientist for redox flow battery formulation",
-    "description": "A vertical-domain AI agent that screens electrolyte formulations for redox flow batteries. Distills 14+ years of flow-battery chemistry into automated reasoning. The flagship intersection of battery science + AI.",
+    "description": "A pre-v0.1 vertical-domain AI agent prototype designed to support redox-flow-battery electrolyte formulation. It aims to translate 14+ years of flow-battery chemistry intuition into structured reasoning, retrieval, and validation workflows.",
     "status": "In progress · pre-v0.1",
     "tags": [
       "LLM agents",

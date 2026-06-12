@@ -28,6 +28,7 @@ jobs:
         env:
           ASTRO_SITE: https://rockyzl.github.io
           ASTRO_BASE: /lu-zhang-site
+          PUBLIC_AGENT_API_URL: https://scientificloop-agent-api.vercel.app/api/agent
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
