@@ -129,8 +129,8 @@
     "zh": "AI/ML 工程师，曾任阿贡国家实验室科学家；当前构建科学智能体、RAG、MLOps 工作流和 AI 驱动的材料发现系统。"
   },
   "home.lead": {
-    "en": "14+ years of DOE battery research at Argonne, 100+ publications, 23 granted U.S. patents, 4,700+ citations, and recent production AI work spanning agent orchestration, Azure AI Search, evaluation, observability, and deployment readiness.",
-    "zh": "在阿贡拥有 14+ 年 DOE 电池研究经验，100+ 论文、23 项授权美国专利、4,700+ 引用；近期生产级 AI 工作覆盖智能体编排、Azure AI Search、评估、可观测性和部署准备。"
+    "en": "14+ years of DOE battery research at Argonne, 100+ publications, 23 granted U.S. patents, 4,700+ citations, and recent applied AI engineering work spanning agent orchestration, Azure AI Search, evaluation, observability, and deployment readiness.",
+    "zh": "在阿贡拥有 14+ 年 DOE 电池研究经验，100+ 论文、23 项授权美国专利、4,700+ 引用；近期应用 AI 工程工作覆盖智能体编排、Azure AI Search、评估、可观测性和部署准备。"
   },
   "home.cta.publications": {
     "en": "Publications →",
@@ -425,8 +425,8 @@
     "zh": "化学与代码的交汇"
   },
   "page.ai.lead": {
-    "en": "Most ML-for-materials systems are built by engineers without chemistry intuition; most battery scientists never operate production ML pipelines. The combination — a senior chemist with R&D 100 winning flow-battery work and three years of insurance-grade ML at scale — is rare, and is the foundation for industrial-scale energy-storage AI going forward.",
-    "zh": "大多数材料 AI 系统由没有化学直觉的工程师搭建；大多数电池科学家从未运营过工业级 ML 管线。两者兼具——R&D 100 获奖资深化学家 + 三年工业级 ML 实战经验——这种组合罕见，也是未来工业级储能 AI 工作的基础。"
+    "en": "This page tracks practical AI systems work at the intersection of scientific domain knowledge and applied engineering: public-site agents, RAG workflows, evaluation harnesses, data pipelines, and selected AI-for-science prototypes connected to battery and materials research.",
+    "zh": "这一页记录科学领域知识与应用工程交叉处的 AI 系统实践：公开网站智能体、RAG 工作流、evaluation harness、数据管线，以及与电池和材料研究相关的 AI for Science 原型。"
   },
   "page.ai.selected": {
     "en": "Selected projects",

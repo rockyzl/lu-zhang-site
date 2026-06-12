@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import ScienceArt from "../components/ScienceArt.astro";
+import SiteAgent from "../components/SiteAgent.astro";
 import { u } from "../lib/url";
 import { detectLocale, t } from "../lib/i18n";
 import publications from "../data/publications.json";
@@ -33,26 +33,33 @@ const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").len
   description="AI/ML engineer and former Argonne scientist building scientific agents, RAG, MLOps workflows, and AI-enabled materials discovery systems across battery science, autonomous discovery, and production ML."
 >
   <div class="container">
-    <section class="hero">
-      <div>
+    <section class="home-agent-hero">
+      <div class="home-agent-intro">
         <span class="eyebrow">{t("home.eyebrow", locale)}</span>
         <h1>Lu Zhang, Ph.D.</h1>
-        <p class="role">{t("home.role", locale)}</p>
-        <p class="lead">{t("home.lead", locale)}</p>
+        <p class="role">AI for Science systems, scientific agents, and battery materials expertise.</p>
+        <p class="lead">
+          I build public-facing AI systems for scientific navigation and evaluation, grounded in a long research background in battery materials, electrochemistry, and autonomous discovery.
+        </p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href={u(`${lp}/publications/`)}>{t("home.cta.publications", locale)}</a>
-          <a class="btn btn-ghost" href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">{locale === "zh" ? "↓ 简历 PDF" : "↓ CV (PDF)"}</a>
+          <a class="btn btn-primary" href={u(`${lp}/agent/`)}>{t("home.cta.agent", locale)}</a>
           <a class="btn btn-ghost" href={u(`${lp}/ai/`)}>{t("home.cta.ai", locale)}</a>
-          <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>{t("home.cta.agent", locale)}</a>
+          <a class="btn btn-ghost" href={u(`${lp}/publications/`)}>{t("home.cta.publications", locale)}</a>
+          <a class="btn btn-ghost" href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">{locale === "zh" ? "↓ 简历 PDF" : "↓ CV (PDF)"}</a>
           <a class="btn btn-ghost" href={u(`${lp}/about/`)}>{t("home.cta.about", locale)}</a>
         </div>
       </div>
-      <div class="portrait">
-        <ScienceArt class="science-art" />
-        <span class="placeholder-hint">{t("home.portrait.hint", locale)}</span>
-        <img src={u("/images/portrait.jpg")} alt="Lu Zhang" onerror="this.remove()" />
+      <div class="home-agent-embed">
+        <SiteAgent locale="en" mode="home" />
       </div>
     </section>
+
+    <div class="agent-trust-strip" aria-label="Agent boundaries">
+      <span>Public website corpus</span>
+      <span>Cited sources when available</span>
+      <span>Not connected to private files</span>
+      <span>Local fallback when live API is unavailable</span>
+    </div>
 
     <div class="stat-bar">
       <div class="stat"><div class="num">{SCI_COUNT}</div><div class="label">{t("stat.papers", locale)}</div></div>
@@ -62,60 +69,6 @@ const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").len
       <div class="stat"><div class="num">{CITATION_COUNT}</div><div class="label">{t("stat.citations", locale)}</div></div>
       <div class="stat"><div class="num">{H_INDEX}</div><div class="label">{t("stat.h", locale)}</div></div>
       <div class="stat"><div class="num">{FIRST_OR_CORRESP}</div><div class="label">{t("stat.first", locale)}</div></div>
-    </div>
-
-    <div class="section-head">
-      <h2>{t("section.recent", locale)}</h2>
-      <span class="more">{t("section.recent.note", locale)}</span>
-    </div>
-    <div class="news-list">
-      {news.map((n) => (
-        <article class="news-item">
-          <div class="news-meta">
-            <div class="date">{n.date}</div>
-            <span class={`news-tag ${n.tag}`}>{n.tag}</span>
-          </div>
-          <div class="news-body">
-            <div class="title">
-              {n.link ? <a href={n.link}>{n.title}</a> : n.title}
-            </div>
-            <div class="blurb">{n.blurb}</div>
-          </div>
-          {n.image && (
-            <a class="preview" href={n.link ?? "#"}>
-              <img src={u(n.image)} alt={n.title} loading="lazy" />
-            </a>
-          )}
-        </article>
-      ))}
-    </div>
-
-    <div class="section-head">
-      <h2>{t("section.featured", locale)}</h2>
-      <a class="more" href={u(`${lp}/publications/`)}>{t("section.featured.more", locale)}</a>
-    </div>
-    <div class="featured-grid">
-      {featured.map((f) => (
-        <a class="feature-card" href={f.doi ?? "#"}>
-          {f.image ? (
-            <div class="cover"><img src={u(f.image)} alt={f.title} loading="lazy" /></div>
-          ) : (
-            <div class={`cover gradient ${f.gradient ?? "from-amber to-rust"}`}>
-              <span class="glyph">{f.journal}<br/><span style="font-weight:400; font-size:0.85em;">{f.year}</span></span>
-            </div>
-          )}
-          <div class="body">
-            <div class="title">{f.title}</div>
-            <div class="meta">
-              {f.journal} · {f.year}
-              {f.citations ? ` · ${f.citations} citations` : ""}
-              {f.role === "first" && <span class="badge first">first</span>}
-              {f.role === "corresponding" && <span class="badge corresponding">corresp.</span>}
-            </div>
-            <div class="highlight">{f.highlight}</div>
-          </div>
-        </a>
-      ))}
     </div>
 
     <div class="section-head">
@@ -150,6 +103,60 @@ const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").len
           </Outer>
         );
       })}
+    </div>
+
+    <div class="section-head">
+      <h2>{t("section.featured", locale)}</h2>
+      <a class="more" href={u(`${lp}/publications/`)}>{t("section.featured.more", locale)}</a>
+    </div>
+    <div class="featured-grid">
+      {featured.map((f) => (
+        <a class="feature-card" href={f.doi ?? "#"}>
+          {f.image ? (
+            <div class="cover"><img src={u(f.image)} alt={f.title} loading="lazy" /></div>
+          ) : (
+            <div class={`cover gradient ${f.gradient ?? "from-amber to-rust"}`}>
+              <span class="glyph">{f.journal}<br/><span style="font-weight:400; font-size:0.85em;">{f.year}</span></span>
+            </div>
+          )}
+          <div class="body">
+            <div class="title">{f.title}</div>
+            <div class="meta">
+              {f.journal} · {f.year}
+              {f.citations ? ` · ${f.citations} citations` : ""}
+              {f.role === "first" && <span class="badge first">first</span>}
+              {f.role === "corresponding" && <span class="badge corresponding">corresp.</span>}
+            </div>
+            <div class="highlight">{f.highlight}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="section-head">
+      <h2>{t("section.recent", locale)}</h2>
+      <span class="more">{t("section.recent.note", locale)}</span>
+    </div>
+    <div class="news-list">
+      {news.map((n) => (
+        <article class="news-item">
+          <div class="news-meta">
+            <div class="date">{n.date}</div>
+            <span class={`news-tag ${n.tag}`}>{n.tag}</span>
+          </div>
+          <div class="news-body">
+            <div class="title">
+              {n.link ? <a href={n.link}>{n.title}</a> : n.title}
+            </div>
+            <div class="blurb">{n.blurb}</div>
+          </div>
+          {n.image && (
+            <a class="preview" href={n.link ?? "#"}>
+              <img src={u(n.image)} alt={n.title} loading="lazy" />
+            </a>
+          )}
+        </article>
+      ))}
     </div>
   </div>
 </Base>

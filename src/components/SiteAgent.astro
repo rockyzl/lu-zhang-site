@@ -2,28 +2,30 @@
 import { u } from "../lib/url";
 import type { Locale } from "../lib/i18n";
 
-const { locale = "en" } = Astro.props as { locale?: Locale };
+const { locale = "en", mode = "full" } = Astro.props as { locale?: Locale; mode?: "full" | "home" };
 const agentApiUrl = import.meta.env.PUBLIC_AGENT_API_URL ?? "";
+const isHomeMode = mode === "home";
 
 const copy = locale === "zh"
   ? {
       eyebrow: "站内智能体",
       title: "问 Lu Zhang 网站智能体",
       lead: agentApiUrl
-        ? "这是一个公开安全的 ScientificLoop 智能体：它会调用后端 RAG / LLM API，并只基于公开网站内容生成带引用回答。"
-        : "这是一个公开安全的站内智能体：它不会调用外部模型，也不会收集输入。它把访客的问题映射到网站里的论文、项目、简历、AI 工作和联系方式。",
+        ? "这是一个公开安全的 ScientificLoop 智能体：它会调用后端 RAG / LLM API，目标是基于公开网站内容回答，并在可用时返回引用来源。"
+        : "这是一个公开安全的站内智能体：当前本地模式不调用外部模型，只把访客问题映射到公开网站里的论文、项目、简历、AI 工作和联系方式。",
       placeholder: "输入关键词：agent, RAG, MLOps, battery, Argonne, publications, contact...",
       send: "查询",
       starter: "可以先问：",
       status: agentApiUrl ? "public-safe RAG agent" : "public-safe static agent",
+      statusBadge: "公开语料",
       matched: "匹配主题",
       next: "建议下一步",
       thinking: "正在检索公开语料并生成回答...",
       apiError: "实时 agent 暂时不可用，已切换到本地规则回答。",
       sources: "来源",
       note: agentApiUrl
-        ? "当前版本调用 ScientificLoop 后端，只使用公开网站语料。不会读取或保存私人文件。"
-        : "当前版本在浏览器端运行，只基于公开网站内容做导航。下一阶段会接入 scientificloop.com 后端，升级为带引用的 RAG / agent API。",
+        ? "当前版本调用 ScientificLoop 后端，只使用公开网站语料；未连接私人文件。可用时会返回引用来源。"
+        : "当前版本在浏览器端运行，只基于公开网站内容做导航；未连接私人文件。线上 API 不可用时会保留这个本地 fallback。",
       fallback: "我现在只能回答公开职业主页里的核心主题。可以试试 agent、AI for science、MLOps、battery、Argonne、publication、patent、CV、contact、VoiceRAG。",
       actions: {
         ai: "看 AI 项目",
@@ -44,20 +46,21 @@ const copy = locale === "zh"
       eyebrow: "Site Agent",
       title: "Ask Lu Zhang's Website Agent",
       lead: agentApiUrl
-        ? "A public-safe ScientificLoop agent backed by a RAG / LLM API. It answers from public website content and returns cited sources."
-        : "A public-safe site agent for this portfolio. It does not call an external model or collect input. It maps visitor questions to the most relevant public research, AI work, CV, and contact paths.",
+        ? "A public-safe ScientificLoop agent backed by a RAG / LLM API. It is intended to answer from public website content and returns cited sources when available."
+        : "A public-safe site agent for this portfolio. In local mode it does not call an external model; it maps visitor questions to the most relevant public research, AI work, CV, and contact paths.",
       placeholder: "Type keywords: agent, RAG, MLOps, battery, Argonne, publications, contact...",
       send: "Ask",
       starter: "Try asking:",
       status: agentApiUrl ? "public-safe RAG agent" : "public-safe static agent",
+      statusBadge: "public corpus",
       matched: "Matched topic",
       next: "Suggested next step",
       thinking: "Retrieving public context and generating an answer...",
       apiError: "Live agent is temporarily unavailable, so I switched to the local rules answer.",
       sources: "Sources",
       note: agentApiUrl
-        ? "This version calls the ScientificLoop backend using only public website corpus. It does not read or store private files."
-        : "This version runs in the browser and only routes across public site content. The next phase is a scientificloop.com backend with cited RAG / agent API responses.",
+        ? "This version calls the ScientificLoop backend using only public website corpus. It is not connected to private files and returns cited sources when available."
+        : "This version runs in the browser and only routes across public site content. It is not connected to private files, and it remains available as a local fallback when the live API is unavailable.",
       fallback: "I can answer the core public portfolio topics for now. Try agent, AI for science, MLOps, battery, Argonne, publication, patent, CV, contact, or VoiceRAG.",
       actions: {
         ai: "View AI projects",
@@ -91,19 +94,21 @@ const links = {
 };
 ---
 
-<section class="agent-shell" data-site-agent data-locale={locale}>
+<section class={`agent-shell agent-shell--${mode}`} data-site-agent data-locale={locale}>
   <div class="agent-panel">
-    <div class="agent-copy">
-      <span class="eyebrow">{copy.eyebrow}</span>
-      <h1>{copy.title}</h1>
-      <p class="lead">{copy.lead}</p>
-      <div class="agent-actions">
-        <a class="btn btn-primary" href={links.ai}>{copy.actions.ai}</a>
-        <a class="btn btn-ghost" href={links.publications}>{copy.actions.publications}</a>
-        <a class="btn btn-ghost" href={links.cv} target="_blank" rel="noopener">{copy.actions.cv}</a>
-        <a class="btn btn-ghost" href={links.email}>{copy.actions.contact}</a>
+    {!isHomeMode && (
+      <div class="agent-copy">
+        <span class="eyebrow">{copy.eyebrow}</span>
+        <h1>{copy.title}</h1>
+        <p class="lead">{copy.lead}</p>
+        <div class="agent-actions">
+          <a class="btn btn-primary" href={links.ai}>{copy.actions.ai}</a>
+          <a class="btn btn-ghost" href={links.publications}>{copy.actions.publications}</a>
+          <a class="btn btn-ghost" href={links.cv} target="_blank" rel="noopener">{copy.actions.cv}</a>
+          <a class="btn btn-ghost" href={links.email}>{copy.actions.contact}</a>
+        </div>
       </div>
-    </div>
+    )}
 
     <div class="agent-card" aria-live="polite">
       <div class="agent-card-header">
@@ -111,8 +116,13 @@ const links = {
           <div class="agent-title">ScientificLoop Agent</div>
           <div class="agent-subtitle">{copy.status}</div>
         </div>
-        <span class="agent-status">no data collection</span>
+        <span class="agent-status">{copy.statusBadge}</span>
       </div>
+
+      <form class="agent-form" data-agent-form>
+        <input name="query" type="text" autocomplete="off" placeholder={copy.placeholder} />
+        <button type="submit">{copy.send}</button>
+      </form>
 
       <div class="agent-answer" data-agent-answer>
         <div class="agent-topic">{copy.matched}: {locale === "zh" ? "开始" : "Start"}</div>
@@ -131,10 +141,6 @@ const links = {
         ))}
       </div>
 
-      <form class="agent-form" data-agent-form>
-        <input name="query" type="text" autocomplete="off" placeholder={copy.placeholder} />
-        <button type="submit">{copy.send}</button>
-      </form>
       <div class="agent-quicklinks" aria-label="Agent quick links">
         <a href={links.ai}>{copy.actions.ai}</a>
         <a href={links.projects}>{locale === "zh" ? "项目" : "Projects"}</a>

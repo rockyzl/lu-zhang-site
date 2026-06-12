@@ -31,15 +31,15 @@
   },
   {
     "name": "guangnian-energy-agent",
-    "tagline": "光年新能源智能体 — Azure-deployed RAG agent for new-energy industry client",
-    "description": "Live AI assistant deployed on Azure Container Apps for 光年新能源 (Guangnian New Energy). Built on Azure OpenAI GPT-4o + Azure AI Search retrieval (voice-rag stack), serves as a live customer-facing demo of AI × energy commercialization. Bilingual EN/ZH; Python aiohttp backend + lightweight web UI.",
-    "status": "Live · production",
+    "tagline": "光年新能源智能体 — Azure-deployed RAG assistant for new-energy content",
+    "description": "Deployed bilingual RAG assistant built on Azure OpenAI and Azure AI Search patterns, with a Python aiohttp backend and lightweight web UI. Used as a practical AI x energy demo and workflow prototype.",
+    "status": "Live demo",
     "tags": [
       "Azure OpenAI",
       "RAG",
       "voice-rag",
-      "AI × energy",
-      "client deployment"
+      "AI x energy",
+      "deployed demo"
     ],
     "image": null,
     "gradient": "from-amber to-teal",

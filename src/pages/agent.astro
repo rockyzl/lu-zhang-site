@@ -8,6 +8,29 @@ import SiteAgent from "../components/SiteAgent.astro";
   description="A public-safe portfolio agent for Lu Zhang's AI for Science, agent systems, battery materials, publications, patents, CV, and project links."
 >
   <div class="container">
-    <SiteAgent locale="en" />
+    <div class="agent-workspace">
+      <SiteAgent locale="en" />
+
+      <section class="agent-workspace-info" aria-label="Agent details">
+        <div>
+          <h2>What It Can Answer</h2>
+          <p>
+            Ask about Lu's AI for Science direction, ScientificLoop-style agent systems, RAG and evaluation work, MLOps experience, battery materials research, publications, patents, CV, and public project links.
+          </p>
+        </div>
+        <div>
+          <h2>Boundaries</h2>
+          <p>
+            The agent is public-safe: it uses public website corpus, returns cited sources when available, and is not connected to private files. If the live API is unavailable, the page falls back to local rule-based routing.
+          </p>
+        </div>
+        <div>
+          <h2>How It Works</h2>
+          <p>
+            The component calls the configured ScientificLoop API when available. Otherwise it matches the query to curated public-site topics and sends visitors to the relevant research, AI, CV, publication, patent, or contact page.
+          </p>
+        </div>
+      </section>
+    </div>
   </div>
 </Base>
