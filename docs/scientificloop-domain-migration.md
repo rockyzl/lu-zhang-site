@@ -61,13 +61,31 @@ Do not change those values until the domain is registered and DNS is ready.
 
 ## Agent Backend Path
 
-The current `/agent/` page is a static public-safe site router. For a real
-ScientificLoop agent:
+The `/agent/` page now supports two modes:
+
+- static public-safe fallback when `PUBLIC_AGENT_API_URL` is not set
+- real public-safe RAG / LLM mode through `scientificloop-agent-api` when
+  `PUBLIC_AGENT_API_URL` is set
 
 - Keep this repo as the public frontend.
-- Build backend in a separate repo such as `scientificloop-agent-api`.
+- Keep backend code in the separate `scientificloop-agent-api` repo.
 - Allowlist only public site pages, papers, patents, GitHub repos, and public
   portfolio content.
 - Return cited answers.
+- Preserve factual status labels such as `in progress`, `prototype`, and
+  `pre-v0.1`.
 - Do not ingest private job-hunting, employer, Workday, health, family,
   finance, address, token, or credential files.
+
+Recommended production split after domain setup:
+
+```text
+https://scientificloop.com          -> GitHub Pages frontend
+https://api.scientificloop.com      -> Vercel backend API
+```
+
+Set the frontend build variable to:
+
+```text
+PUBLIC_AGENT_API_URL=https://api.scientificloop.com/api/agent
+```

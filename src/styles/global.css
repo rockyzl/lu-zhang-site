@@ -641,6 +641,28 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   color: var(--c-muted);
   font-size: 0.86rem;
 }
+.agent-sources {
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--c-border-soft);
+}
+.agent-source-title {
+  color: var(--c-muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+.agent-sources ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+.agent-sources li {
+  margin: 0.22rem 0;
+  color: var(--c-muted);
+  font-size: 0.86rem;
+}
 .agent-suggestions {
   margin-top: 1rem;
 }

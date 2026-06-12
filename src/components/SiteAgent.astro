@@ -3,19 +3,27 @@ import { u } from "../lib/url";
 import type { Locale } from "../lib/i18n";
 
 const { locale = "en" } = Astro.props as { locale?: Locale };
+const agentApiUrl = import.meta.env.PUBLIC_AGENT_API_URL ?? "";
 
 const copy = locale === "zh"
   ? {
       eyebrow: "站内智能体",
       title: "问 Lu Zhang 网站智能体",
-      lead: "这是一个公开安全的站内智能体：它不会调用外部模型，也不会收集输入。它把访客的问题映射到网站里的论文、项目、简历、AI 工作和联系方式。",
+      lead: agentApiUrl
+        ? "这是一个公开安全的 ScientificLoop 智能体：它会调用后端 RAG / LLM API，并只基于公开网站内容生成带引用回答。"
+        : "这是一个公开安全的站内智能体：它不会调用外部模型，也不会收集输入。它把访客的问题映射到网站里的论文、项目、简历、AI 工作和联系方式。",
       placeholder: "输入关键词：agent, RAG, MLOps, battery, Argonne, publications, contact...",
       send: "查询",
       starter: "可以先问：",
-      status: "public-safe static agent",
+      status: agentApiUrl ? "public-safe RAG agent" : "public-safe static agent",
       matched: "匹配主题",
       next: "建议下一步",
-      note: "当前版本在浏览器端运行，只基于公开网站内容做导航。下一阶段会接入 scientificloop.com 后端，升级为带引用的 RAG / agent API。",
+      thinking: "正在检索公开语料并生成回答...",
+      apiError: "实时 agent 暂时不可用，已切换到本地规则回答。",
+      sources: "来源",
+      note: agentApiUrl
+        ? "当前版本调用 ScientificLoop 后端，只使用公开网站语料。不会读取或保存私人文件。"
+        : "当前版本在浏览器端运行，只基于公开网站内容做导航。下一阶段会接入 scientificloop.com 后端，升级为带引用的 RAG / agent API。",
       fallback: "我现在只能回答公开职业主页里的核心主题。可以试试 agent、AI for science、MLOps、battery、Argonne、publication、patent、CV、contact、VoiceRAG。",
       actions: {
         ai: "看 AI 项目",
@@ -35,14 +43,21 @@ const copy = locale === "zh"
   : {
       eyebrow: "Site Agent",
       title: "Ask Lu Zhang's Website Agent",
-      lead: "A public-safe site agent for this portfolio. It does not call an external model or collect input. It maps visitor questions to the most relevant public research, AI work, CV, and contact paths.",
+      lead: agentApiUrl
+        ? "A public-safe ScientificLoop agent backed by a RAG / LLM API. It answers from public website content and returns cited sources."
+        : "A public-safe site agent for this portfolio. It does not call an external model or collect input. It maps visitor questions to the most relevant public research, AI work, CV, and contact paths.",
       placeholder: "Type keywords: agent, RAG, MLOps, battery, Argonne, publications, contact...",
       send: "Ask",
       starter: "Try asking:",
-      status: "public-safe static agent",
+      status: agentApiUrl ? "public-safe RAG agent" : "public-safe static agent",
       matched: "Matched topic",
       next: "Suggested next step",
-      note: "This version runs in the browser and only routes across public site content. The next phase is a scientificloop.com backend with cited RAG / agent API responses.",
+      thinking: "Retrieving public context and generating an answer...",
+      apiError: "Live agent is temporarily unavailable, so I switched to the local rules answer.",
+      sources: "Sources",
+      note: agentApiUrl
+        ? "This version calls the ScientificLoop backend using only public website corpus. It does not read or store private files."
+        : "This version runs in the browser and only routes across public site content. The next phase is a scientificloop.com backend with cited RAG / agent API responses.",
       fallback: "I can answer the core public portfolio topics for now. Try agent, AI for science, MLOps, battery, Argonne, publication, patent, CV, contact, or VoiceRAG.",
       actions: {
         ai: "View AI projects",
@@ -131,7 +146,7 @@ const links = {
   </div>
 </section>
 
-<script define:vars={{ links, fallback: copy.fallback, labels: { matched: copy.matched, next: copy.next } }}>
+<script define:vars={{ links, fallback: copy.fallback, agentApiUrl, labels: { matched: copy.matched, next: copy.next, thinking: copy.thinking, apiError: copy.apiError, sources: copy.sources } }}>
   const answerSets = {
     en: [
       {
@@ -237,6 +252,75 @@ const links = {
     `;
   }
 
+  function escapeHtml(value) {
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function renderApiAnswer(data) {
+    const citations = Array.isArray(data.citations) ? data.citations.slice(0, 5) : [];
+    const sources = citations
+      .map((item) => {
+        const title = escapeHtml(item.title || item.url || "Source");
+        const url = escapeHtml(item.url || "#");
+        return `<li><a href="${url}" target="_blank" rel="noopener">[${escapeHtml(item.id || "")}] ${title}</a></li>`;
+      })
+      .join("");
+    return `
+      <div class="agent-topic">${labels.matched}: ${escapeHtml(data.mode || "live agent")}</div>
+      <div>${escapeHtml(data.answer || "").replaceAll("\n", "<br />")}</div>
+      ${
+        sources
+          ? `<div class="agent-sources"><div class="agent-source-title">${labels.sources}</div><ol>${sources}</ol></div>`
+          : ""
+      }
+    `;
+  }
+
+  async function askLiveAgent(locale, query) {
+    if (!agentApiUrl) return null;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 18000);
+    try {
+      const response = await fetch(agentApiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query, locale }),
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error(`Agent API returned ${response.status}`);
+      return await response.json();
+    } finally {
+      window.clearTimeout(timeout);
+    }
+  }
+
+  async function handleQuery({ locale, query, answer }) {
+    if (!query.trim()) return;
+    if (agentApiUrl) {
+      answer.innerHTML = `<div class="agent-topic">${labels.matched}: live agent</div><div>${labels.thinking}</div>`;
+      try {
+        const data = await askLiveAgent(locale, query);
+        if (data) {
+          answer.innerHTML = renderApiAnswer(data);
+          return;
+        }
+      } catch (error) {
+        answer.innerHTML = `
+          <div class="agent-topic">${labels.matched}: fallback</div>
+          <div>${labels.apiError}</div>
+          ${reply(locale, query)}
+        `;
+        return;
+      }
+    }
+    answer.innerHTML = reply(locale, query);
+  }
+
   document.querySelectorAll("[data-site-agent]").forEach((root) => {
     const locale = root.getAttribute("data-locale") || "en";
     const answer = root.querySelector("[data-agent-answer]");
@@ -244,17 +328,17 @@ const links = {
     const input = form?.querySelector("input[name='query']");
 
     root.querySelectorAll("[data-agent-prompt]").forEach((button) => {
-      button.addEventListener("click", () => {
+      button.addEventListener("click", async () => {
         const query = button.getAttribute("data-agent-prompt") || "";
         if (input) input.value = query;
-        if (answer) answer.innerHTML = reply(locale, query);
+        if (answer) await handleQuery({ locale, query, answer });
       });
     });
 
-    form?.addEventListener("submit", (event) => {
+    form?.addEventListener("submit", async (event) => {
       event.preventDefault();
       const query = input?.value || "";
-      if (answer) answer.innerHTML = reply(locale, query);
+      if (answer) await handleQuery({ locale, query, answer });
     });
   });
 </script>
