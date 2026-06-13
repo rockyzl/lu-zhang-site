@@ -65,7 +65,7 @@ function scoreItem(item, keywords) {
 async function fetchText(url) {
   const response = await fetch(url, {
     headers: {
-      "User-Agent": "ScientificLoopRadar/0.1 (+https://scientificloop.com)",
+      "User-Agent": "ScientificLoopRadar/0.1 (+https://sciencesloop.com)",
       Accept: "application/rss+xml, application/atom+xml, text/xml, text/html;q=0.9, */*;q=0.8",
     },
   });

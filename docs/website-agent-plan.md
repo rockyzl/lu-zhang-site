@@ -36,7 +36,7 @@ The public agent must:
 
 ## Domain Plan
 
-Target professional domain: `scientificloop.com`.
+Target professional domain: `sciencesloop.com`.
 
 Do not switch this repo's `site`, `base`, `CNAME`, resume links, or LinkedIn
 links until DNS and HTTPS are verified.
@@ -63,13 +63,13 @@ PUBLIC_AGENT_API_URL=http://127.0.0.1:8787/api/agent npm run dev
 Production target after domain migration:
 
 ```text
-https://api.scientificloop.com/api/agent
+https://api.sciencesloop.com/api/agent
 ```
 
 Then build the site with:
 
 ```bash
-PUBLIC_AGENT_API_URL=https://api.scientificloop.com/api/agent npm run build
+PUBLIC_AGENT_API_URL=https://api.sciencesloop.com/api/agent npm run build
 ```
 
 Keep private employer, Workday, family, health, finance, address, token, and

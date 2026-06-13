@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: process.env.ASTRO_SITE ?? "https://scientificloop.com",
+  site: process.env.ASTRO_SITE ?? "https://sciencesloop.com",
   base: process.env.ASTRO_BASE ?? "/",
   build: { format: "directory" },
   integrations: [

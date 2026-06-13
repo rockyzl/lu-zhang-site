@@ -57,7 +57,7 @@ src/
     patents.astro       28 issued + applications + non-provisional draft
     projects.astro      18 projects across 4 categories
     talks.astro         13 invited + 38 abstracts
-    ai.astro            shipped AI projects
+    ai.astro            AI projects and working prototypes
   styles/global.css
 public/
   images/{news,ai}/   curated illustrations and screenshots
@@ -79,6 +79,6 @@ npx vercel deploy --prod
 Custom domain target:
 
 ```text
-scientificloop.com
-www.scientificloop.com
+sciencesloop.com
+www.sciencesloop.com
 ```

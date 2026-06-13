@@ -18,6 +18,7 @@ type BlogModule = {
 };
 
 const modules = import.meta.glob<BlogModule>("../content/blog/*.md", { eager: true });
+const showDrafts = import.meta.env.DEV || import.meta.env.PUBLIC_SHOW_DRAFT_POSTS === "true";
 
 function slugFromPath(filePath: string): string {
   return filePath.split("/").pop()?.replace(/\.md$/, "") ?? filePath;
@@ -39,6 +40,7 @@ export function getBlogPosts(locale?: BlogLocale) {
       module: mod,
     }))
     .filter((post) => !locale || post.lang === locale || locale === "zh")
+    .filter((post) => showDrafts || post.status !== "draft")
     .sort((a, b) => String(b.date).localeCompare(String(a.date)));
 }
 

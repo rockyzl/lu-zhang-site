@@ -1,10 +1,10 @@
-# scientificloop.com Migration Plan
+# sciencesloop.com Migration Plan
 
 Target domain:
 
 ```text
-scientificloop.com
-www.scientificloop.com
+sciencesloop.com
+www.sciencesloop.com
 ```
 
 ## Current Production
@@ -19,8 +19,8 @@ https://lu-zhang-site.vercel.app
 Custom domains have been added to the Vercel project:
 
 ```text
-scientificloop.com
-www.scientificloop.com
+sciencesloop.com
+www.sciencesloop.com
 ```
 
 DNS still needs to be configured at the domain registrar.
@@ -30,8 +30,8 @@ DNS still needs to be configured at the domain registrar.
 Vercel currently asks for:
 
 ```text
-A scientificloop.com 76.76.21.21
-A www.scientificloop.com 76.76.21.21
+A sciencesloop.com 76.76.21.21
+A www.sciencesloop.com 76.76.21.21
 ```
 
 Alternatively, move nameservers to:
@@ -44,8 +44,8 @@ ns2.vercel-dns.com
 After DNS changes propagate, verify:
 
 ```bash
-npx vercel domains inspect scientificloop.com
-npx vercel domains inspect www.scientificloop.com
+npx vercel domains inspect sciencesloop.com
+npx vercel domains inspect www.sciencesloop.com
 ```
 
 ## Agent Backend Path
@@ -69,12 +69,12 @@ The `/agent/` page now supports two modes:
 Recommended production split after domain setup:
 
 ```text
-https://scientificloop.com          -> Vercel frontend
-https://api.scientificloop.com      -> Vercel backend API
+https://sciencesloop.com          -> Vercel frontend
+https://api.sciencesloop.com      -> Vercel backend API
 ```
 
 Set the frontend build variable to:
 
 ```text
-PUBLIC_AGENT_API_URL=https://api.scientificloop.com/api/agent
+PUBLIC_AGENT_API_URL=https://api.sciencesloop.com/api/agent
 ```
