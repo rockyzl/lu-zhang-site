@@ -3,7 +3,7 @@ import { u } from "../lib/url";
 import type { Locale } from "../lib/i18n";
 
 const { locale = "en", mode = "full" } = Astro.props as { locale?: Locale; mode?: "full" | "home" };
-const agentApiUrl = import.meta.env.PUBLIC_AGENT_API_URL ?? "https://scientificloop-agent-api.vercel.app/api/agent";
+const agentApiUrl = import.meta.env.PUBLIC_AGENT_API_URL ?? "https://api.sciencesloop.com/api/agent";
 const isHomeMode = mode === "home";
 
 const copy = locale === "zh"
