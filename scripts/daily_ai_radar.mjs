@@ -65,7 +65,7 @@ function scoreItem(item, keywords) {
 async function fetchText(url) {
   const response = await fetch(url, {
     headers: {
-      "User-Agent": "ScientificLoopRadar/0.1 (+https://sciencesloop.com)",
+      "User-Agent": "SciencesLoopRadar/0.1 (+https://sciencesloop.com)",
       Accept: "application/rss+xml, application/atom+xml, text/xml, text/html;q=0.9, */*;q=0.8",
     },
   });
@@ -167,14 +167,14 @@ stable feed in this workflow or need human judgment.
 
 ${watchlistSection || "- No manual watchlist items."}
 
-## ScientificLoop Note
+## SciencesLoop Note
 
 Add Lu's angle here:
 
 - What matters for scientific agents?
 - What is relevant to battery materials, autonomous discovery, RAG, evaluation,
   or workflow automation?
-- Does this suggest a small ScientificLoop demo, benchmark, or blog follow-up?
+- Does this suggest a small SciencesLoop demo, benchmark, or blog follow-up?
 
 ## Possible Follow-Up Posts
 

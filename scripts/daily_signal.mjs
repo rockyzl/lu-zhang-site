@@ -90,7 +90,7 @@ function parseFeed(xml, source, keywords) {
 async function fetchText(url) {
   const response = await fetch(url, {
     headers: {
-      "User-Agent": "ScientificLoopSignal/0.1 (+https://sciencesloop.com)",
+      "User-Agent": "SciencesLoopSignal/0.1 (+https://sciencesloop.com)",
       Accept: "application/rss+xml, application/atom+xml, application/json, text/xml, text/html;q=0.9, */*;q=0.8",
     },
   });
@@ -212,9 +212,23 @@ function formatCandidate(item, index) {
   return `${index + 1}. [${item.title}](${item.url}) - ${item.source}${popularity}`;
 }
 
-function buildPost({ date, selected, candidates }) {
-  const title = `Daily ScientificLoop Signal: ${selected.title}`;
-  const candidateList = candidates.map(formatCandidate).join("\n");
+function sanitizeSummary(value) {
+  return decodeEntities(value)
+    .replace(/\bused by\s+[\d,]+\+?\s+scientists\b[^.]*\.?/gi, "")
+    .replace(/\b#\d+\b/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function sourceLabel(item) {
+  const popularity = item.popularity ? ` (${item.popularity} at scan time)` : "";
+  return `${item.source}${popularity}`;
+}
+
+function buildPost({ date, selected }) {
+  const title = `What ${selected.title} suggests about scientific agent workflows`;
+  const summary = sanitizeSummary(selected.summary)
+    || "This source points to a concrete AI-for-science workflow worth reviewing before adoption.";
 
   return `---
 title: ${yamlString(title)}
@@ -225,70 +239,61 @@ status: "draft"
 featured: false
 tags:
   - AI for Science
-  - ScientificLoop
+  - SciencesLoop
   - daily signal
   - technical writing
 ---
 
-## Signal
+**${title}**
 
-Source: [${selected.title}](${selected.url})
+${selected.title} is a signal from ${sourceLabel(selected)}. In plain terms, the source is about this: ${summary}
 
-The source describes itself as:
+My read is that the useful question is not whether this looks impressive. The useful question is whether it makes one scientific step more reliable, easier to inspect, or easier to repeat. For AI for Science, that usually means clearer retrieval, explicit tool use, benchmarkable outputs, or a trace someone else can audit.
 
-> ${selected.summary || "Add a concise factual summary after reviewing the source."}
+The watch-for is trust. Any adoption number, benchmark claim, or "AI scientist" wording should be treated as a lead, not a conclusion, until it is tested on a task with a known answer.
 
-Verify any usage claims, benchmark claims, or adoption numbers before turning
-them into your own words.
-
-## Why It Matters
-
-Explain the reusable technical pattern in 3-5 sentences. Focus on one of:
-
-- Scientific agents
-- RAG and retrieval quality
-- Evaluation and traceability
-- MLOps or workflow automation
-- Lab automation or autonomous discovery
-- Battery/materials discovery
-
-## ScientificLoop Angle
-
-For ScientificLoop, the useful question is not whether this is impressive. The
-question is whether it suggests a small, testable workflow improvement.
-
-Possible angle:
-
-- Add this source to the public corpus.
-- Turn the idea into a small benchmark.
-- Test whether a site agent can cite it correctly.
-- Compare the workflow against human review.
-- Document a failure mode before building more automation.
-
-## Style Notes
-
-Use the ScientificLoop style:
-
-- Start with the practical signal, not a broad AI claim.
-- Define any specialized term.
-- Keep one idea per paragraph.
-- Separate fact from interpretation.
-- End with a useful question.
+Source: [${selected.title}](${selected.url}) - next step: test one small workflow from this source against a known problem and inspect the trace.
 
 ## LinkedIn Draft
 
-I am testing a simple daily ScientificLoop habit: pick one AI-for-science signal
-and ask what it means for practical scientific workflows.
+I am watching one practical AI-for-science pattern today:
 
-Today I am looking at: ${selected.title}
+${selected.title}
 
-My read: the useful question is not whether the demo or repo is exciting. The
-question is what part of the workflow becomes more reliable, traceable, or
-easier to evaluate.
+My read: the useful question is not whether the repo, paper, or demo sounds impressive. The useful question is whether it makes one scientific step more reliable, traceable, or easier to evaluate.
+
+For SciencesLoop, I would test this on a known problem first, then inspect the retrieved evidence, tool calls, and failure modes before trusting it.
 
 Source: ${selected.url}
 
-What would make this useful enough for a scientist to trust?
+What would make a scientific agent output trustworthy enough for your own workflow?
+`;
+}
+
+function buildSidecar({ date, selected, candidates }) {
+  const candidateList = candidates.map(formatCandidate).join("\n");
+
+  return `# Daily signal sidecar - ${date}
+
+## Selected Signal
+
+- Title: ${selected.title}
+- URL: ${selected.url}
+- Source: ${selected.source}
+- Score: ${selected.score.toFixed(2)}
+
+## Why This Won
+
+Selected by the automated ranker because it matched the AI-for-science keyword
+set and had a strong source/popularity signal. Human review is still required
+before publishing.
+
+## Claims Checked / Not Repeated
+
+- Do not repeat adoption numbers, benchmark claims, or "AI scientist" marketing
+  phrases without source verification.
+- Public post should separate source facts from SciencesLoop interpretation.
+- Treat this as a candidate workflow to test, not a trusted tool recommendation.
 
 ## Other Candidates Reviewed
 
@@ -299,7 +304,7 @@ ${candidateList}
 - [ ] Source link works.
 - [ ] Facts are separated from interpretation.
 - [ ] No private or employer-confidential details.
-- [ ] The ScientificLoop connection is real.
+- [ ] The SciencesLoop connection is real.
 - [ ] The post is one idea, not a link dump.
 `;
 }
@@ -321,9 +326,11 @@ if (!candidates.length) {
 }
 
 const selected = candidates[0];
-const slug = `${date}-${slugify(selected.title) || "scientificloop-signal"}`;
+const slug = `${date}-${slugify(selected.title) || "sciencesloop-signal"}`;
 const outPath = path.resolve("src/content/blog", `${slug}.md`);
-const post = buildPost({ date, selected, candidates });
+const sidecarPath = path.resolve("draft-notes/daily-signal", `${slug}.md`);
+const post = buildPost({ date, selected });
+const sidecar = buildSidecar({ date, selected, candidates });
 
 if (dryRun) {
   console.log(`Selected: ${selected.title}`);
@@ -336,6 +343,9 @@ if (dryRun) {
 }
 
 await fs.mkdir(path.dirname(outPath), { recursive: true });
+await fs.mkdir(path.dirname(sidecarPath), { recursive: true });
 await fs.writeFile(outPath, post, { flag: "wx" });
+await fs.writeFile(sidecarPath, sidecar, { flag: "wx" });
 console.log(`Created ${outPath}`);
+console.log(`Created ${sidecarPath}`);
 console.log(`Selected ${selected.source}: ${selected.title}`);

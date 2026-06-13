@@ -1,6 +1,6 @@
 ---
-title: "Daily SciencesLoop Signal: K-Dense-AI/scientific-agent-skills"
-description: "One small AI-for-science signal, selected from popular and high-signal technical sources."
+title: "A scientist-skill library worth testing, not trusting blindly"
+description: "A short SciencesLoop note on scientific agent skills, workflow reliability, and traceable evaluation."
 date: "2026-06-13"
 lang: "en"
 status: "draft"
@@ -12,85 +12,44 @@ tags:
   - technical writing
 ---
 
-## Signal
+**A scientist-skill library worth testing, not trusting blindly**
 
-Source: [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills)
+K-Dense-AI/scientific-agent-skills is an open library of about 140 ready-made
+agent skills plus 100+ scientific databases across biology, chemistry, medicine,
+and drug discovery. It plugs into tools such as Cursor, Claude Code, Codex, and
+other agents through the open Agent Skills standard. A "skill" here is a packaged
+instruction set that tells an agent how to do one scientific task: query a
+specific database, run an analysis, or follow a protocol.
 
-The source describes itself as:
+For AI for Science, the catalog size is not the point. The useful question is
+whether a packaged skill makes a scientific step more reliable and traceable than
+the agent improvising. A good skill encodes a known-good workflow: the right
+source, the right query, the caveats, and enough trace for another person to
+inspect.
 
-> Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 160,000+ scientists worldwide. 140 ready-to-use skills plus 100+ scientific databases covering biology, chemistry, medicine, and drug discovery. Compatible with Cursor, Claude Code, Codex, Antigravity, and the open Agent Skills standard.
+One claim to check before trusting any of it: large usage numbers are marketing
+signals, not benchmarks. I would test a single skill on a task I already know the
+answer to, then inspect what it retrieved and how it handled failure.
 
-Verify any usage claims, benchmark claims, or adoption numbers before turning
-them into your own words.
-
-## Why It Matters
-
-Explain the reusable technical pattern in 3-5 sentences. Focus on one of:
-
-- Scientific agents
-- RAG and retrieval quality
-- Evaluation and traceability
-- MLOps or workflow automation
-- Lab automation or autonomous discovery
-- Battery/materials discovery
-
-## SciencesLoop Angle
-
-For SciencesLoop, the useful question is not whether this is impressive. The
-question is whether it suggests a small, testable workflow improvement.
-
-Possible angle:
-
-- Add this source to the public corpus.
-- Turn the idea into a small benchmark.
-- Test whether a site agent can cite it correctly.
-- Compare the workflow against human review.
-- Document a failure mode before building more automation.
-
-## Style Notes
-
-Use the SciencesLoop style:
-
-- Start with the practical signal, not a broad AI claim.
-- Define any specialized term.
-- Keep one idea per paragraph.
-- Separate fact from interpretation.
-- End with a useful question.
+Source: [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) -
+try one skill on a known problem and read the trace.
 
 ## LinkedIn Draft
 
-I am testing a simple daily SciencesLoop habit: pick one AI-for-science signal
-and ask what it means for practical scientific workflows.
+I am watching one practical pattern in AI for Science: packaged "skills" for
+scientific agents.
 
-Today I am looking at: K-Dense-AI/scientific-agent-skills
+K-Dense-AI/scientific-agent-skills collects about 140 agent skills plus 100+
+scientific database connections. A skill is not magic. It is a packaged workflow:
+which source to query, what protocol to follow, what caveats to keep in view.
 
-My read: the useful question is not whether the demo or repo is exciting. The
-question is what part of the workflow becomes more reliable, traceable, or
-easier to evaluate.
+My SciencesLoop angle: the useful question is not how many skills exist. It is
+whether one skill makes one scientific step more reliable, traceable, and easier
+to evaluate than an agent improvising.
+
+I would test a single skill on a known problem first, then inspect the retrieved
+evidence and failure modes.
 
 Source: https://github.com/K-Dense-AI/scientific-agent-skills
 
-What would make this useful enough for a scientist to trust?
-
-## Other Candidates Reviewed
-
-1. [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) - GitHub repository search; 28,083 stars
-2. [Future-House/paper-qa](https://github.com/Future-House/paper-qa) - GitHub repository search; 8,690 stars
-3. [SakanaAI/AI-Scientist-v2](https://github.com/SakanaAI/AI-Scientist-v2) - GitHub repository search; 6,561 stars
-4. [Data Formulator 0.7: AI-powered data analytics for enterprise data](https://www.microsoft.com/en-us/research/blog/data-formulator-0-7-ai-powered-data-analytics-for-enterprise-data/) - Microsoft Research Blog
-5. [SocialReasoning-Bench: Measuring whether AI agents act in users’ best interests](https://www.microsoft.com/en-us/research/blog/socialreasoning-bench-measuring-whether-ai-agents-act-in-users-best-interests/) - Microsoft Research Blog
-6. [ruc-datalab/DeepAnalyze](https://github.com/ruc-datalab/DeepAnalyze) - GitHub repository search; 4,221 stars
-7. [argonne-lcf/ChemGraph](https://github.com/argonne-lcf/ChemGraph) - GitHub repository search; 121 stars
-8. [New OpenAI Academy courses for the next era of work](https://openai.com/index/academy-courses-applying-ai-at-work) - OpenAI News
-9. [OpenAI to acquire Ona](https://openai.com/index/openai-to-acquire-ona) - OpenAI News
-10. [How an astrophysicist uses Codex to help simulate black holes](https://openai.com/index/using-codex-to-simulate-black-holes) - OpenAI News
-11. [MagenticLite, MagenticBrain, Fara1.5: An agentic experience optimized for small models](https://www.microsoft.com/en-us/research/blog/magenticlite-magenticbrain-fara1-5-an-agentic-experience-optimized-for-small-models/) - Microsoft Research Blog
-12. [Further Notes on Our Recent Research on AI Delegation and Long-Horizon Reliability](https://www.microsoft.com/en-us/research/blog/further-notes-on-our-recent-research-on-ai-delegation-and-long-horizon-reliability/) - Microsoft Research Blog
-
-## Publish Checks
-
-- [ ] Source link works.
-- [ ] Facts are separated from interpretation.
-- [ ] No private or employer-confidential details.
-- [ ] The SciencesLoop connection is real.
-- [ ] The post is one idea, not a link dump.
+What would make a scientific agent skill trustworthy enough for your own work?
