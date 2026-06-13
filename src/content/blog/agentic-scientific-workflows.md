@@ -23,6 +23,6 @@ That is why I think scientific agents should be designed as workflow systems, no
 
 For AI for Science, the trace matters as much as the answer. If an agent suggests a molecule, a formulation, a paper, or an experimental next step, the user should be able to see where the suggestion came from and what assumptions were used.
 
-My current ScientificLoop direction is built around that pattern: retrieval, tool use, evaluation, and human review. The agent should be able to answer, but it should also route the visitor or researcher to the next useful action: read a source, compare candidates, inspect a trace, or refine the question.
+My current SciencesLoop direction is built around that pattern: retrieval, tool use, evaluation, and human review. The agent should be able to answer, but it should also route the visitor or researcher to the next useful action: read a source, compare candidates, inspect a trace, or refine the question.
 
 The practical design goal is modest: make scientific navigation less brittle. The long-term goal is stronger: turn repeated expert workflows into evaluated, auditable agent systems.

@@ -11,7 +11,7 @@ const copy = locale === "zh"
       eyebrow: "站内智能体",
       title: "问 Lu Zhang 网站智能体",
       lead: agentApiUrl
-        ? "这是一个公开安全的 ScientificLoop 智能体：它会调用后端 RAG / LLM API，目标是基于公开网站内容回答，并在可用时返回引用来源。"
+        ? "这是一个公开安全的 SciencesLoop 智能体：它会调用后端 RAG / LLM API，目标是基于公开网站内容回答，并在可用时返回引用来源。"
         : "这是一个公开安全的站内智能体：当前本地模式不调用外部模型，只把访客问题映射到公开网站里的论文、项目、简历、AI 工作和联系方式。",
       placeholder: "输入关键词：agent, RAG, MLOps, battery, Argonne, publications, contact...",
       send: "查询",
@@ -27,7 +27,7 @@ const copy = locale === "zh"
       apiError: "实时 agent 暂时不可用，已切换到本地规则回答。",
       sources: "来源",
       note: agentApiUrl
-        ? "当前版本调用 ScientificLoop 后端，只使用公开网站语料；未连接私人文件。可用时会返回引用来源。"
+        ? "当前版本调用 SciencesLoop 后端，只使用公开网站语料；未连接私人文件。可用时会返回引用来源。"
         : "当前版本在浏览器端运行，只基于公开网站内容做导航；未连接私人文件。线上 API 不可用时会保留这个本地 fallback。",
       fallback: "我现在只能回答公开职业主页里的核心主题。可以试试 agent、AI for science、MLOps、battery、Argonne、publication、patent、CV、contact、VoiceRAG。",
       actions: {
@@ -50,7 +50,7 @@ const copy = locale === "zh"
       eyebrow: "Site Agent",
       title: "Ask Lu Zhang's Website Agent",
       lead: agentApiUrl
-        ? "A public-safe ScientificLoop agent backed by a RAG / LLM API. It is intended to answer from public website content and returns cited sources when available."
+        ? "A public-safe SciencesLoop agent backed by a RAG / LLM API. It is intended to answer from public website content and returns cited sources when available."
         : "A public-safe site agent for this portfolio. In local mode it does not call an external model; it maps visitor questions to the most relevant public research, AI work, CV, and contact paths.",
       placeholder: "Type keywords: agent, RAG, MLOps, battery, Argonne, publications, contact...",
       send: "Ask",
@@ -66,7 +66,7 @@ const copy = locale === "zh"
       apiError: "Live agent is temporarily unavailable, so I switched to the local rules answer.",
       sources: "Sources",
       note: agentApiUrl
-        ? "This version calls the ScientificLoop backend using only public website corpus. It is not connected to private files and returns cited sources when available."
+        ? "This version calls the SciencesLoop backend using only public website corpus. It is not connected to private files and returns cited sources when available."
         : "This version runs in the browser and only routes across public site content. It is not connected to private files, and it remains available as a local fallback when the live API is unavailable.",
       fallback: "I can answer the core public portfolio topics for now. Try agent, AI for science, MLOps, battery, Argonne, publication, patent, CV, contact, or VoiceRAG.",
       actions: {
@@ -122,7 +122,7 @@ const links = {
     <div class="agent-card" aria-live="polite">
       <div class="agent-card-header">
         <div>
-          <div class="agent-title">ScientificLoop Agent</div>
+          <div class="agent-title">SciencesLoop Agent</div>
           <div class="agent-subtitle">{copy.status}</div>
         </div>
         <span class="agent-status">{copy.statusBadge}</span>

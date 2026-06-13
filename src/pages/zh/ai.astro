@@ -42,7 +42,7 @@ const workflow = [
   {
     step: "Publish",
     title: "发布带来源的工作笔记",
-    text: "把有价值的发现整理成公开安全的文章，保留来源链接、开放问题和 ScientificLoop 视角。",
+    text: "把有价值的发现整理成公开安全的文章，保留来源链接、开放问题和 SciencesLoop 视角。",
   },
 ];
 ---
@@ -53,12 +53,12 @@ const workflow = [
       <span class="eyebrow">{t("page.ai.eyebrow", locale)}</span>
       <h1>AI Research Intelligence + Scientific Agents</h1>
       <p class="lead" style="font-size: 1.1rem; color: var(--c-fg); max-width: 760px;">
-        ScientificLoop 跟踪 AI agents、AI for Science、科研工作流自动化和模型基础设施，
+        SciencesLoop 跟踪 AI agents、AI for Science、科研工作流自动化和模型基础设施，
         再把强信号整理成带来源的笔记和公开安全的小型原型。
       </p>
     </section>
 
-    <section class="workflow-steps" aria-label="ScientificLoop workflow">
+    <section class="workflow-steps" aria-label="SciencesLoop workflow">
       {workflow.map((item) => (
         <article>
           <span>{item.step}</span>
@@ -74,7 +74,7 @@ const workflow = [
         <h2>AI research radar → post → prototype</h2>
         <p>
           发布流程从自动收集来源开始，然后加入人工判断：这个信号为什么重要，
-          它对 scientific agents 有什么影响，是否值得做成 ScientificLoop demo。
+          它对 scientific agents 有什么影响，是否值得做成 SciencesLoop demo。
         </p>
       </div>
       <pre><code>npm run daily:radar

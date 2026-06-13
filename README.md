@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-2d5d5e?style=flat-square)](LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/rockyzl/lu-zhang-site?style=flat-square)](https://github.com/rockyzl/lu-zhang-site/commits/main)
 
-ScientificLoop public site for **Lu Zhang** — AI research intelligence,
+SciencesLoop public site for **Lu Zhang** — AI research intelligence,
 scientific agents, AI for Science workflows, and battery-materials evidence.
 Live: <https://lu-zhang-site.vercel.app/>
 

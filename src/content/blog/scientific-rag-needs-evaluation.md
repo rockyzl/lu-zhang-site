@@ -24,4 +24,4 @@ These layers are different. A system can retrieve the right source but summarize
 
 This is why I prefer to build RAG workflows with trace inspection and small smoke tests early. Before making the interface polished, the system should make failure visible: missing sources, weak matches, stale records, or overconfident summaries.
 
-ScientificLoop is an evolving place to test that pattern publicly: small corpus, clear boundaries, cited answers, and workflow-oriented navigation.
+SciencesLoop is an evolving place to test that pattern publicly: small corpus, clear boundaries, cited answers, and workflow-oriented navigation.

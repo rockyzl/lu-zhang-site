@@ -9,7 +9,7 @@ tags:
   - site agent
   - portfolio
   - public-safe AI
-  - ScientificLoop
+  - SciencesLoop
 ---
 
 Most portfolio sites are organized as pages: about, projects, publications, contact. That works for browsing, but it makes the visitor do the mapping from intent to evidence.

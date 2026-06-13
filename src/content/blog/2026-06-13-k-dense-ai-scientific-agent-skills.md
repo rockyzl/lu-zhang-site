@@ -1,5 +1,5 @@
 ---
-title: "Daily ScientificLoop Signal: K-Dense-AI/scientific-agent-skills"
+title: "Daily SciencesLoop Signal: K-Dense-AI/scientific-agent-skills"
 description: "One small AI-for-science signal, selected from popular and high-signal technical sources."
 date: "2026-06-13"
 lang: "en"
@@ -7,7 +7,7 @@ status: "draft"
 featured: false
 tags:
   - AI for Science
-  - ScientificLoop
+  - SciencesLoop
   - daily signal
   - technical writing
 ---
@@ -34,9 +34,9 @@ Explain the reusable technical pattern in 3-5 sentences. Focus on one of:
 - Lab automation or autonomous discovery
 - Battery/materials discovery
 
-## ScientificLoop Angle
+## SciencesLoop Angle
 
-For ScientificLoop, the useful question is not whether this is impressive. The
+For SciencesLoop, the useful question is not whether this is impressive. The
 question is whether it suggests a small, testable workflow improvement.
 
 Possible angle:
@@ -49,7 +49,7 @@ Possible angle:
 
 ## Style Notes
 
-Use the ScientificLoop style:
+Use the SciencesLoop style:
 
 - Start with the practical signal, not a broad AI claim.
 - Define any specialized term.
@@ -59,7 +59,7 @@ Use the ScientificLoop style:
 
 ## LinkedIn Draft
 
-I am testing a simple daily ScientificLoop habit: pick one AI-for-science signal
+I am testing a simple daily SciencesLoop habit: pick one AI-for-science signal
 and ask what it means for practical scientific workflows.
 
 Today I am looking at: K-Dense-AI/scientific-agent-skills
@@ -92,5 +92,5 @@ What would make this useful enough for a scientist to trust?
 - [ ] Source link works.
 - [ ] Facts are separated from interpretation.
 - [ ] No private or employer-confidential details.
-- [ ] The ScientificLoop connection is real.
+- [ ] The SciencesLoop connection is real.
 - [ ] The post is one idea, not a link dump.

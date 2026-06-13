@@ -159,14 +159,14 @@ stable feed in this workflow or need human judgment.
 - [BAAI](https://www.baai.ac.cn/) (China AI research)
 - [QbitAI](https://www.qbitai.com/) (China AI media)
 
-## ScientificLoop Note
+## SciencesLoop Note
 
 Add Lu's angle here:
 
 - What matters for scientific agents?
 - What is relevant to battery materials, autonomous discovery, RAG, evaluation,
   or workflow automation?
-- Does this suggest a small ScientificLoop demo, benchmark, or blog follow-up?
+- Does this suggest a small SciencesLoop demo, benchmark, or blog follow-up?
 
 ## Possible Follow-Up Posts
 
