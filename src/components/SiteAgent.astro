@@ -3,7 +3,7 @@ import { u } from "../lib/url";
 import type { Locale } from "../lib/i18n";
 
 const { locale = "en", mode = "full" } = Astro.props as { locale?: Locale; mode?: "full" | "home" };
-const agentApiUrl = import.meta.env.PUBLIC_AGENT_API_URL ?? "";
+const agentApiUrl = import.meta.env.PUBLIC_AGENT_API_URL ?? "https://scientificloop-agent-api.vercel.app/api/agent";
 const isHomeMode = mode === "home";
 
 const copy = locale === "zh"
@@ -20,6 +20,9 @@ const copy = locale === "zh"
       statusBadge: "公开语料",
       matched: "匹配主题",
       next: "建议下一步",
+      plan: "执行路径",
+      actionsLabel: "可执行导航",
+      followupsLabel: "继续追问",
       thinking: "正在检索公开语料并生成回答...",
       apiError: "实时 agent 暂时不可用，已切换到本地规则回答。",
       sources: "来源",
@@ -39,6 +42,7 @@ const copy = locale === "zh"
         "哪些项目最能体现 agent 能力？",
         "他有哪些 MLOps / evaluation 经验？",
         "他的电池和液流电池背景是什么？",
+        "Lu 的主要合作者是谁？",
         "我应该先看哪些论文或专利？",
       ],
     }
@@ -55,6 +59,9 @@ const copy = locale === "zh"
       statusBadge: "public corpus",
       matched: "Matched topic",
       next: "Suggested next step",
+      plan: "Agent path",
+      actionsLabel: "Next actions",
+      followupsLabel: "Follow up",
       thinking: "Retrieving public context and generating an answer...",
       apiError: "Live agent is temporarily unavailable, so I switched to the local rules answer.",
       sources: "Sources",
@@ -74,6 +81,7 @@ const copy = locale === "zh"
         "Which projects best show agent skills?",
         "What MLOps and evaluation experience does he have?",
         "What is his battery and redox-flow background?",
+        "Who are Lu's main collaborators?",
         "Which papers or patents should I look at first?",
       ],
     };
@@ -83,6 +91,7 @@ const links = {
   publications: u(locale === "zh" ? "/zh/publications/" : "/publications/"),
   patents: u(locale === "zh" ? "/zh/patents/" : "/patents/"),
   projects: u(locale === "zh" ? "/zh/projects/" : "/projects/"),
+  collaborators: u(locale === "zh" ? "/zh/collaborators/" : "/collaborators/"),
   about: u(locale === "zh" ? "/zh/about/" : "/about/"),
   awards: u(locale === "zh" ? "/zh/awards/" : "/awards/"),
   cv: u("/files/Lu_Zhang_CV.pdf"),
@@ -152,7 +161,7 @@ const links = {
   </div>
 </section>
 
-<script define:vars={{ links, fallback: copy.fallback, agentApiUrl, labels: { matched: copy.matched, next: copy.next, thinking: copy.thinking, apiError: copy.apiError, sources: copy.sources } }}>
+<script define:vars={{ links, fallback: copy.fallback, agentApiUrl, labels: { matched: copy.matched, next: copy.next, plan: copy.plan, actionsLabel: copy.actionsLabel, followupsLabel: copy.followupsLabel, thinking: copy.thinking, apiError: copy.apiError, sources: copy.sources } }}>
   const answerSets = {
     en: [
       {
@@ -184,6 +193,12 @@ const links = {
         next: `<a href="${links.projects}">Review research projects</a>`,
         keys: ["argonne", "anl", "autonomous", "discovery", "robotic", "jcesr", "doe", "national lab"],
         html: `Lu spent 14+ years at Argonne working on battery materials, redox molecules, DOE/JCESR programs, and selected AI/ML, high-throughput, and autonomous-discovery collaborations. The strongest positioning is AI for Science built on deep scientific domain expertise.`,
+      },
+      {
+        topic: "Scientific collaborators",
+        next: `<a href="${links.collaborators}">Open collaborators</a>`,
+        keys: ["collaborator", "collaborators", "collaboraror", "collaboration", "coauthor", "co-author", "co authors", "coworker", "partner"],
+        html: `The <a href="${links.collaborators}">Collaborators</a> page lists Lu's public co-author network from peer-reviewed publications, including principal collaborators by co-authored paper count and institutional context where available.`,
       },
       {
         topic: "VoiceRAG / Lightyear demo",
@@ -230,6 +245,12 @@ const links = {
         html: `Lu 在 Argonne 有 14+ 年电池材料、redox molecules、DOE/JCESR 项目经验，并参与过部分 AI/ML、高通量和 autonomous-discovery 合作。最强定位是以深厚科学背景为基础的 AI for Science。`,
       },
       {
+        topic: "科研合作者",
+        next: `<a href="${links.collaborators}">打开合作者页面</a>`,
+        keys: ["collaborator", "collaborators", "collaboraror", "collaboration", "coauthor", "co-author", "合作者", "合作", "共同作者", "共同发表"],
+        html: `<a href="${links.collaborators}">Collaborators</a> 页面列出 Lu 基于公开论文整理的共同作者网络，包括主要合作者、共同发表数量和可公开展示的机构信息。`,
+      },
+      {
         topic: "VoiceRAG / Lightyear demo",
         next: `<a href="${links.voicerag}" target="_blank" rel="noopener">打开 VoiceRAG</a>`,
         keys: ["voicerag", "voice", "语音", "guangnian", "光年", "lightyear", "sciencesloop"],
@@ -269,6 +290,10 @@ const links = {
 
   function renderApiAnswer(data) {
     const citations = Array.isArray(data.citations) ? data.citations.slice(0, 5) : [];
+    const agent = data.agent || {};
+    const plan = Array.isArray(agent.plan) ? agent.plan.slice(0, 4) : [];
+    const actions = Array.isArray(agent.actions) ? agent.actions.slice(0, 4) : [];
+    const followups = Array.isArray(agent.followups) ? agent.followups.slice(0, 4) : [];
     const sources = citations
       .map((item) => {
         const title = escapeHtml(item.title || item.url || "Source");
@@ -276,9 +301,31 @@ const links = {
         return `<li><a href="${url}" target="_blank" rel="noopener">[${escapeHtml(item.id || "")}] ${title}</a></li>`;
       })
       .join("");
+    const planHtml = plan.length
+      ? `<div class="agent-plan"><div class="agent-source-title">${labels.plan}</div><ol>${plan
+          .map((item) => `<li>${escapeHtml(item)}</li>`)
+          .join("")}</ol></div>`
+      : "";
+    const actionsHtml = actions.length
+      ? `<div class="agent-action-list"><div class="agent-source-title">${labels.actionsLabel}</div>${actions
+          .map((item) => {
+            const label = escapeHtml(item.label || item.url || "Open");
+            const url = escapeHtml(item.url || "#");
+            return `<a href="${url}" target="_blank" rel="noopener">${label}</a>`;
+          })
+          .join("")}</div>`
+      : "";
+    const followupHtml = followups.length
+      ? `<div class="agent-followups"><div class="agent-source-title">${labels.followupsLabel}</div>${followups
+          .map((item) => `<button type="button" data-agent-prompt="${escapeHtml(item)}">${escapeHtml(item)}</button>`)
+          .join("")}</div>`
+      : "";
     return `
-      <div class="agent-topic">${labels.matched}: ${escapeHtml(data.mode || "live agent")}</div>
+      <div class="agent-topic">${labels.matched}: ${escapeHtml(agent.label || data.mode || "live agent")}</div>
       <div>${escapeHtml(data.answer || "").replaceAll("\n", "<br />")}</div>
+      ${planHtml}
+      ${actionsHtml}
+      ${followupHtml}
       ${
         sources
           ? `<div class="agent-sources"><div class="agent-source-title">${labels.sources}</div><ol>${sources}</ol></div>`
@@ -333,12 +380,12 @@ const links = {
     const form = root.querySelector("[data-agent-form]");
     const input = form?.querySelector("input[name='query']");
 
-    root.querySelectorAll("[data-agent-prompt]").forEach((button) => {
-      button.addEventListener("click", async () => {
-        const query = button.getAttribute("data-agent-prompt") || "";
-        if (input) input.value = query;
-        if (answer) await handleQuery({ locale, query, answer });
-      });
+    root.addEventListener("click", async (event) => {
+      const button = event.target.closest?.("[data-agent-prompt]");
+      if (!button) return;
+      const query = button.getAttribute("data-agent-prompt") || "";
+      if (input) input.value = query;
+      if (answer) await handleQuery({ locale, query, answer });
     });
 
     form?.addEventListener("submit", async (event) => {

@@ -1,14 +1,13 @@
 # lu-zhang-site
 
-[![Live site](https://img.shields.io/badge/live-rockyzl.github.io%2Flu--zhang--site-b8531a?style=flat-square)](https://rockyzl.github.io/lu-zhang-site/)
-[![Deploy](https://img.shields.io/github/actions/workflow/status/rockyzl/lu-zhang-site/deploy.yml?branch=main&style=flat-square&label=deploy)](https://github.com/rockyzl/lu-zhang-site/actions/workflows/deploy.yml)
+[![Live site](https://img.shields.io/badge/live-lu--zhang--site.vercel.app-b8531a?style=flat-square)](https://lu-zhang-site.vercel.app/)
 [![Astro](https://img.shields.io/badge/built%20with-Astro%205-bc52ee?style=flat-square&logo=astro)](https://astro.build)
 [![License](https://img.shields.io/badge/license-MIT-2d5d5e?style=flat-square)](LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/rockyzl/lu-zhang-site?style=flat-square)](https://github.com/rockyzl/lu-zhang-site/commits/main)
 
-Personal site for **Lu Zhang** — battery scientist & data engineer.
-14+ years at Argonne National Laboratory · R&D 100 Award (2014) · 143 papers · 28 patents.
-Live: <https://rockyzl.github.io/lu-zhang-site/>
+ScientificLoop public site for **Lu Zhang** — AI research intelligence,
+scientific agents, AI for Science workflows, and battery-materials evidence.
+Live: <https://lu-zhang-site.vercel.app/>
 
 ## Stack
 
@@ -69,10 +68,17 @@ scripts/
 
 ## Deploy
 
-`.github/workflows/deploy.yml` runs on every push to `main`:
+The repo is private and deploys through Vercel.
 
-1. checkout → `npm ci` → `npx astro build` (with `ASTRO_BASE=/lu-zhang-site/`)
-2. upload `dist/` as a Pages artifact
-3. publish to GitHub Pages
+Manual production deploy:
 
-Typical end-to-end: ~30 seconds from `git push` to live URL update.
+```bash
+npx vercel deploy --prod
+```
+
+Custom domain target:
+
+```text
+scientificloop.com
+www.scientificloop.com
+```

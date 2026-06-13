@@ -9,6 +9,7 @@ import conferences from "../../data/conferences.json";
 import news from "../../data/news.json";
 import featured from "../../data/featured.json";
 import aiProjects from "../../data/ai_projects.json";
+import { getFeaturedBlogPosts } from "../../lib/blog";
 
 const locale = detectLocale(Astro.url.pathname);
 const lp = locale === "zh" ? "/zh" : "";
@@ -29,19 +30,43 @@ const verifiedPubs = publications.filter((p) => p.verified);
 const totalCitations = verifiedPubs.reduce((s, p) => s + (p.citations || 0), 0);
 const firstAuthor = verifiedPubs.filter((p) => p.role === "first").length;
 const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").length;
+const featuredPosts = getFeaturedBlogPosts(3);
+const productModules = [
+  {
+    name: "Daily AI Research Radar",
+    label: "情报工作流",
+    text: "每天扫描头部 AI 公司、中国 AI 公司、AI for Science 创业公司、科研预印本和 scientific-agent workflow 信号。",
+    href: `${lp}/blog/`,
+  },
+  {
+    name: "Scientific Workflow Agent",
+    label: "智能体界面",
+    text: "公开安全的站内 agent：检索证据、路由到相关来源，并给出下一步动作，而不是只做静态个人介绍。",
+    href: `${lp}/agent/`,
+  },
+  {
+    name: "AI for Science Lab",
+    label: "构建路线",
+    text: "围绕 RAG、evaluation、可追踪决策支持、液流电池 formulation 和科研工作流自动化的小型原型。",
+    href: `${lp}/ai/`,
+  },
+];
 ---
-<Base title="张鲁 Lu Zhang — 电池科学家 / 数据工程师 · Battery Scientist & Data Engineer">
+<Base title="ScientificLoop — AI Research Intelligence">
   <div class="container">
     <section class="home-agent-hero">
       <div class="home-agent-intro">
-        <span class="eyebrow">{t("home.eyebrow", locale)}</span>
-        <h1>张鲁 · Lu Zhang, Ph.D.</h1>
-        <p class="role">AI for Science 系统、科学智能体与电池材料研究经验。</p>
+        <span class="eyebrow">ScientificLoop · AI research intelligence · AI for Science</span>
+        <h1>ScientificLoop</h1>
+        <p class="role">Lu Zhang 构建的 AI for Science 研究情报工作台。</p>
         <p class="lead">
-          我正在构建面向公开网站内容的科学导航与评估型 AI 系统，并把长期电池材料、电化学和 autonomous discovery 研究背景带入 agent 工作流。
+          跟踪 AI agents、科研工作流自动化、头部大模型实验室、
+          中国 AI 公司和 AI for Science 创业公司，并把信号整理成有来源的笔记、
+          产品想法和小型 agent 原型。
         </p>
         <div class="hero-cta">
           <a class="btn btn-primary" href={u(`${lp}/agent/`)}>{t("home.cta.agent", locale)}</a>
+          <a class="btn btn-ghost" href={u(`${lp}/blog/`)}>AI 进展</a>
           <a class="btn btn-ghost" href={u(`${lp}/ai/`)}>{t("home.cta.ai", locale)}</a>
           <a class="btn btn-ghost" href={u(`${lp}/publications/`)}>{t("home.cta.publications", locale)}</a>
           <a class="btn btn-ghost" href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">{locale === "zh" ? "↓ 简历 PDF" : "↓ CV (PDF)"}</a>
@@ -54,11 +79,21 @@ const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").len
     </section>
 
     <div class="agent-trust-strip" aria-label="智能体边界">
-      <span>公开网站语料</span>
+      <span>Daily AI research radar</span>
+      <span>Scientific agent workflows</span>
       <span>可用时返回引用来源</span>
-      <span>未连接私人文件</span>
-      <span>实时 API 不可用时使用本地 fallback</span>
+      <span>公开安全语料</span>
     </div>
+
+    <section class="product-modules" aria-label="ScientificLoop product modules">
+      {productModules.map((item) => (
+        <a class="product-module" href={u(item.href)}>
+          <span>{item.label}</span>
+          <h2>{item.name}</h2>
+          <p>{item.text}</p>
+        </a>
+      ))}
+    </section>
 
     <div class="stat-bar">
       <div class="stat"><div class="num">{SCI_COUNT}</div><div class="label">{t("stat.papers", locale)}</div></div>
@@ -102,6 +137,26 @@ const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").len
           </Outer>
         );
       })}
+    </div>
+
+    <div class="section-head">
+      <h2>AI 研究雷达</h2>
+      <a class="more" href={u(`${lp}/blog/`)}>全部笔记 →</a>
+    </div>
+    <div class="blog-grid blog-grid--home">
+      {featuredPosts.map((post) => (
+        <article class="blog-card">
+          <div class="blog-card-meta">
+            <time datetime={post.dateLabel}>{post.dateLabel}</time>
+            <span>{post.status ?? "note"}</span>
+          </div>
+          <h2><a href={u(`${lp}/blog/${post.slug}/`)}>{post.title}</a></h2>
+          <p>{post.description}</p>
+          <div class="blog-tags">
+            {post.tags.slice(0, 3).map((tag) => <span>{tag}</span>)}
+          </div>
+        </article>
+      ))}
     </div>
 
     <div class="section-head">

@@ -1,0 +1,35 @@
+---
+import Base from "../../layouts/Base.astro";
+import { u } from "../../lib/url";
+import { getBlogPosts } from "../../lib/blog";
+
+export function getStaticPaths() {
+  return getBlogPosts("en").map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = post.module;
+---
+
+<Base title={`${post.title} — ScientificLoop`} description={post.description}>
+  <article class="container blog-post">
+    <a class="back-link" href={u("/blog/")}>← Writing</a>
+    <header class="blog-post-header">
+      <div class="blog-card-meta">
+        <time datetime={post.dateLabel}>{post.dateLabel}</time>
+        <span>{post.status ?? "note"}</span>
+      </div>
+      <h1>{post.title}</h1>
+      <p>{post.description}</p>
+      <div class="blog-tags">
+        {post.tags.map((tag) => <span>{tag}</span>)}
+      </div>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>

@@ -8,6 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "data": "python3 scripts/parse_md.py && python3 scripts/fetch_openalex.py",
+    "new:post": "node scripts/new_blog_post.mjs",
+    "daily:radar": "node scripts/daily_ai_radar.mjs",
     "cv": "npm run build && python3 scripts/generate_cv.py"
   },
   "dependencies": {

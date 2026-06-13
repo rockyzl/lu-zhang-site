@@ -1,0 +1,53 @@
+---
+import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
+import { getBlogPosts } from "../lib/blog";
+
+const posts = getBlogPosts("en");
+---
+
+<Base
+  title="Writing — ScientificLoop"
+  description="Notes on AI agents, scientific workflows, RAG, evaluation, and AI for Science systems by Lu Zhang."
+>
+  <div class="container">
+    <section class="page-hero compact">
+      <span class="eyebrow">Writing · AI agents · Scientific workflows</span>
+      <h1>ScientificLoop Writing</h1>
+      <p class="lead">
+        Working notes on AI agents, scientific workflow automation, RAG,
+        evaluation, and the bridge between battery-materials research and
+        applied AI systems.
+      </p>
+    </section>
+
+    <div class="blog-grid">
+      {posts.map((post) => (
+        <article class="blog-card">
+          <div class="blog-card-meta">
+            <time datetime={post.dateLabel}>{post.dateLabel}</time>
+            <span>{post.status ?? "note"}</span>
+          </div>
+          <h2><a href={u(`/blog/${post.slug}/`)}>{post.title}</a></h2>
+          <p>{post.description}</p>
+          <div class="blog-tags">
+            {post.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">Publishing workflow</span>
+        <h2>Automated drafting path</h2>
+        <p>
+          New posts are Markdown files under <code>src/content/blog</code>.
+          Use the scaffold script to create a dated draft, then publish by
+          committing the generated Markdown.
+        </p>
+      </div>
+      <pre><code>npm run new:post -- --title "My AI agent note"</code></pre>
+    </section>
+  </div>
+</Base>

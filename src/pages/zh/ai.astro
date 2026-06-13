@@ -23,18 +23,66 @@ const industrial = [
     note: "Loss prediction and analytics platforms.",
   },
 ];
+const workflow = [
+  {
+    step: "Scan",
+    title: "跟踪 AI 研究信号",
+    text: "收集头部实验室、中国 AI 公司、AI for Science 创业公司、研究 feed 和技术博客的更新。",
+  },
+  {
+    step: "Filter",
+    title: "映射到科研工作流",
+    text: "把普通模型新闻和真正相关的 agent、RAG、evaluation、simulation、robotic lab、科学决策支持信号分开。",
+  },
+  {
+    step: "Build",
+    title: "把强信号做成原型",
+    text: "用小 demo 或 notebook 测试某个模式是否能帮助科学导航、formulation、证据审阅或 workflow automation。",
+  },
+  {
+    step: "Publish",
+    title: "发布带来源的工作笔记",
+    text: "把有价值的发现整理成公开安全的文章，保留来源链接、开放问题和 ScientificLoop 视角。",
+  },
+];
 ---
 <Base title={(locale === "zh" ? "AI 与工程 — " : "AI & Engineering — ") + "张鲁 Lu Zhang"}>
   <div class="container">
 
     <section style="padding: 3rem 0 1rem;">
       <span class="eyebrow">{t("page.ai.eyebrow", locale)}</span>
-      <h1>{t("page.ai.title", locale)}</h1>
-      <p class="lead" style="font-size: 1.1rem; color: var(--c-fg); max-width: 680px;">{t("page.ai.lead", locale)}</p>
+      <h1>AI Research Intelligence + Scientific Agents</h1>
+      <p class="lead" style="font-size: 1.1rem; color: var(--c-fg); max-width: 760px;">
+        ScientificLoop 跟踪 AI agents、AI for Science、科研工作流自动化和头部模型基础设施，
+        再把强信号整理成带来源的笔记和公开安全的小型原型。
+      </p>
+    </section>
+
+    <section class="workflow-steps" aria-label="ScientificLoop workflow">
+      {workflow.map((item) => (
+        <article>
+          <span>{item.step}</span>
+          <h2>{item.title}</h2>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">Daily workflow</span>
+        <h2>AI research radar → post → prototype</h2>
+        <p>
+          发布流程从自动收集来源开始，然后加入人工判断：这个信号为什么重要，
+          它对 scientific agents 有什么影响，是否值得做成 ScientificLoop demo。
+        </p>
+      </div>
+      <pre><code>npm run daily:radar
+npm run new:post -- --title "Scientific agent workflow note"</code></pre>
     </section>
 
     <div class="section-head">
-      <h2>{t("page.ai.selected", locale)}</h2>
+      <h2>Agent and AI systems</h2>
       <span class="more">{aiProjects.length}</span>
     </div>
     <div class="featured-grid">

@@ -1,0 +1,154 @@
+{
+  "_doc": "Daily AI Research Radar sources. RSS sources are auto-collected; page sources are watchlist links for manual review when no stable RSS is available.",
+  "sources": [
+    {
+      "name": "OpenAI News",
+      "group": "Frontier AI labs",
+      "type": "rss",
+      "url": "https://openai.com/news/rss.xml",
+      "tags": ["OpenAI", "frontier models", "agents"]
+    },
+    {
+      "name": "Google DeepMind Blog",
+      "group": "Frontier AI labs",
+      "type": "page",
+      "url": "https://deepmind.google/blog/",
+      "tags": ["Google DeepMind", "AI research", "AI for Science"]
+    },
+    {
+      "name": "Anthropic News",
+      "group": "Frontier AI labs",
+      "type": "page",
+      "url": "https://www.anthropic.com/news",
+      "tags": ["Anthropic", "agents", "safety"]
+    },
+    {
+      "name": "Anthropic Engineering",
+      "group": "Agent engineering",
+      "type": "page",
+      "url": "https://www.anthropic.com/engineering",
+      "tags": ["Anthropic", "engineering", "agents"]
+    },
+    {
+      "name": "Microsoft Research Blog",
+      "group": "AI research labs",
+      "type": "rss",
+      "url": "https://www.microsoft.com/en-us/research/feed/",
+      "tags": ["Microsoft Research", "AI research", "AI for Science"]
+    },
+    {
+      "name": "NVIDIA AI Blog",
+      "group": "AI infrastructure",
+      "type": "rss",
+      "url": "https://blogs.nvidia.com/blog/category/deep-learning/feed/",
+      "tags": ["NVIDIA", "AI infrastructure", "scientific computing"]
+    },
+    {
+      "name": "Hugging Face Blog",
+      "group": "Open-source AI",
+      "type": "rss",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "tags": ["open source", "models", "agents"]
+    },
+    {
+      "name": "arXiv cs.AI",
+      "group": "Research preprints",
+      "type": "rss",
+      "url": "https://export.arxiv.org/rss/cs.AI",
+      "tags": ["arXiv", "AI agents", "research"]
+    },
+    {
+      "name": "arXiv cs.LG",
+      "group": "Research preprints",
+      "type": "rss",
+      "url": "https://export.arxiv.org/rss/cs.LG",
+      "tags": ["arXiv", "machine learning", "scientific ML"]
+    },
+    {
+      "name": "arXiv physics.comp-ph",
+      "group": "Scientific computing",
+      "type": "rss",
+      "url": "https://export.arxiv.org/rss/physics.comp-ph",
+      "tags": ["arXiv", "scientific computing", "simulation"]
+    },
+    {
+      "name": "FutureHouse",
+      "group": "AI for Science startups",
+      "type": "page",
+      "url": "https://www.futurehouse.org/",
+      "tags": ["AI scientist", "scientific agents", "startup"]
+    },
+    {
+      "name": "Lila Sciences",
+      "group": "AI for Science startups",
+      "type": "page",
+      "url": "https://www.lila.ai/",
+      "tags": ["AI for Science", "scientific discovery", "startup"]
+    },
+    {
+      "name": "Insilico Medicine News",
+      "group": "AI for Science startups",
+      "type": "page",
+      "url": "https://insilico.com/news",
+      "tags": ["drug discovery", "AI for Science", "startup"]
+    },
+    {
+      "name": "DeepSeek News",
+      "group": "China AI ecosystem",
+      "type": "page",
+      "url": "https://www.deepseek.com/",
+      "tags": ["China AI", "frontier models"]
+    },
+    {
+      "name": "Zhipu AI",
+      "group": "China AI ecosystem",
+      "type": "page",
+      "url": "https://www.zhipuai.cn/",
+      "tags": ["China AI", "agents", "models"]
+    },
+    {
+      "name": "Moonshot AI",
+      "group": "China AI ecosystem",
+      "type": "page",
+      "url": "https://www.moonshot.cn/",
+      "tags": ["China AI", "long context", "agents"]
+    },
+    {
+      "name": "BAAI",
+      "group": "China AI research",
+      "type": "page",
+      "url": "https://www.baai.ac.cn/",
+      "tags": ["China AI", "AI research", "scientific research"]
+    },
+    {
+      "name": "QbitAI",
+      "group": "China AI media",
+      "type": "page",
+      "url": "https://www.qbitai.com/",
+      "tags": ["China AI", "AI news", "startups"]
+    }
+  ],
+  "keywords": [
+    "agent",
+    "agents",
+    "AI scientist",
+    "AI for Science",
+    "scientific discovery",
+    "research assistant",
+    "workflow",
+    "reasoning",
+    "RAG",
+    "evaluation",
+    "robotic lab",
+    "materials",
+    "chemistry",
+    "biology",
+    "simulation",
+    "模型",
+    "智能体",
+    "科学",
+    "科研",
+    "具身",
+    "多智能体"
+  ]
+}

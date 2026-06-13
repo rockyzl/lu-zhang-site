@@ -9,6 +9,7 @@ import conferences from "../data/conferences.json";
 import news from "../data/news.json";
 import featured from "../data/featured.json";
 import aiProjects from "../data/ai_projects.json";
+import { getFeaturedBlogPosts } from "../lib/blog";
 
 const locale = detectLocale(Astro.url.pathname);
 const lp = locale === "zh" ? "/zh" : "";
@@ -27,6 +28,27 @@ const verifiedPubs = publications.filter((p) => p.verified);
 const totalCitations = verifiedPubs.reduce((s, p) => s + (p.citations || 0), 0);
 const firstAuthor = verifiedPubs.filter((p) => p.role === "first").length;
 const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").length;
+const featuredPosts = getFeaturedBlogPosts(3);
+const productModules = [
+  {
+    name: "Daily AI Research Radar",
+    label: "Intelligence workflow",
+    text: "A daily scan of frontier model labs, China AI companies, AI for Science startups, research preprints, and scientific-agent workflow signals.",
+    href: `${lp}/blog/`,
+  },
+  {
+    name: "Scientific Workflow Agent",
+    label: "Agent interface",
+    text: "A public-safe site agent that retrieves evidence, routes visitors to the right source, and exposes next actions instead of acting like a static portfolio search box.",
+    href: `${lp}/agent/`,
+  },
+  {
+    name: "AI for Science Lab",
+    label: "Build track",
+    text: "Small prototypes around RAG, evaluation, traceable decision support, redox-flow formulation, and scientific workflow automation.",
+    href: `${lp}/ai/`,
+  },
+];
 ---
 <Base
   title="Lu Zhang — AI for Science & Scientific Agent Systems"
@@ -35,14 +57,17 @@ const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").len
   <div class="container">
     <section class="home-agent-hero">
       <div class="home-agent-intro">
-        <span class="eyebrow">{t("home.eyebrow", locale)}</span>
-        <h1>Lu Zhang, Ph.D.</h1>
-        <p class="role">AI for Science systems, scientific agents, and battery materials expertise.</p>
+        <span class="eyebrow">ScientificLoop · AI research intelligence · AI for Science</span>
+        <h1>ScientificLoop</h1>
+        <p class="role">An AI for Science research intelligence workspace by Lu Zhang.</p>
         <p class="lead">
-          I build public-facing AI systems for scientific navigation and evaluation, grounded in a long research background in battery materials, electrochemistry, and autonomous discovery.
+          Tracking AI agents, scientific workflow automation, frontier model labs,
+          China AI companies, and AI for Science startups — then turning the
+          signals into cited notes, product ideas, and small agent prototypes.
         </p>
         <div class="hero-cta">
           <a class="btn btn-primary" href={u(`${lp}/agent/`)}>{t("home.cta.agent", locale)}</a>
+          <a class="btn btn-ghost" href={u(`${lp}/blog/`)}>{locale === "zh" ? "AI 进展" : "AI radar"}</a>
           <a class="btn btn-ghost" href={u(`${lp}/ai/`)}>{t("home.cta.ai", locale)}</a>
           <a class="btn btn-ghost" href={u(`${lp}/publications/`)}>{t("home.cta.publications", locale)}</a>
           <a class="btn btn-ghost" href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">{locale === "zh" ? "↓ 简历 PDF" : "↓ CV (PDF)"}</a>
@@ -55,11 +80,21 @@ const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").len
     </section>
 
     <div class="agent-trust-strip" aria-label="Agent boundaries">
-      <span>Public website corpus</span>
+      <span>Daily AI research radar</span>
+      <span>Scientific agent workflows</span>
       <span>Cited sources when available</span>
-      <span>Not connected to private files</span>
-      <span>Local fallback when live API is unavailable</span>
+      <span>Public-safe corpus</span>
     </div>
+
+    <section class="product-modules" aria-label="ScientificLoop product modules">
+      {productModules.map((item) => (
+        <a class="product-module" href={u(item.href)}>
+          <span>{item.label}</span>
+          <h2>{item.name}</h2>
+          <p>{item.text}</p>
+        </a>
+      ))}
+    </section>
 
     <div class="stat-bar">
       <div class="stat"><div class="num">{SCI_COUNT}</div><div class="label">{t("stat.papers", locale)}</div></div>
@@ -75,6 +110,7 @@ const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").len
       <h2>{t("section.ai", locale)}</h2>
       <a class="more" href={u(`${lp}/ai/`)}>{t("section.ai.more", locale)}</a>
     </div>
+
     <div class="featured-grid">
       {aiProjects.map((p) => {
         const linkHref = p.site ?? p.repo ?? null;
@@ -103,6 +139,26 @@ const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").len
           </Outer>
         );
       })}
+    </div>
+
+    <div class="section-head">
+      <h2>{locale === "zh" ? "AI 研究雷达" : "AI research radar"}</h2>
+      <a class="more" href={u(`${lp}/blog/`)}>{locale === "zh" ? "全部笔记 →" : "All notes →"}</a>
+    </div>
+    <div class="blog-grid blog-grid--home">
+      {featuredPosts.map((post) => (
+        <article class="blog-card">
+          <div class="blog-card-meta">
+            <time datetime={post.dateLabel}>{post.dateLabel}</time>
+            <span>{post.status ?? "note"}</span>
+          </div>
+          <h2><a href={u(`${lp}/blog/${post.slug}/`)}>{post.title}</a></h2>
+          <p>{post.description}</p>
+          <div class="blog-tags">
+            {post.tags.slice(0, 3).map((tag) => <span>{tag}</span>)}
+          </div>
+        </article>
+      ))}
     </div>
 
     <div class="section-head">

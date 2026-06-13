@@ -1,0 +1,50 @@
+---
+import Base from "../../layouts/Base.astro";
+import { u } from "../../lib/url";
+import { getBlogPosts } from "../../lib/blog";
+
+const posts = getBlogPosts("zh");
+---
+
+<Base
+  title="写作 — ScientificLoop"
+  description="Lu Zhang 关于 AI agents、科学工作流、RAG、evaluation 和 AI for Science 系统的笔记。"
+>
+  <div class="container">
+    <section class="page-hero compact">
+      <span class="eyebrow">写作 · AI agents · 科学工作流</span>
+      <h1>ScientificLoop 写作</h1>
+      <p class="lead">
+        关于 AI 智能体、科学工作流自动化、RAG、evaluation，以及电池材料研究与应用 AI 系统之间连接的工作笔记。
+      </p>
+    </section>
+
+    <div class="blog-grid">
+      {posts.map((post) => (
+        <article class="blog-card">
+          <div class="blog-card-meta">
+            <time datetime={post.dateLabel}>{post.dateLabel}</time>
+            <span>{post.status ?? "note"}</span>
+          </div>
+          <h2><a href={u(`/zh/blog/${post.slug}/`)}>{post.title}</a></h2>
+          <p>{post.description}</p>
+          <div class="blog-tags">
+            {post.tags.map((tag) => <span>{tag}</span>)}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">发布流程</span>
+        <h2>自动生成草稿</h2>
+        <p>
+          新文章是 <code>src/content/blog</code> 下的 Markdown 文件。
+          用脚本生成带日期和 frontmatter 的草稿，再编辑正文并提交。
+        </p>
+      </div>
+      <pre><code>npm run new:post -- --title "My AI agent note"</code></pre>
+    </section>
+  </div>
+</Base>

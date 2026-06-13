@@ -23,18 +23,68 @@ const industrial = [
     note: "Loss prediction and analytics platforms.",
   },
 ];
+const workflow = [
+  {
+    step: "Scan",
+    title: "Track AI research signals",
+    text: "Collect updates from frontier labs, China AI companies, AI for Science startups, research feeds, and technical blogs.",
+  },
+  {
+    step: "Filter",
+    title: "Map signals to scientific workflows",
+    text: "Separate general model news from signals relevant to agents, RAG, evaluation, simulations, robotic labs, and scientific decision support.",
+  },
+  {
+    step: "Build",
+    title: "Turn strong signals into prototypes",
+    text: "Use small demos and notebooks to test whether a pattern can help scientific navigation, formulation, evidence review, or workflow automation.",
+  },
+  {
+    step: "Publish",
+    title: "Write cited working notes",
+    text: "Convert useful findings into public-safe posts with source links, open questions, and a ScientificLoop angle.",
+  },
+];
 ---
 <Base title={(locale === "zh" ? "AI 与工程 — " : "AI & Engineering — ") + "Lu Zhang"}>
   <div class="container">
 
     <section style="padding: 3rem 0 1rem;">
       <span class="eyebrow">{t("page.ai.eyebrow", locale)}</span>
-      <h1>{t("page.ai.title", locale)}</h1>
-      <p class="lead" style="font-size: 1.1rem; color: var(--c-fg); max-width: 680px;">{t("page.ai.lead", locale)}</p>
+      <h1>AI Research Intelligence + Scientific Agents</h1>
+      <p class="lead" style="font-size: 1.1rem; color: var(--c-fg); max-width: 760px;">
+        ScientificLoop tracks AI agents, AI for Science, scientific workflow
+        automation, and frontier model infrastructure, then turns the strongest
+        signals into cited notes and small public-safe prototypes.
+      </p>
+    </section>
+
+    <section class="workflow-steps" aria-label="ScientificLoop workflow">
+      {workflow.map((item) => (
+        <article>
+          <span>{item.step}</span>
+          <h2>{item.title}</h2>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">Daily workflow</span>
+        <h2>AI research radar → post → prototype</h2>
+        <p>
+          The publishing workflow starts with automated source collection, then
+          adds human judgment: why the signal matters, how it affects scientific
+          agents, and whether it suggests a ScientificLoop demo.
+        </p>
+      </div>
+      <pre><code>npm run daily:radar
+npm run new:post -- --title "Scientific agent workflow note"</code></pre>
     </section>
 
     <div class="section-head">
-      <h2>{t("page.ai.selected", locale)}</h2>
+      <h2>Agent and AI systems</h2>
       <span class="more">{aiProjects.length}</span>
     </div>
     <div class="featured-grid">

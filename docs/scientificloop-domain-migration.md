@@ -9,55 +9,44 @@ www.scientificloop.com
 
 ## Current Production
 
-The site currently deploys through GitHub Pages:
+The GitHub repo is private, so GitHub Pages no longer serves the site. The
+current public deployment is through Vercel:
 
 ```text
-https://rockyzl.github.io/lu-zhang-site/
+https://lu-zhang-site.vercel.app
 ```
 
-The current GitHub Actions workflow builds with:
+Custom domains have been added to the Vercel project:
 
 ```text
-ASTRO_SITE=https://rockyzl.github.io
-ASTRO_BASE=/lu-zhang-site
+scientificloop.com
+www.scientificloop.com
 ```
 
-Do not change those values until the domain is registered and DNS is ready.
+DNS still needs to be configured at the domain registrar.
 
-## Recommended Migration
+## DNS Required
 
-1. Register `scientificloop.com`.
-2. In GitHub Pages settings for `rockyzl/lu-zhang-site`, set custom domain:
-   `scientificloop.com`.
-3. Add DNS records at the registrar:
-   - `A` records for apex domain to GitHub Pages IPs.
-   - `CNAME` record for `www` to `rockyzl.github.io`.
-4. Wait for GitHub Pages to verify DNS and issue HTTPS.
-5. Add `public/CNAME` with:
+Vercel currently asks for:
 
-   ```text
-   scientificloop.com
-   ```
+```text
+A scientificloop.com 76.76.21.21
+A www.scientificloop.com 76.76.21.21
+```
 
-6. Update `.github/workflows/deploy.yml`:
+Alternatively, move nameservers to:
 
-   ```text
-   ASTRO_SITE=https://scientificloop.com
-   ASTRO_BASE=/
-   ```
+```text
+ns1.vercel-dns.com
+ns2.vercel-dns.com
+```
 
-7. Update hard-coded public links in:
-   - `README.md`
-   - `public/robots.txt`
-   - `src/layouts/Base.astro`
-   - `src/data/ai_projects.json`
-   - CV/download references if needed
+After DNS changes propagate, verify:
 
-8. Rebuild and verify:
-
-   ```bash
-   npm run build
-   ```
+```bash
+npx vercel domains inspect scientificloop.com
+npx vercel domains inspect www.scientificloop.com
+```
 
 ## Agent Backend Path
 
@@ -80,7 +69,7 @@ The `/agent/` page now supports two modes:
 Recommended production split after domain setup:
 
 ```text
-https://scientificloop.com          -> GitHub Pages frontend
+https://scientificloop.com          -> Vercel frontend
 https://api.scientificloop.com      -> Vercel backend API
 ```
 
