@@ -4,7 +4,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Personal academic homepage for Lu Zhang (张鲁) — battery scientist & data engineer. Astro 5 static site, deployed to GitHub Pages at <https://rockyzl.github.io/lu-zhang-site/>. Data layer is hand-curated JSON in `src/data/`. See `README.md` for the public-facing summary.
+Personal academic and AI-for-science site for Lu Zhang (张鲁). Astro 5 static site, now deployed on Vercel at <https://sciencesloop.com/> with preview/fallback at <https://lu-zhang-site.vercel.app/>. Data layer is hand-curated JSON in `src/data/`. See `README.md` for the public-facing summary.
+
+## Multi-agent collaboration
+
+Claude Code, Codex, and other local agents may work at the same time, but they
+must avoid overlapping writes.
+
+- Shared mailbox: `/home/lu2/dev/personal/records/agent-comms/`
+- Shared writing skill:
+  - `~/.claude/skills/scientificloop-writing`
+  - `~/.codex/skills/scientificloop-writing`
+  - `~/.agents/skills/scientificloop-writing`
+- Before parallel work, create or update a dated handoff in `records/agent-comms/`
+  with status, file ownership, changed files, verified facts, and next action.
+- One agent owns a file at a time. If another agent needs the same file, leave a
+  note in the handoff rather than editing over it.
+- Prefer separate git branches or worktrees for substantial parallel changes.
+  Lead/integrator merges after `npm run build` passes.
+- Do not publish or submit public/job materials with fabricated claims. Style
+  and emphasis may change; facts must remain conservative and sourceable.
 
 ## Develop
 
@@ -19,9 +38,23 @@ npm run data     # regenerate publications/patents/conferences from private mark
 
 There's no test suite, no linter — just `npm run build` as the gate.
 
-## Deploy: GitHub Actions does the prefixing
+## Deploy: Vercel
 
-Push to `main` triggers `.github/workflows/deploy.yml`, which builds with `ASTRO_BASE=/lu-zhang-site` and deploys to GitHub Pages. **Local builds use `base: "/"`** so dev URLs don't have the prefix. If a user reports a 404 like `https://rockyzl.github.io/zh/awards/`, it's a missing `/lu-zhang-site/` prefix in their typed URL — the deployed site is at `/lu-zhang-site/zh/awards/`.
+GitHub Pages is no longer the public deployment path because this repo is
+private. Use Vercel:
+
+```bash
+npm run build
+npx vercel@latest deploy --prod --yes
+```
+
+Public URLs:
+
+- Site: `https://sciencesloop.com/`
+- Vercel fallback: `https://lu-zhang-site.vercel.app/`
+- Agent API: `https://api.sciencesloop.com/api/agent`
+
+If an old `rockyzl.github.io/lu-zhang-site/` link returns 404, that is expected.
 
 ## Stat numbers are constants, not computed
 
