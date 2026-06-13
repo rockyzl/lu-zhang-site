@@ -48,6 +48,7 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
     <meta name="description" content={description} />
     <meta name="author" content="Lu Zhang" />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="SciencesLoop Writing RSS" href={new URL(u("/rss.xml"), siteUrl).href} />
 
     <!-- Open Graph -->
     <meta property="og:type" content={pathname === u("/") || pathname === u("/zh/") ? "profile" : "website"} />
