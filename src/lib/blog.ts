@@ -39,7 +39,7 @@ export function getBlogPosts(locale?: BlogLocale) {
       tags: mod.frontmatter.tags ?? [],
       module: mod,
     }))
-    .filter((post) => !locale || post.lang === locale || locale === "zh")
+    .filter((post) => !locale || post.lang === locale)
     .filter((post) => showDrafts || post.status !== "draft")
     .sort((a, b) => String(b.date).localeCompare(String(a.date)));
 }

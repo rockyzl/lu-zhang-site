@@ -7,12 +7,13 @@ const {
   title = "Lu Zhang — AI for Science & Scientific Agent Systems",
   description = "Lu Zhang, Ph.D. — AI/ML engineer and former Argonne scientist building public-safe AI for Science prototypes and notes around scientific agents, RAG, evaluation, MLOps practices, and battery-materials research.",
   ogImage,
+  alternatePath,
 } = Astro.props;
 
 const pathname = Astro.url.pathname;
 const locale: Locale = detectLocale(pathname);
 const langPrefix = locale === "zh" ? "/zh" : "";
-const altPath = altLocalePath(pathname, import.meta.env.BASE_URL);
+const altPath = alternatePath ?? altLocalePath(pathname, import.meta.env.BASE_URL);
 
 const siteUrl = Astro.site?.href ?? "https://rockyzl.github.io/";
 const baseUrl = (import.meta.env.BASE_URL ?? "/").replace(/\/+$/, "");

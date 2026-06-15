@@ -12,9 +12,12 @@ export function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = post.module;
+const enSlug = post.slug.endsWith("-zh") ? post.slug.slice(0, -3) : post.slug;
+const enAlternate = getBlogPosts("en").find((candidate) => candidate.slug === enSlug);
+const alternatePath = enAlternate ? u(`/blog/${enAlternate.slug}/`) : undefined;
 ---
 
-<Base title={`${post.title} — SciencesLoop`} description={post.description}>
+<Base title={`${post.title} — SciencesLoop`} description={post.description} alternatePath={alternatePath}>
   <article class="container blog-post">
     <a class="back-link" href={u("/zh/blog/")}>← 写作</a>
     <header class="blog-post-header">

@@ -3,8 +3,8 @@ title: "Scientific RAG should leave an evidence trail, not just an answer"
 description: "A daily AI-for-science signal from Future House's PaperQA2, and what it suggests about citation-grounded scientific agents."
 date: "2026-06-15"
 lang: "en"
-status: "draft"
-featured: false
+status: "daily signal"
+featured: true
 tags:
   - AI for Science
   - SciencesLoop
