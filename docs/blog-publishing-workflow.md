@@ -108,6 +108,20 @@ For a richer technical article, use this shape instead:
 Chinese versions should be rewrites, not literal translations. Preserve source
 links and do not add claims that are not in the English/source material.
 
+## Field Research Publishing Rules
+
+- Field Notes are social drafts first. Use them to ask one public question about
+  a workflow, trust boundary, evidence trail, or review checkpoint before
+  turning the signal into a site article.
+- Monthly Research Briefs can become blog posts when they synthesize multiple
+  Field Notes, public sources, and a clear SciencesLoop workflow takeaway.
+- Do not publish a single poll result directly as an article. Treat it as one
+  input for a brief or follow-up note, with caveats.
+- Preserve privacy and comment safety. Do not include private, employer-private,
+  job-search-private, health, family, finance, address, token, or credential
+  material. Comments, poll replies, and discussion examples should be anonymized
+  or summarized unless there is explicit public context for attribution.
+
 ## Publish
 
 Before publishing:
@@ -117,3 +131,73 @@ npm run build
 ```
 
 Then commit the Markdown and site changes.
+
+## Comments
+
+Article pages include a comments shell.
+
+Default behavior:
+
+- If comment-provider environment variables are missing, the site shows a
+  lightweight feedback box with email and LinkedIn links.
+- This is intentional. Do not open anonymous comments by default.
+- Giscus must be lazy-loaded by user action, not loaded automatically on every
+  page view.
+- Giscus matching should use strict pathname matching to reduce wrong-thread
+  matches.
+
+To enable logged-in comments later, use a moderated GitHub Discussions provider
+such as Giscus and configure these Vercel environment variables:
+
+```text
+PUBLIC_GISCUS_REPO
+PUBLIC_GISCUS_REPO_ID
+PUBLIC_GISCUS_CATEGORY
+PUBLIC_GISCUS_CATEGORY_ID
+```
+
+Requirements before enabling:
+
+- comments repo must be public;
+- Discussions must be enabled;
+- the category should be moderated and intentionally selected for blog
+  comments;
+- all required public env vars must be present, otherwise the fallback CTA stays
+  visible;
+- do not use a private job-hunting or personal-records repo for public comments;
+- test English and Chinese article pages after deployment.
+
+## Publishing Without Manual File Edits
+
+Current state:
+
+- articles live as Markdown under `src/blog/`;
+- publishing changes still go through build, commit, push, and Vercel deploy;
+- this is reliable and version-controlled, but it is not a product-like authoring
+  workflow.
+
+Target:
+
+- keep public content source-grounded and reviewable;
+- allow drafting, review, and publishing from a site/admin workflow;
+- avoid exposing private drafts, credentials, job-search material, or personal
+  records;
+- keep Git history or an equivalent audit trail.
+
+Recommended phased direction:
+
+1. Keep Markdown as the canonical public artifact.
+2. Add a protected draft intake route or admin workflow that creates Markdown
+   drafts through GitHub/Vercel automation.
+3. Add preview and review status before publication.
+4. Later evaluate a dynamic content database or CMS only if Markdown automation
+   becomes too slow and the product needs updates without a site rebuild.
+
+Do not replace the current Markdown pipeline until the new path can preserve:
+
+- source links;
+- image attribution;
+- social draft sidecars;
+- Chinese/English pairing;
+- privacy checks;
+- build/deploy rollback.

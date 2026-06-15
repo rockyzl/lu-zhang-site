@@ -131,6 +131,27 @@ Examples:
 - from a failed agent run to workflow redesign;
 - from wet-lab protocol to structured execution trace.
 
+## SciencesLoop Field Research Program
+
+The Field Research Program is a public research notebook on how AI enters
+scientific workflows. It collects small public observations before they become
+formal articles.
+
+Program outputs:
+
+- Field Note: a short social draft, poll, or discussion prompt about one
+  workflow behavior, trust boundary, evidence trail, or review checkpoint.
+- Workflow Review: a structured look at where a tool or model enters a
+  scientific workflow and what must be checked.
+- Research Brief: a monthly synthesis across Field Notes, public sources, and
+  workflow patterns; it can become a blog post when there is enough public
+  evidence.
+- Case Note / Deep Dive: a longer reconstruction of a workflow, failure mode,
+  or reusable pattern.
+
+Keep the program centered on workflow, trust, evidence, and review. Treat social
+responses as signals to summarize and investigate, not as standalone evidence.
+
 ## Selection Standard
 
 Prefer signals that reveal how scientific work is represented, checked, or
@@ -167,6 +188,10 @@ not a score for entertainment. It is a way to show how a signal is judged.
 Use it near the top of Daily Signals, Technical Notes, Deep Dives, and Case
 Studies when it helps readers orient quickly. Use qualitative labels (`Low`,
 `Medium`, `High`, `Unknown`) and one sentence of reasoning for each dimension.
+
+Public posts should render this as a compact visual card rather than a dense
+Markdown table. Keep the full review matrix in sidecar notes unless the article
+is explicitly about the evaluation framework itself.
 
 Context fields:
 

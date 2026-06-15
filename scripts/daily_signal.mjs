@@ -307,20 +307,6 @@ My read is that the useful question is not whether this looks impressive. The us
 The watch-for is trust. Any adoption number, benchmark claim, or "AI scientist" wording should be treated as a lead, not a conclusion, until it is tested on a task with a known answer.
 
 Source: [${selected.title}](${selected.url}) - next step: test one small workflow from this source against a known problem and inspect the trace.
-
-## LinkedIn Draft
-
-I am watching one practical AI-for-science pattern today:
-
-${selected.title}
-
-My read: the useful question is not whether the repo, paper, or demo sounds impressive. The useful question is whether it makes one scientific step more reliable, traceable, or easier to evaluate.
-
-For SciencesLoop, I would test this on a known problem first, then inspect the retrieved evidence, tool calls, and failure modes before trusting it.
-
-Source: ${selected.url}
-
-What would make a scientific agent output trustworthy enough for your own workflow?
 `;
 }
 
@@ -355,6 +341,23 @@ before publishing.
 Total candidates reviewed after duplicate-source filtering: ${candidates.length}
 
 ${candidateList}
+
+## LinkedIn Draft
+
+I am watching one practical AI-for-science pattern today:
+
+${selected.title}
+
+My read: the useful question is whether this makes one scientific step more
+reliable, traceable, or easier to evaluate.
+
+For SciencesLoop, I would test this on a known problem first, then inspect the
+retrieved evidence, tool calls, and failure modes before trusting it.
+
+Source: ${selected.url}
+
+What would make a scientific agent output trustworthy enough for your own
+workflow?
 
 ## Article Idea Sources
 

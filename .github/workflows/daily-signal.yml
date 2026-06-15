@@ -41,13 +41,13 @@ jobs:
 
       - name: Commit draft
         run: |
-          if [ -z "$(git status --porcelain -- src/content/blog draft-notes)" ]; then
+          if [ -z "$(git status --porcelain -- src/blog draft-notes)" ]; then
             echo "No daily signal changes to commit."
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/content/blog draft-notes
+          git add src/blog draft-notes
           git commit -m "Add daily signal draft for $(TZ=America/Chicago date +%F)"
           git push

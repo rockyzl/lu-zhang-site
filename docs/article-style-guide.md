@@ -219,7 +219,8 @@ Use this for medium notes and deep dives:
 Every Daily Signal, Technical Note, and Deep Dive should start with a short
 Signal Card when it helps readers inspect the piece.
 
-Required fields:
+For public articles, prefer a compact visual card over a long Markdown table.
+The public card should be scannable in 10-15 seconds:
 
 - Signal
 - Workflow Stage
@@ -228,15 +229,17 @@ Required fields:
 - Run Status
 - Publish Type
 - Claim / Hype Risk
-- Scientific Impact
-- Evidence Quality
-- Reproducibility
-- Workflow Utility
-- Transferability
-- Validation Cost
+- 3-5 visible dimensions such as Scientific Impact, Evidence Quality,
+  Reproducibility, Workflow Utility, Transferability, and Validation Cost
 
 Do not present the card as objective scoring. Use it as a reader-facing
 judgment frame with qualitative labels and short explanations.
+
+Keep detailed review matrices in sidecar notes when the public card becomes too
+large. The article should explain the judgment through prose, examples, figures,
+and practical tests instead of forcing readers through a dense table.
+If the card starts to feel like a dashboard, cut dimensions and move the
+reasoning into the article body.
 
 ## Daily Signal Shape
 
@@ -284,8 +287,8 @@ Source:
 ...
 ```
 
-Save LinkedIn drafts under `docs/social-drafts/`. Do not publish them inside
-blog Markdown.
+Save LinkedIn drafts inside the matching `draft-notes/daily-signal/` sidecar.
+Do not publish them inside blog Markdown.
 
 ## Visual Rules
 

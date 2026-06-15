@@ -23,21 +23,43 @@ tags:
 
 ## SciencesLoop Signal Card
 
-| Field | Assessment |
-| --- | --- |
-| Signal | Future House PaperQA2 repo + arXiv paper。 |
-| Workflow Stage | Evidence -> Evaluation -> Reproducibility。 |
-| Reusable Pattern | 把 evidence trail 当成一等 research artifact。 |
-| Practical Test | 用 known-answer questions、near-miss papers、citation checks、caveat checks 和可 replay 的 retrieval trace 做小型测试。 |
-| Run Status | 已读公开 repo 和论文；我还没有在本地运行 PaperQA2。 |
-| Publish Type | Technical Note。 |
-| Scientific Impact | High。科学文献综合位于很多科研决策上游。 |
-| Evidence Quality | Medium-High。primary sources 扎实，但我没有独立复现 benchmark。 |
-| Reproducibility | Medium。repo 是公开的；本地复现和特定领域 benchmark 还需要单独做。 |
-| Workflow Utility | High。这个模式能降低 source-to-claim reasoning 的检查成本。 |
-| Transferability | High。同样模式可以迁移到 literature review、molecule screening、experiment planning 和 contradiction detection。 |
-| Validation Cost | Medium。小 benchmark 不贵；要在真实领域信任它，需要仔细做 corpus 和 citation review。 |
-| Claim / Hype Risk | Medium。源论文用了比较强的 “superhuman” framing，所以我会先看 workflow pattern，再看 performance claim。 |
+<section class="signal-card signal-card--compact" aria-label="SciencesLoop Signal Card">
+  <div class="signal-card__top">
+    <div>
+      <p class="signal-card__eyebrow">工作流判断</p>
+      <h3 class="signal-card__title">PaperQA2 证据链模式</h3>
+      <p class="signal-card__summary">
+        这条 signal 的重点是从 source search 到 cited claim，再到可审查下一步的路径。
+        我已经读了 repo 和论文；还没有本地运行 PaperQA2。
+      </p>
+    </div>
+    <span class="signal-card__pill">Technical Note</span>
+  </div>
+
+  <p class="signal-card__stage">
+    <span>Workflow stage</span>
+    <strong>Evidence -> evaluation -> reproducibility</strong>
+  </p>
+
+  <ul class="signal-card__metrics" aria-label="Assessment dimensions">
+    <li class="signal-metric" data-level="medium-high">
+      <div class="signal-metric__head"><span>Evidence quality</span><span class="signal-metric__level">Med-high</span></div>
+      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
+    </li>
+    <li class="signal-metric" data-level="medium">
+      <div class="signal-metric__head"><span>Reproducibility</span><span class="signal-metric__level">Medium</span></div>
+      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
+    </li>
+    <li class="signal-metric" data-level="high">
+      <div class="signal-metric__head"><span>Workflow utility</span><span class="signal-metric__level">High</span></div>
+      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
+    </li>
+  </ul>
+
+  <p class="signal-card__test">
+    Practical test: known-answer questions、near-miss papers、citation precision checks 和 trace replay。
+  </p>
+</section>
 
 ## 源材料实际说了什么
 
@@ -53,7 +75,7 @@ tags:
 论文里的图更清楚地说明了一点：PaperQA2 被表述成一个包含 search、answering、contradiction detection 和 evaluation 的 agentic toolset。论文也报告了 question answering、article summarization、contradiction detection 等任务上的 benchmark 结果。这里我把这些都当作源论文自己的 claim；这不等同于我已经独立复现过结果。
 
 <figure class="article-figure source-figure">
-  <img src="/images/blog/paperqa2-agentic-toolset.png" alt="PaperQA2 论文源图，展示 agentic toolset 和 benchmark summary。" loading="lazy" />
+  <img src="/images/blog/paperqa2-agentic-toolset.png" alt="PaperQA2 论文源图，展示 agentic toolset 和 benchmark summary。" width="2071" height="2088" loading="lazy" />
   <figcaption>
     源图：Skarlinski et al., arXiv:2409.13740, Figure 1，许可为 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>。我引用这张图，是为了说明 PaperQA2 的公开表述把 search、answer generation、citation behavior 和 evaluation 放进了同一个系统框架里。
   </figcaption>
@@ -66,7 +88,7 @@ tags:
 对 scientific agent 来说，答案只是一个 artifact。另一个科学家真正需要检查的是路径。
 
 <figure class="article-figure">
-  <img src="/images/blog/scientific-rag-evidence-trail.svg" alt="Scientific RAG 证据链概念图，从 question 到 evidence、answer、caveat、review 和 action。" loading="lazy" />
+  <img src="/images/blog/scientific-rag-evidence-trail.svg" alt="Scientific RAG 证据链概念图，从 question 到 evidence、answer、caveat、review 和 action。" width="1200" height="540" loading="lazy" />
   <figcaption>
     SciencesLoop 概念图。我的理解是：answer 应该和 evidence trail 一起交付，因为 trace 才能让另一个科学家审查这个输出。
   </figcaption>
@@ -96,7 +118,7 @@ tags:
 更强的 scientific workflow 应该返回更结构化的东西。
 
 <figure class="article-figure">
-  <img src="/images/blog/scientific-rag-scenario.svg" alt="电池材料问题中，弱回答和可审查 scientific RAG workflow 的概念对比。" loading="lazy" />
+  <img src="/images/blog/scientific-rag-scenario.svg" alt="电池材料问题中，弱回答和可审查 scientific RAG workflow 的概念对比。" width="1200" height="700" loading="lazy" />
   <figcaption>
     SciencesLoop 概念场景。关键界面是 source-to-claim path；研究者需要沿着这条路径判断答案是否值得信任。
   </figcaption>
@@ -121,7 +143,7 @@ PaperQA2 是一个有用信号，因为它公开材料强调 citation-grounded a
 论文 Figure 2 也有用，因为它把 example question/answer、performance、ablation 和 retrieval-stage analysis 放在一起。我把它看作一个好的产品表达模式：把用户看到的答案和背后的 evaluation surface 一起展示。
 
 <figure class="article-figure source-figure">
-  <img src="/images/blog/paperqa2-litqa-workflow.png" alt="PaperQA2 论文源图，展示 LitQA example、performance comparison、ablations 和 DOI recall by stage。" loading="lazy" />
+  <img src="/images/blog/paperqa2-litqa-workflow.png" alt="PaperQA2 论文源图，展示 LitQA example、performance comparison、ablations 和 DOI recall by stage。" width="2137" height="2834" loading="lazy" />
   <figcaption>
     源图：Skarlinski et al., arXiv:2409.13740, Figure 2，许可为 <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>。我把它当作一个有用的产品模式证据：answer 应该和 retrieval/evaluation diagnostics 一起出现；这里不代表独立验证。
   </figcaption>
@@ -142,7 +164,7 @@ PaperQA2 是一个有用信号，因为它公开材料强调 citation-grounded a
 5. 手工检查失败案例。
 
 <figure class="article-figure">
-  <img src="/images/blog/scientific-rag-eval-matrix.svg" alt="Scientific RAG 评估矩阵，覆盖 source coverage、citation precision、answer correctness、caveat visibility 和 trace replay。" loading="lazy" />
+  <img src="/images/blog/scientific-rag-eval-matrix.svg" alt="Scientific RAG 评估矩阵，覆盖 source coverage、citation precision、answer correctness、caveat visibility 和 trace replay。" width="1200" height="760" loading="lazy" />
   <figcaption>
     SciencesLoop 概念评估矩阵。这是我认为在真实科研场景中信任 scientific RAG workflow 之前，至少应该检查的 surface。
   </figcaption>

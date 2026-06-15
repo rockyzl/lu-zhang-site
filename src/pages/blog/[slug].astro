@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import ArticleComments from "../../components/ArticleComments.astro";
 import { u } from "../../lib/url";
 import { getBlogPosts } from "../../lib/blog";
 
@@ -33,5 +34,6 @@ const alternatePath = zhAlternate ? u(`/zh/blog/${zhAlternate.slug}/`) : undefin
     <div class="prose">
       <Content />
     </div>
+    <ArticleComments post={post} locale="en" />
   </article>
 </Base>

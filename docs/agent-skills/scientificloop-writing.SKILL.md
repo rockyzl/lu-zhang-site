@@ -122,6 +122,23 @@ Dimensions:
 Use qualitative labels such as `Low`, `Medium`, `High`, or `Unknown`, plus one
 sentence explaining why. Do not publish unexplained numeric scores.
 
+For public articles, prefer a compact visual card instead of a long Markdown
+table. The visible card should show:
+
+- the signal;
+- the workflow stage;
+- run status;
+- practical test;
+- 3-5 qualitative dimensions;
+- one short claim/hype-risk note.
+
+Move dense assessments, rejected candidates, and detailed scoring into sidecar
+logs. Readers should get the frame quickly, then learn the reasoning from the
+article body, visuals, examples, and failure modes.
+
+If the card feels like a dashboard, it is too large. On mobile, aim for a
+compact orientation panel rather than a full review table.
+
 ## Anti-Hype Gate
 
 Do not write unless at least one is true:
@@ -205,13 +222,11 @@ Use sidecars for material that should not appear in public article body:
 Recommended paths:
 
 ```text
-docs/daily-signal-logs/YYYY-MM-DD-topic.md
-docs/social-drafts/YYYY-MM-DD-topic-linkedin-zh.md
-docs/social-drafts/YYYY-MM-DD-topic-linkedin-en.md
+draft-notes/daily-signal/YYYY-MM-DD-topic.md
 ```
 
 Never put `LinkedIn draft`, `Style notes`, `Other candidates reviewed`, or
-`Publish checks` sections inside `src/content/blog/*.md`.
+`Publish checks` sections inside public `src/blog/*.md` article bodies.
 
 ## Chinese Adaptation
 

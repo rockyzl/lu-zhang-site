@@ -1,0 +1,147 @@
+---
+interface Props {
+  locale?: "en" | "zh";
+  post?: {
+    title?: string;
+  };
+}
+
+const { locale = "en", post } = Astro.props;
+
+const giscusRepo = import.meta.env.PUBLIC_GISCUS_REPO;
+const giscusRepoId = import.meta.env.PUBLIC_GISCUS_REPO_ID;
+const giscusCategory = import.meta.env.PUBLIC_GISCUS_CATEGORY;
+const giscusCategoryId = import.meta.env.PUBLIC_GISCUS_CATEGORY_ID;
+const giscusEnabled = Boolean(
+  giscusRepo && giscusRepoId && giscusCategory && giscusCategoryId
+);
+
+const copy = {
+  en: {
+    title: "Discuss this note",
+    body:
+      "Comments will use a logged-in, moderated GitHub Discussions flow once it is configured. For now, send feedback directly.",
+    statusEnabled: "GitHub comments",
+    statusDisabled: "Email feedback",
+    load: "Load GitHub comments",
+    loading: "Loading GitHub comments...",
+    loaded: "GitHub comments loaded",
+    error:
+      "GitHub comments could not load. Email and LinkedIn feedback still work.",
+    privacy:
+      "Loading comments connects to Giscus and GitHub Discussions. Posting requires a GitHub account.",
+    email: "Email Lu",
+    linkedin: "LinkedIn",
+  },
+  zh: {
+    title: "讨论这篇笔记",
+    body:
+      "评论会使用需要登录、可审核的 GitHub Discussions 流程；配置完成前，先通过邮件或 LinkedIn 反馈。",
+    statusEnabled: "GitHub 评论",
+    statusDisabled: "邮件反馈",
+    load: "加载 GitHub 评论",
+    loading: "正在加载 GitHub 评论...",
+    loaded: "GitHub 评论已加载",
+    error: "GitHub 评论加载失败；仍可用邮件或 LinkedIn 反馈。",
+    privacy:
+      "加载评论会连接 Giscus 和 GitHub Discussions。发表评论需要 GitHub 账号。",
+    email: "邮件联系",
+    linkedin: "LinkedIn",
+  },
+}[locale];
+
+const subject = encodeURIComponent(`SciencesLoop note: ${post?.title ?? "feedback"}`);
+---
+
+<section class="article-comments" aria-label={copy.title}>
+  <div class="article-comments__header">
+    <h2>{copy.title}</h2>
+    <span>{giscusEnabled ? copy.statusEnabled : copy.statusDisabled}</span>
+  </div>
+
+  {
+    giscusEnabled ? (
+      <div class="article-comments__fallback" data-giscus-loader>
+        <p data-giscus-status aria-live="polite">{copy.privacy}</p>
+        <div class="article-comments__actions">
+          <button
+            type="button"
+            data-giscus-button
+            data-ready-label={copy.load}
+            data-loading-label={copy.loading}
+            data-loaded-label={copy.loaded}
+            data-error-label={copy.error}
+            data-repo={giscusRepo}
+            data-repo-id={giscusRepoId}
+            data-category={giscusCategory}
+            data-category-id={giscusCategoryId}
+            data-lang={locale === "zh" ? "zh-CN" : "en"}
+          >
+            {copy.load}
+          </button>
+          <a href={`mailto:zhanglu77@gmail.com?subject=${subject}`}>{copy.email}</a>
+          <a href="https://www.linkedin.com/in/lu-zhang-argonne/">{copy.linkedin}</a>
+        </div>
+        <noscript>
+          <p>{copy.body}</p>
+        </noscript>
+      </div>
+    ) : (
+      <div class="article-comments__fallback">
+        <p>{copy.body}</p>
+        <div class="article-comments__actions">
+          <a href={`mailto:zhanglu77@gmail.com?subject=${subject}`}>{copy.email}</a>
+          <a href="https://www.linkedin.com/in/lu-zhang-argonne/">{copy.linkedin}</a>
+        </div>
+      </div>
+    )
+  }
+</section>
+
+<script>
+  document.querySelectorAll("[data-giscus-button]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const target = button.closest("[data-giscus-loader]");
+      if (!target || target.querySelector("script")) return;
+
+      const status = target.querySelector("[data-giscus-status]");
+      const readyLabel = button.getAttribute("data-ready-label") ?? "Load comments";
+      const loadingLabel = button.getAttribute("data-loading-label") ?? "Loading comments...";
+      const loadedLabel = button.getAttribute("data-loaded-label") ?? "Comments loaded";
+      const errorLabel =
+        button.getAttribute("data-error-label") ?? "Comments could not load.";
+
+      const script = document.createElement("script");
+      script.src = "https://giscus.app/client.js";
+      script.async = true;
+      script.crossOrigin = "anonymous";
+      script.setAttribute("data-repo", button.getAttribute("data-repo") ?? "");
+      script.setAttribute("data-repo-id", button.getAttribute("data-repo-id") ?? "");
+      script.setAttribute("data-category", button.getAttribute("data-category") ?? "");
+      script.setAttribute("data-category-id", button.getAttribute("data-category-id") ?? "");
+      script.setAttribute("data-mapping", "pathname");
+      script.setAttribute("data-strict", "1");
+      script.setAttribute("data-reactions-enabled", "1");
+      script.setAttribute("data-emit-metadata", "0");
+      script.setAttribute("data-input-position", "top");
+      script.setAttribute("data-theme", "preferred_color_scheme");
+      script.setAttribute("data-lang", button.getAttribute("data-lang") ?? "en");
+      script.addEventListener("load", () => {
+        button.textContent = loadedLabel;
+        button.removeAttribute("aria-busy");
+        if (status) status.textContent = loadedLabel;
+      });
+      script.addEventListener("error", () => {
+        script.remove();
+        button.removeAttribute("disabled");
+        button.removeAttribute("aria-busy");
+        button.textContent = readyLabel;
+        if (status) status.textContent = errorLabel;
+      });
+      button.textContent = loadingLabel;
+      button.setAttribute("aria-busy", "true");
+      target.appendChild(script);
+      button.setAttribute("disabled", "true");
+    });
+  });
+</script>

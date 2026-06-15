@@ -40,6 +40,10 @@ Do not write unless at least one is true:
 Use this as a reader-facing assessment framework, not as entertainment scoring.
 Use qualitative labels and a short explanation.
 
+For public articles, render this as a compact visual card. Keep the full text
+matrix in the sidecar when the details are useful for the author but too heavy
+for readers.
+
 ```text
 Signal:
 Workflow Stage:
@@ -129,7 +133,8 @@ tags:
 
 ## SciencesLoop Signal Card
 
-<Qualitative assessment using the six dimensions.>
+<Compact visual card: workflow stage, signal, run status, practical test, and
+3-5 qualitative dimensions. Do not paste the full candidate-review matrix here.>
 
 ## Workflow Stage
 
@@ -153,7 +158,7 @@ Source: <stable primary source link>
 
 ## Sidecar Log
 
-Save under `docs/daily-signal-logs/YYYY-MM-DD-topic.md`:
+Save under `draft-notes/daily-signal/YYYY-MM-DD-topic.md`:
 
 ```markdown
 # Daily Signal Review: <topic>
@@ -182,5 +187,5 @@ Save under `docs/daily-signal-logs/YYYY-MM-DD-topic.md`:
 
 ## LinkedIn Draft
 
-Save under `docs/social-drafts/YYYY-MM-DD-topic-linkedin-zh.md` or `-en.md`.
-Do not paste the LinkedIn draft into public article Markdown.
+Save LinkedIn drafts in the matching `draft-notes/daily-signal/YYYY-MM-DD-topic.md`
+sidecar. Do not paste the LinkedIn draft into public article Markdown.

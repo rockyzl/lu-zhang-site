@@ -23,21 +23,45 @@ My read: PaperQA2 is useful as a workflow signal. It breaks literature question 
 
 ## SciencesLoop Signal Card
 
-| Field | Assessment |
-| --- | --- |
-| Signal | Future House PaperQA2 repo + arXiv paper. |
-| Workflow Stage | Evidence -> Evaluation -> Reproducibility. |
-| Reusable Pattern | Evidence trail as a first-class research artifact. |
-| Practical Test | A small known-answer benchmark with near-miss papers, citation checks, caveat checks, and replayable retrieval traces. |
-| Run Status | Read the public repository and paper; I have not run PaperQA2 locally yet. |
-| Publish Type | Technical Note. |
-| Scientific Impact | High. Scientific literature synthesis is upstream of many research decisions. |
-| Evidence Quality | Medium-High. The primary sources are strong, but I have not independently reproduced the benchmark. |
-| Reproducibility | Medium. The repo is public; local reproduction and domain-specific benchmark replication remain future work. |
-| Workflow Utility | High. The pattern reduces the inspection cost of source-to-claim reasoning. |
-| Transferability | High. The same pattern applies to literature review, molecule screening, experiment planning, and contradiction detection. |
-| Validation Cost | Medium. A small benchmark is cheap; trusting it in a real domain requires careful corpus and citation review. |
-| Claim / Hype Risk | Medium. The source uses strong "superhuman" framing, so I read the workflow pattern first and the performance claim second. |
+<section class="signal-card signal-card--compact" aria-label="SciencesLoop Signal Card">
+  <div class="signal-card__top">
+    <div>
+      <p class="signal-card__eyebrow">Workflow assessment</p>
+      <h3 class="signal-card__title">PaperQA2 evidence-trail pattern</h3>
+      <p class="signal-card__summary">
+        The useful signal is the path from source search to cited claim to a
+        reviewable next step. I have read the repo and paper; I have not run
+        PaperQA2 locally yet.
+      </p>
+    </div>
+    <span class="signal-card__pill">Technical Note</span>
+  </div>
+
+  <p class="signal-card__stage">
+    <span>Workflow stage</span>
+    <strong>Evidence -> evaluation -> reproducibility</strong>
+  </p>
+
+  <ul class="signal-card__metrics" aria-label="Assessment dimensions">
+    <li class="signal-metric" data-level="medium-high">
+      <div class="signal-metric__head"><span>Evidence quality</span><span class="signal-metric__level">Med-high</span></div>
+      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
+    </li>
+    <li class="signal-metric" data-level="medium">
+      <div class="signal-metric__head"><span>Reproducibility</span><span class="signal-metric__level">Medium</span></div>
+      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
+    </li>
+    <li class="signal-metric" data-level="high">
+      <div class="signal-metric__head"><span>Workflow utility</span><span class="signal-metric__level">High</span></div>
+      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
+    </li>
+  </ul>
+
+  <p class="signal-card__test">
+    Practical test: known-answer questions with near-miss papers, citation
+    precision checks, and trace replay.
+  </p>
+</section>
 
 ## What the source actually says
 
@@ -53,7 +77,7 @@ From the public repository README, PaperQA2 is positioned as a package for high-
 The paper adds a stronger visual signal: PaperQA2 is presented as an agentic toolset with multiple operations around search, answering, contradiction detection, and evaluation. It also reports benchmark results across question answering, article summarization, and contradiction detection. Those reported results are source claims from the paper, not my independent benchmark.
 
 <figure class="article-figure source-figure">
-  <img src="/images/blog/paperqa2-agentic-toolset.png" alt="Source figure from the PaperQA2 paper showing the agentic toolset and benchmark summary." loading="lazy" />
+  <img src="/images/blog/paperqa2-agentic-toolset.png" alt="Source figure from the PaperQA2 paper showing the agentic toolset and benchmark summary." width="2071" height="2088" loading="lazy" />
   <figcaption>
     Source figure: Skarlinski et al., arXiv:2409.13740, Figure 1, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. I use it here as source evidence that PaperQA2 is framed as an agentic toolset with evaluation, search, and answer-generation pieces in the same system.
   </figcaption>
@@ -66,7 +90,7 @@ Figure 1 is the reason this signal is interesting for SciencesLoop. It puts sear
 For a scientific agent, the answer is only one artifact. The path is the part another scientist needs in order to inspect it.
 
 <figure class="article-figure">
-  <img src="/images/blog/scientific-rag-evidence-trail.svg" alt="Conceptual diagram showing a scientific RAG evidence trail from question to evidence, answer, caveat, review, and action." loading="lazy" />
+  <img src="/images/blog/scientific-rag-evidence-trail.svg" alt="Conceptual diagram showing a scientific RAG evidence trail from question to evidence, answer, caveat, review, and action." width="1200" height="540" loading="lazy" />
   <figcaption>
     Conceptual SciencesLoop diagram. My interpretation is that the answer should be packaged with its evidence trail, because the trace is what lets another scientist review the output.
   </figcaption>
@@ -96,7 +120,7 @@ A weak assistant gives a confident paragraph and a few paper titles. That may be
 A stronger scientific workflow would return something more structured.
 
 <figure class="article-figure">
-  <img src="/images/blog/scientific-rag-scenario.svg" alt="Conceptual comparison between a weak assistant answer and a reviewable scientific RAG workflow for a battery materials question." loading="lazy" />
+  <img src="/images/blog/scientific-rag-scenario.svg" alt="Conceptual comparison between a weak assistant answer and a reviewable scientific RAG workflow for a battery materials question." width="1200" height="700" loading="lazy" />
   <figcaption>
     Conceptual SciencesLoop scenario. The important surface is the source-to-claim path, because that is where the researcher can decide whether the answer deserves trust.
   </figcaption>
@@ -121,7 +145,7 @@ This is where PaperQA2 is a useful signal. Its public materials emphasize citati
 The PaperQA2 paper's Figure 2 is useful because it pairs an example question and answer with performance and retrieval-stage analysis. I read that as a good communication pattern: show the user-facing answer together with the evaluation surface behind it.
 
 <figure class="article-figure source-figure">
-  <img src="/images/blog/paperqa2-litqa-workflow.png" alt="Source figure from the PaperQA2 paper showing a LitQA example, performance comparison, ablations, and DOI recall by stage." loading="lazy" />
+  <img src="/images/blog/paperqa2-litqa-workflow.png" alt="Source figure from the PaperQA2 paper showing a LitQA example, performance comparison, ablations, and DOI recall by stage." width="2137" height="2834" loading="lazy" />
   <figcaption>
     Source figure: Skarlinski et al., arXiv:2409.13740, Figure 2, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. I am not treating this as independent validation. I am using it as evidence for a useful product pattern: pair the answer with retrieval and evaluation diagnostics.
   </figcaption>
@@ -142,7 +166,7 @@ For example:
 5. Inspect failure cases manually.
 
 <figure class="article-figure">
-  <img src="/images/blog/scientific-rag-eval-matrix.svg" alt="Conceptual evaluation matrix for scientific RAG covering source coverage, citation precision, answer correctness, caveat visibility, and trace replay." loading="lazy" />
+  <img src="/images/blog/scientific-rag-eval-matrix.svg" alt="Conceptual evaluation matrix for scientific RAG covering source coverage, citation precision, answer correctness, caveat visibility, and trace replay." width="1200" height="760" loading="lazy" />
   <figcaption>
     Conceptual SciencesLoop evaluation matrix. This is my proposed minimum inspection surface before trusting a scientific RAG workflow in a real research setting.
   </figcaption>
