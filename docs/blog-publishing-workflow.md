@@ -35,6 +35,11 @@ Generated posts stay `status: "draft"` and `featured: false`; do not treat the
 automation as publication. If a draft already exists for the date, the script
 skips generation to avoid duplicate daily posts.
 
+The public draft focuses on one selected signal. The sidecar log records the
+full ranked candidate set after duplicate-source filtering, including source,
+score, popularity/date when available, and summary. Use that log as the idea
+queue for follow-up articles.
+
 Manual trigger:
 
 1. Open GitHub Actions.

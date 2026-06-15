@@ -203,13 +203,27 @@ async function collectGitHub(keywords) {
 function rankCandidates(candidates) {
   return candidates
     .filter((item) => item.title && item.url)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 12);
+    .sort((a, b) => b.score - a.score);
 }
 
 function formatCandidate(item, index) {
   const popularity = item.popularity ? `; ${item.popularity}` : "";
-  return `${index + 1}. [${item.title}](${item.url}) - ${item.source}${popularity}`;
+  return `${index + 1}. [${item.title}](${item.url}) - ${item.source}${popularity}; score ${item.score.toFixed(2)}`;
+}
+
+function formatCandidateDetail(item, index) {
+  const parts = [
+    `Source: ${item.source}`,
+    `Group: ${item.group || "unclassified"}`,
+    `Score: ${item.score.toFixed(2)}`,
+  ];
+  if (item.date) parts.push(`Date: ${item.date}`);
+  if (item.popularity) parts.push(`Popularity: ${item.popularity}`);
+
+  const summary = sanitizeSummary(item.summary);
+  const summaryLine = summary ? `\n   - Summary: ${summary}` : "";
+
+  return `${index + 1}. [${item.title}](${item.url})\n   - ${parts.join("; ")}${summaryLine}`;
 }
 
 function formatIdeaSource(source, index) {
@@ -311,7 +325,7 @@ What would make a scientific agent output trustworthy enough for your own workfl
 }
 
 function buildSidecar({ date, selected, candidates, sources }) {
-  const candidateList = candidates.map(formatCandidate).join("\n");
+  const candidateList = candidates.map(formatCandidateDetail).join("\n\n");
   const sourceList = (sources ?? []).map(formatIdeaSource).join("\n");
 
   return `# Daily signal sidecar - ${date}
@@ -337,6 +351,8 @@ before publishing.
 - Treat this as a candidate workflow to test, not a trusted tool recommendation.
 
 ## Other Candidates Reviewed
+
+Total candidates reviewed after duplicate-source filtering: ${candidates.length}
 
 ${candidateList}
 
@@ -389,12 +405,15 @@ const post = buildPost({ date, selected });
 const sidecar = buildSidecar({ date, selected, candidates, sources: config.sources ?? [] });
 
 if (dryRun) {
+  const displayLimit = Number(argValue("limit", "12"));
+  const displayedCandidates = candidates.slice(0, displayLimit);
+
   console.log(`Selected: ${selected.title}`);
   console.log(`Source: ${selected.url}`);
   console.log(`Score: ${selected.score.toFixed(2)}`);
   console.log("");
-  console.log("Top candidates:");
-  console.log(candidates.map(formatCandidate).join("\n"));
+  console.log(`Top ${displayedCandidates.length} of ${candidates.length} candidates:`);
+  console.log(displayedCandidates.map(formatCandidate).join("\n"));
   console.log("");
   console.log("Configured article idea sources:");
   console.log((config.sources ?? []).map(formatIdeaSource).join("\n"));
