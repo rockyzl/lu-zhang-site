@@ -127,10 +127,17 @@ links and do not add claims that are not in the English/source material.
 Before publishing:
 
 ```bash
+npm run content:guard
 npm run build
 ```
 
 Then commit the Markdown and site changes.
+
+`npm run content:guard` checks public `src/blog/*.md` files before build. It
+fails on internal sections such as LinkedIn drafts, old public brand spellings,
+likely credentials/tokens, missing local image files, and source figures without
+visible attribution. It may warn on repeated AI-blog phrases so the article can
+be reviewed without blocking a truthful post.
 
 ## Comments
 

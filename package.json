@@ -12,6 +12,8 @@
     "new:post": "node scripts/new_blog_post.mjs",
     "daily:radar": "node scripts/daily_ai_radar.mjs",
     "daily:signal": "node scripts/daily_signal.mjs",
+    "content:guard": "node scripts/content_guard.mjs",
+    "check": "npm run content:guard && npm run build",
     "cv": "npm run build && python3 scripts/generate_cv.py"
   },
   "dependencies": {
