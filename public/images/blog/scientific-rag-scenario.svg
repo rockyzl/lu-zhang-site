@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">A battery-research scenario for scientific RAG</title>
+  <desc id="desc">A conceptual comparison between a weak assistant answer and a reviewable scientific RAG workflow.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #dbe3ef; stroke-width: 2; }
+      .weak { fill: #fff7ed; stroke: #fdba74; stroke-width: 2; }
+      .strong { fill: #eff6ff; stroke: #93c5fd; stroke-width: 2; }
+      .good { fill: #ecfdf5; stroke: #86efac; stroke-width: 2; }
+      .title { fill: #172033; font-family: Inter, Arial, sans-serif; font-size: 30px; font-weight: 800; }
+      .head { fill: #172033; font-family: Inter, Arial, sans-serif; font-size: 23px; font-weight: 800; }
+      .text { fill: #334155; font-family: Inter, Arial, sans-serif; font-size: 19px; font-weight: 500; }
+      .small { fill: #607086; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 500; }
+      .label { fill: #0066ff; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 800; letter-spacing: 2.5px; }
+      .arrow { stroke: #0066ff; stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#0066ff"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1200" height="700"/>
+  <text class="label" x="72" y="72">SCENARIO</text>
+  <text class="title" x="72" y="114">Same question, different work product</text>
+  <rect class="card" x="72" y="150" width="1056" height="108" rx="18"/>
+  <text class="head" x="104" y="196">Research question</text>
+  <text class="text" x="104" y="228">Which classes of redox-active molecules have evidence for better stability in nonaqueous flow batteries?</text>
+
+  <path class="arrow" d="M600 258 L600 318" marker-end="url(#arrow)"/>
+
+  <g transform="translate(72 330)">
+    <rect class="weak" x="0" y="0" width="500" height="240" rx="18"/>
+    <text class="head" x="28" y="44">Weak output: plausible paragraph</text>
+    <text class="text" x="28" y="86">- Gives a confident summary</text>
+    <text class="text" x="28" y="122">- Lists a few paper titles</text>
+    <text class="text" x="28" y="158">- Hard to inspect source-to-claim mapping</text>
+    <text class="text" x="28" y="194">- Unclear missing evidence or caveats</text>
+  </g>
+
+  <g transform="translate(628 330)">
+    <rect class="strong" x="0" y="0" width="500" height="240" rx="18"/>
+    <text class="head" x="28" y="44">Strong output: reviewable trace</text>
+    <text class="text" x="28" y="86">- Search query and selected corpus</text>
+    <text class="text" x="28" y="122">- Extracted claim with citation</text>
+    <text class="text" x="28" y="158">- Conflicting or missing evidence</text>
+    <text class="text" x="28" y="194">- Proposed next validation step</text>
+  </g>
+
+  <rect class="good" x="260" y="600" width="680" height="58" rx="16"/>
+  <text class="text" x="304" y="636">Digest: the value is not fluency. It is inspectable scientific reasoning.</text>
+</svg>

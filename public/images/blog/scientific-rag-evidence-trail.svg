@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" role="img" aria-labelledby="title desc">
+  <title id="title">Conceptual evidence trail for scientific RAG</title>
+  <desc id="desc">A conceptual workflow from question to evidence, answer, caveat, review, and next scientific action.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #dbe3ef; stroke-width: 2; }
+      .step { fill: #ffffff; stroke: #9ab8ff; stroke-width: 2.5; }
+      .accent { fill: #0066ff; }
+      .muted { fill: #607086; }
+      .text { fill: #172033; font-family: Inter, Arial, sans-serif; font-size: 26px; font-weight: 700; }
+      .small { fill: #607086; font-family: Inter, Arial, sans-serif; font-size: 18px; font-weight: 500; }
+      .label { fill: #0066ff; font-family: Inter, Arial, sans-serif; font-size: 18px; font-weight: 800; letter-spacing: 3px; }
+      .arrow { stroke: #0066ff; stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#0066ff"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1200" height="540"/>
+  <rect class="panel" x="54" y="54" width="1092" height="432" rx="22"/>
+  <text class="label" x="88" y="108">CONCEPTUAL MODEL</text>
+  <text class="text" x="88" y="148">A scientific RAG answer should leave an evidence trail</text>
+  <text class="small" x="88" y="180">The answer is not the only artifact. The trace is what makes the output reviewable.</text>
+
+  <g transform="translate(86 238)">
+    <rect class="step" x="0" y="0" width="138" height="108" rx="16"/>
+    <text class="text" x="24" y="43">Question</text>
+    <text class="small" x="24" y="72">domain task</text>
+  </g>
+  <path class="arrow" d="M232 292 L305 292" marker-end="url(#arrow)"/>
+  <g transform="translate(320 238)">
+    <rect class="step" x="0" y="0" width="150" height="108" rx="16"/>
+    <text class="text" x="24" y="43">Evidence</text>
+    <text class="small" x="24" y="72">papers, sections</text>
+  </g>
+  <path class="arrow" d="M482 292 L555 292" marker-end="url(#arrow)"/>
+  <g transform="translate(570 238)">
+    <rect class="step" x="0" y="0" width="154" height="108" rx="16"/>
+    <text class="text" x="24" y="43">Answer</text>
+    <text class="small" x="24" y="72">with citations</text>
+  </g>
+  <path class="arrow" d="M736 292 L809 292" marker-end="url(#arrow)"/>
+  <g transform="translate(824 238)">
+    <rect class="step" x="0" y="0" width="142" height="108" rx="16"/>
+    <text class="text" x="24" y="43">Caveat</text>
+    <text class="small" x="24" y="72">what is missing</text>
+  </g>
+  <path class="arrow" d="M978 292 L1051 292" marker-end="url(#arrow)"/>
+  <g transform="translate(1060 238)">
+    <rect class="step" x="0" y="0" width="0" height="0"/>
+  </g>
+
+  <g transform="translate(1020 220)">
+    <circle cx="42" cy="42" r="42" fill="#0066ff"/>
+    <path d="M23 43 L37 57 L63 27" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <text class="small" x="-12" y="120">Review</text>
+    <text class="small" x="-18" y="145">then act</text>
+  </g>
+
+  <path d="M145 388 C320 454, 766 454, 1060 388" stroke="#c8d6ea" stroke-width="3" fill="none" stroke-dasharray="10 9"/>
+  <text class="small" x="382" y="438">If a later reader cannot inspect this path, the answer is not scientific enough.</text>
+</svg>

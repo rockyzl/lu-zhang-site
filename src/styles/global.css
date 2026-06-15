@@ -1256,6 +1256,30 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   border-radius: 5px;
   padding: 0.08rem 0.28rem;
 }
+.prose figure.article-figure {
+  margin: 2rem 0;
+}
+.prose figure.article-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--c-border);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+.prose figure.article-figure.source-figure img {
+  padding: 0.35rem;
+}
+.prose figure.article-figure figcaption {
+  margin-top: 0.6rem;
+  color: var(--c-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+.prose figure.article-figure figcaption a {
+  font-weight: 700;
+}
 @media (max-width: 900px) {
   .blog-grid {
     grid-template-columns: 1fr;

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Evaluation matrix for scientific RAG</title>
+  <desc id="desc">A conceptual matrix for evaluating citation-grounded scientific RAG systems.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #dbe3ef; stroke-width: 2; }
+      .header { fill: #0066ff; }
+      .stripe { fill: #f1f5f9; }
+      .title { fill: #172033; font-family: Inter, Arial, sans-serif; font-size: 31px; font-weight: 800; }
+      .label { fill: #0066ff; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 800; letter-spacing: 2.5px; }
+      .th { fill: #ffffff; font-family: Inter, Arial, sans-serif; font-size: 20px; font-weight: 800; }
+      .td { fill: #172033; font-family: Inter, Arial, sans-serif; font-size: 18px; font-weight: 650; }
+      .small { fill: #526176; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 500; }
+      .line { stroke: #dbe3ef; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="760"/>
+  <text class="label" x="72" y="72">PRACTICAL TEST</text>
+  <text class="title" x="72" y="115">Before trusting a scientific RAG answer, inspect the chain</text>
+  <text class="small" x="72" y="150">This is my proposed minimum evaluation surface for a public-safe scientific agent.</text>
+
+  <rect class="panel" x="72" y="190" width="1056" height="500" rx="20"/>
+  <rect class="header" x="72" y="190" width="1056" height="70" rx="20"/>
+  <rect class="header" x="72" y="224" width="1056" height="36"/>
+  <text class="th" x="110" y="235">Test</text>
+  <text class="th" x="388" y="235">What to inspect</text>
+  <text class="th" x="800" y="235">Failure caught</text>
+
+  <rect class="stripe" x="72" y="330" width="1056" height="86"/>
+  <rect class="stripe" x="72" y="502" width="1056" height="86"/>
+  <line class="line" x1="330" y1="260" x2="330" y2="690"/>
+  <line class="line" x1="742" y1="260" x2="742" y2="690"/>
+  <line class="line" x1="72" y1="330" x2="1128" y2="330"/>
+  <line class="line" x1="72" y1="416" x2="1128" y2="416"/>
+  <line class="line" x1="72" y1="502" x2="1128" y2="502"/>
+  <line class="line" x1="72" y1="588" x2="1128" y2="588"/>
+
+  <text class="td" x="110" y="304">Source coverage</text>
+  <text class="small" x="388" y="294">Were the expected papers found?</text>
+  <text class="small" x="388" y="320">Were near-miss papers separated?</text>
+  <text class="small" x="800" y="304">Answer built on the wrong corpus</text>
+
+  <text class="td" x="110" y="390">Citation precision</text>
+  <text class="small" x="388" y="380">Does each citation support the exact claim?</text>
+  <text class="small" x="388" y="406">Can a reviewer jump to the right section?</text>
+  <text class="small" x="800" y="390">Relevant paper, wrong evidence</text>
+
+  <text class="td" x="110" y="476">Answer correctness</text>
+  <text class="small" x="388" y="466">Does the final answer match known-answer cases?</text>
+  <text class="small" x="388" y="492">Are conditions and units preserved?</text>
+  <text class="small" x="800" y="476">Merged or overstated claims</text>
+
+  <text class="td" x="110" y="562">Caveat visibility</text>
+  <text class="small" x="388" y="552">Does it surface missing or conflicting evidence?</text>
+  <text class="small" x="388" y="578">Does it avoid pretending uncertainty is solved?</text>
+  <text class="small" x="800" y="562">False confidence</text>
+
+  <text class="td" x="110" y="648">Trace replay</text>
+  <text class="small" x="388" y="638">Can a second reader inspect the retrieval path?</text>
+  <text class="small" x="388" y="664">Are prompts, sources, and artifacts logged?</text>
+  <text class="small" x="800" y="648">Non-auditable decision support</text>
+</svg>
