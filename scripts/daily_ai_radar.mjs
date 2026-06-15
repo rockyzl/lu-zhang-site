@@ -113,7 +113,7 @@ const config = JSON.parse(await fs.readFile(sourcePath, "utf8"));
 const date = argValue("date", new Date().toISOString().slice(0, 10));
 const title = argValue("title", `AI Research Radar — ${date}`);
 const slug = argValue("slug", `${date}-ai-research-radar`);
-const outPath = path.resolve("src/content/blog", `${slugify(slug)}.md`);
+const outPath = path.resolve("src/blog", `${slugify(slug)}.md`);
 const results = await Promise.all(config.sources.map((source) => collectSource(source, config.keywords)));
 const autoItems = results.flatMap((result) => result.items);
 const grouped = groupBy(autoItems, "group");

@@ -17,7 +17,7 @@ type BlogModule = {
   file?: string;
 };
 
-const modules = import.meta.glob<BlogModule>("../content/blog/*.md", { eager: true });
+const modules = import.meta.glob<BlogModule>("../blog/*.md", { eager: true });
 const showDrafts = import.meta.env.DEV || import.meta.env.PUBLIC_SHOW_DRAFT_POSTS === "true";
 
 function slugFromPath(filePath: string): string {

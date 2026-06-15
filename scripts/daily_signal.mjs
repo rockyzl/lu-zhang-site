@@ -245,7 +245,7 @@ function sourceLabel(item) {
 }
 
 async function readKnownSourceUrls() {
-  const blogDir = path.resolve("src/content/blog");
+  const blogDir = path.resolve("src/blog");
   const urls = new Set();
 
   try {
@@ -265,7 +265,7 @@ async function readKnownSourceUrls() {
 }
 
 async function hasDailyDraft(date) {
-  const blogDir = path.resolve("src/content/blog");
+  const blogDir = path.resolve("src/blog");
 
   try {
     const entries = await fs.readdir(blogDir, { withFileTypes: true });
@@ -399,7 +399,7 @@ if (!candidates.length) {
 
 const selected = candidates[0];
 const slug = `${date}-${slugify(selected.title) || "sciencesloop-signal"}`;
-const outPath = path.resolve("src/content/blog", `${slug}.md`);
+const outPath = path.resolve("src/blog", `${slug}.md`);
 const sidecarPath = path.resolve("draft-notes/daily-signal", `${slug}.md`);
 const post = buildPost({ date, selected });
 const sidecar = buildSidecar({ date, selected, candidates, sources: config.sources ?? [] });

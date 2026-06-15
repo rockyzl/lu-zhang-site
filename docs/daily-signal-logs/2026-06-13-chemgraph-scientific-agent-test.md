@@ -1,7 +1,7 @@
 # Daily Signal Sidecar — 2026-06-13 ChemGraph
 
 Public post:
-`src/content/blog/2026-06-13-chemgraph-scientific-agent-test.md`
+`src/blog/2026-06-13-chemgraph-scientific-agent-test.md`
 
 ## Selected Signal
 

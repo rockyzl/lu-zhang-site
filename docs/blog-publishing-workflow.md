@@ -3,7 +3,7 @@
 This site publishes SciencesLoop notes from Markdown files in:
 
 ```text
-src/content/blog/
+src/blog/
 ```
 
 Use this workflow for AI agent, scientific workflow, RAG, evaluation, and AI for
@@ -19,7 +19,7 @@ npm run daily:signal
 ```
 
 This searches popular or high-signal public sources, picks one candidate, and
-creates a draft under `src/content/blog/`. Review and edit the draft before
+creates a draft under `src/blog/`. Review and edit the draft before
 publishing.
 
 ## Daily Automation

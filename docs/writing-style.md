@@ -1,4 +1,4 @@
-# ScientificLoop — Daily "AI × Science" Writing Style Guide (v1)
+# SciencesLoop — Daily "AI × Science" Writing Style Guide (v1)
 
 This guide governs the daily one-item posts on sciencesloop.com. Use it as the
 short operational checklist next to the fuller
@@ -70,7 +70,7 @@ playbook.
 `"the future of …"`, calling a prototype "production", unsourced superlatives,
 emoji pile-ups, empty openers ("In today's fast-paced world …").
 
-This directly enforces the anti-"over-claiming" cleanup ScientificLoop already did,
+This directly enforces the anti-"over-claiming" cleanup SciencesLoop already did,
 and matches what HN/LinkedIn readers reject in AI content.
 
 ## Bilingual

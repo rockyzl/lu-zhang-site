@@ -1,6 +1,6 @@
-# ScientificLoop Writing Style
+# SciencesLoop Writing Style
 
-ScientificLoop posts should be useful, small, and evidence-linked. The goal is
+SciencesLoop posts should be useful, small, and evidence-linked. The goal is
 not to chase AI news. The goal is to build a public thinking trail around AI for
 Science, scientific agents, RAG, evaluation, MLOps, and battery/materials
 discovery.
@@ -33,7 +33,7 @@ Each day:
 4. Study the writing shape of similar high-performing posts.
 5. Write one short post.
 6. Cite the source link.
-7. Explain what it means for ScientificLoop.
+7. Explain what it means for SciencesLoop.
 8. Publish only after checking claims and links.
 
 Target length: 300-700 words for website posts, 120-220 words for LinkedIn.
@@ -55,7 +55,7 @@ Use these as style references, not as content to copy.
   reduce noise, keep one practical takeaway, and make the reader feel current
   without drowning them in links.
 
-The ScientificLoop blend is:
+The SciencesLoop blend is:
 
 ```text
 GitHub clarity + technical workflow + popular-science hook + AI-newsletter brevity
@@ -153,9 +153,9 @@ Explain the practical pattern:
 - Does it make scientific work more traceable?
 - Does it reduce manual friction for a scientist?
 
-### 3. ScientificLoop Angle
+### 3. SciencesLoop Angle
 
-Explain how this affects the ScientificLoop direction:
+Explain how this affects the SciencesLoop direction:
 
 - A feature to test.
 - A workflow pattern to borrow.
@@ -234,7 +234,7 @@ Use:
 - Modest claims: "I am testing", "this suggests", "a useful pattern is",
   "the failure mode is".
 - First-person judgment when useful: "My read is", "I would watch", "For
-  ScientificLoop, this matters because".
+  SciencesLoop, this matters because".
 
 Avoid:
 
@@ -254,7 +254,7 @@ Every post should pass these checks:
 - Is any prototype clearly called a prototype?
 - Does the post avoid private or confidential context?
 - Would the claim survive an interview follow-up?
-- Is the ScientificLoop connection real, not forced?
+- Is the SciencesLoop connection real, not forced?
 
 ## Preferred Titles
 
@@ -265,7 +265,7 @@ Good:
 - "A Repo Worth Watching: Scientific Agent Skills"
 - "Why Scientific Agents Need A Trace"
 - "The Small Missing Piece In AI Literature Review Tools"
-- "What A Lab Automation Demo Suggests For ScientificLoop"
+- "What A Lab Automation Demo Suggests For SciencesLoop"
 
 Weak:
 
@@ -280,7 +280,7 @@ conversational:
 
 1. State the signal.
 2. Give one practical takeaway.
-3. Connect it to ScientificLoop.
+3. Connect it to SciencesLoop.
 4. Ask one question.
 
 Do not post more than one idea at a time.
@@ -304,7 +304,7 @@ It also carries configured page/watchlist sources into the sidecar log as
 article idea sources. These links are prompts for manual review, not automatic
 facts. Reopen the primary source before repeating any claim.
 
-It generates a draft Markdown post in `src/content/blog/`. The draft must still
+It generates a draft Markdown post in `src/blog/`. The draft must still
 be reviewed and edited before publishing.
 
 Manual-review sources, such as LinkedIn, X.com, Reddit, YouTube, YC, Product

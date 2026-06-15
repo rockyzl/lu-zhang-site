@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "clean": "rm -rf .astro dist",
+    "build": "npm run clean && astro build",
     "preview": "astro preview",
     "data": "python3 scripts/parse_md.py && python3 scripts/fetch_openalex.py",
     "new:post": "node scripts/new_blog_post.mjs",

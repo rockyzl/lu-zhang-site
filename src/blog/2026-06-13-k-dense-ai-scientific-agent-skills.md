@@ -33,23 +33,3 @@ answer to, then inspect what it retrieved and how it handled failure.
 
 Source: [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) -
 try one skill on a known problem and read the trace.
-
-## LinkedIn Draft
-
-I am watching one practical pattern in AI for Science: packaged "skills" for
-scientific agents.
-
-K-Dense-AI/scientific-agent-skills collects about 140 agent skills plus 100+
-scientific database connections. A skill is not magic. It is a packaged workflow:
-which source to query, what protocol to follow, what caveats to keep in view.
-
-My SciencesLoop angle: the useful question is not how many skills exist. It is
-whether one skill makes one scientific step more reliable, traceable, and easier
-to evaluate than an agent improvising.
-
-I would test a single skill on a known problem first, then inspect the retrieved
-evidence and failure modes.
-
-Source: https://github.com/K-Dense-AI/scientific-agent-skills
-
-What would make a scientific agent skill trustworthy enough for your own work?

@@ -33,7 +33,7 @@ const tags = argValue("tags", "AI agents, scientific workflow, RAG")
   .split(",")
   .map((tag) => tag.trim())
   .filter(Boolean);
-const filePath = path.resolve("src/content/blog", `${slug}.md`);
+const filePath = path.resolve("src/blog", `${slug}.md`);
 
 const frontmatterTags = tags.map((tag) => `  - ${tag}`).join("\n");
 const body = `---
