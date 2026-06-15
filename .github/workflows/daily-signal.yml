@@ -41,7 +41,7 @@ jobs:
 
       - name: Commit draft
         run: |
-          if git diff --quiet -- src/content/blog draft-notes; then
+          if [ -z "$(git status --porcelain -- src/content/blog draft-notes)" ]; then
             echo "No daily signal changes to commit."
             exit 0
           fi
