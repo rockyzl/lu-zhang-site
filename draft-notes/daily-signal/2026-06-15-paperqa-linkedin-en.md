@@ -1,18 +1,23 @@
 # LinkedIn Draft: PaperQA2 / scientific RAG evidence trail
 
-I am watching one useful AI-for-science pattern today: scientific RAG that leaves an evidence trail.
+In scientific literature review, finding papers is only the start. The slower work is checking whether a conclusion is actually supported.
 
-Future House's PaperQA2 repository and paper describe a RAG system for answering questions from scientific documents with citations. What caught my attention is the workflow shape:
+That is why I'm treating Future House's PaperQA2 as a workflow signal, not a tool recommendation yet.
 
-question -> retrieved evidence -> cited answer -> caveat -> human review -> next step
+The current repo highlights cited answers, reranking, contextual summarization, local full-text search, and agentic query refinement. The paper evaluates PaperQA2 as a multi-step literature agent.
 
-For scientific work, a plausible answer is not enough. The output needs to be inspectable: which sources were used, which claims were extracted, where uncertainty remains, and what should be checked next.
+The inspection surface I want is:
 
-My read: the useful unit of work is not a chat message. It is a reviewable research artifact.
+question -> retrieved evidence -> cited answer -> uncertainty -> review gate -> next action
 
-I would test any scientific RAG system first on known-answer questions, then check citation precision, answer correctness, caveat visibility, and whether the retrieval trace can be replayed.
+For scientific work, a fluent answer is only useful if the evidence path can be inspected later. Which source sections were used? Which claim came from where? What uncertainty remains?
 
-Source: https://github.com/Future-House/paper-qa
+In materials or battery review, the dangerous errors are often quiet: citing the right paper but the wrong section, merging results measured under different conditions, or missing a negative result.
+
+I have read the repo and paper; I have not run PaperQA2 locally yet. My first test would be small: known-answer questions, near-miss papers, citation precision, answer correctness, caveat visibility, and replayable retrieval traces.
+
+Article: https://sciencesloop.com/blog/2026-06-15-future-house-paper-qa/
+Repo: https://github.com/Future-House/paper-qa
 Paper: https://arxiv.org/abs/2409.13740
 
-What would make a scientific agent answer trustworthy enough for your own workflow?
+Would you trust a cited scientific answer without source-section trace, or would you need a replayable retrieval path first?

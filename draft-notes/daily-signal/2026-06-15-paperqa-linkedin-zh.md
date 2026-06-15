@@ -1,18 +1,23 @@
 # LinkedIn 中文草稿: PaperQA2 / scientific RAG evidence trail
 
-今天看到一个值得关注的 AI for Science 模式：scientific RAG 不应该只给答案，而要留下 evidence trail。
+做科研文献综述时，找到论文只是起点。更花时间的是判断一个结论到底有没有被证据支撑。
 
-Future House 的 PaperQA2 repo 和论文展示了一个面向科学文档问答的 RAG 系统。对我来说，重点不是“更好的搜索”，而是 workflow shape：
+这也是我今天写这篇 PaperQA2 note 的原因：我先把它看成一个 workflow signal；是否适合作为工具推荐，还需要本地测试。
 
-question -> retrieved evidence -> cited answer -> caveat -> human review -> next step
+当前 repo 强调带引用回答、reranking、contextual summarization、本地全文搜索和 agentic query refinement；论文则把 PaperQA2 作为多步文献 agent 来评估。
 
-科研场景里，一个合理答案不够。输出需要可以检查：用了哪些来源，提取了哪些 claim，哪里还有 uncertainty，下一步应该查什么。
+我想检查的是，它能不能形成一个可审查的工作面：
 
-我的 SciencesLoop 角度：真正有用的单位不是 chat message，而是 reviewable research artifact。
+question -> retrieved evidence -> cited answer -> uncertainty -> review gate -> next action
 
-我会先用 known-answer questions 测任何 scientific RAG 系统，评分 citation precision、answer correctness、caveat visibility，以及 retrieval trace 能不能 replay。
+科研场景里，答案的价值取决于 evidence path 能不能事后检查。用了哪些 source sections？哪个 claim 来自哪里？有没有漏掉 negative result？
 
-Source: https://github.com/Future-House/paper-qa
+更安静、也更危险的错误，是引用了相关论文却引用错 section，或者把不同实验条件下的结论合并了。
+
+我已经读了 repo 和论文；还没有本地运行 PaperQA2。我的第一步测试会很小：known-answer questions、near-miss papers、citation precision、answer correctness、caveat visibility，以及 retrieval trace 能不能 replay。
+
+文章：https://sciencesloop.com/zh/blog/2026-06-15-future-house-paper-qa-zh/
+Repo: https://github.com/Future-House/paper-qa
 Paper: https://arxiv.org/abs/2409.13740
 
-如果是你的科研流程，什么样的 agent answer 才值得信任？
+如果放到你的科研流程里，你会需要看到哪些 trace，才会把 agent 的回答用于下一篇论文、下一次模拟或下一步实验？
