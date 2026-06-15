@@ -158,17 +158,17 @@
           "years": "2021 – 2024",
           "role": "Co-author of flagship Nature Communications 2024 paper",
           "highlights": [
-            "Robotic chemistry + active learning → accelerated discovery of optimal electrolyte formulations",
-            "Direct precursor to rfb-formulation-agent — the personal AI scientist project"
+            "Robotic chemistry and active learning study for electrolyte-formulation optimization",
+            "Relevant scientific background for later personal formulation-support prototypes"
           ]
         },
         {
           "name": "Autonomous Discovery for Battery Electrolytes",
-          "funder": "ANL internal (FY23)",
-          "years": "2023 – ongoing",
-          "role": "Project lead (internal proposal)",
+          "funder": "Argonne internal concept work",
+          "years": "2023",
+          "role": "Internal concept/proposal lead",
           "highlights": [
-            "Autonomous discovery framework extended from RFB electrolytes to Li-metal battery electrolytes"
+            "Explored autonomous-discovery workflow concepts across battery-electrolyte problems; public details intentionally limited"
           ]
         }
       ]
@@ -198,9 +198,9 @@
         },
         {
           "name": "PS Upcycling Membrane → Aqueous Flow Battery & Lithium Extraction",
-          "funder": "ANL internal — ongoing",
-          "years": "2024 – ongoing",
-          "role": "Project lead (user-confirmed)",
+          "funder": "Argonne collaboration",
+          "years": "2024",
+          "role": "Contributor / project lead; public details limited",
           "highlights": [
             "Patent advanced to finalized US non-provisional draft (ANL 23-T-154 / ANL-IN-22-134)",
             "Manuscript in preparation"

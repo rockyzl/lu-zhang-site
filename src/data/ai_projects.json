@@ -31,15 +31,15 @@
   },
   {
     "name": "guangnian-energy-agent",
-    "tagline": "光年新能源智能体 — Azure-deployed RAG assistant for new-energy content",
-    "description": "Deployed bilingual RAG assistant built on Azure OpenAI and Azure AI Search patterns, with a Python aiohttp backend and lightweight web UI. Used as a practical AI x energy demo and workflow prototype.",
+    "tagline": "光年新能源智能体 — RAG assistant demo for new-energy content",
+    "description": "Bilingual RAG assistant demo/prototype built around Azure OpenAI and Azure AI Search patterns, with a Python aiohttp backend and lightweight web UI. Used as a practical AI x energy demo and workflow prototype.",
     "status": "Live demo",
     "tags": [
       "Azure OpenAI",
       "RAG",
       "voice-rag",
       "AI x energy",
-      "deployed demo"
+      "live demo"
     ],
     "image": null,
     "gradient": "from-amber to-teal",
@@ -48,8 +48,8 @@
   },
   {
     "name": "rfb-formulation-agent",
-    "tagline": "AI scientist for redox flow battery formulation",
-    "description": "A pre-v0.1 vertical-domain AI agent prototype designed to support redox-flow-battery electrolyte formulation. It aims to translate 14+ years of flow-battery chemistry intuition into structured reasoning, retrieval, and validation workflows.",
+    "tagline": "Redox-flow-battery formulation support prototype",
+    "description": "A pre-v0.1 vertical-domain AI agent prototype for redox-flow-battery formulation support. It tests whether structured retrieval, reasoning, and validation workflows can help organize flow-battery formulation knowledge.",
     "status": "In progress · pre-v0.1",
     "tags": [
       "LLM agents",

@@ -26,8 +26,8 @@
   {
     "date": "2026-04",
     "tag": "AI",
-    "title": "Building rfb-formulation-agent — AI scientist for redox flow battery formulation",
-    "blurb": "A pre-v0.1 vertical AI prototype for redox-flow-battery formulation support. The goal is to connect 14+ years of flow-battery intuition with structured retrieval, reasoning, and validation workflows.",
+    "title": "Building rfb-formulation-agent — redox-flow-battery formulation support prototype",
+    "blurb": "A pre-v0.1 AI prototype testing whether structured retrieval, reasoning, and validation workflows can help organize redox-flow-battery formulation knowledge.",
     "image": null,
     "link": "https://github.com/rockyzl"
   },
@@ -35,7 +35,7 @@
     "date": "2026-02",
     "tag": "Career",
     "title": "Joined AAOS as Data Science Engineer",
-    "blurb": "Working on enterprise AI agent, RAG, and workflow tooling for the American Academy of Orthopaedic Surgeons.",
+    "blurb": "Working on high-level enterprise data/AI workflow tooling at AAOS; public details intentionally limited.",
     "image": null,
     "link": "https://www.aaos.org/"
   },

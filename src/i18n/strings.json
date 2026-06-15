@@ -129,12 +129,12 @@
     "zh": "AI for Science · 科学智能体 · 电池材料"
   },
   "home.role": {
-    "en": "AI/ML engineer and former Argonne scientist building scientific agents, RAG, MLOps workflows, and AI-enabled materials discovery systems.",
-    "zh": "AI/ML 工程师，曾任阿贡国家实验室科学家；当前构建科学智能体、RAG、MLOps 工作流和 AI 驱动的材料发现系统。"
+    "en": "AI/ML engineer and former Argonne scientist building public-safe AI for Science prototypes, scientific-agent notes, RAG workflows, and evaluation-oriented systems.",
+    "zh": "AI/ML 工程师，曾任阿贡国家实验室科学家；当前构建公开安全的 AI for Science 原型、科学智能体笔记、RAG 工作流和面向评估的系统。"
   },
   "home.lead": {
-    "en": "14+ years of DOE battery research at Argonne, 100+ publications, 23 granted U.S. patents, 4,700+ citations, and recent applied AI engineering work spanning agent orchestration, Azure AI Search, evaluation, observability, and deployment readiness.",
-    "zh": "在阿贡拥有 14+ 年 DOE 电池研究经验，100+ 论文、23 项授权美国专利、4,700+ 引用；近期应用 AI 工程工作覆盖智能体编排、Azure AI Search、评估、可观测性和部署准备。"
+    "en": "14+ years of DOE battery research at Argonne, 100+ publications, 23 granted U.S. patents, 4,700+ citations, and recent applied AI engineering work around RAG, agent workflows, retrieval checks, trace review, evaluation, and deployment-readiness practices.",
+    "zh": "在阿贡拥有 14+ 年 DOE 电池研究经验，100+ 论文、23 项授权美国专利、4,700+ 引用；近期应用 AI 工程工作围绕 RAG、智能体工作流、检索检查、trace review、评估和部署准备实践。"
   },
   "home.cta.publications": {
     "en": "Publications →",
