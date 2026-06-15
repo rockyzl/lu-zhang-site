@@ -22,6 +22,19 @@ This searches popular or high-signal public sources, picks one candidate, and
 creates a draft under `src/content/blog/`. Review and edit the draft before
 publishing.
 
+What the collectors mean:
+
+- **RSS collector:** reads machine-readable feeds from sources such as OpenAI,
+  Microsoft Research, NVIDIA, Hugging Face, and arXiv. RSS is like a public
+  subscription feed for new posts or papers.
+- **Hacker News collector:** searches Hacker News through Algolia for recent
+  community discussions, then uses points/comments as one popularity signal.
+- **GitHub collector:** searches GitHub repositories through `gh api`, then
+  ranks repo candidates by relevance and stars.
+- **Manual watchlist:** page sources from `src/data/ai_radar_sources.json`,
+  LinkedIn, X, Reddit, YouTube, Product Hunt, and Daily Signals source maps.
+  These are idea sources only; reopen the primary source before publishing.
+
 For a manual post:
 
 ```bash
@@ -55,6 +68,21 @@ Use this structure unless there is a clear reason not to:
 2. Why it matters.
 3. ScientificLoop angle.
 4. Useful question.
+
+For a richer technical article, use this shape instead:
+
+1. Problem hook.
+2. Nut graf.
+3. Source facts.
+4. Concrete scenario.
+5. Workflow trace or diagram.
+6. Technical mechanism.
+7. Use cases and non-use cases.
+8. Failure modes.
+9. Practical checklist or next test.
+
+Chinese versions should be rewrites, not literal translations. Preserve source
+links and do not add claims that are not in the English/source material.
 
 ## Publish
 

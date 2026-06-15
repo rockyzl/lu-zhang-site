@@ -19,7 +19,7 @@ opinionated, checkable, never hyped.**
 - Honest about limits; preserve uncertainty instead of flattening it into confidence.
 - Calmer than Sentry (at most half a joke per post), looser than a journal paper.
 
-## Post structure (default template)
+## Daily / short post structure
 
 Borrows Import AI's skeleton + Willison's hands-on framing + The Rundown's "why / how":
 
@@ -35,6 +35,24 @@ Borrows Import AI's skeleton + Willison's hands-on framing + The Rundown's "why 
 
 Length: **English 120–250 words**. Chinese is a rewrite, not a literal translation,
 of comparable length.
+
+## Medium / long article structure
+
+Use this only when a source deserves more depth than a daily note.
+
+1. **Problem hook** — start with a recognizable scientific or engineering
+   workflow problem.
+2. **Nut graf** — tell readers what they will learn and why it matters.
+3. **Source facts** — summarize the paper/tool/repo/announcement with links.
+4. **Scenario** — show one realistic workflow, not a generic description.
+5. **Trace or diagram** — show `question -> evidence -> tool/action -> artifact
+   -> evaluation -> human review`.
+6. **Mechanism** — explain the technical pieces that matter.
+7. **Failure modes** — cite the trust, benchmark, retrieval, or safety gap.
+8. **Next test** — end with a checklist or experiment the reader could try.
+
+See `docs/scientificloop-writing-style.md` for the full rich technical article
+playbook.
 
 ## House rules
 

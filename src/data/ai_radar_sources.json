@@ -93,6 +93,118 @@
       "tags": ["drug discovery", "AI for Science", "startup"]
     },
     {
+      "name": "OpenAI GPT-Rosalind",
+      "group": "AI for Science platforms",
+      "type": "page",
+      "url": "https://openai.com/index/introducing-gpt-rosalind/",
+      "tags": ["life sciences", "scientific workflows", "trusted access"]
+    },
+    {
+      "name": "OpenAI GPT-Rosalind Capabilities",
+      "group": "AI for Science platforms",
+      "type": "page",
+      "url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/",
+      "tags": ["life sciences", "plugins", "provenance", "benchmarks"]
+    },
+    {
+      "name": "OpenAI Rosalind Biodefense",
+      "group": "AI-bio governance",
+      "type": "page",
+      "url": "https://openai.com/index/strengthening-societal-resilience-with-rosalind-biodefense/",
+      "tags": ["biosecurity", "trusted access", "public health"]
+    },
+    {
+      "name": "Google Gemini for Science",
+      "group": "AI for Science platforms",
+      "type": "page",
+      "url": "https://blog.google/innovation-and-ai/technology/research/gemini-for-science-io-2026/",
+      "tags": ["science skills", "hypothesis generation", "computational discovery"]
+    },
+    {
+      "name": "Google DeepMind Co-Scientist",
+      "group": "Scientific agents",
+      "type": "page",
+      "url": "https://deepmind.google/blog/co-scientist-a-multi-agent-ai-partner-to-accelerate-research/",
+      "tags": ["multi-agent", "hypothesis generation", "ranking", "lab validation"]
+    },
+    {
+      "name": "Sanger AI Genomics Consortium",
+      "group": "AI-ready scientific data",
+      "type": "page",
+      "url": "https://www.sanger.ac.uk/news_item/google-deepmind-google-org-and-sanger-institute-to-launch-new-ai-consortium-for-genomics/",
+      "tags": ["AI-ready data", "genomics", "data generation"]
+    },
+    {
+      "name": "Anthropic Making Claude a Chemist",
+      "group": "Scientific model evaluation",
+      "type": "page",
+      "url": "https://www.anthropic.com/research/making-claude-a-chemist",
+      "tags": ["chemistry", "scientific artifacts", "model evaluation"]
+    },
+    {
+      "name": "CEPI Pandemic Preparedness Engine",
+      "group": "AI-bio governance",
+      "type": "page",
+      "url": "https://cepi.net/biosecurity-design-cepis-pandemic-preparedness-engine",
+      "tags": ["biosecurity", "agentic workflow", "vaccine R&D"]
+    },
+    {
+      "name": "FAI Nucleic Acid Synthesis Screening",
+      "group": "AI-bio governance",
+      "type": "page",
+      "url": "https://www.thefai.org/posts/in-support-of-mandatory-nucleic-acid-synthesis-screening-and-recordkeeping",
+      "tags": ["screening", "recordkeeping", "traceability", "biosecurity"]
+    },
+    {
+      "name": "Arbor Hypothesis-Tree Refinement",
+      "group": "Autonomous research workflows",
+      "type": "page",
+      "url": "https://arxiv.org/abs/2606.11926",
+      "tags": ["hypothesis tree", "research state", "scientific agents"]
+    },
+    {
+      "name": "Arbor GitHub",
+      "group": "Autonomous research workflows",
+      "type": "page",
+      "url": "https://github.com/RUC-NLPIR/Arbor",
+      "tags": ["open source", "hypothesis tree", "scientific agents"]
+    },
+    {
+      "name": "AutoResearchClaw",
+      "group": "Autonomous research workflows",
+      "type": "page",
+      "url": "https://github.com/aiming-lab/AutoResearchClaw",
+      "tags": ["autonomous research", "human-in-the-loop", "verification"]
+    },
+    {
+      "name": "ResearchClawBench",
+      "group": "Autonomous research evaluation",
+      "type": "page",
+      "url": "https://github.com/InternScience/ResearchClawBench",
+      "tags": ["benchmark", "autonomous research", "scientific agents"]
+    },
+    {
+      "name": "SciResearcher",
+      "group": "Scientific reasoning benchmarks",
+      "type": "page",
+      "url": "https://arxiv.org/html/2605.01489v2",
+      "tags": ["scientific reasoning", "tool use", "computation-grounded tasks"]
+    },
+    {
+      "name": "Agentic AI Scientists Critique",
+      "group": "Scientific agent evaluation",
+      "type": "page",
+      "url": "https://arxiv.org/html/2605.08956v1",
+      "tags": ["evaluation", "physical validation", "benchmark validity"]
+    },
+    {
+      "name": "Bohrium / DP Technology",
+      "group": "China AI for Science ecosystem",
+      "type": "page",
+      "url": "https://www.dp.tech/en/product/bohrium",
+      "tags": ["AI for Science", "scientific workflow", "China AI"]
+    },
+    {
       "name": "DeepSeek News",
       "group": "China AI ecosystem",
       "type": "page",
@@ -137,6 +249,18 @@
     "research assistant",
     "workflow",
     "reasoning",
+    "co-scientist",
+    "hypothesis",
+    "hypothesis tree",
+    "provenance",
+    "artifact",
+    "traceability",
+    "recordkeeping",
+    "trusted access",
+    "AI-ready data",
+    "biosecurity",
+    "physical validation",
+    "benchmark validity",
     "RAG",
     "evaluation",
     "robotic lab",

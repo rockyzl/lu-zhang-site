@@ -174,6 +174,56 @@ Good examples:
 - What evidence should the agent cite before suggesting the next experiment?
 - Is this a tool, a workflow, or just an interface?
 
+## Rich Technical Article Structure
+
+Use this when a topic needs more than a short daily signal. Do not expand just
+to make the article look substantial. Expand only when there is a real scenario,
+trace, diagram, caveat, or implementation lesson.
+
+1. **Problem hook.** Start with a scientific or engineering bottleneck the
+   reader recognizes.
+2. **Nut graf.** Say what the article explains, why it matters, and who should
+   care.
+3. **Source facts.** Summarize the paper/tool/repo/announcement with a link.
+4. **Concrete scenario.** Use one realistic workflow, clearly labeled if
+   hypothetical.
+5. **Diagram or trace.** Prefer a simple original flow:
+
+   ```text
+   Question -> Evidence -> Tool/action -> Artifact -> Evaluation -> Human review -> Next step
+   ```
+
+6. **Technical mechanism.** Explain retrieval, tool state, artifacts,
+   benchmarks, MLOps, data flow, or evaluation only as far as needed.
+7. **Use cases.** List plausible applications, not promised capabilities.
+8. **Failure modes.** Name missing citations, weak benchmarks, unsafe
+   automation, private-data risk, or physical-validation gaps.
+9. **Practical next step.** End with a checklist, small test, or follow-up
+   research question.
+
+Strong technical articles feel useful because they let the reader inspect the
+path from problem to evidence to decision.
+
+## LinkedIn / Short Technical Post Shape
+
+Use this shape when adapting a website note to LinkedIn:
+
+1. Open with one technical tension.
+2. Explain the source in one or two sentences.
+3. Give one reusable pattern.
+4. Add one caveat.
+5. Ask one expert-level question.
+6. Link the source.
+
+Target length: 120-220 words. One post, one idea.
+
+Good question examples:
+
+- What would you benchmark first?
+- Where should the human review gate sit?
+- What artifact would make this output auditable?
+- Where would this fail in a real lab workflow?
+
 ## Tone
 
 Use:
@@ -249,6 +299,10 @@ The workflow searches:
 - RSS sources from `src/data/ai_radar_sources.json`.
 - GitHub repository search, ranked by stars and relevance.
 - Hacker News search, ranked by discussion signal.
+
+It also carries configured page/watchlist sources into the sidecar log as
+article idea sources. These links are prompts for manual review, not automatic
+facts. Reopen the primary source before repeating any claim.
 
 It generates a draft Markdown post in `src/content/blog/`. The draft must still
 be reviewed and edited before publishing.

@@ -212,6 +212,11 @@ function formatCandidate(item, index) {
   return `${index + 1}. [${item.title}](${item.url}) - ${item.source}${popularity}`;
 }
 
+function formatIdeaSource(source, index) {
+  const tags = (source.tags ?? []).length ? `; tags: ${(source.tags ?? []).join(", ")}` : "";
+  return `${index + 1}. ${source.name} (${source.type}, ${source.group}) - ${source.url}${tags}`;
+}
+
 function sanitizeSummary(value) {
   return decodeEntities(value)
     .replace(/\bused by\s+[\d,]+\+?\s+scientists\b[^.]*\.?/gi, "")
@@ -223,6 +228,26 @@ function sanitizeSummary(value) {
 function sourceLabel(item) {
   const popularity = item.popularity ? ` (${item.popularity} at scan time)` : "";
   return `${item.source}${popularity}`;
+}
+
+async function readKnownSourceUrls() {
+  const blogDir = path.resolve("src/content/blog");
+  const urls = new Set();
+
+  try {
+    const entries = await fs.readdir(blogDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (!entry.isFile() || !entry.name.endsWith(".md")) continue;
+      const text = await fs.readFile(path.join(blogDir, entry.name), "utf8");
+      for (const match of text.matchAll(/https?:\/\/[^\s)"<>]+/g)) {
+        urls.add(match[0].replace(/[.,;:]+$/g, ""));
+      }
+    }
+  } catch {
+    // A fresh site may not have blog files yet. In that case, skip nothing.
+  }
+
+  return urls;
 }
 
 function buildPost({ date, selected }) {
@@ -270,8 +295,9 @@ What would make a scientific agent output trustworthy enough for your own workfl
 `;
 }
 
-function buildSidecar({ date, selected, candidates }) {
+function buildSidecar({ date, selected, candidates, sources }) {
   const candidateList = candidates.map(formatCandidate).join("\n");
+  const sourceList = (sources ?? []).map(formatIdeaSource).join("\n");
 
   return `# Daily signal sidecar - ${date}
 
@@ -299,6 +325,14 @@ before publishing.
 
 ${candidateList}
 
+## Article Idea Sources
+
+These configured sources are the recurring idea pool. RSS sources can be
+auto-collected; page sources are manual watchlist links. Reopen the primary
+source before repeating any claim.
+
+${sourceList}
+
 ## Publish Checks
 
 - [ ] Source link works.
@@ -313,12 +347,13 @@ const config = JSON.parse(await fs.readFile(sourcePath, "utf8"));
 const date = argValue("date", new Date().toISOString().slice(0, 10));
 const keywords = config.keywords ?? [];
 const dryRun = hasFlag("dry-run");
+const knownSourceUrls = await readKnownSourceUrls();
 
 const candidates = rankCandidates([
   ...await collectRss(config.sources, keywords),
   ...await collectHackerNews(keywords),
   ...await collectGitHub(keywords),
-]);
+].filter((item) => !knownSourceUrls.has(item.url)));
 
 if (!candidates.length) {
   console.error("No candidates found. Try the manual watchlist in src/data/ai_radar_sources.json.");
@@ -330,7 +365,7 @@ const slug = `${date}-${slugify(selected.title) || "sciencesloop-signal"}`;
 const outPath = path.resolve("src/content/blog", `${slug}.md`);
 const sidecarPath = path.resolve("draft-notes/daily-signal", `${slug}.md`);
 const post = buildPost({ date, selected });
-const sidecar = buildSidecar({ date, selected, candidates });
+const sidecar = buildSidecar({ date, selected, candidates, sources: config.sources ?? [] });
 
 if (dryRun) {
   console.log(`Selected: ${selected.title}`);
@@ -339,6 +374,9 @@ if (dryRun) {
   console.log("");
   console.log("Top candidates:");
   console.log(candidates.map(formatCandidate).join("\n"));
+  console.log("");
+  console.log("Configured article idea sources:");
+  console.log((config.sources ?? []).map(formatIdeaSource).join("\n"));
   process.exit(0);
 }
 
