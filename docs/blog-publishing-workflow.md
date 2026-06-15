@@ -1,6 +1,6 @@
 # Blog Publishing Workflow
 
-This site publishes ScientificLoop notes from Markdown files in:
+This site publishes SciencesLoop notes from Markdown files in:
 
 ```text
 src/content/blog/
@@ -21,6 +21,25 @@ npm run daily:signal
 This searches popular or high-signal public sources, picks one candidate, and
 creates a draft under `src/content/blog/`. Review and edit the draft before
 publishing.
+
+## Daily Automation
+
+GitHub Actions runs `Daily AI Signal Draft` once per day:
+
+```text
+13:30 UTC daily, roughly 08:30 America/Chicago during daylight saving time
+```
+
+The scheduled job only creates a draft Markdown file and a sidecar review note.
+Generated posts stay `status: "draft"` and `featured: false`; do not treat the
+automation as publication. If a draft already exists for the date, the script
+skips generation to avoid duplicate daily posts.
+
+Manual trigger:
+
+1. Open GitHub Actions.
+2. Select `Daily AI Signal Draft`.
+3. Run workflow.
 
 What the collectors mean:
 
@@ -66,7 +85,7 @@ Use this structure unless there is a clear reason not to:
 
 1. Signal.
 2. Why it matters.
-3. ScientificLoop angle.
+3. SciencesLoop angle.
 4. Useful question.
 
 For a richer technical article, use this shape instead:

@@ -250,6 +250,21 @@ async function readKnownSourceUrls() {
   return urls;
 }
 
+async function hasDailyDraft(date) {
+  const blogDir = path.resolve("src/content/blog");
+
+  try {
+    const entries = await fs.readdir(blogDir, { withFileTypes: true });
+    return entries.some((entry) => (
+      entry.isFile()
+        && entry.name.startsWith(`${date}-`)
+        && entry.name.endsWith(".md")
+    ));
+  } catch {
+    return false;
+  }
+}
+
 function buildPost({ date, selected }) {
   const title = `What ${selected.title} suggests about scientific agent workflows`;
   const summary = sanitizeSummary(selected.summary)
@@ -347,6 +362,12 @@ const config = JSON.parse(await fs.readFile(sourcePath, "utf8"));
 const date = argValue("date", new Date().toISOString().slice(0, 10));
 const keywords = config.keywords ?? [];
 const dryRun = hasFlag("dry-run");
+
+if (!dryRun && await hasDailyDraft(date)) {
+  console.log(`Daily signal draft already exists for ${date}; skipping.`);
+  process.exit(0);
+}
+
 const knownSourceUrls = await readKnownSourceUrls();
 
 const candidates = rankCandidates([
