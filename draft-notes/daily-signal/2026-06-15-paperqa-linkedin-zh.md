@@ -1,5 +1,7 @@
 # LinkedIn 中文草稿: PaperQA2 / scientific RAG evidence trail
 
+## 主帖
+
 做科研文献综述时，找到论文只是起点。更花时间的是判断一个结论到底有没有被证据支撑。
 
 这也是我今天写这篇 PaperQA2 note 的原因：我先把它看成一个 workflow signal；是否适合作为工具推荐，还需要本地测试。
@@ -17,7 +19,15 @@ question -> retrieved evidence -> cited answer -> uncertainty -> review gate -> 
 我已经读了 repo 和论文；还没有本地运行 PaperQA2。我的第一步测试会很小：known-answer questions、near-miss papers、citation precision、answer correctness、caveat visibility，以及 retrieval trace 能不能 replay。
 
 文章：https://sciencesloop.com/zh/blog/2026-06-15-future-house-paper-qa-zh/
-Repo: https://github.com/Future-House/paper-qa
-Paper: https://arxiv.org/abs/2409.13740
 
 如果放到你的科研流程里，你会需要看到哪些 trace，才会把 agent 的回答用于下一篇论文、下一次模拟或下一步实验？
+
+## 第一评论
+
+来源：
+
+Repo: https://github.com/Future-House/paper-qa
+
+Paper: https://arxiv.org/abs/2409.13740
+
+我把 source links 放在评论里，这样 LinkedIn 的 preview card 会优先指向 SciencesLoop 文章。

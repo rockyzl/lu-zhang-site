@@ -1,5 +1,7 @@
 # LinkedIn Draft: PaperQA2 / scientific RAG evidence trail
 
+## Main Post
+
 In scientific literature review, finding papers is only the start. The slower work is checking whether a conclusion is actually supported.
 
 That is why I'm treating Future House's PaperQA2 as a workflow signal, not a tool recommendation yet.
@@ -17,7 +19,15 @@ In materials or battery review, the dangerous errors are often quiet: citing the
 I have read the repo and paper; I have not run PaperQA2 locally yet. My first test would be small: known-answer questions, near-miss papers, citation precision, answer correctness, caveat visibility, and replayable retrieval traces.
 
 Article: https://sciencesloop.com/blog/2026-06-15-future-house-paper-qa/
-Repo: https://github.com/Future-House/paper-qa
-Paper: https://arxiv.org/abs/2409.13740
 
 Would you trust a cited scientific answer without source-section trace, or would you need a replayable retrieval path first?
+
+## First Comment
+
+Sources:
+
+Repo: https://github.com/Future-House/paper-qa
+
+Paper: https://arxiv.org/abs/2409.13740
+
+I put the source links here so LinkedIn keeps the preview card attached to the SciencesLoop article.

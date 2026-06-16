@@ -30,6 +30,15 @@ function yamlString(value) {
   return JSON.stringify(String(value ?? ""));
 }
 
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function decodeEntities(value) {
   return String(value ?? "")
     .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
@@ -244,6 +253,78 @@ function sourceLabel(item) {
   return `${item.source}${popularity}`;
 }
 
+function inferWorkflowStage(item) {
+  const text = `${item.title} ${item.summary} ${item.group}`.toLowerCase();
+
+  if (/\b(agent|scientist|autonomous|tool|workflow|automation|mcp|planner|orchestrat)\b/.test(text)) {
+    return "tool/model -> reproducibility";
+  }
+  if (/\b(rag|retriev|citation|literature|paper|arxiv|knowledge)\b/.test(text)) {
+    return "evidence -> evaluation";
+  }
+  if (/\b(material|molecule|battery|protein|chem|bio|discovery|screen)\b/.test(text)) {
+    return "hypothesis -> experiment/simulation";
+  }
+  if (/\b(benchmark|eval|leaderboard|metric|test)\b/.test(text)) {
+    return "evaluation -> reproducibility";
+  }
+  return "scientific question -> evidence";
+}
+
+function inferReusablePattern(item) {
+  const text = `${item.title} ${item.summary}`.toLowerCase();
+
+  if (/\b(agent|scientist|autonomous|tool|workflow|automation|planner|mcp)\b/.test(text)) {
+    return "Turn a model response into a traceable workflow artifact.";
+  }
+  if (/\b(rag|retriev|citation|literature|paper)\b/.test(text)) {
+    return "Make the evidence path inspectable before trusting the answer.";
+  }
+  if (/\b(material|molecule|battery|protein|chem|bio|screen)\b/.test(text)) {
+    return "Connect model-guided prioritization to a validation plan.";
+  }
+  if (/\b(benchmark|eval|metric|leaderboard)\b/.test(text)) {
+    return "Use a small known-answer test before adopting a broad claim.";
+  }
+  return "Map a public AI signal onto one concrete scientific workflow step.";
+}
+
+function inferFailureMode(item) {
+  const text = `${item.title} ${item.summary}`.toLowerCase();
+
+  if (/\b(agent|scientist|autonomous|tool|workflow|automation|planner|mcp)\b/.test(text)) {
+    return "The workflow may look agentic while hiding state, tool errors, or handoff decisions.";
+  }
+  if (/\b(rag|retriev|citation|literature|paper)\b/.test(text)) {
+    return "The system may cite related sources without proving that the cited section supports the claim.";
+  }
+  if (/\b(material|molecule|battery|protein|chem|bio|screen)\b/.test(text)) {
+    return "A ranked candidate list can look convincing while validation cost, data quality, or experimental constraints dominate.";
+  }
+  if (/\b(benchmark|eval|metric|leaderboard)\b/.test(text)) {
+    return "A benchmark result may not transfer to the corpus, task, or failure mode that matters in real work.";
+  }
+  return "The public signal may be interesting but too thin to support a practical workflow decision yet.";
+}
+
+function inferPracticalTest(item) {
+  const text = `${item.title} ${item.summary}`.toLowerCase();
+
+  if (/\b(agent|scientist|autonomous|tool|workflow|automation|planner|mcp)\b/.test(text)) {
+    return "Run one narrow task with logged tool calls, expected artifacts, failure injection, and a human review gate.";
+  }
+  if (/\b(rag|retriev|citation|literature|paper)\b/.test(text)) {
+    return "Use known-answer questions, near-miss sources, citation precision checks, and replayable retrieval traces.";
+  }
+  if (/\b(material|molecule|battery|protein|chem|bio|screen)\b/.test(text)) {
+    return "Pick a small public dataset or paper example, reproduce the ranking logic, then inspect what evidence would change the shortlist.";
+  }
+  if (/\b(benchmark|eval|metric|leaderboard)\b/.test(text)) {
+    return "Recreate a small slice of the benchmark with explicit pass/fail criteria and failed-example review.";
+  }
+  return "Read the primary source, define one expected artifact, and test whether the claim changes a real workflow decision.";
+}
+
 async function readKnownSourceUrls() {
   const blogDir = path.resolve("src/blog");
   const urls = new Set();
@@ -280,13 +361,23 @@ async function hasDailyDraft(date) {
 }
 
 function buildPost({ date, selected }) {
-  const title = `What ${selected.title} suggests about scientific agent workflows`;
+  const title = `Daily signal: ${selected.title}`;
   const summary = sanitizeSummary(selected.summary)
     || "This source points to a concrete AI-for-science workflow worth reviewing before adoption.";
+  const workflowStage = inferWorkflowStage(selected);
+  const reusablePattern = inferReusablePattern(selected);
+  const failureMode = inferFailureMode(selected);
+  const practicalTest = inferPracticalTest(selected);
+  const selectedTitleHtml = escapeHtml(selected.title);
+  const sourceLabelHtml = escapeHtml(sourceLabel(selected));
+  const workflowStageHtml = escapeHtml(workflowStage);
+  const reusablePatternHtml = escapeHtml(reusablePattern);
+  const practicalTestHtml = escapeHtml(practicalTest);
+  const failureModeHtml = escapeHtml(failureMode);
 
   return `---
 title: ${yamlString(title)}
-description: "One small AI-for-science signal, selected from popular and high-signal technical sources."
+description: "A draft SciencesLoop Daily Signal selected from public technical sources for human review."
 date: ${yamlString(date)}
 lang: "en"
 status: "draft"
@@ -300,19 +391,117 @@ tags:
 
 **${title}**
 
-${selected.title} is a signal from ${sourceLabel(selected)}. In plain terms, the source is about this: ${summary}
+This is an automated SciencesLoop draft. I have not yet reviewed the primary
+source in detail, reproduced any result, or checked the claim against a real
+scientific workflow.
 
-My read is that the useful question is not whether this looks impressive. The useful question is whether it makes one scientific step more reliable, easier to inspect, or easier to repeat. For AI for Science, that usually means clearer retrieval, explicit tool use, benchmarkable outputs, or a trace someone else can audit.
+The signal selected today is [${selected.title}](${selected.url}) from ${sourceLabel(selected)}.
+The source summary available to the scanner is:
 
-The watch-for is trust. Any adoption number, benchmark claim, or "AI scientist" wording should be treated as a lead, not a conclusion, until it is tested on a task with a known answer.
+> ${summary}
 
-Source: [${selected.title}](${selected.url}) - next step: test one small workflow from this source against a known problem and inspect the trace.
+## SciencesLoop Signal Card
+
+<section class="signal-card signal-card--compact" aria-label="SciencesLoop Signal Card">
+  <div class="signal-card__top">
+    <div>
+      <p class="signal-card__eyebrow">Draft workflow assessment</p>
+      <h3 class="signal-card__title">${selectedTitleHtml}</h3>
+      <p class="signal-card__summary">
+        Automated candidate selected from ${sourceLabelHtml}. Treat this as a
+        research lead until the source, claims, and failure modes are reviewed.
+      </p>
+    </div>
+    <span class="signal-card__pill">Daily Signal Draft</span>
+  </div>
+
+  <p class="signal-card__stage">
+    <span>Workflow stage</span>
+    <strong>${workflowStageHtml}</strong>
+  </p>
+
+  <ul class="signal-card__metrics" aria-label="Assessment dimensions">
+    <li class="signal-metric" data-level="medium">
+      <div class="signal-metric__head"><span>Evidence quality</span><span class="signal-metric__level">Needs review</span></div>
+      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
+    </li>
+    <li class="signal-metric" data-level="medium">
+      <div class="signal-metric__head"><span>Workflow utility</span><span class="signal-metric__level">Candidate</span></div>
+      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
+    </li>
+    <li class="signal-metric" data-level="low">
+      <div class="signal-metric__head"><span>Run status</span><span class="signal-metric__level">Not tested</span></div>
+      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
+    </li>
+  </ul>
+
+  <p class="signal-card__test">
+    Practical test: ${practicalTestHtml}
+  </p>
+</section>
+
+## Why I Would Look At This
+
+The reusable pattern I would inspect first is:
+
+> ${reusablePattern}
+
+That does not make the source a recommendation. It gives the next review step a
+shape. For SciencesLoop, the useful question is whether the signal changes one
+part of scientific work in a way that can be checked later: the evidence used,
+the tool action taken, the artifact produced, or the review gate before a human
+acts on it.
+
+## Workflow Stage
+
+My initial classification is **${workflowStage}**.
+
+This classification may change after reading the source. The point of the draft
+is to force an early workflow hypothesis before writing commentary. If the
+source only describes a model or product without a testable workflow change, the
+right decision is to keep it in the sidecar queue and not publish it.
+
+## Failure Mode To Check
+
+${failureMode}
+
+This is the first place I would be cautious. Popularity, benchmark language, or
+a polished demo can identify a signal worth reading, but they do not prove that
+the pattern is useful for scientific work. The review should look for what was
+measured, what was omitted, what can be reproduced, and what artifact a
+scientist or engineer could inspect afterward.
+
+## Practical Test
+
+${practicalTest}
+
+The smallest useful next step is to turn the source into one checkable task. A
+good test should name the input, expected artifact, success criteria, and one
+failure case. If that cannot be specified, this signal is probably too vague for
+a public Daily Signal.
+
+## What To Review Before Publishing
+
+- Open the primary source and replace this scanner summary with source-checked
+  facts.
+- Decide whether the post should remain a Daily Signal or become a Technical
+  Note.
+- Add one concrete scenario, preferably from literature review, materials
+  screening, agent evaluation, or scientific MLOps.
+- Keep any LinkedIn draft, rejected candidates, and claim checks in the matching
+  sidecar note.
+
+Source: [${selected.title}](${selected.url})
 `;
 }
 
 function buildSidecar({ date, selected, candidates, sources }) {
   const candidateList = candidates.map(formatCandidateDetail).join("\n\n");
   const sourceList = (sources ?? []).map(formatIdeaSource).join("\n");
+  const workflowStage = inferWorkflowStage(selected);
+  const reusablePattern = inferReusablePattern(selected);
+  const failureMode = inferFailureMode(selected);
+  const practicalTest = inferPracticalTest(selected);
 
   return `# Daily signal sidecar - ${date}
 
@@ -322,6 +511,23 @@ function buildSidecar({ date, selected, candidates, sources }) {
 - URL: ${selected.url}
 - Source: ${selected.source}
 - Score: ${selected.score.toFixed(2)}
+
+## Candidate Review
+
+- Signal: ${selected.title}
+- Primary source: ${selected.url}
+- Discovery source: ${selected.source}
+- Workflow stage: ${workflowStage}
+- Pattern: ${reusablePattern}
+- Failure mode: ${failureMode}
+- Practical test: ${practicalTest}
+- Evidence Quality: Unknown until human review
+- Reproducibility: Unknown until human review
+- Workflow Utility: Candidate
+- Transferability: Unknown until human review
+- Validation Cost: Unknown until human review
+- Run Status: automated scan only; source not yet reviewed in detail
+- Publish decision: draft for human review
 
 ## Why This Won
 
@@ -414,6 +620,9 @@ if (dryRun) {
   console.log(`Selected: ${selected.title}`);
   console.log(`Source: ${selected.url}`);
   console.log(`Score: ${selected.score.toFixed(2)}`);
+  console.log(`Workflow stage: ${inferWorkflowStage(selected)}`);
+  console.log(`Pattern: ${inferReusablePattern(selected)}`);
+  console.log(`Practical test: ${inferPracticalTest(selected)}`);
   console.log("");
   console.log(`Top ${displayedCandidates.length} of ${candidates.length} candidates:`);
   console.log(displayedCandidates.map(formatCandidate).join("\n"));

@@ -35,10 +35,13 @@ Generated posts stay `status: "draft"` and `featured: false`; do not treat the
 automation as publication. If a draft already exists for the date, the script
 skips generation to avoid duplicate daily posts.
 
-The public draft focuses on one selected signal. The sidecar log records the
-full ranked candidate set after duplicate-source filtering, including source,
-score, popularity/date when available, and summary. Use that log as the idea
-queue for follow-up articles.
+The public draft focuses on one selected signal and includes a compact
+SciencesLoop Signal Card scaffold, workflow-stage hypothesis, likely failure
+mode, and a practical-test prompt. Treat these as a starting point for review,
+not as verified analysis. The sidecar log records the full ranked candidate set
+after duplicate-source filtering, including source, score, popularity/date when
+available, inferred workflow stage, pattern, failure mode, practical test, and
+summary. Use that log as the idea queue for follow-up articles.
 
 Manual trigger:
 
@@ -138,6 +141,23 @@ fails on internal sections such as LinkedIn drafts, old public brand spellings,
 likely credentials/tokens, missing local image files, and source figures without
 visible attribution. It may warn on repeated AI-blog phrases so the article can
 be reviewed without blocking a truthful post.
+
+## LinkedIn Sharing
+
+LinkedIn usually builds the preview card from the first previewable URL in the
+main post body and may cache that preview. If the goal is to drive readers to a
+SciencesLoop article:
+
+1. Put only the SciencesLoop article URL in the main post.
+2. Do not include arXiv, GitHub, paper, or repo URLs in the same main post if
+   those links should not own the preview card.
+3. Put source links in the article body, a first comment, or a follow-up reply.
+4. If LinkedIn already generated the wrong preview card, the reliable fix is to
+   repost with only the intended article URL. Editing the text may not refresh
+   the cached card.
+
+This keeps the public post focused while preserving source transparency inside
+the article.
 
 ## Comments
 
