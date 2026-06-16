@@ -163,3 +163,7 @@ Product features:
 - [ ] Add preview workflow before publishing.
 - [ ] Add automated checks for banned internal sections such as LinkedIn drafts
       inside public Markdown.
+- [ ] Create Phase 0 schema for a SciencesLoop research signal map inspired by
+      Molecular Universe's map/detail/related-item product pattern.
+- [ ] Seed the signal map with PaperQA2, Molecular Universe, loop engineering,
+      and one Daily Signal item using only source-backed relationships.

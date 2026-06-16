@@ -35,6 +35,8 @@ reader feedback, and follow-up work.
       unsafe URLs, attribution, and private-access guardrails.
 - [x] Loop engineering research note captured from video metadata and public
       loop-engineering references.
+- [x] Molecular Universe map deep dive captured as a product reference for a
+      future SciencesLoop research/signal map.
 
 ## Active Priorities
 
@@ -79,6 +81,15 @@ reader feedback, and follow-up work.
      comment.
    - Acceptance: main post uses only the SciencesLoop article URL when the
      preview card should point to the site; source links go in first comment.
+
+7. **Research Signal Map**
+   - Status: design next.
+   - Goal: turn SciencesLoop signals into a navigable research/workflow map
+     inspired by Molecular Universe's map, detail-panel, and related-item
+     pattern without implying unsupported scientific relationships.
+   - Acceptance: Phase 0 schema defines signal, source, claim, workflow stage,
+     risk, practical test, related signals, article URL, and run status; seed
+     data includes only source-backed relationships.
 
 ## Standard Slice Checklist
 
