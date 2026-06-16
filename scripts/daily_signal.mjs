@@ -402,7 +402,7 @@ The source summary available to the scanner is:
 
 ## SciencesLoop Signal Card
 
-<section class="signal-card signal-card--compact" aria-label="SciencesLoop Signal Card">
+<section class="signal-card signal-card--compact signal-card--visual" aria-label="SciencesLoop Signal Card">
   <div class="signal-card__top">
     <div>
       <p class="signal-card__eyebrow">Draft workflow assessment</p>
@@ -420,23 +420,38 @@ The source summary available to the scanner is:
     <strong>${workflowStageHtml}</strong>
   </p>
 
+  <dl class="signal-card__details">
+    <div class="signal-card__detail">
+      <dt>Signal</dt>
+      <dd>${selectedTitleHtml}</dd>
+    </div>
+    <div class="signal-card__detail">
+      <dt>Run status</dt>
+      <dd>Not reviewed or run locally</dd>
+    </div>
+    <div class="signal-card__detail">
+      <dt>Practical test</dt>
+      <dd>${practicalTestHtml}</dd>
+    </div>
+  </dl>
+
   <ul class="signal-card__metrics" aria-label="Assessment dimensions">
     <li class="signal-metric" data-level="medium">
       <div class="signal-metric__head"><span>Evidence quality</span><span class="signal-metric__level">Needs review</span></div>
-      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
     </li>
     <li class="signal-metric" data-level="medium">
       <div class="signal-metric__head"><span>Workflow utility</span><span class="signal-metric__level">Candidate</span></div>
-      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
     </li>
     <li class="signal-metric" data-level="low">
       <div class="signal-metric__head"><span>Run status</span><span class="signal-metric__level">Not tested</span></div>
-      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
+    </li>
+    <li class="signal-metric" data-level="risk-medium">
+      <div class="signal-metric__head"><span>Hype risk</span><span class="signal-metric__level">Unknown</span></div>
     </li>
   </ul>
 
   <p class="signal-card__test">
-    Practical test: ${practicalTestHtml}
+    Early pattern: ${reusablePatternHtml}. Likely failure mode: ${failureModeHtml}
   </p>
 </section>
 

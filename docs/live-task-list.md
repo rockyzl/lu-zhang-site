@@ -37,12 +37,13 @@ reader feedback, and follow-up work.
 ## Active Priorities
 
 1. **Visual Signal Card**
-   - Status: planned.
+   - Status: first version implemented.
    - Goal: replace dense scorecard text with a compact visual card that explains
      workflow stage, evidence quality, reproducibility, transferability,
      validation cost, and hype risk.
    - Acceptance: works on desktop and mobile; does not look like fake numeric
-     scoring; appears in English and Chinese article pages.
+     scoring; appears in English and Chinese article pages. First version is
+     applied to the PaperQA2 article and the daily signal generator.
 
 2. **Article Quality Pass**
    - Status: planned.

@@ -23,7 +23,7 @@ My read: PaperQA2 is useful as a workflow signal. It breaks literature question 
 
 ## SciencesLoop Signal Card
 
-<section class="signal-card signal-card--compact" aria-label="SciencesLoop Signal Card">
+<section class="signal-card signal-card--compact signal-card--visual" aria-label="SciencesLoop Signal Card">
   <div class="signal-card__top">
     <div>
       <p class="signal-card__eyebrow">Workflow assessment</p>
@@ -42,24 +42,39 @@ My read: PaperQA2 is useful as a workflow signal. It breaks literature question 
     <strong>Evidence -> evaluation -> reproducibility</strong>
   </p>
 
+  <dl class="signal-card__details">
+    <div class="signal-card__detail">
+      <dt>Signal</dt>
+      <dd>Future House PaperQA2 repo + arXiv paper</dd>
+    </div>
+    <div class="signal-card__detail">
+      <dt>Run status</dt>
+      <dd>Read repo and paper; not run locally yet</dd>
+    </div>
+    <div class="signal-card__detail">
+      <dt>Practical test</dt>
+      <dd>Known-answer questions with near-miss papers and trace replay</dd>
+    </div>
+  </dl>
+
   <ul class="signal-card__metrics" aria-label="Assessment dimensions">
     <li class="signal-metric" data-level="medium-high">
       <div class="signal-metric__head"><span>Evidence quality</span><span class="signal-metric__level">Med-high</span></div>
-      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
     </li>
     <li class="signal-metric" data-level="medium">
       <div class="signal-metric__head"><span>Reproducibility</span><span class="signal-metric__level">Medium</span></div>
-      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
     </li>
     <li class="signal-metric" data-level="high">
       <div class="signal-metric__head"><span>Workflow utility</span><span class="signal-metric__level">High</span></div>
-      <div class="signal-metric__bar" aria-hidden="true"><span></span></div>
+    </li>
+    <li class="signal-metric" data-level="risk-medium">
+      <div class="signal-metric__head"><span>Hype risk</span><span class="signal-metric__level">Medium</span></div>
     </li>
   </ul>
 
   <p class="signal-card__test">
-    Practical test: known-answer questions with near-miss papers, citation
-    precision checks, and trace replay.
+    Why I paid attention: evidence trail is a reusable research artifact pattern,
+    while the paper's strong performance framing still needs independent testing.
   </p>
 </section>
 

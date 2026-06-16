@@ -1352,6 +1352,33 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   font-size: 0.9rem;
   font-weight: 800;
 }
+.signal-card__details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0.85rem 0;
+}
+.signal-card__detail {
+  margin: 0;
+  border: 1px solid var(--c-border-soft);
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 0.65rem;
+}
+.signal-card__detail dt {
+  margin: 0 0 0.25rem;
+  color: var(--c-muted);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.signal-card__detail dd {
+  margin: 0;
+  color: var(--c-fg);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
 .signal-card__flow {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1409,6 +1436,9 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
 .signal-card--compact .signal-card__metrics {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+.signal-card--visual .signal-card__metrics {
+  grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+}
 .signal-metric {
   margin: 0;
   list-style: none;
@@ -1429,6 +1459,24 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   color: var(--c-accent);
   font-size: 0.76rem;
 }
+.signal-card--visual .signal-metric {
+  background: #ffffff;
+}
+.signal-card--visual .signal-metric__head {
+  display: block;
+}
+.signal-card--visual .signal-metric__level {
+  display: inline-block;
+  margin-top: 0.35rem;
+  border-radius: 999px;
+  padding: 0.14rem 0.45rem;
+  background: var(--c-bg-soft);
+  color: var(--c-muted);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
 .signal-metric__bar {
   margin-top: 0.45rem;
   height: 7px;
@@ -1446,6 +1494,32 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
 .signal-metric[data-level="medium-high"] .signal-metric__bar span { width: 72%; }
 .signal-metric[data-level="medium"] .signal-metric__bar span { width: 55%; }
 .signal-metric[data-level="low"] .signal-metric__bar span { width: 30%; }
+.signal-card--visual .signal-metric__bar {
+  display: none;
+}
+.signal-card--visual .signal-metric[data-level="high"] {
+  border-color: rgba(0, 102, 255, 0.24);
+  background: rgba(0, 102, 255, 0.045);
+}
+.signal-card--visual .signal-metric[data-level="medium-high"] {
+  border-color: rgba(0, 102, 255, 0.18);
+  background: rgba(0, 102, 255, 0.035);
+}
+.signal-card--visual .signal-metric[data-level="medium"] {
+  border-color: rgba(15, 23, 42, 0.1);
+}
+.signal-card--visual .signal-metric[data-level="low"] {
+  border-color: rgba(148, 163, 184, 0.32);
+  background: rgba(148, 163, 184, 0.08);
+}
+.signal-card--visual .signal-metric[data-level="risk-medium"] {
+  border-color: rgba(217, 119, 6, 0.26);
+  background: rgba(217, 119, 6, 0.07);
+}
+.signal-card--visual .signal-metric[data-level="risk-medium"] .signal-metric__level {
+  color: #9a5a00;
+  background: rgba(217, 119, 6, 0.12);
+}
 .signal-card__note {
   margin: 0.85rem 0 0;
   color: var(--c-muted);
@@ -1542,12 +1616,13 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   }
   .signal-card__flow,
   .signal-card__facts,
+  .signal-card__details,
   .signal-card__metrics {
     grid-template-columns: 1fr;
   }
   .signal-card--compact .signal-card__metrics {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.4rem;
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
   }
   .signal-card--compact .signal-metric {
     padding: 0.55rem 0.45rem;
