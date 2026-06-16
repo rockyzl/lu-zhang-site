@@ -30,6 +30,34 @@
       "tags": ["Anthropic", "engineering", "agents"]
     },
     {
+      "name": "Addy Osmani Loop Engineering",
+      "group": "Loop engineering",
+      "type": "page",
+      "url": "https://addyosmani.com/blog/loop-engineering/",
+      "tags": ["loop engineering", "agent workflows", "skills", "worktrees", "subagents", "memory"]
+    },
+    {
+      "name": "Louis Bouchard Loop Engineering",
+      "group": "Loop engineering",
+      "type": "page",
+      "url": "https://www.louisbouchard.ai/loop-engineering/",
+      "tags": ["loop engineering", "agent loops", "triggers", "hard brakes", "human review"]
+    },
+    {
+      "name": "Developers Digest Loop Engineering",
+      "group": "Loop engineering",
+      "type": "page",
+      "url": "https://www.developersdigest.tech/tutorials/nKlF15Ic78w",
+      "tags": ["loop engineering", "automation", "memory", "human-in-the-loop", "security scans"]
+    },
+    {
+      "name": "Ling Talk AI Loop Engineering Video",
+      "group": "Loop engineering",
+      "type": "page",
+      "url": "https://www.youtube.com/watch?v=fS-3o4Tz5cI",
+      "tags": ["loop engineering", "Chinese AI commentary", "agent loops", "maker checker"]
+    },
+    {
       "name": "Microsoft Research Blog",
       "group": "AI research labs",
       "type": "rss",
@@ -248,6 +276,10 @@
     "scientific discovery",
     "research assistant",
     "workflow",
+    "loop engineering",
+    "agent loop",
+    "maker checker",
+    "human-in-the-loop",
     "reasoning",
     "co-scientist",
     "hypothesis",

@@ -33,6 +33,8 @@ reader feedback, and follow-up work.
 - [x] Article comments shell with safe fallback and optional Giscus lazy-load.
 - [x] API eval harness covering citations, routing metadata, brand leaks,
       unsafe URLs, attribution, and private-access guardrails.
+- [x] Loop engineering research note captured from video metadata and public
+      loop-engineering references.
 
 ## Active Priorities
 
