@@ -3,6 +3,8 @@
 This document is the product roadmap for moving SciencesLoop from a static
 Markdown blog toward a safer authoring and publishing workflow.
 
+For current execution status, use `docs/live-task-list.md`.
+
 ## North Star
 
 SciencesLoop should make it easy to turn one useful AI-for-science signal into a
