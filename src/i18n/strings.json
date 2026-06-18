@@ -44,6 +44,10 @@
     "en": "AI",
     "zh": "AI"
   },
+  "nav.energy": {
+    "en": "Energy AI",
+    "zh": "能源 AI"
+  },
   "nav.agent": {
     "en": "Agent",
     "zh": "智能体"

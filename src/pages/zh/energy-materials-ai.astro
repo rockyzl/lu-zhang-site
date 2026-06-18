@@ -1,0 +1,203 @@
+---
+import Base from "../../layouts/Base.astro";
+import { u } from "../../lib/url";
+
+const title = "能源材料 AI — 张鲁 Lu Zhang";
+const description =
+  "面向能源材料研发的科学决策基础设施：把分散在论文、专利、数据库和实验记录里的证据，转化成可追溯、可比较的研发判断。";
+
+const dataSources = [
+  "论文正文和 supporting information",
+  "专利和公开数据库",
+  "实验记录和旧表格",
+  "计算工具和性质模型",
+];
+
+const focusAreas = [
+  "水系 Flow Battery",
+  "有机氧化还原分子",
+  "膜材料",
+  "电解液体系",
+  "测试条件",
+];
+
+const workflow = [
+  ["Extract", "从论文、专利和公开数据库里提取真正有用的数值。"],
+  ["Structure", "把分子、性质、条件、单位和来源放进可以检查的 schema。"],
+  ["Rank", "在标出不确定性的前提下比较候选材料。"],
+  ["Review", "在改变实验前，把证据链留给研究人员检查。"],
+];
+---
+<Base title={title} description={description} alternatePath={u("/energy-materials-ai/")}>
+  <div class="container energy-page">
+    <section class="energy-hero">
+      <span class="eyebrow">Energy Materials AI</span>
+      <h1>面向能源材料研发的科学决策基础设施</h1>
+      <p class="lead">
+        把分散的科学证据转化成可追溯、可比较、可使用的研发判断。
+      </p>
+      <p>
+        能源材料研究并不缺论文。更难的是把论文、专利、数据库、实验记录
+        和计算工具里的信息，变成一个清楚的下一步。
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="mailto:zhanglu77@gmail.com?subject=Energy%20Materials%20AI%20collaboration">聊一个真实科研痛点</a>
+        <a class="btn btn-ghost" href={u("/zh/blog/")}>读 founder notes</a>
+      </div>
+    </section>
+
+    <section class="workflow-panel energy-question">
+      <div>
+        <span class="eyebrow">Working question</span>
+        <h2>下一步该测什么、在什么条件下测、为什么值得测？</h2>
+        <p>
+          这是一个有用的 AI for Science 系统应该帮助回答的问题。流畅总结不够。
+          我更关心来源链接、结构化字段、不确定性，以及人可以在哪里检查。
+        </p>
+      </div>
+      <pre><code>scientific evidence
+-> structured knowledge
+-> candidate ranking
+-> reviewed decision</code></pre>
+    </section>
+
+    <div class="section-head">
+      <h2>问题</h2>
+    </div>
+    <p class="section-copy">
+      有用的科学数据分散在很多地方。研究人员经常要查文献、复制数值、
+      检查单位、比较实验条件，再判断不同论文里的结果能不能放在一起看。
+    </p>
+    <div class="focus-grid" aria-label="Scientific data sources">
+      {dataSources.map((item) => <div>{item}</div>)}
+    </div>
+
+    <div class="section-head">
+      <h2>正在构建什么</h2>
+    </div>
+    <section class="workflow-steps energy-steps" aria-label="Data to decision workflow">
+      {workflow.map(([step, text]) => (
+        <article>
+          <span>{step}</span>
+          <h2>{step}</h2>
+          <p>{text}</p>
+        </article>
+      ))}
+    </section>
+
+    <div class="section-head">
+      <h2>第一阶段聚焦</h2>
+    </div>
+    <p class="section-copy">
+      第一阶段聚焦电化学能源材料。第一个 demo 应该很窄：围绕一个分子、
+      一个膜材料，或者一个筛选问题，做一条从文献到研发判断的小流程。
+    </p>
+    <div class="focus-grid" aria-label="Initial focus areas">
+      {focusAreas.map((item) => <div>{item}</div>)}
+    </div>
+
+    <section class="status-band">
+      <div>
+        <span class="eyebrow">Current status</span>
+        <h2>早期原型和 customer discovery</h2>
+      </div>
+      <p>
+        我正在寻找做 flow battery、膜材料、有机电解液、分子筛选、材料数据
+        和 AI for Science workflow 的研究人员或团队。现在最有价值的不是泛聊 AI，
+        而是一个具体、真实、花时间的科研痛点。
+      </p>
+    </section>
+
+    <div class="section-head">
+      <h2>第一个 demo 要证明什么</h2>
+    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td>输入</td>
+          <td>一个分子、膜材料、材料体系，或者一个具体研究问题。</td>
+        </tr>
+        <tr>
+          <td>证据</td>
+          <td>来自论文、专利、公开数据库或计算性质的来源链接。</td>
+        </tr>
+        <tr>
+          <td>输出</td>
+          <td>一个可以检查的候选排序，并且明确标出不确定字段。</td>
+        </tr>
+        <tr>
+          <td>人工检查</td>
+          <td>研究人员能在改变实验前检查证据，而不是只看一个流畅答案。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</Base>
+
+<style>
+  .energy-page {
+    padding-top: 3rem;
+  }
+  .energy-hero {
+    max-width: 860px;
+    padding: 0 0 1rem;
+  }
+  .energy-hero .lead {
+    max-width: 780px;
+    font-size: 1.12rem;
+    color: var(--c-fg);
+  }
+  .energy-hero p:not(.lead),
+  .section-copy {
+    max-width: 760px;
+    color: var(--c-muted);
+  }
+  .energy-question {
+    margin-top: 2rem;
+  }
+  .energy-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
+    margin: 1rem 0 2rem;
+  }
+  .focus-grid div {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-sm);
+    background: var(--c-card);
+    padding: 0.9rem 1rem;
+    color: var(--c-fg);
+    font-size: 0.94rem;
+  }
+  .status-band {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 1.2rem;
+    align-items: start;
+    border-top: 1px solid var(--c-border);
+    border-bottom: 1px solid var(--c-border);
+    padding: 1.4rem 0;
+    margin: 2.5rem 0 1rem;
+  }
+  .status-band h2 {
+    margin: 0;
+  }
+  .status-band p {
+    margin: 0;
+    color: var(--c-muted);
+  }
+  .energy-page table td:first-child {
+    width: 150px;
+    font-weight: 700;
+    color: var(--c-fg);
+  }
+  @media (max-width: 900px) {
+    .energy-steps,
+    .status-band {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

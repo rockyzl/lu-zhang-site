@@ -1,0 +1,209 @@
+---
+import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
+
+const title = "Energy Materials AI — Lu Zhang";
+const description =
+  "Scientific decision infrastructure for energy materials R&D: turning fragmented papers, patents, databases, and experiment records into traceable, comparable research decisions.";
+
+const dataSources = [
+  "paper text and supporting information",
+  "patents and public databases",
+  "experiment records and old tables",
+  "computational tools and property models",
+];
+
+const focusAreas = [
+  "Aqueous flow batteries",
+  "Organic redox molecules",
+  "Membrane materials",
+  "Electrolyte systems",
+  "Testing conditions",
+];
+
+const workflow = [
+  ["Extract", "Pull useful values from papers, patents, and public databases."],
+  ["Structure", "Put molecules, properties, conditions, units, and sources into a checkable schema."],
+  ["Rank", "Compare candidates with uncertainty instead of hiding weak fields."],
+  ["Review", "Show evidence before a researcher changes an experiment."],
+];
+---
+<Base title={title} description={description} alternatePath={u("/zh/energy-materials-ai/")}>
+  <div class="container energy-page">
+    <section class="energy-hero">
+      <span class="eyebrow">Energy Materials AI</span>
+      <h1>Scientific Decision Infrastructure for Energy Materials R&amp;D</h1>
+      <p class="lead">
+        Turning fragmented scientific evidence into traceable, comparable, and
+        usable R&amp;D decisions.
+      </p>
+      <p>
+        Energy materials researchers do not lack papers. The harder problem is
+        turning papers, patents, databases, experiment records, and computational
+        tools into a clear next step.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="mailto:zhanglu77@gmail.com?subject=Energy%20Materials%20AI%20collaboration">Talk about a research pain point</a>
+        <a class="btn btn-ghost" href={u("/blog/")}>Read founder notes</a>
+      </div>
+    </section>
+
+    <section class="workflow-panel energy-question">
+      <div>
+        <span class="eyebrow">Working question</span>
+        <h2>What should I test next, under what conditions, and why?</h2>
+        <p>
+          That is the question a useful AI for Science system should help answer.
+          A fluent summary is not enough. I want source links, structured fields,
+          uncertainty, and a clear place for human review.
+        </p>
+      </div>
+      <pre><code>scientific evidence
+-> structured knowledge
+-> candidate ranking
+-> reviewed decision</code></pre>
+    </section>
+
+    <div class="section-head">
+      <h2>Problem</h2>
+    </div>
+    <p class="section-copy">
+      Useful scientific data is scattered across many places. A researcher often
+      has to search, copy values, check units, compare conditions, and decide
+      whether one reported result can be trusted beside another.
+    </p>
+    <div class="focus-grid" aria-label="Scientific data sources">
+      {dataSources.map((item) => <div>{item}</div>)}
+    </div>
+
+    <div class="section-head">
+      <h2>What we are building</h2>
+    </div>
+    <section class="workflow-steps energy-steps" aria-label="Data to decision workflow">
+      {workflow.map(([step, text]) => (
+        <article>
+          <span>{step}</span>
+          <h2>{step}</h2>
+          <p>{text}</p>
+        </article>
+      ))}
+    </section>
+
+    <div class="section-head">
+      <h2>Initial focus</h2>
+    </div>
+    <p class="section-copy">
+      The first wedge is electrochemical energy materials. The first demo should
+      be narrow: a literature-to-decision workflow for a molecule, membrane, or
+      related screening question.
+    </p>
+    <div class="focus-grid" aria-label="Initial focus areas">
+      {focusAreas.map((item) => <div>{item}</div>)}
+    </div>
+
+    <section class="status-band">
+      <div>
+        <span class="eyebrow">Current status</span>
+        <h2>Early prototype and customer discovery</h2>
+      </div>
+      <p>
+        I am looking for researchers, engineers, and teams working on flow
+        batteries, membranes, organic electrolytes, molecule screening, materials
+        data, and AI for Science workflows. The useful next conversation is a
+        concrete research pain point, not a broad AI pitch.
+      </p>
+    </section>
+
+    <div class="section-head">
+      <h2>What the first demo must show</h2>
+    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td>Input</td>
+          <td>A molecule, membrane, material family, or research question.</td>
+        </tr>
+        <tr>
+          <td>Evidence</td>
+          <td>Source links from papers, patents, public databases, or computed properties.</td>
+        </tr>
+        <tr>
+          <td>Output</td>
+          <td>A ranked, inspectable recommendation with uncertain fields marked.</td>
+        </tr>
+        <tr>
+          <td>Review</td>
+          <td>A scientist can check the evidence before changing an experiment.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</Base>
+
+<style>
+  .energy-page {
+    padding-top: 3rem;
+  }
+  .energy-hero {
+    max-width: 860px;
+    padding: 0 0 1rem;
+  }
+  .energy-hero .lead {
+    max-width: 780px;
+    font-size: 1.12rem;
+    color: var(--c-fg);
+  }
+  .energy-hero p:not(.lead),
+  .section-copy {
+    max-width: 760px;
+    color: var(--c-muted);
+  }
+  .energy-question {
+    margin-top: 2rem;
+  }
+  .energy-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .focus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
+    margin: 1rem 0 2rem;
+  }
+  .focus-grid div {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-sm);
+    background: var(--c-card);
+    padding: 0.9rem 1rem;
+    color: var(--c-fg);
+    font-size: 0.94rem;
+  }
+  .status-band {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 1.2rem;
+    align-items: start;
+    border-top: 1px solid var(--c-border);
+    border-bottom: 1px solid var(--c-border);
+    padding: 1.4rem 0;
+    margin: 2.5rem 0 1rem;
+  }
+  .status-band h2 {
+    margin: 0;
+  }
+  .status-band p {
+    margin: 0;
+    color: var(--c-muted);
+  }
+  .energy-page table td:first-child {
+    width: 150px;
+    font-weight: 700;
+    color: var(--c-fg);
+  }
+  @media (max-width: 900px) {
+    .energy-steps,
+    .status-band {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
