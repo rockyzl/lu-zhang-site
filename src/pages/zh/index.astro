@@ -31,42 +31,63 @@ const totalCitations = verifiedPubs.reduce((s, p) => s + (p.citations || 0), 0);
 const firstAuthor = verifiedPubs.filter((p) => p.role === "first").length;
 const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").length;
 const featuredPosts = getFeaturedBlogPosts(3);
-const productModules = [
+const researchPrograms = [
   {
-    name: "Daily AI Research Radar",
-    label: "情报工作流",
-    text: "基于公开来源跟踪选定 AI 实验室、AI for Science 创业公司、科研预印本和 scientific-agent workflow 信号。",
-    href: `${lp}/blog/`,
-  },
-  {
-    name: "Scientific Workflow Agent",
-    label: "智能体界面",
-    text: "公开安全的站内 agent：检索证据、路由到相关来源，并给出下一步动作，而不是只做静态个人介绍。",
+    name: "Scientific Workflow",
+    label: "Program 01",
+    text: "面向科学工作的智能体流程、工具路由、评估门、工作流引擎和可靠闭环。",
     href: `${lp}/agent/`,
   },
   {
-    name: "AI for Science Lab",
-    label: "构建路线",
-    text: "围绕 RAG、evaluation、可追踪决策支持、液流电池 formulation 和科研工作流自动化的小型原型。",
+    name: "Scientific State",
+    label: "Program 02",
+    text: "科学记忆、文献证据、结构化状态、溯源和上下文系统，让科学决策可检查。",
+    href: `${lp}/agent/`,
+  },
+  {
+    name: "Scientific Foundation Models",
+    label: "Program 03",
+    text: "表示学习、分子/性质模型、溶解度与电池材料建模，以及科学基础模型能力建设。",
     href: `${lp}/ai/`,
   },
+  {
+    name: "Scientific Discovery",
+    label: "Program 04",
+    text: "液流电池决策支持、benchmark graph、性质预测，以及未来 self-driving lab 接口。",
+    href: `${lp}/energy-materials-ai/`,
+  },
+];
+
+const openProblems = [
+  "Scientific agent 应该如何先表示 state，再做 decision？",
+  "科学工作流智能体应该如何评估？",
+  "文献、仿真、实验和人工 review 能否共享同一条 trace？",
+];
+
+const labPrinciples = [
+  "我们不是在做一个回答科学问题的 AI。",
+  "我们在构建帮助科学家提出更好问题、设计更好实验、做出更好决策的科学基础设施。",
 ];
 ---
-<Base title="SciencesLoop — AI Research Intelligence">
+<Base
+  title="SciencesLoop — Scientific AI 开放研究实验室"
+  description="SciencesLoop 是一个探索 AI-native 科学工作流、科学状态、智能体和 evidence-driven discovery systems 的开放研究实验室。"
+>
   <div class="container">
     <section class="home-agent-hero">
       <div class="home-agent-intro">
-        <span class="eyebrow">SciencesLoop · AI research intelligence · AI for Science</span>
+        <span class="eyebrow">开放研究实验室 · Scientific AI · Agent systems</span>
         <h1>SciencesLoop</h1>
-        <p class="role">Lu Zhang 构建的 AI for Science 研究情报工作台。</p>
+        <p class="role">一个面向 Scientific AI 的开放实验室。</p>
         <p class="lead">
-          跟踪 AI agents、科研工作流自动化、选定 AI 实验室
-          和 AI for Science 创业公司，并把信号整理成有来源的笔记、
-          产品想法和小型 agent 原型。
+          构建 AI-native 科学工作流、智能体、科学状态系统和
+          evidence-driven 基础设施，用来加速科学发现。
         </p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href={u(`${lp}/agent/`)}>{t("home.cta.agent", locale)}</a>
-          <a class="btn btn-ghost" href={u(`${lp}/blog/`)}>AI 进展</a>
+          <a class="btn btn-primary" href={u(`${lp}/ai/`)}>研究方向</a>
+          <a class="btn btn-ghost" href={u(`${lp}/blog/`)}>研究笔记</a>
+          <a class="btn btn-ghost" href={u(`${lp}/projects/`)}>软件</a>
+          <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>{t("home.cta.agent", locale)}</a>
           <a class="btn btn-ghost" href={u(`${lp}/ai/`)}>{t("home.cta.ai", locale)}</a>
           <a class="btn btn-ghost" href={u(`${lp}/publications/`)}>{t("home.cta.publications", locale)}</a>
           <a class="btn btn-ghost" href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">{locale === "zh" ? "↓ 简历 PDF" : "↓ CV (PDF)"}</a>
@@ -79,20 +100,54 @@ const productModules = [
     </section>
 
     <div class="agent-trust-strip" aria-label="智能体边界">
-      <span>Daily AI research radar</span>
-      <span>Scientific agent workflows</span>
-      <span>可用时返回引用来源</span>
-      <span>公开安全语料</span>
+      <span>科学工作流系统</span>
+      <span>Scientific state and memory</span>
+      <span>Evidence-driven agents</span>
+      <span>电池材料发现</span>
     </div>
 
-    <section class="product-modules" aria-label="SciencesLoop product modules">
-      {productModules.map((item) => (
+    <section class="lab-manifesto" aria-label="SciencesLoop mission">
+      <div>
+        <span class="eyebrow">Mission</span>
+        <h2>帮助科学家做出更好的决策。</h2>
+      </div>
+      <div>
+        {labPrinciples.map((line) => <p>{line}</p>)}
+      </div>
+    </section>
+
+    <div class="section-head">
+      <h2>研究方向</h2>
+      <a class="more" href={u(`${lp}/ai/`)}>研究地图 →</a>
+    </div>
+    <section class="product-modules" aria-label="SciencesLoop research programs">
+      {researchPrograms.map((item) => (
         <a class="product-module" href={u(item.href)}>
           <span>{item.label}</span>
           <h2>{item.name}</h2>
           <p>{item.text}</p>
         </a>
       ))}
+    </section>
+
+    <section class="lab-split" aria-label="Open problems and people">
+      <article>
+        <span class="eyebrow">开放问题</span>
+        <h2>驱动实验室的问题</h2>
+        <ul>
+          {openProblems.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+      <article>
+        <span class="eyebrow">成员</span>
+        <h2>Lu Zhang</h2>
+        <p>
+          SciencesLoop 创建者。Scientific AI Systems Engineer，曾任
+          Argonne 科学家，连接电池材料研究、生产 AI 工作流、Agent
+          系统和科学基础设施。
+        </p>
+        <a class="more" href={u(`${lp}/about/`)}>成员页面 →</a>
+      </article>
     </section>
 
     <div class="stat-bar">
@@ -140,7 +195,7 @@ const productModules = [
     </div>
 
     <div class="section-head">
-      <h2>AI 研究雷达</h2>
+      <h2>Field Notes</h2>
       <a class="more" href={u(`${lp}/blog/`)}>全部笔记 →</a>
     </div>
     <div class="blog-grid blog-grid--home">

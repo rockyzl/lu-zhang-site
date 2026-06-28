@@ -39,7 +39,12 @@ const career = isZh
 // onto /awards/. About-page Recognition is now a 1-paragraph summary
 // + cross-link.
 ---
-<Base title={isZh ? "简介 — 张鲁" : "About — Lu Zhang"}>
+<Base
+  title={isZh ? "成员 — SciencesLoop" : "People — SciencesLoop"}
+  description={isZh
+    ? "SciencesLoop 的成员、创建者背景、科学研究、AI 系统和公开联系方式。"
+    : "People behind SciencesLoop: founder background, scientific research, AI systems work, and public contact links."}
+>
   <div class="container" style="padding-top: 3rem;">
   <div style="display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; align-items: start;" class="about-hero">
     <div class="portrait square">
@@ -48,12 +53,16 @@ const career = isZh
       <img src={u("/images/portrait.jpg")} alt="Lu Zhang" onerror="this.remove()" />
     </div>
     <div>
-      <span class="eyebrow">{t("about.eyebrow", locale)}</span>
-      <h1 style="margin-top: 0;">{isZh ? "张鲁" : "Lu Zhang"}</h1>
+      <span class="eyebrow">{isZh ? "SciencesLoop 成员" : "SciencesLoop People"}</span>
+      <h1 style="margin-top: 0;">{isZh ? "Lu Zhang / 张鲁" : "Lu Zhang"}</h1>
       <p style="color: var(--c-muted); font-size: 1.1rem; margin-top: -0.4rem; margin-bottom: 1.2rem;">
-        {isZh ? "Lu Zhang, Ph.D." : "张鲁, Ph.D."}
+        {isZh ? "创建者 · Scientific AI Systems Engineer · Ph.D." : "Founder · Scientific AI Systems Engineer · Ph.D."}
       </p>
-      <p class="lead">{t("about.lead", locale)}</p>
+      <p class="lead">
+        {isZh
+          ? "SciencesLoop 目前由 Lu Zhang 创建并维护，方向是 AI-native 科学工作流、科学状态系统、智能体和 evidence-driven discovery infrastructure。"
+          : "SciencesLoop is currently founded and maintained by Lu Zhang, focused on AI-native scientific workflows, scientific state systems, intelligent agents, and evidence-driven discovery infrastructure."}
+      </p>
       <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: 1rem;">
         {t("about.based", locale)} <a href="mailto:zhanglu77@gmail.com">zhanglu77@gmail.com</a>。
       </p>
@@ -70,6 +79,18 @@ const career = isZh
       .about-hero .portrait.square { max-width: 200px; }
     }
   </style>
+
+  <section class="workflow-panel" style="margin-top: 2.5rem;">
+    <div>
+      <span class="eyebrow">{isZh ? "实验室定位" : "Lab Direction"}</span>
+      <h2>{isZh ? "Scientific AI 开放实验室" : "Open Research Lab for Scientific AI"}</h2>
+      <p>
+        {isZh
+          ? "SciencesLoop 不是普通个人主页，而是一个公开记录软件、研究笔记、开放问题和 AI for Science 工作流实验的长期实验室。"
+          : "SciencesLoop is not only a personal site. It is a public record of software, field notes, open problems, and AI-for-Science workflow experiments."}
+      </p>
+    </div>
+  </section>
 
   <h2>{t("about.education", locale)}</h2>
   <ul>{education.map((e) => <li set:html={e.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")}></li>)}</ul>

@@ -36,16 +36,14 @@ The public agent must:
 
 ## Domain Plan
 
-Target professional domain: `sciencesloop.com`.
-
-Do not switch this repo's `site`, `base`, `CNAME`, resume links, or LinkedIn
-links until DNS and HTTPS are verified.
-
-Current production fallback remains:
+Canonical professional domain:
 
 ```text
-https://rockyzl.github.io/lu-zhang-site/
+https://sciencesloop.com/
 ```
+
+The old GitHub Pages URL and temporary Vercel URL should not be used in public
+profiles, resumes, or LinkedIn links except as operational deployment fallbacks.
 
 ## Backend Wiring
 

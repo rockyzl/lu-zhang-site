@@ -27,11 +27,27 @@ const teamGrowth = [
   ["2020 – 2023", "3 postdocs + 1 student · JCESR Y3 milestone lead"],
 ];
 ---
-<Base title={(locale === "zh" ? "项目 — " : "Funded Projects — ") + "张鲁 Lu Zhang"}>
+<Base
+  title={(locale === "zh" ? "软件与项目 — " : "Software & Projects — ") + "SciencesLoop"}
+  description={locale === "zh"
+    ? "SciencesLoop 软件、科研项目和公开证据库。"
+    : "SciencesLoop software, research projects, and public evidence archive."}
+>
   <div class="container" style="padding-top: 3rem;">
     <span class="eyebrow">{t("page.projects.eyebrow", locale)}</span>
     <h1>{t("page.projects.title", locale)}</h1>
     <p class="lead">{t("page.projects.lead", locale)}</p>
+    <section class="workflow-panel" style="margin-top: 2rem;">
+      <div>
+        <span class="eyebrow">{locale === "zh" ? "Software layer" : "Software layer"}</span>
+        <h2>{locale === "zh" ? "从科研项目到 Scientific AI 基础设施" : "From funded research to Scientific AI infrastructure"}</h2>
+        <p>
+          {locale === "zh"
+            ? "这个页面保留 Argonne 电池材料研究项目档案，也作为 SciencesLoop 软件与研究证据层的一部分：后续的 scientific agents、workflow systems 和 discovery tools 都会引用这些公开证据。"
+            : "This page preserves the Argonne battery-materials project archive and acts as part of the SciencesLoop evidence layer. Future scientific agents, workflow systems, and discovery tools can point back to these public records."}
+        </p>
+      </div>
+    </section>
 
     {projectsData.categories.map((cat) => (
       <section style="margin-top: 3rem;">

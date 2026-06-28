@@ -4,8 +4,8 @@ import { u } from "../lib/url";
 import { detectLocale, t, altLocalePath, type Locale } from "../lib/i18n";
 
 const {
-  title = "Lu Zhang — AI for Science & Scientific Agent Systems",
-  description = "Lu Zhang, Ph.D. — AI/ML engineer and former Argonne scientist building public-safe AI for Science prototypes and notes around scientific agents, RAG, evaluation, MLOps practices, and battery-materials research.",
+  title = "SciencesLoop — Open Research Lab for Scientific AI",
+  description = "SciencesLoop is an open research lab exploring AI-native scientific workflows, intelligent agents, scientific state, and evidence-driven systems for discovery.",
   ogImage,
   alternatePath,
 } = Astro.props;
@@ -15,7 +15,7 @@ const locale: Locale = detectLocale(pathname);
 const langPrefix = locale === "zh" ? "/zh" : "";
 const altPath = alternatePath ?? altLocalePath(pathname, import.meta.env.BASE_URL);
 
-const siteUrl = Astro.site?.href ?? "https://rockyzl.github.io/";
+const siteUrl = Astro.site?.href ?? "https://sciencesloop.com/";
 const baseUrl = (import.meta.env.BASE_URL ?? "/").replace(/\/+$/, "");
 const canonicalUrl = new URL(pathname, siteUrl).href;
 // Pages render under the base path (/lu-zhang-site/) but Astro.site is just the
@@ -50,20 +50,20 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
     <meta name="description" content={description} />
     <meta name="author" content="Lu Zhang" />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" type="application/rss+xml" title="SciencesLoop Writing RSS" href={new URL(u("/rss.xml"), siteUrl).href} />
+    <link rel="alternate" type="application/rss+xml" title="SciencesLoop Field Notes RSS" href={new URL(u("/rss.xml"), siteUrl).href} />
 
     <!-- Open Graph -->
     <meta property="og:type" content={pathname === u("/") || pathname === u("/zh/") ? "profile" : "website"} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:site_name" content="Lu Zhang" />
+    <meta property="og:site_name" content="SciencesLoop" />
     <meta property="og:locale" content={locale === "zh" ? "zh_CN" : "en_US"} />
     <meta property="og:locale:alternate" content={locale === "zh" ? "en_US" : "zh_CN"} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Lu Zhang — AI for Science and Scientific Agent Systems" />
+    <meta property="og:image:alt" content="SciencesLoop — open research lab for Scientific AI" />
     <meta property="profile:first_name" content="Lu" />
     <meta property="profile:last_name" content="Zhang" />
 
@@ -95,7 +95,7 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
         givenName: "Lu",
         familyName: "Zhang",
         honorificSuffix: "Ph.D.",
-        jobTitle: "Data Science Engineer",
+        jobTitle: "Scientific AI Systems Engineer",
         worksFor: {
           "@type": "Organization",
           name: "American Academy of Orthopaedic Surgeons (AAOS)",
@@ -129,14 +129,14 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
           "https://www.anl.gov/profile/lu-zhang",
         ],
         email: "mailto:zhanglu77@gmail.com",
-        description: "Battery scientist with 14+ years at Argonne National Laboratory. R&D 100 Award (2014). 99 peer-reviewed publications (97 SCI + 2 book chapters), 28 patents & applications, 4,700+ citations. Now bridging electrochemistry, applied AI systems, and scientific-agent workflows.",
+        description: "Founder of SciencesLoop, an open research lab for Scientific AI. Former Argonne battery scientist now building scientific-agent workflows, AI research intelligence, scientific state systems, and evidence-driven infrastructure for discovery.",
       })} />
     )}
   </head>
   <body data-locale={locale}>
     <header class="site">
       <div class="inner">
-        <a class="name" href={u(homeHref)}>Lu Zhang</a>
+        <a class="name" href={u(homeHref)}>SciencesLoop</a>
         <nav>
           {nav.map((n) => (
             <a href={u(n.href)} class={isActive(n.href) ? "active" : ""}>{t(n.key, locale)}</a>
@@ -149,7 +149,7 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
       <slot />
     </main>
     <footer class="site">
-      © 2026 Lu Zhang ·
+      © 2026 SciencesLoop · Lu Zhang ·
       <a href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">{locale === "zh" ? "下载简历 (PDF)" : "Download CV (PDF)"}</a> ·
       <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en">{t("footer.scholar", locale)}</a> ·
       <a href="https://github.com/rockyzl">{t("footer.github", locale)}</a> ·

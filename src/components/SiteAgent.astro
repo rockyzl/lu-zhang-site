@@ -31,7 +31,7 @@ const copy = locale === "zh"
         : "当前版本在浏览器端运行，只基于公开网站内容做导航；未连接私人文件。线上 API 不可用时会保留这个本地 fallback。",
       fallback: "我现在只能回答公开职业主页里的核心主题。可以试试 agent、AI for science、MLOps、battery、Argonne、publication、patent、CV、contact、VoiceRAG。",
       actions: {
-        ai: "看 AI 项目",
+        ai: "看研究方向",
         publications: "看论文",
         cv: "下载 CV",
         contact: "联系 Lu",
@@ -70,7 +70,7 @@ const copy = locale === "zh"
         : "This version runs in the browser and only routes across public site content. It is not connected to private files, and it remains available as a local fallback when the live API is unavailable.",
       fallback: "I can answer the core public portfolio topics for now. Try agent, AI for science, MLOps, battery, Argonne, publication, patent, CV, contact, or VoiceRAG.",
       actions: {
-        ai: "View AI projects",
+        ai: "View programs",
         publications: "View publications",
         cv: "Download CV",
         contact: "Contact Lu",
@@ -152,7 +152,7 @@ const links = {
 
       <div class="agent-quicklinks" aria-label="Agent quick links">
         <a href={links.ai}>{copy.actions.ai}</a>
-        <a href={links.projects}>{locale === "zh" ? "项目" : "Projects"}</a>
+        <a href={links.projects}>{locale === "zh" ? "软件" : "Software"}</a>
         <a href={links.publications}>{copy.actions.publications}</a>
         <a href={links.about}>{locale === "zh" ? "背景" : "Background"}</a>
       </div>

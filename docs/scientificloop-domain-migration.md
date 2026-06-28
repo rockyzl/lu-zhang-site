@@ -9,25 +9,19 @@ www.sciencesloop.com
 
 ## Current Production
 
-The GitHub repo is private, so GitHub Pages no longer serves the site. The
-current public deployment is through Vercel:
+The canonical public deployment is:
 
 ```text
-https://lu-zhang-site.vercel.app
+https://sciencesloop.com
+https://www.sciencesloop.com
 ```
 
-Custom domains have been added to the Vercel project:
+The Vercel preview/fallback deployment may still exist for operational checks,
+but public materials should point only to SciencesLoop.
 
-```text
-sciencesloop.com
-www.sciencesloop.com
-```
+## DNS Reference
 
-DNS still needs to be configured at the domain registrar.
-
-## DNS Required
-
-Vercel currently asks for:
+If DNS ever needs to be repaired, Vercel commonly asks for:
 
 ```text
 A sciencesloop.com 76.76.21.21
@@ -41,7 +35,7 @@ ns1.vercel-dns.com
 ns2.vercel-dns.com
 ```
 
-After DNS changes propagate, verify:
+Verify domain state with:
 
 ```bash
 npx vercel domains inspect sciencesloop.com

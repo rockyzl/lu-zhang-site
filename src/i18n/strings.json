@@ -1,8 +1,8 @@
 {
   "_doc": "UI string dictionary. Keys flat, values keyed by locale ('en' | 'zh').",
   "nav.about": {
-    "en": "About",
-    "zh": "简介"
+    "en": "People",
+    "zh": "成员"
   },
   "nav.publications": {
     "en": "Publications",
@@ -13,8 +13,8 @@
     "zh": "专利"
   },
   "nav.projects": {
-    "en": "Projects",
-    "zh": "项目"
+    "en": "Software",
+    "zh": "软件"
   },
   "nav.talks": {
     "en": "Talks",
@@ -41,8 +41,8 @@
     "zh": "教学"
   },
   "nav.ai": {
-    "en": "AI",
-    "zh": "AI"
+    "en": "Programs",
+    "zh": "研究方向"
   },
   "nav.energy": {
     "en": "Energy AI",
@@ -53,8 +53,8 @@
     "zh": "智能体"
   },
   "nav.blog": {
-    "en": "Writing",
-    "zh": "写作"
+    "en": "Field Notes",
+    "zh": "研究笔记"
   },
   "page.awards.eyebrow": {
     "en": "Awards · Service · Recognition",
@@ -145,16 +145,16 @@
     "zh": "论文 →"
   },
   "home.cta.ai": {
-    "en": "AI projects",
-    "zh": "AI 项目"
+    "en": "Working prototypes",
+    "zh": "工作原型"
   },
   "home.cta.agent": {
     "en": "Ask the agent",
     "zh": "问智能体"
   },
   "home.cta.about": {
-    "en": "About",
-    "zh": "简介"
+    "en": "People",
+    "zh": "成员"
   },
   "home.portrait.hint": {
     "en": "photo: drop public/images/portrait.jpg",
@@ -201,12 +201,12 @@
     "zh": "查看全部论文 →"
   },
   "section.ai": {
-    "en": "AI & engineering",
-    "zh": "AI 与工程"
+    "en": "Working prototypes",
+    "zh": "原型与软件"
   },
   "section.ai.more": {
-    "en": "All projects →",
-    "zh": "查看全部项目 →"
+    "en": "Program map →",
+    "zh": "研究地图 →"
   },
   "about.eyebrow": {
     "en": "Bio",
@@ -361,16 +361,16 @@
     "zh": "领域"
   },
   "page.projects.eyebrow": {
-    "en": "DOE-funded battery research at Argonne",
-    "zh": "阿贡国家实验室 DOE 资助电池研究"
+    "en": "Software, research archive, and evidence layer",
+    "zh": "软件、科研档案与证据层"
   },
   "page.projects.title": {
-    "en": "Funded Research Projects",
-    "zh": "科研项目"
+    "en": "Software & Research Projects",
+    "zh": "软件与科研项目"
   },
   "page.projects.lead": {
-    "en": "DOE-funded battery research at Argonne National Laboratory across four interconnected lines: redox flow batteries, silicon anodes, autonomous ML-driven discovery, and membrane / lithium-recovery technology. Bridging fundamental molecular design to industrial translation.",
-    "zh": "在阿贡国家实验室开展的 DOE 资助电池研究，涵盖四个交织的方向：液流电池、硅负极、自主式 ML 驱动发现、膜材料与锂回收。从基础分子设计到产业转化的全链条工作。"
+    "en": "A public archive of software directions and Argonne battery-materials research across redox flow batteries, silicon anodes, autonomous ML-driven discovery, and membrane / lithium-recovery technology. This is the evidence base SciencesLoop builds on.",
+    "zh": "这里是 SciencesLoop 的软件方向和 Argonne 电池材料研究公开档案，覆盖液流电池、硅负极、自主式 ML 驱动发现、膜材料与锂回收。这是 SciencesLoop 后续构建 scientific agents 与 discovery infrastructure 的证据基础。"
   },
   "page.projects.capability": {
     "en": "Capability themes",

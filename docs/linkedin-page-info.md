@@ -5,10 +5,9 @@ should copy these values verbatim. Voice follows `docs/writing-style.md`
 (anti-hype, specific, scientist register).
 
 ## Logo
-Upload the existing asset (square, 512×512, meets LinkedIn ≥300×300):
-- Live URL (works now): https://lu-zhang-site.vercel.app/images/scientificloop-logo-512.png
+Upload the existing asset (square, 512×512, meets LinkedIn >=300x300):
+- Live URL: https://sciencesloop.com/images/scientificloop-logo-512.png
 - Repo path: `public/images/scientificloop-logo-512.png`
-- (`sciencesloop.com` will serve it too once its SSL is issued.)
 
 ## Tagline (Page info, ≤120 chars)
 ```

@@ -45,7 +45,7 @@ ${categories}
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>SciencesLoop Writing</title>
+    <title>SciencesLoop Field Notes</title>
     <link>${escapeXml(absoluteUrl("/blog/"))}</link>
     <atom:link href="${escapeXml(absoluteUrl("/rss.xml"))}" rel="self" type="application/rss+xml" />
     <description>Short notes on AI for Science, scientific agents, RAG, evaluation, MLOps, and battery materials discovery.</description>

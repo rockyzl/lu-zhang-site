@@ -1,13 +1,26 @@
-# lu-zhang-site
+# SciencesLoop
 
-[![Live site](https://img.shields.io/badge/live-lu--zhang--site.vercel.app-b8531a?style=flat-square)](https://lu-zhang-site.vercel.app/)
+[![Live site](https://img.shields.io/badge/live-sciencesloop.com-b8531a?style=flat-square)](https://sciencesloop.com/)
 [![Astro](https://img.shields.io/badge/built%20with-Astro%205-bc52ee?style=flat-square&logo=astro)](https://astro.build)
 [![License](https://img.shields.io/badge/license-MIT-2d5d5e?style=flat-square)](LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/rockyzl/lu-zhang-site?style=flat-square)](https://github.com/rockyzl/lu-zhang-site/commits/main)
 
-SciencesLoop public site for **Lu Zhang** — AI research intelligence,
-scientific agents, AI for Science workflows, and battery-materials evidence.
-Live: <https://lu-zhang-site.vercel.app/>
+SciencesLoop is an open research lab for Scientific AI: AI-native scientific
+workflows, intelligent agents, scientific state systems, and evidence-driven
+infrastructure for discovery.
+
+Live: <https://sciencesloop.com/>
+
+## Research Programs
+
+- Scientific Workflow — agent orchestration, tool use, evaluation, and traceable
+  execution for scientific work.
+- Scientific State — representations that connect literature, data, simulation,
+  experiment, and decision history.
+- Scientific Foundation Models — practical experiments around molecular,
+  materials, and domain-specific representation learning.
+- Scientific Discovery — battery-materials evidence, flow-battery benchmarks,
+  and closed-loop discovery patterns.
 
 ## Stack
 
@@ -51,13 +64,13 @@ src/
   layouts/Base.astro
   lib/url.ts        helper: prefix paths with site BASE_URL
   pages/
-    index.astro         home — hero + news + featured + AI spotlight
-    about.astro         bio + recognition + service & review
+    index.astro         home — SciencesLoop lab framing + programs + notes
+    about.astro         people + founder bio + recognition + service & review
     publications.astro  143 papers, filterable
     patents.astro       28 issued + applications + non-provisional draft
-    projects.astro      18 projects across 4 categories
+    projects.astro      software and funded research archive
     talks.astro         13 invited + 38 abstracts
-    ai.astro            AI projects and working prototypes
+    ai.astro            research programs and working prototypes
   styles/global.css
 public/
   images/{news,ai}/   curated illustrations and screenshots

@@ -5,6 +5,7 @@ import { detectLocale, t } from "../lib/i18n";
 import aiProjects from "../data/ai_projects.json";
 
 const locale = detectLocale(Astro.url.pathname);
+const isZh = locale === "zh";
 
 const industrial = [
   {
@@ -45,18 +46,91 @@ const workflow = [
     text: "Convert useful findings into public-safe posts with source links, open questions, and a SciencesLoop angle.",
   },
 ];
+
+const researchPrograms = isZh
+  ? [
+      {
+        name: "Scientific Workflow",
+        label: "Program 01",
+        text: "研究如何把科学问题转成可检查的 agent workflow：工具路由、状态、评估门、人工 review 和闭环执行。",
+      },
+      {
+        name: "Scientific State",
+        label: "Program 02",
+        text: "研究 scientific memory、文献证据、实验上下文、provenance 和 workflow state，让科学决策不是一次性回答。",
+      },
+      {
+        name: "Scientific Foundation Models",
+        label: "Program 03",
+        text: "跟踪和实验表示学习、分子/性质模型、溶解度、电池材料模型，以及 foundation-model 方法在科学系统中的作用。",
+      },
+      {
+        name: "Scientific Discovery",
+        label: "Program 04",
+        text: "把 flow battery、property prediction、benchmark graph 和未来 self-driving-lab 接口作为 discovery sandbox。",
+      },
+    ]
+  : [
+      {
+        name: "Scientific Workflow",
+        label: "Program 01",
+        text: "Agentic workflow systems that convert scientific questions into tool routing, state, evaluation gates, human review, and closed-loop execution.",
+      },
+      {
+        name: "Scientific State",
+        label: "Program 02",
+        text: "Scientific memory, evidence, experimental context, provenance, and workflow state for inspectable scientific decisions.",
+      },
+      {
+        name: "Scientific Foundation Models",
+        label: "Program 03",
+        text: "Representation learning, molecular/property models, solubility and battery-materials modeling, and foundation-model methods for scientific systems.",
+      },
+      {
+        name: "Scientific Discovery",
+        label: "Program 04",
+        text: "Flow-battery decision support, property prediction, benchmark graphs, and future interfaces to self-driving laboratories.",
+      },
+    ];
 ---
-<Base title={(locale === "zh" ? "AI 与工程 — " : "AI & Engineering — ") + "Lu Zhang"}>
+<Base
+  title={(isZh ? "Research Programs — " : "Research Programs — ") + "SciencesLoop"}
+  description="SciencesLoop research programs: Scientific Workflow, Scientific State, Scientific Foundation Models, and Scientific Discovery."
+>
   <div class="container">
 
     <section style="padding: 3rem 0 1rem;">
-      <span class="eyebrow">{t("page.ai.eyebrow", locale)}</span>
-      <h1>AI Research Intelligence + Scientific Agents</h1>
+      <span class="eyebrow">SciencesLoop Research Programs</span>
+      <h1>{isZh ? "四个 Scientific AI 研究方向" : "Four programs for Scientific AI"}</h1>
       <p class="lead" style="font-size: 1.1rem; color: var(--c-fg); max-width: 760px;">
-        SciencesLoop tracks AI agents, AI for Science, scientific workflow
-        automation, and model infrastructure, then turns the strongest
-        signals into cited notes and small public-safe prototypes.
+        {isZh
+          ? "SciencesLoop 不只是项目集合，而是一个开放研究实验室：围绕 scientific workflow、scientific state、foundation models 和 discovery systems 持续积累软件、笔记和实验。"
+          : "SciencesLoop is not a project list. It is an open research lab organized around scientific workflow, scientific state, foundation models, and discovery systems."}
       </p>
+    </section>
+
+    <section class="product-modules" aria-label="SciencesLoop research programs">
+      {researchPrograms.map((item) => (
+        <article class="product-module">
+          <span>{item.label}</span>
+          <h2>{item.name}</h2>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="lab-manifesto" aria-label="Research manifesto">
+      <div>
+        <span class="eyebrow">Research Manifesto</span>
+        <h2>{isZh ? "Scientific AI 不是问答界面。" : "Scientific AI is not a Q&A interface."}</h2>
+      </div>
+      <div>
+        <p>
+          {isZh
+            ? "SciencesLoop 的目标不是让 AI 直接回答科学问题，而是构建帮助科学家提出更好问题、设计更好实验、做出更好决策的科学基础设施。"
+            : "SciencesLoop is not building AI to answer scientific questions. It is building scientific infrastructure that helps scientists ask better questions, design better experiments, and make better decisions."}
+        </p>
+      </div>
     </section>
 
     <section class="workflow-steps" aria-label="SciencesLoop workflow">

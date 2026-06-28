@@ -45,17 +45,67 @@ const workflow = [
     text: "把有价值的发现整理成公开安全的文章，保留来源链接、开放问题和 SciencesLoop 视角。",
   },
 ];
+
+const researchPrograms = [
+  {
+    name: "Scientific Workflow",
+    label: "Program 01",
+    text: "研究如何把科学问题转成可检查的 agent workflow：工具路由、状态、评估门、人工 review 和闭环执行。",
+  },
+  {
+    name: "Scientific State",
+    label: "Program 02",
+    text: "研究 scientific memory、文献证据、实验上下文、provenance 和 workflow state，让科学决策不是一次性回答。",
+  },
+  {
+    name: "Scientific Foundation Models",
+    label: "Program 03",
+    text: "跟踪和实验表示学习、分子/性质模型、溶解度、电池材料模型，以及 foundation-model 方法在科学系统中的作用。",
+  },
+  {
+    name: "Scientific Discovery",
+    label: "Program 04",
+    text: "把 flow battery、property prediction、benchmark graph 和未来 self-driving-lab 接口作为 discovery sandbox。",
+  },
+];
 ---
-<Base title={(locale === "zh" ? "AI 与工程 — " : "AI & Engineering — ") + "张鲁 Lu Zhang"}>
+<Base
+  title="研究方向 — SciencesLoop"
+  description="SciencesLoop 的四个 Scientific AI 研究方向：Scientific Workflow、Scientific State、Scientific Foundation Models 和 Scientific Discovery。"
+>
   <div class="container">
 
     <section style="padding: 3rem 0 1rem;">
-      <span class="eyebrow">{t("page.ai.eyebrow", locale)}</span>
-      <h1>AI Research Intelligence + Scientific Agents</h1>
+      <span class="eyebrow">SciencesLoop 研究方向</span>
+      <h1>四个 Scientific AI 研究方向</h1>
       <p class="lead" style="font-size: 1.1rem; color: var(--c-fg); max-width: 760px;">
-        SciencesLoop 跟踪 AI agents、AI for Science、科研工作流自动化和模型基础设施，
-        再把强信号整理成带来源的笔记和公开安全的小型原型。
+        SciencesLoop 不只是项目集合，而是一个开放研究实验室：围绕
+        scientific workflow、scientific state、foundation models 和
+        discovery systems 持续积累软件、笔记和实验。
       </p>
+    </section>
+
+    <section class="product-modules" aria-label="SciencesLoop research programs">
+      {researchPrograms.map((item) => (
+        <article class="product-module">
+          <span>{item.label}</span>
+          <h2>{item.name}</h2>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="lab-manifesto" aria-label="Research manifesto">
+      <div>
+        <span class="eyebrow">研究宣言</span>
+        <h2>Scientific AI 不是问答界面。</h2>
+      </div>
+      <div>
+        <p>
+          SciencesLoop 的目标不是让 AI 直接回答科学问题，而是构建帮助科学家提出更好问题、
+          设计更好实验、做出更好决策的科学基础设施。
+        </p>
+      </div>
     </section>
 
     <section class="workflow-steps" aria-label="SciencesLoop workflow">
