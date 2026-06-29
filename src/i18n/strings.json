@@ -157,8 +157,8 @@
     "zh": "成员"
   },
   "home.portrait.hint": {
-    "en": "photo: drop public/images/portrait.jpg",
-    "zh": "（头像位）"
+    "en": "",
+    "zh": ""
   },
   "stat.papers": {
     "en": "Journal articles",

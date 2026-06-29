@@ -15,35 +15,20 @@
     "repo": null
   },
   {
-    "name": "meditation-study",
-    "tagline": "Personal meditation learning platform",
-    "description": "Web app for studying a meditation teacher-training course. Built around session JSON, polished script generation, and TTS audio playback. Daily-use product.",
-    "status": "Live",
-    "tags": [
-      "Next.js",
-      "TTS",
-      "personal product"
-    ],
-    "image": null,
-    "gradient": "from-teal to-navy",
-    "site": "https://meditation-study.vercel.app",
-    "repo": null
-  },
-  {
     "name": "guangnian-energy-agent",
-    "tagline": "光年新能源智能体 — RAG assistant demo for new-energy content",
-    "description": "Bilingual RAG assistant demo/prototype built around Azure OpenAI and Azure AI Search patterns, with a Python aiohttp backend and lightweight web UI. Used as a practical AI x energy demo and workflow prototype.",
-    "status": "Live demo",
+    "tagline": "VoiceRAG / Lightyear energy-agent prototype",
+    "description": "Bilingual RAG assistant prototype for new-energy content, used to test retrieval, realtime voice interaction, and public-safe navigation patterns for SciencesLoop-style agents.",
+    "status": "Public prototype",
     "tags": [
       "Azure OpenAI",
       "RAG",
       "voice-rag",
       "AI x energy",
-      "live demo"
+      "public prototype"
     ],
     "image": null,
     "gradient": "from-amber to-teal",
-    "site": "https://capps-backend-cjkrzvaj3737y.ambitiousmushroom-bd0f5384.eastus2.azurecontainerapps.io/",
+    "site": "https://voicerag.sciencesloop.com/",
     "repo": "https://github.com/rockyzl/voice-rag"
   },
   {

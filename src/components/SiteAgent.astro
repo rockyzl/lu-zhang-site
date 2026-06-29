@@ -12,7 +12,7 @@ const copy = locale === "zh"
       title: "问 Lu Zhang 网站智能体",
       lead: agentApiUrl
         ? "这是一个公开安全的 SciencesLoop 智能体：它会调用后端 RAG / LLM API，目标是基于公开网站内容回答，并在可用时返回引用来源。"
-        : "这是一个公开安全的站内智能体：当前本地模式不调用外部模型，只把访客问题映射到公开网站里的论文、项目、简历、AI 工作和联系方式。",
+        : "这是一个公开安全的站内智能体：当前本地模式不调用外部模型，只把访客问题映射到公开网站里的论文、项目、学术 CV、AI 工作和联系方式。",
       placeholder: "输入关键词：agent, RAG, MLOps, battery, Argonne, publications, contact...",
       send: "查询",
       starter: "可以先问：",
@@ -29,17 +29,17 @@ const copy = locale === "zh"
       note: agentApiUrl
         ? "当前版本调用 SciencesLoop 后端，只使用公开网站语料；未连接私人文件。可用时会返回引用来源。"
         : "当前版本在浏览器端运行，只基于公开网站内容做导航；未连接私人文件。线上 API 不可用时会保留这个本地 fallback。",
-      fallback: "我现在只能回答公开职业主页里的核心主题。可以试试 agent、AI for science、MLOps、battery、Argonne、publication、patent、CV、contact、VoiceRAG。",
+      fallback: "我现在只能回答公开网站里的核心主题。可以试试 agent reliability、AI for science、MLOps、battery、Argonne、publication、patent、academic CV、contact、VoiceRAG。",
       actions: {
         ai: "看研究方向",
         publications: "看论文",
-        cv: "下载 CV",
+        cv: "学术 CV",
         contact: "联系 Lu",
         roadmap: "查看路线图",
       },
       prompts: [
         "Lu 的 AI for Science 方向是什么？",
-        "哪些项目最能体现 agent 能力？",
+        "哪些证据体现 agent reliability 能力？",
         "他有哪些 MLOps / evaluation 经验？",
         "他的电池和液流电池背景是什么？",
         "Lu 的主要合作者是谁？",
@@ -51,7 +51,7 @@ const copy = locale === "zh"
       title: "Ask Lu Zhang's Website Agent",
       lead: agentApiUrl
         ? "A public-safe SciencesLoop agent backed by a RAG / LLM API. It is intended to answer from public website content and returns cited sources when available."
-        : "A public-safe site agent for this portfolio. In local mode it does not call an external model; it maps visitor questions to the most relevant public research, AI work, CV, and contact paths.",
+        : "A public-safe site agent for this portfolio. In local mode it does not call an external model; it maps visitor questions to the most relevant public research, AI work, academic CV, and contact paths.",
       placeholder: "Type keywords: agent, RAG, MLOps, battery, Argonne, publications, contact...",
       send: "Ask",
       starter: "Try asking:",
@@ -68,17 +68,17 @@ const copy = locale === "zh"
       note: agentApiUrl
         ? "This version calls the SciencesLoop backend using only public website corpus. It is not connected to private files and returns cited sources when available."
         : "This version runs in the browser and only routes across public site content. It is not connected to private files, and it remains available as a local fallback when the live API is unavailable.",
-      fallback: "I can answer the core public portfolio topics for now. Try agent, AI for science, MLOps, battery, Argonne, publication, patent, CV, contact, or VoiceRAG.",
+      fallback: "I can answer the core public site topics for now. Try agent reliability, AI for science, MLOps, battery, Argonne, publication, patent, academic CV, contact, or VoiceRAG.",
       actions: {
         ai: "View programs",
         publications: "View publications",
-        cv: "Download CV",
+        cv: "Academic CV",
         contact: "Contact Lu",
         roadmap: "View roadmap",
       },
       prompts: [
         "What is Lu's AI for Science direction?",
-        "Which projects best show agent skills?",
+        "What evidence shows agent reliability skills?",
         "What MLOps and evaluation experience does he have?",
         "What is his battery and redox-flow background?",
         "Who are Lu's main collaborators?",
@@ -168,7 +168,7 @@ const links = {
         topic: "AI for Science agents",
         next: `<a href="${links.ai}">Open AI projects</a>`,
         keys: ["agent", "agents", "rag", "mcp", "langgraph", "workflow", "harness", "ai for science", "scientific agent"],
-        html: `Lu's current direction is AI for Science through practical agent systems: RAG, tool use, evaluation harnesses, traceable workflow execution, and human-in-the-loop scientific decision support. The public site highlights this as a bridge between battery science and applied AI systems.`,
+        html: `Lu's current direction is AI for Science through reliable agent systems: context engineering, evaluation harnesses, multi-agent orchestration, traceable workflow execution, and human-in-the-loop scientific decision support. The public site highlights this as a bridge between battery science and applied AI systems.`,
       },
       {
         topic: "MLOps and evaluation",
@@ -208,9 +208,9 @@ const links = {
       },
       {
         topic: "Contact and profile links",
-        next: `<a href="${links.cv}" target="_blank" rel="noopener">Download CV</a>`,
+        next: `<a href="${links.cv}" target="_blank" rel="noopener">Open academic CV</a>`,
         keys: ["cv", "resume", "linkedin", "github", "contact", "email"],
-        html: `Use <a href="${links.cv}" target="_blank" rel="noopener">CV PDF</a> for the academic record, <a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a> for career context, <a href="${links.github}" target="_blank" rel="noopener">GitHub</a> for code, or <a href="${links.email}">email Lu</a>.`,
+        html: `Use the <a href="${links.cv}" target="_blank" rel="noopener">academic CV PDF</a> for the public academic record, <a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a> for career context, <a href="${links.github}" target="_blank" rel="noopener">GitHub</a> for code, or <a href="${links.email}">email Lu</a>.`,
       },
     ],
     zh: [
@@ -218,7 +218,7 @@ const links = {
         topic: "AI for Science 智能体",
         next: `<a href="${links.ai}">打开 AI 项目</a>`,
         keys: ["agent", "智能体", "rag", "mcp", "langgraph", "workflow", "工作流", "ai for science"],
-        html: `Lu 现在的主线是把 agent 系统用于 AI for Science：RAG、工具调用、evaluation harness、可追踪工作流和 human-in-the-loop 科学决策支持。这个方向把电池材料科学背景和应用层 AI 系统结合起来。`,
+        html: `Lu 现在的主线是把可靠 agent 系统用于 AI for Science：context engineering、evaluation harnesses、multi-agent orchestration、可追踪工作流和 human-in-the-loop 科学决策支持。这个方向把电池材料科学背景和应用层 AI 系统结合起来。`,
       },
       {
         topic: "MLOps 与 evaluation",
@@ -258,9 +258,9 @@ const links = {
       },
       {
         topic: "联系与公开链接",
-        next: `<a href="${links.cv}" target="_blank" rel="noopener">下载 CV</a>`,
+        next: `<a href="${links.cv}" target="_blank" rel="noopener">打开学术 CV</a>`,
         keys: ["cv", "resume", "简历", "linkedin", "github", "contact", "email", "联系"],
-        html: `学术记录看 <a href="${links.cv}" target="_blank" rel="noopener">CV PDF</a>，职业背景看 <a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a>，代码看 <a href="${links.github}" target="_blank" rel="noopener">GitHub</a>，也可以 <a href="${links.email}">邮件联系 Lu</a>。`,
+        html: `公开学术记录看 <a href="${links.cv}" target="_blank" rel="noopener">学术 CV PDF</a>，职业背景看 <a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a>，代码看 <a href="${links.github}" target="_blank" rel="noopener">GitHub</a>，也可以 <a href="${links.email}">邮件联系 Lu</a>。`,
       },
     ],
   };

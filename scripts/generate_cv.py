@@ -8,6 +8,7 @@ running WeasyPrint in CI.
 """
 
 import subprocess
+import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ if not SRC.exists():
 
 print(f"Rendering CV PDF from {SRC.relative_to(REPO)} → {OUT.relative_to(REPO)}")
 subprocess.check_call(
-    ["weasyprint", str(SRC), str(OUT)],
+    [sys.executable, "-m", "weasyprint", str(SRC), str(OUT)],
     stderr=subprocess.STDOUT,
 )
 size = OUT.stat().st_size / 1024

@@ -47,11 +47,10 @@ const career = isZh
 >
   <div class="container" style="padding-top: 3rem;">
   <div style="display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; align-items: start;" class="about-hero">
-    <div class="portrait square">
-      <ScienceArt class="science-art" />
-      <span class="placeholder-hint">{t("home.portrait.hint", locale)}</span>
-      <img src={u("/images/portrait.jpg")} alt="Lu Zhang" onerror="this.remove()" />
-    </div>
+      <div class="portrait square">
+        <ScienceArt class="science-art" />
+        <img src={u("/images/portrait.jpg")} alt="Lu Zhang" onerror="this.remove()" />
+      </div>
     <div>
       <span class="eyebrow">{isZh ? "SciencesLoop 成员" : "SciencesLoop People"}</span>
       <h1 style="margin-top: 0;">{isZh ? "Lu Zhang / 张鲁" : "Lu Zhang"}</h1>
@@ -68,7 +67,7 @@ const career = isZh
       </p>
       <p style="margin-top: 1rem;">
         <a class="btn btn-primary" href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">
-          {isZh ? "↓ 下载简历 (PDF)" : "↓ Download CV (PDF)"}
+          {isZh ? "↓ 下载学术 CV (PDF)" : "↓ Download academic CV (PDF)"}
         </a>
       </p>
     </div>
@@ -86,8 +85,8 @@ const career = isZh
       <h2>{isZh ? "Scientific AI 开放实验室" : "Open Research Lab for Scientific AI"}</h2>
       <p>
         {isZh
-          ? "SciencesLoop 不是普通个人主页，而是一个公开记录软件、研究笔记、开放问题和 AI for Science 工作流实验的长期实验室。"
-          : "SciencesLoop is not only a personal site. It is a public record of software, field notes, open problems, and AI-for-Science workflow experiments."}
+          ? "SciencesLoop 是一个公开记录软件、研究笔记、开放问题和 AI for Science 工作流实验的长期实验室，重点关注 context engineering、evaluation harnesses 和 human-in-the-loop review 等可靠智能体实践。"
+          : "SciencesLoop is a public record of software, field notes, open problems, and AI-for-Science workflow experiments, with a focus on what makes agents reliable: context engineering, evaluation harnesses, and human-in-the-loop review."}
       </p>
     </div>
   </section>

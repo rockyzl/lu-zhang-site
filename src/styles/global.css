@@ -486,10 +486,10 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
     padding: 2rem 0 1rem;
   }
   .home-agent-intro {
-    order: 2;
+    order: 1;
   }
   .home-agent-embed {
-    order: 1;
+    order: 2;
   }
   .home-agent-intro .lead {
     max-width: 680px;

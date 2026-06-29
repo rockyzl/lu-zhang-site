@@ -1,0 +1,46 @@
+---
+import Base from "../../layouts/Base.astro";
+import { u } from "../../lib/url";
+---
+
+<Base
+  title="学术 CV — SciencesLoop"
+  description="Lu Zhang 的公开学术 CV：Scientific AI Systems Engineer，曾任 Argonne 电池科学家。"
+>
+  <div class="container">
+    <section class="page-hero compact">
+      <span class="eyebrow">公开学术 CV</span>
+      <h1>Lu Zhang, Ph.D.</h1>
+      <p class="lead">
+        Scientific AI Systems Engineer，曾任 Argonne 电池科学家。当前公开定位聚焦
+        Scientific AI、可靠 agent 系统、context engineering、evaluation
+        harnesses 和 human-in-the-loop review。
+      </p>
+      <p>
+        这份 CV 是公开学术记录入口，覆盖论文、专利、报告、研究项目和公开职业背景；
+        不包含私人求职材料、雇主内部信息或未公开申请材料。
+      </p>
+      <p>
+        <a class="btn btn-primary" href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">
+          下载学术 CV (PDF)
+        </a>
+      </p>
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">相关公开页面</span>
+        <h2>学术证据层</h2>
+        <p>
+          更详细的公开记录可分别查看论文、专利、报告和研究项目页面。
+        </p>
+      </div>
+      <div class="agent-action-list">
+        <a href={u("/zh/publications/")}>论文</a>
+        <a href={u("/zh/patents/")}>专利</a>
+        <a href={u("/zh/projects/")}>研究项目</a>
+        <a href={u("/zh/about/")}>成员页面</a>
+      </div>
+    </section>
+  </div>
+</Base>

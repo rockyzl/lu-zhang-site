@@ -1,5 +1,29 @@
 {
   "framework": "astro",
   "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "lu-zhang-site.vercel.app"
+        }
+      ],
+      "destination": "https://sciencesloop.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.sciencesloop.com"
+        }
+      ],
+      "destination": "https://sciencesloop.com/:path*",
+      "permanent": true
+    }
+  ]
 }
