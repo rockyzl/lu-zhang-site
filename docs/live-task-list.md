@@ -37,6 +37,9 @@ reader feedback, and follow-up work.
       loop-engineering references.
 - [x] Molecular Universe map deep dive captured as a product reference for a
       future SciencesLoop research/signal map.
+- [x] Information architecture reworked around Build, Research Record, and
+      About groups, with Programs as the main AI entry and legacy routes
+      redirected.
 
 ## Active Priorities
 

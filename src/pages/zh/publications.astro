@@ -8,6 +8,7 @@ const locale = detectLocale(Astro.url.pathname);
 // Only show verified journal articles. Conference abstracts, preprints,
 // and book-chapters live elsewhere (/talks/, dedicated section).
 const filtered = publications.filter((p) => p.verified && p.kind === "journal");
+const AUTHORITATIVE_JOURNAL_COUNT = 97;
 const preprints = publications.filter((p) => p.verified && p.kind === "preprint");
 const sorted = [...filtered].sort((a, b) => (b.year || 0) - (a.year || 0) || b.citations - a.citations);
 const topics = [...new Set(filtered.map((p) => p.topic))].filter(Boolean);
@@ -50,7 +51,7 @@ const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox fl
   </div>
 
   <div class="section-head" style="margin-top: 2.5rem;">
-    <h2 style="margin:0;">{t("page.publications.allpapers", locale)} ({sorted.length})</h2>
+    <h2 style="margin:0;">{t("page.publications.allpapers", locale)} ({sorted.length} / {AUTHORITATIVE_JOURNAL_COUNT})</h2>
     <span class="more">{locale === "zh" ? "按年份倒序" : "newest first"}</span>
   </div>
   <div id="list">

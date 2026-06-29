@@ -1,8 +1,8 @@
 {
   "_doc": "UI string dictionary. Keys flat, values keyed by locale ('en' | 'zh').",
   "nav.about": {
-    "en": "People",
-    "zh": "成员"
+    "en": "About",
+    "zh": "关于"
   },
   "nav.publications": {
     "en": "Publications",
@@ -13,8 +13,8 @@
     "zh": "专利"
   },
   "nav.projects": {
-    "en": "Software",
-    "zh": "软件"
+    "en": "Research Projects",
+    "zh": "科研项目"
   },
   "nav.talks": {
     "en": "Talks",
@@ -28,6 +28,10 @@
     "en": "Collaborators",
     "zh": "合作者"
   },
+  "nav.mentorship": {
+    "en": "Mentorship & Collaborators",
+    "zh": "指导与合作者"
+  },
   "nav.awards": {
     "en": "Awards",
     "zh": "荣誉"
@@ -40,7 +44,7 @@
     "en": "Teaching",
     "zh": "教学"
   },
-  "nav.ai": {
+  "nav.programs": {
     "en": "Programs",
     "zh": "研究方向"
   },
@@ -49,8 +53,24 @@
     "zh": "能源 AI"
   },
   "nav.agent": {
-    "en": "Agent",
-    "zh": "智能体"
+    "en": "Agent Demo",
+    "zh": "智能体 Demo"
+  },
+  "nav.cv": {
+    "en": "Academic CV",
+    "zh": "学术 CV"
+  },
+  "nav.group.build": {
+    "en": "Build",
+    "zh": "构建"
+  },
+  "nav.group.record": {
+    "en": "Research Record",
+    "zh": "研究记录"
+  },
+  "nav.group.about": {
+    "en": "About",
+    "zh": "关于"
   },
   "nav.blog": {
     "en": "Field Notes",
@@ -133,8 +153,8 @@
     "zh": "AI for Science · 科学智能体 · 电池材料"
   },
   "home.role": {
-    "en": "AI/ML engineer and former Argonne scientist building public-safe AI for Science prototypes, scientific-agent notes, RAG workflows, and evaluation-oriented systems.",
-    "zh": "AI/ML 工程师，曾任阿贡国家实验室科学家；当前构建公开安全的 AI for Science 原型、科学智能体笔记、RAG 工作流和面向评估的系统。"
+    "en": "AI/ML engineer and former Argonne scientist building AI for Science prototypes, scientific-agent notes, RAG workflows, and evaluation-oriented systems.",
+    "zh": "AI/ML 工程师，曾任阿贡国家实验室科学家；当前构建 AI for Science 原型、科学智能体笔记、RAG 工作流和面向评估的系统。"
   },
   "home.lead": {
     "en": "14+ years of DOE battery research at Argonne, 100+ publications, 23 granted U.S. patents, 4,700+ citations, and recent applied AI engineering work around RAG, agent workflows, retrieval checks, trace review, evaluation, and deployment-readiness practices.",
@@ -145,16 +165,16 @@
     "zh": "论文 →"
   },
   "home.cta.ai": {
-    "en": "Working prototypes",
-    "zh": "工作原型"
+    "en": "Programs",
+    "zh": "研究方向"
   },
   "home.cta.agent": {
-    "en": "Ask the agent",
-    "zh": "问智能体"
+    "en": "Ask the demo agent",
+    "zh": "问 Demo 智能体"
   },
   "home.cta.about": {
-    "en": "People",
-    "zh": "成员"
+    "en": "About",
+    "zh": "关于"
   },
   "home.portrait.hint": {
     "en": "",
@@ -201,8 +221,8 @@
     "zh": "查看全部论文 →"
   },
   "section.ai": {
-    "en": "Working prototypes",
-    "zh": "原型与软件"
+    "en": "Current builds",
+    "zh": "当前构建"
   },
   "section.ai.more": {
     "en": "Program map →",
@@ -321,20 +341,20 @@
     "zh": "研究技术报告"
   },
   "page.publications.allpapers": {
-    "en": "All journal articles",
-    "zh": "全部期刊论文"
+    "en": "Indexed journal articles",
+    "zh": "已索引期刊论文"
   },
   "page.patents.eyebrow": {
-    "en": "28 issued + applications",
-    "zh": "已授权 28 项 · 申请待补"
+    "en": "25 issued + 3 applications (28 total)",
+    "zh": "已授权 25 项 + 申请 3 项（合计 28 项）"
   },
   "page.patents.title": {
     "en": "US Patents",
     "zh": "美国专利"
   },
   "page.patents.lead": {
-    "en": "28 issued US patents in flow battery chemistries, redox shuttles, Li-ion electrolytes, and silicon-anode binders, plus pending applications in membrane / lithium-recovery and electrolyte-solvent directions.",
-    "zh": "已授权 28 项美国专利，覆盖液流电池化学、氧化还原穿梭剂、锂离子电解液、硅负极粘合剂等方向；另有膜材料 / 锂回收与电解液溶剂方向的待审申请。"
+    "en": "25 issued US patents covering flow battery chemistries, redox shuttles, Li-ion electrolytes, and silicon-anode binders; plus 3 pending applications in membrane / Li recovery and HFE solvent directions. 28 total in patent portfolio.",
+    "zh": "已授权 25 项美国专利，覆盖液流电池化学、氧化还原穿梭剂、锂离子电解液、硅负极粘合剂等方向；另有 3 项膜材料 / 锂回收 / 氟醚溶剂方向的待审申请。专利组合合计 28 项。"
   },
   "page.patents.issued": {
     "en": "Issued patents",
@@ -361,16 +381,16 @@
     "zh": "领域"
   },
   "page.projects.eyebrow": {
-    "en": "Software, research archive, and evidence layer",
-    "zh": "软件、科研档案与证据层"
+    "en": "Funded research archive and evidence layer",
+    "zh": "科研项目档案与证据层"
   },
   "page.projects.title": {
-    "en": "Software & Research Projects",
-    "zh": "软件与科研项目"
+    "en": "Research Projects",
+    "zh": "科研项目"
   },
   "page.projects.lead": {
-    "en": "A public archive of software directions and Argonne battery-materials research across redox flow batteries, silicon anodes, autonomous ML-driven discovery, and membrane / lithium-recovery technology. This is the evidence base SciencesLoop builds on.",
-    "zh": "这里是 SciencesLoop 的软件方向和 Argonne 电池材料研究公开档案，覆盖液流电池、硅负极、自主式 ML 驱动发现、膜材料与锂回收。这是 SciencesLoop 后续构建 scientific agents 与 discovery infrastructure 的证据基础。"
+    "en": "A public archive of Argonne battery-materials research across redox flow batteries, silicon anodes, autonomous ML-driven discovery, and membrane / lithium-recovery technology. This is the scientific evidence base SciencesLoop builds on.",
+    "zh": "这里是 Argonne 电池材料研究公开档案，覆盖液流电池、硅负极、自主式 ML 驱动发现、膜材料与锂回收。这是 SciencesLoop 后续构建 scientific agents 与 discovery infrastructure 的科学证据基础。"
   },
   "page.projects.capability": {
     "en": "Capability themes",

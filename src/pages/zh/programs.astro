@@ -5,24 +5,6 @@ import { detectLocale, t } from "../../lib/i18n";
 import aiProjects from "../../data/ai_projects.json";
 
 const locale = detectLocale(Astro.url.pathname);
-
-const industrial = [
-  {
-    name: "AAOS — Data Science Engineer",
-    period: "Feb 2026 – present",
-    note: "AAOS 的企业数据 / AI 工作流工具；公开页面仅保留高层信息。",
-  },
-  {
-    name: "Mercury Insurance — Senior Data Scientist",
-    period: "Nov 2024 – Jan 2026",
-    note: "应用机器学习、分析管线和模型治理工作流。",
-  },
-  {
-    name: "Cincinnati Insurance — Data Scientist",
-    period: "Aug 2023 – Nov 2024",
-    note: "Loss prediction and analytics platforms.",
-  },
-];
 const workflow = [
   {
     step: "Scan",
@@ -42,27 +24,31 @@ const workflow = [
   {
     step: "Publish",
     title: "发布带来源的工作笔记",
-    text: "把有价值的发现整理成公开安全的文章，保留来源链接、开放问题和 SciencesLoop 视角。",
+    text: "把有价值的发现整理成公开笔记，保留来源链接、开放问题和可测试的下一步。",
   },
 ];
 
 const researchPrograms = [
   {
+    id: "scientific-workflow",
     name: "Scientific Workflow",
     label: "Program 01",
     text: "研究如何把科学问题转成可检查的 agent workflow：工具路由、状态、评估门、人工 review 和闭环执行。",
   },
   {
+    id: "scientific-state",
     name: "Scientific State",
     label: "Program 02",
     text: "研究 scientific memory、文献证据、实验上下文、provenance 和 workflow state，让科学决策不是一次性回答。",
   },
   {
+    id: "scientific-foundation-models",
     name: "Scientific Foundation Models",
     label: "Program 03",
     text: "跟踪和实验表示学习、分子/性质模型、溶解度、电池材料模型，以及 foundation-model 方法在科学系统中的作用。",
   },
   {
+    id: "scientific-discovery",
     name: "Scientific Discovery",
     label: "Program 04",
     text: "把 flow battery、property prediction、benchmark graph 和未来 self-driving-lab 接口作为 discovery sandbox。",
@@ -87,7 +73,7 @@ const researchPrograms = [
 
     <section class="product-modules" aria-label="SciencesLoop research programs">
       {researchPrograms.map((item) => (
-        <article class="product-module">
+        <article class="product-module" id={item.id}>
           <span>{item.label}</span>
           <h2>{item.name}</h2>
           <p>{item.text}</p>
@@ -120,21 +106,35 @@ const researchPrograms = [
 
     <section class="workflow-panel">
       <div>
-        <span class="eyebrow">Daily workflow</span>
-        <h2>AI research radar → post → prototype</h2>
+        <span class="eyebrow">运行循环</span>
+        <h2>信号 → 判断 → 原型 → 公开笔记</h2>
         <p>
-          发布流程从自动收集来源开始，然后加入人工判断：这个信号为什么重要，
-          它对 scientific agents 有什么影响，是否值得做成 SciencesLoop demo。
+          SciencesLoop 把公开 AI for Science 信号映射到科学工作流问题，
+          再用小原型和带来源的笔记检验哪些模式真的有用。
         </p>
       </div>
       <p>
-        公开输出是研究笔记、小型原型和带来源的研究地图；内部脚本和 review log
-        不进入公开正文。
+        公开输出是研究笔记、可检查的原型和研究地图；页面只展示可公开解释的结论和证据。
+      </p>
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">WIP 案例</span>
+        <h2>Energy AI 原型</h2>
+        <p>
+          Energy Materials AI 是 Scientific Discovery 方向下的当前应用案例：
+          把论文、专利、数据库、实验记录和性质模型组织成可追踪的研发决策。
+          它仍处于原型和问题发现阶段。
+        </p>
+      </div>
+      <p>
+        <a class="more" href={u("/zh/energy-materials-ai/")}>查看 Energy AI 原型 →</a>
       </p>
     </section>
 
     <div class="section-head">
-      <h2>Agent and AI systems</h2>
+      <h2>当前 AI 系统与原型</h2>
       <span class="more">{aiProjects.length}</span>
     </div>
     <div class="featured-grid">
@@ -173,22 +173,23 @@ const researchPrograms = [
       })}
     </div>
 
-    <p style="color: var(--c-muted); font-size: 0.9rem; margin-top: 1.5rem;">
-      More tools and experiments live on
-      <a href="https://github.com/rockyzl">github.com/rockyzl</a>
-      — primarily personal Claude Code skills, RAG / agent prototypes, and
-      research scripts. They are not productized and not listed here.
-    </p>
-
-    <div class="section-head">
-      <h2>{t("page.ai.industrial", locale)}</h2>
-    </div>
-    {industrial.map((p) => (
-      <div class="entry">
-        <div class="title">{p.name}</div>
-        <div class="meta"><strong style="color: var(--c-fg);">{p.period}</strong> — {p.note}</div>
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">证据基础</span>
+        <h2>科研记录仍是这个系统的基础。</h2>
+        <p>
+          这些 program 建立在公开论文、专利、DOE/JCESR 项目和电池材料研究经验之上。
+          AI 领先呈现，但科研证据不隐藏。
+        </p>
       </div>
-    ))}
+      <p>
+        <a class="more" href={u("/zh/publications/")}>论文 →</a>
+        {" · "}
+        <a class="more" href={u("/zh/patents/")}>专利 →</a>
+        {" · "}
+        <a class="more" href={u("/zh/projects/")}>科研项目 →</a>
+      </p>
+    </section>
 
   </div>
 </Base>

@@ -7,23 +7,6 @@ import aiProjects from "../data/ai_projects.json";
 const locale = detectLocale(Astro.url.pathname);
 const isZh = locale === "zh";
 
-const industrial = [
-  {
-    name: "AAOS — Data Science Engineer",
-    period: "Feb 2026 – present",
-    note: "High-level enterprise data/AI workflow tooling at AAOS; public details intentionally limited.",
-  },
-  {
-    name: "Mercury Insurance — Senior Data Scientist",
-    period: "Nov 2024 – Jan 2026",
-    note: "Applied ML, analytics pipelines, and model-governance workflows.",
-  },
-  {
-    name: "Cincinnati Insurance — Data Scientist",
-    period: "Aug 2023 – Nov 2024",
-    note: "Loss prediction and analytics platforms.",
-  },
-];
 const workflow = [
   {
     step: "Scan",
@@ -43,28 +26,32 @@ const workflow = [
   {
     step: "Publish",
     title: "Write cited working notes",
-    text: "Convert useful findings into public-safe posts with source links, open questions, and a SciencesLoop angle.",
+    text: "Convert useful findings into public notes with source links, open questions, and practical tests.",
   },
 ];
 
 const researchPrograms = isZh
   ? [
       {
+        id: "scientific-workflow",
         name: "Scientific Workflow",
         label: "Program 01",
         text: "研究如何把科学问题转成可检查的 agent workflow：工具路由、状态、评估门、人工 review 和闭环执行。",
       },
       {
+        id: "scientific-state",
         name: "Scientific State",
         label: "Program 02",
         text: "研究 scientific memory、文献证据、实验上下文、provenance 和 workflow state，让科学决策不是一次性回答。",
       },
       {
+        id: "scientific-foundation-models",
         name: "Scientific Foundation Models",
         label: "Program 03",
         text: "跟踪和实验表示学习、分子/性质模型、溶解度、电池材料模型，以及 foundation-model 方法在科学系统中的作用。",
       },
       {
+        id: "scientific-discovery",
         name: "Scientific Discovery",
         label: "Program 04",
         text: "把 flow battery、property prediction、benchmark graph 和未来 self-driving-lab 接口作为 discovery sandbox。",
@@ -72,21 +59,25 @@ const researchPrograms = isZh
     ]
   : [
       {
+        id: "scientific-workflow",
         name: "Scientific Workflow",
         label: "Program 01",
         text: "Agentic workflow systems that convert scientific questions into tool routing, state, evaluation gates, human review, and closed-loop execution.",
       },
       {
+        id: "scientific-state",
         name: "Scientific State",
         label: "Program 02",
         text: "Scientific memory, evidence, experimental context, provenance, and workflow state for inspectable scientific decisions.",
       },
       {
+        id: "scientific-foundation-models",
         name: "Scientific Foundation Models",
         label: "Program 03",
         text: "Representation learning, molecular/property models, solubility and battery-materials modeling, and foundation-model methods for scientific systems.",
       },
       {
+        id: "scientific-discovery",
         name: "Scientific Discovery",
         label: "Program 04",
         text: "Flow-battery decision support, property prediction, benchmark graphs, and future interfaces to self-driving laboratories.",
@@ -111,7 +102,7 @@ const researchPrograms = isZh
 
     <section class="product-modules" aria-label="SciencesLoop research programs">
       {researchPrograms.map((item) => (
-        <article class="product-module">
+        <article class="product-module" id={item.id}>
           <span>{item.label}</span>
           <h2>{item.name}</h2>
           <p>{item.text}</p>
@@ -145,23 +136,40 @@ const researchPrograms = isZh
 
     <section class="workflow-panel">
       <div>
-        <span class="eyebrow">Daily workflow</span>
-        <h2>AI research radar → post → prototype</h2>
+        <span class="eyebrow">{isZh ? "Operating loop" : "Operating loop"}</span>
+        <h2>{isZh ? "信号 → 判断 → 原型 → 公开笔记" : "Signal → judgment → prototype → field note"}</h2>
         <p>
-          The publishing workflow starts with automated source collection, then
-          adds human judgment: why the signal matters, how it affects scientific
-          agents, and whether it suggests a SciencesLoop demo.
+          {isZh
+            ? "SciencesLoop 把公开 AI for Science 信号映射到科学工作流问题，再用小原型和带来源的笔记检验哪些模式真的有用。"
+            : "SciencesLoop maps public AI-for-Science signals to scientific workflow problems, then uses small prototypes and cited notes to test which patterns are useful."}
         </p>
       </div>
       <p>
-        Public outputs are field notes, small prototypes, and source-linked
-        research maps. Internal scripts and review logs stay out of the public
-        article body.
+        {isZh
+          ? "公开输出是研究笔记、可检查的原型和研究地图；页面只展示可公开解释的结论和证据。"
+          : "Public outputs are field notes, inspectable prototypes, and research maps; the site keeps the visible layer focused on evidence and interpretation."}
+      </p>
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">{isZh ? "WIP case study" : "WIP case study"}</span>
+        <h2>{isZh ? "Energy AI 原型" : "Energy AI prototype"}</h2>
+        <p>
+          {isZh
+            ? "Energy Materials AI 是 Scientific Discovery 方向下的当前应用案例：把论文、专利、数据库、实验记录和性质模型组织成可追踪的研发决策。它仍处于原型和问题发现阶段。"
+            : "Energy Materials AI is the current applied case under Scientific Discovery: turning papers, patents, databases, experiment records, and property models into traceable R&D decisions. It is still a prototype and discovery effort."}
+        </p>
+      </div>
+      <p>
+        <a class="more" href={u(isZh ? "/zh/energy-materials-ai/" : "/energy-materials-ai/")}>
+          {isZh ? "查看 Energy AI 原型 →" : "View Energy AI prototype →"}
+        </a>
       </p>
     </section>
 
     <div class="section-head">
-      <h2>Agent and AI systems</h2>
+      <h2>{isZh ? "当前 AI 系统与原型" : "Current AI systems and prototypes"}</h2>
       <span class="more">{aiProjects.length}</span>
     </div>
     <div class="featured-grid">
@@ -200,22 +208,24 @@ const researchPrograms = isZh
       })}
     </div>
 
-    <p style="color: var(--c-muted); font-size: 0.9rem; margin-top: 1.5rem;">
-      More tools and experiments live on
-      <a href="https://github.com/rockyzl">github.com/rockyzl</a>
-      — primarily personal Claude Code skills, RAG / agent prototypes, and
-      research scripts. They are not productized and not listed here.
-    </p>
-
-    <div class="section-head">
-      <h2>{t("page.ai.industrial", locale)}</h2>
-    </div>
-    {industrial.map((p) => (
-      <div class="entry">
-        <div class="title">{p.name}</div>
-        <div class="meta"><strong style="color: var(--c-fg);">{p.period}</strong> — {p.note}</div>
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">{isZh ? "Evidence base" : "Evidence base"}</span>
+        <h2>{isZh ? "科研记录仍是这个系统的基础。" : "The research record remains the foundation."}</h2>
+        <p>
+          {isZh
+            ? "这些 program 建立在公开论文、专利、DOE/JCESR 项目和电池材料研究经验之上。AI 领先呈现，但科研证据不隐藏。"
+            : "These programs build on public papers, patents, DOE/JCESR projects, and battery-materials research experience. The AI work leads, but the scientific record stays visible."}
+        </p>
       </div>
-    ))}
+      <p>
+        <a class="more" href={u(isZh ? "/zh/publications/" : "/publications/")}>{isZh ? "论文 →" : "Publications →"}</a>
+        {" · "}
+        <a class="more" href={u(isZh ? "/zh/patents/" : "/patents/")}>{isZh ? "专利 →" : "Patents →"}</a>
+        {" · "}
+        <a class="more" href={u(isZh ? "/zh/projects/" : "/projects/")}>{isZh ? "科研项目 →" : "Research Projects →"}</a>
+      </p>
+    </section>
 
   </div>
 </Base>

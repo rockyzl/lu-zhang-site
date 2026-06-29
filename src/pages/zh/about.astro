@@ -40,10 +40,10 @@ const career = isZh
 // + cross-link.
 ---
 <Base
-  title={isZh ? "成员 — SciencesLoop" : "People — SciencesLoop"}
+  title={isZh ? "关于 — SciencesLoop" : "About — SciencesLoop"}
   description={isZh
-    ? "SciencesLoop 的成员、创建者背景、科学研究、AI 系统和公开联系方式。"
-    : "People behind SciencesLoop: founder background, scientific research, AI systems work, and public contact links."}
+    ? "SciencesLoop 创建者背景、科学研究、AI 系统和公开联系方式。"
+    : "Founder background behind SciencesLoop: scientific research, AI systems work, and public contact links."}
 >
   <div class="container" style="padding-top: 3rem;">
   <div style="display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; align-items: start;" class="about-hero">
@@ -52,7 +52,7 @@ const career = isZh
         <img src={u("/images/portrait.jpg")} alt="Lu Zhang" onerror="this.remove()" />
       </div>
     <div>
-      <span class="eyebrow">{isZh ? "SciencesLoop 成员" : "SciencesLoop People"}</span>
+      <span class="eyebrow">{isZh ? "关于 SciencesLoop" : "About SciencesLoop"}</span>
       <h1 style="margin-top: 0;">{isZh ? "Lu Zhang / 张鲁" : "Lu Zhang"}</h1>
       <p style="color: var(--c-muted); font-size: 1.1rem; margin-top: -0.4rem; margin-bottom: 1.2rem;">
         {isZh ? "创建者 · Scientific AI Systems Engineer · Ph.D." : "Founder · Scientific AI Systems Engineer · Ph.D."}

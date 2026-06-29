@@ -34,25 +34,25 @@ const researchPrograms = [
     name: "Scientific Workflow",
     label: "Program 01",
     text: "Agentic workflows, workflow engines, tool routing, evaluation gates, and reliable loops for scientific work.",
-    href: `${lp}/agent/`,
+    href: `${lp}/programs/#scientific-workflow`,
   },
   {
     name: "Scientific State",
     label: "Program 02",
     text: "Scientific memory, literature evidence, structured state, provenance, and context systems that make decisions inspectable.",
-    href: `${lp}/agent/`,
+    href: `${lp}/programs/#scientific-state`,
   },
   {
     name: "Scientific Foundation Models",
     label: "Program 03",
     text: "Representation learning, molecular/property models, solubility and battery-materials modeling, and foundation-model literacy.",
-    href: `${lp}/ai/`,
+    href: `${lp}/programs/#scientific-foundation-models`,
   },
   {
     name: "Scientific Discovery",
     label: "Program 04",
     text: "Flow-battery decision support, benchmark graphs, property prediction, and future self-driving-lab interfaces.",
-    href: `${lp}/energy-materials-ai/`,
+    href: `${lp}/programs/#scientific-discovery`,
   },
 ];
 
@@ -83,14 +83,10 @@ const labPrinciples = [
           and human-in-the-loop review.
         </p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href={u(`${lp}/ai/`)}>Research Programs</a>
+          <a class="btn btn-primary" href={u(`${lp}/programs/`)}>Research Programs</a>
+          <a class="btn btn-ghost" href={u(`${lp}/energy-materials-ai/`)}>Energy AI prototype</a>
           <a class="btn btn-ghost" href={u(`${lp}/blog/`)}>Field Notes</a>
-          <a class="btn btn-ghost" href={u(`${lp}/projects/`)}>Software</a>
           <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>{t("home.cta.agent", locale)}</a>
-          <a class="btn btn-ghost" href={u(`${lp}/ai/`)}>{t("home.cta.ai", locale)}</a>
-          <a class="btn btn-ghost" href={u(`${lp}/publications/`)}>{t("home.cta.publications", locale)}</a>
-          <a class="btn btn-ghost" href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">{locale === "zh" ? "↓ 学术 CV (PDF)" : "↓ Academic CV (PDF)"}</a>
-          <a class="btn btn-ghost" href={u(`${lp}/about/`)}>{t("home.cta.about", locale)}</a>
         </div>
       </div>
       <div class="home-agent-embed">
@@ -117,7 +113,7 @@ const labPrinciples = [
 
     <div class="section-head">
       <h2>Research Programs</h2>
-      <a class="more" href={u(`${lp}/ai/`)}>Program map →</a>
+      <a class="more" href={u(`${lp}/programs/`)}>Program map →</a>
     </div>
     <section class="product-modules" aria-label="SciencesLoop research programs">
       {researchPrograms.map((item) => (
@@ -138,7 +134,7 @@ const labPrinciples = [
         </ul>
       </article>
       <article>
-        <span class="eyebrow">People</span>
+        <span class="eyebrow">About</span>
         <h2>Lu Zhang</h2>
         <p>
           Founder of SciencesLoop. Scientific AI Systems Engineer and former
@@ -146,7 +142,7 @@ const labPrinciples = [
           AI workflows, agent reliability engineering, and scientific
           infrastructure.
         </p>
-        <a class="more" href={u(`${lp}/about/`)}>People page →</a>
+        <a class="more" href={u(`${lp}/about/`)}>About page →</a>
       </article>
     </section>
 
@@ -162,7 +158,7 @@ const labPrinciples = [
 
     <div class="section-head">
       <h2>{t("section.ai", locale)}</h2>
-      <a class="more" href={u(`${lp}/ai/`)}>{t("section.ai.more", locale)}</a>
+      <a class="more" href={u(`${lp}/programs/`)}>{t("section.ai.more", locale)}</a>
     </div>
 
     <div class="featured-grid">

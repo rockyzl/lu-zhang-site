@@ -10,25 +10,9 @@ const totalCount = projectsData.categories.reduce((s, c) => s + c.items.length, 
 const projectUrl = (p) =>
   p.url ?? `https://www.osti.gov/search/semantic:${encodeURIComponent(p.name + " Lu Zhang Argonne")}`;
 
-const collaborations = [
-  ["MIT", "Prof. Fikile Brushett — anolyte molecule design", "since 2014"],
-  ["PNNL", "Flow battery testing & cell engineering", "since 2015"],
-  ["UIUC", "Electrolyte design & molecular modeling", "since 2015"],
-  ["University of Michigan", "ROMs stability studies", "since 2016"],
-  ["Daimler", "Industrial overcharge-protection translation", "2020"],
-];
-
-const teamGrowth = [
-  ["2013", "1 postdoc"],
-  ["2014", "1 postdoc + 1 student"],
-  ["2015", "1 postdoc + visiting student · led JCESR low-potential Sprint (3 universities + 2 labs)"],
-  ["2016 – 2017", "2 postdocs + 2 students · led electrolyte-optimization Sprint (UIUC, PNNL, ANL)"],
-  ["2018", "3 postdocs + 1 student · JCESR 2.0 sub-thrust lead"],
-  ["2020 – 2023", "3 postdocs + 1 student · JCESR Y3 milestone lead"],
-];
 ---
 <Base
-  title={(locale === "zh" ? "软件与项目 — " : "Software & Projects — ") + "SciencesLoop"}
+  title={(locale === "zh" ? "科研项目 — " : "Research Projects — ") + "SciencesLoop"}
   description={locale === "zh"
     ? "SciencesLoop 软件、科研项目和公开证据库。"
     : "SciencesLoop software, research projects, and public evidence archive."}
@@ -39,12 +23,12 @@ const teamGrowth = [
     <p class="lead">{t("page.projects.lead", locale)}</p>
     <section class="workflow-panel" style="margin-top: 2rem;">
       <div>
-        <span class="eyebrow">{locale === "zh" ? "Software layer" : "Software layer"}</span>
-        <h2>{locale === "zh" ? "从科研项目到 Scientific AI 基础设施" : "From funded research to Scientific AI infrastructure"}</h2>
+        <span class="eyebrow">{locale === "zh" ? "Research record" : "Research record"}</span>
+        <h2>{locale === "zh" ? "SciencesLoop 的科学证据基础" : "The scientific evidence base behind SciencesLoop"}</h2>
         <p>
           {locale === "zh"
-            ? "这个页面保留 Argonne 电池材料研究项目档案，也作为 SciencesLoop 软件与研究证据层的一部分：后续的 scientific agents、workflow systems 和 discovery tools 都会引用这些公开证据。"
-            : "This page preserves the Argonne battery-materials project archive and acts as part of the SciencesLoop evidence layer. Future scientific agents, workflow systems, and discovery tools can point back to these public records."}
+            ? "这个页面保留 Argonne 电池材料研究项目档案：液流电池、硅负极、膜材料、锂回收和自主式材料发现。这些公开记录是 SciencesLoop 构建 scientific agents、workflow systems 和 discovery tools 的证据基础。"
+            : "This page preserves the Argonne battery-materials research archive: flow batteries, silicon anodes, membranes, lithium recovery, and autonomous materials discovery. These public records are the evidence base for SciencesLoop scientific agents, workflow systems, and discovery tools."}
         </p>
       </div>
     </section>
@@ -84,33 +68,6 @@ const teamGrowth = [
           </div>
         ))}
       </div>
-    </section>
-
-    <section style="margin-top: 3.5rem;">
-      <div class="section-head"><h2 style="margin:0;">{t("page.projects.team", locale)}</h2></div>
-      <table>
-        <thead><tr><th style="width: 180px;">Year</th><th>Group / leadership</th></tr></thead>
-        <tbody>
-          {teamGrowth.map(([y, g]) => (
-            <tr><td style="white-space:nowrap; font-weight:500;">{y}</td><td>{g}</td></tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
-
-    <section style="margin-top: 3.5rem;">
-      <div class="section-head"><h2 style="margin:0;">{t("page.projects.collab", locale)}</h2></div>
-      <table>
-        <tbody>
-          {collaborations.map(([inst, desc, when]) => (
-            <tr>
-              <td style="white-space:nowrap; font-weight:600; color: var(--c-fg);">{inst}</td>
-              <td>{desc}</td>
-              <td style="white-space:nowrap; color: var(--c-muted);">{when}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </section>
 
   </div>

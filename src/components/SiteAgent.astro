@@ -9,15 +9,15 @@ const isHomeMode = mode === "home";
 const copy = locale === "zh"
   ? {
       eyebrow: "站内智能体",
-      title: "问 Lu Zhang 网站智能体",
+      title: "问 SciencesLoop Demo 智能体",
       lead: agentApiUrl
-        ? "这是一个公开安全的 SciencesLoop 智能体：它会调用后端 RAG / LLM API，目标是基于公开网站内容回答，并在可用时返回引用来源。"
-        : "这是一个公开安全的站内智能体：当前本地模式不调用外部模型，只把访客问题映射到公开网站里的论文、项目、学术 CV、AI 工作和联系方式。",
-      placeholder: "输入关键词：agent, RAG, MLOps, battery, Argonne, publications, contact...",
+        ? "这是一个 SciencesLoop 站内问答 demo：它基于公开网站内容回答，并在可用时返回引用来源。"
+        : "这是一个 SciencesLoop 站内问答 demo：当前本地模式不调用外部模型，只把访客问题映射到公开网站里的研究方向、论文、项目、学术 CV 和联系方式。",
+      placeholder: "输入关键词：agent, workflow, evaluation, battery, publications, contact...",
       send: "查询",
       starter: "可以先问：",
-      status: agentApiUrl ? "public-safe RAG agent" : "public-safe static agent",
-      statusBadge: "公开语料",
+      status: agentApiUrl ? "public-site RAG demo" : "public-site static demo",
+      statusBadge: "公开网站内容",
       matched: "匹配主题",
       next: "建议下一步",
       plan: "执行路径",
@@ -27,11 +27,11 @@ const copy = locale === "zh"
       apiError: "实时 agent 暂时不可用，已切换到本地规则回答。",
       sources: "来源",
       note: agentApiUrl
-        ? "当前版本调用 SciencesLoop 后端，只使用公开网站语料；未连接私人文件。可用时会返回引用来源。"
-        : "当前版本在浏览器端运行，只基于公开网站内容做导航；未连接私人文件。线上 API 不可用时会保留这个本地 fallback。",
-      fallback: "我现在只能回答公开网站里的核心主题。可以试试 agent reliability、AI for science、MLOps、battery、Argonne、publication、patent、academic CV、contact、VoiceRAG。",
+        ? "当前版本调用 SciencesLoop 后端，只使用公开网站内容；可用时会返回引用来源。"
+        : "当前版本在浏览器端运行，只基于公开网站内容做导航；线上 API 不可用时会保留这个本地 fallback。",
+      fallback: "我现在只能回答网站里的核心主题。可以试试 agent reliability、AI for science、workflow、battery、Argonne、publication、patent、academic CV、contact、VoiceRAG。",
       actions: {
-        ai: "看研究方向",
+        ai: "看 Programs",
         publications: "看论文",
         cv: "学术 CV",
         contact: "联系 Lu",
@@ -48,15 +48,15 @@ const copy = locale === "zh"
     }
   : {
       eyebrow: "Site Agent",
-      title: "Ask Lu Zhang's Website Agent",
+      title: "Ask the SciencesLoop Demo Agent",
       lead: agentApiUrl
-        ? "A public-safe SciencesLoop agent backed by a RAG / LLM API. It is intended to answer from public website content and returns cited sources when available."
-        : "A public-safe site agent for this portfolio. In local mode it does not call an external model; it maps visitor questions to the most relevant public research, AI work, academic CV, and contact paths.",
-      placeholder: "Type keywords: agent, RAG, MLOps, battery, Argonne, publications, contact...",
+        ? "A SciencesLoop site Q&A demo backed by a RAG / LLM API. It answers from public website content and returns cited sources when available."
+        : "A SciencesLoop site Q&A demo. In local mode it does not call an external model; it maps visitor questions to the most relevant public research, programs, academic CV, and contact paths.",
+      placeholder: "Type keywords: agent, workflow, evaluation, battery, publications, contact...",
       send: "Ask",
       starter: "Try asking:",
-      status: agentApiUrl ? "public-safe RAG agent" : "public-safe static agent",
-      statusBadge: "public corpus",
+      status: agentApiUrl ? "public-site RAG demo" : "public-site static demo",
+      statusBadge: "public site",
       matched: "Matched topic",
       next: "Suggested next step",
       plan: "Agent path",
@@ -66,11 +66,11 @@ const copy = locale === "zh"
       apiError: "Live agent is temporarily unavailable, so I switched to the local rules answer.",
       sources: "Sources",
       note: agentApiUrl
-        ? "This version calls the SciencesLoop backend using only public website corpus. It is not connected to private files and returns cited sources when available."
-        : "This version runs in the browser and only routes across public site content. It is not connected to private files, and it remains available as a local fallback when the live API is unavailable.",
-      fallback: "I can answer the core public site topics for now. Try agent reliability, AI for science, MLOps, battery, Argonne, publication, patent, academic CV, contact, or VoiceRAG.",
+        ? "This version calls the SciencesLoop backend using public website content and returns cited sources when available."
+        : "This version runs in the browser and only routes across public site content. It remains available as a local fallback when the live API is unavailable.",
+      fallback: "I can answer the core site topics for now. Try agent reliability, AI for science, workflow, battery, Argonne, publication, patent, academic CV, contact, or VoiceRAG.",
       actions: {
-        ai: "View programs",
+        ai: "View Programs",
         publications: "View publications",
         cv: "Academic CV",
         contact: "Contact Lu",
@@ -87,11 +87,11 @@ const copy = locale === "zh"
     };
 
 const links = {
-  ai: u(locale === "zh" ? "/zh/ai/" : "/ai/"),
+  ai: u(locale === "zh" ? "/zh/programs/" : "/programs/"),
   publications: u(locale === "zh" ? "/zh/publications/" : "/publications/"),
   patents: u(locale === "zh" ? "/zh/patents/" : "/patents/"),
   projects: u(locale === "zh" ? "/zh/projects/" : "/projects/"),
-  collaborators: u(locale === "zh" ? "/zh/collaborators/" : "/collaborators/"),
+  collaborators: u(locale === "zh" ? "/zh/mentorship-collaborators/" : "/mentorship-collaborators/"),
   about: u(locale === "zh" ? "/zh/about/" : "/about/"),
   awards: u(locale === "zh" ? "/zh/awards/" : "/awards/"),
   cv: u("/files/Lu_Zhang_CV.pdf"),
@@ -137,8 +137,8 @@ const links = {
         <div class="agent-topic">{copy.matched}: {locale === "zh" ? "开始" : "Start"}</div>
         <div>
           {locale === "zh"
-            ? "你好。我可以帮你快速了解 Lu 的 AI for Science、agent 系统、电池材料、论文专利和职业背景。"
-            : "Hi. I can help you navigate Lu's AI for Science, agent systems, battery materials, publications, patents, and career background."}
+            ? "你好。我可以帮你快速了解 SciencesLoop 的研究方向、agent 系统、电池材料、论文专利和职业背景。"
+            : "Hi. I can help you navigate SciencesLoop programs, agent systems, battery materials, publications, patents, and career background."}
         </div>
         <div class="agent-next">{copy.next}: <a href={links.ai}>{copy.actions.ai}</a></div>
       </div>
@@ -152,7 +152,7 @@ const links = {
 
       <div class="agent-quicklinks" aria-label="Agent quick links">
         <a href={links.ai}>{copy.actions.ai}</a>
-        <a href={links.projects}>{locale === "zh" ? "软件" : "Software"}</a>
+        <a href={links.projects}>{locale === "zh" ? "科研项目" : "Research Projects"}</a>
         <a href={links.publications}>{copy.actions.publications}</a>
         <a href={links.about}>{locale === "zh" ? "背景" : "Background"}</a>
       </div>
@@ -166,13 +166,13 @@ const links = {
     en: [
       {
         topic: "AI for Science agents",
-        next: `<a href="${links.ai}">Open AI projects</a>`,
+        next: `<a href="${links.ai}">Open Programs</a>`,
         keys: ["agent", "agents", "rag", "mcp", "langgraph", "workflow", "harness", "ai for science", "scientific agent"],
         html: `Lu's current direction is AI for Science through reliable agent systems: context engineering, evaluation harnesses, multi-agent orchestration, traceable workflow execution, and human-in-the-loop scientific decision support. The public site highlights this as a bridge between battery science and applied AI systems.`,
       },
       {
         topic: "MLOps and evaluation",
-        next: `<a href="${links.ai}">Review AI systems work</a>`,
+        next: `<a href="${links.ai}">Review Programs</a>`,
         keys: ["mlops", "eval", "evaluation", "observability", "trace", "smoke test", "deployment", "azure", "docker", "search"],
         html: `Lu's recent AI engineering profile emphasizes application-layer reliability practices: retrieval checks, smoke tests, trace review, Docker/Azure deployment-readiness learning, and rollback-aware search-index workflows. This is application-layer AI/MLOps practice, not model pretraining or infrastructure ownership.`,
       },
@@ -196,9 +196,9 @@ const links = {
       },
       {
         topic: "Scientific collaborators",
-        next: `<a href="${links.collaborators}">Open collaborators</a>`,
+        next: `<a href="${links.collaborators}">Open Mentorship & Collaborators</a>`,
         keys: ["collaborator", "collaborators", "collaboraror", "collaboration", "coauthor", "co-author", "co authors", "coworker", "partner"],
-        html: `The <a href="${links.collaborators}">Collaborators</a> page lists Lu's public co-author network from peer-reviewed publications, including principal collaborators by co-authored paper count and institutional context where available.`,
+        html: `The <a href="${links.collaborators}">Mentorship & Collaborators</a> page combines Lu's public co-author network, direct mentees, JCESR team leadership, and patent-only collaborators where available.`,
       },
       {
         topic: "VoiceRAG / Lightyear demo",
@@ -216,13 +216,13 @@ const links = {
     zh: [
       {
         topic: "AI for Science 智能体",
-        next: `<a href="${links.ai}">打开 AI 项目</a>`,
+        next: `<a href="${links.ai}">打开 Programs</a>`,
         keys: ["agent", "智能体", "rag", "mcp", "langgraph", "workflow", "工作流", "ai for science"],
         html: `Lu 现在的主线是把可靠 agent 系统用于 AI for Science：context engineering、evaluation harnesses、multi-agent orchestration、可追踪工作流和 human-in-the-loop 科学决策支持。这个方向把电池材料科学背景和应用层 AI 系统结合起来。`,
       },
       {
         topic: "MLOps 与 evaluation",
-        next: `<a href="${links.ai}">查看 AI 系统工作</a>`,
+        next: `<a href="${links.ai}">查看研究方向</a>`,
         keys: ["mlops", "eval", "evaluation", "评估", "观测", "trace", "smoke test", "部署", "azure", "docker", "search"],
         html: `Lu 最近公开可描述的 AI 工程重点是应用层可靠性实践：retrieval checks、smoke tests、trace review、Docker/Azure deployment-readiness learning，以及可回滚的 search-index 工作流。这是应用层 AI/MLOps 实践，不是模型预训练或底层基础设施所有权。`,
       },
@@ -246,9 +246,9 @@ const links = {
       },
       {
         topic: "科研合作者",
-        next: `<a href="${links.collaborators}">打开合作者页面</a>`,
+        next: `<a href="${links.collaborators}">打开指导与合作者页面</a>`,
         keys: ["collaborator", "collaborators", "collaboraror", "collaboration", "coauthor", "co-author", "合作者", "合作", "共同作者", "共同发表"],
-        html: `<a href="${links.collaborators}">Collaborators</a> 页面列出 Lu 基于公开论文整理的共同作者网络，包括主要合作者、共同发表数量和可公开展示的机构信息。`,
+        html: `<a href="${links.collaborators}">指导与合作者</a> 页面合并展示 Lu 的公开共同作者网络、直接指导学生/博士后、JCESR 团队领导和部分仅专利合作者。`,
       },
       {
         topic: "VoiceRAG / Lightyear demo",
@@ -271,7 +271,7 @@ const links = {
     const match = set.find((item) => item.keys.some((key) => normalized.includes(key.toLowerCase())));
     const topic = match ? match.topic : "Fallback";
     const html = match ? match.html : fallback;
-    const next = match ? match.next : `<a href="${links.ai}">AI projects</a>`;
+    const next = match ? match.next : `<a href="${links.ai}">Programs</a>`;
     return `
       <div class="agent-topic">${labels.matched}: ${topic}</div>
       <div>${html}</div>

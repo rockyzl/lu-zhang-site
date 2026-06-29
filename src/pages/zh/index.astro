@@ -36,25 +36,25 @@ const researchPrograms = [
     name: "Scientific Workflow",
     label: "Program 01",
     text: "面向科学工作的智能体流程、工具路由、评估门、工作流引擎和可靠闭环。",
-    href: `${lp}/agent/`,
+    href: `${lp}/programs/#scientific-workflow`,
   },
   {
     name: "Scientific State",
     label: "Program 02",
     text: "科学记忆、文献证据、结构化状态、溯源和上下文系统，让科学决策可检查。",
-    href: `${lp}/agent/`,
+    href: `${lp}/programs/#scientific-state`,
   },
   {
     name: "Scientific Foundation Models",
     label: "Program 03",
     text: "表示学习、分子/性质模型、溶解度与电池材料建模，以及科学基础模型能力建设。",
-    href: `${lp}/ai/`,
+    href: `${lp}/programs/#scientific-foundation-models`,
   },
   {
     name: "Scientific Discovery",
     label: "Program 04",
     text: "液流电池决策支持、benchmark graph、性质预测，以及未来 self-driving lab 接口。",
-    href: `${lp}/energy-materials-ai/`,
+    href: `${lp}/programs/#scientific-discovery`,
   },
 ];
 
@@ -85,14 +85,10 @@ const labPrinciples = [
           human-in-the-loop review。
         </p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href={u(`${lp}/ai/`)}>研究方向</a>
+          <a class="btn btn-primary" href={u(`${lp}/programs/`)}>研究方向</a>
+          <a class="btn btn-ghost" href={u(`${lp}/energy-materials-ai/`)}>能源 AI 原型</a>
           <a class="btn btn-ghost" href={u(`${lp}/blog/`)}>研究笔记</a>
-          <a class="btn btn-ghost" href={u(`${lp}/projects/`)}>软件</a>
           <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>{t("home.cta.agent", locale)}</a>
-          <a class="btn btn-ghost" href={u(`${lp}/ai/`)}>{t("home.cta.ai", locale)}</a>
-          <a class="btn btn-ghost" href={u(`${lp}/publications/`)}>{t("home.cta.publications", locale)}</a>
-          <a class="btn btn-ghost" href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">{locale === "zh" ? "↓ 学术 CV (PDF)" : "↓ Academic CV (PDF)"}</a>
-          <a class="btn btn-ghost" href={u(`${lp}/about/`)}>{t("home.cta.about", locale)}</a>
         </div>
       </div>
       <div class="home-agent-embed">
@@ -102,14 +98,14 @@ const labPrinciples = [
 
     <div class="agent-trust-strip" aria-label="智能体边界">
       <span>科学工作流系统</span>
-      <span>Scientific state and memory</span>
-      <span>Agent reliability engineering</span>
+      <span>科学状态与记忆</span>
+      <span>智能体可靠性工程</span>
       <span>电池材料发现</span>
     </div>
 
     <section class="lab-manifesto" aria-label="SciencesLoop mission">
       <div>
-        <span class="eyebrow">Mission</span>
+        <span class="eyebrow">使命</span>
         <h2>帮助科学家做出更好的决策。</h2>
       </div>
       <div>
@@ -119,7 +115,7 @@ const labPrinciples = [
 
     <div class="section-head">
       <h2>研究方向</h2>
-      <a class="more" href={u(`${lp}/ai/`)}>研究地图 →</a>
+      <a class="more" href={u(`${lp}/programs/`)}>研究地图 →</a>
     </div>
     <section class="product-modules" aria-label="SciencesLoop research programs">
       {researchPrograms.map((item) => (
@@ -140,14 +136,14 @@ const labPrinciples = [
         </ul>
       </article>
       <article>
-        <span class="eyebrow">成员</span>
+        <span class="eyebrow">关于</span>
         <h2>Lu Zhang</h2>
         <p>
           SciencesLoop 创建者。Scientific AI Systems Engineer，曾任
           Argonne 科学家，连接电池材料研究、生产 AI 工作流、Agent
           可靠性工程和科学基础设施。
         </p>
-        <a class="more" href={u(`${lp}/about/`)}>成员页面 →</a>
+        <a class="more" href={u(`${lp}/about/`)}>关于页面 →</a>
       </article>
     </section>
 
@@ -163,7 +159,7 @@ const labPrinciples = [
 
     <div class="section-head">
       <h2>{t("section.ai", locale)}</h2>
-      <a class="more" href={u(`${lp}/ai/`)}>{t("section.ai.more", locale)}</a>
+      <a class="more" href={u(`${lp}/programs/`)}>{t("section.ai.more", locale)}</a>
     </div>
     <div class="featured-grid">
       {aiProjects.map((p) => {
@@ -196,7 +192,7 @@ const labPrinciples = [
     </div>
 
     <div class="section-head">
-      <h2>Field Notes</h2>
+      <h2>研究笔记</h2>
       <a class="more" href={u(`${lp}/blog/`)}>全部笔记 →</a>
     </div>
     <div class="blog-grid blog-grid--home">

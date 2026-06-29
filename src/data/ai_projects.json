@@ -1,12 +1,12 @@
 [
   {
     "name": "lu-zhang-site",
-    "tagline": "This site — academic homepage with structured data layer",
-    "description": "Astro static site driven by curated JSON data extracted from a master research record. 99 publications (97 SCI + 2 book chapters), 28 patents (25 issued + 3 applications), 51 conference presentations (38 abstracts + 13 invited talks).",
+    "tagline": "SciencesLoop public research lab site with structured evidence layer",
+    "description": "Astro static site driven by curated public research records. It connects SciencesLoop programs, field notes, research projects, publications, patents, talks, and the public agent demo.",
     "status": "Live",
     "tags": [
       "Astro",
-      "private repo",
+      "structured data",
       "data-driven"
     ],
     "image": null,
@@ -17,7 +17,7 @@
   {
     "name": "guangnian-energy-agent",
     "tagline": "VoiceRAG / Lightyear energy-agent prototype",
-    "description": "Bilingual RAG assistant prototype for new-energy content, used to test retrieval, realtime voice interaction, and public-safe navigation patterns for SciencesLoop-style agents.",
+    "description": "Bilingual RAG assistant prototype for new-energy content, used to test retrieval, realtime voice interaction, and domain navigation patterns for SciencesLoop-style agents.",
     "status": "Public prototype",
     "tags": [
       "Azure OpenAI",

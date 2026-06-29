@@ -75,13 +75,6 @@ const peerJournals = [
   ["ACS Applied Energy Materials", "https://pubs.acs.org/journal/aaemcq"],
 ];
 
-const featured = [
-  ["Argonne Today", "Liquid catholyte ANL-8/9 highlight", "https://www.anl.gov/"],
-  ["JCESR Research Highlights", "Multiple molecular-engineering breakthroughs", "https://www.anl.gov/jcesr"],
-  ["EurekAlert", "Self-reporting redox flow battery coverage", "https://www.eurekalert.org/news-releases/780281"],
-  ["Nature Communications", "2024 robotic platform + active learning paper", "https://www.nature.com/articles/s41467-024-47070-5"],
-];
-
 const metrics = isZh
   ? [
       ["4,700+ 总被引 · h-index 39 · i10-index 89", "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en"],
@@ -152,18 +145,10 @@ const metrics = isZh
     </div>
 
     <div class="section-head" style="margin-top: 3rem;">
-      <h2 style="margin:0;">{t("page.awards.media", locale)}</h2>
+      <h2 style="margin:0;">{isZh ? "媒体报道" : "Press coverage"}</h2>
     </div>
-    {featured.map(([outlet, desc, link]) => (
-      <div class="entry">
-        <div class="title">
-          <a href={link} target="_blank" rel="noopener">{outlet}</a>
-        </div>
-        <div class="meta">{desc}</div>
-      </div>
-    ))}
     <p style="margin-top: 1rem; font-size: 0.93rem;">
-      <a href={isZh ? "/lu-zhang-site/zh/press/" : "/lu-zhang-site/press/"}>
+      <a href={isZh ? "/zh/press/" : "/press/"}>
         {isZh ? "→ 完整媒体报道列表（含 JCESR 视频）" : "→ Full press coverage list (incl. JCESR video)"}
       </a>
     </p>
@@ -178,35 +163,5 @@ const metrics = isZh
         </div>
       </div>
     ))}
-
-    <div class="section-head" style="margin-top: 3rem;">
-      <h2 style="margin:0;">{t("page.awards.certifications", locale)}</h2>
-    </div>
-    <div class="entry">
-      <div class="title">
-        {isZh
-          ? "Certified Meditation & Mindfulness Teacher（2026）"
-          : "Certified Meditation & Mindfulness Teacher (2026)"}
-      </div>
-      <div class="meta" style="font-style: italic;">
-        {isZh
-          ? "School of Positive Transformation · 颁发人：Dr. Itai Ivtzan · 课程导师：Wendy Quan · 颁发日期：2026-05-15"
-          : "School of Positive Transformation · Awarded by Dr. Itai Ivtzan · Course lead: Wendy Quan · Issued 2026-05-15"}
-      </div>
-      <div class="meta" style="margin-top: 0.4rem;">
-        {isZh
-          ? "完成「Meditation & Mindfulness Teacher Training」全课程；课程具 CPD 认证 + IMMA（International Meditation & Mindfulness Alliance）资质认可。"
-          : "Completed the full Meditation & Mindfulness Teacher Training programme. CPD-accredited and IMMA-recognised (International Meditation & Mindfulness Alliance)."}
-      </div>
-      <div style="margin-top: 1rem; max-width: 520px;">
-        <a href={u("/images/meditation-mindfulness-teacher-cert.png")} target="_blank" rel="noopener">
-          <img
-            src={u("/images/meditation-mindfulness-teacher-cert.png")}
-            alt={isZh ? "Lu Zhang Meditation & Mindfulness Teacher 证书" : "Lu Zhang Meditation & Mindfulness Teacher certificate"}
-            style="width: 100%; height: auto; border: 1px solid var(--c-border, #e5e5e5); border-radius: 4px;"
-          />
-        </a>
-      </div>
-    </div>
   </div>
 </Base>

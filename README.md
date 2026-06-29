@@ -66,11 +66,12 @@ src/
   pages/
     index.astro         home — SciencesLoop lab framing + programs + notes
     about.astro         people + founder bio + recognition + service & review
-    publications.astro  143 papers, filterable
-    patents.astro       28 issued + applications + non-provisional draft
-    projects.astro      software and funded research archive
+    programs.astro      Scientific AI programs and current prototypes
+    publications.astro  99 publications total; indexed journal subset is filterable
+    patents.astro       25 issued + 3 applications (28 total)
+    projects.astro      funded research archive and evidence layer
     talks.astro         13 invited + 38 abstracts
-    ai.astro            research programs and working prototypes
+    mentorship-collaborators.astro  mentorship, team growth, and collaborator record
   styles/global.css
 public/
   images/{news,ai}/   curated illustrations and screenshots

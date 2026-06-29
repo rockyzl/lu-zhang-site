@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import { detectLocale, t } from "../lib/i18n";
 import publications from "../data/publications.json";
 import menteesData from "../data/mentees.json";
+import collaborators from "../data/collaborators.json";
 
 const locale = detectLocale(Astro.url.pathname);
 const isZh = locale === "zh";
@@ -89,18 +90,49 @@ const sprintTeams = isZh
       ["JCESR 2.0 Y3 milestone (2020)", "Self-reporting fluorescent redoxmer direction; cross-institution coordination"],
     ];
 
-const TITLE = isZh ? "教学与团队培养" : "Teaching & Mentorship";
+const collaborationRows = [
+  ["MIT", "Prof. Fikile Brushett — anolyte molecule design", "since 2014"],
+  ["PNNL", "Flow battery testing & cell engineering", "since 2015"],
+  ["UIUC", "Electrolyte design & molecular modeling", "since 2015"],
+  ["University of Michigan", "ROMs stability studies", "since 2016"],
+  ["Daimler", "Industrial overcharge-protection translation", "2020"],
+];
+
+const principal = collaborators.filter((c) => c.count >= 5);
+const recurring = collaborators.filter((c) => c.count >= 2 && c.count < 5);
+const oneOff = collaborators.filter((c) => c.count === 1);
+const patentOnly = collaborators.filter((c) => c.via === "patent");
+const RELEVANT_KEYWORDS = [
+  "university", "national lab", "argonne", "pacific northwest",
+  "oak ridge", "lawrence", "brookhaven", "fermilab", "berkeley",
+  "mit", "massachusetts institute", "stanford", "caltech", "princeton",
+  "cornell", "columbia", "harvard", "yale", "chicago", "northwestern",
+  "michigan", "illinois", "purdue", "tennessee", "delaware",
+  "academia sinica", "academy of sciences", "institute of",
+  "battelle", "pnnl", "csiro", "cnrs",
+  "tesla", "factorial energy", "wildcat discovery", "general motors",
+  "living proof", "cnpc", "zhejiang erge", "applied materials", "orbia", "industry",
+];
+function topInst(institutions: string[]): string {
+  const cleaned = institutions.filter((i) => {
+    const lo = i.toLowerCase();
+    return RELEVANT_KEYWORDS.some((kw) => lo.includes(kw));
+  });
+  return (cleaned[0] || institutions[0] || "").replace(/\s*\(United States\)/g, "");
+}
+
+const TITLE = isZh ? "指导与合作者" : "Mentorship & Collaborators";
 ---
 <Base title={TITLE + " — Lu Zhang"}>
   <div class="container" style="padding-top: 3rem;">
     <span class="eyebrow">
-      {isZh ? "ANL 团队 · JCESR Sprint 领导 · 跨机构合作" : "ANL group · JCESR Sprint leadership · Cross-institution collaboration"}
+      {isZh ? "ANL 团队 · JCESR Sprint 领导 · 公开合作者网络" : "ANL group · JCESR Sprint leadership · Public collaborator network"}
     </span>
     <h1>{TITLE}</h1>
     <p class="lead">
       {isZh
-        ? `于阿贡国家实验室（2013–2023）期间指导博士后、研究生与访问学者，领导 JCESR 跨机构 Sprint 团队（成员覆盖 MIT、PNNL、UIUC、UMichigan、Purdue）。团队规模从 1 名博士后扩展到 3 名博士后 + 1 名学生，多名学生与博士后已在高校或电池产业担任教职 / 骨干岗位。`
-        : `Supervised postdocs, graduate students, and visiting researchers at Argonne National Laboratory (2013 – 2023). Led cross-institution JCESR Sprint teams across MIT, PNNL, UIUC, UMichigan, Purdue. Team grew from 1 postdoc to 3 postdocs + 1 student. Several mentees have moved on to faculty positions and senior roles in the battery industry.`}
+        ? `于阿贡国家实验室（2013–2023）期间指导博士后、研究生与访问学者，领导 JCESR 跨机构 Sprint 团队，并与 Argonne、JCESR、PNNL、UIUC、MIT、UMichigan 等网络形成公开论文和专利合作记录。`
+        : `Supervised postdocs, graduate students, and visiting researchers at Argonne National Laboratory (2013 – 2023), led cross-institution JCESR Sprint teams, and built a public publication and patent collaboration record across Argonne, JCESR, PNNL, UIUC, MIT, UMichigan, and related networks.`}
     </p>
 
     <div class="section-head" style="margin-top: 2.5rem;">
@@ -251,6 +283,118 @@ const TITLE = isZh ? "教学与团队培养" : "Teaching & Mentorship";
     ))}
 
     <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{isZh ? "代表性跨机构合作" : "Representative cross-institution collaborations"}</h2>
+    </div>
+    <table>
+      <tbody>
+        {collaborationRows.map(([inst, desc, when]) => (
+          <tr>
+            <td style="white-space:nowrap; font-weight:600; color: var(--c-fg);">{inst}</td>
+            <td>{desc}</td>
+            <td style="white-space:nowrap; color: var(--c-muted);">{when}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{isZh ? "公开论文合作者网络" : "Public coauthor network"}</h2>
+      <span class="more">{collaborators.length} {isZh ? "位独立合作者" : "unique collaborators"}</span>
+    </div>
+    <p style="font-size: 0.92rem; color: var(--c-muted); margin-top: -0.5rem;">
+      {isZh
+        ? "汇总自公开同行评议论文，并按机构 affiliation 过滤至本人作品。下表按合作论文数量排序。"
+        : "Compiled from public peer-reviewed publications and filtered by affiliation to this Lu Zhang. Sorted by number of co-authored papers."}
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:60px; text-align:right;">#</th>
+          <th>{isZh ? "姓名" : "Name"}</th>
+          <th style="width:80px; text-align:right;">{isZh ? "篇数" : "Papers"}</th>
+          <th>{isZh ? "主要机构" : "Primary affiliation"}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {principal.map((c, i) => (
+          <tr>
+            <td style="text-align:right; color:var(--c-muted);">{i + 1}</td>
+            <td style="font-weight:600;">
+              {c.openalex_id
+                ? <a href={`https://openalex.org/${c.openalex_id}`} target="_blank" rel="noopener">{c.name}</a>
+                : c.name}
+            </td>
+            <td style="text-align:right;">{c.count}</td>
+            <td style="color:var(--c-muted); font-size:0.92em;">{topInst(c.institutions)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin:0;">{isZh ? "经常合作者" : "Recurring collaborators"} ({recurring.length})</h2>
+      <span class="more">2 – 4 {isZh ? "篇" : "papers"}</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.5rem 1.5rem;">
+      {recurring.map((c) => (
+        <div style="font-size: 0.93rem; padding: 0.35rem 0; border-bottom: 1px dotted var(--c-border-soft);">
+          <span style="font-weight:500;">
+            {c.openalex_id
+              ? <a href={`https://openalex.org/${c.openalex_id}`} target="_blank" rel="noopener" style="color: var(--c-fg);">{c.name}</a>
+              : c.name}
+          </span>
+          <span style="color: var(--c-muted); font-size:0.82em;"> · {c.count}{isZh ? "篇" : ""}</span>
+        </div>
+      ))}
+    </div>
+
+    <details style="margin-top: 3rem;">
+      <summary style="cursor: pointer; font-family: var(--font-serif); font-weight: 600; font-size: 1.2rem; color: var(--c-ink);">
+        {isZh ? `单次合作者（${oneOff.length}）` : `One-time collaborators (${oneOff.length})`}
+      </summary>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.2rem 1rem; margin-top: 0.8rem; font-size: 0.88rem;">
+        {oneOff.map((c) => (
+          <div style="padding: 0.15rem 0; color: var(--c-muted);">
+            {c.openalex_id
+              ? <a href={`https://openalex.org/${c.openalex_id}`} target="_blank" rel="noopener" style="color: var(--c-muted);">{c.name}</a>
+              : c.name}
+          </div>
+        ))}
+      </div>
+    </details>
+
+    {patentOnly.length > 0 && (
+      <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border-soft);">
+        <h2 style="margin-top: 0;">{isZh ? `仅专利合作者 (${patentOnly.length})` : `Patent-only coauthors (${patentOnly.length})`}</h2>
+        <p style="color: var(--c-muted); font-size: 0.92rem;">
+          {isZh
+            ? "在授权或公开美国专利申请上担任共同发明人，但尚未共同发表期刊论文。"
+            : "Co-inventors on issued or published US patent applications who have not yet co-authored a peer-reviewed paper with Lu Zhang."}
+        </p>
+        <table style="margin-top: 0.8rem;">
+          <thead>
+            <tr>
+              <th>{isZh ? "姓名" : "Name"}</th>
+              <th>{isZh ? "机构" : "Institution"}</th>
+              <th style="width: 80px; text-align: right;">{isZh ? "专利数" : "Patents"}</th>
+              <th>{isZh ? "备注" : "Note"}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {patentOnly.map((c) => (
+              <tr>
+                <td style="font-weight: 600;">{c.name}</td>
+                <td style="font-size: 0.9rem; color: var(--c-muted);">{topInst(c.institutions)}</td>
+                <td style="text-align: right;">{c.patent_count ?? 1}</td>
+                <td style="font-size: 0.88rem; color: var(--c-muted);">{isZh ? (c.note_zh ?? "") : (c.note_en ?? "")}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+
+    <div class="section-head" style="margin-top: 3rem;">
       <h2 style="margin:0;">{isZh ? "其他指导与培训" : "Other teaching & invited service"}</h2>
     </div>
     <div class="entry">
@@ -273,7 +417,7 @@ const TITLE = isZh ? "教学与团队培养" : "Teaching & Mentorship";
     <p style="color: var(--c-muted); font-size: 0.88rem; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border-soft);">
       {isZh
         ? "* 直接指导名单按 OpenAlex 已公开论文派生：博士后/学生在张鲁担任通讯作者的论文中担任第一作者。多名访问学生 / 实习生 / 兄弟实验室协作者未独立成稿，未列入此表。"
-        : "* Direct mentee list derived from public OpenAlex records — postdocs/students who first-authored papers with Lu Zhang as corresponding author. Visiting students, interns, and external collaborators without independent first-author papers are not listed here."}
+        : "* Mentee and collaborator sections combine Lu Zhang's confirmed mentee list with public OpenAlex, publication, and patent records. Visiting students, interns, and external collaborators without independent first-author papers may not appear in the mentee-derived sections."}
     </p>
   </div>
 </Base>

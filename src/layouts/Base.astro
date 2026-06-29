@@ -24,21 +24,39 @@ const canonical = canonicalUrl;
 const publicOrigin = siteUrl.replace(/\/+$/, "");
 const ogImageUrl = ogImage ?? `${publicOrigin}${u("/og-default.png")}`;
 
-// Nav slimmed to 9 items. /reports/ and /press/ are still live but
-// reached via cross-links from /publications/ and /awards/.
-const nav = [
-  { href: `${langPrefix}/agent/`,        key: "nav.agent" },
-  { href: `${langPrefix}/ai/`,           key: "nav.ai" },
-  { href: `${langPrefix}/energy-materials-ai/`, key: "nav.energy" },
-  { href: `${langPrefix}/blog/`,         key: "nav.blog" },
-  { href: `${langPrefix}/about/`,        key: "nav.about" },
-  { href: `${langPrefix}/publications/`, key: "nav.publications" },
-  { href: `${langPrefix}/patents/`,      key: "nav.patents" },
-  { href: `${langPrefix}/projects/`,     key: "nav.projects" },
-  { href: `${langPrefix}/talks/`,        key: "nav.talks" },
-  { href: `${langPrefix}/collaborators/`,key: "nav.collaborators" },
+const navGroups = [
+  {
+    key: "nav.group.build",
+    items: [
+      { href: `${langPrefix}/programs/`, key: "nav.programs" },
+      { href: `${langPrefix}/energy-materials-ai/`, key: "nav.energy" },
+      { href: `${langPrefix}/agent/`, key: "nav.agent" },
+      { href: `${langPrefix}/blog/`, key: "nav.blog" },
+    ],
+  },
+  {
+    key: "nav.group.record",
+    items: [
+      { href: `${langPrefix}/publications/`, key: "nav.publications" },
+      { href: `${langPrefix}/patents/`, key: "nav.patents" },
+      { href: `${langPrefix}/talks/`, key: "nav.talks" },
+      { href: `${langPrefix}/reports/`, key: "nav.reports" },
+      { href: `${langPrefix}/projects/`, key: "nav.projects" },
+    ],
+  },
+  {
+    key: "nav.group.about",
+    items: [
+      { href: `${langPrefix}/about/`, key: "nav.about" },
+      { href: `${langPrefix}/mentorship-collaborators/`, key: "nav.mentorship" },
+      { href: `${langPrefix}/awards/`, key: "nav.awards" },
+      { href: `${langPrefix}/press/`, key: "nav.press" },
+      { href: u("/files/Lu_Zhang_CV.pdf"), key: "nav.cv", external: true },
+    ],
+  },
 ];
-const isActive = (href) => pathname === u(href) || (href !== "/" && pathname.startsWith(u(href)));
+const isActive = (href) => !href.endsWith(".pdf") && (pathname === u(href) || (href !== "/" && pathname.startsWith(u(href))));
+const groupActive = (group) => group.items.some((item) => isActive(item.href));
 const homeHref = locale === "zh" ? "/zh/" : "/";
 ---
 <!doctype html>
@@ -96,17 +114,10 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
         familyName: "Zhang",
         honorificSuffix: "Ph.D.",
         jobTitle: "Scientific AI Systems Engineer",
-        worksFor: {
-          "@type": "Organization",
-          name: "American Academy of Orthopaedic Surgeons (AAOS)",
-        },
         alumniOf: [
           { "@type": "EducationalOrganization", name: "Chinese Academy of Sciences" },
           { "@type": "EducationalOrganization", name: "Florida State University" },
           { "@type": "EducationalOrganization", name: "Shandong University" },
-        ],
-        affiliation: [
-          { "@type": "Organization", name: "Argonne National Laboratory", sameAs: "https://www.anl.gov/" },
         ],
         award: [
           "R&D 100 Award (2014) — for redox-shuttle technology",
@@ -138,8 +149,24 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
       <div class="inner">
         <a class="name" href={u(homeHref)}>SciencesLoop</a>
         <nav>
-          {nav.map((n) => (
-            <a href={u(n.href)} class={isActive(n.href) ? "active" : ""}>{t(n.key, locale)}</a>
+          {navGroups.map((group) => (
+            <div class={`nav-group ${groupActive(group) ? "active" : ""}`}>
+              <button type="button" class="nav-group-label" aria-haspopup="true">
+                {t(group.key, locale)}
+              </button>
+              <div class="nav-menu">
+                {group.items.map((n) => (
+                  <a
+                    href={u(n.href)}
+                    class={isActive(n.href) ? "active" : ""}
+                    target={n.external ? "_blank" : undefined}
+                    rel={n.external ? "noopener" : undefined}
+                  >
+                    {t(n.key, locale)}
+                  </a>
+                ))}
+              </div>
+            </div>
           ))}
           <a class="lang-toggle" href={altPath} aria-label="Switch language">{locale === "zh" ? "EN" : "中"}</a>
         </nav>
