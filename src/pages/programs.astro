@@ -83,6 +83,84 @@ const researchPrograms = isZh
         text: "Flow-battery decision support, property prediction, benchmark graphs, and future interfaces to self-driving laboratories.",
       },
     ];
+
+const caseStudies = isZh
+  ? [
+      {
+        title: "RFB Formulation Agent",
+        status: "prototype · private pre-v0.1",
+        problem: "在不信任 ungrounded model output 的前提下，筛选 redox-flow-battery electrolyte 候选。",
+        approach: "Anthropic tool-use loop、RDKit/SMARTS 化学过滤、文献 ingest/verify/extract pipeline、SQLite candidate engine 和严格 provenance。",
+        built: "已构建 tool-use loop、多阶段化学过滤 pipeline、DOI-verified retrieval 和 Streamlit UI；document RAG 仍是 stub，并按 stub 标注。",
+        evaluation: "No-hallucinated-DOI contracts、可审计 evidence IDs 和小规模 blind query test。",
+        output: "带 `verdict → why → recommendations → caveats → evidence IDs` 的候选 shortlist，供科学家人工 review。",
+      },
+      {
+        title: "ChemGraph Workflow Contributions",
+        status: "contribution notes · no ownership claim",
+        problem: "Scientific agent 需要展示 molecule、calculation、tool calls、result 和 failure state，而不能只给流利答案。",
+        approach: "围绕 calculator routing、MCP-facing workflow、workflow trace isolation 和 evaluation 的本地复现与贡献工作。",
+        built: "公开笔记记录了本地运行、workflow failure 和可检查 trace；ChemGraph 是 Argonne 的 framework，不是 SciencesLoop 项目。",
+        evaluation: "小问题 smoke tests、可见 workflow trace、result rendering 和 state isolation 检查。",
+        output: "一个用于理解 scientific-agent reliability 的实战案例：答案之外，过程也必须可审查。",
+      },
+      {
+        title: "scifm Series",
+        status: "early registry · prototype",
+        problem: "Science foundation model 论文和仓库很多，但本地是否可运行、是否可复现，经常不清楚。",
+        approach: "建立 registry 和 smoke-test harness，记录模型、输入、运行状态和失败原因。",
+        built: "早期 `scifm-01-registry`，目标是验证哪些 science foundation models 实际可以 local-runnable。",
+        evaluation: "Smoke tests 区分 didn't crash、loaded、ran、produced useful output 等状态，而不是把能启动当成成功。",
+        output: "面向科学 AI builder 的可审计 model-readiness registry。",
+      },
+      {
+        title: "Molecular-Property ML Pipeline",
+        status: "public · baseline-anchored",
+        problem: "用真实分子数据建立可运行的 property prediction pipeline，同时保留诚实 baseline。",
+        approach: "RDKit featurization、PyTorch MLP、Random Forest baseline 和可解释的 evaluation loop。",
+        built: "`scientific-foundation-model-lab` 中的 ESOL/AqSolDB solubility pipeline。",
+        evaluation: "与 classical baseline 对照，记录 training behavior、failure mode 和 baseline gap。",
+        output: "一个可公开展示的 molecular-property ML slice，为 Scientific Foundation Models 方向提供实证基础。",
+      },
+    ]
+  : [
+      {
+        title: "RFB Formulation Agent",
+        status: "prototype · private pre-v0.1",
+        problem: "Screen redox-flow-battery electrolyte candidates without trusting ungrounded model output.",
+        approach: "An Anthropic tool-use loop, RDKit/SMARTS chemistry filters, literature ingest/verify/extract pipeline, SQLite candidate engine, and strict provenance.",
+        built: "The tool-use loop, multi-stage chemistry filter pipeline, DOI-verified retrieval, and Streamlit UI are built. Document RAG is still a stub and labeled as such.",
+        evaluation: "No-hallucinated-DOI contracts, auditable evidence IDs, and a small blind query test.",
+        output: "Evidence-backed candidate shortlists with `verdict → why → recommendations → caveats → evidence IDs`, ready for human scientific review.",
+      },
+      {
+        title: "ChemGraph Workflow Contributions",
+        status: "contribution notes · no ownership claim",
+        problem: "A scientific agent must expose molecule, calculation, tool calls, result, and failure state, not only a fluent answer.",
+        approach: "Local reproduction and contribution work around calculator routing, MCP-facing workflow, workflow-trace isolation, and evaluation.",
+        built: "The public note documents local runs, workflow failures, and inspectable traces. ChemGraph is Argonne's framework, not a SciencesLoop project.",
+        evaluation: "Small-question smoke tests, visible workflow traces, result rendering checks, and state-isolation checks.",
+        output: "A practical reliability case: for scientific agents, the process must be reviewable as well as the answer.",
+      },
+      {
+        title: "scifm Series",
+        status: "early registry · prototype",
+        problem: "Science foundation-model papers and repos are plentiful, but local runnability and reproducibility are often unclear.",
+        approach: "A registry and smoke-test harness that records model, input, run state, and failure reason.",
+        built: "Early `scifm-01-registry`, aimed at verifying which science foundation models are actually local-runnable.",
+        evaluation: "Smoke tests distinguish did-not-crash, loaded, ran, and produced useful output instead of treating startup as success.",
+        output: "An auditable model-readiness registry for scientific AI builders.",
+      },
+      {
+        title: "Molecular-Property ML Pipeline",
+        status: "public · baseline-anchored",
+        problem: "Build a runnable property-prediction pipeline on real molecular data while keeping an honest baseline.",
+        approach: "RDKit featurization, PyTorch MLP, Random Forest baseline, and an inspectable evaluation loop.",
+        built: "The ESOL/AqSolDB solubility pipeline in `scientific-foundation-model-lab`.",
+        evaluation: "Comparison with a classical baseline, with training behavior, failure mode, and baseline gap recorded.",
+        output: "A public molecular-property ML slice that supports the Scientific Foundation Models program with concrete evidence.",
+      },
+    ];
 ---
 <Base
   title={(isZh ? "Research Programs — " : "Research Programs — ") + "SciencesLoop"}
@@ -166,6 +244,41 @@ const researchPrograms = isZh
           {isZh ? "查看 Energy AI 原型 →" : "View Energy AI prototype →"}
         </a>
       </p>
+    </section>
+
+    <div class="section-head" id="case-studies">
+      <h2>{isZh ? "Case Studies" : "Case Studies"}</h2>
+      <span class="more">{caseStudies.length}</span>
+    </div>
+    <section class="case-study-grid" aria-label="SciencesLoop case studies">
+      {caseStudies.map((item) => (
+        <article class="case-study-card">
+          <div class="case-study-status">{item.status}</div>
+          <h2>{item.title}</h2>
+          <dl>
+            <div>
+              <dt>{isZh ? "Problem" : "Problem"}</dt>
+              <dd>{item.problem}</dd>
+            </div>
+            <div>
+              <dt>{isZh ? "Approach" : "Approach"}</dt>
+              <dd>{item.approach}</dd>
+            </div>
+            <div>
+              <dt>{isZh ? "What's built" : "What's built"}</dt>
+              <dd>{item.built}</dd>
+            </div>
+            <div>
+              <dt>{isZh ? "Evaluation" : "Evaluation"}</dt>
+              <dd>{item.evaluation}</dd>
+            </div>
+            <div>
+              <dt>{isZh ? "Scientist gets" : "Scientist gets"}</dt>
+              <dd>{item.output}</dd>
+            </div>
+          </dl>
+        </article>
+      ))}
     </section>
 
     <div class="section-head">

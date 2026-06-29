@@ -65,8 +65,10 @@ src/
   lib/url.ts        helper: prefix paths with site BASE_URL
   pages/
     index.astro         home — SciencesLoop lab framing + programs + notes
-    about.astro         people + founder bio + recognition + service & review
+    about.astro         founder bio + recognition + service & review
     programs.astro      Scientific AI programs and current prototypes
+    approach.astro      reliable-agent engineering approach
+    evolution.astro     technical evolution with commit-history figures
     publications.astro  99 publications total; indexed journal subset is filterable
     patents.astro       25 issued + 3 applications (28 total)
     projects.astro      funded research archive and evidence layer
@@ -74,7 +76,7 @@ src/
     mentorship-collaborators.astro  mentorship, team growth, and collaborator record
   styles/global.css
 public/
-  images/{news,ai}/   curated illustrations and screenshots
+  images/{news,ai,evolution}/   curated illustrations, screenshots, and evolution figures
 scripts/
   parse_md.py                       markdown → JSON parser
   corresponding_overrides.json      whitelist of confirmed corresponding-author papers

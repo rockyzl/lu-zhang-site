@@ -29,7 +29,7 @@ const copy = locale === "zh"
       note: agentApiUrl
         ? "当前版本调用 SciencesLoop 后端，只使用公开网站内容；可用时会返回引用来源。"
         : "当前版本在浏览器端运行，只基于公开网站内容做导航；线上 API 不可用时会保留这个本地 fallback。",
-      fallback: "我现在只能回答网站里的核心主题。可以试试 agent reliability、AI for science、workflow、battery、Argonne、publication、patent、academic CV、contact、VoiceRAG。",
+      fallback: "我现在只能回答网站里的核心主题。可以试试 agent reliability、case studies、technical evolution、AI for science、workflow、battery、Argonne、publication、patent、academic CV、contact、VoiceRAG。",
       actions: {
         ai: "看 Programs",
         publications: "看论文",
@@ -40,6 +40,8 @@ const copy = locale === "zh"
       prompts: [
         "Lu 的 AI for Science 方向是什么？",
         "哪些证据体现 agent reliability 能力？",
+        "SciencesLoop 的方法论是什么？",
+        "有哪些 case studies？",
         "他有哪些 MLOps / evaluation 经验？",
         "他的电池和液流电池背景是什么？",
         "Lu 的主要合作者是谁？",
@@ -68,7 +70,7 @@ const copy = locale === "zh"
       note: agentApiUrl
         ? "This version calls the SciencesLoop backend using public website content and returns cited sources when available."
         : "This version runs in the browser and only routes across public site content. It remains available as a local fallback when the live API is unavailable.",
-      fallback: "I can answer the core site topics for now. Try agent reliability, AI for science, workflow, battery, Argonne, publication, patent, academic CV, contact, or VoiceRAG.",
+      fallback: "I can answer the core site topics for now. Try agent reliability, case studies, technical evolution, AI for science, workflow, battery, Argonne, publication, patent, academic CV, contact, or VoiceRAG.",
       actions: {
         ai: "View Programs",
         publications: "View publications",
@@ -79,6 +81,8 @@ const copy = locale === "zh"
       prompts: [
         "What is Lu's AI for Science direction?",
         "What evidence shows agent reliability skills?",
+        "How does SciencesLoop build reliable agents?",
+        "What case studies show the work?",
         "What MLOps and evaluation experience does he have?",
         "What is his battery and redox-flow background?",
         "Who are Lu's main collaborators?",
@@ -88,6 +92,9 @@ const copy = locale === "zh"
 
 const links = {
   ai: u(locale === "zh" ? "/zh/programs/" : "/programs/"),
+  approach: u(locale === "zh" ? "/zh/approach/" : "/approach/"),
+  evolution: u(locale === "zh" ? "/zh/evolution/" : "/evolution/"),
+  cases: u(locale === "zh" ? "/zh/programs/#case-studies" : "/programs/#case-studies"),
   publications: u(locale === "zh" ? "/zh/publications/" : "/publications/"),
   patents: u(locale === "zh" ? "/zh/patents/" : "/patents/"),
   projects: u(locale === "zh" ? "/zh/projects/" : "/projects/"),
@@ -152,6 +159,8 @@ const links = {
 
       <div class="agent-quicklinks" aria-label="Agent quick links">
         <a href={links.ai}>{copy.actions.ai}</a>
+        <a href={links.approach}>{locale === "zh" ? "方法" : "Approach"}</a>
+        <a href={links.cases}>{locale === "zh" ? "案例" : "Case Studies"}</a>
         <a href={links.projects}>{locale === "zh" ? "科研项目" : "Research Projects"}</a>
         <a href={links.publications}>{copy.actions.publications}</a>
         <a href={links.about}>{locale === "zh" ? "背景" : "Background"}</a>
@@ -169,6 +178,24 @@ const links = {
         next: `<a href="${links.ai}">Open Programs</a>`,
         keys: ["agent", "agents", "rag", "mcp", "langgraph", "workflow", "harness", "ai for science", "scientific agent"],
         html: `Lu's current direction is AI for Science through reliable agent systems: context engineering, evaluation harnesses, multi-agent orchestration, traceable workflow execution, and human-in-the-loop scientific decision support. The public site highlights this as a bridge between battery science and applied AI systems.`,
+      },
+      {
+        topic: "Reliable agent approach",
+        next: `<a href="${links.approach}">Open Approach</a>`,
+        keys: ["approach", "reliable", "reliability", "context engineering", "golden set", "acceptance contract", "human review", "human-in-the-loop"],
+        html: `The <a href="${links.approach}">Approach</a> page explains the reliability stack: foundation models, agent engineering, context engineering, and evaluation harnesses. The emphasis is on measurable behavior, grounded context, explicit tools, and human review.`,
+      },
+      {
+        topic: "Case studies",
+        next: `<a href="${links.cases}">Open Case Studies</a>`,
+        keys: ["case", "case study", "case studies", "rfb", "scifm", "molecular property", "molecular-property", "chemgraph"],
+        html: `The <a href="${links.cases}">case studies</a> section covers the RFB formulation agent, ChemGraph workflow contributions, the scifm registry, and a public molecular-property ML pipeline, with maturity labels preserved.`,
+      },
+      {
+        topic: "Technical evolution",
+        next: `<a href="${links.evolution}">Open Evolution</a>`,
+        keys: ["evolution", "timeline", "technical evolution", "commit", "commits", "trajectory"],
+        html: `The <a href="${links.evolution}">Technical Evolution</a> page frames the path from scientific research to data science, LLM/agent systems, and 2026 production reliability work, with figures from the commit-history audit.`,
       },
       {
         topic: "MLOps and evaluation",
@@ -219,6 +246,24 @@ const links = {
         next: `<a href="${links.ai}">打开 Programs</a>`,
         keys: ["agent", "智能体", "rag", "mcp", "langgraph", "workflow", "工作流", "ai for science"],
         html: `Lu 现在的主线是把可靠 agent 系统用于 AI for Science：context engineering、evaluation harnesses、multi-agent orchestration、可追踪工作流和 human-in-the-loop 科学决策支持。这个方向把电池材料科学背景和应用层 AI 系统结合起来。`,
+      },
+      {
+        topic: "可靠 agent 方法",
+        next: `<a href="${links.approach}">打开方法页</a>`,
+        keys: ["approach", "方法", "可靠", "reliability", "context engineering", "golden set", "acceptance contract", "human review", "human-in-the-loop"],
+        html: `<a href="${links.approach}">方法页</a> 解释可靠 agent 的四层结构：foundation models、agent engineering、context engineering 和 evaluation harnesses。重点是可测量行为、grounded context、明确工具和人工 review。`,
+      },
+      {
+        topic: "Case studies",
+        next: `<a href="${links.cases}">打开案例</a>`,
+        keys: ["case", "case study", "case studies", "案例", "rfb", "scifm", "molecular property", "molecular-property", "chemgraph"],
+        html: `<a href="${links.cases}">case studies</a> 包含 RFB formulation agent、ChemGraph workflow contributions、scifm registry 和公开 molecular-property ML pipeline，并保留 maturity 标签。`,
+      },
+      {
+        topic: "技术演化",
+        next: `<a href="${links.evolution}">打开演化页</a>`,
+        keys: ["evolution", "演化", "timeline", "时间线", "technical evolution", "commit", "commits", "trajectory"],
+        html: `<a href="${links.evolution}">技术演化页</a> 解释从科学研究到 data science、LLM/agent systems，再到 2026 production reliability work 的连续路径，并包含 commit-history audit 图。`,
       },
       {
         topic: "MLOps 与 evaluation",

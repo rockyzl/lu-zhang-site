@@ -1,0 +1,80 @@
+---
+import Base from "../../layouts/Base.astro";
+import { u } from "../../lib/url";
+
+const trajectory = [
+  ["2022-23", "数据科学与 classical machine learning。"],
+  ["2023-24 后期", "最早的 LLM/RAG 系统实践：先作为使用者，再进入应用工作流构建。"],
+  ["2025 后期", "第一次拥有完整 RAG 和 agent 系统及 evaluation，从“使用模型”转向“工程化模型系统”。"],
+  ["2026", "生产级 agent reliability 工作和 Scientific AI：context engineering、evaluation harness、多智能体 runtime 和 scientific agents。"],
+];
+---
+
+<Base
+  title="技术演化 — SciencesLoop"
+  description="从科学家到 Scientific AI Systems Builder 的公开技术演化记录，基于 commit 历史和有证据的能力层。"
+>
+  <div class="container">
+    <section class="page-hero compact">
+      <span class="eyebrow">技术演化 · evidence-backed narrative</span>
+      <h1>从科学家到 Scientific AI Systems Builder</h1>
+      <p class="lead">
+        这不是一次突然转向，而是一条连续路径：把困难领域转成数据、workflow、
+        模型和可靠系统，并且一层一层提高抽象层级。
+      </p>
+    </section>
+
+    <div class="section-head">
+      <h2>演化轨迹</h2>
+    </div>
+    <section class="workflow-steps">
+      {trajectory.map(([when, text]) => (
+        <article>
+          <span>{when}</span>
+          <h2>{when}</h2>
+          <p>{text}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">能力栈</span>
+        <h2>Scientific discovery ← multi-agent systems ← context engineering ← evaluation harness ← foundation models.</h2>
+        <p>
+          稀缺价值在中间层：context、state、evaluation、provenance 和
+          human review。Foundation model 重要，但它本身不会让 scientific
+          system 可靠。
+        </p>
+      </div>
+    </section>
+
+    <section class="evolution-figures" aria-label="Technical evolution figures">
+      <figure>
+        <img src={u("/images/evolution/commits_by_theme.png")} alt="按主题统计 commit 的堆叠柱状图。" loading="lazy" />
+        <figcaption>按主题统计的 commit 演化，来自本地 career-evolution 审计。</figcaption>
+      </figure>
+      <figure>
+        <img src={u("/images/evolution/vocab_drift.png")} alt="词汇漂移图，显示 agent、evaluation、context 和 scientific concepts 在 2026 年上升。" loading="lazy" />
+        <figcaption>2026 年词汇向 agent、evaluation、context 和 scientific-system 概念转移。</figcaption>
+      </figure>
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">诚实说明</span>
+        <h2>时间线很重要。</h2>
+        <p>
+          LLM 和 agent 构建大约跨越两年。Agent reliability 和 Scientific AI
+          的深度集中在 2026 年，并锚定在生产工作中。重点不是追热点，而是持续把
+          AI 工程化为可靠系统，再把这套能力带回 scientific discovery。
+        </p>
+      </div>
+      <p>
+        <a class="more" href={u("/zh/approach/")}>方法 →</a>
+        {" · "}
+        <a class="more" href={u("/zh/programs/#case-studies")}>Case Studies →</a>
+      </p>
+    </section>
+  </div>
+</Base>

@@ -48,6 +48,14 @@
     "en": "Programs",
     "zh": "研究方向"
   },
+  "nav.approach": {
+    "en": "Approach",
+    "zh": "方法"
+  },
+  "nav.evolution": {
+    "en": "Evolution",
+    "zh": "演化"
+  },
   "nav.energy": {
     "en": "Energy AI",
     "zh": "能源 AI"

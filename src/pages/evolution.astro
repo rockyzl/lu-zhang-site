@@ -1,0 +1,83 @@
+---
+import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
+
+const trajectory = [
+  ["2022-23", "Data science and classical machine learning."],
+  ["Late 2023-24", "First LLM/RAG systems as a user and builder of applied workflows."],
+  ["Late 2025", "First owned RAG and agent systems with evaluation: the shift from using models to engineering them."],
+  ["2026", "Production agent-reliability work plus scientific AI: context engineering, evaluation harnesses, multi-agent runtimes, and scientific agents."],
+];
+---
+
+<Base
+  title="Technical Evolution — SciencesLoop"
+  description="A public technical evolution record: from scientist to Scientific AI systems builder, grounded in commit history and evidence-backed capability layers."
+>
+  <div class="container">
+    <section class="page-hero compact">
+      <span class="eyebrow">Technical Evolution · evidence-backed narrative</span>
+      <h1>From Scientist to Scientific AI Systems Builder</h1>
+      <p class="lead">
+        Not a pivot, but a continuous progression: turning hard domains into
+        data, workflows, models, and reliable systems, one abstraction level at
+        a time.
+      </p>
+    </section>
+
+    <div class="section-head">
+      <h2>The trajectory</h2>
+    </div>
+    <section class="workflow-steps">
+      {trajectory.map(([when, text]) => (
+        <article>
+          <span>{when}</span>
+          <h2>{when}</h2>
+          <p>{text}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">Capability stack</span>
+        <h2>Scientific discovery ← multi-agent systems ← context engineering ← evaluation harness ← foundation models.</h2>
+        <p>
+          The scarce value is in the middle: context, state, evaluation,
+          provenance, and human review. Foundation models matter, but they do
+          not make a scientific system reliable by themselves.
+        </p>
+      </div>
+    </section>
+
+    <section class="evolution-figures" aria-label="Technical evolution figures">
+      <figure>
+        <img src={u("/images/evolution/commits_by_theme.png")} alt="Stacked bar chart showing commits by theme over time." loading="lazy" />
+        <figcaption>Commits by theme over time, from the local career-evolution audit.</figcaption>
+      </figure>
+      <figure>
+        <img src={u("/images/evolution/vocab_drift.png")} alt="Vocabulary drift chart showing agent, evaluation, context, and scientific concepts rising in 2026." loading="lazy" />
+        <figcaption>Vocabulary shift toward agent, evaluation, context, and scientific-system concepts in 2026.</figcaption>
+      </figure>
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">Honest note</span>
+        <h2>The timeline matters.</h2>
+        <p>
+          The LLM and agent building spans roughly two years. The
+          agent-reliability and scientific-AI depth is concentrated in 2026 and
+          anchored in production work. The point is not chasing hype; it is
+          continuously engineering AI to be reliable, then turning that
+          discipline toward scientific discovery.
+        </p>
+      </div>
+      <p>
+        <a class="more" href={u("/approach/")}>Approach →</a>
+        {" · "}
+        <a class="more" href={u("/programs/#case-studies")}>Case Studies →</a>
+      </p>
+    </section>
+  </div>
+</Base>

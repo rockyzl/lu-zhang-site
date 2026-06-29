@@ -54,6 +54,45 @@ const researchPrograms = [
     text: "把 flow battery、property prediction、benchmark graph 和未来 self-driving-lab 接口作为 discovery sandbox。",
   },
 ];
+
+const caseStudies = [
+  {
+    title: "RFB Formulation Agent",
+    status: "prototype · private pre-v0.1",
+    problem: "在不信任 ungrounded model output 的前提下，筛选 redox-flow-battery electrolyte 候选。",
+    approach: "Anthropic tool-use loop、RDKit/SMARTS 化学过滤、文献 ingest/verify/extract pipeline、SQLite candidate engine 和严格 provenance。",
+    built: "已构建 tool-use loop、多阶段化学过滤 pipeline、DOI-verified retrieval 和 Streamlit UI；document RAG 仍是 stub，并按 stub 标注。",
+    evaluation: "No-hallucinated-DOI contracts、可审计 evidence IDs 和小规模 blind query test。",
+    output: "带 `verdict → why → recommendations → caveats → evidence IDs` 的候选 shortlist，供科学家人工 review。",
+  },
+  {
+    title: "ChemGraph Workflow Contributions",
+    status: "contribution notes · no ownership claim",
+    problem: "Scientific agent 需要展示 molecule、calculation、tool calls、result 和 failure state，而不能只给流利答案。",
+    approach: "围绕 calculator routing、MCP-facing workflow、workflow trace isolation 和 evaluation 的本地复现与贡献工作。",
+    built: "公开笔记记录了本地运行、workflow failure 和可检查 trace；ChemGraph 是 Argonne 的 framework，不是 SciencesLoop 项目。",
+    evaluation: "小问题 smoke tests、可见 workflow trace、result rendering 和 state isolation 检查。",
+    output: "一个用于理解 scientific-agent reliability 的实战案例：答案之外，过程也必须可审查。",
+  },
+  {
+    title: "scifm Series",
+    status: "early registry · prototype",
+    problem: "Science foundation model 论文和仓库很多，但本地是否可运行、是否可复现，经常不清楚。",
+    approach: "建立 registry 和 smoke-test harness，记录模型、输入、运行状态和失败原因。",
+    built: "早期 `scifm-01-registry`，目标是验证哪些 science foundation models 实际可以 local-runnable。",
+    evaluation: "Smoke tests 区分 didn't crash、loaded、ran、produced useful output 等状态，而不是把能启动当成成功。",
+    output: "面向科学 AI builder 的可审计 model-readiness registry。",
+  },
+  {
+    title: "Molecular-Property ML Pipeline",
+    status: "public · baseline-anchored",
+    problem: "用真实分子数据建立可运行的 property prediction pipeline，同时保留诚实 baseline。",
+    approach: "RDKit featurization、PyTorch MLP、Random Forest baseline 和可解释的 evaluation loop。",
+    built: "`scientific-foundation-model-lab` 中的 ESOL/AqSolDB solubility pipeline。",
+    evaluation: "与 classical baseline 对照，记录 training behavior、failure mode 和 baseline gap。",
+    output: "一个可公开展示的 molecular-property ML slice，为 Scientific Foundation Models 方向提供实证基础。",
+  },
+];
 ---
 <Base
   title="研究方向 — SciencesLoop"
@@ -131,6 +170,41 @@ const researchPrograms = [
       <p>
         <a class="more" href={u("/zh/energy-materials-ai/")}>查看 Energy AI 原型 →</a>
       </p>
+    </section>
+
+    <div class="section-head" id="case-studies">
+      <h2>Case Studies</h2>
+      <span class="more">{caseStudies.length}</span>
+    </div>
+    <section class="case-study-grid" aria-label="SciencesLoop case studies">
+      {caseStudies.map((item) => (
+        <article class="case-study-card">
+          <div class="case-study-status">{item.status}</div>
+          <h2>{item.title}</h2>
+          <dl>
+            <div>
+              <dt>Problem</dt>
+              <dd>{item.problem}</dd>
+            </div>
+            <div>
+              <dt>Approach</dt>
+              <dd>{item.approach}</dd>
+            </div>
+            <div>
+              <dt>What's built</dt>
+              <dd>{item.built}</dd>
+            </div>
+            <div>
+              <dt>Evaluation</dt>
+              <dd>{item.evaluation}</dd>
+            </div>
+            <div>
+              <dt>Scientist gets</dt>
+              <dd>{item.output}</dd>
+            </div>
+          </dl>
+        </article>
+      ))}
     </section>
 
     <div class="section-head">

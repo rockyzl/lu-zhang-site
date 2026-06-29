@@ -1,0 +1,115 @@
+---
+import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
+
+const layers = [
+  {
+    name: "LLM / foundation models",
+    text: "Retrieval, grounding, and no-fabrication behavior. Necessary, not sufficient.",
+  },
+  {
+    name: "Agent engineering",
+    text: "Tools, state machines, multi-agent orchestration, and MCP. Comfortable across LangGraph, Anthropic tool-use, Google ADK, and related ecosystems without treating any one framework as the core skill.",
+  },
+  {
+    name: "Context engineering",
+    text: "What the model should and should not see: retrieval assembly and ranking, conversation state, memory, routing, and state transitions.",
+  },
+  {
+    name: "Evaluation / agent harness",
+    text: "Golden sets with per-case acceptance contracts, regression checks, failure analysis, human-in-the-loop confirmation, and safety guardrails.",
+  },
+];
+
+const methods = [
+  ["Evaluation harnesses", "Versioned golden sets plus per-case acceptance contracts spanning routing, grounding, action confirmation, and safety, so regressions are caught before release."],
+  ["Context engineering", "Multi-turn state, retrieval assembly and ranking, and layered memory so the agent stays grounded and on task."],
+  ["Human-in-the-loop", "Confirm-before-write, send, or act. Nothing irreversible runs without explicit approval."],
+  ["Grounding and provenance", "Answers come from evidence with traceable IDs, not invention."],
+  ["Multi-agent orchestration", "Bounded roles, explicit handoffs, and guardrails over unbounded loops."],
+];
+---
+
+<Base
+  title="How I Build Reliable Agents — SciencesLoop"
+  description="SciencesLoop approach page on reliable agents: context engineering, evaluation harnesses, tool orchestration, grounding, and human review."
+>
+  <div class="container">
+    <section class="page-hero compact">
+      <span class="eyebrow">Approach · reliable agents · Scientific AI</span>
+      <h1>How I Build Reliable Agents</h1>
+      <p class="lead">
+        The model is rarely the bottleneck. Making an autonomous system reliable
+        is. My work focuses on the engineering that decides whether an agent can
+        be trusted in production and in the lab: context, evaluation, tools, and
+        human review, not any single framework.
+      </p>
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">Four layers</span>
+        <h2>Most people stop at the first layer.</h2>
+        <p>
+          SciencesLoop treats foundation models as one component inside a larger
+          reliability system. The scarce work is in state, context, evaluation,
+          and review.
+        </p>
+      </div>
+    </section>
+
+    <section class="product-modules" aria-label="Reliable agent layers">
+      {layers.map((layer, index) => (
+        <article class="product-module">
+          <span>Layer {String(index + 1).padStart(2, "0")}</span>
+          <h2>{layer.name}</h2>
+          <p>{layer.text}</p>
+        </article>
+      ))}
+    </section>
+
+    <div class="section-head">
+      <h2>Methods I use</h2>
+    </div>
+    <section class="workflow-steps">
+      {methods.map(([name, text]) => (
+        <article>
+          <span>Method</span>
+          <h2>{name}</h2>
+          <p>{text}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">Honest note</span>
+        <h2>Recent depth, production anchored.</h2>
+        <p>
+          This reliability depth is recent and production anchored: daily
+          production AI-system work in 2026, corroborated by open prototypes and
+          public SciencesLoop systems. The truthful claim is not "two years of
+          harness work"; it is roughly two years building LLM and agent systems,
+          with agent-reliability depth concentrated in 2026.
+        </p>
+      </div>
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">Next steps</span>
+        <h2>See the approach applied.</h2>
+        <p>
+          The case studies show how these layers appear in scientific agents,
+          molecular-property modeling, foundation-model smoke tests, and the
+          public SciencesLoop site agent.
+        </p>
+      </div>
+      <p>
+        <a class="more" href={u("/programs/#case-studies")}>Case Studies →</a>
+        {" · "}
+        <a class="more" href={u("/blog/")}>Field Notes →</a>
+      </p>
+    </section>
+  </div>
+</Base>

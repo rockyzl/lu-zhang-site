@@ -1,0 +1,111 @@
+---
+import Base from "../../layouts/Base.astro";
+import { u } from "../../lib/url";
+
+const layers = [
+  {
+    name: "LLM / foundation models",
+    text: "检索、grounding 和不编造。必要，但远远不够。",
+  },
+  {
+    name: "Agent engineering",
+    text: "工具、状态机、多智能体编排和 MCP。可以跨 LangGraph、Anthropic tool-use、Google ADK 等生态工作，但不把某一个框架当成核心能力。",
+  },
+  {
+    name: "Context engineering",
+    text: "决定模型应该看到什么、不应该看到什么：检索组装与排序、对话状态、记忆、路由和状态转移。",
+  },
+  {
+    name: "Evaluation / agent harness",
+    text: "Golden set、逐 case acceptance contract、回归检查、失败分析、human-in-the-loop confirmation 和安全护栏。",
+  },
+];
+
+const methods = [
+  ["Evaluation harnesses", "版本化 golden set 加逐 case acceptance contract，覆盖路由、grounding、动作确认和安全，让回归问题在发布前暴露。"],
+  ["Context engineering", "多轮状态、检索组装与排序、分层记忆，让 agent 保持 grounded 和 on task。"],
+  ["Human-in-the-loop", "写入、发送、执行前确认；不可逆动作不绕过人工批准。"],
+  ["Grounding and provenance", "回答来自带 ID 的证据，而不是临场编造。"],
+  ["Multi-agent orchestration", "有边界的角色、明确交接和护栏，而不是无限循环。"],
+];
+---
+
+<Base
+  title="如何构建可靠 Agent — SciencesLoop"
+  description="SciencesLoop 关于可靠 agent 的方法页：context engineering、evaluation harness、工具编排、grounding 和人工 review。"
+>
+  <div class="container">
+    <section class="page-hero compact">
+      <span class="eyebrow">方法 · 可靠 agent · Scientific AI</span>
+      <h1>如何构建可靠 Agent</h1>
+      <p class="lead">
+        模型通常不是瓶颈。让一个 autonomous system 可靠，才是瓶颈。
+        我的工作重点是决定 agent 能否在生产环境和实验室中被信任的工程层：
+        context、evaluation、tools 和 human review，而不是某一个框架。
+      </p>
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">四层能力</span>
+        <h2>大多数人停在第一层。</h2>
+        <p>
+          SciencesLoop 把 foundation model 看成可靠性系统里的一个组件。
+          真正稀缺的工作在 state、context、evaluation 和 review。
+        </p>
+      </div>
+    </section>
+
+    <section class="product-modules" aria-label="Reliable agent layers">
+      {layers.map((layer, index) => (
+        <article class="product-module">
+          <span>Layer {String(index + 1).padStart(2, "0")}</span>
+          <h2>{layer.name}</h2>
+          <p>{layer.text}</p>
+        </article>
+      ))}
+    </section>
+
+    <div class="section-head">
+      <h2>我使用的方法</h2>
+    </div>
+    <section class="workflow-steps">
+      {methods.map(([name, text]) => (
+        <article>
+          <span>Method</span>
+          <h2>{name}</h2>
+          <p>{text}</p>
+        </article>
+      ))}
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">诚实说明</span>
+        <h2>深度是近期形成的，并且锚定在生产系统。</h2>
+        <p>
+          这层可靠性深度是近期形成的，锚定在 2026 年的日常生产 AI 系统工作，
+          并由开放原型和 SciencesLoop 公开系统佐证。诚实说法不是“做了两年
+          harness”，而是约两年构建 LLM/agent 系统，其中 agent reliability
+          的深度集中在 2026 年。
+        </p>
+      </div>
+    </section>
+
+    <section class="workflow-panel">
+      <div>
+        <span class="eyebrow">下一步</span>
+        <h2>看这些方法如何落到案例里。</h2>
+        <p>
+          Case studies 展示这些层如何出现在 scientific agent、分子性质建模、
+          foundation-model smoke test 和 SciencesLoop 公开站点 agent 中。
+        </p>
+      </div>
+      <p>
+        <a class="more" href={u("/zh/programs/#case-studies")}>Case Studies →</a>
+        {" · "}
+        <a class="more" href={u("/zh/blog/")}>研究笔记 →</a>
+      </p>
+    </section>
+  </div>
+</Base>
