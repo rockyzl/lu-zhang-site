@@ -9,12 +9,22 @@
       "permanent": true
     },
     {
+      "source": "/ai/",
+      "destination": "/programs/",
+      "permanent": true
+    },
+    {
       "source": "/ai/:path*",
       "destination": "/programs/:path*",
       "permanent": true
     },
     {
       "source": "/zh/ai",
+      "destination": "/zh/programs/",
+      "permanent": true
+    },
+    {
+      "source": "/zh/ai/",
       "destination": "/zh/programs/",
       "permanent": true
     },
@@ -29,12 +39,22 @@
       "permanent": true
     },
     {
+      "source": "/teaching/",
+      "destination": "/mentorship-collaborators/",
+      "permanent": true
+    },
+    {
       "source": "/teaching/:path*",
       "destination": "/mentorship-collaborators/:path*",
       "permanent": true
     },
     {
       "source": "/collaborators",
+      "destination": "/mentorship-collaborators/",
+      "permanent": true
+    },
+    {
+      "source": "/collaborators/",
       "destination": "/mentorship-collaborators/",
       "permanent": true
     },
@@ -49,12 +69,22 @@
       "permanent": true
     },
     {
+      "source": "/zh/teaching/",
+      "destination": "/zh/mentorship-collaborators/",
+      "permanent": true
+    },
+    {
       "source": "/zh/teaching/:path*",
       "destination": "/zh/mentorship-collaborators/:path*",
       "permanent": true
     },
     {
       "source": "/zh/collaborators",
+      "destination": "/zh/mentorship-collaborators/",
+      "permanent": true
+    },
+    {
+      "source": "/zh/collaborators/",
       "destination": "/zh/mentorship-collaborators/",
       "permanent": true
     },
