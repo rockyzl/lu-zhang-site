@@ -86,6 +86,7 @@
           "funder": "Argonne LDRD (2021-0394)",
           "years": "2021 – 2023",
           "role": "Project participant — autonomous discovery platform",
+          "url": "https://publications.anl.gov/anlpubs/2022/05/174835.pdf",
           "highlights": [
             "Foundation for the AI + robotics electrolyte-discovery platform that became the 2024 Nature Communications paper"
           ]
@@ -147,6 +148,7 @@
           "funder": "publication-driven research line",
           "years": "2021",
           "role": "Co-author",
+          "url": "https://pubs.acs.org/doi/10.1021/acs.chemmater.1c02040",
           "highlights": [
             "Multiobjective Bayesian optimization for redox-active molecule discovery",
             "Earliest of his ML-driven design publications"
@@ -157,6 +159,7 @@
           "funder": "Argonne — Polybot/N9 platform",
           "years": "2021 – 2024",
           "role": "Co-author of flagship Nature Communications 2024 paper",
+          "url": "https://www.nature.com/articles/s41467-024-47070-5",
           "highlights": [
             "Robotic chemistry and active learning study for electrolyte-formulation optimization",
             "Relevant scientific background for later personal formulation-support prototypes"
