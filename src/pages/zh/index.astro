@@ -9,7 +9,7 @@ import conferences from "../../data/conferences.json";
 import news from "../../data/news.json";
 import featured from "../../data/featured.json";
 import aiProjects from "../../data/ai_projects.json";
-import { getFeaturedBlogPosts } from "../../lib/blog";
+import { getBlogPosts, getFeaturedBlogPosts } from "../../lib/blog";
 
 const locale = detectLocale(Astro.url.pathname);
 const lp = locale === "zh" ? "/zh" : "";
@@ -31,6 +31,12 @@ const totalCitations = verifiedPubs.reduce((s, p) => s + (p.citations || 0), 0);
 const firstAuthor = verifiedPubs.filter((p) => p.role === "first").length;
 const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").length;
 const featuredPosts = getFeaturedBlogPosts(3);
+const zhBlogPosts = getBlogPosts("zh");
+const blogPostHref = (post) => {
+  if (post.lang === "zh") return `/zh/blog/${post.slug}/`;
+  const zhAlternate = zhBlogPosts.find((candidate) => candidate.slug === `${post.slug}-zh`);
+  return zhAlternate ? `/zh/blog/${zhAlternate.slug}/` : `/blog/${post.slug}/`;
+};
 const researchPrograms = [
   {
     name: "Scientific Workflow",
@@ -203,7 +209,7 @@ const labPrinciples = [
             <time datetime={post.dateLabel}>{post.dateLabel}</time>
             <span>{post.status ?? "note"}</span>
           </div>
-          <h2><a href={u(`${lp}/blog/${post.slug}/`)}>{post.title}</a></h2>
+          <h2><a href={u(blogPostHref(post))}>{post.title}</a></h2>
           <p>{post.description}</p>
           <div class="blog-tags">
             {post.tags.slice(0, 3).map((tag) => <span>{tag}</span>)}

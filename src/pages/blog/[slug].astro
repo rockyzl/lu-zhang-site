@@ -14,7 +14,7 @@ export function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = post.module;
 const zhAlternate = getBlogPosts("zh").find((candidate) => candidate.slug === `${post.slug}-zh`);
-const alternatePath = zhAlternate ? u(`/zh/blog/${zhAlternate.slug}/`) : undefined;
+const alternatePath = zhAlternate ? u(`/zh/blog/${zhAlternate.slug}/`) : u("/zh/blog/");
 ---
 
 <Base title={`${post.title} — SciencesLoop`} description={post.description} alternatePath={alternatePath}>

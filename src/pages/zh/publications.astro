@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { detectLocale, t } from "../../lib/i18n";
+import { u } from "../../lib/url";
 import publications from "../../data/publications.json";
 import bookChapters from "../../data/book_chapters.json";
 
@@ -112,11 +113,11 @@ const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox fl
   )}
 
   <p style="margin-top: 2rem; font-size: 0.93rem;">
-    <a href={locale === "zh" ? "/lu-zhang-site/zh/talks/" : "/lu-zhang-site/talks/"}>
+    <a href={u(locale === "zh" ? "/zh/talks/" : "/talks/")}>
       {locale === "zh" ? "→ 51 项会议报告（38 摘要 + 13 特邀）" : "→ 51 conference presentations (38 abstracts + 13 invited)"}
     </a>
     {" · "}
-    <a href={locale === "zh" ? "/lu-zhang-site/zh/reports/" : "/lu-zhang-site/reports/"}>
+    <a href={u(locale === "zh" ? "/zh/reports/" : "/reports/")}>
       {locale === "zh" ? "5 项技术报告" : "5 technical reports"}
     </a>
   </p>

@@ -6,6 +6,7 @@ import techReports from "../data/tech_reports.json";
 const locale = detectLocale(Astro.url.pathname);
 const isZh = locale === "zh";
 const sorted = [...techReports].sort((a, b) => b.year - a.year);
+const hasReportUrl = (r) => typeof r.url === "string" && r.url.length > 0;
 ---
 <Base title={(isZh ? "技术报告 — " : "Technical Reports — ") + "Lu Zhang"}>
   <div class="container" style="padding-top: 3rem;">
@@ -21,7 +22,11 @@ const sorted = [...techReports].sort((a, b) => b.year - a.year);
     {sorted.map((r) => (
       <div class="entry">
         <div class="title">
-          <a href={r.url} target="_blank" rel="noopener">{r.title_en}</a>
+          {hasReportUrl(r) ? (
+            <a href={r.url} target="_blank" rel="noopener">{r.title_en}</a>
+          ) : (
+            <span>{r.title_en}</span>
+          )}
         </div>
         {isZh && r.title_cn && <div class="meta">{r.title_cn}</div>}
         <div class="meta">
@@ -33,8 +38,8 @@ const sorted = [...techReports].sort((a, b) => b.year - a.year);
 
     <p style="color: var(--c-muted); font-size: 0.9rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--c-border-soft);">
       {isZh
-        ? "DOE 战略评估为公开报告（PDF 直链）；阿贡 LDRD 项目报告链接到 OSTI 搜索（具体年报可能在 OSTI 公开 LDRD Annual Report 中找到）。"
-        : "DOE strategy assessments link to the public PDF directly; Argonne LDRD project reports link to OSTI search (specific annual reports may appear in publicly-released LDRD Annual Reports)."}
+        ? "DOE 战略评估为公开报告（PDF 直链）；部分阿贡 LDRD 或项目报告只保留题录信息，未放置不稳定的搜索链接。"
+        : "DOE strategy assessments link to the public PDF directly; selected Argonne LDRD or project reports keep citation metadata only where no stable public URL is available."}
     </p>
   </div>
 </Base>
