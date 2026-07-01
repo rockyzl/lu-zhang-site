@@ -1914,12 +1914,11 @@
     "title": "From machine learning to chemical insight: Darwinian chance and the stability of charge carriers in flow batteries",
     "topic": "ML for electrolyte stability / DMB redoxmer",
     "authors": "Jingjing Zhang, Lily A. Robertson, Ilya A. Shkrob, Rajeev S. Assary, Lu Zhang",
-    "journal": "Journal of Materials Chemistry A — under revision",
+    "journal": "Journal of Materials Chemistry A",
     "year": 2026,
-    "doi": "https://scholar.google.com/scholar?q=Darwinian+chance+stability+charge+carriers+flow+batteries",
-    "role": "corresponding",
-    "status": "in revision",
-    "manuscript_id": "TA-ART-01-2026-000771",
+    "citations": 0,
+    "doi": "https://doi.org/10.1039/D6TA00771F",
+    "role": "co",
     "verified": true,
     "kind": "journal"
   }
