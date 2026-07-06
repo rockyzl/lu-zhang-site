@@ -1,13 +1,17 @@
 ---
 import Base from "../../layouts/Base.astro";
-import SiteAgent from "../../components/SiteAgent.astro";
+import ChemGraphDemo from "../../components/ChemGraphDemo.astro";
 ---
 
 <Base
-  title="SciencesLoop 智能体 Demo — Lu Zhang"
-  description="SciencesLoop 站内智能体 demo，用于导航研究方向、可靠 agent 系统、电池材料、论文、专利、学术 CV 和项目链接。"
+  title="实时 Agent Demo — ChemGraph 科学闭环 — 张鲁 Lu Zhang"
+  description="一个实时的 agentic 化学 demo:真实的 ChemGraph agent(Argonne LCF,LangGraph + ASE)识别分子、跑真实的单点能仿真,并对照工作流护栏审计自己的结果 —— 张鲁在做的 loop engineering 的一个可运行示例。"
 >
-  <div class="container">
-    <SiteAgent locale="zh" />
+  <div class="container agent-page">
+    <ChemGraphDemo locale="zh" />
   </div>
 </Base>
+
+<style>
+  .agent-page { padding-top: 30px; padding-bottom: 64px; }
+</style>
