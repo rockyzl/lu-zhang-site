@@ -8,29 +8,6 @@ import SiteAgent from "../components/SiteAgent.astro";
   description="A public SciencesLoop site-agent demo for navigating Scientific AI programs, battery materials, publications, patents, academic CV, and project links."
 >
   <div class="container">
-    <div class="agent-workspace">
-      <SiteAgent locale="en" />
-
-      <section class="agent-workspace-info" aria-label="Agent details">
-        <div>
-          <h2>What It Can Answer</h2>
-          <p>
-            Ask about SciencesLoop programs, agent systems, context engineering, evaluation harnesses, human-in-the-loop review, battery materials research, publications, patents, academic CV, and public project links.
-          </p>
-        </div>
-        <div>
-          <h2>Boundaries</h2>
-          <p>
-            This is a site-navigation and Q&A demo. It uses public website content, returns cited sources when available, and falls back to local rule-based routing if the live API is unavailable.
-          </p>
-        </div>
-        <div>
-          <h2>How It Works</h2>
-          <p>
-            The component calls the configured SciencesLoop API when available. Otherwise it matches the query to curated public-site topics and sends visitors to the relevant research, AI, academic CV, publication, patent, or contact page.
-          </p>
-        </div>
-      </section>
-    </div>
+    <SiteAgent locale="en" />
   </div>
 </Base>

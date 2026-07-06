@@ -8,29 +8,6 @@ import SiteAgent from "../../components/SiteAgent.astro";
   description="SciencesLoop 站内智能体 demo，用于导航研究方向、可靠 agent 系统、电池材料、论文、专利、学术 CV 和项目链接。"
 >
   <div class="container">
-    <div class="agent-workspace">
-      <SiteAgent locale="zh" />
-
-      <section class="agent-workspace-info" aria-label="智能体说明">
-        <div>
-          <h2>可以回答什么</h2>
-          <p>
-            可以询问 SciencesLoop 的研究方向、agent 系统、context engineering、evaluation harnesses、human-in-the-loop review、电池材料研究、论文、专利、学术 CV 和公开项目链接。
-          </p>
-        </div>
-        <div>
-          <h2>边界</h2>
-          <p>
-            这是一个站内导航和问答 demo：它使用公开网站内容，可用时返回引用来源。实时 API 不可用时，页面会切换到本地规则 fallback。
-          </p>
-        </div>
-        <div>
-          <h2>如何工作</h2>
-          <p>
-            配置了 SciencesLoop API 时，组件会调用后端；否则会把问题匹配到公开站点主题，并引导到相关的研究、AI、学术 CV、论文、专利或联系方式页面。
-          </p>
-        </div>
-      </section>
-    </div>
+    <SiteAgent locale="zh" />
   </div>
 </Base>

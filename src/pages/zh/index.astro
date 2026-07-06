@@ -2,19 +2,12 @@
 import Base from "../../layouts/Base.astro";
 import { u } from "../../lib/url";
 import { detectLocale } from "../../lib/i18n";
-import { getFeaturedBlogPosts, getBlogPosts } from "../../lib/blog";
+import { getFeaturedBlogPosts } from "../../lib/blog";
 
 const locale = detectLocale(Astro.url.pathname);
 const lp = locale === "zh" ? "/zh" : "";
 const featuredPosts = getFeaturedBlogPosts(3);
-const zhBlogPosts = getBlogPosts("zh");
-const blogPostHref = (post) => {
-  if (post.lang === "zh") return `/zh/blog/${post.slug}/`;
-  const zhAlternate = zhBlogPosts.find((candidate) => candidate.slug === `${post.slug}-zh`);
-  return zhAlternate ? `/zh/blog/${zhAlternate.slug}/` : `/blog/${post.slug}/`;
-};
 
-// Map a status string → mono status-badge variant (redesign-v2 card pattern).
 const badgeClass = (status) => {
   const s = (status || "").toLowerCase();
   if (s.includes("demo") || s.includes("live") || s.includes("在线")) return "demo";
@@ -22,279 +15,306 @@ const badgeClass = (status) => {
   return "priv";
 };
 
-// 精选 AI 系统 —— 恰好 3 个（符合 public-content-contract）。
-// Property OS 为私有系统概览：只描述，不放仓库、不放真实 URL。
 const featuredSystems = [
   {
     name: "Scientific Agent Lab",
     tagline: "有据可查、评估可回放的科学智能体",
     description:
-      "探索 LLM 智能体如何在回答科学问题的同时，始终以被引用的来源为依据，并通过确定性的评估 harness 保持可测试。",
+      "面向科学问答和文献支撑推理，且不能容忍无依据断言的场景 —— 回答始终以被引用的来源为依据，每次运行都是确定性的。",
     status: "公开仓库",
-    tags: ["grounded agents", "eval harness", "LLM agents"],
-    gradient: "from-rust to-amber",
+    tags: ["Python", "RAG", "LLM agents", "eval harness"],
     href: "https://github.com/rockyzl/scientific-agent-lab",
     external: true,
-    cta: "查看仓库",
+    cta: "GitHub",
   },
   {
     name: "SciencesLoop Agent API",
     tagline: "带署名护栏的检索增强智能体",
     description:
-      "一个检索增强的智能体，回答关于我公开工作的问题，并带有 external-attribution 护栏，避免把他人的工作错误归属。",
+      "问我的研究、项目和 AI 系统 —— 以公开语料为依据、尽可能带引用，并拒绝把他人的工作错误归属。这就是 Loopi。",
     status: "在线 Demo",
-    tags: ["RAG", "attribution guardrail", "grounded Q&A"],
-    gradient: "from-amber to-teal",
+    tags: ["RAG", "retrieval guardrails", "Node", "evals"],
     href: u(`${lp}/agent/`),
     external: false,
-    cta: "试用 Demo",
+    cta: "在线 Demo",
   },
   {
-    name: "Property OS — 语音/短信运营智能体",
-    tagline: "可打断的实时语音与短信运营智能体",
+    name: "Property OS",
+    tagline: "安全门控的实时语音与短信运营智能体",
     description:
-      "面向物业运营的可打断实时语音与短信助手：自然语音交互、安全门控的 LLM 层、只读运营控制台，以及运营记录与财务台账之间明确的数据治理边界。",
+      "在隐私、安全和数据边界与模型能力同等重要的运营场景：自然语音、硬编码的安全筛查、严格的数据治理。",
     status: "私有系统概览",
-    tags: ["realtime voice", "safety-gated", "ops console"],
-    gradient: "from-teal to-navy",
+    tags: ["realtime voice", "Twilio relay", "LLM safety screen", "data governance"],
     href: null,
     external: false,
     cta: null,
   },
 ];
 
-// Systems I Build —— 4 张能力卡片（把项目抽象成一套系统能力）。
 const capabilities = [
   {
-    label: "能力 01",
-    name: "Grounded Agents",
-    text: "会引用来源、保留署名、并避免无依据断言的智能体。",
+    key: "input · grounding",
+    name: "Context Engineering",
+    text: "喂给模型的东西：grounded retrieval、引用和署名护栏，让回答始终以真实证据为依据。",
   },
   {
-    label: "能力 02",
-    name: "Eval-Driven AI",
-    text: "可回放的 trace、确定性测试，以及针对智能体行为的回归检查。",
+    key: "control · the loop",
+    name: "Loop Engineering",
+    text: "控制回路 —— retrieve → reason → act → verify —— 让行为可观测、可纠正，而不是黑盒。",
   },
   {
-    label: "能力 03",
-    name: "Safety-Gated Workflows",
-    text: "硬编码的安全筛查、受限工具、隐私边界，以及人工复核。",
+    key: "proof · evaluation",
+    name: "Harness Engineering",
+    text: "怎么知道它有效：可回放的 eval harness、确定性测试和回归检查，让行为可度量。",
   },
   {
-    label: "能力 04",
-    name: "Domain AI Systems",
-    text: "面向科学、物业运营、保险受理等高上下文、正确性至关重要场景的 AI 系统。",
+    key: "guardrail · safety",
+    name: "Safety Gating",
+    text: "护栏：硬编码的安全筛查、受限工具、隐私边界，以及上线前的人工复核。",
   },
 ];
 
-// 精选项目 —— 分组导览，链接到 /projects/。
-const projectGroups = [
+// Case studies —— 两个端到端负责的系统（一个企业级，一个独立构建）。脱敏：雇主匿名，无仓库/URL。
+const caseStudies = [
   {
-    label: "Group 01",
-    name: "Agent Infrastructure",
-    items: ["Scientific Agent Lab", "SciencesLoop Agent API", "Realtime Synthetic Call Center"],
+    name: "Academy-Wide Virtual Assistant",
+    tagline: "面向约 3.8 万会员协会的 member-facing agentic 助手",
+    description:
+      "一个基于 MCP 工具、以企业 CRM 实时数据为依据的 agent：从权威记录回答会员问题，答不了时自动创建服务工单。我负责 MCP 工具层、读写数据链路，以及多环境 Azure 部署（Container Apps、Key Vault、托管身份、SSO）。",
+    status: "企业级 · 工作案例",
+    tags: ["MCP tools", "Dynamics CRM", "Azure", "SSO / OIDC"],
   },
   {
-    label: "Group 02",
-    name: "Science AI",
-    items: ["Scientific Foundation Model Lab", "SciFM Registry", "RFB Formulation Agent"],
-  },
-  {
-    label: "Group 03",
-    name: "Operations AI",
-    items: ["Property OS", "Insurance FNOL Agent"],
+    name: "“Second Brain” — 本地优先个人 AI",
+    tagline: "把工作流编译成知识的本地优先个人 AI",
+    description:
+      "本地 RAG（ChromaDB + sentence-transformers，Flask 后端）、实时会议助手（流式 Whisper + 截图 OCR + 自动综述），以及自我编译的 Obsidian wiki —— 全部本地运行。包含定位原生库并发段错误、消除按量 API 成本。",
+    status: "独立构建 · 日常在用",
+    tags: ["RAG", "streaming STT", "vision / OCR", "local-first"],
   },
 ];
 ---
 <Base
   title="张鲁 Lu Zhang — 构建有据可查、可测试的 AI 智能体"
-  description="AI 工程师，为科学与运营构建有据可查、可测试的智能体 —— 把检索、评估、安全护栏与领域经验，变成可靠的软件。"
+  description="AI 工程师，为科学与运营构建有据可查、可测试的智能体 —— 把 context engineering、loop engineering、harness engineering 与 safety gating 变成可靠的软件。"
 >
-  <div class="container">
-    <section class="home-agent-hero home-agent-hero--solo">
-      <div class="home-agent-intro">
-        <span class="hero-hello">你好，我是张鲁。👋</span>
-        <h1>我为科学与运营构建<span class="hero-em">有据可查、可测试</span>的 AI 智能体。</h1>
-        <p class="lead">
-          我构建的 AI 系统，把<strong>检索、评估、安全护栏和领域经验</strong>结合起来，
-          将复杂、高语境的知识工作流变成可靠的软件。我喜欢会留下轨迹的智能体、
-          真能测试的 demo，以及会说明出处的回答。
-        </p>
-        <p class="role">
-          转向 AI 之前，我在<strong>阿贡 / JCESR</strong>做了<strong>15+ 年</strong>能源科学 ·
-          <strong>97</strong> 篇论文 · <strong>28</strong> 项专利 · h 指数 <strong>39</strong> ·
-          <a href={u(`${lp}/research-archive/`)}>研究档案 →</a>
-        </p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#featured-systems">探索 AI 系统</a>
-          <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>试用智能体 Demo</a>
-          <a class="btn btn-ghost" href="#start-here">从这里开始</a>
-        </div>
+  <main class="hp wrap">
+    <section class="hero" style="border-top:none">
+      <div class="hi"><span class="wave">👋</span> 你好，我是张鲁。</div>
+      <h1>我为科学与运营构建<span class="em">有据可查、可测试</span>的 AI 智能体。</h1>
+      <p class="lede">
+        我构建的 AI 系统把<b>检索、评估、安全护栏和领域经验</b>结合起来，
+        将复杂、高语境的知识工作流变成可靠的软件。我喜欢会留下轨迹的智能体、
+        真能测试的 demo，以及会说明出处的回答。
+      </p>
+      <p class="buzz">context engineering · loop engineering · harness engineering · safety gating</p>
+      <div class="credline">
+        <span>转向 AI 前，我在 <b>阿贡 / JCESR</b> 做了 <b>15+ 年</b>能源科学</span>
+        <span class="sep">·</span><span><b>97</b> 篇论文</span>
+        <span class="sep">·</span><span><b>28</b> 项专利</span>
+        <span class="sep">·</span><span>h-index <b>39</b></span>
+        <span class="sep">·</span><a href={u(`${lp}/research-archive/`)}>研究档案 →</a>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="#work">探索 AI 系统 <span class="arrow">↗</span></a>
+        <a class="btn" href={u(`${lp}/agent/`)}>试用 Loopi <span class="arrow">↗</span></a>
       </div>
     </section>
 
-    <div class="section-head" id="start-here">
-      <div class="section-title">
-        <span class="eyebrow">↳ 从这里开始</span>
-        <h2>从这里开始</h2>
+    <section id="cases">
+      <div class="shead">
+        <div class="snum">01 — Case studies</div>
+        <h2>两个我端到端负责的系统</h2>
+        <p>一个企业级交付，一个独立构建 —— 最能说明我怎么工作。</p>
       </div>
-    </div>
-    <section class="product-modules start-grid" aria-label="从这里开始">
-      <a class="product-module" href={u(`${lp}/projects/`)}>
-        <span>路径 01</span>
-        <h2>我想看看 AI 系统</h2>
-        <p>精选智能体、评估 harness，以及我构建的系统。 → 项目</p>
-      </a>
-      <a class="product-module" href={u(`${lp}/agent/`)}>
-        <span>路径 02</span>
-        <h2>我想试点实时的东西</h2>
-        <p>向我的检索增强智能体提问，了解我的公开工作。 → 智能体 Demo</p>
-      </a>
-      <a class="product-module" href={u(`${lp}/research-archive/`)}>
-        <span>路径 03</span>
-        <h2>我想看科学根基</h2>
-        <p>15 年以上的能源科学 —— 论文、专利与演讲。 → 研究档案</p>
-      </a>
-    </section>
-
-    <div class="section-head" id="featured-systems">
-      <div class="section-title">
-        <span class="eyebrow">01 — 精选 AI 系统</span>
-        <h2>精选 AI 系统</h2>
-      </div>
-      <a class="more" href={u(`${lp}/projects/`)}>全部项目 →</a>
-    </div>
-    <div class="featured-grid">
-      {featuredSystems.map((p) => {
-        const Outer = p.href ? "a" : "div";
-        const outerProps = p.href
-          ? (p.external
-              ? { href: p.href, target: "_blank", rel: "noopener", class: "project-card" }
-              : { href: p.href, class: "project-card" })
-          : { class: "project-card" };
-        return (
-          <Outer {...outerProps}>
+      <div class="grid grid-2">
+        {caseStudies.map((p) => (
+          <div class="proj">
             <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
-            <div class="name">{p.name}</div>
-            <div class="tagline">{p.tagline}</div>
-            <div class="description">{p.description}</div>
-            {p.cta && <div class="links">{p.cta} ↗</div>}
-            <div class="tags">
-              {p.tags.map((tg) => <span class="tag">{tg}</span>)}
-            </div>
-          </Outer>
-        );
-      })}
-    </div>
-
-    <div class="section-head">
-      <div class="section-title">
-        <span class="eyebrow">02 — Systems I Build</span>
-        <h2>Systems I Build</h2>
+            <h3>{p.name}</h3>
+            <p class="one">{p.tagline}</p>
+            <div class="use">{p.description}</div>
+            <div class="links none">案例 · 无公开仓库</div>
+            <div class="stack">{p.tags.map((t) => <span>{t}</span>)}</div>
+          </div>
+        ))}
       </div>
-      <a class="more" href={u(`${lp}/projects/`)}>它们如何组合 →</a>
-    </div>
-    <section class="product-modules" aria-label="能力">
-      {capabilities.map((c) => (
-        <div class="product-module">
-          <span>{c.label}</span>
-          <h2>{c.name}</h2>
-          <p>{c.text}</p>
+    </section>
+
+    <section id="work">
+      <div class="shead">
+        <div class="snum">02 — 精选 AI 系统</div>
+        <h2>我做过的几个系统</h2>
+        <p>每个都回答同样的问题：是什么、给谁用、能不能试、我具体做了什么。</p>
+      </div>
+      <div class="grid">
+        {featuredSystems.map((p) => (
+          <div class="proj">
+            <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
+            <h3>{p.name}</h3>
+            <p class="one">{p.tagline}</p>
+            <div class="use">{p.description}</div>
+            {p.href
+              ? <div class="links"><a href={p.href} {...(p.external ? { target: "_blank", rel: "noopener" } : {})}>{p.cta} ↗</a></div>
+              : <div class="links none">私有系统概览 · 仅案例</div>}
+            <div class="stack">{p.tags.map((t) => <span>{t}</span>)}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="build">
+      <div class="shead">
+        <div class="snum">03 — 我怎么构建</div>
+        <h2>我如何构建可靠的 agent</h2>
+        <p>四个工程面 —— context、control、evaluation、safety 如何组成一个系统。</p>
+      </div>
+      <div class="caps">
+        {capabilities.map((c) => (
+          <div class="cap">
+            <div class="k">→ {c.key}</div>
+            <h4>{c.name}</h4>
+            <p>{c.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="notes">
+      <div class="notes">
+        <div class="nlead">
+          <div class="snum">04 — 研究笔记</div>
+          <h2 class="nh">研究笔记</h2>
+          <p>构建有据可查的智能体时留下的工作笔记、构建日志和小心得。有些已经打磨完善，有些还在生长中。</p>
+          <a class="nmore" href={u(`${lp}/blog/`)}>全部笔记 →</a>
         </div>
-      ))}
+        <div class="noteslist">
+          {featuredPosts.map((post) => (
+            <a class="note" href={u(`${lp}/blog/${post.slug}/`)}>
+              <time datetime={post.dateLabel}>{post.dateLabel}</time>
+              <span class="t">{post.title}</span>
+            </a>
+          ))}
+        </div>
+      </div>
     </section>
 
-    <div class="section-head">
-      <div class="section-title">
-        <span class="eyebrow">03 — 我如何看待 AI 系统</span>
-        <h2>我如何看待 AI 系统</h2>
+    <section id="found" style="border-top:none;padding-top:18px">
+      <div class="found">
+        <div class="l">
+          <div class="k">科学根基</div>
+          <p>我的 AI 工作由在 <b>阿贡和 JCESR</b> 的 <b>15+ 年</b>电化学能源研究塑造 —— 液流电池、电解液、自主材料发现。这也是我在意证据、可复现性和安全边界的原因。</p>
+        </div>
+        <a href={u(`${lp}/research-archive/`)}>查看研究档案 →</a>
       </div>
-    </div>
-    <ul class="how-i-think">
-      <li>我喜欢会留下痕迹的智能体。</li>
-      <li>我喜欢可以被测试的 Demo。</li>
-      <li>我喜欢会说明答案出处的检索。</li>
-      <li>我喜欢有清晰安全边界的自动化。</li>
-    </ul>
-
-    <div class="section-head">
-      <div class="section-title">
-        <span class="eyebrow">04 — 科学根基</span>
-        <h2>科学背景为什么重要</h2>
-      </div>
-    </div>
-    <p class="lead" style="margin-top: -0.4rem;">
-      在构建 AI 系统之前，我在<strong>阿贡和 JCESR</strong>从事了<strong>15 年以上</strong>的能源科学研究 ——
-      电化学储能、液流电池、锂金属体系和材料发现。这段背景塑造了我构建
-      AI 智能体的方式：我在意证据、署名、可复现性、不确定性和安全边界 ——
-      尤其是在犯错代价高昂的地方。
-    </p>
-    <div class="agent-trust-strip" aria-label="科学根基">
-      <span>科学根基</span>
-      <span>阿贡 / JCESR · 电化学能源研究</span>
-    </div>
-    <p style="margin-top: 1rem;">
-      <a class="more" href={u(`${lp}/research-archive/`)}>查看研究档案 →</a>
-    </p>
-
-    <div class="section-head">
-      <div class="section-title">
-        <span class="eyebrow">05 — 精选项目</span>
-        <h2>精选项目</h2>
-      </div>
-      <a class="more" href={u(`${lp}/projects/`)}>全部项目 →</a>
-    </div>
-    <section class="product-modules" aria-label="项目分组">
-      {projectGroups.map((g) => (
-        <a class="product-module" href={u(`${lp}/projects/`)}>
-          <span>{g.label}</span>
-          <h2>{g.name}</h2>
-          <p>{g.items.join(" · ")}</p>
-        </a>
-      ))}
     </section>
 
-    <div class="section-head">
-      <div class="section-title">
-        <span class="eyebrow">06 — 研究笔记</span>
-        <h2>研究笔记</h2>
+    <section id="contact" class="contact" style="border-top:none">
+      <div class="eyebrow" style="text-align:center">05 — 联系</div>
+      <h2>一起做点经得起考验的东西。</h2>
+      <p>开放注重严谨的 AI / agent 工程机会。问 Loopi 关于我的工作，或者打个招呼。</p>
+      <div class="cta">
+        <a class="btn primary" href={u(`${lp}/agent/`)}>问 Loopi <span class="arrow">↗</span></a>
+        <a class="btn" href="https://github.com/rockyzl" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+        <a class="btn" href="https://www.linkedin.com/in/lu-zhang-argonne/" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
       </div>
-      <a class="more" href={u(`${lp}/blog/`)}>全部笔记 →</a>
-    </div>
-    <p class="section-intro">
-      构建有据可查的智能体时留下的工作笔记、构建日志和一些小心得。
-      有些已经打磨完善，有些还在生长中。
-    </p>
-    <div class="blog-grid blog-grid--home">
-      {featuredPosts.map((post) => (
-        <article class="blog-card">
-          <div class="blog-card-meta">
-            <time datetime={post.dateLabel}>{post.dateLabel}</time>
-            <span>{post.status ?? "note"}</span>
-          </div>
-          <h2><a href={u(blogPostHref(post))}>{post.title}</a></h2>
-          <p>{post.description}</p>
-          <div class="blog-tags">
-            {post.tags.slice(0, 3).map((tag) => <span>{tag}</span>)}
-          </div>
-        </article>
-      ))}
-    </div>
+    </section>
+  </main>
 
-    <div class="section-head">
-      <div class="section-title">
-        <span class="eyebrow">07 — 联系</span>
-        <h2>联系</h2>
-      </div>
-    </div>
-    <p style="margin-bottom: 3rem;">
-      正在做需要有据可查、可测试的智能体的项目？可以在
-      <a href="https://github.com/rockyzl" target="_blank" rel="noopener">GitHub</a>
-      找我，试用<a href={u(`${lp}/agent/`)}>智能体 Demo</a>，或在
-      <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
-      和
-      <a href="https://www.linkedin.com/in/lu-zhang-argonne/" target="_blank" rel="noopener">LinkedIn</a>
-      上找到我。
-    </p>
-  </div>
+  <style is:global>
+    :root {
+      --paper: #f3f1ea; --card: #fbfaf5; --card-2: #f0eee5;
+      --ink: #1b201c; --ink-2: #39423b; --muted: #6a736a;
+      --line: #e4e0d4; --line-strong: #d3cebe;
+      --accent: #0d7361; --accent-deep: #0a5849; --accent-soft: #dcefe8;
+      --honey: #c1863c; --honey-soft: #f2e6d2;
+      --hp-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+      --hp-maxw: 1080px; --hp-r: 16px;
+    }
+    @keyframes hp-wave { 0%,60%,100% { transform: rotate(0); } 20% { transform: rotate(16deg); } 40% { transform: rotate(-8deg); } }
+  </style>
+
+  <style>
+    .hp.wrap { max-width: var(--hp-maxw); margin: 0 auto; padding: 0 26px; }
+    .hp a { color: inherit; text-decoration: none; }
+    .hp b { font-weight: 640; color: var(--ink); }
+    .hp .eyebrow { font-family: var(--hp-mono); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+
+    .hp .hero { display: block; padding: 74px 0 46px; }
+    .hp .hi { font-family: var(--hp-mono); font-size: 15px; color: var(--honey); letter-spacing: .01em; margin-bottom: 16px; }
+    .hp .hi .wave { display: inline-block; animation: hp-wave 2.6s ease-in-out 2; }
+    .hp h1 { font-size: clamp(34px, 5.2vw, 58px); line-height: 1.08; letter-spacing: -.03em; font-weight: 720; margin: 0; text-wrap: balance; max-width: 22ch; }
+    .hp h1 .em { color: var(--accent); }
+    .hp .lede { max-width: 60ch; margin: 22px 0 0; font-size: clamp(16px, 1.6vw, 18px); color: var(--ink-2); line-height: 1.7; }
+    .hp .buzz { margin: 16px 0 0; font-family: var(--hp-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-deep); }
+    .hp .credline { margin-top: 20px; font-family: var(--hp-mono); font-size: 12.5px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .hp .credline b { color: var(--ink); }
+    .hp .credline .sep { color: var(--line-strong); }
+    .hp .credline a { color: var(--accent); border-bottom: 1px solid transparent; }
+    .hp .credline a:hover { border-color: var(--accent); }
+    .hp .cta { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 28px; }
+    .hp .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--hp-mono); font-size: 13px; padding: 12px 18px; border-radius: 11px; border: 1px solid var(--line-strong); background: var(--card); color: var(--ink); transition: transform .12s, box-shadow .15s, border-color .15s, background .15s; }
+    .hp .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -12px rgba(13,115,97,.5); border-color: var(--accent); }
+    .hp .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .hp .btn.primary:hover { background: var(--accent-deep); }
+    .hp .btn .arrow { transition: .15s; }
+    .hp .btn:hover .arrow { transform: translate(2px, -2px); }
+
+    .hp section { display: block; padding: 54px 0; border-top: 1px solid var(--line); }
+    .hp .snum { font-family: var(--hp-mono); font-size: 11.5px; color: var(--accent); letter-spacing: .1em; }
+    .hp .shead h2 { font-size: clamp(22px, 2.9vw, 31px); letter-spacing: -.02em; margin: 8px 0 0; font-weight: 700; }
+    .hp .shead p { margin: 8px 0 24px; color: var(--muted); max-width: 56ch; font-size: 15px; }
+
+    .hp .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .hp .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .hp .proj { background: var(--card); border: 1px solid var(--line); border-radius: var(--hp-r); padding: 20px 20px 18px; display: flex; flex-direction: column; transition: transform .14s, box-shadow .18s, border-color .15s; position: relative; overflow: hidden; }
+    .hp .proj::after { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 3px; background: var(--accent); transform: scaleY(0); transform-origin: top; transition: transform .2s; }
+    .hp .proj:hover { transform: translateY(-3px); box-shadow: 0 20px 44px -28px rgba(27,32,28,.5); border-color: var(--line-strong); }
+    .hp .proj:hover::after { transform: scaleY(1); }
+    .hp .badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--hp-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; padding: 4px 8px; border-radius: 6px; align-self: flex-start; }
+    .hp .badge.repo { color: var(--accent-deep); background: var(--accent-soft); border: 1px solid #cbe3da; }
+    .hp .badge.demo { color: #215d3a; background: #ddeede; border: 1px solid #c6e0c9; }
+    .hp .badge.priv { color: #7a5a2c; background: var(--honey-soft); border: 1px solid #e7d3b0; }
+    .hp .proj h3 { margin: 12px 0 0; font-size: 18px; letter-spacing: -.01em; font-weight: 670; }
+    .hp .proj .one { margin: 8px 0 0; color: var(--ink-2); font-size: 14px; line-height: 1.5; }
+    .hp .proj .use { margin: 11px 0 0; font-family: var(--hp-mono); font-size: 11.5px; color: var(--muted); line-height: 1.6; padding-left: 11px; border-left: 2px solid var(--line-strong); }
+    .hp .proj .links { margin: 13px 0 0; font-family: var(--hp-mono); font-size: 11.5px; color: var(--accent); display: flex; gap: 12px; flex-wrap: wrap; }
+    .hp .proj .links.none { color: var(--muted); }
+    .hp .proj .links a:hover { border-bottom: 1px solid var(--accent); }
+    .hp .stack { margin-top: auto; padding-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .hp .stack span { font-family: var(--hp-mono); font-size: 10.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; }
+
+    .hp .caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
+    .hp .cap { border: 1px solid var(--line); border-radius: var(--hp-r); padding: 19px; background: var(--card); }
+    .hp .cap .k { font-family: var(--hp-mono); font-size: 11px; color: var(--accent); letter-spacing: .05em; }
+    .hp .cap h4 { margin: 11px 0 6px; font-size: 15.5px; letter-spacing: -.01em; }
+    .hp .cap p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+
+    .hp .notes { display: flex; gap: 22px; align-items: flex-start; flex-wrap: wrap; }
+    .hp .nlead { flex: 1 1 260px; }
+    .hp .nlead .nh { font-size: 26px; letter-spacing: -.02em; margin: 8px 0 0; font-weight: 700; }
+    .hp .nlead p { color: var(--muted); font-size: 15px; margin: 8px 0 0; }
+    .hp .nlead .nmore { display: inline-block; margin-top: 12px; font-family: var(--hp-mono); font-size: 12px; color: var(--accent); }
+    .hp .noteslist { flex: 2 1 380px; display: grid; gap: 10px; }
+    .hp .note { display: flex; gap: 14px; align-items: baseline; border: 1px solid var(--line); border-radius: 12px; padding: 13px 16px; background: var(--card); transition: .15s; }
+    .hp .note:hover { border-color: var(--accent); transform: translateX(2px); }
+    .hp .note time { font-family: var(--hp-mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
+    .hp .note .t { font-size: 14.5px; }
+
+    .hp .found { display: flex; align-items: center; justify-content: space-between; gap: 22px; flex-wrap: wrap; background: var(--card-2); border: 1px solid var(--line); border-radius: var(--hp-r); padding: 22px 26px; }
+    .hp .found .l .k { font-family: var(--hp-mono); font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+    .hp .found .l p { margin: 7px 0 0; font-size: 14.5px; color: var(--ink-2); max-width: 54ch; line-height: 1.7; }
+    .hp .found .l b { color: var(--ink); }
+    .hp .found a { font-family: var(--hp-mono); font-size: 12.5px; color: var(--accent); white-space: nowrap; border: 1px solid var(--line-strong); padding: 9px 14px; border-radius: 10px; background: var(--card); }
+    .hp .found a:hover { border-color: var(--accent); }
+
+    .hp .contact { text-align: center; padding: 66px 0 20px; }
+    .hp .contact h2 { font-size: clamp(24px, 4vw, 40px); letter-spacing: -.03em; margin: 8px 0 0; font-weight: 720; text-wrap: balance; }
+    .hp .contact p { color: var(--muted); margin: 14px auto 0; max-width: 46ch; }
+    .hp .contact .cta { justify-content: center; }
+
+    @media (max-width: 880px) { .hp .grid, .hp .caps { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 620px) { .hp .grid, .hp .caps { grid-template-columns: 1fr; } .hp .found { flex-direction: column; align-items: flex-start; } }
+    @media (prefers-reduced-motion: reduce) { .hp *, .hp *::before, .hp *::after { animation: none !important; transition: none !important; } }
+  </style>
 </Base>

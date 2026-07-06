@@ -11,42 +11,86 @@ const posts = getBlogPosts("en");
   description="SciencesLoop field notes on scientific agents, scientific workflows, RAG, evaluation, and AI for Science infrastructure."
 >
   <div class="container">
-    <section class="page-hero compact">
-      <span class="eyebrow">Field Notes · AI agents · Scientific workflows</span>
-      <h1>SciencesLoop Field Notes</h1>
+    <section class="fn-head">
+      <span class="eyebrow">Notes &amp; build logs</span>
+      <h1>Field Notes</h1>
       <p class="lead">
-        Working notes from building Scientific AI systems: agent workflows,
-        scientific state, RAG, evaluation, open problems, and the bridge between
-        battery-materials research and applied AI infrastructure.
+        Working notes from building scientific AI systems — agents, RAG,
+        evaluation, and the open problems in between.
       </p>
     </section>
 
-    <div class="blog-grid">
+    <div class="fn-notes">
       {posts.map((post) => (
-        <article class="blog-card">
-          <div class="blog-card-meta">
+        <a class="fn-note" href={u(`/blog/${post.slug}/`)}>
+          <div class="fn-meta">
             <time datetime={post.dateLabel}>{post.dateLabel}</time>
-            <span>{post.status ?? "note"}</span>
+            {post.status && <span>· {post.status}</span>}
           </div>
-          <h2><a href={u(`/blog/${post.slug}/`)}>{post.title}</a></h2>
+          <h2>{post.title}</h2>
           <p>{post.description}</p>
-          <div class="blog-tags">
-            {post.tags.map((tag) => <span>{tag}</span>)}
-          </div>
-        </article>
+          {post.tags?.[0] && <span class="fn-tag">{post.tags[0]}</span>}
+        </a>
       ))}
     </div>
 
-    <section class="workflow-panel">
-      <div>
-        <span class="eyebrow">Field note workflow</span>
-        <h2>From observation to public note</h2>
-        <p>
-          Field notes start from public sources and personal testing, then
-          separate source claims from interpretation. The public page focuses
-          on evidence, what was tested, and what remains uncertain.
-        </p>
-      </div>
-    </section>
+    <p class="fn-foot">
+      Every note starts from public sources and personal testing — evidence
+      first, interpretation second.
+    </p>
   </div>
+
+  <style>
+    .fn-head { padding: 2.6rem 0 0.4rem; }
+    .fn-head h1 { margin: 0.55rem 0 0; }
+    .fn-head .lead { max-width: 56ch; }
+    .fn-notes { margin: 1.8rem 0 0.5rem; }
+    .fn-note {
+      display: block;
+      padding: 1.55rem 0;
+      border-top: 1px solid var(--c-border-soft);
+      text-decoration: none;
+      color: inherit;
+    }
+    .fn-notes .fn-note:last-of-type { border-bottom: 1px solid var(--c-border-soft); }
+    .fn-meta {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      display: flex;
+      gap: 0.4rem;
+    }
+    .fn-note h2 {
+      font-size: 1.3rem;
+      letter-spacing: -0.015em;
+      font-weight: 680;
+      margin: 0.5rem 0 0;
+      transition: color 0.15s;
+    }
+    .fn-note:hover h2 { color: var(--c-accent); }
+    .fn-note p {
+      color: var(--c-muted);
+      font-size: 0.95rem;
+      margin: 0.4rem 0 0;
+      max-width: 70ch;
+    }
+    .fn-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--c-accent);
+      margin-top: 0.6rem;
+    }
+    .fn-foot {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--c-muted);
+      margin: 1rem 0 3rem;
+    }
+    @media (max-width: 600px) {
+      .fn-note h2 { font-size: 1.15rem; }
+    }
+  </style>
 </Base>

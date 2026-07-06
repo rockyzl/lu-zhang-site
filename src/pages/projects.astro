@@ -21,6 +21,43 @@ const badgeClass = (status) => {
 // public repos link out; private system overviews describe only (no repo, no URL).
 const groups = [
   {
+    key: "case-studies",
+    name_en: "Case Studies",
+    name_zh: "Case Studies",
+    sub_en: "Two systems I own end-to-end — one enterprise delivery, one independent build.",
+    sub_zh: "两个我端到端负责的系统 —— 一个企业级交付，一个独立构建。",
+    items: [
+      {
+        name: "Academy-Wide Virtual Assistant",
+        tagline_en: "A member-facing agentic assistant for a ~38,000-member association",
+        tagline_zh: "面向约 3.8 万会员协会的 member-facing agentic 助手",
+        desc_en: "An MCP-tool agent grounded in a live enterprise CRM: it answers member questions from authoritative records and creates service tickets when it can't. I owned the MCP tool layer, the read/write data path (direct DB reads, governed REST writes), and a multi-environment Azure deployment — Container Apps, Key Vault, managed identity, single-static-IP egress, and SSO.",
+        desc_zh: "一个基于 MCP 工具、以企业 CRM 实时数据为依据的 agent：从权威记录回答会员问题，答不了时自动创建服务工单。我负责 MCP 工具层、读写数据链路（直连库读、受管 REST 写），以及多环境 Azure 部署 —— Container Apps、Key Vault、托管身份、单静态出口 IP、SSO。",
+        status_en: "Enterprise · work case study",
+        status_zh: "企业级 · 工作案例",
+        tags: ["MCP tools", "Dynamics CRM", "Azure Container Apps", "SSO / OIDC", "safety-first"],
+        href: null,
+        external: false,
+        cta_en: null,
+        cta_zh: null,
+      },
+      {
+        name: "“Second Brain” — Local-First Personal AI",
+        tagline_en: "A local-first personal AI that compiles my work stream into knowledge",
+        tagline_zh: "把工作流编译成知识的本地优先个人 AI",
+        desc_en: "A local RAG stack (ChromaDB + sentence-transformers behind Flask), a real-time meeting assistant (streaming Whisper + screenshot vision/OCR + auto-synthesis), and a self-compiling, Obsidian-synced knowledge wiki — all on-device. Includes root-causing a native-library concurrency segfault and routing LLM calls through a CLI subscription to eliminate metered-API cost.",
+        desc_zh: "本地 RAG（ChromaDB + sentence-transformers，Flask 后端）、实时会议助手（流式 Whisper + 截图 vision/OCR + 自动综述），以及自我编译、与 Obsidian 同步的知识 wiki —— 全部本地运行。包含定位一个原生库并发段错误，以及把 LLM 调用改走 CLI 订阅以消除按量 API 成本。",
+        status_en: "Solo build · daily driver",
+        status_zh: "独立构建 · 日常在用",
+        tags: ["RAG", "streaming STT", "vision / OCR", "local-first", "native-code debugging"],
+        href: null,
+        external: false,
+        cta_en: null,
+        cta_zh: null,
+      },
+    ],
+  },
+  {
     key: "agent-infra",
     name_en: "Agent Infrastructure",
     name_zh: "Agent Infrastructure",

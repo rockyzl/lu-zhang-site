@@ -11,39 +11,84 @@ const posts = getBlogPosts("zh");
   description="SciencesLoop 关于 scientific agents、科学工作流、RAG、evaluation 和 AI for Science infrastructure 的研究笔记。"
 >
   <div class="container">
-    <section class="page-hero compact">
-      <span class="eyebrow">研究笔记 · AI agents · 科学工作流</span>
-      <h1>SciencesLoop 研究笔记</h1>
+    <section class="fn-head">
+      <span class="eyebrow">笔记与构建日志</span>
+      <h1>研究笔记</h1>
       <p class="lead">
-        记录 Scientific AI 系统构建过程中的观察：agent 工作流、科学状态、RAG、evaluation、开放问题，以及电池材料研究与应用 AI infrastructure 的连接。
+        构建 scientific AI 系统时的工作笔记 —— agent、RAG、evaluation，以及其间的开放问题。
       </p>
     </section>
 
-    <div class="blog-grid">
+    <div class="fn-notes">
       {posts.map((post) => (
-        <article class="blog-card">
-          <div class="blog-card-meta">
+        <a class="fn-note" href={u(`/zh/blog/${post.slug}/`)}>
+          <div class="fn-meta">
             <time datetime={post.dateLabel}>{post.dateLabel}</time>
-            <span>{post.status ?? "note"}</span>
+            {post.status && <span>· {post.status}</span>}
           </div>
-          <h2><a href={u(`/zh/blog/${post.slug}/`)}>{post.title}</a></h2>
+          <h2>{post.title}</h2>
           <p>{post.description}</p>
-          <div class="blog-tags">
-            {post.tags.map((tag) => <span>{tag}</span>)}
-          </div>
-        </article>
+          {post.tags?.[0] && <span class="fn-tag">{post.tags[0]}</span>}
+        </a>
       ))}
     </div>
 
-    <section class="workflow-panel">
-      <div>
-        <span class="eyebrow">研究笔记流程</span>
-        <h2>从观察到公开笔记</h2>
-        <p>
-          研究笔记从公开来源和个人测试开始，并把来源事实与个人判断分开。
-          公开页面重点呈现证据、测试过什么，以及还不确定的地方。
-        </p>
-      </div>
-    </section>
+    <p class="fn-foot">
+      每条笔记都从公开来源和个人测试开始 —— 先证据，再判断。
+    </p>
   </div>
+
+  <style>
+    .fn-head { padding: 2.6rem 0 0.4rem; }
+    .fn-head h1 { margin: 0.55rem 0 0; }
+    .fn-head .lead { max-width: 56ch; }
+    .fn-notes { margin: 1.8rem 0 0.5rem; }
+    .fn-note {
+      display: block;
+      padding: 1.55rem 0;
+      border-top: 1px solid var(--c-border-soft);
+      text-decoration: none;
+      color: inherit;
+    }
+    .fn-notes .fn-note:last-of-type { border-bottom: 1px solid var(--c-border-soft); }
+    .fn-meta {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      display: flex;
+      gap: 0.4rem;
+    }
+    .fn-note h2 {
+      font-size: 1.3rem;
+      letter-spacing: -0.015em;
+      font-weight: 680;
+      margin: 0.5rem 0 0;
+      transition: color 0.15s;
+    }
+    .fn-note:hover h2 { color: var(--c-accent); }
+    .fn-note p {
+      color: var(--c-muted);
+      font-size: 0.95rem;
+      margin: 0.4rem 0 0;
+      max-width: 70ch;
+    }
+    .fn-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--c-accent);
+      margin-top: 0.6rem;
+    }
+    .fn-foot {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--c-muted);
+      margin: 1rem 0 3rem;
+    }
+    @media (max-width: 600px) {
+      .fn-note h2 { font-size: 1.15rem; }
+    }
+  </style>
 </Base>

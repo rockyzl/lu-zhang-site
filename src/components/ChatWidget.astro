@@ -44,6 +44,11 @@ const copy = locale === "zh"
       close: "关闭对话",
       expand: "展开对话窗口",
       shrink: "收起对话窗口",
+      reset: "开始新对话",
+      tabChat: "对话",
+      tabHistory: "历史",
+      historyEmpty: "还没有提问记录。",
+      historyHint: "点任意问题可重新提问",
       launcherOpen: "和 Loopi 聊聊",
       greeting: "你好，我是 Loopi 👋 SciencesLoop 的智能体。我只根据公开网站内容回答，还会标出处。可以问我 Lu 建过哪些 AI 系统、他怎么让 agent 可靠可测，或者这些工作背后的科学背景。",
       thinking: "正在思考…",
@@ -68,6 +73,11 @@ const copy = locale === "zh"
       close: "Close chat",
       expand: "Expand chat window",
       shrink: "Collapse chat window",
+      reset: "New chat",
+      tabChat: "Chat",
+      tabHistory: "History",
+      historyEmpty: "No questions yet.",
+      historyHint: "Tap any question to ask it again",
       launcherOpen: "Chat with Loopi",
       greeting: "Hi, I'm Loopi 👋 the SciencesLoop agent. I only answer from the public site — and I cite my sources. Ask me about the AI systems Lu has built, how he keeps agents grounded and testable, or the science behind the work.",
       thinking: "Thinking…",
@@ -102,6 +112,11 @@ const copy = locale === "zh"
         <div class="cw-subtitle">{copy.subtitle}</div>
       </div>
       <div class="cw-head-actions">
+        <button type="button" class="cw-reset" data-cw-reset aria-label={copy.reset} title={copy.reset}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 11a8 8 0 1 0-.6 3M20 5v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
         <button type="button" class="cw-expand" data-cw-expand aria-label={copy.expand} aria-pressed="false">
           <svg class="cw-icon-expand" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M15 3h6v6M21 3l-7 7M9 21H3v-6M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -118,10 +133,21 @@ const copy = locale === "zh"
       </div>
     </header>
 
+    <div class="cw-tabs" role="tablist">
+      <button type="button" class="cw-tab is-on" data-cw-tab="chat">{copy.tabChat}</button>
+      <button type="button" class="cw-tab" data-cw-tab="history">{copy.tabHistory}</button>
+    </div>
+
     <div class="cw-messages" data-cw-messages aria-live="polite" aria-atomic="false">
       <div class="cw-msg cw-msg--agent">
         <div class="cw-bubble">{copy.greeting}</div>
       </div>
+    </div>
+
+    <div class="cw-history" data-cw-history hidden>
+      <div class="cw-history-hint" data-cw-history-hint hidden>{copy.historyHint}</div>
+      <div class="cw-history-empty" data-cw-history-empty>{copy.historyEmpty}</div>
+      <div class="cw-history-list" data-cw-history-list></div>
     </div>
 
     <div class="cw-starters" data-cw-starters>
@@ -233,6 +259,7 @@ const copy = locale === "zh"
      of the conversation is visible. Not a "size up" (no wider box); the shape
      just changes from a short card to a full-height column. */
   .cw-panel.cw-expanded {
+    width: min(560px, calc(100vw - 40px));
     height: min(760px, calc(100vh - 104px));
     max-height: min(760px, calc(100vh - 104px));
   }
@@ -285,7 +312,7 @@ const copy = locale === "zh"
     margin-top: .12rem;
   }
   .cw-head-actions { display: flex; align-items: center; gap: .2rem; flex-shrink: 0; }
-  .cw-close, .cw-expand {
+  .cw-close, .cw-expand, .cw-reset {
     flex-shrink: 0;
     display: inline-flex;
     align-items: center;
@@ -299,8 +326,28 @@ const copy = locale === "zh"
     cursor: pointer;
     transition: background .15s, color .15s, border-color .15s;
   }
-  .cw-close:hover, .cw-expand:hover { background: var(--c-bg-soft); color: var(--c-ink); }
-  .cw-close:focus-visible, .cw-expand:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+  .cw-close:hover, .cw-expand:hover, .cw-reset:hover { background: var(--c-bg-soft); color: var(--c-ink); }
+  .cw-close:focus-visible, .cw-expand:focus-visible, .cw-reset:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+
+  /* tabs (Chat / History) */
+  .cw-tabs { display: flex; padding: 0 1rem; border-bottom: 1px solid var(--c-border-soft); background: var(--c-card); }
+  .cw-tab { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .04em; text-transform: uppercase; color: var(--c-muted); background: none; border: none; border-bottom: 2px solid transparent; padding: .55rem .3rem; margin-right: 1rem; cursor: pointer; }
+  .cw-tab.is-on { color: var(--c-ink); border-bottom-color: var(--accent); }
+  .cw-tab:hover { color: var(--c-ink); }
+
+  /* history view */
+  .cw-history { flex: 1 1 auto; min-height: 130px; overflow-y: auto; padding: .85rem 1rem 1rem; display: none; }
+  .cw-history-hint { font-family: var(--font-mono); font-size: .68rem; color: var(--c-muted); margin-bottom: .6rem; }
+  .cw-history-empty { color: var(--c-muted-2); font-size: .85rem; padding: 1rem 0; }
+  .cw-history-list { display: flex; flex-direction: column; gap: .35rem; }
+  .cw-history-item { text-align: left; font: inherit; font-size: .82rem; line-height: 1.4; color: var(--c-fg-2); background: var(--c-bg-soft); border: 1px solid var(--line); border-radius: 9px; padding: .5rem .65rem; cursor: pointer; transition: border-color .15s, color .15s, background .15s; }
+  .cw-history-item:hover { border-color: var(--accent-soft); color: var(--accent); background: var(--accent-soft); }
+
+  /* view toggle: History tab hides the live chat surfaces */
+  .cw-root.cw-view-history .cw-messages,
+  .cw-root.cw-view-history .cw-starters,
+  .cw-root.cw-view-history .cw-form { display: none; }
+  .cw-root.cw-view-history .cw-history { display: block; }
   /* expand ⇄ shrink icon swap, driven by the panel's expanded class */
   .cw-icon-shrink { display: none; }
   .cw-panel.cw-expanded .cw-icon-expand { display: none; }
@@ -351,6 +398,9 @@ const copy = locale === "zh"
   .cw-bubble ul:last-child, .cw-bubble ol:last-child { margin-bottom: 0; }
   .cw-bubble li { margin: .2rem 0; }
   .cw-msg--agent .cw-bubble strong { font-weight: 700; color: var(--c-ink); }
+  /* clickable inline citation markers [1], [2]… */
+  .cw-bubble .cw-cite { color: var(--accent); font-weight: 700; font-size: .82em; padding: 0 1px; vertical-align: 1px; }
+  .cw-bubble .cw-cite:hover { text-decoration: underline; }
   .cw-bubble code {
     font-family: var(--font-mono);
     font-size: .82em;
@@ -392,6 +442,7 @@ const copy = locale === "zh"
     margin-bottom: .3rem;
   }
   .cw-sources ol { margin: 0; padding-left: 1.1rem; }
+  .cw-sources ul.cw-src { list-style: none; margin: 0; padding: 0; }
   .cw-sources li { font-size: .78rem; color: var(--c-muted); margin: .15rem 0; }
   .cw-followups {
     margin-top: .55rem;
@@ -512,6 +563,12 @@ const copy = locale === "zh"
     const form = root.querySelector("[data-cw-form]");
     const input = form.querySelector(".cw-input");
     const sendBtn = form.querySelector("[data-cw-send]");
+    const resetBtn = root.querySelector("[data-cw-reset]");
+    const tabs = [...root.querySelectorAll("[data-cw-tab]")];
+    const historyList = root.querySelector("[data-cw-history-list]");
+    const historyEmpty = root.querySelector("[data-cw-history-empty]");
+    const historyHint = root.querySelector("[data-cw-history-hint]");
+    const greetingHTML = messages.innerHTML; // captured for "New chat" reset
 
     // Client-side conversation history (turns). The backend contract is
     // single-turn { query, locale } (see SiteAgent.astro), so history is kept
@@ -523,14 +580,17 @@ const copy = locale === "zh"
        This is a static MPA: every navigation is a full page reload, so the
        conversation must be saved and rehydrated to survive across pages.
        sessionStorage keeps it for the tab's browsing session (clears on close). */
-    const STORE_KEY = "sl-chat-widget-v1";
-    let transcript = []; // [{role:"user",text} | {role:"agent",html}]
+    const STORE_KEY = "sl-chat-widget-v2"; // v2: fresh schema (drops stale pre-fix transcripts)
+    let transcript = []; // [{role:"user",text} | {role:"agent",html}] — current conversation
+    let questionLog = []; // just the questions asked, for the History tab (survives "New chat")
     function persist() {
       try {
         sessionStorage.setItem(STORE_KEY, JSON.stringify({
           transcript: transcript.slice(-60),
+          questionLog: questionLog.slice(-80),
           open: !panel.hidden,
           expanded: panel.classList.contains("cw-expanded"),
+          view: root.classList.contains("cw-view-history") ? "history" : "chat",
         }));
       } catch (e) { /* storage blocked/full — degrade to in-memory only */ }
     }
@@ -680,8 +740,13 @@ const copy = locale === "zh"
     // Build the agent answer bubble from the live API response, reusing the same
     // response shape SiteAgent parses: answer text + citations + followups.
     function renderApiAnswer(data) {
-      const answer = renderMarkdown(data.answer || "");
-      const citations = Array.isArray(data.citations) ? data.citations.slice(0, 5) : [];
+      const allCites = Array.isArray(data.citations) ? data.citations : [];
+      const citations = allCites.slice(0, 6);
+      // Map citation id -> url so inline [n] markers become clickable links.
+      const citeMap = {};
+      allCites.forEach((c) => { if (c && c.id != null && c.url) citeMap[String(c.id)] = c.url; });
+      const answer = renderMarkdown(data.answer || "").replace(/\[(\d+)\]/g, (m, n) =>
+        citeMap[n] ? `<a class="cw-cite" href="${escapeHtml(citeMap[n])}" target="_blank" rel="noopener">[${n}]</a>` : m);
       const agent = data.agent || {};
       const followups = Array.isArray(agent.followups) ? agent.followups.slice(0, 3) : [];
 
@@ -694,7 +759,7 @@ const copy = locale === "zh"
         })
         .join("");
       const sourcesHtml = sources
-        ? `<div class="cw-sources"><div class="cw-sources-title">${escapeHtml(copy.sources)}</div><ol>${sources}</ol></div>`
+        ? `<div class="cw-sources"><div class="cw-sources-title">${escapeHtml(copy.sources)}</div><ul class="cw-src">${sources}</ul></div>`
         : "";
       const followupsHtml = followups.length
         ? `<div class="cw-followups">${followups
@@ -707,7 +772,7 @@ const copy = locale === "zh"
     /* ---------- live API (same contract as SiteAgent.astro) ---------- */
     async function askLiveAgent(query) {
       const controller = new AbortController();
-      const timeout = window.setTimeout(() => controller.abort(), 18000);
+      const timeout = window.setTimeout(() => controller.abort(), 35000);
       try {
         const response = await fetch(agentApiUrl, {
           method: "POST",
@@ -738,10 +803,12 @@ const copy = locale === "zh"
       const q = (query || "").trim();
       if (!q || pending) return; // debounce: ignore while a request is in flight
 
+      if (root.classList.contains("cw-view-history")) showView("chat"); // asking jumps back to chat
       root.classList.add("cw-conversing"); // hide starter chips after first turn
       addUserMessage(q);
       history.push({ role: "user", text: q });
       transcript.push({ role: "user", text: q });
+      if (questionLog[questionLog.length - 1] !== q) questionLog.push(q); // log for History tab
       persist();
       input.value = "";
       setPending(true);
@@ -813,9 +880,37 @@ const copy = locale === "zh"
       persist();
     }
 
+    function renderHistory() {
+      const items = questionLog.slice().reverse();
+      historyList.innerHTML = items
+        .map((q) => `<button type="button" class="cw-history-item" data-cw-prompt="${escapeHtml(q)}">${escapeHtml(q)}</button>`)
+        .join("");
+      const has = items.length > 0;
+      historyEmpty.hidden = has;
+      if (historyHint) historyHint.hidden = !has;
+    }
+    function showView(view) {
+      const isHistory = view === "history";
+      root.classList.toggle("cw-view-history", isHistory);
+      tabs.forEach((t) => t.classList.toggle("is-on", t.getAttribute("data-cw-tab") === view));
+      if (isHistory) renderHistory();
+      persist();
+    }
+    // "New chat": clear the current conversation but KEEP the question history.
+    function resetChat() {
+      transcript = [];
+      messages.innerHTML = greetingHTML;
+      root.classList.remove("cw-conversing");
+      showView("chat");
+      persist();
+      window.requestAnimationFrame(() => input.focus());
+    }
+
     launcher.addEventListener("click", togglePanel);
     closeBtn.addEventListener("click", closePanel);
     expandBtn.addEventListener("click", toggleExpand);
+    resetBtn.addEventListener("click", resetChat);
+    tabs.forEach((t) => t.addEventListener("click", () => showView(t.getAttribute("data-cw-tab"))));
 
     // Esc closes the panel when it's open.
     document.addEventListener("keydown", (e) => {
@@ -847,11 +942,14 @@ const copy = locale === "zh"
         });
         root.classList.add("cw-conversing");
       }
+      if (Array.isArray(saved.questionLog)) questionLog = saved.questionLog;
+      renderHistory();
       if (saved.expanded) {
         panel.classList.add("cw-expanded");
         expandBtn.setAttribute("aria-pressed", "true");
         expandBtn.setAttribute("aria-label", copy.shrink);
       }
+      if (saved.view === "history") showView("history");
       if (saved.open) openPanel(false); // reopen without stealing focus/scroll
     })();
   })();

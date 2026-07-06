@@ -1,137 +1,167 @@
 ---
 import Base from "../../layouts/Base.astro";
-import ScienceArt from "../../components/ScienceArt.astro";
 import { u } from "../../lib/url";
-import { detectLocale, t } from "../../lib/i18n";
+import { detectLocale } from "../../lib/i18n";
 
 const locale = detectLocale(Astro.url.pathname);
 const isZh = locale === "zh";
 
-const education = isZh
-  ? [
-      "博士 · 有机化学 — 中国科学院 (2001 – 2006)。硕博连读阶段 2001 – 2004。",
-      "学士 · 化学 — 山东大学 (1996 – 2000)",
-    ]
-  : [
-      "Ph.D., Organic Chemistry — Chinese Academy of Sciences (2001 – 2006). Master's stage 2001 – 2004 under combined master/PhD program.",
-      "B.S., Chemistry — Shandong University (1996 – 2000)",
-    ];
+const stats = [
+  { n: "15+", l: isZh ? "年能源科学" : "yrs energy science" },
+  { n: "97", l: isZh ? "篇论文" : "papers" },
+  { n: "28", l: isZh ? "项专利" : "patents" },
+  { n: "39", l: "h-index" },
+  { n: "4,700+", l: isZh ? "总被引" : "citations" },
+];
 
 const career = isZh
   ? [
-      ["数据科学工程师", "AAOS（美国骨科医师学会）", "2026年2月 – 至今"],
-      ["高级数据科学家", "Mercury Insurance（水星保险）", "2024年11月 – 2026年1月"],
-      ["数据科学家", "Cincinnati Insurance（辛辛那提保险）", "2023年8月 – 2024年11月"],
-      ["化学家 → 资深化学家", "Argonne National Laboratory（阿贡国家实验室）", "2009 – 2023"],
-      ["博士后研究员", "Argonne National Laboratory", "2008 – 2009"],
-      ["博士后研究员", "Florida State University（佛罗里达州立大学）", "2006 – 2008"],
+      ["数据科学工程师", "AAOS", "2026.02 – 至今"],
+      ["高级数据科学家", "Mercury Insurance", "2024.11 – 2026.01"],
+      ["数据科学家", "Cincinnati Insurance", "2023.08 – 2024.11"],
+      ["化学家 → 资深化学家", "Argonne National Laboratory", "2009 – 2023"],
+      ["博士后", "Argonne · Florida State University", "2006 – 2009"],
     ]
   : [
       ["Data Science Engineer", "AAOS", "Feb 2026 – present"],
       ["Senior Data Scientist", "Mercury Insurance", "Nov 2024 – Jan 2026"],
       ["Data Scientist", "Cincinnati Insurance", "Aug 2023 – Nov 2024"],
       ["Chemist → Senior Chemist", "Argonne National Laboratory", "2009 – 2023"],
-      ["Postdoctoral Fellow", "Argonne National Laboratory", "2008 – 2009"],
-      ["Postdoctoral Researcher", "Florida State University", "2006 – 2008"],
+      ["Postdoctoral", "Argonne · Florida State University", "2006 – 2009"],
     ];
 
-// Detailed Recognition lists used to live here but were consolidated
-// onto /awards/. About-page Recognition is now a 1-paragraph summary
-// + cross-link.
+const education = isZh
+  ? [
+      ["博士 · 有机化学", "中国科学院", "2001 – 2006"],
+      ["学士 · 化学", "山东大学", "1996 – 2000"],
+    ]
+  : [
+      ["Ph.D., Organic Chemistry", "Chinese Academy of Sciences", "2001 – 2006"],
+      ["B.S., Chemistry", "Shandong University", "1996 – 2000"],
+    ];
 ---
 <Base
   title={isZh ? "关于 — SciencesLoop" : "About — SciencesLoop"}
   description={isZh
-    ? "SciencesLoop 创建者背景、科学研究、AI 系统和公开联系方式。"
+    ? "SciencesLoop 创建者背景：科学研究、AI 系统工作与公开联系方式。"
     : "Founder background behind SciencesLoop: scientific research, AI systems work, and public contact links."}
 >
-  <div class="container" style="padding-top: 3rem;">
-  <div style="display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; align-items: start;" class="about-hero">
-      <div class="portrait square">
-        <ScienceArt class="science-art" />
-        <img src={u("/images/portrait.jpg")} alt="Lu Zhang" onerror="this.remove()" />
+  <div class="container ab">
+    <section class="ab-hero">
+      <div class="ab-top">
+        <span class="ab-mark" aria-hidden="true">LZ</span>
+        <div>
+          <span class="eyebrow">{isZh ? "关于 · SciencesLoop" : "About · SciencesLoop"}</span>
+          <h1 class="ab-name">{isZh ? "Lu Zhang / 张鲁" : "Lu Zhang"}</h1>
+          <p class="ab-role">{isZh ? "AI 工程师 · 科学系统构建者 · Ph.D." : "AI Engineer · Scientific Systems Builder · Ph.D."}</p>
+        </div>
       </div>
-    <div>
-      <span class="eyebrow">{isZh ? "关于 SciencesLoop" : "About SciencesLoop"}</span>
-      <h1 style="margin-top: 0;">{isZh ? "Lu Zhang / 张鲁" : "Lu Zhang"}</h1>
-      <p style="color: var(--c-muted); font-size: 1.1rem; margin-top: -0.4rem; margin-bottom: 1.2rem;">
-        {isZh ? "AI 工程师 · 科学系统构建者 · Ph.D." : "AI Engineer · Scientific Systems Builder · Ph.D."}
+      <p class="ab-intro">
+        {isZh ? (
+          <>我构建<span class="accent">有据可查、可测试的 AI 智能体</span>，用于科学与运营 —— 把高上下文的知识工作流变成可靠的软件。SciencesLoop 是我把这些工作放在公开处的地方：研究笔记、小工具，以及关于"怎样让 agent 可靠"的 AI-for-Science 实验。</>
+        ) : (
+          <>I build <span class="accent">grounded, testable AI agents</span> for science and operations — turning high-context knowledge workflows into reliable software. SciencesLoop is where I keep the work in the open: field notes, small tools, and AI-for-Science experiments focused on what makes agents reliable.</>
+        )}
       </p>
-      <p class="lead">
-        {isZh
-          ? "SciencesLoop 目前由 Lu Zhang 创建并维护，方向是 AI-native 科学工作流、科学状态系统、智能体和 evidence-driven discovery infrastructure。"
-          : "SciencesLoop is currently founded and maintained by Lu Zhang, focused on AI-native scientific workflows, scientific state systems, intelligent agents, and evidence-driven discovery infrastructure."}
-      </p>
-      <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: 1rem;">
-        {t("about.based", locale)} <a href="mailto:zhanglu77@gmail.com">zhanglu77@gmail.com</a>。
-      </p>
-      <p style="margin-top: 1rem;">
-        <a class="btn btn-primary" href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">
-          {isZh ? "↓ 下载学术 CV (PDF)" : "↓ Download academic CV (PDF)"}
-        </a>
-      </p>
+      <div class="ab-meta">
+        <span>{isZh ? "常驻芝加哥" : "Based in Chicago"}</span>
+        <span class="dot">·</span>
+        <a class="mail" href="mailto:zhanglu77@gmail.com">zhanglu77@gmail.com</a>
+        <a class="cv" href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">{isZh ? "↓ 学术 CV (PDF)" : "↓ Academic CV (PDF)"}</a>
+      </div>
+    </section>
+
+    <div class="ab-stats">
+      {stats.map((s) => (
+        <div class="ab-stat"><div class="n">{s.n}</div><div class="l">{s.l}</div></div>
+      ))}
     </div>
+
+    <section class="ab-sec">
+      <div class="ab-sechead">{isZh ? "履历" : "Career"}</div>
+      {career.map(([title_, org, when]) => (
+        <div class="ab-row">
+          <div class="when">{when}</div>
+          <div class="what"><strong>{title_}</strong>, <span class="org">{org}</span></div>
+        </div>
+      ))}
+    </section>
+
+    <section class="ab-sec">
+      <div class="ab-sechead">{isZh ? "教育" : "Education"}</div>
+      {education.map(([deg, school, when]) => (
+        <div class="ab-row">
+          <div class="when">{when}</div>
+          <div class="what"><strong>{deg}</strong> — <span class="org">{school}</span></div>
+        </div>
+      ))}
+    </section>
+
+    <section class="ab-sec">
+      <div class="ab-sechead">{isZh ? "荣誉" : "Recognition"}</div>
+      <div class="ab-row">
+        <div class="when">2014 · 2015</div>
+        <div class="what">
+          {isZh
+            ? <><strong>R&D 100 大奖</strong>（氧化还原穿梭剂技术）与 Finalist — <span class="org">DOE Flow Batteries Strategy Assessment 共同作者、JCESR Theme Lead</span></>
+            : <><strong>R&D 100 Award</strong> (redox-shuttle technology) &amp; Finalist — <span class="org">co-author, DOE Flow Batteries Strategy Assessment; JCESR Theme Lead</span></>}
+        </div>
+      </div>
+      <p class="ab-links">
+        <a href={u(isZh ? "/zh/awards/" : "/awards/")}>{isZh ? "完整荣誉与认可 →" : "Full awards & recognition →"}</a>
+        <a href={u(isZh ? "/zh/research-archive/" : "/research-archive/")}>{isZh ? "研究档案 →" : "Research archive →"}</a>
+      </p>
+    </section>
+
+    <section class="ab-sec">
+      <div class="ab-sechead">{isZh ? "联系" : "Contact"}</div>
+      <p class="ab-contact">
+        <a href="mailto:zhanglu77@gmail.com">Email</a>
+        <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="https://github.com/rockyzl" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/lu-zhang-argonne/" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </section>
+
+    <p class="ab-foot">{isZh ? "完整学术记录 —— 论文、专利、演讲 —— 都在研究档案里。" : "Full academic record — publications, patents, talks — lives in the research archive."}</p>
   </div>
+
   <style>
-    @media (max-width: 640px) {
-      .about-hero { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
-      .about-hero .portrait.square { max-width: 200px; }
+    .ab { max-width: 760px; }
+    .ab .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--c-accent); }
+    .ab-hero { padding: 1.4rem 0 0; }
+    .ab-top { display: flex; align-items: flex-start; gap: 1rem; }
+    .ab-mark { flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; border: 1.5px solid var(--c-border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; font-size: 14px; color: var(--c-accent); margin-top: 6px; }
+    .ab-name { font-size: clamp(32px, 5vw, 50px); letter-spacing: -.035em; font-weight: 730; margin: .35rem 0 0; line-height: 1.02; }
+    .ab-role { color: var(--c-muted); font-family: var(--font-mono); font-size: .9rem; margin: .5rem 0 0; }
+    .ab-intro { font-size: 1.05rem; color: var(--c-fg); line-height: 1.6; margin: 1.25rem 0 0; max-width: 60ch; }
+    .ab-intro .accent { color: var(--c-accent); font-weight: 600; }
+    .ab-meta { display: flex; flex-wrap: wrap; gap: .6rem 1.2rem; align-items: center; margin: 1.3rem 0 0; font-size: .95rem; color: var(--c-muted); }
+    .ab-meta .dot { color: var(--c-border-strong, var(--c-border)); }
+    .ab-meta .mail { color: var(--c-accent); }
+    .ab-meta .cv { font-family: var(--font-mono); font-size: .78rem; background: var(--c-accent); color: #fff; border-radius: 9px; padding: .55rem .9rem; }
+
+    .ab-stats { display: flex; flex-wrap: wrap; gap: 1.8rem; margin: 2.2rem 0 0; padding: 1.3rem 0; border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border); }
+    .ab-stat .n { font-size: 1.4rem; font-weight: 700; letter-spacing: -.02em; color: var(--c-fg); }
+    .ab-stat .l { font-family: var(--font-mono); font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; color: var(--c-muted); margin-top: .2rem; }
+
+    .ab-sec { padding: 2.1rem 0 0; }
+    .ab-sechead { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--c-muted); margin: 0 0 .9rem; }
+    .ab-row { display: flex; gap: 1.4rem; padding: .85rem 0; border-top: 1px solid var(--c-border); }
+    .ab-sec .ab-row:first-of-type { border-top: 0; }
+    .ab-row .when { flex: 0 0 132px; font-family: var(--font-mono); font-size: .78rem; color: var(--c-muted); padding-top: .12rem; }
+    .ab-row .what { font-size: .98rem; color: var(--c-fg); }
+    .ab-row .what strong { font-weight: 640; }
+    .ab-row .what .org { color: var(--c-muted); }
+    .ab-links { display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 1rem 0 0; }
+    .ab-links a { font-family: var(--font-mono); font-size: .8rem; color: var(--c-accent); }
+    .ab-contact { display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 0; }
+    .ab-contact a { font-family: var(--font-mono); font-size: .85rem; color: var(--c-accent); }
+    .ab-foot { color: var(--c-muted); font-size: .9rem; margin: 1.8rem 0 3.5rem; }
+
+    @media (max-width: 600px) {
+      .ab-row { flex-direction: column; gap: .15rem; }
+      .ab-row .when { flex-basis: auto; }
     }
   </style>
-
-  <section class="workflow-panel" style="margin-top: 2.5rem;">
-    <div>
-      <span class="eyebrow">SciencesLoop</span>
-      <h2>{isZh ? "在公开中构建可靠的 AI 系统" : "Reliable AI systems, built in the open"}</h2>
-      <p>
-        {isZh
-          ? "SciencesLoop 是一个公开记录软件、研究笔记、开放问题和 AI for Science 工作流实验的长期实验室，重点关注 context engineering、evaluation harnesses 和 human-in-the-loop review 等可靠智能体实践。"
-          : "SciencesLoop is a public record of software, field notes, open problems, and AI-for-Science workflow experiments, with a focus on what makes agents reliable: context engineering, evaluation harnesses, and human-in-the-loop review."}
-      </p>
-    </div>
-  </section>
-
-  <h2>{t("about.education", locale)}</h2>
-  <ul>{education.map((e) => <li set:html={e.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")}></li>)}</ul>
-
-  <h2>{t("about.career", locale)}</h2>
-  <ul>
-    {career.map(([title_, org, when]) => (
-      <li><strong>{title_}</strong>, {org} ({when})</li>
-    ))}
-  </ul>
-
-  <h2>{t("about.recognition", locale)}</h2>
-  <p style="font-size: 1rem; color: var(--c-fg);">
-    {isZh
-      ? "2014 年 R&D 100 大奖获得者（氧化还原穿梭剂技术），2015 年 Finalist。DOE Flow Battery Strategy Assessment 共同作者，JCESR Theme Lead，DOE SBIR / NSF / DOE ES Prize 评审专家，10+ 期刊审稿人。"
-      : "R&D 100 Award (2014, redox-shuttle technology) and Finalist (2015). Co-author of DOE Flow Batteries Strategy Assessment, JCESR Theme Lead, DOE SBIR / NSF / DOE ES Prize panel reviewer, peer reviewer for 10+ journals."}
-  </p>
-  <p style="font-size: 0.95rem; color: var(--c-muted); margin-top: 0.6rem;">
-    <strong style="color: var(--c-fg);">99</strong> {isZh ? "项论著（97 SCI + 2 章著作）" : "publications (97 SCI + 2 book chapters)"} ·
-    <strong style="color: var(--c-fg);">28</strong> {isZh ? "项美国专利及申请" : "US patents & applications"} ·
-    <strong style="color: var(--c-fg);">51</strong> {isZh ? "次会议报告（含 13 项特邀）" : "conference talks (incl. 13 invited)"} ·
-    <strong style="color: var(--c-fg);">180</strong> {isZh ? "位独立合作者" : "unique collaborators"} ·
-    h-index <strong style="color: var(--c-fg);">39</strong> ·
-    4,700+ {isZh ? "总被引" : "citations"}
-  </p>
-  <p style="margin-top: 1rem;">
-    <a href={isZh ? "/zh/awards/" : "/awards/"} style="font-weight: 500;">
-      {isZh ? "→ 查看完整荣誉与认可（含所有链接）" : "→ See full Awards & Recognition page (all links)"}
-    </a>
-  </p>
-  <p style="margin-top: 0.6rem;">
-    <a href={u(isZh ? "/zh/research-archive/" : "/research-archive/")} style="font-weight: 500;">
-      {isZh ? "→ 研究档案（论文、专利、报告、荣誉、合作者）" : "→ Research Archive (publications, patents, reports, awards, collaborators)"}
-    </a>
-  </p>
-
-  <h2>{t("about.contact", locale)}</h2>
-  <p>
-    <a href="mailto:zhanglu77@gmail.com">zhanglu77@gmail.com</a> ·
-    <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en">Google Scholar</a> ·
-    <a href="https://github.com/rockyzl">GitHub</a> ·
-    <a href="https://www.linkedin.com/in/lu-zhang-argonne/">LinkedIn</a>
-  </p>
-  </div>
 </Base>

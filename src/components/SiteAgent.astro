@@ -22,7 +22,7 @@ const copy = locale === "zh"
       next: "建议下一步",
       plan: "执行路径",
       actionsLabel: "可执行导航",
-      followupsLabel: "继续追问",
+      followupsLabel: "继续探索",
       thinking: "正在检索公开语料并生成回答...",
       apiError: "实时 agent 暂时不可用，已切换到本地规则回答。",
       sources: "来源",
@@ -61,7 +61,7 @@ const copy = locale === "zh"
       next: "Suggested next step",
       plan: "Agent path",
       actionsLabel: "Next actions",
-      followupsLabel: "Follow up",
+      followupsLabel: "Keep exploring",
       thinking: "Retrieving public context and generating an answer...",
       apiError: "Live agent is temporarily unavailable, so I switched to the local rules answer.",
       sources: "Sources",
@@ -106,51 +106,35 @@ const links = {
 ---
 
 <section class={`agent-shell agent-shell--${mode}`} data-site-agent data-locale={locale}>
-  <div class="agent-panel">
-    {!isHomeMode && (
-      <div class="agent-copy">
-        <span class="eyebrow">{copy.eyebrow}</span>
-        <h1>{copy.title}</h1>
-        <p class="lead">{copy.lead}</p>
-        <div class="agent-actions">
-          <a class="btn btn-primary" href={links.ai}>{copy.actions.ai}</a>
-          <a class="btn btn-ghost" href={links.publications}>{copy.actions.publications}</a>
-          <a class="btn btn-ghost" href={links.cv} target="_blank" rel="noopener">{copy.actions.cv}</a>
-          <a class="btn btn-ghost" href={links.email}>{copy.actions.contact}</a>
-        </div>
+  <div class="agent-solo">
+    <div class="agent-id">
+      <span class="agent-avatar" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <path d="M20 12a8 8 0 1 1-3.2-6.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <circle cx="9.2" cy="10.6" r="1.15" fill="currentColor" />
+          <circle cx="14.8" cy="10.6" r="1.15" fill="currentColor" />
+          <path d="M8.7 14.3a4.2 4.2 0 0 0 6.6 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+      </span>
+      <div class="agent-id-text">
+        <h1 class="agent-id-name">Loopi</h1>
+        <div class="agent-id-sub">{locale === "zh" ? "SciencesLoop 智能体 · " : "the SciencesLoop agent · "}{copy.status}</div>
       </div>
-    )}
+    </div>
+    <p class="agent-solo-lead">
+      {locale === "zh"
+        ? "问我关于 Lu 的工作 —— 我只根据公开网站内容回答，而且必标来源。"
+        : "Ask about Lu's work — I answer only from the public site, and I always cite my sources."}
+    </p>
 
     <div class="agent-card" aria-live="polite">
-      <div class="agent-card-header">
-        <span class="agent-avatar" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M20 12a8 8 0 1 1-3.2-6.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-            <circle cx="9.2" cy="10.6" r="1.15" fill="currentColor" />
-            <circle cx="14.8" cy="10.6" r="1.15" fill="currentColor" />
-            <path d="M8.7 14.3a4.2 4.2 0 0 0 6.6 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-          </svg>
-        </span>
-        <div class="agent-head-text">
-          <div class="agent-title">Loopi</div>
-          <div class="agent-subtitle">{copy.status}</div>
-        </div>
-        <span class="agent-status">{copy.statusBadge}</span>
-      </div>
-
-      <form class="agent-form" data-agent-form>
-        <input name="query" type="text" autocomplete="off" placeholder={copy.placeholder} />
-        <button type="submit">{copy.send}</button>
-      </form>
-
       <div class="agent-answer" data-agent-answer>
         <div class="agent-topic">{copy.matched}: {locale === "zh" ? "开始" : "Start"}</div>
-        <div>
+        <div class="agent-answer-body">
           {locale === "zh"
             ? "你好，我是 Loopi 👋 可以问我 Lu 建过哪些 AI 系统、他怎么让 agent 可靠可测，或者这些工作背后的科学背景。"
             : "Hi, I'm Loopi 👋 Ask about the AI systems Lu has built, how he keeps agents grounded and testable, or the science background behind the work."}
         </div>
-        <div class="agent-next">{copy.next}: <a href={links.ai}>{copy.actions.ai}</a></div>
       </div>
 
       <div class="agent-suggestions">
@@ -160,16 +144,17 @@ const links = {
         ))}
       </div>
 
-      <div class="agent-quicklinks" aria-label="Agent quick links">
-        <a href={links.ai}>{copy.actions.ai}</a>
-        <a href={links.approach}>{locale === "zh" ? "方法" : "Approach"}</a>
-        <a href={links.cases}>{locale === "zh" ? "案例" : "Case Studies"}</a>
-        <a href={links.projects}>{locale === "zh" ? "科研项目" : "Research Projects"}</a>
-        <a href={links.publications}>{copy.actions.publications}</a>
-        <a href={links.about}>{locale === "zh" ? "背景" : "Background"}</a>
-      </div>
-      <p class="agent-note">{copy.note}</p>
+      <form class="agent-form" data-agent-form>
+        <input name="query" type="text" autocomplete="off" placeholder={copy.placeholder} />
+        <button type="submit">{copy.send}</button>
+      </form>
     </div>
+
+    <p class="agent-howcap">
+      {locale === "zh"
+        ? "Loopi 的工作方式：一个有界、会自检的循环 —— retrieve → reason → act → verify"
+        : "How Loopi works: a bounded, self-verifying loop — retrieve → reason → act → verify"}
+    </p>
   </div>
 </section>
 
@@ -185,6 +170,29 @@ const links = {
   .agent-answer-body ol:last-child { margin-bottom: 0; }
   .agent-answer-body li { margin: .28rem 0; }
   .agent-answer-body strong { font-weight: 700; color: var(--c-ink); }
+  /* clickable inline citation markers [1], [2]… */
+  .agent-answer-body .agent-cite { color: var(--c-accent); font-weight: 700; font-size: .82em; vertical-align: 1px; padding: 0 1px; }
+  .agent-answer-body .agent-cite:hover { text-decoration: underline; }
+  /* sources list: keep the [n] prefix, drop the <ol> auto-number (no dup) */
+  .agent-sources ul.agent-src { list-style: none; margin: 0; padding: 0; }
+
+  /* Loop-engineering trace — the agentic loop, collapsible (no clutter at rest) */
+  .agent-loop { margin-top: .9rem; padding-top: .75rem; border-top: 1px solid var(--c-border-soft); }
+  .agent-loop summary { list-style: none; cursor: pointer; display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; font-family: var(--font-mono); font-size: .72rem; color: var(--c-muted); }
+  .agent-loop summary::-webkit-details-marker { display: none; }
+  .agent-loop summary::before { content: "▸"; color: var(--c-accent); transition: transform .15s; }
+  .agent-loop[open] summary::before { transform: rotate(90deg); }
+  .agent-loop summary .lk { color: var(--c-accent); letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
+  .agent-loop summary .lstages { color: var(--c-muted); }
+  .agent-loop summary .lcnt { color: var(--c-muted); margin-left: auto; }
+  .agent-loop-steps { list-style: none; margin: .75rem 0 .2rem; padding: .1rem 0 .1rem .35rem; display: grid; gap: .55rem; border-left: 2px solid var(--c-border); }
+  .agent-loop-steps li { position: relative; padding-left: 1rem; font-size: .8rem; line-height: 1.4; color: var(--c-fg); }
+  .agent-loop-steps li::before { content: ""; position: absolute; left: -5px; top: .42em; width: 7px; height: 7px; border-radius: 50%; background: var(--c-accent); }
+  .agent-loop-steps li.lp-verify::before { background: var(--c-honey, #c1863c); }
+  .agent-loop-steps .lph { font-family: var(--font-mono); font-size: .66rem; letter-spacing: .06em; color: var(--c-accent); font-weight: 700; margin-right: .35rem; }
+  .agent-loop-steps li.lp-verify .lph { color: var(--c-honey, #c1863c); }
+  .agent-loop-steps code { font-family: var(--font-mono); font-size: .74rem; color: var(--c-accent-deep, var(--c-accent)); background: var(--c-bg-soft); border-radius: 4px; padding: 0 .3em; }
+  .agent-loop-steps .lsm { color: var(--c-muted); }
   .agent-answer-body code {
     font-family: var(--font-mono);
     font-size: .84em;
@@ -210,6 +218,30 @@ const links = {
     background: var(--c-accent);
     color: #fff;
     box-shadow: 0 2px 6px rgba(13, 115, 97, 0.3);
+  }
+
+  /* --- Simplified single-column Agent Demo (Loopi) --- */
+  .agent-solo { max-width: 720px; margin: 0 auto; }
+  .agent-id { display: flex; align-items: center; gap: 0.8rem; margin: 2.2rem 0 0; }
+  .agent-id .agent-avatar { width: 42px; height: 42px; }
+  .agent-id .agent-id-name { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+  .agent-id-sub { font-family: var(--font-mono); font-size: 0.78rem; color: var(--c-muted); margin-top: 0.12rem; }
+  .agent-solo-lead { color: var(--c-fg); font-size: 1rem; line-height: 1.6; margin: 1.1rem 0 1.4rem; max-width: 58ch; }
+  .agent-solo .agent-card { display: block; }
+  .agent-solo .agent-suggestions { margin-top: 1rem; }
+  .agent-solo .agent-form {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--c-border-soft);
+  }
+  .agent-howcap {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    line-height: 1.5;
+    color: var(--c-muted);
+    text-align: center;
+    margin: 1.1rem auto 3rem;
+    max-width: 62ch;
   }
 </style>
 
@@ -408,10 +440,14 @@ const links = {
   }
 
   function renderApiAnswer(data) {
-    const citations = Array.isArray(data.citations) ? data.citations.slice(0, 5) : [];
+    const allCites = Array.isArray(data.citations) ? data.citations : [];
+    const citations = allCites.slice(0, 6);
+    // Map citation id -> url so inline [n] markers become clickable links.
+    const citeMap = {};
+    allCites.forEach((c) => { if (c && c.id != null && c.url) citeMap[String(c.id)] = c.url; });
+    const answerHtml = renderMarkdown(data.answer || "").replace(/\[(\d+)\]/g, (m, n) =>
+      citeMap[n] ? `<a class="agent-cite" href="${escapeHtml(citeMap[n])}" target="_blank" rel="noopener">[${n}]</a>` : m);
     const agent = data.agent || {};
-    const plan = Array.isArray(agent.plan) ? agent.plan.slice(0, 4) : [];
-    const actions = Array.isArray(agent.actions) ? agent.actions.slice(0, 4) : [];
     const followups = Array.isArray(agent.followups) ? agent.followups.slice(0, 4) : [];
     const sources = citations
       .map((item) => {
@@ -420,34 +456,25 @@ const links = {
         return `<li><a href="${url}" target="_blank" rel="noopener">[${escapeHtml(item.id || "")}] ${title}</a></li>`;
       })
       .join("");
-    const planHtml = plan.length
-      ? `<div class="agent-plan"><div class="agent-source-title">${labels.plan}</div><ol>${plan
-          .map((item) => `<li>${escapeHtml(item)}</li>`)
-          .join("")}</ol></div>`
-      : "";
-    const actionsHtml = actions.length
-      ? `<div class="agent-action-list"><div class="agent-source-title">${labels.actionsLabel}</div>${actions
-          .map((item) => {
-            const label = escapeHtml(item.label || item.url || "Open");
-            const url = escapeHtml(item.url || "#");
-            return `<a href="${url}" target="_blank" rel="noopener">${label}</a>`;
-          })
-          .join("")}</div>`
-      : "";
     const followupHtml = followups.length
       ? `<div class="agent-followups"><div class="agent-source-title">${labels.followupsLabel}</div>${followups
           .map((item) => `<button type="button" data-agent-prompt="${escapeHtml(item)}">${escapeHtml(item)}</button>`)
           .join("")}</div>`
       : "";
+    const trace = Array.isArray(data.trace) ? data.trace : [];
+    const traceHtml = trace.length
+      ? `<details class="agent-loop"><summary><span class="lk">Loop engineering</span><span class="lstages">retrieve → reason → act → verify</span><span class="lcnt">${trace.length} steps · verified ✓</span></summary><ol class="agent-loop-steps">${trace
+          .map((s) => `<li class="lp-${escapeHtml(s.phase || "")}"><span class="lph">${escapeHtml(String(s.phase || "").toUpperCase())}</span>${s.tool ? ` <code>${escapeHtml(s.tool)}</code>` : ""}${s.detail ? ` <span class="ldt">${escapeHtml(s.detail)}</span>` : ""} <span class="lsm">${escapeHtml(s.summary || "")}</span></li>`)
+          .join("")}</ol></details>`
+      : "";
     return `
       <div class="agent-topic">${labels.matched}: ${escapeHtml(agent.label || data.mode || "live agent")}</div>
-      <div class="agent-answer-body">${renderMarkdown(data.answer || "")}</div>
-      ${planHtml}
-      ${actionsHtml}
+      <div class="agent-answer-body">${answerHtml}</div>
+      ${traceHtml}
       ${followupHtml}
       ${
         sources
-          ? `<div class="agent-sources"><div class="agent-source-title">${labels.sources}</div><ol>${sources}</ol></div>`
+          ? `<div class="agent-sources"><div class="agent-source-title">${labels.sources}</div><ul class="agent-src">${sources}</ul></div>`
           : ""
       }
     `;
@@ -456,7 +483,7 @@ const links = {
   async function askLiveAgent(locale, query) {
     if (!agentApiUrl) return null;
     const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 18000);
+    const timeout = window.setTimeout(() => controller.abort(), 35000);
     try {
       const response = await fetch(agentApiUrl, {
         method: "POST",

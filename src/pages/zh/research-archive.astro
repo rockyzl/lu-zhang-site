@@ -13,64 +13,30 @@ const lp = isZh ? "/zh" : "";
 const SCI_COUNT = 97;
 const BOOK_CHAPTER_COUNT = 2;
 const PATENT_COUNT_TOTAL = 28;
-const PATENT_ISSUED = 25;
 const TALKS_TOTAL = 51;
 const CITATION_COUNT = "4,700+";
 const H_INDEX = 39;
 const FIRST_OR_CORRESP = 59;
 
-// Nested entry points — these pages are no longer in the top nav; the archive
-// is their home. Keeps every existing record page reachable.
+const SCHOLAR = "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en";
+const stats = [
+  { n: SCI_COUNT, l: isZh ? "SCI 论文" : "papers", href: u(`${lp}/publications/`) },
+  { n: BOOK_CHAPTER_COUNT, l: isZh ? "著作章节" : "book chapters", href: u(`${lp}/publications/`) },
+  { n: PATENT_COUNT_TOTAL, l: isZh ? "专利" : "patents", href: u(`${lp}/patents/`) },
+  { n: TALKS_TOTAL, l: isZh ? "报告" : "talks", href: u(`${lp}/talks/`) },
+  { n: CITATION_COUNT, l: isZh ? "总被引" : "citations", href: SCHOLAR, external: true },
+  { n: H_INDEX, l: "h-index", href: SCHOLAR, external: true },
+  { n: FIRST_OR_CORRESP, l: isZh ? "一作/通讯" : "first / corresp.", href: u(`${lp}/publications/`) },
+];
+
 const archiveSections = [
-  {
-    href: `${lp}/publications/`,
-    name_en: "Publications",
-    name_zh: "论文",
-    meta_en: "97 SCI articles + 2 book chapters",
-    meta_zh: "97 篇 SCI 论文 + 2 章著作",
-  },
-  {
-    href: `${lp}/patents/`,
-    name_en: "US Patents",
-    name_zh: "美国专利",
-    meta_en: "28 total · 25 issued",
-    meta_zh: "共 28 项 · 25 项已授权",
-  },
-  {
-    href: `${lp}/talks/`,
-    name_en: "Talks & Presentations",
-    name_zh: "学术报告",
-    meta_en: "51 talks · 13 invited",
-    meta_zh: "51 场报告 · 13 场特邀",
-  },
-  {
-    href: `${lp}/reports/`,
-    name_en: "Technical Reports",
-    name_zh: "技术报告",
-    meta_en: "DOE / Argonne LDRD",
-    meta_zh: "DOE / 阿贡 LDRD",
-  },
-  {
-    href: `${lp}/awards/`,
-    name_en: "Awards & Recognition",
-    name_zh: "荣誉与认可",
-    meta_en: "R&D 100 · DOE / JCESR service",
-    meta_zh: "R&D 100 · DOE / JCESR 服务",
-  },
-  {
-    href: `${lp}/mentorship-collaborators/`,
-    name_en: "Mentorship & Collaborators",
-    name_zh: "指导与合作者",
-    meta_en: "13 mentees · 180+ collaborators",
-    meta_zh: "13 位学生 · 180+ 合作者",
-  },
-  {
-    href: `${lp}/press/`,
-    name_en: "Press & Media",
-    name_zh: "媒体与报道",
-    meta_en: "Argonne / DOE / industry coverage",
-    meta_zh: "阿贡 / DOE / 行业报道",
-  },
+  { href: `${lp}/publications/`, name_en: "Publications", name_zh: "论文", meta_en: "97 SCI + 2 book chapters", meta_zh: "97 篇 SCI + 2 章著作" },
+  { href: `${lp}/patents/`, name_en: "US Patents", name_zh: "美国专利", meta_en: "28 total · 25 issued", meta_zh: "共 28 · 25 已授权" },
+  { href: `${lp}/talks/`, name_en: "Talks & Presentations", name_zh: "学术报告", meta_en: "51 talks · 13 invited", meta_zh: "51 场 · 13 特邀" },
+  { href: `${lp}/reports/`, name_en: "Technical Reports", name_zh: "技术报告", meta_en: "DOE / Argonne LDRD", meta_zh: "DOE / 阿贡 LDRD" },
+  { href: `${lp}/awards/`, name_en: "Awards & Recognition", name_zh: "荣誉与认可", meta_en: "R&D 100 · DOE / JCESR", meta_zh: "R&D 100 · DOE / JCESR" },
+  { href: `${lp}/mentorship-collaborators/`, name_en: "Mentorship & Collaborators", name_zh: "指导与合作者", meta_en: "13 mentees · 180+ collaborators", meta_zh: "13 学生 · 180+ 合作者" },
+  { href: `${lp}/press/`, name_en: "Press & Media", name_zh: "媒体与报道", meta_en: "Argonne / DOE / industry", meta_zh: "阿贡 / DOE / 行业" },
 ];
 
 const hasProjectUrl = (p) => typeof p.url === "string" && p.url.length > 0;
@@ -81,157 +47,128 @@ const hasProjectUrl = (p) => typeof p.url === "string" && p.url.length > 0;
     ? "张鲁在电化学储能领域科学工作的公开记录：论文、专利、资助研究方向与项目历史，位于 AI 作品集之后。"
     : "A public record of Lu Zhang's scientific work in electrochemical energy storage — publications, patents, funded research themes, and project history, kept behind the AI portfolio."}
 >
-  <div class="container" style="padding-top: 3rem;">
-    <span class="eyebrow">{isZh ? "研究档案" : "Research Archive"}</span>
-    <h1>{isZh ? "研究档案" : "Research Archive"}</h1>
-    <p class="lead">
-      {isZh
-        ? "在我的 AI 系统工作之前和同时，这里是我在电化学储能领域科学工作的公开记录。"
-        : "A public record of my scientific work in electrochemical energy storage before and alongside my AI systems work."}
-    </p>
-    <p style="color: var(--c-fg); font-size: 1rem; line-height: 1.65; max-width: 62ch; margin-top: 1rem;">
-      {isZh
-        ? "在转向 AI 工程之前，我从事液流电池、锂离子电解液、硅负极、膜材料、锂回收和自主式材料发现研究 15+ 年。这份档案保存了公开的论文、专利、资助研究方向和精选项目历史。它位于主 AI 作品集之后，因为 SciencesLoop 如今聚焦于 grounded agents、evaluation harnesses 和 safety-aware workflows —— 但这段科学背景仍然塑造着我构建系统的方式：以证据为先、可复现、并具备领域意识。"
-        : "Before moving into AI engineering, I spent 15+ years working on redox-flow batteries, lithium-ion electrolytes, silicon anodes, membranes, lithium recovery, and autonomous materials discovery. This archive preserves public publications, patents, funded research themes, and selected project history. It sits behind the main AI portfolio because SciencesLoop is now focused on grounded agents, evaluation harnesses, and safety-aware workflows — but the scientific background still shapes how I build systems: evidence-first, reproducible, and domain-aware."}
-    </p>
+  <div class="container ra">
+    <section class="ra-hero">
+      <span class="eyebrow">{isZh ? "研究档案 · 科学根基" : "Research Archive · science foundation"}</span>
+      <h1 class="ra-title">{isZh ? "研究档案" : "Research Archive"}</h1>
+      <p class="ra-intro">
+        {isZh
+          ? <>转向 AI 工程之前，我在电化学储能领域做了 <b>15+ 年</b>研究 —— 液流电池、锂离子电解液、硅负极、膜材料、锂回收和自主式材料发现。这段背景仍塑造着我今天构建 AI 系统的方式：<b>以证据为先、可复现、具备领域意识</b>。这份档案保存公开的论文、专利、资助方向和项目历史。</>
+          : <>Before moving into AI engineering, I spent <b>15+ years</b> in electrochemical energy storage — redox-flow batteries, Li-ion electrolytes, silicon anodes, membranes, lithium recovery, and autonomous materials discovery. That background still shapes how I build AI systems today: <b>evidence-first, reproducible, and domain-aware</b>. This archive keeps the public publications, patents, funded themes, and project history.</>}
+      </p>
+    </section>
 
-    <div class="stat-bar" style="margin-top: 2.5rem;">
-      <div class="stat"><div class="num">{SCI_COUNT}</div><div class="label">{t("stat.papers", locale)}</div></div>
-      <div class="stat"><div class="num">{BOOK_CHAPTER_COUNT}</div><div class="label">{isZh ? "著作章节" : "Book chapters"}</div></div>
-      <div class="stat"><div class="num">{PATENT_COUNT_TOTAL}</div><div class="label">{t("stat.patents", locale)}</div></div>
-      <div class="stat"><div class="num">{TALKS_TOTAL}</div><div class="label">{t("stat.talks", locale)}</div></div>
-      <div class="stat"><div class="num">{CITATION_COUNT}</div><div class="label">{t("stat.citations", locale)}</div></div>
-      <div class="stat"><div class="num">{H_INDEX}</div><div class="label">{t("stat.h", locale)}</div></div>
-      <div class="stat"><div class="num">{FIRST_OR_CORRESP}</div><div class="label">{t("stat.first", locale)}</div></div>
-    </div>
-
-    <div class="section-head" style="margin-top: 3rem;">
-      <h2 style="margin: 0;">{isZh ? "档案索引" : "Browse the record"}</h2>
-    </div>
-    <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">
-      {isZh
-        ? "论文、专利、报告、荣誉与合作者的完整明细页面。"
-        : "The full detail pages for publications, patents, reports, awards, and collaborators."}
-    </p>
-    <section class="product-modules" aria-label={isZh ? "档案子页面" : "Archive sections"}>
-      {archiveSections.map((s) => (
-        <a class="product-module" href={u(s.href)}>
-          <h2>{isZh ? s.name_zh : s.name_en}</h2>
-          <p>{isZh ? s.meta_zh : s.meta_en}</p>
+    <div class="ra-stats">
+      {stats.map((s) => (
+        <a class="ra-stat" href={s.href} {...(s.external ? { target: "_blank", rel: "noopener" } : {})}>
+          <div class="n">{s.n}</div><div class="l">{s.l}</div>
         </a>
       ))}
-    </section>
+    </div>
 
-    <section class="workflow-panel" style="margin-top: 2rem;">
-      <div>
-        <span class="eyebrow">{isZh ? "论文记录" : "Publication record"}</span>
-        <h2>{SCI_COUNT} {isZh ? "篇 SCI 期刊论文 + 2 章著作章节" : "peer-reviewed journal articles + 2 book chapters"}</h2>
-        <p>
-          {isZh
-            ? "覆盖液流电池化学、redoxmer 分子设计、锂离子电解液添加剂、硅负极粘合剂和 ML 驱动的材料发现；4,700+ 总被引，h 指数 39。"
-            : "Spanning flow-battery chemistries, redoxmer molecular design, Li-ion electrolyte additives, silicon-anode binders, and ML-driven materials discovery; 4,700+ citations, h-index 39."}
-        </p>
-        <p><a class="more" href={u(`${lp}/publications/`)}>{isZh ? "查看全部论文 →" : "See all publications →"}</a></p>
+    <section class="ra-sec">
+      <div class="ra-sechead">{isZh ? "档案索引" : "Browse the record"}</div>
+      <div class="ra-index">
+        {archiveSections.map((s) => (
+          <a class="ra-idx" href={u(s.href)}>
+            <span class="nm">{isZh ? s.name_zh : s.name_en}</span>
+            <span class="mt">{isZh ? s.meta_zh : s.meta_en}</span>
+            <span class="ar">→</span>
+          </a>
+        ))}
       </div>
     </section>
 
-    <section class="workflow-panel" style="margin-top: 1.4rem;">
-      <div>
-        <span class="eyebrow">{isZh ? "专利记录" : "Patent record"}</span>
-        <h2>{PATENT_COUNT_TOTAL} {isZh ? "项专利组合（25 项已授权）" : "in the patent portfolio (25 issued)"}</h2>
-        <p>
-          {isZh
-            ? "覆盖液流电池化学、氧化还原穿梭剂、锂离子电解液、硅负极粘合剂，以及膜材料 / 锂回收 / 氟醚溶剂方向的待审申请。"
-            : "Covering flow-battery chemistries, redox shuttles, Li-ion electrolytes, silicon-anode binders, plus pending applications in membrane / lithium-recovery and HFE-solvent directions."}
-        </p>
-        <p><a class="more" href={u(`${lp}/patents/`)}>{isZh ? "查看全部专利 →" : "See all patents →"}</a></p>
+    <section class="ra-sec">
+      <div class="ra-sechead">{isZh ? "研究方向" : "Research themes"}</div>
+      <div class="ra-themes">
+        {projectsData.capability_themes.map((theme) => <span class="ra-theme">{theme}</span>)}
       </div>
     </section>
 
-    <div class="section-head" style="margin-top: 3rem;">
-      <h2 style="margin: 0;">{isZh ? "研究方向" : "Research themes"}</h2>
-    </div>
-    <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">
-      {isZh ? "在上述项目中形成的跨领域专长。" : "Cross-cutting expertise developed across the projects below."}
-    </p>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 1rem;">
-      {projectsData.capability_themes.map((theme) => (
-        <div style="background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-sm); padding: 0.9rem 1rem; font-size: 0.92rem;">
-          {theme}
-        </div>
-      ))}
-    </div>
-
-    <div class="section-head" style="margin-top: 3.5rem;">
-      <h2 style="margin: 0;">{isZh ? "精选研究项目" : "Selected research projects"}</h2>
-    </div>
-    <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">
-      {isZh
-        ? "阿贡 DOE / JCESR / LDRD 电池材料研究档案。"
-        : "The Argonne DOE / JCESR / LDRD battery-materials research archive."}
-    </p>
-    {projectsData.categories.map((cat) => (
-      <section style="margin-top: 2.5rem;">
-        <div class="section-head">
-          <h2 style="margin: 0;">{cat.title}</h2>
-          <span class="more">{cat.items.length}</span>
-        </div>
-        <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">{cat.subtitle}</p>
-        {cat.items.map((p) => (
-          <div class="entry">
-            <div class="title">
-              {hasProjectUrl(p) ? (
-                <a href={p.url} target="_blank" rel="noopener">{p.name}</a>
-              ) : (
-                <span>{p.name}</span>
+    <section class="ra-sec">
+      <div class="ra-sechead">{isZh ? "精选研究项目 · 阿贡 DOE / JCESR / LDRD" : "Selected research projects · Argonne DOE / JCESR / LDRD"}</div>
+      {projectsData.categories.map((cat) => (
+        <div class="ra-catgroup">
+          <div class="ra-cat"><span>{cat.title}</span><span class="c">{cat.items.length}</span></div>
+          {cat.subtitle && <p class="ra-catsub">{cat.subtitle}</p>}
+          {cat.items.map((p) => (
+            <div class="ra-entry">
+              <div class="ra-etitle">
+                {hasProjectUrl(p) ? <a href={p.url} target="_blank" rel="noopener">{p.name} ↗</a> : <span>{p.name}</span>}
+              </div>
+              <div class="ra-emeta"><b>{p.funder}</b> · {p.years} · {p.role}</div>
+              {p.highlights && p.highlights.length > 0 && (
+                <ul class="ra-hl">{p.highlights.map((h) => <li>{h}</li>)}</ul>
               )}
             </div>
-            <div class="meta">
-              <strong style="color: var(--c-fg);">{p.funder}</strong> · {p.years} · {p.role}
-            </div>
-            {p.highlights && p.highlights.length > 0 && (
-              <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--c-fg); font-size: 0.93rem; line-height: 1.55;">
-                {p.highlights.map((h) => <li>{h}</li>)}
-              </ul>
-            )}
-          </div>
-        ))}
-      </section>
-    ))}
-
-    <section class="workflow-panel" style="margin-top: 3rem;">
-      <div>
-        <span class="eyebrow">{isZh ? "合作与机构" : "Collaborations & institutions"}</span>
-        <h2>{isZh ? "跨机构的科学合作" : "Cross-institution scientific collaboration"}</h2>
-        <p>
-          {isZh
-            ? "13 位直接指导的学生与博士后，以及 180+ 位来自国家实验室、大学和产业界的合作者，工作横跨 JCESR、Silicon Consortium 和多个 DOE / Argonne LDRD 项目。"
-            : "13 directly mentored students and postdocs, plus 180+ collaborators across national labs, universities, and industry, spanning JCESR, the Silicon Consortium, and multiple DOE / Argonne LDRD projects."}
-        </p>
-        <p><a class="more" href={u(`${lp}/mentorship-collaborators/`)}>{isZh ? "查看指导与合作者 →" : "See mentorship & collaborators →"}</a></p>
-      </div>
+          ))}
+        </div>
+      ))}
     </section>
 
-    <section class="lab-manifesto" style="margin-top: 1.4rem;" aria-label={isZh ? "科学背景如何影响 AI 工作" : "How this informs my AI work"}>
-      <div>
-        <span class="eyebrow">{isZh ? "承前启后" : "The through-line"}</span>
-        <h2>{isZh ? "这段背景如何塑造我的 AI 工作" : "How this background informs my AI work"}</h2>
-      </div>
-      <div>
-        <p>
-          {isZh
-            ? "在犯错代价高昂的实验科学里做了十几年，我养成了对证据、署名、可复现性和不确定性的本能重视。"
-            : "More than a decade in experimental science, where mistakes are expensive, built an instinct for evidence, attribution, reproducibility, and uncertainty."}
-        </p>
-        <p>
-          {isZh
-            ? "这直接对应到我今天构建 AI 系统的方式：让智能体以来源为依据、用确定性 eval 测试它们、给它们加上安全护栏，并在正确性至关重要的地方保留人工复核。"
-            : "That maps directly onto how I build AI systems today: grounding agents in sources, testing them with deterministic evals, gating them with safety screens, and keeping human review where correctness matters."}
-        </p>
-        <p style="margin-top: 0.4rem;">
-          <a class="more" href={u(`${lp}/projects/`)}>{isZh ? "查看当前 AI 系统 →" : "See the current AI systems →"}</a>
-        </p>
-      </div>
+    <section class="ra-through">
+      <div class="ra-sechead">{isZh ? "承前启后" : "The through-line"}</div>
+      <p>
+        {isZh
+          ? "在犯错代价高昂的实验科学里做了十几年，养成了对证据、署名、可复现性和不确定性的本能重视 —— 这直接对应到我今天构建 AI 系统的方式：让 agent 以来源为依据、用确定性 eval 测试、加安全护栏，并在正确性关键处保留人工复核。"
+          : "More than a decade in experimental science, where mistakes are expensive, built an instinct for evidence, attribution, reproducibility, and uncertainty — which maps directly onto how I build AI today: grounding agents in sources, testing with deterministic evals, gating with safety screens, and keeping human review where correctness matters."}
+      </p>
+      <a class="ra-cta" href={u(`${lp}/projects/`)}>{isZh ? "查看当前 AI 系统 →" : "See the current AI systems →"}</a>
     </section>
   </div>
+
+  <style>
+    .ra { max-width: 820px; }
+    .ra .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--c-accent); }
+    .ra-hero { padding: 1.4rem 0 0; }
+    .ra-title { font-size: clamp(32px, 5vw, 50px); letter-spacing: -.035em; font-weight: 730; margin: .5rem 0 0; }
+    .ra-intro { font-size: 1.05rem; color: var(--c-fg); line-height: 1.65; margin: 1.2rem 0 0; max-width: 66ch; }
+    .ra-intro b { font-weight: 640; color: var(--c-ink); }
+
+    .ra-stats { display: flex; flex-wrap: wrap; gap: 1.4rem 1.9rem; margin: 2.2rem 0 0; padding: 1.3rem 0; border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border); }
+    .ra-stat { color: inherit; text-decoration: none; display: block; padding: .3rem .55rem .3rem 0; border-radius: 8px; transition: transform .14s; }
+    .ra-stat .n { font-size: 1.45rem; font-weight: 700; letter-spacing: -.02em; color: var(--c-fg); transition: color .15s; display: inline-flex; align-items: baseline; gap: .28rem; }
+    .ra-stat .n::after { content: "↗"; font-family: var(--font-mono); font-size: .62rem; color: var(--c-border-strong, #b9b3a0); transition: color .15s, transform .15s; }
+    .ra-stat .l { font-family: var(--font-mono); font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; color: var(--c-muted); margin-top: .2rem; transition: color .15s; }
+    .ra-stat:hover { transform: translateY(-2px); }
+    .ra-stat:hover .n { color: var(--c-accent); }
+    .ra-stat:hover .n::after { color: var(--c-accent); transform: translate(1px, -1px); }
+    .ra-stat:hover .l { color: var(--c-accent); }
+
+    .ra-sec { padding: 2.4rem 0 0; }
+    .ra-sechead { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--c-muted); margin: 0 0 1rem; }
+
+    .ra-index { display: flex; flex-direction: column; }
+    .ra-idx { display: flex; align-items: baseline; gap: 1rem; padding: .85rem 0; border-top: 1px solid var(--c-border); color: inherit; text-decoration: none; }
+    .ra-idx:first-of-type { border-top: 0; }
+    .ra-idx .nm { font-size: 1rem; font-weight: 640; transition: color .15s; }
+    .ra-idx:hover .nm { color: var(--c-accent); }
+    .ra-idx .mt { font-family: var(--font-mono); font-size: .74rem; color: var(--c-muted); margin-left: auto; text-align: right; }
+    .ra-idx .ar { color: var(--c-accent); font-family: var(--font-mono); }
+
+    .ra-themes { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .ra-theme { font-family: var(--font-mono); font-size: .76rem; color: var(--c-fg-2, var(--c-fg)); background: var(--c-card); border: 1px solid var(--c-border); border-radius: 999px; padding: .35rem .7rem; }
+
+    .ra-catgroup { margin-top: 1.8rem; }
+    .ra-cat { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; font-size: 1.05rem; font-weight: 680; letter-spacing: -.01em; border-bottom: 1px solid var(--c-border); padding-bottom: .5rem; }
+    .ra-cat .c { font-family: var(--font-mono); font-size: .8rem; font-weight: 400; color: var(--c-muted); }
+    .ra-catsub { color: var(--c-muted); font-size: .9rem; margin: .55rem 0 0; }
+    .ra-entry { padding: .95rem 0; border-bottom: 1px solid var(--c-border-soft); }
+    .ra-etitle { font-size: .98rem; font-weight: 600; }
+    .ra-etitle a { color: var(--c-accent); }
+    .ra-emeta { font-family: var(--font-mono); font-size: .74rem; color: var(--c-muted); margin-top: .28rem; }
+    .ra-emeta b { color: var(--c-fg); font-weight: 600; }
+    .ra-hl { margin: .5rem 0 0; padding-left: 1.15rem; color: var(--c-fg); font-size: .9rem; line-height: 1.55; }
+    .ra-hl li { margin: .15rem 0; }
+
+    .ra-through { padding: 2.6rem 0 3.5rem; }
+    .ra-through p { color: var(--c-fg); font-size: 1rem; line-height: 1.7; max-width: 66ch; margin: 0; }
+    .ra-cta { display: inline-block; margin-top: 1rem; font-family: var(--font-mono); font-size: .82rem; color: var(--c-accent); }
+
+    @media (max-width: 560px) {
+      .ra-idx { flex-wrap: wrap; gap: .2rem; }
+      .ra-idx .mt { margin-left: 0; text-align: left; flex-basis: 100%; }
+    }
+  </style>
 </Base>
