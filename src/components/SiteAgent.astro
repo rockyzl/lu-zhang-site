@@ -38,14 +38,12 @@ const copy = locale === "zh"
         roadmap: "查看路线图",
       },
       prompts: [
-        "Lu 的 AI for Science 方向是什么？",
-        "哪些证据体现 agent reliability 能力？",
-        "SciencesLoop 的方法论是什么？",
-        "有哪些 case studies？",
-        "他有哪些 MLOps / evaluation 经验？",
-        "他的电池和液流电池背景是什么？",
-        "Lu 的主要合作者是谁？",
-        "我应该先看哪些论文或专利？",
+        "Lu 建过哪些 AI 系统？",
+        "他怎么让 agent 可靠、可测？",
+        "Property OS 是什么？怎么做安全门控的？",
+        "这个 SciencesLoop Agent demo 是怎么工作的？",
+        "他在 RAG、评测、安全护栏方面有什么经验？",
+        "科学背景如何影响他的 AI 工程？",
       ],
     }
   : {
@@ -79,14 +77,12 @@ const copy = locale === "zh"
         roadmap: "View roadmap",
       },
       prompts: [
-        "What is Lu's AI for Science direction?",
-        "What evidence shows agent reliability skills?",
-        "How does SciencesLoop build reliable agents?",
-        "What case studies show the work?",
-        "What MLOps and evaluation experience does he have?",
-        "What is his battery and redox-flow background?",
-        "Who are Lu's main collaborators?",
-        "Which papers or patents should I look at first?",
+        "What AI systems has Lu built?",
+        "How does he keep agents grounded and testable?",
+        "What's Property OS, and how is it safety-gated?",
+        "How does the SciencesLoop Agent (this demo) work?",
+        "What's his experience with RAG, evals, and safety guardrails?",
+        "How does his science background inform his AI engineering?",
       ],
     };
 
@@ -144,8 +140,8 @@ const links = {
         <div class="agent-topic">{copy.matched}: {locale === "zh" ? "开始" : "Start"}</div>
         <div>
           {locale === "zh"
-            ? "你好。我可以帮你快速了解 SciencesLoop 的研究方向、agent 系统、电池材料、论文专利和职业背景。"
-            : "Hi. I can help you navigate SciencesLoop programs, agent systems, battery materials, publications, patents, and career background."}
+            ? "你好。可以问我 Lu 建过哪些 AI 系统、他怎么让 agent 可靠可测，或者这些工作背后的科学背景。"
+            : "Hi. Ask about the AI systems Lu has built, how he keeps agents grounded and testable, or the science background behind the work."}
         </div>
         <div class="agent-next">{copy.next}: <a href={links.ai}>{copy.actions.ai}</a></div>
       </div>
