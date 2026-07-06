@@ -42,7 +42,7 @@ const navGroups = [
       { href: `${langPrefix}/patents/`, key: "nav.patents" },
       { href: `${langPrefix}/talks/`, key: "nav.talks" },
       { href: `${langPrefix}/reports/`, key: "nav.reports" },
-      { href: `${langPrefix}/projects/`, key: "nav.projects" },
+      { href: `${langPrefix}/research-archive/`, key: "nav.projects", label: { en: "Research Archive", zh: "研究档案" } },
     ],
   },
   {
@@ -163,7 +163,7 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
                     target={n.external ? "_blank" : undefined}
                     rel={n.external ? "noopener" : undefined}
                   >
-                    {t(n.key, locale)}
+                    {n.label ? n.label[locale] : t(n.key, locale)}
                   </a>
                 ))}
               </div>
