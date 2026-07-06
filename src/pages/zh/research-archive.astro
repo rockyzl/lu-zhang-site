@@ -1,0 +1,237 @@
+---
+import Base from "../../layouts/Base.astro";
+import { u } from "../../lib/url";
+import { detectLocale, t } from "../../lib/i18n";
+import projectsData from "../../data/projects.json";
+
+const locale = detectLocale(Astro.url.pathname);
+const isZh = locale === "zh";
+const lp = isZh ? "/zh" : "";
+
+// Authoritative counts (user-verified TSV 2026-04-27) — same constants used on
+// the home stat bar. Do NOT switch to dynamic compute (JSON is incomplete).
+const SCI_COUNT = 97;
+const BOOK_CHAPTER_COUNT = 2;
+const PATENT_COUNT_TOTAL = 28;
+const PATENT_ISSUED = 25;
+const TALKS_TOTAL = 51;
+const CITATION_COUNT = "4,700+";
+const H_INDEX = 39;
+const FIRST_OR_CORRESP = 59;
+
+// Nested entry points — these pages are no longer in the top nav; the archive
+// is their home. Keeps every existing record page reachable.
+const archiveSections = [
+  {
+    href: `${lp}/publications/`,
+    name_en: "Publications",
+    name_zh: "论文",
+    meta_en: "97 SCI articles + 2 book chapters",
+    meta_zh: "97 篇 SCI 论文 + 2 章著作",
+  },
+  {
+    href: `${lp}/patents/`,
+    name_en: "US Patents",
+    name_zh: "美国专利",
+    meta_en: "28 total · 25 issued",
+    meta_zh: "共 28 项 · 25 项已授权",
+  },
+  {
+    href: `${lp}/talks/`,
+    name_en: "Talks & Presentations",
+    name_zh: "学术报告",
+    meta_en: "51 talks · 13 invited",
+    meta_zh: "51 场报告 · 13 场特邀",
+  },
+  {
+    href: `${lp}/reports/`,
+    name_en: "Technical Reports",
+    name_zh: "技术报告",
+    meta_en: "DOE / Argonne LDRD",
+    meta_zh: "DOE / 阿贡 LDRD",
+  },
+  {
+    href: `${lp}/awards/`,
+    name_en: "Awards & Recognition",
+    name_zh: "荣誉与认可",
+    meta_en: "R&D 100 · DOE / JCESR service",
+    meta_zh: "R&D 100 · DOE / JCESR 服务",
+  },
+  {
+    href: `${lp}/mentorship-collaborators/`,
+    name_en: "Mentorship & Collaborators",
+    name_zh: "指导与合作者",
+    meta_en: "13 mentees · 180+ collaborators",
+    meta_zh: "13 位学生 · 180+ 合作者",
+  },
+  {
+    href: `${lp}/press/`,
+    name_en: "Press & Media",
+    name_zh: "媒体与报道",
+    meta_en: "Argonne / DOE / industry coverage",
+    meta_zh: "阿贡 / DOE / 行业报道",
+  },
+];
+
+const hasProjectUrl = (p) => typeof p.url === "string" && p.url.length > 0;
+---
+<Base
+  title={(isZh ? "研究档案 — " : "Research Archive — ") + "SciencesLoop"}
+  description={isZh
+    ? "张鲁在电化学储能领域科学工作的公开记录：论文、专利、资助研究方向与项目历史，位于 AI 作品集之后。"
+    : "A public record of Lu Zhang's scientific work in electrochemical energy storage — publications, patents, funded research themes, and project history, kept behind the AI portfolio."}
+>
+  <div class="container" style="padding-top: 3rem;">
+    <span class="eyebrow">{isZh ? "研究档案" : "Research Archive"}</span>
+    <h1>{isZh ? "研究档案" : "Research Archive"}</h1>
+    <p class="lead">
+      {isZh
+        ? "在我的 AI 系统工作之前和同时，这里是我在电化学储能领域科学工作的公开记录。"
+        : "A public record of my scientific work in electrochemical energy storage before and alongside my AI systems work."}
+    </p>
+    <p style="color: var(--c-fg); font-size: 1rem; line-height: 1.65; max-width: 62ch; margin-top: 1rem;">
+      {isZh
+        ? "在转向 AI 工程之前，我从事液流电池、锂离子电解液、硅负极、膜材料、锂回收和自主式材料发现研究 15+ 年。这份档案保存了公开的论文、专利、资助研究方向和精选项目历史。它位于主 AI 作品集之后，因为 SciencesLoop 如今聚焦于 grounded agents、evaluation harnesses 和 safety-aware workflows —— 但这段科学背景仍然塑造着我构建系统的方式：以证据为先、可复现、并具备领域意识。"
+        : "Before moving into AI engineering, I spent 15+ years working on redox-flow batteries, lithium-ion electrolytes, silicon anodes, membranes, lithium recovery, and autonomous materials discovery. This archive preserves public publications, patents, funded research themes, and selected project history. It sits behind the main AI portfolio because SciencesLoop is now focused on grounded agents, evaluation harnesses, and safety-aware workflows — but the scientific background still shapes how I build systems: evidence-first, reproducible, and domain-aware."}
+    </p>
+
+    <div class="stat-bar" style="margin-top: 2.5rem;">
+      <div class="stat"><div class="num">{SCI_COUNT}</div><div class="label">{t("stat.papers", locale)}</div></div>
+      <div class="stat"><div class="num">{BOOK_CHAPTER_COUNT}</div><div class="label">{isZh ? "著作章节" : "Book chapters"}</div></div>
+      <div class="stat"><div class="num">{PATENT_COUNT_TOTAL}</div><div class="label">{t("stat.patents", locale)}</div></div>
+      <div class="stat"><div class="num">{TALKS_TOTAL}</div><div class="label">{t("stat.talks", locale)}</div></div>
+      <div class="stat"><div class="num">{CITATION_COUNT}</div><div class="label">{t("stat.citations", locale)}</div></div>
+      <div class="stat"><div class="num">{H_INDEX}</div><div class="label">{t("stat.h", locale)}</div></div>
+      <div class="stat"><div class="num">{FIRST_OR_CORRESP}</div><div class="label">{t("stat.first", locale)}</div></div>
+    </div>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin: 0;">{isZh ? "档案索引" : "Browse the record"}</h2>
+    </div>
+    <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">
+      {isZh
+        ? "论文、专利、报告、荣誉与合作者的完整明细页面。"
+        : "The full detail pages for publications, patents, reports, awards, and collaborators."}
+    </p>
+    <section class="product-modules" aria-label={isZh ? "档案子页面" : "Archive sections"}>
+      {archiveSections.map((s) => (
+        <a class="product-module" href={u(s.href)}>
+          <h2>{isZh ? s.name_zh : s.name_en}</h2>
+          <p>{isZh ? s.meta_zh : s.meta_en}</p>
+        </a>
+      ))}
+    </section>
+
+    <section class="workflow-panel" style="margin-top: 2rem;">
+      <div>
+        <span class="eyebrow">{isZh ? "论文记录" : "Publication record"}</span>
+        <h2>{SCI_COUNT} {isZh ? "篇 SCI 期刊论文 + 2 章著作章节" : "peer-reviewed journal articles + 2 book chapters"}</h2>
+        <p>
+          {isZh
+            ? "覆盖液流电池化学、redoxmer 分子设计、锂离子电解液添加剂、硅负极粘合剂和 ML 驱动的材料发现；4,700+ 总被引，h 指数 39。"
+            : "Spanning flow-battery chemistries, redoxmer molecular design, Li-ion electrolyte additives, silicon-anode binders, and ML-driven materials discovery; 4,700+ citations, h-index 39."}
+        </p>
+        <p><a class="more" href={u(`${lp}/publications/`)}>{isZh ? "查看全部论文 →" : "See all publications →"}</a></p>
+      </div>
+    </section>
+
+    <section class="workflow-panel" style="margin-top: 1.4rem;">
+      <div>
+        <span class="eyebrow">{isZh ? "专利记录" : "Patent record"}</span>
+        <h2>{PATENT_COUNT_TOTAL} {isZh ? "项专利组合（25 项已授权）" : "in the patent portfolio (25 issued)"}</h2>
+        <p>
+          {isZh
+            ? "覆盖液流电池化学、氧化还原穿梭剂、锂离子电解液、硅负极粘合剂，以及膜材料 / 锂回收 / 氟醚溶剂方向的待审申请。"
+            : "Covering flow-battery chemistries, redox shuttles, Li-ion electrolytes, silicon-anode binders, plus pending applications in membrane / lithium-recovery and HFE-solvent directions."}
+        </p>
+        <p><a class="more" href={u(`${lp}/patents/`)}>{isZh ? "查看全部专利 →" : "See all patents →"}</a></p>
+      </div>
+    </section>
+
+    <div class="section-head" style="margin-top: 3rem;">
+      <h2 style="margin: 0;">{isZh ? "研究方向" : "Research themes"}</h2>
+    </div>
+    <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">
+      {isZh ? "在上述项目中形成的跨领域专长。" : "Cross-cutting expertise developed across the projects below."}
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 1rem;">
+      {projectsData.capability_themes.map((theme) => (
+        <div style="background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-sm); padding: 0.9rem 1rem; font-size: 0.92rem;">
+          {theme}
+        </div>
+      ))}
+    </div>
+
+    <div class="section-head" style="margin-top: 3.5rem;">
+      <h2 style="margin: 0;">{isZh ? "精选研究项目" : "Selected research projects"}</h2>
+    </div>
+    <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">
+      {isZh
+        ? "阿贡 DOE / JCESR / LDRD 电池材料研究档案。"
+        : "The Argonne DOE / JCESR / LDRD battery-materials research archive."}
+    </p>
+    {projectsData.categories.map((cat) => (
+      <section style="margin-top: 2.5rem;">
+        <div class="section-head">
+          <h2 style="margin: 0;">{cat.title}</h2>
+          <span class="more">{cat.items.length}</span>
+        </div>
+        <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">{cat.subtitle}</p>
+        {cat.items.map((p) => (
+          <div class="entry">
+            <div class="title">
+              {hasProjectUrl(p) ? (
+                <a href={p.url} target="_blank" rel="noopener">{p.name}</a>
+              ) : (
+                <span>{p.name}</span>
+              )}
+            </div>
+            <div class="meta">
+              <strong style="color: var(--c-fg);">{p.funder}</strong> · {p.years} · {p.role}
+            </div>
+            {p.highlights && p.highlights.length > 0 && (
+              <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--c-fg); font-size: 0.93rem; line-height: 1.55;">
+                {p.highlights.map((h) => <li>{h}</li>)}
+              </ul>
+            )}
+          </div>
+        ))}
+      </section>
+    ))}
+
+    <section class="workflow-panel" style="margin-top: 3rem;">
+      <div>
+        <span class="eyebrow">{isZh ? "合作与机构" : "Collaborations & institutions"}</span>
+        <h2>{isZh ? "跨机构的科学合作" : "Cross-institution scientific collaboration"}</h2>
+        <p>
+          {isZh
+            ? "13 位直接指导的学生与博士后，以及 180+ 位来自国家实验室、大学和产业界的合作者，工作横跨 JCESR、Silicon Consortium 和多个 DOE / Argonne LDRD 项目。"
+            : "13 directly mentored students and postdocs, plus 180+ collaborators across national labs, universities, and industry, spanning JCESR, the Silicon Consortium, and multiple DOE / Argonne LDRD projects."}
+        </p>
+        <p><a class="more" href={u(`${lp}/mentorship-collaborators/`)}>{isZh ? "查看指导与合作者 →" : "See mentorship & collaborators →"}</a></p>
+      </div>
+    </section>
+
+    <section class="lab-manifesto" style="margin-top: 1.4rem;" aria-label={isZh ? "科学背景如何影响 AI 工作" : "How this informs my AI work"}>
+      <div>
+        <span class="eyebrow">{isZh ? "承前启后" : "The through-line"}</span>
+        <h2>{isZh ? "这段背景如何塑造我的 AI 工作" : "How this background informs my AI work"}</h2>
+      </div>
+      <div>
+        <p>
+          {isZh
+            ? "在犯错代价高昂的实验科学里做了十几年，我养成了对证据、署名、可复现性和不确定性的本能重视。"
+            : "More than a decade in experimental science, where mistakes are expensive, built an instinct for evidence, attribution, reproducibility, and uncertainty."}
+        </p>
+        <p>
+          {isZh
+            ? "这直接对应到我今天构建 AI 系统的方式：让智能体以来源为依据、用确定性 eval 测试它们、给它们加上安全护栏，并在正确性至关重要的地方保留人工复核。"
+            : "That maps directly onto how I build AI systems today: grounding agents in sources, testing them with deterministic evals, gating them with safety screens, and keeping human review where correctness matters."}
+        </p>
+        <p style="margin-top: 0.4rem;">
+          <a class="more" href={u(`${lp}/projects/`)}>{isZh ? "查看当前 AI 系统 →" : "See the current AI systems →"}</a>
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>

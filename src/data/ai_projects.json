@@ -1,48 +1,46 @@
 [
   {
-    "name": "lu-zhang-site",
-    "tagline": "SciencesLoop public research lab site with structured evidence layer",
-    "description": "Astro static site driven by curated public research records. It connects SciencesLoop programs, field notes, research projects, publications, patents, talks, and the public agent demo.",
-    "status": "Live",
+    "name": "Scientific Agent Lab",
+    "tagline": "Evidence-grounded scientific agents with replayable evals",
+    "description": "Explores how LLM agents can answer scientific questions while staying grounded in cited sources and testable through a deterministic evaluation harness.",
+    "status": "Public repository",
     "tags": [
-      "Astro",
-      "structured data",
-      "data-driven"
-    ],
-    "image": null,
-    "gradient": "from-amber to-rust",
-    "site": "https://sciencesloop.com/",
-    "repo": null
-  },
-  {
-    "name": "guangnian-energy-agent",
-    "tagline": "VoiceRAG / Lightyear energy-agent prototype",
-    "description": "Bilingual RAG assistant prototype for new-energy content, used to test retrieval, realtime voice interaction, and domain navigation patterns for SciencesLoop-style agents.",
-    "status": "Public prototype",
-    "tags": [
-      "Azure OpenAI",
-      "RAG",
-      "voice-rag",
-      "AI x energy",
-      "public prototype"
-    ],
-    "image": null,
-    "gradient": "from-amber to-teal",
-    "site": "https://voicerag.sciencesloop.com/",
-    "repo": "https://github.com/rockyzl/voice-rag"
-  },
-  {
-    "name": "rfb-formulation-agent",
-    "tagline": "Redox-flow-battery formulation support prototype",
-    "description": "A pre-v0.1 vertical-domain AI agent prototype for redox-flow-battery formulation support. It tests whether structured retrieval, reasoning, and validation workflows can help organize flow-battery formulation knowledge.",
-    "status": "In progress · pre-v0.1",
-    "tags": [
-      "LLM agents",
-      "electrochemistry",
-      "materials discovery"
+      "grounded agents",
+      "eval harness",
+      "LLM agents"
     ],
     "image": null,
     "gradient": "from-rust to-amber",
+    "site": null,
+    "repo": "https://github.com/rockyzl/scientific-agent-lab"
+  },
+  {
+    "name": "SciencesLoop Agent API",
+    "tagline": "Retrieval-grounded agent with an attribution guardrail",
+    "description": "A retrieval-grounded agent that answers questions about my public work, with an external-attribution guardrail to avoid misattributing others' work.",
+    "status": "Live demo",
+    "tags": [
+      "RAG",
+      "attribution guardrail",
+      "grounded Q&A"
+    ],
+    "image": null,
+    "gradient": "from-amber to-teal",
+    "site": "https://sciencesloop.com/agent/",
+    "repo": null
+  },
+  {
+    "name": "Property OS — Voice/SMS Operations Agent",
+    "tagline": "Interruptible real-time voice & SMS operations agent",
+    "description": "An interruptible real-time voice and SMS assistant for property operations: natural voice interaction, a safety-gated LLM layer, a read-only ops console, and explicit data-governance boundaries between operational records and financial ledgers.",
+    "status": "Private case study",
+    "tags": [
+      "realtime voice",
+      "safety-gated",
+      "ops console"
+    ],
+    "image": null,
+    "gradient": "from-teal to-navy",
     "site": null,
     "repo": null
   }

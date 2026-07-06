@@ -1,78 +1,222 @@
 ---
 import Base from "../../layouts/Base.astro";
-import { detectLocale, t } from "../../lib/i18n";
-import projectsData from "../../data/projects.json";
+import { u } from "../../lib/url";
+import { detectLocale } from "../../lib/i18n";
 
 const locale = detectLocale(Astro.url.pathname);
-const totalCount = projectsData.categories.reduce((s, c) => s + c.items.length, 0);
+const isZh = locale === "zh";
+const lp = isZh ? "/zh" : "";
 
-const hasProjectUrl = (p) => typeof p.url === "string" && p.url.length > 0;
+const GH_PROFILE = "https://github.com/rockyzl";
 
+// Current AI / agent / software systems. Public-safe per public-content-contract:
+// public repos link out; private case studies describe only (no repo, no URL).
+const groups = [
+  {
+    key: "agent-infra",
+    name_en: "Agent Infrastructure",
+    name_zh: "Agent Infrastructure",
+    sub_en: "Grounded agents, retrieval, and the evaluation scaffolding around them.",
+    sub_zh: "有据可查的智能体、检索，以及围绕它们的评估支架。",
+    items: [
+      {
+        name: "Scientific Agent Lab",
+        tagline_en: "Evidence-grounded scientific agents with replayable evals",
+        tagline_zh: "有据可查、评估可回放的科学智能体",
+        desc_en: "Explores how LLM agents can answer scientific questions while staying grounded in cited sources and testable through a deterministic evaluation harness.",
+        desc_zh: "探索 LLM 智能体如何在回答科学问题的同时，始终以被引用的来源为依据，并通过确定性的评估 harness 保持可测试。",
+        status_en: "Public repository",
+        status_zh: "公开仓库",
+        tags: ["grounded agents", "eval harness", "LLM agents"],
+        gradient: "from-rust to-amber",
+        href: "https://github.com/rockyzl/scientific-agent-lab",
+        external: true,
+        cta_en: "View repository",
+        cta_zh: "查看仓库",
+      },
+      {
+        name: "SciencesLoop Agent API",
+        tagline_en: "Retrieval-grounded agent with an attribution guardrail",
+        tagline_zh: "带署名护栏的检索增强智能体",
+        desc_en: "A retrieval-grounded agent that answers questions about my public work, with an external-attribution guardrail to avoid misattributing others' work.",
+        desc_zh: "一个检索增强的智能体，回答关于我公开工作的问题，并带有 external-attribution 护栏，避免把他人的工作错误归属。",
+        status_en: "Live demo",
+        status_zh: "在线 Demo",
+        tags: ["RAG", "attribution guardrail", "grounded Q&A"],
+        gradient: "from-amber to-teal",
+        href: u(`${lp}/agent/`),
+        external: false,
+        cta_en: "Try the demo",
+        cta_zh: "试用 Demo",
+      },
+      {
+        name: "Realtime Synthetic Call Center",
+        tagline_en: "A realtime voice simulation for stress-testing agents",
+        tagline_zh: "用于压测智能体的实时语音仿真",
+        desc_en: "A realtime voice simulation environment for stress-testing conversational agents — synthetic callers, latency-aware turn-taking, and evaluation hooks.",
+        desc_zh: "一个实时语音仿真环境，用于压测对话式智能体 —— 合成来电者、感知延迟的轮流对话，以及评估挂钩。",
+        status_en: "Public repository",
+        status_zh: "公开仓库",
+        tags: ["realtime voice", "simulation", "agent eval"],
+        gradient: "from-rose to-orange",
+        href: GH_PROFILE,
+        external: true,
+        cta_en: "See on GitHub",
+        cta_zh: "在 GitHub 查看",
+      },
+    ],
+  },
+  {
+    key: "science-ai",
+    name_en: "Science AI",
+    name_zh: "Science AI",
+    sub_en: "Foundation models and domain agents for scientific work.",
+    sub_zh: "面向科学工作的基础模型与领域智能体。",
+    items: [
+      {
+        name: "Scientific Foundation Model Lab",
+        tagline_en: "Training and understanding scientific foundation models",
+        tagline_zh: "训练与理解科学基础模型",
+        desc_en: "A hands-on lab for training and understanding scientific foundation models — representation learning, property prediction, and model-literacy tooling.",
+        desc_zh: "一个动手的实验室，用于训练和理解科学基础模型 —— 表示学习、性质预测，以及模型素养工具。",
+        status_en: "Public repository",
+        status_zh: "公开仓库",
+        tags: ["foundation models", "representation learning", "ML tooling"],
+        gradient: "from-teal to-navy",
+        href: GH_PROFILE,
+        external: true,
+        cta_en: "See on GitHub",
+        cta_zh: "在 GitHub 查看",
+      },
+      {
+        name: "SciFM Registry",
+        tagline_en: "Which scientific foundation models are actually usable",
+        tagline_zh: "哪些科学基础模型真正可用",
+        desc_en: "A registry that tracks which scientific foundation models are actually usable in practice, with reproducible usability checks.",
+        desc_zh: "一个登记表，追踪哪些科学基础模型在实践中真正可用，并配有可复现的可用性检查。",
+        status_en: "Private case study",
+        status_zh: "私有案例研究",
+        tags: ["model registry", "usability checks", "reproducibility"],
+        gradient: "from-amber to-rust",
+        href: null,
+        external: false,
+        cta_en: null,
+        cta_zh: null,
+      },
+      {
+        name: "RFB Formulation Agent",
+        tagline_en: "Structured knowledge support for flow-battery formulation",
+        tagline_zh: "面向液流电池配方的结构化知识支持",
+        desc_en: "A vertical-domain agent that helps organize redox-flow-battery formulation knowledge through structured retrieval, reasoning, and validation.",
+        desc_zh: "一个垂直领域智能体，通过结构化检索、推理和验证，帮助组织液流电池配方知识。",
+        status_en: "Private case study",
+        status_zh: "私有案例研究",
+        tags: ["domain agent", "electrochemistry", "retrieval"],
+        gradient: "from-rust to-amber",
+        href: null,
+        external: false,
+        cta_en: null,
+        cta_zh: null,
+      },
+    ],
+  },
+  {
+    key: "ops-ai",
+    name_en: "Operations AI",
+    name_zh: "Operations AI",
+    sub_en: "Safety-gated agents for real-world, high-context operations.",
+    sub_zh: "面向真实世界、高上下文运营的安全门控智能体。",
+    items: [
+      {
+        name: "Property OS — Voice/SMS Operations Agent",
+        tagline_en: "Interruptible real-time voice & SMS operations agent",
+        tagline_zh: "可打断的实时语音与短信运营智能体",
+        desc_en: "An interruptible real-time voice and SMS assistant for property operations: natural voice interaction, a safety-gated LLM layer, a read-only ops console, and explicit data-governance boundaries between operational records and financial ledgers.",
+        desc_zh: "面向物业运营的可打断实时语音与短信助手：自然语音交互、安全门控的 LLM 层、只读运营控制台，以及运营记录与财务台账之间明确的数据治理边界。",
+        status_en: "Private case study",
+        status_zh: "私有案例研究",
+        tags: ["realtime voice", "safety-gated", "ops console"],
+        gradient: "from-teal to-navy",
+        href: null,
+        external: false,
+        cta_en: null,
+        cta_zh: null,
+      },
+      {
+        name: "Insurance FNOL Agent",
+        tagline_en: "Safety-aware intake for first-notice-of-loss workflows",
+        tagline_zh: "面向 first-notice-of-loss 流程的安全受理",
+        desc_en: "A product-framed intake agent for first-notice-of-loss workflows: structured capture, routing, and safety-aware handling of claims intake.",
+        desc_zh: "一个以产品视角构建的受理智能体，面向 first-notice-of-loss 流程：结构化采集、路由，以及对理赔受理的安全处理。",
+        status_en: "Private case study",
+        status_zh: "私有案例研究",
+        tags: ["intake agent", "routing", "safety-aware"],
+        gradient: "from-rose to-orange",
+        href: null,
+        external: false,
+        cta_en: null,
+        cta_zh: null,
+      },
+    ],
+  },
+];
 ---
 <Base
-  title={(locale === "zh" ? "科研项目 — " : "Research Projects — ") + "SciencesLoop"}
-  description={locale === "zh"
-    ? "SciencesLoop 软件、科研项目和公开证据库。"
-    : "SciencesLoop software, research projects, and public evidence archive."}
+  title={(isZh ? "项目 — " : "Projects — ") + "SciencesLoop"}
+  description={isZh
+    ? "当前的 AI / 智能体 / 软件系统作品集：Agent Infrastructure、Science AI、Operations AI。"
+    : "Current AI / agent / software systems portfolio: Agent Infrastructure, Science AI, and Operations AI."}
 >
   <div class="container" style="padding-top: 3rem;">
-    <span class="eyebrow">{t("page.projects.eyebrow", locale)}</span>
-    <h1>{t("page.projects.title", locale)}</h1>
-    <p class="lead">{t("page.projects.lead", locale)}</p>
-    <section class="workflow-panel" style="margin-top: 2rem;">
-      <div>
-        <span class="eyebrow">{locale === "zh" ? "研究记录" : "Research record"}</span>
-        <h2>{locale === "zh" ? "SciencesLoop 的科学证据基础" : "The scientific evidence base behind SciencesLoop"}</h2>
-        <p>
-          {locale === "zh"
-            ? "这个页面保留 Argonne 电池材料研究项目档案：液流电池、硅负极、膜材料、锂回收和自主式材料发现。这些公开记录是 SciencesLoop 构建 scientific agents、workflow systems 和 discovery tools 的证据基础。"
-            : "This page preserves the Argonne battery-materials research archive: flow batteries, silicon anodes, membranes, lithium recovery, and autonomous materials discovery. These public records are the evidence base for SciencesLoop scientific agents, workflow systems, and discovery tools."}
-        </p>
-      </div>
-    </section>
+    <span class="eyebrow">{isZh ? "AI / 智能体 / 软件系统" : "AI · agents · software systems"}</span>
+    <h1>{isZh ? "项目" : "Projects"}</h1>
+    <p class="lead">
+      {isZh
+        ? "当前的 AI 系统作品集，分为三组：Agent Infrastructure、Science AI 和 Operations AI。公开仓库附有链接；私有系统以案例研究形式描述，不放仓库链接。"
+        : "The current AI systems portfolio, grouped into Agent Infrastructure, Science AI, and Operations AI. Public repositories link out; private systems are described as case studies with no repo link."}
+    </p>
+    <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: 0.6rem;">
+      {isZh ? "在找我更早的电池材料科学工作？" : "Looking for the earlier battery-materials science work?"}
+      {" "}
+      <a class="more" href={u(`${lp}/research-archive/`)}>{isZh ? "研究档案 →" : "Research Archive →"}</a>
+    </p>
 
-    {projectsData.categories.map((cat) => (
+    {groups.map((g) => (
       <section style="margin-top: 3rem;">
         <div class="section-head">
-          <h2 style="margin: 0;">{cat.title}</h2>
-          <span class="more">{cat.items.length}</span>
+          <h2 style="margin: 0;">{isZh ? g.name_zh : g.name_en}</h2>
+          <span class="more">{g.items.length}</span>
         </div>
-        <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">{cat.subtitle}</p>
-        {cat.items.map((p) => (
-          <div class="entry">
-            <div class="title">
-              {hasProjectUrl(p) ? (
-                <a href={p.url} target="_blank" rel="noopener">{p.name}</a>
-              ) : (
-                <span>{p.name}</span>
-              )}
-            </div>
-            <div class="meta">
-              <strong style="color: var(--c-fg);">{p.funder}</strong> · {p.years} · {p.role}
-            </div>
-            {p.highlights && p.highlights.length > 0 && (
-              <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--c-fg); font-size: 0.93rem; line-height: 1.55;">
-                {p.highlights.map((h) => <li>{h}</li>)}
-              </ul>
-            )}
-          </div>
-        ))}
+        <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">{isZh ? g.sub_zh : g.sub_en}</p>
+        <div class="featured-grid">
+          {g.items.map((p) => {
+            const Outer = p.href ? "a" : "div";
+            const outerProps = p.href
+              ? (p.external
+                  ? { href: p.href, target: "_blank", rel: "noopener", class: "project-card" }
+                  : { href: p.href, class: "project-card" })
+              : { class: "project-card" };
+            const status = isZh ? p.status_zh : p.status_en;
+            const cta = isZh ? p.cta_zh : p.cta_en;
+            return (
+              <Outer {...outerProps}>
+                <div class={`cover gradient ${p.gradient}`}>
+                  <span class="glyph">{p.name}</span>
+                </div>
+                <div class="body">
+                  <div class="name">{p.name}</div>
+                  <div class="tagline">{isZh ? p.tagline_zh : p.tagline_en}</div>
+                  <div class="description">{isZh ? p.desc_zh : p.desc_en}</div>
+                  <div class="status">{cta ? `${status} · ${cta} →` : status}</div>
+                  <div class="tags">
+                    {p.tags.map((tg) => <span class="tag">{tg}</span>)}
+                  </div>
+                </div>
+              </Outer>
+            );
+          })}
+        </div>
       </section>
     ))}
-
-    <section style="margin-top: 3.5rem;">
-      <div class="section-head"><h2 style="margin:0;">{t("page.projects.capability", locale)}</h2></div>
-      <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">
-        Cross-cutting expertise developed across the projects above.
-      </p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 1rem;">
-        {projectsData.capability_themes.map((t) => (
-          <div style="background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-sm); padding: 0.9rem 1rem; font-size: 0.92rem;">
-            {t}
-          </div>
-        ))}
-      </div>
-    </section>
-
   </div>
 </Base>

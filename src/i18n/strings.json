@@ -1,5 +1,9 @@
 {
   "_doc": "UI string dictionary. Keys flat, values keyed by locale ('en' | 'zh').",
+  "nav.home": {
+    "en": "Home",
+    "zh": "首页"
+  },
   "nav.about": {
     "en": "About",
     "zh": "关于"
@@ -13,8 +17,8 @@
     "zh": "专利"
   },
   "nav.projects": {
-    "en": "Research Projects",
-    "zh": "科研项目"
+    "en": "Projects",
+    "zh": "项目"
   },
   "nav.talks": {
     "en": "Talks",
