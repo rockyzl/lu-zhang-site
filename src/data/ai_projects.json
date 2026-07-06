@@ -33,7 +33,7 @@
     "name": "Property OS — Voice/SMS Operations Agent",
     "tagline": "Interruptible real-time voice & SMS operations agent",
     "description": "An interruptible real-time voice and SMS assistant for property operations: natural voice interaction, a safety-gated LLM layer, a read-only ops console, and explicit data-governance boundaries between operational records and financial ledgers.",
-    "status": "Private case study",
+    "status": "Private system overview",
     "tags": [
       "realtime voice",
       "safety-gated",

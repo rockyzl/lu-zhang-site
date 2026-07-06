@@ -373,7 +373,7 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
 }
 .agent-trust-strip {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
   gap: 0;
   border-top: 1px solid var(--c-border);
   border-bottom: 1px solid var(--c-border);

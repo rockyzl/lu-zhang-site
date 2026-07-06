@@ -10,7 +10,7 @@ const lp = locale === "zh" ? "/zh" : "";
 const featuredPosts = getFeaturedBlogPosts(3);
 
 // Featured AI systems — exactly 3 (public-content-contract compliant).
-// Property OS is a private case study: describe only, NO repo, NO real URL.
+// Property OS is a private system overview: describe only, NO repo, NO real URL.
 const featuredSystems = [
   {
     name: "Scientific Agent Lab",
@@ -41,7 +41,7 @@ const featuredSystems = [
     tagline: "Interruptible real-time voice & SMS operations agent",
     description:
       "An interruptible real-time voice and SMS assistant for property operations: natural voice interaction, a safety-gated LLM layer, a read-only ops console, and explicit data-governance boundaries between operational records and financial ledgers.",
-    status: "Private case study",
+    status: "Private system overview",
     tags: ["realtime voice", "safety-gated", "ops console"],
     gradient: "from-teal to-navy",
     href: null,
@@ -212,10 +212,7 @@ const projectGroups = [
     </p>
     <div class="agent-trust-strip" aria-label="Scientific foundation">
       <span>Scientific foundation</span>
-      <span>15+ years in energy science · Argonne / JCESR</span>
-      <span>97 publications</span>
-      <span>28 US patents</span>
-      <span>h-index 39</span>
+      <span>Argonne / JCESR · electrochemical energy research</span>
     </div>
     <p style="margin-top: 1rem;">
       <a class="more" href={u(`${lp}/research-archive/`)}>View research archive →</a>

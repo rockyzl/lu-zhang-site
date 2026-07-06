@@ -10,7 +10,7 @@ const lp = isZh ? "/zh" : "";
 const GH_PROFILE = "https://github.com/rockyzl";
 
 // Current AI / agent / software systems. Public-safe per public-content-contract:
-// public repos link out; private case studies describe only (no repo, no URL).
+// public repos link out; private system overviews describe only (no repo, no URL).
 const groups = [
   {
     key: "agent-infra",
@@ -59,7 +59,7 @@ const groups = [
         status_zh: "公开仓库",
         tags: ["realtime voice", "simulation", "agent eval"],
         gradient: "from-rose to-orange",
-        href: GH_PROFILE,
+        href: "https://github.com/rockyzl/Realtime-Synthetic-Call-Center-Agents",
         external: true,
         cta_en: "See on GitHub",
         cta_zh: "在 GitHub 查看",
@@ -83,7 +83,7 @@ const groups = [
         status_zh: "公开仓库",
         tags: ["foundation models", "representation learning", "ML tooling"],
         gradient: "from-teal to-navy",
-        href: GH_PROFILE,
+        href: "https://github.com/rockyzl/scientific-foundation-model-lab",
         external: true,
         cta_en: "See on GitHub",
         cta_zh: "在 GitHub 查看",
@@ -94,8 +94,8 @@ const groups = [
         tagline_zh: "哪些科学基础模型真正可用",
         desc_en: "A registry that tracks which scientific foundation models are actually usable in practice, with reproducible usability checks.",
         desc_zh: "一个登记表，追踪哪些科学基础模型在实践中真正可用，并配有可复现的可用性检查。",
-        status_en: "Private case study",
-        status_zh: "私有案例研究",
+        status_en: "Private system overview",
+        status_zh: "私有系统概览",
         tags: ["model registry", "usability checks", "reproducibility"],
         gradient: "from-amber to-rust",
         href: null,
@@ -109,8 +109,8 @@ const groups = [
         tagline_zh: "面向液流电池配方的结构化知识支持",
         desc_en: "A vertical-domain agent that helps organize redox-flow-battery formulation knowledge through structured retrieval, reasoning, and validation.",
         desc_zh: "一个垂直领域智能体，通过结构化检索、推理和验证，帮助组织液流电池配方知识。",
-        status_en: "Private case study",
-        status_zh: "私有案例研究",
+        status_en: "Private system overview",
+        status_zh: "私有系统概览",
         tags: ["domain agent", "electrochemistry", "retrieval"],
         gradient: "from-rust to-amber",
         href: null,
@@ -133,8 +133,8 @@ const groups = [
         tagline_zh: "可打断的实时语音与短信运营智能体",
         desc_en: "An interruptible real-time voice and SMS assistant for property operations: natural voice interaction, a safety-gated LLM layer, a read-only ops console, and explicit data-governance boundaries between operational records and financial ledgers.",
         desc_zh: "面向物业运营的可打断实时语音与短信助手：自然语音交互、安全门控的 LLM 层、只读运营控制台，以及运营记录与财务台账之间明确的数据治理边界。",
-        status_en: "Private case study",
-        status_zh: "私有案例研究",
+        status_en: "Private system overview",
+        status_zh: "私有系统概览",
         tags: ["realtime voice", "safety-gated", "ops console"],
         gradient: "from-teal to-navy",
         href: null,
@@ -148,8 +148,8 @@ const groups = [
         tagline_zh: "面向 first-notice-of-loss 流程的安全受理",
         desc_en: "A product-framed intake agent for first-notice-of-loss workflows: structured capture, routing, and safety-aware handling of claims intake.",
         desc_zh: "一个以产品视角构建的受理智能体，面向 first-notice-of-loss 流程：结构化采集、路由，以及对理赔受理的安全处理。",
-        status_en: "Private case study",
-        status_zh: "私有案例研究",
+        status_en: "Private system overview",
+        status_zh: "私有系统概览",
         tags: ["intake agent", "routing", "safety-aware"],
         gradient: "from-rose to-orange",
         href: null,
@@ -172,8 +172,8 @@ const groups = [
     <h1>{isZh ? "项目" : "Projects"}</h1>
     <p class="lead">
       {isZh
-        ? "当前的 AI 系统作品集，分为三组：Agent Infrastructure、Science AI 和 Operations AI。公开仓库附有链接；私有系统以案例研究形式描述，不放仓库链接。"
-        : "The current AI systems portfolio, grouped into Agent Infrastructure, Science AI, and Operations AI. Public repositories link out; private systems are described as case studies with no repo link."}
+        ? "当前的 AI 系统作品集，分为三组：Agent Infrastructure、Science AI 和 Operations AI。公开仓库附有链接；私有系统以系统概览形式描述，不放仓库链接。"
+        : "The current AI systems portfolio, grouped into Agent Infrastructure, Science AI, and Operations AI. Public repositories link out; private systems are described as system overviews with no repo link."}
     </p>
     <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: 0.6rem;">
       {isZh ? "在找我更早的电池材料科学工作？" : "Looking for the earlier battery-materials science work?"}
