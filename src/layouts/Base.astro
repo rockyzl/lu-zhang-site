@@ -2,10 +2,11 @@
 import "../styles/global.css";
 import { u } from "../lib/url";
 import { detectLocale, t, altLocalePath, type Locale } from "../lib/i18n";
+import ChatWidget from "../components/ChatWidget.astro";
 
 const {
-  title = "SciencesLoop — Open Research Lab for Scientific AI",
-  description = "SciencesLoop is an open research lab exploring AI-native scientific workflows, intelligent agents, scientific state, and evidence-driven systems for discovery.",
+  title = "SciencesLoop — AI engineering for science and operations",
+  description = "AI engineer building grounded, testable agents for science and operations, with a scientific foundation in electrochemical energy research.",
   ogImage,
   alternatePath,
 } = Astro.props;
@@ -24,41 +25,22 @@ const canonical = canonicalUrl;
 const publicOrigin = siteUrl.replace(/\/+$/, "");
 const ogImageUrl = ogImage ?? `${publicOrigin}${u("/og-default.png")}`;
 
-const navGroups = [
-  {
-    key: "nav.group.build",
-    items: [
-      { href: `${langPrefix}/programs/`, key: "nav.programs" },
-      { href: `${langPrefix}/approach/`, key: "nav.approach" },
-      { href: `${langPrefix}/evolution/`, key: "nav.evolution" },
-      { href: `${langPrefix}/agent/`, key: "nav.agent" },
-      { href: `${langPrefix}/blog/`, key: "nav.blog" },
-    ],
-  },
-  {
-    key: "nav.group.record",
-    items: [
-      { href: `${langPrefix}/publications/`, key: "nav.publications" },
-      { href: `${langPrefix}/patents/`, key: "nav.patents" },
-      { href: `${langPrefix}/talks/`, key: "nav.talks" },
-      { href: `${langPrefix}/reports/`, key: "nav.reports" },
-      { href: `${langPrefix}/projects/`, key: "nav.projects" },
-    ],
-  },
-  {
-    key: "nav.group.about",
-    items: [
-      { href: `${langPrefix}/about/`, key: "nav.about" },
-      { href: `${langPrefix}/mentorship-collaborators/`, key: "nav.mentorship" },
-      { href: `${langPrefix}/awards/`, key: "nav.awards" },
-      { href: `${langPrefix}/press/`, key: "nav.press" },
-      { href: u("/files/Lu_Zhang_CV.pdf"), key: "nav.cv", external: true },
-    ],
-  },
-];
-const isActive = (href) => !href.endsWith(".pdf") && (pathname === u(href) || (href !== "/" && pathname.startsWith(u(href))));
-const groupActive = (group) => group.items.some((item) => isActive(item.href));
 const homeHref = locale === "zh" ? "/zh/" : "/";
+// Flat top nav — exactly 5 items. Every other page stays reachable through
+// the Research Archive page (publications / patents / talks / reports / awards)
+// and the About page (CV / mentorship / research archive).
+const navItems = [
+  { href: homeHref, key: "nav.home" },
+  { href: `${langPrefix}/projects/`, key: "nav.projects" },
+  { href: `${langPrefix}/agent/`, key: "nav.agent" },
+  { href: `${langPrefix}/blog/`, key: "nav.blog" },
+  { href: `${langPrefix}/about/`, key: "nav.about" },
+];
+const isActive = (href) => {
+  const target = u(href);
+  if (href === homeHref) return pathname === target;
+  return pathname === target || pathname.startsWith(target);
+};
 ---
 <!doctype html>
 <html lang={locale === "zh" ? "zh-CN" : "en"}>
@@ -82,7 +64,7 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="SciencesLoop — open research lab for Scientific AI" />
+    <meta property="og:image:alt" content="Lu Zhang — AI engineer building grounded, testable agents for science and operations" />
     <meta property="profile:first_name" content="Lu" />
     <meta property="profile:last_name" content="Zhang" />
 
@@ -96,13 +78,8 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
     <link rel="alternate" hreflang={locale === "zh" ? "en" : "zh-CN"} href={new URL(altPath, siteUrl).href} />
     <link rel="alternate" hreflang="x-default" href={new URL(u("/"), siteUrl).href} />
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230066ff'/%3E%3Ctext x='32' y='44' font-family='Georgia' font-size='38' font-weight='600' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Noto+Serif+SC:wght@400;500;600&display=swap"
-    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d7361'/%3E%3Ctext x='32' y='45' font-family='ui-monospace, Menlo, monospace' font-size='38' font-weight='700' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
+    <!-- The redesign uses only system + monospace font stacks — no webfont/CDN requests. -->
 
     <!-- JSON-LD Person schema (English locale only to avoid duplication) -->
     {locale === "en" && (pathname === u("/") || pathname === u("/about/")) && (
@@ -114,7 +91,7 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
         givenName: "Lu",
         familyName: "Zhang",
         honorificSuffix: "Ph.D.",
-        jobTitle: "Scientific AI Systems Engineer",
+        jobTitle: "AI Engineer · Scientific Systems Builder",
         alumniOf: [
           { "@type": "EducationalOrganization", name: "Chinese Academy of Sciences" },
           { "@type": "EducationalOrganization", name: "Florida State University" },
@@ -141,36 +118,23 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
           "https://www.anl.gov/profile/lu-zhang",
         ],
         email: "mailto:zhanglu77@gmail.com",
-        description: "Founder of SciencesLoop, an open research lab for Scientific AI. Former Argonne battery scientist now building scientific-agent workflows, scientific state systems, agent reliability practices, and evidence-driven infrastructure for discovery.",
+        description: "AI engineer building grounded, testable agents for science and operations, with a scientific foundation in electrochemical energy research. Former Argonne battery scientist, now building retrieval-grounded, evaluation-driven agent systems with explicit safety boundaries.",
       })} />
     )}
   </head>
   <body data-locale={locale}>
     <header class="site">
       <div class="inner">
-        <a class="name" href={u(homeHref)}>SciencesLoop</a>
+        <a class="name" href={u(homeHref)}><span class="brand-loop" aria-hidden="true"></span>SciencesLoop</a>
         <nav>
-          {navGroups.map((group) => (
-            <div class={`nav-group ${groupActive(group) ? "active" : ""}`}>
-              <button type="button" class="nav-group-label" aria-haspopup="true">
-                {t(group.key, locale)}
-              </button>
-              <div class="nav-menu">
-                {group.items.map((n) => (
-                  <a
-                    href={u(n.href)}
-                    class={isActive(n.href) ? "active" : ""}
-                    target={n.external ? "_blank" : undefined}
-                    rel={n.external ? "noopener" : undefined}
-                  >
-                    {t(n.key, locale)}
-                  </a>
-                ))}
-              </div>
-            </div>
+          {navItems.map((n) => (
+            <a href={u(n.href)} class={isActive(n.href) ? "active" : ""}>
+              {t(n.key, locale)}
+            </a>
           ))}
           <a class="lang-toggle" href={altPath} aria-label="Switch language">{locale === "zh" ? "EN" : "中"}</a>
         </nav>
+        <span class="avail"><span class="dot" aria-hidden="true"></span>{t("nav.availability", locale)}</span>
       </div>
     </header>
     <main>
@@ -183,12 +147,17 @@ const homeHref = locale === "zh" ? "/zh/" : "/";
       <a href="https://github.com/rockyzl">{t("footer.github", locale)}</a> ·
       <a href="mailto:zhanglu77@gmail.com">{t("footer.email", locale)}</a>
     </footer>
+    <ChatWidget locale={locale} />
   </body>
 </html>
 
 <style is:global>
+  /* zh locale: keep a CJK-capable sans stack (the redesign is sans-only, no
+     external webfonts). --font-serif is aliased to sans site-wide, so we point
+     both at a system CJK sans so headings and body render crisply. */
   body[data-locale="zh"] {
-    --font-serif: "Noto Serif SC", "Newsreader", "PingFang SC",
-      "Hiragino Sans GB", "Microsoft YaHei", serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", Roboto, sans-serif;
+    --font-serif: var(--font-sans);
   }
 </style>

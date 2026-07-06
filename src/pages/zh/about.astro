@@ -55,7 +55,7 @@ const career = isZh
       <span class="eyebrow">{isZh ? "关于 SciencesLoop" : "About SciencesLoop"}</span>
       <h1 style="margin-top: 0;">{isZh ? "Lu Zhang / 张鲁" : "Lu Zhang"}</h1>
       <p style="color: var(--c-muted); font-size: 1.1rem; margin-top: -0.4rem; margin-bottom: 1.2rem;">
-        {isZh ? "创建者 · Scientific AI Systems Engineer · Ph.D." : "Founder · Scientific AI Systems Engineer · Ph.D."}
+        {isZh ? "AI 工程师 · 科学系统构建者 · Ph.D." : "AI Engineer · Scientific Systems Builder · Ph.D."}
       </p>
       <p class="lead">
         {isZh
@@ -81,8 +81,8 @@ const career = isZh
 
   <section class="workflow-panel" style="margin-top: 2.5rem;">
     <div>
-      <span class="eyebrow">{isZh ? "实验室定位" : "Lab Direction"}</span>
-      <h2>{isZh ? "Scientific AI 开放实验室" : "Open Research Lab for Scientific AI"}</h2>
+      <span class="eyebrow">SciencesLoop</span>
+      <h2>{isZh ? "在公开中构建可靠的 AI 系统" : "Reliable AI systems, built in the open"}</h2>
       <p>
         {isZh
           ? "SciencesLoop 是一个公开记录软件、研究笔记、开放问题和 AI for Science 工作流实验的长期实验室，重点关注 context engineering、evaluation harnesses 和 human-in-the-loop review 等可靠智能体实践。"
@@ -118,6 +118,11 @@ const career = isZh
   <p style="margin-top: 1rem;">
     <a href={isZh ? "/zh/awards/" : "/awards/"} style="font-weight: 500;">
       {isZh ? "→ 查看完整荣誉与认可（含所有链接）" : "→ See full Awards & Recognition page (all links)"}
+    </a>
+  </p>
+  <p style="margin-top: 0.6rem;">
+    <a href={u(isZh ? "/zh/research-archive/" : "/research-archive/")} style="font-weight: 500;">
+      {isZh ? "→ 研究档案（论文、专利、报告、荣誉、合作者）" : "→ Research Archive (publications, patents, reports, awards, collaborators)"}
     </a>
   </p>
 

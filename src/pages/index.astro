@@ -1,191 +1,182 @@
 ---
 import Base from "../layouts/Base.astro";
-import SiteAgent from "../components/SiteAgent.astro";
 import { u } from "../lib/url";
-import { detectLocale, t } from "../lib/i18n";
-import publications from "../data/publications.json";
-import patents from "../data/patents.json";
-import conferences from "../data/conferences.json";
-import news from "../data/news.json";
-import featured from "../data/featured.json";
-import aiProjects from "../data/ai_projects.json";
+import { detectLocale } from "../lib/i18n";
 import { getFeaturedBlogPosts } from "../lib/blog";
 
 const locale = detectLocale(Astro.url.pathname);
 const lp = locale === "zh" ? "/zh" : "";
-
-// Stats use AUTHORITATIVE counts (user-verified TSV 2026-04-27), not raw JSON
-// — local publications.json is incomplete (87 journals; authoritative count is 97).
-const SCI_COUNT = 97;
-const BOOK_CHAPTER_COUNT = 2;
-const PATENT_COUNT_TOTAL = 28;
-const TALKS_TOTAL = 51; // 13 invited + 38 conference abstracts
-const CITATION_COUNT = "4,700+";
-const H_INDEX = 39;
-const FIRST_OR_CORRESP = 59;
-// (kept for any legacy references that still use these:)
-const verifiedPubs = publications.filter((p) => p.verified);
-const totalCitations = verifiedPubs.reduce((s, p) => s + (p.citations || 0), 0);
-const firstAuthor = verifiedPubs.filter((p) => p.role === "first").length;
-const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").length;
 const featuredPosts = getFeaturedBlogPosts(3);
-const researchPrograms = [
+
+// Map a status string → mono status-badge variant (redesign-v2 card pattern).
+const badgeClass = (status) => {
+  const s = (status || "").toLowerCase();
+  if (s.includes("demo") || s.includes("live") || s.includes("在线")) return "demo";
+  if (s.includes("public") || s.includes("repo") || s.includes("公开") || s.includes("仓库")) return "repo";
+  return "priv";
+};
+
+// Featured AI systems — exactly 3 (public-content-contract compliant).
+// Property OS is a private system overview: describe only, NO repo, NO real URL.
+const featuredSystems = [
   {
-    name: "Scientific Workflow",
-    label: "Program 01",
-    text: "Agentic workflows, workflow engines, tool routing, evaluation gates, and reliable loops for scientific work.",
-    href: `${lp}/programs/#scientific-workflow`,
+    name: "Scientific Agent Lab",
+    tagline: "Evidence-grounded scientific agents with replayable evals",
+    description:
+      "Explores how LLM agents can answer scientific questions while staying grounded in cited sources and testable through a deterministic evaluation harness.",
+    status: "Public repository",
+    tags: ["grounded agents", "eval harness", "LLM agents"],
+    gradient: "from-rust to-amber",
+    href: "https://github.com/rockyzl/scientific-agent-lab",
+    external: true,
+    cta: "View repository",
   },
   {
-    name: "Scientific State",
-    label: "Program 02",
-    text: "Scientific memory, literature evidence, structured state, provenance, and context systems that make decisions inspectable.",
-    href: `${lp}/programs/#scientific-state`,
+    name: "SciencesLoop Agent API",
+    tagline: "Retrieval-grounded agent with an attribution guardrail",
+    description:
+      "A retrieval-grounded agent that answers questions about my public work, with an external-attribution guardrail to avoid misattributing others' work.",
+    status: "Live demo",
+    tags: ["RAG", "attribution guardrail", "grounded Q&A"],
+    gradient: "from-amber to-teal",
+    href: u(`${lp}/agent/`),
+    external: false,
+    cta: "Try the demo",
   },
   {
-    name: "Scientific Foundation Models",
-    label: "Program 03",
-    text: "Representation learning, molecular/property models, solubility and battery-materials modeling, and foundation-model literacy.",
-    href: `${lp}/programs/#scientific-foundation-models`,
-  },
-  {
-    name: "Scientific Discovery",
-    label: "Program 04",
-    text: "Flow-battery decision support, benchmark graphs, property prediction, and future self-driving-lab interfaces.",
-    href: `${lp}/programs/#scientific-discovery`,
+    name: "Property OS — Voice/SMS Operations Agent",
+    tagline: "Interruptible real-time voice & SMS operations agent",
+    description:
+      "An interruptible real-time voice and SMS assistant for property operations: natural voice interaction, a safety-gated LLM layer, a read-only ops console, and explicit data-governance boundaries between operational records and financial ledgers.",
+    status: "Private system overview",
+    tags: ["realtime voice", "safety-gated", "ops console"],
+    gradient: "from-teal to-navy",
+    href: null,
+    external: false,
+    cta: null,
   },
 ];
 
-const openProblems = [
-  "How should scientific agents represent state before making decisions?",
-  "What should count as evaluation for a scientific workflow agent?",
-  "How can literature, simulation, experiment, and human review share one trace?",
+// Systems I Build — 4 capability cards (abstract the projects into a system).
+const capabilities = [
+  {
+    label: "Capability 01",
+    name: "Grounded Agents",
+    text: "Agents that cite sources, preserve attribution, and avoid unsupported claims.",
+  },
+  {
+    label: "Capability 02",
+    name: "Eval-Driven AI",
+    text: "Replayable traces, deterministic tests, and regression checks for agent behavior.",
+  },
+  {
+    label: "Capability 03",
+    name: "Safety-Gated Workflows",
+    text: "Hard-coded safety screens, scoped tools, privacy boundaries, and human review.",
+  },
+  {
+    label: "Capability 04",
+    name: "Domain AI Systems",
+    text: "AI systems for science, property operations, insurance intake, and other high-context workflows where correctness matters.",
+  },
 ];
 
-const labPrinciples = [
-  "We are not building AI to answer scientific questions.",
-  "We are building scientific infrastructure that helps scientists ask better questions, design better experiments, and make better decisions.",
+// Selected Projects — grouped teaser linking to /projects/.
+const projectGroups = [
+  {
+    label: "Group 01",
+    name: "Agent Infrastructure",
+    items: ["Scientific Agent Lab", "SciencesLoop Agent API", "Realtime Synthetic Call Center"],
+  },
+  {
+    label: "Group 02",
+    name: "Science AI",
+    items: ["Scientific Foundation Model Lab", "SciFM Registry", "RFB Formulation Agent"],
+  },
+  {
+    label: "Group 03",
+    name: "Operations AI",
+    items: ["Property OS", "Insurance FNOL Agent"],
+  },
 ];
 ---
 <Base
-  title="SciencesLoop — Open Research Lab for Scientific AI"
-  description="SciencesLoop is an open research lab exploring AI-native scientific workflows, scientific state, intelligent agents, and evidence-driven systems for discovery."
+  title="Lu Zhang — AI engineer for grounded, testable agents"
+  description="AI engineer building grounded, testable agents for science and operations — retrieval, evaluation, safety guardrails, and domain expertise turned into reliable software."
 >
   <div class="container">
-    <section class="home-agent-hero">
+    <section class="home-agent-hero home-agent-hero--solo">
       <div class="home-agent-intro">
-        <span class="eyebrow">Open research lab · Scientific AI · Reliable agent systems</span>
-        <h1>SciencesLoop</h1>
-        <p class="role">An open laboratory for reliable Scientific AI.</p>
+        <span class="hero-hello">Hi, I'm Lu. 👋</span>
+        <h1>I build <span class="hero-em">grounded, testable</span> AI agents for science &amp; operations.</h1>
         <p class="lead">
-          Building AI-native scientific workflows, scientific state systems,
-          and reliable agents with context engineering, evaluation harnesses,
-          and human-in-the-loop review.
+          My work combines <strong>retrieval, evaluation, safety guardrails, and
+          domain expertise</strong> — turning complex, high-context knowledge
+          workflows into reliable software. I like agents that leave traces,
+          demos you can actually test, and answers that say where they came from.
+        </p>
+        <p class="role">
+          Before AI, <strong>15+ yrs</strong> in energy science at
+          <strong>Argonne / JCESR</strong> · <strong>97</strong> papers ·
+          <strong>28</strong> patents · h-index <strong>39</strong> ·
+          <a href={u(`${lp}/research-archive/`)}>research archive →</a>
         </p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href={u(`${lp}/programs/`)}>Research Programs</a>
-          <a class="btn btn-ghost" href={u(`${lp}/approach/`)}>Approach</a>
-          <a class="btn btn-ghost" href={u(`${lp}/programs/#case-studies`)}>Case Studies</a>
-          <a class="btn btn-ghost" href={u(`${lp}/blog/`)}>Field Notes</a>
-          <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>{t("home.cta.agent", locale)}</a>
+          <a class="btn btn-primary" href="#featured-systems">Explore AI systems</a>
+          <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>Try the agent demo</a>
+          <a class="btn btn-ghost" href="#start-here">Start here</a>
         </div>
       </div>
-      <div class="home-agent-embed">
-        <SiteAgent locale="en" mode="home" />
+    </section>
+
+    <div class="section-head" id="start-here">
+      <div class="section-title">
+        <span class="eyebrow">↳ Start here</span>
+        <h2>Start here</h2>
       </div>
+    </div>
+    <section class="product-modules start-grid" aria-label="Start here">
+      <a class="product-module" href={u(`${lp}/projects/`)}>
+        <span>Path 01</span>
+        <h2>I want to see AI systems</h2>
+        <p>Featured agents, eval harnesses, and the systems I build. → Projects</p>
+      </a>
+      <a class="product-module" href={u(`${lp}/agent/`)}>
+        <span>Path 02</span>
+        <h2>I want to try something live</h2>
+        <p>Ask my retrieval-grounded agent about my public work. → Agent demo</p>
+      </a>
+      <a class="product-module" href={u(`${lp}/research-archive/`)}>
+        <span>Path 03</span>
+        <h2>I want the scientific foundation</h2>
+        <p>15+ years of energy science — publications, patents, talks. → Research archive</p>
+      </a>
     </section>
 
-    <div class="agent-trust-strip" aria-label="Agent boundaries">
-      <span>Scientific workflow systems</span>
-      <span>Scientific state and memory</span>
-      <span>Agent reliability engineering</span>
-      <span>Battery-materials discovery</span>
-    </div>
-
-    <section class="lab-manifesto" aria-label="SciencesLoop mission">
-      <div>
-        <span class="eyebrow">Mission</span>
-        <h2>Scientific infrastructure for better decisions.</h2>
+    <div class="section-head" id="featured-systems">
+      <div class="section-title">
+        <span class="eyebrow">01 — Featured AI Systems</span>
+        <h2>Featured AI Systems</h2>
       </div>
-      <div>
-        {labPrinciples.map((line) => <p>{line}</p>)}
-      </div>
-    </section>
-
-    <div class="section-head">
-      <h2>Research Programs</h2>
-      <a class="more" href={u(`${lp}/programs/`)}>Program map →</a>
+      <a class="more" href={u(`${lp}/projects/`)}>All projects →</a>
     </div>
-    <section class="product-modules" aria-label="SciencesLoop research programs">
-      {researchPrograms.map((item) => (
-        <a class="product-module" href={u(item.href)}>
-          <span>{item.label}</span>
-          <h2>{item.name}</h2>
-          <p>{item.text}</p>
-        </a>
-      ))}
-    </section>
-
-    <section class="lab-split" aria-label="Open problems and people">
-      <article>
-        <span class="eyebrow">Open Problems</span>
-        <h2>Questions driving the lab</h2>
-        <ul>
-          {openProblems.map((item) => <li>{item}</li>)}
-        </ul>
-      </article>
-      <article>
-        <span class="eyebrow">About</span>
-        <h2>Lu Zhang</h2>
-        <p>
-          Founder of SciencesLoop. Scientific AI Systems Engineer and former
-          Argonne scientist connecting battery-materials research, production
-          AI workflows, agent reliability engineering, and scientific
-          infrastructure.
-        </p>
-        <a class="more" href={u(`${lp}/about/`)}>About page →</a>
-      </article>
-    </section>
-
-    <div class="stat-bar">
-      <div class="stat"><div class="num">{SCI_COUNT}</div><div class="label">{t("stat.papers", locale)}</div></div>
-      <div class="stat"><div class="num">{BOOK_CHAPTER_COUNT}</div><div class="label">{locale === "zh" ? "著作章节" : "Book chapters"}</div></div>
-      <div class="stat"><div class="num">{PATENT_COUNT_TOTAL}</div><div class="label">{t("stat.patents", locale)}</div></div>
-      <div class="stat"><div class="num">{TALKS_TOTAL}</div><div class="label">{t("stat.talks", locale)}</div></div>
-      <div class="stat"><div class="num">{CITATION_COUNT}</div><div class="label">{t("stat.citations", locale)}</div></div>
-      <div class="stat"><div class="num">{H_INDEX}</div><div class="label">{t("stat.h", locale)}</div></div>
-      <div class="stat"><div class="num">{FIRST_OR_CORRESP}</div><div class="label">{t("stat.first", locale)}</div></div>
-    </div>
-
-    <div class="section-head">
-      <h2>{t("section.ai", locale)}</h2>
-      <a class="more" href={u(`${lp}/programs/`)}>{t("section.ai.more", locale)}</a>
-    </div>
-
     <div class="featured-grid">
-      {aiProjects.map((p) => {
-        const linkHref = p.site ?? p.repo ?? null;
-        const Outer = linkHref ? "a" : "div";
-        const outerProps = linkHref
-          ? { href: linkHref, target: "_blank", rel: "noopener", class: "project-card" }
+      {featuredSystems.map((p) => {
+        const Outer = p.href ? "a" : "div";
+        const outerProps = p.href
+          ? (p.external
+              ? { href: p.href, target: "_blank", rel: "noopener", class: "project-card" }
+              : { href: p.href, class: "project-card" })
           : { class: "project-card" };
         return (
           <Outer {...outerProps}>
-            {p.image ? (
-              <div class="cover"><img src={u(p.image)} alt={p.name} loading="lazy" /></div>
-            ) : (
-              <div class={`cover gradient ${p.gradient ?? "from-rust to-amber"}`}>
-                <span class="glyph">{p.name}</span>
-              </div>
-            )}
-            <div class="body">
-              <div class="name">{p.name}</div>
-              <div class="tagline">{p.tagline}</div>
-              <div class="description">{p.description}</div>
-              <div class="status">{p.status}</div>
-              <div class="tags">
-                {p.tags.map((t) => <span class="tag">{t}</span>)}
-              </div>
+            <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
+            <div class="name">{p.name}</div>
+            <div class="tagline">{p.tagline}</div>
+            <div class="description">{p.description}</div>
+            {p.cta && <div class="links">{p.cta} ↗</div>}
+            <div class="tags">
+              {p.tags.map((tg) => <span class="tag">{tg}</span>)}
             </div>
           </Outer>
         );
@@ -193,9 +184,85 @@ const labPrinciples = [
     </div>
 
     <div class="section-head">
-      <h2>Field Notes</h2>
+      <div class="section-title">
+        <span class="eyebrow">02 — Systems I Build</span>
+        <h2>Systems I Build</h2>
+      </div>
+      <a class="more" href={u(`${lp}/projects/`)}>See how they fit →</a>
+    </div>
+    <section class="product-modules" aria-label="Capabilities">
+      {capabilities.map((c) => (
+        <div class="product-module">
+          <span>{c.label}</span>
+          <h2>{c.name}</h2>
+          <p>{c.text}</p>
+        </div>
+      ))}
+    </section>
+
+    <div class="section-head">
+      <div class="section-title">
+        <span class="eyebrow">03 — How I think</span>
+        <h2>How I think about AI systems</h2>
+      </div>
+    </div>
+    <ul class="how-i-think">
+      <li>I like agents that leave traces.</li>
+      <li>I like demos that can be tested.</li>
+      <li>I like retrieval that says where an answer came from.</li>
+      <li>I like automation with clear safety boundaries.</li>
+    </ul>
+
+    <div class="section-head">
+      <div class="section-title">
+        <span class="eyebrow">04 — Scientific foundation</span>
+        <h2>Why my science background matters</h2>
+      </div>
+    </div>
+    <p class="lead" style="margin-top: -0.4rem;">
+      Before building AI systems, I spent over <strong>15 years</strong> in
+      energy science at <strong>Argonne &amp; JCESR</strong> — electrochemical
+      energy storage, redox-flow batteries, lithium-metal systems, and materials
+      discovery. That background shapes how I build AI agents: I care about
+      evidence, attribution, reproducibility, uncertainty, and safety
+      boundaries — especially where mistakes are expensive.
+    </p>
+    <div class="agent-trust-strip" aria-label="Scientific foundation">
+      <span>Scientific foundation</span>
+      <span>Argonne / JCESR · electrochemical energy research</span>
+    </div>
+    <p style="margin-top: 1rem;">
+      <a class="more" href={u(`${lp}/research-archive/`)}>View research archive →</a>
+    </p>
+
+    <div class="section-head">
+      <div class="section-title">
+        <span class="eyebrow">05 — Selected projects</span>
+        <h2>Selected Projects</h2>
+      </div>
+      <a class="more" href={u(`${lp}/projects/`)}>All projects →</a>
+    </div>
+    <section class="product-modules" aria-label="Project groups">
+      {projectGroups.map((g) => (
+        <a class="product-module" href={u(`${lp}/projects/`)}>
+          <span>{g.label}</span>
+          <h2>{g.name}</h2>
+          <p>{g.items.join(" · ")}</p>
+        </a>
+      ))}
+    </section>
+
+    <div class="section-head">
+      <div class="section-title">
+        <span class="eyebrow">06 — Field notes</span>
+        <h2>Field Notes</h2>
+      </div>
       <a class="more" href={u(`${lp}/blog/`)}>All notes →</a>
     </div>
+    <p class="section-intro">
+      Working notes, build logs, and small lessons from building grounded
+      agents. Some are polished. Some are still growing.
+    </p>
     <div class="blog-grid blog-grid--home">
       {featuredPosts.map((post) => (
         <article class="blog-card">
@@ -213,57 +280,18 @@ const labPrinciples = [
     </div>
 
     <div class="section-head">
-      <h2>{t("section.featured", locale)}</h2>
-      <a class="more" href={u(`${lp}/publications/`)}>{t("section.featured.more", locale)}</a>
+      <div class="section-title">
+        <span class="eyebrow">07 — Contact</span>
+        <h2>Contact</h2>
+      </div>
     </div>
-    <div class="featured-grid">
-      {featured.map((f) => (
-        <a class="feature-card" href={f.doi ?? "#"}>
-          {f.image ? (
-            <div class="cover"><img src={u(f.image)} alt={f.title} loading="lazy" /></div>
-          ) : (
-            <div class={`cover gradient ${f.gradient ?? "from-amber to-rust"}`}>
-              <span class="glyph">{f.journal}<br/><span style="font-weight:400; font-size:0.85em;">{f.year}</span></span>
-            </div>
-          )}
-          <div class="body">
-            <div class="title">{f.title}</div>
-            <div class="meta">
-              {f.journal} · {f.year}
-              {f.citations ? ` · ${f.citations} citations` : ""}
-              {f.role === "first" && <span class="badge first">first</span>}
-              {f.role === "corresponding" && <span class="badge corresponding">corresp.</span>}
-            </div>
-            <div class="highlight">{f.highlight}</div>
-          </div>
-        </a>
-      ))}
-    </div>
-
-    <div class="section-head">
-      <h2>{t("section.recent", locale)}</h2>
-      <span class="more">{t("section.recent.note", locale)}</span>
-    </div>
-    <div class="news-list">
-      {news.map((n) => (
-        <article class="news-item">
-          <div class="news-meta">
-            <div class="date">{n.date}</div>
-            <span class={`news-tag ${n.tag}`}>{n.tag}</span>
-          </div>
-          <div class="news-body">
-            <div class="title">
-              {n.link ? <a href={n.link}>{n.title}</a> : n.title}
-            </div>
-            <div class="blurb">{n.blurb}</div>
-          </div>
-          {n.image && (
-            <a class="preview" href={n.link ?? "#"}>
-              <img src={u(n.image)} alt={n.title} loading="lazy" />
-            </a>
-          )}
-        </article>
-      ))}
-    </div>
+    <p style="margin-bottom: 3rem;">
+      Building something that needs grounded, testable agents? Reach me on
+      <a href="https://github.com/rockyzl" target="_blank" rel="noopener">GitHub</a>,
+      try the <a href={u(`${lp}/agent/`)}>agent demo</a>, or find me on
+      <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+      and
+      <a href="https://www.linkedin.com/in/lu-zhang-argonne/" target="_blank" rel="noopener">LinkedIn</a>.
+    </p>
   </div>
 </Base>

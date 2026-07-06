@@ -3,16 +3,16 @@
   <desc id="desc">A conceptual matrix for evaluating citation-grounded scientific RAG systems.</desc>
   <defs>
     <style>
-      .bg { fill: #f8fafc; }
-      .panel { fill: #ffffff; stroke: #dbe3ef; stroke-width: 2; }
-      .header { fill: #0066ff; }
-      .stripe { fill: #f1f5f9; }
-      .title { fill: #172033; font-family: Inter, Arial, sans-serif; font-size: 31px; font-weight: 800; }
-      .label { fill: #0066ff; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 800; letter-spacing: 2.5px; }
+      .bg { fill: #f3f1ea; }
+      .panel { fill: #fbfaf5; stroke: #e4e0d4; stroke-width: 2; }
+      .header { fill: #0d7361; }
+      .stripe { fill: #f0eee5; }
+      .title { fill: #1b201c; font-family: Inter, Arial, sans-serif; font-size: 31px; font-weight: 800; }
+      .label { fill: #0d7361; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 800; letter-spacing: 2.5px; }
       .th { fill: #ffffff; font-family: Inter, Arial, sans-serif; font-size: 20px; font-weight: 800; }
-      .td { fill: #172033; font-family: Inter, Arial, sans-serif; font-size: 18px; font-weight: 650; }
-      .small { fill: #526176; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 500; }
-      .line { stroke: #dbe3ef; stroke-width: 2; }
+      .td { fill: #1b201c; font-family: Inter, Arial, sans-serif; font-size: 18px; font-weight: 650; }
+      .small { fill: #6a736a; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 500; }
+      .line { stroke: #e4e0d4; stroke-width: 2; }
     </style>
   </defs>
   <rect class="bg" width="1200" height="760"/>

@@ -5,6 +5,15 @@ import { detectLocale, t } from "../../lib/i18n";
 import aiProjects from "../../data/ai_projects.json";
 
 const locale = detectLocale(Astro.url.pathname);
+
+// Map a status string → mono status-badge variant (redesign-v2 card pattern).
+const badgeClass = (status) => {
+  const s = (status || "").toLowerCase();
+  if (s.includes("demo") || s.includes("live") || s.includes("在线")) return "demo";
+  if (s.includes("public") || s.includes("repo") || s.includes("公开") || s.includes("仓库")) return "repo";
+  return "priv";
+};
+
 const workflow = [
   {
     step: "Scan",
@@ -95,18 +104,18 @@ const caseStudies = [
 ];
 ---
 <Base
-  title="研究方向 — SciencesLoop"
-  description="SciencesLoop 的四个 Scientific AI 研究方向：Scientific Workflow、Scientific State、Scientific Foundation Models 和 Scientific Discovery。"
+  title="工程框架 — SciencesLoop"
+  description="SciencesLoop 构建 Scientific AI 系统的工程框架：Scientific Workflow、Scientific State、Scientific Foundation Models 和 Scientific Discovery。"
 >
   <div class="container">
 
     <section style="padding: 3rem 0 1rem;">
-      <span class="eyebrow">SciencesLoop 研究方向</span>
-      <h1>四个 Scientific AI 研究方向</h1>
+      <span class="eyebrow">SciencesLoop 工程框架</span>
+      <h1>Scientific AI 系统的工程框架</h1>
       <p class="lead" style="font-size: 1.1rem; color: var(--c-fg); max-width: 760px;">
-        SciencesLoop 不只是项目集合，而是一个开放研究实验室：围绕
+        SciencesLoop 是一套用于构建 Scientific AI 系统的工程框架：围绕
         scientific workflow、scientific state、foundation models 和
-        discovery systems 持续积累软件、笔记和实验。
+        discovery systems 持续积累软件、笔记和实验，以工程为先。
       </p>
     </section>
 
@@ -220,27 +229,18 @@ const caseStudies = [
           : { class: "project-card" };
         return (
           <Outer {...outerProps}>
-            {p.image ? (
-              <div class="cover"><img src={u(p.image)} alt={p.name} loading="lazy" /></div>
-            ) : (
-              <div class={`cover gradient ${p.gradient ?? "from-rust to-amber"}`}>
-                <span class="glyph">{p.name}</span>
+            <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
+            <div class="name">{p.name}</div>
+            <div class="tagline">{p.tagline}</div>
+            <div class="description">{p.description}</div>
+            {(p.site || p.repo) && (
+              <div class="links">
+                {p.site && <span>↗ Live site</span>}
+                {p.repo && <span class="muted">⌗ Source</span>}
               </div>
             )}
-            <div class="body">
-              <div class="name">{p.name}</div>
-              <div class="tagline">{p.tagline}</div>
-              <div class="description">{p.description}</div>
-              <div class="status">{p.status}</div>
-              <div class="tags">
-                {p.tags.map((t) => <span class="tag">{t}</span>)}
-              </div>
-              {(p.site || p.repo) && (
-                <div style="margin-top: 0.5rem; display: flex; gap: 0.6rem; font-size: 0.85rem;">
-                  {p.site && <span style="color: var(--c-accent); font-weight: 500;">↗ Live site</span>}
-                  {p.repo && <span style="color: var(--c-muted);">⌗ Source</span>}
-                </div>
-              )}
+            <div class="tags">
+              {p.tags.map((t) => <span class="tag">{t}</span>)}
             </div>
           </Outer>
         );

@@ -1,35 +1,11 @@
 ---
 import Base from "../../layouts/Base.astro";
-import SiteAgent from "../../components/SiteAgent.astro";
 import { u } from "../../lib/url";
-import { detectLocale, t } from "../../lib/i18n";
-import publications from "../../data/publications.json";
-import patents from "../../data/patents.json";
-import conferences from "../../data/conferences.json";
-import news from "../../data/news.json";
-import featured from "../../data/featured.json";
-import aiProjects from "../../data/ai_projects.json";
-import { getBlogPosts, getFeaturedBlogPosts } from "../../lib/blog";
+import { detectLocale } from "../../lib/i18n";
+import { getFeaturedBlogPosts, getBlogPosts } from "../../lib/blog";
 
 const locale = detectLocale(Astro.url.pathname);
 const lp = locale === "zh" ? "/zh" : "";
-
-// Filter to verified ANL-affiliated papers (excludes same-name authors).
-// Stats use AUTHORITATIVE counts (user-verified TSV 2026-04-27), not raw JSON
-// — local publications.json is incomplete (87 journals; authoritative count is 97).
-// See ~/.claude/projects/.../memory/project_publication_count_99.md for口径.
-const SCI_COUNT = 97;
-const BOOK_CHAPTER_COUNT = 2;
-const PATENT_COUNT_TOTAL = 28;
-const TALKS_TOTAL = 51; // 13 invited + 38 conference abstracts
-const CITATION_COUNT = "4,700+";
-const H_INDEX = 39;
-const FIRST_OR_CORRESP = 59;
-// (kept for any legacy references that still use these:)
-const verifiedPubs = publications.filter((p) => p.verified);
-const totalCitations = verifiedPubs.reduce((s, p) => s + (p.citations || 0), 0);
-const firstAuthor = verifiedPubs.filter((p) => p.role === "first").length;
-const corresponding = verifiedPubs.filter((p) => p.role === "corresponding").length;
 const featuredPosts = getFeaturedBlogPosts(3);
 const zhBlogPosts = getBlogPosts("zh");
 const blogPostHref = (post) => {
@@ -37,161 +13,174 @@ const blogPostHref = (post) => {
   const zhAlternate = zhBlogPosts.find((candidate) => candidate.slug === `${post.slug}-zh`);
   return zhAlternate ? `/zh/blog/${zhAlternate.slug}/` : `/blog/${post.slug}/`;
 };
-const researchPrograms = [
+
+// Map a status string → mono status-badge variant (redesign-v2 card pattern).
+const badgeClass = (status) => {
+  const s = (status || "").toLowerCase();
+  if (s.includes("demo") || s.includes("live") || s.includes("在线")) return "demo";
+  if (s.includes("public") || s.includes("repo") || s.includes("公开") || s.includes("仓库")) return "repo";
+  return "priv";
+};
+
+// 精选 AI 系统 —— 恰好 3 个（符合 public-content-contract）。
+// Property OS 为私有系统概览：只描述，不放仓库、不放真实 URL。
+const featuredSystems = [
   {
-    name: "Scientific Workflow",
-    label: "Program 01",
-    text: "面向科学工作的智能体流程、工具路由、评估门、工作流引擎和可靠闭环。",
-    href: `${lp}/programs/#scientific-workflow`,
+    name: "Scientific Agent Lab",
+    tagline: "有据可查、评估可回放的科学智能体",
+    description:
+      "探索 LLM 智能体如何在回答科学问题的同时，始终以被引用的来源为依据，并通过确定性的评估 harness 保持可测试。",
+    status: "公开仓库",
+    tags: ["grounded agents", "eval harness", "LLM agents"],
+    gradient: "from-rust to-amber",
+    href: "https://github.com/rockyzl/scientific-agent-lab",
+    external: true,
+    cta: "查看仓库",
   },
   {
-    name: "Scientific State",
-    label: "Program 02",
-    text: "科学记忆、文献证据、结构化状态、溯源和上下文系统，让科学决策可检查。",
-    href: `${lp}/programs/#scientific-state`,
+    name: "SciencesLoop Agent API",
+    tagline: "带署名护栏的检索增强智能体",
+    description:
+      "一个检索增强的智能体，回答关于我公开工作的问题，并带有 external-attribution 护栏，避免把他人的工作错误归属。",
+    status: "在线 Demo",
+    tags: ["RAG", "attribution guardrail", "grounded Q&A"],
+    gradient: "from-amber to-teal",
+    href: u(`${lp}/agent/`),
+    external: false,
+    cta: "试用 Demo",
   },
   {
-    name: "Scientific Foundation Models",
-    label: "Program 03",
-    text: "表示学习、分子/性质模型、溶解度与电池材料建模，以及科学基础模型能力建设。",
-    href: `${lp}/programs/#scientific-foundation-models`,
-  },
-  {
-    name: "Scientific Discovery",
-    label: "Program 04",
-    text: "液流电池决策支持、benchmark graph、性质预测，以及未来 self-driving lab 接口。",
-    href: `${lp}/programs/#scientific-discovery`,
+    name: "Property OS — 语音/短信运营智能体",
+    tagline: "可打断的实时语音与短信运营智能体",
+    description:
+      "面向物业运营的可打断实时语音与短信助手：自然语音交互、安全门控的 LLM 层、只读运营控制台，以及运营记录与财务台账之间明确的数据治理边界。",
+    status: "私有系统概览",
+    tags: ["realtime voice", "safety-gated", "ops console"],
+    gradient: "from-teal to-navy",
+    href: null,
+    external: false,
+    cta: null,
   },
 ];
 
-const openProblems = [
-  "Scientific agent 应该如何先表示 state，再做 decision？",
-  "科学工作流智能体应该如何评估？",
-  "文献、仿真、实验和人工 review 能否共享同一条 trace？",
+// Systems I Build —— 4 张能力卡片（把项目抽象成一套系统能力）。
+const capabilities = [
+  {
+    label: "能力 01",
+    name: "Grounded Agents",
+    text: "会引用来源、保留署名、并避免无依据断言的智能体。",
+  },
+  {
+    label: "能力 02",
+    name: "Eval-Driven AI",
+    text: "可回放的 trace、确定性测试，以及针对智能体行为的回归检查。",
+  },
+  {
+    label: "能力 03",
+    name: "Safety-Gated Workflows",
+    text: "硬编码的安全筛查、受限工具、隐私边界，以及人工复核。",
+  },
+  {
+    label: "能力 04",
+    name: "Domain AI Systems",
+    text: "面向科学、物业运营、保险受理等高上下文、正确性至关重要场景的 AI 系统。",
+  },
 ];
 
-const labPrinciples = [
-  "我们不是在做一个回答科学问题的 AI。",
-  "我们在构建帮助科学家提出更好问题、设计更好实验、做出更好决策的科学基础设施。",
+// 精选项目 —— 分组导览，链接到 /projects/。
+const projectGroups = [
+  {
+    label: "Group 01",
+    name: "Agent Infrastructure",
+    items: ["Scientific Agent Lab", "SciencesLoop Agent API", "Realtime Synthetic Call Center"],
+  },
+  {
+    label: "Group 02",
+    name: "Science AI",
+    items: ["Scientific Foundation Model Lab", "SciFM Registry", "RFB Formulation Agent"],
+  },
+  {
+    label: "Group 03",
+    name: "Operations AI",
+    items: ["Property OS", "Insurance FNOL Agent"],
+  },
 ];
 ---
 <Base
-  title="SciencesLoop — Scientific AI 开放研究实验室"
-  description="SciencesLoop 是一个探索 AI-native 科学工作流、科学状态、智能体和 evidence-driven discovery systems 的开放研究实验室。"
+  title="张鲁 Lu Zhang — 构建有据可查、可测试的 AI 智能体"
+  description="AI 工程师，为科学与运营构建有据可查、可测试的智能体 —— 把检索、评估、安全护栏与领域经验，变成可靠的软件。"
 >
   <div class="container">
-    <section class="home-agent-hero">
+    <section class="home-agent-hero home-agent-hero--solo">
       <div class="home-agent-intro">
-        <span class="eyebrow">开放研究实验室 · Scientific AI · 可靠智能体系统</span>
-        <h1>SciencesLoop</h1>
-        <p class="role">一个面向可靠 Scientific AI 的开放实验室。</p>
+        <span class="hero-hello">你好，我是张鲁。👋</span>
+        <h1>我为科学与运营构建<span class="hero-em">有据可查、可测试</span>的 AI 智能体。</h1>
         <p class="lead">
-          构建 AI-native 科学工作流、科学状态系统和可靠智能体，
-          重点关注 context engineering、evaluation harnesses 和
-          human-in-the-loop review。
+          我构建的 AI 系统，把<strong>检索、评估、安全护栏和领域经验</strong>结合起来，
+          将复杂、高语境的知识工作流变成可靠的软件。我喜欢会留下轨迹的智能体、
+          真能测试的 demo，以及会说明出处的回答。
+        </p>
+        <p class="role">
+          转向 AI 之前，我在<strong>阿贡 / JCESR</strong>做了<strong>15+ 年</strong>能源科学 ·
+          <strong>97</strong> 篇论文 · <strong>28</strong> 项专利 · h 指数 <strong>39</strong> ·
+          <a href={u(`${lp}/research-archive/`)}>研究档案 →</a>
         </p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href={u(`${lp}/programs/`)}>研究方向</a>
-          <a class="btn btn-ghost" href={u(`${lp}/approach/`)}>方法</a>
-          <a class="btn btn-ghost" href={u(`${lp}/programs/#case-studies`)}>案例</a>
-          <a class="btn btn-ghost" href={u(`${lp}/blog/`)}>研究笔记</a>
-          <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>{t("home.cta.agent", locale)}</a>
+          <a class="btn btn-primary" href="#featured-systems">探索 AI 系统</a>
+          <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>试用智能体 Demo</a>
+          <a class="btn btn-ghost" href="#start-here">从这里开始</a>
         </div>
       </div>
-      <div class="home-agent-embed">
-        <SiteAgent locale="zh" mode="home" />
+    </section>
+
+    <div class="section-head" id="start-here">
+      <div class="section-title">
+        <span class="eyebrow">↳ 从这里开始</span>
+        <h2>从这里开始</h2>
       </div>
+    </div>
+    <section class="product-modules start-grid" aria-label="从这里开始">
+      <a class="product-module" href={u(`${lp}/projects/`)}>
+        <span>路径 01</span>
+        <h2>我想看看 AI 系统</h2>
+        <p>精选智能体、评估 harness，以及我构建的系统。 → 项目</p>
+      </a>
+      <a class="product-module" href={u(`${lp}/agent/`)}>
+        <span>路径 02</span>
+        <h2>我想试点实时的东西</h2>
+        <p>向我的检索增强智能体提问，了解我的公开工作。 → 智能体 Demo</p>
+      </a>
+      <a class="product-module" href={u(`${lp}/research-archive/`)}>
+        <span>路径 03</span>
+        <h2>我想看科学根基</h2>
+        <p>15 年以上的能源科学 —— 论文、专利与演讲。 → 研究档案</p>
+      </a>
     </section>
 
-    <div class="agent-trust-strip" aria-label="智能体边界">
-      <span>科学工作流系统</span>
-      <span>科学状态与记忆</span>
-      <span>智能体可靠性工程</span>
-      <span>电池材料发现</span>
-    </div>
-
-    <section class="lab-manifesto" aria-label="SciencesLoop mission">
-      <div>
-        <span class="eyebrow">使命</span>
-        <h2>帮助科学家做出更好的决策。</h2>
+    <div class="section-head" id="featured-systems">
+      <div class="section-title">
+        <span class="eyebrow">01 — 精选 AI 系统</span>
+        <h2>精选 AI 系统</h2>
       </div>
-      <div>
-        {labPrinciples.map((line) => <p>{line}</p>)}
-      </div>
-    </section>
-
-    <div class="section-head">
-      <h2>研究方向</h2>
-      <a class="more" href={u(`${lp}/programs/`)}>研究地图 →</a>
-    </div>
-    <section class="product-modules" aria-label="SciencesLoop research programs">
-      {researchPrograms.map((item) => (
-        <a class="product-module" href={u(item.href)}>
-          <span>{item.label}</span>
-          <h2>{item.name}</h2>
-          <p>{item.text}</p>
-        </a>
-      ))}
-    </section>
-
-    <section class="lab-split" aria-label="Open problems and people">
-      <article>
-        <span class="eyebrow">开放问题</span>
-        <h2>驱动实验室的问题</h2>
-        <ul>
-          {openProblems.map((item) => <li>{item}</li>)}
-        </ul>
-      </article>
-      <article>
-        <span class="eyebrow">关于</span>
-        <h2>Lu Zhang</h2>
-        <p>
-          SciencesLoop 创建者。Scientific AI Systems Engineer，曾任
-          Argonne 科学家，连接电池材料研究、生产 AI 工作流、Agent
-          可靠性工程和科学基础设施。
-        </p>
-        <a class="more" href={u(`${lp}/about/`)}>关于页面 →</a>
-      </article>
-    </section>
-
-    <div class="stat-bar">
-      <div class="stat"><div class="num">{SCI_COUNT}</div><div class="label">{t("stat.papers", locale)}</div></div>
-      <div class="stat"><div class="num">{BOOK_CHAPTER_COUNT}</div><div class="label">{locale === "zh" ? "著作章节" : "Book chapters"}</div></div>
-      <div class="stat"><div class="num">{PATENT_COUNT_TOTAL}</div><div class="label">{t("stat.patents", locale)}</div></div>
-      <div class="stat"><div class="num">{TALKS_TOTAL}</div><div class="label">{t("stat.talks", locale)}</div></div>
-      <div class="stat"><div class="num">{CITATION_COUNT}</div><div class="label">{t("stat.citations", locale)}</div></div>
-      <div class="stat"><div class="num">{H_INDEX}</div><div class="label">{t("stat.h", locale)}</div></div>
-      <div class="stat"><div class="num">{FIRST_OR_CORRESP}</div><div class="label">{t("stat.first", locale)}</div></div>
-    </div>
-
-    <div class="section-head">
-      <h2>{t("section.ai", locale)}</h2>
-      <a class="more" href={u(`${lp}/programs/`)}>{t("section.ai.more", locale)}</a>
+      <a class="more" href={u(`${lp}/projects/`)}>全部项目 →</a>
     </div>
     <div class="featured-grid">
-      {aiProjects.map((p) => {
-        const linkHref = p.site ?? p.repo ?? null;
-        const Outer = linkHref ? "a" : "div";
-        const outerProps = linkHref
-          ? { href: linkHref, target: "_blank", rel: "noopener", class: "project-card" }
+      {featuredSystems.map((p) => {
+        const Outer = p.href ? "a" : "div";
+        const outerProps = p.href
+          ? (p.external
+              ? { href: p.href, target: "_blank", rel: "noopener", class: "project-card" }
+              : { href: p.href, class: "project-card" })
           : { class: "project-card" };
         return (
           <Outer {...outerProps}>
-            {p.image ? (
-              <div class="cover"><img src={u(p.image)} alt={p.name} loading="lazy" /></div>
-            ) : (
-              <div class={`cover gradient ${p.gradient ?? "from-rust to-amber"}`}>
-                <span class="glyph">{p.name}</span>
-              </div>
-            )}
-            <div class="body">
-              <div class="name">{p.name}</div>
-              <div class="tagline">{p.tagline}</div>
-              <div class="description">{p.description}</div>
-              <div class="status">{p.status}</div>
-              <div class="tags">
-                {p.tags.map((t) => <span class="tag">{t}</span>)}
-              </div>
+            <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
+            <div class="name">{p.name}</div>
+            <div class="tagline">{p.tagline}</div>
+            <div class="description">{p.description}</div>
+            {p.cta && <div class="links">{p.cta} ↗</div>}
+            <div class="tags">
+              {p.tags.map((tg) => <span class="tag">{tg}</span>)}
             </div>
           </Outer>
         );
@@ -199,9 +188,83 @@ const labPrinciples = [
     </div>
 
     <div class="section-head">
-      <h2>研究笔记</h2>
+      <div class="section-title">
+        <span class="eyebrow">02 — Systems I Build</span>
+        <h2>Systems I Build</h2>
+      </div>
+      <a class="more" href={u(`${lp}/projects/`)}>它们如何组合 →</a>
+    </div>
+    <section class="product-modules" aria-label="能力">
+      {capabilities.map((c) => (
+        <div class="product-module">
+          <span>{c.label}</span>
+          <h2>{c.name}</h2>
+          <p>{c.text}</p>
+        </div>
+      ))}
+    </section>
+
+    <div class="section-head">
+      <div class="section-title">
+        <span class="eyebrow">03 — 我如何看待 AI 系统</span>
+        <h2>我如何看待 AI 系统</h2>
+      </div>
+    </div>
+    <ul class="how-i-think">
+      <li>我喜欢会留下痕迹的智能体。</li>
+      <li>我喜欢可以被测试的 Demo。</li>
+      <li>我喜欢会说明答案出处的检索。</li>
+      <li>我喜欢有清晰安全边界的自动化。</li>
+    </ul>
+
+    <div class="section-head">
+      <div class="section-title">
+        <span class="eyebrow">04 — 科学根基</span>
+        <h2>科学背景为什么重要</h2>
+      </div>
+    </div>
+    <p class="lead" style="margin-top: -0.4rem;">
+      在构建 AI 系统之前，我在<strong>阿贡和 JCESR</strong>从事了<strong>15 年以上</strong>的能源科学研究 ——
+      电化学储能、液流电池、锂金属体系和材料发现。这段背景塑造了我构建
+      AI 智能体的方式：我在意证据、署名、可复现性、不确定性和安全边界 ——
+      尤其是在犯错代价高昂的地方。
+    </p>
+    <div class="agent-trust-strip" aria-label="科学根基">
+      <span>科学根基</span>
+      <span>阿贡 / JCESR · 电化学能源研究</span>
+    </div>
+    <p style="margin-top: 1rem;">
+      <a class="more" href={u(`${lp}/research-archive/`)}>查看研究档案 →</a>
+    </p>
+
+    <div class="section-head">
+      <div class="section-title">
+        <span class="eyebrow">05 — 精选项目</span>
+        <h2>精选项目</h2>
+      </div>
+      <a class="more" href={u(`${lp}/projects/`)}>全部项目 →</a>
+    </div>
+    <section class="product-modules" aria-label="项目分组">
+      {projectGroups.map((g) => (
+        <a class="product-module" href={u(`${lp}/projects/`)}>
+          <span>{g.label}</span>
+          <h2>{g.name}</h2>
+          <p>{g.items.join(" · ")}</p>
+        </a>
+      ))}
+    </section>
+
+    <div class="section-head">
+      <div class="section-title">
+        <span class="eyebrow">06 — 研究笔记</span>
+        <h2>研究笔记</h2>
+      </div>
       <a class="more" href={u(`${lp}/blog/`)}>全部笔记 →</a>
     </div>
+    <p class="section-intro">
+      构建有据可查的智能体时留下的工作笔记、构建日志和一些小心得。
+      有些已经打磨完善，有些还在生长中。
+    </p>
     <div class="blog-grid blog-grid--home">
       {featuredPosts.map((post) => (
         <article class="blog-card">
@@ -219,57 +282,19 @@ const labPrinciples = [
     </div>
 
     <div class="section-head">
-      <h2>{t("section.featured", locale)}</h2>
-      <a class="more" href={u(`${lp}/publications/`)}>{t("section.featured.more", locale)}</a>
+      <div class="section-title">
+        <span class="eyebrow">07 — 联系</span>
+        <h2>联系</h2>
+      </div>
     </div>
-    <div class="featured-grid">
-      {featured.map((f) => (
-        <a class="feature-card" href={f.doi ?? "#"}>
-          {f.image ? (
-            <div class="cover"><img src={u(f.image)} alt={f.title} loading="lazy" /></div>
-          ) : (
-            <div class={`cover gradient ${f.gradient ?? "from-amber to-rust"}`}>
-              <span class="glyph">{f.journal}<br/><span style="font-weight:400; font-size:0.85em;">{f.year}</span></span>
-            </div>
-          )}
-          <div class="body">
-            <div class="title">{f.title}</div>
-            <div class="meta">
-              {f.journal} · {f.year}
-              {f.citations ? ` · ${f.citations} citations` : ""}
-              {f.role === "first" && <span class="badge first">first</span>}
-              {f.role === "corresponding" && <span class="badge corresponding">corresp.</span>}
-            </div>
-            <div class="highlight">{f.highlight}</div>
-          </div>
-        </a>
-      ))}
-    </div>
-
-    <div class="section-head">
-      <h2>{t("section.recent", locale)}</h2>
-      <span class="more">{t("section.recent.note", locale)}</span>
-    </div>
-    <div class="news-list">
-      {news.map((n) => (
-        <article class="news-item">
-          <div class="news-meta">
-            <div class="date">{n.date}</div>
-            <span class={`news-tag ${n.tag}`}>{n.tag}</span>
-          </div>
-          <div class="news-body">
-            <div class="title">
-              {n.link ? <a href={n.link}>{n.title}</a> : n.title}
-            </div>
-            <div class="blurb">{n.blurb}</div>
-          </div>
-          {n.image && (
-            <a class="preview" href={n.link ?? "#"}>
-              <img src={u(n.image)} alt={n.title} loading="lazy" />
-            </a>
-          )}
-        </article>
-      ))}
-    </div>
+    <p style="margin-bottom: 3rem;">
+      正在做需要有据可查、可测试的智能体的项目？可以在
+      <a href="https://github.com/rockyzl" target="_blank" rel="noopener">GitHub</a>
+      找我，试用<a href={u(`${lp}/agent/`)}>智能体 Demo</a>，或在
+      <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+      和
+      <a href="https://www.linkedin.com/in/lu-zhang-argonne/" target="_blank" rel="noopener">LinkedIn</a>
+      上找到我。
+    </p>
   </div>
 </Base>

@@ -9,7 +9,7 @@ const isHomeMode = mode === "home";
 const copy = locale === "zh"
   ? {
       eyebrow: "站内智能体",
-      title: "问 SciencesLoop Demo 智能体",
+      title: "认识一下 Loopi — SciencesLoop 智能体",
       lead: agentApiUrl
         ? "这是一个 SciencesLoop 站内问答 demo：它基于公开网站内容回答，并在可用时返回引用来源。"
         : "这是一个 SciencesLoop 站内问答 demo：当前本地模式不调用外部模型，只把访客问题映射到公开网站里的研究方向、论文、项目、学术 CV 和联系方式。",
@@ -29,7 +29,7 @@ const copy = locale === "zh"
       note: agentApiUrl
         ? "当前版本调用 SciencesLoop 后端，只使用公开网站内容；可用时会返回引用来源。"
         : "当前版本在浏览器端运行，只基于公开网站内容做导航；线上 API 不可用时会保留这个本地 fallback。",
-      fallback: "我现在只能回答网站里的核心主题。可以试试 agent reliability、case studies、technical evolution、AI for science、workflow、battery、Argonne、publication、patent、academic CV、contact、VoiceRAG。",
+      fallback: "我现在只能回答网站里的核心主题。可以试试 agent reliability、case studies、technical evolution、AI for science、workflow、battery、Argonne、publication、patent、academic CV、contact。",
       actions: {
         ai: "看 Programs",
         publications: "看论文",
@@ -38,19 +38,17 @@ const copy = locale === "zh"
         roadmap: "查看路线图",
       },
       prompts: [
-        "Lu 的 AI for Science 方向是什么？",
-        "哪些证据体现 agent reliability 能力？",
-        "SciencesLoop 的方法论是什么？",
-        "有哪些 case studies？",
-        "他有哪些 MLOps / evaluation 经验？",
-        "他的电池和液流电池背景是什么？",
-        "Lu 的主要合作者是谁？",
-        "我应该先看哪些论文或专利？",
+        "Lu 建过哪些 AI 系统？",
+        "他怎么让 agent 可靠、可测？",
+        "Property OS 是什么？怎么做安全门控的？",
+        "这个 SciencesLoop Agent demo 是怎么工作的？",
+        "他在 RAG、评测、安全护栏方面有什么经验？",
+        "科学背景如何影响他的 AI 工程？",
       ],
     }
   : {
       eyebrow: "Site Agent",
-      title: "Ask the SciencesLoop Demo Agent",
+      title: "Meet Loopi — the SciencesLoop agent",
       lead: agentApiUrl
         ? "A SciencesLoop site Q&A demo backed by a RAG / LLM API. It answers from public website content and returns cited sources when available."
         : "A SciencesLoop site Q&A demo. In local mode it does not call an external model; it maps visitor questions to the most relevant public research, programs, academic CV, and contact paths.",
@@ -70,7 +68,7 @@ const copy = locale === "zh"
       note: agentApiUrl
         ? "This version calls the SciencesLoop backend using public website content and returns cited sources when available."
         : "This version runs in the browser and only routes across public site content. It remains available as a local fallback when the live API is unavailable.",
-      fallback: "I can answer the core site topics for now. Try agent reliability, case studies, technical evolution, AI for science, workflow, battery, Argonne, publication, patent, academic CV, contact, or VoiceRAG.",
+      fallback: "I can answer the core site topics for now. Try agent reliability, case studies, technical evolution, AI for science, workflow, battery, Argonne, publication, patent, academic CV, or contact.",
       actions: {
         ai: "View Programs",
         publications: "View publications",
@@ -79,14 +77,12 @@ const copy = locale === "zh"
         roadmap: "View roadmap",
       },
       prompts: [
-        "What is Lu's AI for Science direction?",
-        "What evidence shows agent reliability skills?",
-        "How does SciencesLoop build reliable agents?",
-        "What case studies show the work?",
-        "What MLOps and evaluation experience does he have?",
-        "What is his battery and redox-flow background?",
-        "Who are Lu's main collaborators?",
-        "Which papers or patents should I look at first?",
+        "What AI systems has Lu built?",
+        "How does he keep agents grounded and testable?",
+        "What's Property OS, and how is it safety-gated?",
+        "How does the SciencesLoop Agent (this demo) work?",
+        "What's his experience with RAG, evals, and safety guardrails?",
+        "How does his science background inform his AI engineering?",
       ],
     };
 
@@ -106,7 +102,6 @@ const links = {
   github: "https://github.com/rockyzl",
   linkedin: "https://www.linkedin.com/in/lu-zhang-argonne/",
   email: "mailto:zhanglu77@gmail.com",
-  voicerag: "https://voicerag.sciencesloop.com/",
 };
 ---
 
@@ -128,8 +123,16 @@ const links = {
 
     <div class="agent-card" aria-live="polite">
       <div class="agent-card-header">
-        <div>
-          <div class="agent-title">SciencesLoop Agent</div>
+        <span class="agent-avatar" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M20 12a8 8 0 1 1-3.2-6.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <circle cx="9.2" cy="10.6" r="1.15" fill="currentColor" />
+            <circle cx="14.8" cy="10.6" r="1.15" fill="currentColor" />
+            <path d="M8.7 14.3a4.2 4.2 0 0 0 6.6 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+        </span>
+        <div class="agent-head-text">
+          <div class="agent-title">Loopi</div>
           <div class="agent-subtitle">{copy.status}</div>
         </div>
         <span class="agent-status">{copy.statusBadge}</span>
@@ -144,8 +147,8 @@ const links = {
         <div class="agent-topic">{copy.matched}: {locale === "zh" ? "开始" : "Start"}</div>
         <div>
           {locale === "zh"
-            ? "你好。我可以帮你快速了解 SciencesLoop 的研究方向、agent 系统、电池材料、论文专利和职业背景。"
-            : "Hi. I can help you navigate SciencesLoop programs, agent systems, battery materials, publications, patents, and career background."}
+            ? "你好，我是 Loopi 👋 可以问我 Lu 建过哪些 AI 系统、他怎么让 agent 可靠可测，或者这些工作背后的科学背景。"
+            : "Hi, I'm Loopi 👋 Ask about the AI systems Lu has built, how he keeps agents grounded and testable, or the science background behind the work."}
         </div>
         <div class="agent-next">{copy.next}: <a href={links.ai}>{copy.actions.ai}</a></div>
       </div>
@@ -169,6 +172,46 @@ const links = {
     </div>
   </div>
 </section>
+
+<style is:global>
+  /* Rendered-markdown typography inside the agent answer. The answer is injected
+     via innerHTML at runtime, so Astro scoped styles don't reach it — keep these
+     global, namespaced under .agent-answer-body. */
+  .agent-answer-body p { margin: 0 0 .6rem; }
+  .agent-answer-body p:last-child { margin-bottom: 0; }
+  .agent-answer-body ul,
+  .agent-answer-body ol { margin: .4rem 0 .6rem; padding-left: 1.3rem; }
+  .agent-answer-body ul:last-child,
+  .agent-answer-body ol:last-child { margin-bottom: 0; }
+  .agent-answer-body li { margin: .28rem 0; }
+  .agent-answer-body strong { font-weight: 700; color: var(--c-ink); }
+  .agent-answer-body code {
+    font-family: var(--font-mono);
+    font-size: .84em;
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-border-soft);
+    border-radius: 4px;
+    padding: 0 .3em;
+  }
+  /* Give the matched-topic label the same live teal accent the widget uses. */
+  .agent-answer .agent-topic { color: var(--c-accent); }
+
+  /* Loopi identity in the agent card header. */
+  .agent-card-header { display: flex; align-items: center; gap: .6rem; }
+  .agent-head-text { margin-right: auto; }
+  .agent-avatar {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    background: var(--c-accent);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(13, 115, 97, 0.3);
+  }
+</style>
 
 <script define:vars={{ links, fallback: copy.fallback, agentApiUrl, labels: { matched: copy.matched, next: copy.next, plan: copy.plan, actionsLabel: copy.actionsLabel, followupsLabel: copy.followupsLabel, thinking: copy.thinking, apiError: copy.apiError, sources: copy.sources } }}>
   const answerSets = {
@@ -226,12 +269,6 @@ const links = {
         next: `<a href="${links.collaborators}">Open Mentorship & Collaborators</a>`,
         keys: ["collaborator", "collaborators", "collaboraror", "collaboration", "coauthor", "co-author", "co authors", "coworker", "partner"],
         html: `The <a href="${links.collaborators}">Mentorship & Collaborators</a> page combines Lu's public co-author network, direct mentees, JCESR team leadership, and patent-only collaborators where available.`,
-      },
-      {
-        topic: "VoiceRAG / Lightyear demo",
-        next: `<a href="${links.voicerag}" target="_blank" rel="noopener">Open VoiceRAG</a>`,
-        keys: ["voicerag", "voice", "guangnian", "lightyear", "sciencesloop"],
-        html: `The VoiceRAG / Lightyear work is a live voice-RAG demo/prototype using realtime voice interaction and retrieval patterns. Open <a href="${links.voicerag}" target="_blank" rel="noopener">voicerag.sciencesloop.com</a>.`,
       },
       {
         topic: "Contact and profile links",
@@ -296,12 +333,6 @@ const links = {
         html: `<a href="${links.collaborators}">指导与合作者</a> 页面合并展示 Lu 的公开共同作者网络、直接指导学生/博士后、JCESR 团队领导和部分仅专利合作者。`,
       },
       {
-        topic: "VoiceRAG / Lightyear demo",
-        next: `<a href="${links.voicerag}" target="_blank" rel="noopener">打开 VoiceRAG</a>`,
-        keys: ["voicerag", "voice", "语音", "guangnian", "光年", "lightyear", "sciencesloop"],
-        html: `VoiceRAG / Lightyear 是一个在线 voice-RAG demo/prototype，结合 realtime voice interaction 和检索模式。打开 <a href="${links.voicerag}" target="_blank" rel="noopener">voicerag.sciencesloop.com</a>。`,
-      },
-      {
         topic: "联系与公开链接",
         next: `<a href="${links.cv}" target="_blank" rel="noopener">打开学术 CV</a>`,
         keys: ["cv", "resume", "简历", "linkedin", "github", "contact", "email", "联系"],
@@ -333,6 +364,49 @@ const links = {
       .replaceAll("'", "&#039;");
   }
 
+  // Minimal, XSS-safe markdown -> HTML for agent answers (same approach as the
+  // floating ChatWidget). Escape FIRST so no raw HTML survives, then re-introduce
+  // a small known set of tags: **bold**, *italic*, `code`, [label](url) links,
+  // and ordered/unordered lists. Fixes raw ** and list markers showing through.
+  function renderInline(escaped) {
+    return escaped
+      .replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+      .replace(/__([^_]+)__/g, "<strong>$1</strong>")
+      .replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>")
+      .replace(/`([^`]+)`/g, "<code>$1</code>");
+  }
+  function renderMarkdown(raw) {
+    const escaped = escapeHtml(raw || "").replace(/\r\n/g, "\n").trim();
+    if (!escaped) return "";
+    return escaped
+      .split(/\n{2,}/)
+      .map((block) => {
+        const lines = block.split("\n").filter((l) => l.trim() !== "");
+        if (!lines.length) return "";
+        if (lines.every((l) => /^\s*\d+\.\s+/.test(l))) {
+          // Preserve the source ordinal via value=, so blank-line-separated
+          // items (each its own block) don't all restart at "1.".
+          return `<ol>${lines.map((l) => {
+            const n = (l.match(/^\s*(\d+)\.\s+/) || [])[1] || "";
+            return `<li value="${n}">${renderInline(l.replace(/^\s*\d+\.\s+/, ""))}</li>`;
+          }).join("")}</ol>`;
+        }
+        if (lines.every((l) => /^\s*[-*]\s+/.test(l))) {
+          return `<ul>${lines.map((l) => `<li>${renderInline(l.replace(/^\s*[-*]\s+/, ""))}</li>`).join("")}</ul>`;
+        }
+        return `<p>${renderInline(lines.join("<br />"))}</p>`;
+      })
+      .join("");
+  }
+
+  // Keep source cards short: long academic titles get truncated at a word
+  // boundary so the sources list stays scannable.
+  function shortSourceTitle(value) {
+    const s = String(value ?? "").replace(/\s+/g, " ").trim();
+    return s.length > 64 ? `${s.slice(0, 63).replace(/\s+\S*$/, "").trim()}…` : s;
+  }
+
   function renderApiAnswer(data) {
     const citations = Array.isArray(data.citations) ? data.citations.slice(0, 5) : [];
     const agent = data.agent || {};
@@ -341,7 +415,7 @@ const links = {
     const followups = Array.isArray(agent.followups) ? agent.followups.slice(0, 4) : [];
     const sources = citations
       .map((item) => {
-        const title = escapeHtml(item.title || item.url || "Source");
+        const title = escapeHtml(shortSourceTitle(item.title || item.url || "Source"));
         const url = escapeHtml(item.url || "#");
         return `<li><a href="${url}" target="_blank" rel="noopener">[${escapeHtml(item.id || "")}] ${title}</a></li>`;
       })
@@ -367,7 +441,7 @@ const links = {
       : "";
     return `
       <div class="agent-topic">${labels.matched}: ${escapeHtml(agent.label || data.mode || "live agent")}</div>
-      <div>${escapeHtml(data.answer || "").replaceAll("\n", "<br />")}</div>
+      <div class="agent-answer-body">${renderMarkdown(data.answer || "")}</div>
       ${planHtml}
       ${actionsHtml}
       ${followupHtml}
