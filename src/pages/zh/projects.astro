@@ -1,78 +1,16 @@
 ---
 import Base from "../../layouts/Base.astro";
-import { detectLocale, t } from "../../lib/i18n";
-import projectsData from "../../data/projects.json";
+import { detectLocale } from "../../lib/i18n";
+import ResearchArchiveContent from "../../components/ResearchArchiveContent.astro";
 
 const locale = detectLocale(Astro.url.pathname);
-const totalCount = projectsData.categories.reduce((s, c) => s + c.items.length, 0);
-
-const hasProjectUrl = (p) => typeof p.url === "string" && p.url.length > 0;
-
+const isZh = locale === "zh";
 ---
 <Base
-  title={(locale === "zh" ? "科研项目 — " : "Research Projects — ") + "SciencesLoop"}
-  description={locale === "zh"
-    ? "SciencesLoop 软件、科研项目和公开证据库。"
-    : "SciencesLoop software, research projects, and public evidence archive."}
+  title={(isZh ? "研究档案 — " : "Research Archive — ") + "SciencesLoop"}
+  description={isZh
+    ? "SciencesLoop 公开研究档案：能源材料科研记录、论文、专利、报告和代表性项目。"
+    : "SciencesLoop public research archive: energy-materials research record, publications, patents, reports, and selected projects."}
 >
-  <div class="container" style="padding-top: 3rem;">
-    <span class="eyebrow">{t("page.projects.eyebrow", locale)}</span>
-    <h1>{t("page.projects.title", locale)}</h1>
-    <p class="lead">{t("page.projects.lead", locale)}</p>
-    <section class="workflow-panel" style="margin-top: 2rem;">
-      <div>
-        <span class="eyebrow">{locale === "zh" ? "研究记录" : "Research record"}</span>
-        <h2>{locale === "zh" ? "SciencesLoop 的科学证据基础" : "The scientific evidence base behind SciencesLoop"}</h2>
-        <p>
-          {locale === "zh"
-            ? "这个页面保留 Argonne 电池材料研究项目档案：液流电池、硅负极、膜材料、锂回收和自主式材料发现。这些公开记录是 SciencesLoop 构建 scientific agents、workflow systems 和 discovery tools 的证据基础。"
-            : "This page preserves the Argonne battery-materials research archive: flow batteries, silicon anodes, membranes, lithium recovery, and autonomous materials discovery. These public records are the evidence base for SciencesLoop scientific agents, workflow systems, and discovery tools."}
-        </p>
-      </div>
-    </section>
-
-    {projectsData.categories.map((cat) => (
-      <section style="margin-top: 3rem;">
-        <div class="section-head">
-          <h2 style="margin: 0;">{cat.title}</h2>
-          <span class="more">{cat.items.length}</span>
-        </div>
-        <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">{cat.subtitle}</p>
-        {cat.items.map((p) => (
-          <div class="entry">
-            <div class="title">
-              {hasProjectUrl(p) ? (
-                <a href={p.url} target="_blank" rel="noopener">{p.name}</a>
-              ) : (
-                <span>{p.name}</span>
-              )}
-            </div>
-            <div class="meta">
-              <strong style="color: var(--c-fg);">{p.funder}</strong> · {p.years} · {p.role}
-            </div>
-            {p.highlights && p.highlights.length > 0 && (
-              <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--c-fg); font-size: 0.93rem; line-height: 1.55;">
-                {p.highlights.map((h) => <li>{h}</li>)}
-              </ul>
-            )}
-          </div>
-        ))}
-      </section>
-    ))}
-
-    <section style="margin-top: 3.5rem;">
-      <div class="section-head"><h2 style="margin:0;">{t("page.projects.capability", locale)}</h2></div>
-      <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">
-        Cross-cutting expertise developed across the projects above.
-      </p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 1rem;">
-        {projectsData.capability_themes.map((t) => (
-          <div style="background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-sm); padding: 0.9rem 1rem; font-size: 0.92rem;">
-            {t}
-          </div>
-        ))}
-      </div>
-    </section>
-
-  </div>
+  <ResearchArchiveContent locale={locale} />
 </Base>
