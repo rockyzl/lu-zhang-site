@@ -77,13 +77,8 @@ const isActive = (href) => {
     <link rel="alternate" hreflang={locale === "zh" ? "en" : "zh-CN"} href={new URL(altPath, siteUrl).href} />
     <link rel="alternate" hreflang="x-default" href={new URL(u("/"), siteUrl).href} />
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230066ff'/%3E%3Ctext x='32' y='44' font-family='Georgia' font-size='38' font-weight='600' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Noto+Serif+SC:wght@400;500;600&display=swap"
-    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d7361'/%3E%3Ctext x='32' y='45' font-family='ui-monospace, Menlo, monospace' font-size='38' font-weight='700' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
+    <!-- The redesign uses only system + monospace font stacks — no webfont/CDN requests. -->
 
     <!-- JSON-LD Person schema (English locale only to avoid duplication) -->
     {locale === "en" && (pathname === u("/") || pathname === u("/about/")) && (
@@ -129,7 +124,7 @@ const isActive = (href) => {
   <body data-locale={locale}>
     <header class="site">
       <div class="inner">
-        <a class="name" href={u(homeHref)}>SciencesLoop</a>
+        <a class="name" href={u(homeHref)}><span class="brand-loop" aria-hidden="true"></span>SciencesLoop</a>
         <nav>
           {navItems.map((n) => (
             <a href={u(n.href)} class={isActive(n.href) ? "active" : ""}>
@@ -138,6 +133,7 @@ const isActive = (href) => {
           ))}
           <a class="lang-toggle" href={altPath} aria-label="Switch language">{locale === "zh" ? "EN" : "中"}</a>
         </nav>
+        <span class="avail"><span class="dot" aria-hidden="true"></span>{t("nav.availability", locale)}</span>
       </div>
     </header>
     <main>
@@ -154,8 +150,12 @@ const isActive = (href) => {
 </html>
 
 <style is:global>
+  /* zh locale: keep a CJK-capable sans stack (the redesign is sans-only, no
+     external webfonts). --font-serif is aliased to sans site-wide, so we point
+     both at a system CJK sans so headings and body render crisply. */
   body[data-locale="zh"] {
-    --font-serif: "Noto Serif SC", "Newsreader", "PingFang SC",
-      "Hiragino Sans GB", "Microsoft YaHei", serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+      "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", Roboto, sans-serif;
+    --font-serif: var(--font-sans);
   }
 </style>
