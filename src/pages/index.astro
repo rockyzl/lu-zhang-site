@@ -8,6 +8,14 @@ const locale = detectLocale(Astro.url.pathname);
 const lp = locale === "zh" ? "/zh" : "";
 const featuredPosts = getFeaturedBlogPosts(3);
 
+// Map a status string → mono status-badge variant (redesign-v2 card pattern).
+const badgeClass = (status) => {
+  const s = (status || "").toLowerCase();
+  if (s.includes("demo") || s.includes("live") || s.includes("在线")) return "demo";
+  if (s.includes("public") || s.includes("repo") || s.includes("公开") || s.includes("仓库")) return "repo";
+  return "priv";
+};
+
 // Featured AI systems — exactly 3 (public-content-contract compliant).
 // Property OS is a private system overview: describe only, NO repo, NO real URL.
 const featuredSystems = [
@@ -120,7 +128,10 @@ const projectGroups = [
     </section>
 
     <div class="section-head" id="start-here">
-      <h2>Start here</h2>
+      <div class="section-title">
+        <span class="eyebrow">↳ Start here</span>
+        <h2>Start here</h2>
+      </div>
     </div>
     <section class="product-modules start-grid" aria-label="Start here">
       <a class="product-module" href={u(`${lp}/projects/`)}>
@@ -141,7 +152,10 @@ const projectGroups = [
     </section>
 
     <div class="section-head" id="featured-systems">
-      <h2>Featured AI Systems</h2>
+      <div class="section-title">
+        <span class="eyebrow">01 — Featured AI Systems</span>
+        <h2>Featured AI Systems</h2>
+      </div>
       <a class="more" href={u(`${lp}/projects/`)}>All projects →</a>
     </div>
     <div class="featured-grid">
@@ -154,17 +168,13 @@ const projectGroups = [
           : { class: "project-card" };
         return (
           <Outer {...outerProps}>
-            <div class={`cover gradient ${p.gradient}`}>
-              <span class="glyph">{p.name}</span>
-            </div>
-            <div class="body">
-              <div class="name">{p.name}</div>
-              <div class="tagline">{p.tagline}</div>
-              <div class="description">{p.description}</div>
-              <div class="status">{p.cta ? `${p.status} · ${p.cta} →` : p.status}</div>
-              <div class="tags">
-                {p.tags.map((tg) => <span class="tag">{tg}</span>)}
-              </div>
+            <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
+            <div class="name">{p.name}</div>
+            <div class="tagline">{p.tagline}</div>
+            <div class="description">{p.description}</div>
+            {p.cta && <div class="links">{p.cta} ↗</div>}
+            <div class="tags">
+              {p.tags.map((tg) => <span class="tag">{tg}</span>)}
             </div>
           </Outer>
         );
@@ -172,7 +182,10 @@ const projectGroups = [
     </div>
 
     <div class="section-head">
-      <h2>Systems I Build</h2>
+      <div class="section-title">
+        <span class="eyebrow">02 — Systems I Build</span>
+        <h2>Systems I Build</h2>
+      </div>
       <a class="more" href={u(`${lp}/projects/`)}>See how they fit →</a>
     </div>
     <section class="product-modules" aria-label="Capabilities">
@@ -186,7 +199,10 @@ const projectGroups = [
     </section>
 
     <div class="section-head">
-      <h2>How I think about AI systems</h2>
+      <div class="section-title">
+        <span class="eyebrow">03 — How I think</span>
+        <h2>How I think about AI systems</h2>
+      </div>
     </div>
     <ul class="how-i-think">
       <li>I like agents that leave traces.</li>
@@ -196,7 +212,10 @@ const projectGroups = [
     </ul>
 
     <div class="section-head">
-      <h2>Why my science background matters</h2>
+      <div class="section-title">
+        <span class="eyebrow">04 — Scientific foundation</span>
+        <h2>Why my science background matters</h2>
+      </div>
     </div>
     <p class="lead" style="margin-top: -0.4rem;">
       Before building AI systems, I spent over 15 years in energy science at
@@ -215,7 +234,10 @@ const projectGroups = [
     </p>
 
     <div class="section-head">
-      <h2>Selected Projects</h2>
+      <div class="section-title">
+        <span class="eyebrow">05 — Selected projects</span>
+        <h2>Selected Projects</h2>
+      </div>
       <a class="more" href={u(`${lp}/projects/`)}>All projects →</a>
     </div>
     <section class="product-modules" aria-label="Project groups">
@@ -229,7 +251,10 @@ const projectGroups = [
     </section>
 
     <div class="section-head">
-      <h2>Field Notes</h2>
+      <div class="section-title">
+        <span class="eyebrow">06 — Field notes</span>
+        <h2>Field Notes</h2>
+      </div>
       <a class="more" href={u(`${lp}/blog/`)}>All notes →</a>
     </div>
     <p class="section-intro">
@@ -253,7 +278,10 @@ const projectGroups = [
     </div>
 
     <div class="section-head">
-      <h2>Contact</h2>
+      <div class="section-title">
+        <span class="eyebrow">07 — Contact</span>
+        <h2>Contact</h2>
+      </div>
     </div>
     <p style="margin-bottom: 3rem;">
       Building something that needs grounded, testable agents? Reach me on

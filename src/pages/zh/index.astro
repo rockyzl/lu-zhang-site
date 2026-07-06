@@ -14,6 +14,14 @@ const blogPostHref = (post) => {
   return zhAlternate ? `/zh/blog/${zhAlternate.slug}/` : `/blog/${post.slug}/`;
 };
 
+// Map a status string → mono status-badge variant (redesign-v2 card pattern).
+const badgeClass = (status) => {
+  const s = (status || "").toLowerCase();
+  if (s.includes("demo") || s.includes("live") || s.includes("在线")) return "demo";
+  if (s.includes("public") || s.includes("repo") || s.includes("公开") || s.includes("仓库")) return "repo";
+  return "priv";
+};
+
 // 精选 AI 系统 —— 恰好 3 个（符合 public-content-contract）。
 // Property OS 为私有系统概览：只描述，不放仓库、不放真实 URL。
 const featuredSystems = [
@@ -125,7 +133,10 @@ const projectGroups = [
     </section>
 
     <div class="section-head" id="start-here">
-      <h2>从这里开始</h2>
+      <div class="section-title">
+        <span class="eyebrow">↳ 从这里开始</span>
+        <h2>从这里开始</h2>
+      </div>
     </div>
     <section class="product-modules start-grid" aria-label="从这里开始">
       <a class="product-module" href={u(`${lp}/projects/`)}>
@@ -146,7 +157,10 @@ const projectGroups = [
     </section>
 
     <div class="section-head" id="featured-systems">
-      <h2>精选 AI 系统</h2>
+      <div class="section-title">
+        <span class="eyebrow">01 — 精选 AI 系统</span>
+        <h2>精选 AI 系统</h2>
+      </div>
       <a class="more" href={u(`${lp}/projects/`)}>全部项目 →</a>
     </div>
     <div class="featured-grid">
@@ -159,17 +173,13 @@ const projectGroups = [
           : { class: "project-card" };
         return (
           <Outer {...outerProps}>
-            <div class={`cover gradient ${p.gradient}`}>
-              <span class="glyph">{p.name}</span>
-            </div>
-            <div class="body">
-              <div class="name">{p.name}</div>
-              <div class="tagline">{p.tagline}</div>
-              <div class="description">{p.description}</div>
-              <div class="status">{p.cta ? `${p.status} · ${p.cta} →` : p.status}</div>
-              <div class="tags">
-                {p.tags.map((tg) => <span class="tag">{tg}</span>)}
-              </div>
+            <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
+            <div class="name">{p.name}</div>
+            <div class="tagline">{p.tagline}</div>
+            <div class="description">{p.description}</div>
+            {p.cta && <div class="links">{p.cta} ↗</div>}
+            <div class="tags">
+              {p.tags.map((tg) => <span class="tag">{tg}</span>)}
             </div>
           </Outer>
         );
@@ -177,7 +187,10 @@ const projectGroups = [
     </div>
 
     <div class="section-head">
-      <h2>Systems I Build</h2>
+      <div class="section-title">
+        <span class="eyebrow">02 — Systems I Build</span>
+        <h2>Systems I Build</h2>
+      </div>
       <a class="more" href={u(`${lp}/projects/`)}>它们如何组合 →</a>
     </div>
     <section class="product-modules" aria-label="能力">
@@ -191,7 +204,10 @@ const projectGroups = [
     </section>
 
     <div class="section-head">
-      <h2>我如何看待 AI 系统</h2>
+      <div class="section-title">
+        <span class="eyebrow">03 — 我如何看待 AI 系统</span>
+        <h2>我如何看待 AI 系统</h2>
+      </div>
     </div>
     <ul class="how-i-think">
       <li>我喜欢会留下痕迹的智能体。</li>
@@ -201,7 +217,10 @@ const projectGroups = [
     </ul>
 
     <div class="section-head">
-      <h2>科学背景为什么重要</h2>
+      <div class="section-title">
+        <span class="eyebrow">04 — 科学根基</span>
+        <h2>科学背景为什么重要</h2>
+      </div>
     </div>
     <p class="lead" style="margin-top: -0.4rem;">
       在构建 AI 系统之前，我在阿贡和 JCESR 从事了 15 年以上的能源科学研究 ——
@@ -218,7 +237,10 @@ const projectGroups = [
     </p>
 
     <div class="section-head">
-      <h2>精选项目</h2>
+      <div class="section-title">
+        <span class="eyebrow">05 — 精选项目</span>
+        <h2>精选项目</h2>
+      </div>
       <a class="more" href={u(`${lp}/projects/`)}>全部项目 →</a>
     </div>
     <section class="product-modules" aria-label="项目分组">
@@ -232,7 +254,10 @@ const projectGroups = [
     </section>
 
     <div class="section-head">
-      <h2>研究笔记</h2>
+      <div class="section-title">
+        <span class="eyebrow">06 — 研究笔记</span>
+        <h2>研究笔记</h2>
+      </div>
       <a class="more" href={u(`${lp}/blog/`)}>全部笔记 →</a>
     </div>
     <p class="section-intro">
@@ -256,7 +281,10 @@ const projectGroups = [
     </div>
 
     <div class="section-head">
-      <h2>联系</h2>
+      <div class="section-title">
+        <span class="eyebrow">07 — 联系</span>
+        <h2>联系</h2>
+      </div>
     </div>
     <p style="margin-bottom: 3rem;">
       正在做需要有据可查、可测试的智能体的项目？可以在

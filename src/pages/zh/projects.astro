@@ -9,6 +9,14 @@ const lp = isZh ? "/zh" : "";
 
 const GH_PROFILE = "https://github.com/rockyzl";
 
+// Map a status string → mono status-badge variant (redesign-v2 card pattern).
+const badgeClass = (status) => {
+  const s = (status || "").toLowerCase();
+  if (s.includes("demo") || s.includes("live") || s.includes("在线")) return "demo";
+  if (s.includes("public") || s.includes("repo") || s.includes("公开") || s.includes("仓库")) return "repo";
+  return "priv";
+};
+
 // Current AI / agent / software systems. Public-safe per public-content-contract:
 // public repos link out; private system overviews describe only (no repo, no URL).
 const groups = [
@@ -181,10 +189,13 @@ const groups = [
       <a class="more" href={u(`${lp}/research-archive/`)}>{isZh ? "研究档案 →" : "Research Archive →"}</a>
     </p>
 
-    {groups.map((g) => (
+    {groups.map((g, gi) => (
       <section style="margin-top: 3rem;">
         <div class="section-head">
-          <h2 style="margin: 0;">{isZh ? g.name_zh : g.name_en}</h2>
+          <div class="section-title">
+            <span class="eyebrow">{`0${gi + 1} — ` + (isZh ? g.name_zh : g.name_en)}</span>
+            <h2 style="margin: 0;">{isZh ? g.name_zh : g.name_en}</h2>
+          </div>
           <span class="more">{g.items.length}</span>
         </div>
         <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">{isZh ? g.sub_zh : g.sub_en}</p>
@@ -200,17 +211,13 @@ const groups = [
             const cta = isZh ? p.cta_zh : p.cta_en;
             return (
               <Outer {...outerProps}>
-                <div class={`cover gradient ${p.gradient}`}>
-                  <span class="glyph">{p.name}</span>
-                </div>
-                <div class="body">
-                  <div class="name">{p.name}</div>
-                  <div class="tagline">{isZh ? p.tagline_zh : p.tagline_en}</div>
-                  <div class="description">{isZh ? p.desc_zh : p.desc_en}</div>
-                  <div class="status">{cta ? `${status} · ${cta} →` : status}</div>
-                  <div class="tags">
-                    {p.tags.map((tg) => <span class="tag">{tg}</span>)}
-                  </div>
+                <span class={`badge ${badgeClass(status)}`}>● {status}</span>
+                <div class="name">{p.name}</div>
+                <div class="tagline">{isZh ? p.tagline_zh : p.tagline_en}</div>
+                <div class="description">{isZh ? p.desc_zh : p.desc_en}</div>
+                {cta && <div class="links">{cta} ↗</div>}
+                <div class="tags">
+                  {p.tags.map((tg) => <span class="tag">{tg}</span>)}
                 </div>
               </Outer>
             );
