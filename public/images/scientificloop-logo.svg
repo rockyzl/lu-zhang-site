@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="SciencesLoop logo">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0b1f33"/>
-      <stop offset="1" stop-color="#123f5d"/>
+      <stop offset="0" stop-color="#0a2b24"/>
+      <stop offset="1" stop-color="#0a5849"/>
     </linearGradient>
     <linearGradient id="loop" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#4ee6a8"/>
-      <stop offset="1" stop-color="#4bb3ff"/>
+      <stop offset="0" stop-color="#1a8f78"/>
+      <stop offset="1" stop-color="#c1863c"/>
     </linearGradient>
   </defs>
   <rect width="512" height="512" rx="96" fill="url(#bg)"/>
@@ -14,7 +14,7 @@
     <ellipse cx="256" cy="256" rx="170" ry="72" stroke-width="24" transform="rotate(-22 256 256)"/>
     <ellipse cx="256" cy="256" rx="170" ry="72" stroke-width="16" opacity="0.7" transform="rotate(34 256 256)"/>
   </g>
-  <circle cx="256" cy="256" r="42" fill="#f7fbff"/>
-  <circle cx="256" cy="256" r="19" fill="#20c997"/>
-  <text x="256" y="374" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="118" font-weight="700" letter-spacing="-8" fill="#f7fbff">SL</text>
+  <circle cx="256" cy="256" r="42" fill="#fbfaf5"/>
+  <circle cx="256" cy="256" r="19" fill="#0d7361"/>
+  <text x="256" y="374" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="118" font-weight="700" letter-spacing="-8" fill="#fbfaf5">SL</text>
 </svg>

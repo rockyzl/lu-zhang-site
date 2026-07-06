@@ -1,6 +1,5 @@
 ---
 import Base from "../../layouts/Base.astro";
-import SiteAgent from "../../components/SiteAgent.astro";
 import { u } from "../../lib/url";
 import { detectLocale } from "../../lib/i18n";
 import { getFeaturedBlogPosts, getBlogPosts } from "../../lib/blog";
@@ -104,7 +103,7 @@ const projectGroups = [
   description="AI 工程师，为科学与运营构建有据可查、可测试的智能体 —— 把检索、评估、安全护栏与领域经验，变成可靠的软件。"
 >
   <div class="container">
-    <section class="home-agent-hero">
+    <section class="home-agent-hero home-agent-hero--solo">
       <div class="home-agent-intro">
         <span class="hero-hello">你好，我是张鲁。👋</span>
         <h1>我为科学与运营构建有据可查、可测试的 AI 智能体。</h1>
@@ -122,9 +121,6 @@ const projectGroups = [
           <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>试用智能体 Demo</a>
           <a class="btn btn-ghost" href="#start-here">从这里开始</a>
         </div>
-      </div>
-      <div class="home-agent-embed">
-        <SiteAgent locale="zh" mode="home" />
       </div>
     </section>
 

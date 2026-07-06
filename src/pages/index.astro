@@ -1,6 +1,5 @@
 ---
 import Base from "../layouts/Base.astro";
-import SiteAgent from "../components/SiteAgent.astro";
 import { u } from "../lib/url";
 import { detectLocale } from "../lib/i18n";
 import { getFeaturedBlogPosts } from "../lib/blog";
@@ -98,7 +97,7 @@ const projectGroups = [
   description="AI engineer building grounded, testable agents for science and operations — retrieval, evaluation, safety guardrails, and domain expertise turned into reliable software."
 >
   <div class="container">
-    <section class="home-agent-hero">
+    <section class="home-agent-hero home-agent-hero--solo">
       <div class="home-agent-intro">
         <span class="hero-hello">Hi, I'm Lu. 👋</span>
         <h1>I build grounded, testable AI agents for science and operations.</h1>
@@ -117,9 +116,6 @@ const projectGroups = [
           <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>Try the agent demo</a>
           <a class="btn btn-ghost" href="#start-here">Start here</a>
         </div>
-      </div>
-      <div class="home-agent-embed">
-        <SiteAgent locale="en" mode="home" />
       </div>
     </section>
 

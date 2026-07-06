@@ -3,20 +3,20 @@
   <desc id="desc">A conceptual comparison between a weak assistant answer and a reviewable scientific RAG workflow.</desc>
   <defs>
     <style>
-      .bg { fill: #f8fafc; }
-      .card { fill: #ffffff; stroke: #dbe3ef; stroke-width: 2; }
-      .weak { fill: #fff7ed; stroke: #fdba74; stroke-width: 2; }
-      .strong { fill: #eff6ff; stroke: #93c5fd; stroke-width: 2; }
-      .good { fill: #ecfdf5; stroke: #86efac; stroke-width: 2; }
-      .title { fill: #172033; font-family: Inter, Arial, sans-serif; font-size: 30px; font-weight: 800; }
-      .head { fill: #172033; font-family: Inter, Arial, sans-serif; font-size: 23px; font-weight: 800; }
-      .text { fill: #334155; font-family: Inter, Arial, sans-serif; font-size: 19px; font-weight: 500; }
-      .small { fill: #607086; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 500; }
-      .label { fill: #0066ff; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 800; letter-spacing: 2.5px; }
-      .arrow { stroke: #0066ff; stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .bg { fill: #f3f1ea; }
+      .card { fill: #fbfaf5; stroke: #e4e0d4; stroke-width: 2; }
+      .weak { fill: #f7ecd9; stroke: #dcb877; stroke-width: 2; }
+      .strong { fill: #dcefe8; stroke: #a9d5c8; stroke-width: 2; }
+      .good { fill: #ddeede; stroke: #9cc9ab; stroke-width: 2; }
+      .title { fill: #1b201c; font-family: Inter, Arial, sans-serif; font-size: 30px; font-weight: 800; }
+      .head { fill: #1b201c; font-family: Inter, Arial, sans-serif; font-size: 23px; font-weight: 800; }
+      .text { fill: #39423b; font-family: Inter, Arial, sans-serif; font-size: 19px; font-weight: 500; }
+      .small { fill: #6a736a; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 500; }
+      .label { fill: #0d7361; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 800; letter-spacing: 2.5px; }
+      .arrow { stroke: #0d7361; stroke-width: 4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
     </style>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-      <path d="M2,2 L10,6 L2,10 Z" fill="#0066ff"/>
+      <path d="M2,2 L10,6 L2,10 Z" fill="#0d7361"/>
     </marker>
   </defs>
   <rect class="bg" width="1200" height="700"/>
