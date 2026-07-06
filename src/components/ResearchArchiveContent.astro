@@ -1,0 +1,109 @@
+---
+import { u } from "../lib/url";
+import projectsData from "../data/projects.json";
+
+const { locale = "en" } = Astro.props;
+const isZh = locale === "zh";
+const lp = isZh ? "/zh" : "";
+
+const hasProjectUrl = (p) => typeof p.url === "string" && p.url.length > 0;
+
+const copy = {
+  eyebrow: isZh ? "科学基础 · 公开档案" : "Scientific foundation · public archive",
+  title: isZh ? "研究档案" : "Research Archive",
+  lead: isZh
+    ? "这个页面保存我在 AI systems 工作之前以及并行阶段的公开科研记录：能源材料研究方向、代表项目、论文、专利、报告和公开证据。"
+    : "A public record of my scientific work before and alongside my AI systems work: energy-materials research themes, selected projects, publications, patents, reports, and public evidence.",
+  panelEyebrow: isZh ? "Archive note" : "Archive note",
+  panelTitle: isZh ? "把科研证据保留下来，但不让它占据首页主线。" : "Preserve the evidence without making it the homepage center of gravity.",
+  panelBody: isZh
+    ? "SciencesLoop 会逐步把 AI systems、grounded agents、evaluation 和 safety-gated workflows 放到前台。这个档案页把公开的 Argonne / JCESR 科研记录集中保存，方便需要深度背景的人继续查阅，同时让主站保持更清楚的 AI engineering 定位。"
+    : "SciencesLoop now foregrounds AI systems, grounded agents, evaluation, and safety-gated workflows. This archive keeps the public Argonne / JCESR research record intact for visitors who want the deeper scientific background, while keeping the main portfolio focused on current AI engineering work.",
+  linksLabel: isZh ? "快速入口" : "Quick links",
+  projectsTitle: isZh ? "公开科研项目记录" : "Public research project record",
+  projectsSubtitle: isZh
+    ? "以下内容来自公开科研项目档案；它们是科学背景层，而不是当前 AI 作品集主线。"
+    : "The records below come from the public research archive. They are the scientific foundation layer, not the main current AI portfolio.",
+  capabilityTitle: isZh ? "沉淀出的能力主题" : "Capability themes",
+  capabilitySubtitle: isZh
+    ? "这些长期科研能力会继续影响我如何构建 grounded、testable、domain-aware 的 AI systems。"
+    : "These long-running research capabilities still shape how I build grounded, testable, domain-aware AI systems.",
+};
+
+const archiveLinks = [
+  { label: isZh ? "论文" : "Publications", href: `${lp}/publications/` },
+  { label: isZh ? "专利" : "Patents", href: `${lp}/patents/` },
+  { label: isZh ? "报告" : "Talks", href: `${lp}/talks/` },
+  { label: isZh ? "技术报告" : "Reports", href: `${lp}/reports/` },
+  { label: isZh ? "荣誉" : "Awards", href: `${lp}/awards/` },
+];
+---
+<div class="container" style="padding-top: 3rem;">
+  <span class="eyebrow">{copy.eyebrow}</span>
+  <h1>{copy.title}</h1>
+  <p class="lead">{copy.lead}</p>
+
+  <section class="workflow-panel" style="margin-top: 2rem;">
+    <div>
+      <span class="eyebrow">{copy.panelEyebrow}</span>
+      <h2>{copy.panelTitle}</h2>
+      <p>{copy.panelBody}</p>
+      <div class="hero-cta" style="margin-top: 1.25rem; flex-wrap: wrap;" aria-label={copy.linksLabel}>
+        {archiveLinks.map((link) => (
+          <a class="btn btn-ghost" href={u(link.href)}>{link.label}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top: 3rem;">
+    <div class="section-head">
+      <h2 style="margin: 0;">{copy.projectsTitle}</h2>
+      <span class="more">{projectsData.categories.reduce((s, c) => s + c.items.length, 0)}</span>
+    </div>
+    <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">{copy.projectsSubtitle}</p>
+  </section>
+
+  {projectsData.categories.map((cat) => (
+    <section style="margin-top: 2.5rem;">
+      <div class="section-head">
+        <h2 style="margin: 0;">{cat.title}</h2>
+        <span class="more">{cat.items.length}</span>
+      </div>
+      <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">{cat.subtitle}</p>
+      {cat.items.map((p) => (
+        <div class="entry">
+          <div class="title">
+            {hasProjectUrl(p) ? (
+              <a href={p.url} target="_blank" rel="noopener">{p.name}</a>
+            ) : (
+              <span>{p.name}</span>
+            )}
+          </div>
+          <div class="meta">
+            <strong style="color: var(--c-fg);">{p.funder}</strong> · {p.years} · {p.role}
+          </div>
+          {p.highlights && p.highlights.length > 0 && (
+            <ul style="margin: 0.5rem 0 0; padding-left: 1.2rem; color: var(--c-fg); font-size: 0.93rem; line-height: 1.55;">
+              {p.highlights.map((h) => <li>{h}</li>)}
+            </ul>
+          )}
+        </div>
+      ))}
+    </section>
+  ))}
+
+  <section style="margin-top: 3.5rem;">
+    <div class="section-head"><h2 style="margin:0;">{copy.capabilityTitle}</h2></div>
+    <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: -0.5rem;">
+      {copy.capabilitySubtitle}
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 1rem;">
+      {projectsData.capability_themes.map((theme) => (
+        <div style="background: var(--c-card); border: 1px solid var(--c-border); border-radius: var(--radius-sm); padding: 0.9rem 1rem; font-size: 0.92rem;">
+          {theme}
+        </div>
+      ))}
+    </div>
+  </section>
+</div>
