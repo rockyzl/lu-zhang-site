@@ -1,0 +1,16 @@
+---
+import Base from "../../layouts/Base.astro";
+import { detectLocale } from "../../lib/i18n";
+import ResearchArchiveContent from "../../components/ResearchArchiveContent.astro";
+
+const locale = detectLocale(Astro.url.pathname);
+const isZh = locale === "zh";
+---
+<Base
+  title={(isZh ? "研究档案 — " : "Research Archive — ") + "SciencesLoop"}
+  description={isZh
+    ? "SciencesLoop 公开研究档案：能源材料科研记录、论文、专利、报告和代表性项目。"
+    : "SciencesLoop public research archive: energy-materials research record, publications, patents, reports, and selected projects."}
+>
+  <ResearchArchiveContent locale={locale} />
+</Base>
