@@ -561,6 +561,10 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   font-weight: 600;
   white-space: nowrap;
 }
+/* Emphasis subtleties — match the mockup: teal key words, bold key facts */
+.hero-em { color: var(--c-accent); }
+.lead strong { color: var(--c-ink); font-weight: 640; }
+.home-agent-intro .role strong { color: var(--c-ink); font-weight: 600; }
 .start-grid {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
