@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { u } from "../lib/url";
 import { detectLocale, t, altLocalePath, type Locale } from "../lib/i18n";
+import ChatWidget from "../components/ChatWidget.astro";
 
 const {
   title = "SciencesLoop — AI engineering for science and operations",
@@ -146,6 +147,7 @@ const isActive = (href) => {
       <a href="https://github.com/rockyzl">{t("footer.github", locale)}</a> ·
       <a href="mailto:zhanglu77@gmail.com">{t("footer.email", locale)}</a>
     </footer>
+    <ChatWidget locale={locale} />
   </body>
 </html>
 

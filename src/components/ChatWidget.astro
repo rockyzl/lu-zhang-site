@@ -1,0 +1,696 @@
+---
+// Floating chat-bot widget — a launcher bubble (bottom-right, every page) that
+// pops out a slide-in chat panel for multi-turn Q&A with the SciencesLoop agent.
+//
+// This is a FRESH floating-chat UX. It does NOT reuse the inline agent card
+// markup, but it DOES reuse SiteAgent.astro's backend contract verbatim:
+//   - config:   PUBLIC_AGENT_API_URL (same default endpoint)
+//   - request:  POST { query, locale } as JSON, 18s AbortController timeout
+//   - response: { answer, citations:[{id,title,url}], agent:{followups[]}, mode }
+//   - fallback: local keyword rules over the public corpus when the API errors
+// Public-safe guardrails only: answers route across public site content.
+import { u } from "../lib/url";
+import type { Locale } from "../lib/i18n";
+
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const agentApiUrl = import.meta.env.PUBLIC_AGENT_API_URL ?? "https://api.sciencesloop.com/api/agent";
+
+// Same public link map SiteAgent uses, so local-fallback answers point to the
+// same public pages.
+const links = {
+  ai: u(locale === "zh" ? "/zh/programs/" : "/programs/"),
+  approach: u(locale === "zh" ? "/zh/approach/" : "/approach/"),
+  evolution: u(locale === "zh" ? "/zh/evolution/" : "/evolution/"),
+  cases: u(locale === "zh" ? "/zh/programs/#case-studies" : "/programs/#case-studies"),
+  publications: u(locale === "zh" ? "/zh/publications/" : "/publications/"),
+  patents: u(locale === "zh" ? "/zh/patents/" : "/patents/"),
+  projects: u(locale === "zh" ? "/zh/projects/" : "/projects/"),
+  collaborators: u(locale === "zh" ? "/zh/mentorship-collaborators/" : "/mentorship-collaborators/"),
+  about: u(locale === "zh" ? "/zh/about/" : "/about/"),
+  scholar: "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en",
+  github: "https://github.com/rockyzl",
+  linkedin: "https://www.linkedin.com/in/lu-zhang-argonne/",
+  email: "mailto:zhanglu77@gmail.com",
+  cv: u("/files/Lu_Zhang_CV.pdf"),
+  voicerag: "https://voicerag.sciencesloop.com/",
+};
+
+const copy = locale === "zh"
+  ? {
+      title: "SciencesLoop Agent",
+      subtitle: "问我的工作",
+      placeholder: "问问 Lu 的工作…",
+      send: "发送",
+      sendAria: "发送消息",
+      close: "关闭对话",
+      launcherOpen: "打开 SciencesLoop 智能体对话",
+      greeting: "你好，我是 SciencesLoop 智能体。可以问我 Lu 建过哪些 AI 系统、他怎么让 agent 可靠可测，或者这些工作背后的科学背景。",
+      thinking: "正在思考…",
+      apiError: "实时 agent 暂时不可用，这是我能基于公开网站内容回答的部分。",
+      rateLimit: "稍等一下——问得太快了，过一会儿再试。",
+      sources: "来源",
+      followupsLabel: "继续追问",
+      startersLabel: "可以先问：",
+      starters: [
+        "Lu 建过哪些 AI 系统？",
+        "他怎么让 agent 可靠、可测？",
+        "Property OS 是什么？怎么做安全门控的？",
+      ],
+      fallback: "我现在只能回答网站里的核心主题。可以试试 agent reliability、case studies、technical evolution、AI for science、workflow、battery、Argonne、publication、patent、academic CV、contact、VoiceRAG。",
+    }
+  : {
+      title: "SciencesLoop Agent",
+      subtitle: "ask about my work",
+      placeholder: "Ask about Lu's work…",
+      send: "Send",
+      sendAria: "Send message",
+      close: "Close chat",
+      launcherOpen: "Open chat with the SciencesLoop agent",
+      greeting: "Hi — I'm the SciencesLoop agent. Ask about the AI systems Lu has built, how he keeps agents grounded and testable, or the science behind the work.",
+      thinking: "Thinking…",
+      apiError: "Live agent is temporarily unavailable — here's what I can answer from the public site.",
+      rateLimit: "Give me a moment — too many questions at once. Please try again shortly.",
+      sources: "Sources",
+      followupsLabel: "Follow up",
+      startersLabel: "Try asking:",
+      starters: [
+        "What AI systems has Lu built?",
+        "How does he keep agents grounded and testable?",
+        "What's Property OS, and how is it safety-gated?",
+      ],
+      fallback: "I can answer the core site topics for now. Try agent reliability, case studies, technical evolution, AI for science, workflow, battery, Argonne, publication, patent, academic CV, contact, or VoiceRAG.",
+    };
+---
+
+<div class="chat-widget cw-root" data-chat-widget data-locale={locale}>
+  <!-- Panel: rendered above the launcher, hidden until opened -->
+  <div class="cw-panel" id="cw-panel" role="dialog" aria-modal="false" aria-label={copy.title} hidden>
+    <header class="cw-head">
+      <div class="cw-head-text">
+        <div class="cw-title">{copy.title}</div>
+        <div class="cw-subtitle">{copy.subtitle}</div>
+      </div>
+      <button type="button" class="cw-close" data-cw-close aria-label={copy.close}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </header>
+
+    <div class="cw-messages" data-cw-messages aria-live="polite" aria-atomic="false">
+      <div class="cw-msg cw-msg--agent">
+        <div class="cw-bubble">{copy.greeting}</div>
+      </div>
+    </div>
+
+    <div class="cw-starters" data-cw-starters>
+      <div class="cw-starters-label">{copy.startersLabel}</div>
+      <div class="cw-chips">
+        {copy.starters.map((s) => (
+          <button type="button" class="cw-chip" data-cw-prompt={s}>{s}</button>
+        ))}
+      </div>
+    </div>
+
+    <form class="cw-form" data-cw-form>
+      <input
+        class="cw-input"
+        name="q"
+        type="text"
+        autocomplete="off"
+        placeholder={copy.placeholder}
+        aria-label={copy.placeholder}
+      />
+      <button type="submit" class="cw-send" data-cw-send aria-label={copy.sendAria}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 12l16-8-6 16-2.5-6.5L4 12z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="currentColor" fill-opacity="0.08" />
+        </svg>
+        <span class="cw-send-text">{copy.send}</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- Launcher: fixed circular button, bottom-right -->
+  <button
+    type="button"
+    class="cw-launcher"
+    data-cw-launcher
+    aria-label={copy.launcherOpen}
+    aria-expanded="false"
+    aria-controls="cw-panel"
+  >
+    <svg class="cw-icon-open" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v7A2.5 2.5 0 0 1 17.5 15H9l-4 4v-4H6.5A2.5 2.5 0 0 1 4 12.5v-7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+      <circle cx="9" cy="9" r="1.1" fill="currentColor" />
+      <circle cx="12.5" cy="9" r="1.1" fill="currentColor" />
+      <circle cx="16" cy="9" r="1.1" fill="currentColor" />
+    </svg>
+    <svg class="cw-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </button>
+</div>
+
+<style is:global>
+  .cw-root {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 900;
+    font-family: var(--font-sans);
+  }
+
+  /* ---- Launcher bubble ---- */
+  .cw-launcher {
+    position: relative;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 999px;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 10px 26px -8px rgba(13, 115, 97, 0.55), 0 2px 6px rgba(27, 32, 28, 0.14);
+    transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+  }
+  .cw-launcher:hover {
+    background: var(--accent-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px -10px rgba(13, 115, 97, 0.6), 0 3px 8px rgba(27, 32, 28, 0.16);
+  }
+  .cw-launcher:focus-visible {
+    outline: 3px solid var(--accent-soft);
+    outline-offset: 3px;
+  }
+  .cw-icon-close { display: none; }
+  .cw-root.cw-open .cw-icon-open { display: none; }
+  .cw-root.cw-open .cw-icon-close { display: block; }
+
+  /* ---- Panel ---- */
+  .cw-panel {
+    position: absolute;
+    right: 0;
+    bottom: 72px;
+    width: 360px;
+    max-width: calc(100vw - 40px);
+    max-height: min(72vh, 560px);
+    display: flex;
+    flex-direction: column;
+    background: var(--c-card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .cw-panel[hidden] { display: none; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cw-panel {
+      transform-origin: bottom right;
+      animation: cw-pop .18s cubic-bezier(.2, .8, .3, 1);
+    }
+    @keyframes cw-pop {
+      from { opacity: 0; transform: translateY(8px) scale(.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+  }
+
+  /* ---- Header ---- */
+  .cw-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: .85rem 1rem;
+    border-bottom: 1px solid var(--c-border-soft);
+    background: linear-gradient(180deg, var(--accent-soft), var(--c-card));
+  }
+  .cw-title {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: .92rem;
+    color: var(--c-ink);
+    letter-spacing: -0.01em;
+  }
+  .cw-subtitle {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .04em;
+    color: var(--c-muted);
+    margin-top: .12rem;
+  }
+  .cw-close {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--c-muted);
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .cw-close:hover { background: var(--c-bg-soft); color: var(--c-ink); }
+  .cw-close:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+
+  /* ---- Messages ---- */
+  .cw-messages {
+    flex: 1 1 auto;
+    min-height: 130px;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    background:
+      linear-gradient(180deg, rgba(220, 239, 232, 0.28), rgba(251, 250, 245, 0.0) 90px);
+  }
+  .cw-msg { display: flex; }
+  .cw-msg--user { justify-content: flex-end; }
+  .cw-msg--agent { justify-content: flex-start; }
+  .cw-bubble {
+    max-width: 84%;
+    padding: .55rem .75rem;
+    border-radius: 14px;
+    font-size: .9rem;
+    line-height: 1.55;
+    color: var(--c-fg);
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
+  .cw-msg--user .cw-bubble {
+    background: var(--accent);
+    color: #fff;
+    border-bottom-right-radius: 5px;
+  }
+  .cw-msg--user .cw-bubble a { color: #eafff8; }
+  .cw-msg--agent .cw-bubble {
+    background: var(--c-card);
+    border: 1px solid var(--line);
+    border-bottom-left-radius: 5px;
+  }
+  .cw-msg--agent .cw-bubble a { color: var(--accent); font-weight: 600; }
+
+  /* thinking dots */
+  .cw-dots { display: inline-flex; gap: 4px; align-items: center; height: 1.1em; }
+  .cw-dots span {
+    width: 6px; height: 6px; border-radius: 999px; background: var(--c-muted-2);
+    display: inline-block;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cw-dots span { animation: cw-blink 1.2s infinite ease-in-out; }
+    .cw-dots span:nth-child(2) { animation-delay: .18s; }
+    .cw-dots span:nth-child(3) { animation-delay: .36s; }
+    @keyframes cw-blink {
+      0%, 80%, 100% { opacity: .3; }
+      40% { opacity: 1; }
+    }
+  }
+
+  /* sources + followups inside an agent bubble */
+  .cw-sources {
+    margin-top: .55rem;
+    padding-top: .5rem;
+    border-top: 1px solid var(--c-border-soft);
+  }
+  .cw-sources-title {
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+    margin-bottom: .3rem;
+  }
+  .cw-sources ol { margin: 0; padding-left: 1.1rem; }
+  .cw-sources li { font-size: .78rem; color: var(--c-muted); margin: .15rem 0; }
+  .cw-followups {
+    margin-top: .55rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+  }
+
+  /* ---- Starter chips ---- */
+  .cw-starters {
+    padding: 0 1rem .6rem;
+    border-top: 1px solid var(--c-border-soft);
+    padding-top: .7rem;
+  }
+  .cw-root.cw-conversing .cw-starters { display: none; }
+  .cw-starters-label {
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+    margin-bottom: .4rem;
+  }
+  .cw-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .cw-chip, .cw-followups button {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--c-bg-soft);
+    color: var(--c-fg-2);
+    font: inherit;
+    font-size: .78rem;
+    line-height: 1.3;
+    text-align: left;
+    padding: .3rem .6rem;
+    cursor: pointer;
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .cw-chip:hover, .cw-followups button:hover {
+    border-color: var(--accent-soft);
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .cw-chip:focus-visible, .cw-followups button:focus-visible {
+    outline: 2px solid var(--accent-soft);
+    outline-offset: 2px;
+  }
+
+  /* ---- Input row ---- */
+  .cw-form {
+    display: flex;
+    gap: .5rem;
+    padding: .75rem 1rem 1rem;
+    border-top: 1px solid var(--c-border-soft);
+    background: var(--c-card);
+  }
+  .cw-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    font: inherit;
+    font-size: .9rem;
+    color: var(--c-fg);
+    background: var(--c-bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: .5rem .7rem;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .cw-input::placeholder { color: var(--c-muted-2); }
+  .cw-input:focus {
+    outline: none;
+    border-color: var(--accent-soft);
+    box-shadow: 0 0 0 3px rgba(13, 115, 97, 0.12);
+  }
+  .cw-send {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    font: inherit;
+    font-size: .85rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 10px;
+    padding: .5rem .8rem;
+    cursor: pointer;
+    transition: background .15s, opacity .15s;
+  }
+  .cw-send:hover { background: var(--accent-deep); }
+  .cw-send:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 2px; }
+  .cw-send:disabled { opacity: .55; cursor: not-allowed; }
+  .cw-root.cw-pending .cw-input { opacity: .7; }
+
+  /* ---- Mobile: near-full-width panel, launcher stays reachable ---- */
+  @media (max-width: 480px) {
+    .cw-root { right: 14px; bottom: 14px; }
+    .cw-panel {
+      width: calc(100vw - 28px);
+      max-height: min(76vh, 620px);
+      bottom: 68px;
+    }
+    .cw-send-text { display: none; }
+    .cw-send { padding: .5rem .6rem; }
+  }
+</style>
+
+<script define:vars={{ agentApiUrl, locale, links, copy }}>
+  (() => {
+    const root = document.querySelector("[data-chat-widget]");
+    if (!root) return;
+
+    const launcher = root.querySelector("[data-cw-launcher]");
+    const panel = root.querySelector("#cw-panel");
+    const closeBtn = root.querySelector("[data-cw-close]");
+    const messages = root.querySelector("[data-cw-messages]");
+    const form = root.querySelector("[data-cw-form]");
+    const input = form.querySelector(".cw-input");
+    const sendBtn = form.querySelector("[data-cw-send]");
+
+    // Client-side conversation history (turns). The backend contract is
+    // single-turn { query, locale } (see SiteAgent.astro), so history is kept
+    // for display; each request still sends just { query, locale }.
+    const history = [];
+    let pending = false;
+
+    /* ---------- local keyword fallback (public corpus, same as SiteAgent) ---------- */
+    const answerSets = {
+      en: [
+        { keys: ["agent", "agents", "rag", "mcp", "langgraph", "workflow", "harness", "ai for science", "scientific agent"],
+          html: `Lu's current direction is AI for Science through reliable agent systems: context engineering, evaluation harnesses, multi-agent orchestration, traceable workflow execution, and human-in-the-loop scientific decision support. See <a href="${links.ai}">Programs</a>.` },
+        { keys: ["approach", "reliable", "reliability", "grounded", "testable", "context engineering", "golden set", "acceptance contract", "human review", "human-in-the-loop"],
+          html: `The <a href="${links.approach}">Approach</a> page explains the reliability stack: foundation models, agent engineering, context engineering, and evaluation harnesses — measurable behavior, grounded context, explicit tools, and human review.` },
+        { keys: ["case", "case study", "case studies", "rfb", "scifm", "molecular property", "molecular-property", "chemgraph"],
+          html: `The <a href="${links.cases}">case studies</a> cover the RFB formulation agent, ChemGraph workflow contributions, the scifm registry, and a public molecular-property ML pipeline, with maturity labels preserved.` },
+        { keys: ["evolution", "timeline", "technical evolution", "commit", "commits", "trajectory"],
+          html: `The <a href="${links.evolution}">Technical Evolution</a> page frames the path from scientific research to data science, LLM/agent systems, and 2026 production reliability work.` },
+        { keys: ["mlops", "eval", "evaluation", "observability", "trace", "smoke test", "deployment", "azure", "docker", "search"],
+          html: `Lu's AI engineering emphasizes application-layer reliability: retrieval checks, smoke tests, trace review, Docker/Azure deployment-readiness, and rollback-aware search-index workflows — application-layer AI/MLOps, not model pretraining.` },
+        { keys: ["battery", "redox", "flow", "electrolyte", "redoxmer", "materials", "property os"],
+          html: `Lu's scientific base is battery materials and electrochemistry: redox-flow batteries, redox-active organic molecules, Li-ion electrolyte additives, redox shuttles, and molecular design. See <a href="${links.publications}">publications</a> and <a href="${links.patents}">patents</a>.` },
+        { keys: ["publication", "paper", "citation", "scholar", "patent"],
+          html: `For publication depth use the <a href="${links.publications}">publication list</a> and <a href="${links.scholar}" target="_blank" rel="noopener">Google Scholar</a>. For invention output see <a href="${links.patents}">patents</a>.` },
+        { keys: ["argonne", "anl", "autonomous", "discovery", "robotic", "jcesr", "doe", "national lab"],
+          html: `Lu spent 14+ years at Argonne on battery materials, redox molecules, DOE/JCESR programs, and selected AI/ML, high-throughput, and autonomous-discovery collaborations — AI for Science built on deep scientific domain expertise.` },
+        { keys: ["voicerag", "voice", "lightyear", "sciencesloop"],
+          html: `The VoiceRAG / Lightyear work is a live voice-RAG demo using realtime voice interaction and retrieval patterns. Open <a href="${links.voicerag}" target="_blank" rel="noopener">voicerag.sciencesloop.com</a>.` },
+        { keys: ["cv", "resume", "linkedin", "github", "contact", "email"],
+          html: `Use the <a href="${links.cv}" target="_blank" rel="noopener">academic CV PDF</a>, <a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a>, <a href="${links.github}" target="_blank" rel="noopener">GitHub</a>, or <a href="${links.email}">email Lu</a>.` },
+      ],
+      zh: [
+        { keys: ["agent", "智能体", "rag", "mcp", "langgraph", "workflow", "工作流", "ai for science"],
+          html: `Lu 现在的主线是把可靠 agent 系统用于 AI for Science：context engineering、evaluation harnesses、multi-agent orchestration、可追踪工作流和 human-in-the-loop 科学决策支持。见 <a href="${links.ai}">Programs</a>。` },
+        { keys: ["approach", "方法", "可靠", "可测", "grounded", "reliability", "context engineering", "golden set", "human review", "human-in-the-loop"],
+          html: `<a href="${links.approach}">方法页</a> 解释可靠 agent 的四层：foundation models、agent engineering、context engineering 和 evaluation harnesses。重点是可测量行为、grounded context、明确工具和人工 review。` },
+        { keys: ["case", "案例", "rfb", "scifm", "molecular property", "molecular-property", "chemgraph"],
+          html: `<a href="${links.cases}">case studies</a> 包含 RFB formulation agent、ChemGraph workflow、scifm registry 和公开 molecular-property ML pipeline，并保留 maturity 标签。` },
+        { keys: ["evolution", "演化", "timeline", "时间线", "technical evolution", "trajectory"],
+          html: `<a href="${links.evolution}">技术演化页</a> 解释从科学研究到 data science、LLM/agent systems，再到 2026 production reliability work 的连续路径。` },
+        { keys: ["mlops", "eval", "evaluation", "评估", "trace", "smoke test", "部署", "azure", "docker", "search"],
+          html: `Lu 的 AI 工程重点是应用层可靠性：retrieval checks、smoke tests、trace review、Docker/Azure deployment-readiness，以及可回滚的 search-index 工作流。是应用层 AI/MLOps，不是模型预训练。` },
+        { keys: ["battery", "电池", "redox", "flow", "液流", "electrolyte", "电解液", "redoxmer", "materials", "材料", "property os"],
+          html: `Lu 的科学基础是电池材料和电化学：液流电池、氧化还原活性有机分子、锂离子电解液添加剂、redox shuttle 和分子设计。见 <a href="${links.publications}">论文</a> 和 <a href="${links.patents}">专利</a>。` },
+        { keys: ["publication", "paper", "论文", "citation", "引用", "scholar", "patent", "专利"],
+          html: `论文看 <a href="${links.publications}">publication list</a> 与 <a href="${links.scholar}" target="_blank" rel="noopener">Google Scholar</a>；发明成果看 <a href="${links.patents}">专利</a>。` },
+        { keys: ["argonne", "anl", "阿贡", "autonomous", "自主发现", "discovery", "jcesr", "doe", "国家实验室"],
+          html: `Lu 在 Argonne 有 14+ 年电池材料、redox molecules、DOE/JCESR 项目经验，并参与过部分 AI/ML、高通量和 autonomous-discovery 合作——以深厚科学背景为基础的 AI for Science。` },
+        { keys: ["voicerag", "voice", "语音", "光年", "lightyear", "sciencesloop"],
+          html: `VoiceRAG / Lightyear 是一个在线 voice-RAG demo，结合 realtime voice interaction 和检索模式。打开 <a href="${links.voicerag}" target="_blank" rel="noopener">voicerag.sciencesloop.com</a>。` },
+        { keys: ["cv", "resume", "简历", "linkedin", "github", "contact", "email", "联系"],
+          html: `公开记录看 <a href="${links.cv}" target="_blank" rel="noopener">学术 CV PDF</a>，职业背景看 <a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a>，代码看 <a href="${links.github}" target="_blank" rel="noopener">GitHub</a>，也可 <a href="${links.email}">邮件联系 Lu</a>。` },
+      ],
+    };
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function localReply(query) {
+      const normalized = query.toLowerCase();
+      const set = answerSets[locale] || answerSets.en;
+      const match = set.find((item) => item.keys.some((key) => normalized.includes(key.toLowerCase())));
+      return match ? match.html : copy.fallback;
+    }
+
+    /* ---------- DOM helpers ---------- */
+    function scrollToBottom() {
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function addUserMessage(text) {
+      const row = document.createElement("div");
+      row.className = "cw-msg cw-msg--user";
+      const bubble = document.createElement("div");
+      bubble.className = "cw-bubble";
+      bubble.textContent = text;
+      row.appendChild(bubble);
+      messages.appendChild(row);
+      scrollToBottom();
+    }
+
+    // Returns the bubble element so the caller can replace its content once the
+    // answer arrives.
+    function addAgentMessage(html) {
+      const row = document.createElement("div");
+      row.className = "cw-msg cw-msg--agent";
+      const bubble = document.createElement("div");
+      bubble.className = "cw-bubble";
+      bubble.innerHTML = html;
+      row.appendChild(bubble);
+      messages.appendChild(row);
+      scrollToBottom();
+      return bubble;
+    }
+
+    function thinkingHtml() {
+      return `<span class="cw-dots" aria-label="${escapeHtml(copy.thinking)}"><span></span><span></span><span></span></span>`;
+    }
+
+    // Build the agent answer bubble from the live API response, reusing the same
+    // response shape SiteAgent parses: answer text + citations + followups.
+    function renderApiAnswer(data) {
+      const answer = escapeHtml(data.answer || "").replaceAll("\n", "<br />");
+      const citations = Array.isArray(data.citations) ? data.citations.slice(0, 5) : [];
+      const agent = data.agent || {};
+      const followups = Array.isArray(agent.followups) ? agent.followups.slice(0, 3) : [];
+
+      const sources = citations
+        .map((item) => {
+          const title = escapeHtml(item.title || item.url || "Source");
+          const url = escapeHtml(item.url || "#");
+          const id = escapeHtml(item.id || "");
+          return `<li><a href="${url}" target="_blank" rel="noopener">${id ? "[" + id + "] " : ""}${title}</a></li>`;
+        })
+        .join("");
+      const sourcesHtml = sources
+        ? `<div class="cw-sources"><div class="cw-sources-title">${escapeHtml(copy.sources)}</div><ol>${sources}</ol></div>`
+        : "";
+      const followupsHtml = followups.length
+        ? `<div class="cw-followups">${followups
+            .map((f) => `<button type="button" data-cw-prompt="${escapeHtml(f)}">${escapeHtml(f)}</button>`)
+            .join("")}</div>`
+        : "";
+      return `<div>${answer || escapeHtml(copy.fallback)}</div>${sourcesHtml}${followupsHtml}`;
+    }
+
+    /* ---------- live API (same contract as SiteAgent.astro) ---------- */
+    async function askLiveAgent(query) {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 18000);
+      try {
+        const response = await fetch(agentApiUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query, locale }),
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          const err = new Error(`Agent API returned ${response.status}`);
+          err.status = response.status;
+          throw err;
+        }
+        return await response.json();
+      } finally {
+        window.clearTimeout(timeout);
+      }
+    }
+
+    /* ---------- send flow with abuse/cost guard ---------- */
+    function setPending(state) {
+      pending = state;
+      sendBtn.disabled = state;
+      input.disabled = state;
+      root.classList.toggle("cw-pending", state);
+    }
+
+    async function send(query) {
+      const q = (query || "").trim();
+      if (!q || pending) return; // debounce: ignore while a request is in flight
+
+      root.classList.add("cw-conversing"); // hide starter chips after first turn
+      addUserMessage(q);
+      history.push({ role: "user", text: q });
+      input.value = "";
+      setPending(true);
+
+      const bubble = addAgentMessage(thinkingHtml());
+
+      if (!agentApiUrl) {
+        // No endpoint configured → local fallback only (graceful degrade).
+        const html = localReply(q);
+        bubble.innerHTML = html;
+        history.push({ role: "agent", text: html });
+        scrollToBottom();
+        setPending(false);
+        return;
+      }
+
+      try {
+        const data = await askLiveAgent(q);
+        const html = renderApiAnswer(data);
+        bubble.innerHTML = html;
+        history.push({ role: "agent", text: data.answer || "" });
+      } catch (error) {
+        if (error && error.status === 429) {
+          // Rate limited — do NOT retry/hammer the backend.
+          bubble.innerHTML = `<div>${escapeHtml(copy.rateLimit)}</div>`;
+        } else {
+          // Any other error/timeout → friendly note + local public-corpus answer.
+          bubble.innerHTML = `<div>${escapeHtml(copy.apiError)}</div><div style="margin-top:.5rem">${localReply(q)}</div>`;
+        }
+      } finally {
+        setPending(false);
+        scrollToBottom();
+        if (!input.disabled) input.focus();
+      }
+    }
+
+    /* ---------- open/close ---------- */
+    function openPanel() {
+      panel.hidden = false;
+      root.classList.add("cw-open");
+      launcher.setAttribute("aria-expanded", "true");
+      launcher.setAttribute("aria-label", copy.close);
+      window.requestAnimationFrame(() => input.focus());
+    }
+    function closePanel() {
+      panel.hidden = true;
+      root.classList.remove("cw-open");
+      launcher.setAttribute("aria-expanded", "false");
+      launcher.setAttribute("aria-label", copy.launcherOpen);
+      launcher.focus();
+    }
+    function togglePanel() {
+      if (panel.hidden) openPanel();
+      else closePanel();
+    }
+
+    launcher.addEventListener("click", togglePanel);
+    closeBtn.addEventListener("click", closePanel);
+
+    // Esc closes the panel when it's open.
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !panel.hidden) closePanel();
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      send(input.value);
+    });
+
+    // Delegated: starter chips + dynamically-rendered followup chips both send.
+    root.addEventListener("click", (e) => {
+      const chip = e.target.closest?.("[data-cw-prompt]");
+      if (!chip) return;
+      send(chip.getAttribute("data-cw-prompt") || "");
+    });
+  })();
+</script>
