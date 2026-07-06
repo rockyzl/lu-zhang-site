@@ -100,26 +100,48 @@ const projectGroups = [
   <div class="container">
     <section class="home-agent-hero">
       <div class="home-agent-intro">
-        <span class="eyebrow">AI Engineer · Grounded agents · Evaluation-driven · Safe by design</span>
-        <h1>AI engineer building grounded, testable agents for science and operations.</h1>
+        <span class="hero-hello">Hi, I'm Lu. 👋</span>
+        <h1>I build grounded, testable AI agents for science and operations.</h1>
         <p class="lead">
           I build AI systems that combine retrieval, evaluation, safety
           guardrails, and domain expertise — turning complex knowledge
           workflows into reliable software.
         </p>
         <p class="role">
-          15+ years in energy science at Argonne/JCESR now informs how I build
-          agents: evidence-first, reproducible, and safe by design.
+          15+ yrs energy science · Argonne/JCESR · 97 publications ·
+          28 patents · h-index 39 ·
+          <a href={u(`${lp}/research-archive/`)}>View research archive →</a>
         </p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#featured-systems">View AI Systems</a>
-          <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>Try Agent Demo</a>
-          <a class="btn btn-ghost" href={u(`${lp}/blog/`)}>Read Field Notes</a>
+          <a class="btn btn-primary" href="#featured-systems">Explore AI systems</a>
+          <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>Try the agent demo</a>
+          <a class="btn btn-ghost" href="#start-here">Start here</a>
         </div>
       </div>
       <div class="home-agent-embed">
         <SiteAgent locale="en" mode="home" />
       </div>
+    </section>
+
+    <div class="section-head" id="start-here">
+      <h2>Start here</h2>
+    </div>
+    <section class="product-modules start-grid" aria-label="Start here">
+      <a class="product-module" href={u(`${lp}/projects/`)}>
+        <span>Path 01</span>
+        <h2>I want to see AI systems</h2>
+        <p>Featured agents, eval harnesses, and the systems I build. → Projects</p>
+      </a>
+      <a class="product-module" href={u(`${lp}/agent/`)}>
+        <span>Path 02</span>
+        <h2>I want to try something live</h2>
+        <p>Ask my retrieval-grounded agent about my public work. → Agent demo</p>
+      </a>
+      <a class="product-module" href={u(`${lp}/research-archive/`)}>
+        <span>Path 03</span>
+        <h2>I want the scientific foundation</h2>
+        <p>15+ years of energy science — publications, patents, talks. → Research archive</p>
+      </a>
     </section>
 
     <div class="section-head" id="featured-systems">
@@ -168,6 +190,16 @@ const projectGroups = [
     </section>
 
     <div class="section-head">
+      <h2>How I think about AI systems</h2>
+    </div>
+    <ul class="how-i-think">
+      <li>I like agents that leave traces.</li>
+      <li>I like demos that can be tested.</li>
+      <li>I like retrieval that says where an answer came from.</li>
+      <li>I like automation with clear safety boundaries.</li>
+    </ul>
+
+    <div class="section-head">
       <h2>Why my science background matters</h2>
     </div>
     <p class="lead" style="margin-top: -0.4rem;">
@@ -207,6 +239,10 @@ const projectGroups = [
       <h2>Field Notes</h2>
       <a class="more" href={u(`${lp}/blog/`)}>All notes →</a>
     </div>
+    <p class="section-intro">
+      Working notes, build logs, and small lessons from building grounded
+      agents. Some are polished. Some are still growing.
+    </p>
     <div class="blog-grid blog-grid--home">
       {featuredPosts.map((post) => (
         <article class="blog-card">

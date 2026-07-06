@@ -437,6 +437,52 @@ footer.site a:hover { color: var(--c-accent); border-bottom-color: var(--c-accen
   border-color: var(--c-accent-soft);
   transform: translateY(-1px);
 }
+/* ----- Homepage warmth pass (personal accents) ----- */
+.hero-hello {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--c-accent);
+  margin-bottom: 0.5rem;
+}
+.home-agent-intro .role a {
+  font-weight: 600;
+  white-space: nowrap;
+}
+.start-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.section-intro {
+  color: var(--c-muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  max-width: 640px;
+  margin: -0.6rem 0 1.5rem;
+}
+.how-i-think {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+  max-width: 640px;
+}
+.how-i-think li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 1.12rem;
+  line-height: 1.5;
+  color: var(--c-fg);
+}
+.how-i-think li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--c-accent);
+  font-weight: 600;
+}
 .lab-manifesto {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);

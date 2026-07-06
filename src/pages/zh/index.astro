@@ -106,25 +106,47 @@ const projectGroups = [
   <div class="container">
     <section class="home-agent-hero">
       <div class="home-agent-intro">
-        <span class="eyebrow">AI 工程师 · Grounded agents · 面向评估 · 安全优先</span>
-        <h1>为科学与运营构建有据可查、可测试的 AI 智能体。</h1>
+        <span class="hero-hello">你好，我是张鲁。👋</span>
+        <h1>我为科学与运营构建有据可查、可测试的 AI 智能体。</h1>
         <p class="lead">
           我构建的 AI 系统，把检索、评估、安全护栏和领域经验结合起来，
           将复杂的知识工作流变成可靠的软件。
         </p>
         <p class="role">
-          在阿贡 / JCESR 从事能源科学 15+ 年，这段经历塑造了我构建智能体的方式：
-          以证据为先、可复现、并从设计上保证安全。
+          能源科学 15+ 年 · 阿贡 / JCESR · 97 篇论文 ·
+          28 项专利 · h 指数 39 ·
+          <a href={u(`${lp}/research-archive/`)}>查看研究档案 →</a>
         </p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#featured-systems">查看 AI 系统</a>
+          <a class="btn btn-primary" href="#featured-systems">探索 AI 系统</a>
           <a class="btn btn-ghost" href={u(`${lp}/agent/`)}>试用智能体 Demo</a>
-          <a class="btn btn-ghost" href={u(`${lp}/blog/`)}>阅读研究笔记</a>
+          <a class="btn btn-ghost" href="#start-here">从这里开始</a>
         </div>
       </div>
       <div class="home-agent-embed">
         <SiteAgent locale="zh" mode="home" />
       </div>
+    </section>
+
+    <div class="section-head" id="start-here">
+      <h2>从这里开始</h2>
+    </div>
+    <section class="product-modules start-grid" aria-label="从这里开始">
+      <a class="product-module" href={u(`${lp}/projects/`)}>
+        <span>路径 01</span>
+        <h2>我想看看 AI 系统</h2>
+        <p>精选智能体、评估 harness，以及我构建的系统。 → 项目</p>
+      </a>
+      <a class="product-module" href={u(`${lp}/agent/`)}>
+        <span>路径 02</span>
+        <h2>我想试点实时的东西</h2>
+        <p>向我的检索增强智能体提问，了解我的公开工作。 → 智能体 Demo</p>
+      </a>
+      <a class="product-module" href={u(`${lp}/research-archive/`)}>
+        <span>路径 03</span>
+        <h2>我想看科学根基</h2>
+        <p>15 年以上的能源科学 —— 论文、专利与演讲。 → 研究档案</p>
+      </a>
     </section>
 
     <div class="section-head" id="featured-systems">
@@ -173,6 +195,16 @@ const projectGroups = [
     </section>
 
     <div class="section-head">
+      <h2>我如何看待 AI 系统</h2>
+    </div>
+    <ul class="how-i-think">
+      <li>我喜欢会留下痕迹的智能体。</li>
+      <li>我喜欢可以被测试的 Demo。</li>
+      <li>我喜欢会说明答案出处的检索。</li>
+      <li>我喜欢有清晰安全边界的自动化。</li>
+    </ul>
+
+    <div class="section-head">
       <h2>科学背景为什么重要</h2>
     </div>
     <p class="lead" style="margin-top: -0.4rem;">
@@ -210,6 +242,10 @@ const projectGroups = [
       <h2>研究笔记</h2>
       <a class="more" href={u(`${lp}/blog/`)}>全部笔记 →</a>
     </div>
+    <p class="section-intro">
+      构建有据可查的智能体时留下的工作笔记、构建日志和一些小心得。
+      有些已经打磨完善，有些还在生长中。
+    </p>
     <div class="blog-grid blog-grid--home">
       {featuredPosts.map((post) => (
         <article class="blog-card">
