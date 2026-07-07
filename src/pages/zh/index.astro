@@ -28,12 +28,12 @@ const featuredSystems = [
     cta: "GitHub",
   },
   {
-    name: "SciencesLoop Agent API",
-    tagline: "带署名护栏的检索增强智能体",
+    name: "ChemGraph Loop",
+    tagline: "一个可以现场跑的真实 agentic 化学工作流",
     description:
-      "问我的研究、项目和 AI 系统 —— 以公开语料为依据、尽可能带引用，并拒绝把他人的工作错误归属。这就是 Loopi。",
+      "用大白话问一个小分子的问题，看真实 agent —— Argonne 的 ChemGraph，我复现并加固过 —— 自己挑工具、跑真实仿真、画出 3D 结构，并对照工作流护栏审计结果。这是 loop engineering 的一个可运行例子。",
     status: "在线 Demo",
-    tags: ["RAG", "retrieval guardrails", "Node", "evals"],
+    tags: ["agentic workflow", "LangGraph + ASE", "tool use", "workflow guard"],
     href: u(`${lp}/agent/`),
     external: false,
     cta: "在线 Demo",
@@ -117,7 +117,7 @@ const caseStudies = [
       </div>
       <div class="cta">
         <a class="btn primary" href="#work">探索 AI 系统 <span class="arrow">↗</span></a>
-        <a class="btn" href={u(`${lp}/agent/`)}>试用 Loopi <span class="arrow">↗</span></a>
+        <a class="btn" href={u(`${lp}/agent/`)}>看实时 agent demo <span class="arrow">↗</span></a>
       </div>
     </section>
 
@@ -214,12 +214,22 @@ const caseStudies = [
       <h2>一起做点经得起考验的东西。</h2>
       <p>开放注重严谨的 AI / agent 工程机会。问 Loopi 关于我的工作，或者打个招呼。</p>
       <div class="cta">
-        <a class="btn primary" href={u(`${lp}/agent/`)}>问 Loopi <span class="arrow">↗</span></a>
+        <a class="btn primary" href={u(`${lp}/agent/`)} data-open-loopi>问 Loopi <span class="arrow">↗</span></a>
         <a class="btn" href="https://github.com/rockyzl" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
         <a class="btn" href="https://www.linkedin.com/in/lu-zhang-argonne/" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
       </div>
     </section>
   </main>
+
+  <script is:inline>
+    // “问 Loopi” 打开站内角标助手（widget），而不是 /agent/ 的 demo 页。
+    document.querySelectorAll("[data-open-loopi]").forEach((b) => {
+      b.addEventListener("click", (e) => {
+        const launcher = document.querySelector("[data-cw-launcher]");
+        if (launcher) { e.preventDefault(); launcher.click(); }
+      });
+    });
+  </script>
 
   <style is:global>
     :root {

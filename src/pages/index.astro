@@ -30,12 +30,12 @@ const featuredSystems = [
     cta: "GitHub",
   },
   {
-    name: "SciencesLoop Agent API",
-    tagline: "Retrieval-grounded agent with an attribution guardrail",
+    name: "ChemGraph Loop",
+    tagline: "A real agentic chemistry workflow you can run live",
     description:
-      "Ask about my research, projects, and AI systems — grounded in a public corpus, cited when possible, and refusing to misattribute others' work. This is Loopi.",
+      "Ask a plain-language question about a small molecule and watch a real agent — Argonne's ChemGraph, which I reproduced and hardened — pick its own tools, run a real simulation, draw the 3D structure, and audit its result against a workflow guard. A working example of loop engineering.",
     status: "Live demo",
-    tags: ["RAG", "retrieval guardrails", "Node", "evals"],
+    tags: ["agentic workflow", "LangGraph + ASE", "tool use", "workflow guard"],
     href: u(`${lp}/agent/`),
     external: false,
     cta: "Live demo",
@@ -123,7 +123,7 @@ const caseStudies = [
       </div>
       <div class="cta">
         <a class="btn primary" href="#work">Explore AI systems <span class="arrow">↗</span></a>
-        <a class="btn" href={u(`${lp}/agent/`)}>Try Loopi, the agent <span class="arrow">↗</span></a>
+        <a class="btn" href={u(`${lp}/agent/`)}>See the live agent demo <span class="arrow">↗</span></a>
       </div>
     </section>
 
@@ -220,12 +220,22 @@ const caseStudies = [
       <h2>Let's build something that holds up.</h2>
       <p>Open to AI / agent engineering roles where rigor matters. Ask Loopi about my work, or say hi.</p>
       <div class="cta">
-        <a class="btn primary" href={u(`${lp}/agent/`)}>Ask Loopi <span class="arrow">↗</span></a>
+        <a class="btn primary" href={u(`${lp}/agent/`)} data-open-loopi>Ask Loopi <span class="arrow">↗</span></a>
         <a class="btn" href="https://github.com/rockyzl" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
         <a class="btn" href="https://www.linkedin.com/in/lu-zhang-argonne/" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
       </div>
     </section>
   </main>
+
+  <script is:inline>
+    // "Ask Loopi" opens the site assistant (corner widget), not the /agent/ demo page.
+    document.querySelectorAll("[data-open-loopi]").forEach((b) => {
+      b.addEventListener("click", (e) => {
+        const launcher = document.querySelector("[data-cw-launcher]");
+        if (launcher) { e.preventDefault(); launcher.click(); }
+      });
+    });
+  </script>
 
   <style is:global>
     :root {
