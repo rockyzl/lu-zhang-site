@@ -1,0 +1,17 @@
+---
+import Base from "../../../layouts/Base.astro";
+import ConditionMonitoringDemo from "../../../components/ConditionMonitoringDemo.astro";
+---
+
+<Base
+  title="设备状态监测 Agent 演示 — 张鲁 Lu Zhang"
+  description="一个可交互的确定性管道智能体演示：在 NASA C-MAPSS 公开数据上跑 10 阶段剩余寿命分析，人工决策把关，每条建议都带证据和引用——默认路径无 LLM。"
+>
+  <div class="container cm-page">
+    <ConditionMonitoringDemo locale="zh" />
+  </div>
+</Base>
+
+<style>
+  .cm-page { padding-top: 30px; padding-bottom: 64px; }
+</style>

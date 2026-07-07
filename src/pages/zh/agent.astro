@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import ChemGraphDemo from "../../components/ChemGraphDemo.astro";
+import { u } from "../../lib/url";
 ---
 
 <Base
@@ -9,9 +10,34 @@ import ChemGraphDemo from "../../components/ChemGraphDemo.astro";
 >
   <div class="container agent-page">
     <ChemGraphDemo locale="zh" />
+
+    <aside class="cm-more">
+      <span class="cm-more-eyebrow">更多在线演示</span>
+      <a href={u("/zh/agent/condition-monitoring/")} class="cm-more-card">
+        <strong>设备状态监测管道智能体 →</strong>
+        <span>
+          确定性管道智能体 + 人工决策把关：在 NASA 公开数据上跑 10
+          阶段剩余寿命分析，交回带证据和引用的决策卡——默认路径无 LLM。
+        </span>
+      </a>
+    </aside>
   </div>
 </Base>
 
 <style>
   .agent-page { padding-top: 30px; padding-bottom: 64px; }
+  .cm-more { max-width: 980px; margin: 40px auto 0; }
+  .cm-more-eyebrow {
+    display: block; font-size: 0.78rem; letter-spacing: 0.08em;
+    text-transform: uppercase; font-weight: 700; margin-bottom: 8px;
+    color: var(--muted, #5f6f7a);
+  }
+  .cm-more-card {
+    display: block; border: 1px solid var(--line, #e3e8ea); border-radius: 12px;
+    padding: 16px 18px; text-decoration: none; color: inherit;
+    background: var(--card, #fff); transition: border-color 0.12s;
+  }
+  .cm-more-card:hover { border-color: var(--accent, #14655f); }
+  .cm-more-card strong { display: block; margin-bottom: 4px; }
+  .cm-more-card span { font-size: 0.92rem; color: var(--muted, #5f6f7a); }
 </style>

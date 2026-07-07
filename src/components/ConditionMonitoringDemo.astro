@@ -1,0 +1,143 @@
+---
+import { u } from "../lib/url";
+import type { Locale } from "../lib/i18n";
+
+const { locale = "en" } = Astro.props as { locale?: Locale };
+
+// Live demo: a deterministic condition-monitoring pipeline agent (NASA C-MAPSS
+// public data) with human-in-the-loop decision gates, served from its own
+// HF Space — fully separate from the ChemGraph Space.
+const SPACE_URL =
+  import.meta.env.PUBLIC_CONDMON_URL ??
+  "https://rockyaaos-condition-monitoring-agent.hf.space";
+
+const repoHref = "https://github.com/rockyzl/genai-condition-monitoring-prototype";
+const agentHref = u("/agent/");
+
+const copy = locale === "zh"
+  ? {
+      eyebrow: "Agentic 预测维护 · 确定性管道智能体",
+      title: "跟一个设备状态监测 agent 聊聊",
+      lead: "打一句话（比如「扫描机队」），一个<b>确定性管道智能体</b>会先跟你确认计划，然后当着你的面跑完 10 阶段分析（载入 → 清理 → 建模 → 选型 → 预测 → 诊断），把需要人拍板的事浓缩成几张<b>带证据和引用的决策卡</b>交回给你——agent 做重活，人做决策。",
+      badge: "🔒 确定性 · 有据可查 · 无 LLM",
+      coldStart: "免费容器休眠后首次访问需自举约 2–3 分钟（下载 NASA 公开数据 + 现场训练）。看到「First boot / 首次启动」请稍等，之后秒开。",
+      open: "全屏打开 ↗",
+      tryLabel: "试试：",
+      tries: [
+        "点「扫描机队」→ 确认计划 → 看 agent 逐步跑完并交回决策卡",
+        "输入「diagnose unit 81」→ 得到带知识库引用的双语诊断",
+        "切到「教学模式」→ 手动逐步看每一环节的功能和目的",
+      ],
+      whatT: "它能做什么",
+      what: "对 100 台涡扇发动机（NASA C-MAPSS 公开仿真数据）做剩余寿命预测、风险分级、证据提取，并用 TF-IDF 检索一个维护知识库，生成每条建议都带出处的诊断报告；全程可复现、可审计（每次工具调用都写进执行轨迹）。",
+      boundT: "边界",
+      bound: "独立研究原型：公开仿真数据，非真实车队遥测；确定性规则编排，默认无 LLM；所有输出仅供参考——分诊和签核类决策永远不会自动通过，必须由人确认。与任何设备制造商无关。",
+      howT: "怎么工作的",
+      how: "10 阶段流水线由一个规则式监督器驱动：每阶段「执行 → 验证门 → 通过 / 升决策卡 / 硬停」，产物带溯源戳（断点续跑），事件流实时渲染成聊天气泡；决策卡的每条信号都能回溯到具体产物字段。源码与评估报告见 GitHub。",
+      ghLabel: "查看源码与评估 →",
+      backLabel: "← 返回 ChemGraph demo",
+    }
+  : {
+      eyebrow: "Agentic predictive maintenance · deterministic pipeline agent",
+      title: "Chat with a condition-monitoring agent",
+      lead: "Type one sentence (try “Scan the fleet”) and a <b>deterministic pipeline agent</b> confirms the plan, runs a 10-stage analysis in front of you (ingest → clean → model → select → predict → diagnose), and hands back a short queue of <b>evidence-backed, cited decision cards</b> — the agent does the heavy lifting, a human makes the calls.",
+      badge: "🔒 Deterministic · Grounded · No LLM",
+      coldStart: "After the free container sleeps, the first visit self-bootstraps in ~2–3 min (downloads the public NASA dataset + trains on the spot). If you see “First boot”, give it a moment — it's instant afterwards.",
+      open: "Open full screen ↗",
+      tryLabel: "Try:",
+      tries: [
+        "Click “Scan fleet” → confirm the plan → watch the run → answer a decision card",
+        "Type “diagnose unit 81” → get a bilingual diagnosis with knowledge-base citations",
+        "Switch to Teaching mode → step through each pipeline stage manually",
+      ],
+      whatT: "What it does",
+      what: "Remaining-useful-life prediction, risk banding, and evidence extraction for 100 turbofan engines (public NASA C-MAPSS simulation data), plus a TF-IDF-retrieved maintenance knowledge base that grounds a cited diagnostic report — fully reproducible and auditable (every tool call lands in an execution trace).",
+      boundT: "Boundaries",
+      bound: "Independent R&D prototype: public simulated data, not field telematics; deterministic rule-based orchestration with no LLM in the default path; every output is advisory — triage and sign-off decisions never auto-pass and always require a human. Not affiliated with any equipment manufacturer.",
+      howT: "How it works",
+      how: "A rule-based supervisor drives the 10-stage pipeline: each stage runs EXECUTE → VALIDATE gate → pass / raise a decision card / halt. Artifacts carry provenance stamps (checkpoint/resume), the step journal streams into the chat, and every decision-card signal re-derives from a named artifact field. Source and evaluation reports are on GitHub.",
+      ghLabel: "View source & evaluation →",
+      backLabel: "← Back to the ChemGraph demo",
+    };
+---
+
+<section class="cm-demo">
+  <p class="cm-eyebrow">{copy.eyebrow}</p>
+  <h1 class="cm-title">{copy.title}</h1>
+  <p class="cm-lead" set:html={copy.lead} />
+  <p class="cm-badge">{copy.badge}</p>
+
+  <div class="cm-frame-wrap">
+    <iframe
+      src={`${SPACE_URL}/?embed=true`}
+      title="Condition monitoring agent demo"
+      loading="lazy"
+      allow="clipboard-write"
+    ></iframe>
+  </div>
+  <p class="cm-coldstart">
+    {copy.coldStart}
+    <a href={SPACE_URL} target="_blank" rel="noopener">{copy.open}</a>
+  </p>
+
+  <p class="cm-try"><strong>{copy.tryLabel}</strong></p>
+  <ul class="cm-tries">
+    {copy.tries.map((t) => <li>{t}</li>)}
+  </ul>
+
+  <div class="cm-info">
+    <div>
+      <h2>{copy.whatT}</h2>
+      <p>{copy.what}</p>
+    </div>
+    <div>
+      <h2>{copy.boundT}</h2>
+      <p>{copy.bound}</p>
+    </div>
+    <div>
+      <h2>{copy.howT}</h2>
+      <p>{copy.how}</p>
+    </div>
+  </div>
+
+  <p class="cm-links">
+    <a href={repoHref} target="_blank" rel="noopener">{copy.ghLabel}</a>
+    <a href={agentHref}>{copy.backLabel}</a>
+  </p>
+</section>
+
+<style>
+  .cm-demo { max-width: 980px; margin: 0 auto; }
+  .cm-eyebrow {
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent, #14655f); font-weight: 700; margin: 0 0 6px;
+  }
+  .cm-title { margin: 0 0 10px; }
+  .cm-lead { max-width: 70ch; color: var(--muted, #5f6f7a); margin: 0 0 10px; }
+  .cm-badge {
+    display: inline-block; font-size: 0.85rem; font-weight: 600;
+    border: 1px solid var(--line, #e3e8ea); border-radius: 999px;
+    padding: 4px 12px; margin: 0 0 16px; background: var(--card, #fff);
+  }
+  .cm-frame-wrap {
+    border: 1px solid var(--line, #e3e8ea); border-radius: 12px;
+    overflow: hidden; background: var(--card, #fff);
+  }
+  .cm-frame-wrap iframe { display: block; width: 100%; height: 780px; border: 0; }
+  .cm-coldstart { font-size: 0.85rem; color: var(--muted, #5f6f7a); margin: 8px 0 20px; }
+  .cm-coldstart a { margin-left: 6px; }
+  .cm-try { margin: 0 0 4px; }
+  .cm-tries { margin: 0 0 24px; padding-left: 20px; }
+  .cm-tries li { margin-bottom: 4px; }
+  .cm-info {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    margin-bottom: 24px;
+  }
+  .cm-info h2 { font-size: 1rem; margin: 0 0 6px; }
+  .cm-info p { font-size: 0.92rem; color: var(--muted, #5f6f7a); margin: 0; }
+  .cm-links { display: flex; gap: 20px; flex-wrap: wrap; }
+  @media (max-width: 760px) {
+    .cm-info { grid-template-columns: 1fr; }
+    .cm-frame-wrap iframe { height: 640px; }
+  }
+</style>

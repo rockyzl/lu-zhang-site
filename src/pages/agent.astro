@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import ChemGraphDemo from "../components/ChemGraphDemo.astro";
+import { u } from "../lib/url";
 ---
 
 <Base
@@ -9,9 +10,35 @@ import ChemGraphDemo from "../components/ChemGraphDemo.astro";
 >
   <div class="container agent-page">
     <ChemGraphDemo locale="en" />
+
+    <aside class="cm-more">
+      <span class="cm-more-eyebrow">More live demos</span>
+      <a href={u("/agent/condition-monitoring/")} class="cm-more-card">
+        <strong>Condition Monitoring Pipeline Agent →</strong>
+        <span>
+          A deterministic pipeline agent with human-in-the-loop decision gates:
+          10-stage RUL analysis on public NASA data, evidence-backed decision
+          cards, cited diagnostics — no LLM in the default path.
+        </span>
+      </a>
+    </aside>
   </div>
 </Base>
 
 <style>
   .agent-page { padding-top: 30px; padding-bottom: 64px; }
+  .cm-more { max-width: 980px; margin: 40px auto 0; }
+  .cm-more-eyebrow {
+    display: block; font-size: 0.78rem; letter-spacing: 0.08em;
+    text-transform: uppercase; font-weight: 700; margin-bottom: 8px;
+    color: var(--muted, #5f6f7a);
+  }
+  .cm-more-card {
+    display: block; border: 1px solid var(--line, #e3e8ea); border-radius: 12px;
+    padding: 16px 18px; text-decoration: none; color: inherit;
+    background: var(--card, #fff); transition: border-color 0.12s;
+  }
+  .cm-more-card:hover { border-color: var(--accent, #14655f); }
+  .cm-more-card strong { display: block; margin-bottom: 4px; }
+  .cm-more-card span { font-size: 0.92rem; color: var(--muted, #5f6f7a); }
 </style>

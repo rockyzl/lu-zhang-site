@@ -1,0 +1,17 @@
+---
+import Base from "../../layouts/Base.astro";
+import ConditionMonitoringDemo from "../../components/ConditionMonitoringDemo.astro";
+---
+
+<Base
+  title="Condition Monitoring Agent Demo — Lu Zhang"
+  description="A live deterministic pipeline agent with human-in-the-loop decision gates: 10-stage RUL analysis on public NASA C-MAPSS data, evidence-backed decision cards, cited diagnostics — no LLM in the default path."
+>
+  <div class="container cm-page">
+    <ConditionMonitoringDemo locale="en" />
+  </div>
+</Base>
+
+<style>
+  .cm-page { padding-top: 30px; padding-bottom: 64px; }
+</style>
