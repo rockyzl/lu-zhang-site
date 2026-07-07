@@ -20,6 +20,9 @@ const copy = locale === "zh"
       title: "跟一个设备状态监测 agent 聊聊",
       lead: "打一句话（比如「扫描机队」），一个<b>确定性管道智能体</b>会先跟你确认计划，然后当着你的面跑完 10 阶段分析（载入 → 清理 → 建模 → 选型 → 预测 → 诊断），把需要人拍板的事浓缩成几张<b>带证据和引用的决策卡</b>交回给你——agent 做重活，人做决策。",
       badge: "🔒 确定性 · 有据可查 · 无 LLM",
+      videoT: "68 秒演示",
+      videoCaption: "一句话 → 确认计划 → 看智能体跑完 10 阶段 → 决策卡拍板 → 带引用的诊断。下面可以亲手试。",
+      liveT: "在线体验",
       coldStart: "免费容器休眠后首次访问需自举约 2–3 分钟（下载 NASA 公开数据 + 现场训练）。看到「First boot / 首次启动」请稍等，之后秒开。",
       open: "全屏打开 ↗",
       tryLabel: "试试：",
@@ -42,6 +45,9 @@ const copy = locale === "zh"
       title: "Chat with a condition-monitoring agent",
       lead: "Type one sentence (try “Scan the fleet”) and a <b>deterministic pipeline agent</b> confirms the plan, runs a 10-stage analysis in front of you (ingest → clean → model → select → predict → diagnose), and hands back a short queue of <b>evidence-backed, cited decision cards</b> — the agent does the heavy lifting, a human makes the calls.",
       badge: "🔒 Deterministic · Grounded · No LLM",
+      videoT: "The 68-second demo",
+      videoCaption: "One sentence → confirmed plan → the agent runs all 10 stages → a decision card gets answered → a cited diagnosis. Try it yourself below.",
+      liveT: "Try it live",
       coldStart: "After the free container sleeps, the first visit self-bootstraps in ~2–3 min (downloads the public NASA dataset + trains on the spot). If you see “First boot”, give it a moment — it's instant afterwards.",
       open: "Open full screen ↗",
       tryLabel: "Try:",
@@ -67,6 +73,16 @@ const copy = locale === "zh"
   <p class="cm-lead" set:html={copy.lead} />
   <p class="cm-badge">{copy.badge}</p>
 
+  <h2 class="cm-section-t">{copy.videoT}</h2>
+  <div class="cm-video-wrap">
+    <video controls preload="metadata" playsinline>
+      <source src={u("/videos/condition-monitoring-demo.mp4")} type="video/mp4" />
+      <source src={u("/videos/condition-monitoring-demo.webm")} type="video/webm" />
+    </video>
+  </div>
+  <p class="cm-coldstart">{copy.videoCaption}</p>
+
+  <h2 class="cm-section-t">{copy.liveT}</h2>
   <div class="cm-frame-wrap">
     <iframe
       src={`${SPACE_URL}/?embed=true`}
@@ -119,6 +135,12 @@ const copy = locale === "zh"
     border: 1px solid var(--line, #e3e8ea); border-radius: 999px;
     padding: 4px 12px; margin: 0 0 16px; background: var(--card, #fff);
   }
+  .cm-section-t { font-size: 1.1rem; margin: 22px 0 10px; }
+  .cm-video-wrap {
+    border: 1px solid var(--line, #e3e8ea); border-radius: 12px;
+    overflow: hidden; background: #0d1117;
+  }
+  .cm-video-wrap video { display: block; width: 100%; height: auto; }
   .cm-frame-wrap {
     border: 1px solid var(--line, #e3e8ea); border-radius: 12px;
     overflow: hidden; background: var(--card, #fff);
