@@ -15,7 +15,7 @@ const badgeClass = (status) => {
   return "priv";
 };
 
-// Featured AI systems — exactly 3 (public-content-contract compliant).
+// Featured AI systems — 4, shown as a 2×2 (public-content-contract compliant).
 // Property OS is a private system overview: describe only, NO repo, NO real URL.
 const featuredSystems = [
   {
@@ -37,6 +37,17 @@ const featuredSystems = [
     status: "Live demo",
     tags: ["agentic workflow", "LangGraph + ASE", "tool use", "workflow guard"],
     href: u(`${lp}/agent/`),
+    external: false,
+    cta: "Live demo",
+  },
+  {
+    name: "Condition-Monitoring Agent",
+    tagline: "A deterministic predictive-maintenance pipeline you can run live",
+    description:
+      "Type a request and a deterministic pipeline agent runs a 10-stage remaining-useful-life analysis on public NASA turbofan data — with human-in-the-loop decision gates, evidence-backed decision cards, and cited diagnostics. No LLM in the default path; every result re-derives from a named artifact.",
+    status: "Live demo",
+    tags: ["deterministic pipeline", "predictive maintenance", "human-in-the-loop", "auditable trace"],
+    href: u(`${lp}/agent/condition-monitoring/`),
     external: false,
     cta: "Live demo",
   },
@@ -153,7 +164,7 @@ const caseStudies = [
         <h2>A few systems I've built</h2>
         <p>Each answers the same questions: what is it, who's it for, can you try it, and what did I actually build?</p>
       </div>
-      <div class="grid">
+      <div class="grid grid-2">
         {featuredSystems.map((p) => (
           <div class="proj">
             <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
