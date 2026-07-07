@@ -66,13 +66,13 @@ const groups = [
     items: [
       {
         name: "Scientific Agent Lab",
-        tagline_en: "Evidence-grounded scientific agents with replayable evals",
-        tagline_zh: "有据可查、评估可回放的科学智能体",
-        desc_en: "Explores how LLM agents can answer scientific questions while staying grounded in cited sources and testable through a deterministic evaluation harness.",
-        desc_zh: "探索 LLM 智能体如何在回答科学问题的同时，始终以被引用的来源为依据，并通过确定性的评估 harness 保持可测试。",
+        tagline_en: "An evaluation & reproducibility layer for scientific AI",
+        tagline_zh: "科学 AI 的评估与可复现层",
+        desc_en: "Not a scientific assistant but the layer below it — the “when can you trust the result?” spine. A deterministic, zero-dependency pipeline that separates evidence from assumptions, keeps uncertainty explicit, flags missing required data, refuses to accept on gaps (recommends “measure again”), and ships a byte-for-byte reproducible trace an eval harness scores. No LLM in the loop.",
+        desc_zh: "不是科学助手，而是它下面那一层 —— 回答“结果什么时候能信”的骨架。一个确定性、零依赖的管道：把证据和假设分开、把不确定性摆明、标出缺失的必需数据、证据不全时拒绝接受（判“再测”），并交出一份逐字节可复现、可被评估 harness 打分的轨迹。全程无 LLM。",
         status_en: "Public repository",
         status_zh: "公开仓库",
-        tags: ["grounded agents", "eval harness", "LLM agents"],
+        tags: ["evaluation harness", "reproducibility", "deterministic · no LLM"],
         gradient: "from-rust to-amber",
         href: "https://github.com/rockyzl/scientific-agent-lab",
         external: true,
