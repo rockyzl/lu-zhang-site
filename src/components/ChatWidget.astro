@@ -244,7 +244,10 @@ const copy = locale === "zh"
     bottom: 72px;
     width: 360px;
     max-width: calc(100vw - 40px);
-    max-height: min(72vh, 560px);
+    /* Fixed height (not just max) so switching Chat <-> History doesn't resize
+       the panel — both views flex-fill the same space. */
+    height: min(72vh, 500px);
+    max-height: min(72vh, 500px);
     display: flex;
     flex-direction: column;
     background: var(--c-card);
