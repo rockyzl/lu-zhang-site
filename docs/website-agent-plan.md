@@ -1,5 +1,11 @@
 # Website Agent Plan
 
+> **Update (2026-07-06):** `/agent/` is now the **ChemGraph live demo**, not the
+> Loopi retrieval site-agent described below. Loopi moved to the corner
+> **ChatWidget** (on every page); it's still backed by `scientificloop-agent-api`.
+> For the current `/agent/` demo see **`docs/chemgraph-agent-demo.md`**. The
+> Loopi/RAG details below still describe the widget's backend + guardrails.
+
 This repo owns the public website and static website-agent UI only.
 
 ## Current Phase
