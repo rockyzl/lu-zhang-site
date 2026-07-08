@@ -4,64 +4,30 @@ import type { Locale } from "../lib/i18n";
 
 const { locale = "en" } = Astro.props as { locale?: Locale };
 
-// Precomputed, synthetic-only results viewer, hosted same-origin in public/demos/
-// (no live inference, no backend). Source repo + adapters are external links.
+// The demo itself (headline, chart, takeaways, collapsed example, links) is a
+// self-contained page hosted same-origin in public/demos/. Keep this wrapper thin.
 const demoHref = u("/demos/preventive-health-model-lab.html");
 const repoHref = "https://github.com/rockyzl/preventive-health-model-lab";
 const spaceHref = "https://huggingface.co/spaces/rockyaaos/preventive-health-model-lab";
-const medgemmaHref = "https://huggingface.co/rockyaaos/medgemma-1.5-4b-preventive-qlora";
-const gemmaHref = "https://huggingface.co/rockyaaos/gemma-3-4b-preventive-qlora";
 const agentHref = u("/agent/");
 
 const copy = locale === "zh"
   ? {
       eyebrow: "微调研究 · 8GB 单卡 QLoRA",
-      title: "医疗预训练,对预防健康推理真的有帮助吗?",
-      lead: "一个受控实验平台:同一个任务、同一份合成数据、同一套 QLoRA 配方,分别微调 <b>Gemma 3</b> 和它的医疗版兄弟 <b>MedGemma</b>,并在微调<b>前后</b>都测一遍——看微调到底提升了什么,以及基础模型的选择是否影响它对微调的适应性。全程在一块 8GB 笔记本 GPU 上完成。",
-      badge: "🔬 合成数据 · 仅研究/教育 · 非诊断 · 不收真实健康数据",
-      findT: "两个发现",
-      findWinT: "微调做到了什么",
-      findWin: "两个基础模型出厂时都常常漏掉免责声明、滑向诊断性措辞、还引用时间线里没有的数字。微调可靠地把这三样都解决了——安全硬失败从 100% 降到 0%。",
-      findSurpT: "我们没料到的一点",
-      findSurp: "本以为医疗版 MedGemma 微调后会更强,结果没有——两者都接近天花板。解读:对这个任务,微调的收益更取决于基础模型的通用底子,而不是它是否做过医疗预训练。这不否定医疗模型,而是关于微调本身的一个有意思的发现。",
-      liveT: "在线体验(预计算,只读)",
-      liveNote: "全程预计算、不跑模型、不收任何输入——挑一个模型和一个合成病人,看它微调前(坏)→ 微调后(好)的对比,编造的数字会高亮标出。",
+      title: "微调开源医疗大模型做安全的健康趋势推理",
+      lead: "同任务、同合成数据、同配方微调 Gemma 3 和它的医疗版 MedGemma。看下面一眼就懂:微调修好了什么,以及“医疗”模型是不是真的更强。",
       open: "全屏打开 ↗",
-      whatT: "它展示什么",
-      what: "在留出的合成测试集上,4 个组合(Gemma 3 / MedGemma × 微调前 / 后)对同一批病人的 7 段式预防健康分析,并用自动指标打分:7 段完整性、免责声明、不诊断、数值接地(引用的化验值是否真在记录里)。",
-      howT: "怎么做的",
-      how: "QLoRA:基础模型 4-bit 载入,只训一个约 30M 参数的 LoRA adapter(base 权重冻结),因此 4B 模型能塞进 8GB。同数据、同超参、同 seed,只换基础模型——把“医疗预训练”隔离成唯一变量。",
-      boundT: "边界",
-      bound: "仅研究/教育,非诊断产品。全部为合成数据,无任何真实病历/PHI。自动指标衡量的是“形式与忠实度”,不是临床正确性;测试集仅 6 人,差异在噪声内;未经临床复核。真实 EHR 数据的验证是后续工作。",
-      linksT: "代码 · 模型 · 论述",
-      repoLabel: "GitHub:完整 pipeline 与训练代码 →",
-      spaceLabel: "Hugging Face Space(同款 demo)↗",
-      adaptersLabel: "LoRA adapter(仅 adapter,不含 base 权重):",
+      repoLabel: "代码与完整论述 →",
+      spaceLabel: "Hugging Face ↗",
       backLabel: "← 返回 Agent demo 列表",
     }
   : {
       eyebrow: "Fine-tuning study · QLoRA on one 8GB GPU",
-      title: "Does medical pretraining actually help preventive-health reasoning?",
-      lead: "A small controlled platform: the same task, same synthetic data, same QLoRA recipe on two base models — <b>Gemma 3</b> and its medical sibling <b>MedGemma</b> — measured <b>before and after</b> fine-tuning. It asks what fine-tuning improves, and whether the base model choice changes how well it adapts. Everything runs on a single 8GB laptop GPU.",
-      badge: "🔬 Synthetic data · research/education only · non-diagnostic · no real health data",
-      findT: "Two findings",
-      findWinT: "What fine-tuning did",
-      findWin: "Out of the box, both models often skipped the safety disclaimer, slipped into diagnostic language, and cited numbers not in the record. Fine-tuning reliably fixed all three — safety hard-fails went from 100% to 0%.",
-      findSurpT: "The part we didn't expect",
-      findSurp: "We expected the medical base (MedGemma) to pull ahead after fine-tuning. It didn't — both landed near the ceiling. The read: for this task, fine-tuning's payoff rides on the base model's general capability more than on medical pretraining. That's a finding about fine-tuning, and takes nothing away from medical models.",
-      liveT: "Try it (precomputed, read-only)",
-      liveNote: "Fully precomputed — no model runs, no input accepted. Pick a model and a synthetic patient, and see its before (base) → after (fine-tuned) side by side; made-up numbers are highlighted.",
+      title: "Fine-tuning open medical LLMs for safe health-trend reasoning",
+      lead: "Same task, same synthetic data, same recipe on Gemma 3 and its medical sibling MedGemma. The demo below shows, at a glance, what fine-tuning fixed — and whether a “medical” model is actually better.",
       open: "Open full screen ↗",
-      whatT: "What it shows",
-      what: "On a held-out synthetic test set, the 7-part preventive-health assessment from four conditions (Gemma 3 / MedGemma × base / fine-tuned) on the same patients, scored by automatic metrics: 7-section schema, safety disclaimer, non-diagnostic language, and numeric grounding (are cited lab values actually in the record).",
-      howT: "How it works",
-      how: "QLoRA: the base is loaded in 4-bit and only a ~30M-param LoRA adapter is trained (base weights frozen), so a 4B model fits in 8GB. Same data, hyperparameters, and seed across both models — isolating medical pretraining as the single variable.",
-      boundT: "Boundaries",
-      bound: "Research/education only, not a diagnostic product. All data is synthetic — no real records or PHI. The automatic metrics measure form & faithfulness, not clinical correctness; the test set is only 6 patients (differences within noise); nothing was clinician-reviewed. Validation on real EHR data is future work.",
-      linksT: "Code · models · write-up",
-      repoLabel: "GitHub: full pipeline & training code →",
-      spaceLabel: "Hugging Face Space (same demo) ↗",
-      adaptersLabel: "LoRA adapters (adapter only, no base weights):",
+      repoLabel: "Code & full write-up →",
+      spaceLabel: "Hugging Face ↗",
       backLabel: "← Back to the agent demos",
     };
 ---
@@ -69,88 +35,36 @@ const copy = locale === "zh"
 <section class="ph-demo">
   <p class="ph-eyebrow">{copy.eyebrow}</p>
   <h1 class="ph-title">{copy.title}</h1>
-  <p class="ph-lead" set:html={copy.lead} />
-  <p class="ph-badge">{copy.badge}</p>
+  <p class="ph-lead">{copy.lead}</p>
 
-  <div class="ph-findings">
-    <div class="ph-find win">
-      <h2>{copy.findWinT}</h2>
-      <p>{copy.findWin}</p>
-    </div>
-    <div class="ph-find surprise">
-      <h2>{copy.findSurpT}</h2>
-      <p>{copy.findSurp}</p>
-    </div>
-  </div>
-
-  <h2 class="ph-section-t">{copy.liveT}</h2>
   <div class="ph-frame-wrap">
-    <iframe src={demoHref} title="Preventive Health Model Lab results viewer" loading="lazy"></iframe>
-  </div>
-  <p class="ph-note">
-    {copy.liveNote}
-    <a href={demoHref} target="_blank" rel="noopener">{copy.open}</a>
-  </p>
-
-  <div class="ph-info">
-    <div><h2>{copy.whatT}</h2><p>{copy.what}</p></div>
-    <div><h2>{copy.howT}</h2><p>{copy.how}</p></div>
-    <div><h2>{copy.boundT}</h2><p>{copy.bound}</p></div>
+    <iframe src={demoHref} title="Preventive Health Model Lab — results" loading="lazy"></iframe>
   </div>
 
-  <h2 class="ph-section-t">{copy.linksT}</h2>
   <p class="ph-links">
+    <a href={demoHref} target="_blank" rel="noopener">{copy.open}</a>
     <a href={repoHref} target="_blank" rel="noopener">{copy.repoLabel}</a>
     <a href={spaceHref} target="_blank" rel="noopener">{copy.spaceLabel}</a>
-  </p>
-  <p class="ph-adapters">
-    {copy.adaptersLabel}
-    <a href={medgemmaHref} target="_blank" rel="noopener">MedGemma</a>
-    <a href={gemmaHref} target="_blank" rel="noopener">Gemma 3</a>
   </p>
   <p class="ph-back"><a href={agentHref}>{copy.backLabel}</a></p>
 </section>
 
 <style>
-  .ph-demo { max-width: 980px; margin: 0 auto; }
+  .ph-demo { max-width: 900px; margin: 0 auto; }
   .ph-eyebrow {
     font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--accent, #14655f); font-weight: 700; margin: 0 0 6px;
   }
   .ph-title { margin: 0 0 10px; }
-  .ph-lead { max-width: 72ch; color: var(--muted, #5f6f7a); margin: 0 0 10px; }
-  .ph-badge {
-    display: inline-block; font-size: 0.85rem; font-weight: 600;
-    border: 1px solid var(--line, #e3e8ea); border-radius: 999px;
-    padding: 4px 12px; margin: 0 0 20px; background: var(--card, #fff);
-  }
-  .ph-findings { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 26px; }
-  .ph-find {
-    border: 1px solid var(--line, #e3e8ea); border-radius: 12px; padding: 16px 18px;
-    background: var(--card, #fff);
-  }
-  .ph-find.win { border-left: 4px solid #2f8f5b; }
-  .ph-find.surprise { border-left: 4px solid var(--accent, #14655f); }
-  .ph-find h2 { font-size: 1rem; margin: 0 0 6px; }
-  .ph-find p { font-size: 0.92rem; color: var(--muted, #5f6f7a); margin: 0; }
-  .ph-section-t { font-size: 1.1rem; margin: 22px 0 10px; }
+  .ph-lead { max-width: 68ch; color: var(--muted, #5f6f7a); margin: 0 0 18px; }
   .ph-frame-wrap {
     border: 1px solid var(--line, #e3e8ea); border-radius: 12px;
     overflow: hidden; background: var(--card, #fff);
   }
-  .ph-frame-wrap iframe { display: block; width: 100%; height: 860px; border: 0; }
-  .ph-note { font-size: 0.85rem; color: var(--muted, #5f6f7a); margin: 8px 0 24px; }
-  .ph-note a { margin-left: 6px; }
-  .ph-info {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 24px;
-  }
-  .ph-info h2 { font-size: 1rem; margin: 0 0 6px; }
-  .ph-info p { font-size: 0.92rem; color: var(--muted, #5f6f7a); margin: 0; }
-  .ph-links, .ph-adapters { display: flex; gap: 20px; flex-wrap: wrap; margin: 0 0 10px; }
-  .ph-adapters { font-size: 0.92rem; color: var(--muted, #5f6f7a); align-items: baseline; }
-  .ph-back { margin-top: 14px; }
+  .ph-frame-wrap iframe { display: block; width: 100%; height: 1000px; border: 0; }
+  .ph-links { display: flex; gap: 20px; flex-wrap: wrap; margin: 14px 0 0; }
+  .ph-back { margin-top: 12px; }
   @media (max-width: 760px) {
-    .ph-findings, .ph-info { grid-template-columns: 1fr; }
-    .ph-frame-wrap iframe { height: 760px; }
+    .ph-frame-wrap iframe { height: 1180px; }
   }
 </style>
