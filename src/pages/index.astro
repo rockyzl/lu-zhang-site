@@ -15,20 +15,9 @@ const badgeClass = (status) => {
   return "priv";
 };
 
-// Featured AI systems — 4, shown as a 2×2 (public-content-contract compliant).
+// Featured AI systems — 5 (three live demos lead), shown as a 3-col grid (public-content-contract compliant).
 // Property OS is a private system overview: describe only, NO repo, NO real URL.
 const featuredSystems = [
-  {
-    name: "Scientific Agent Lab",
-    tagline: "An evaluation & reproducibility layer for scientific AI",
-    description:
-      "Not another science assistant — the layer below that asks “when can you trust the result?” A deterministic, zero-dependency pipeline that separates evidence from assumptions, flags missing required data, refuses to conclude on gaps, and ships a reproducible trace an eval harness scores.",
-    status: "Public repository",
-    tags: ["Python", "evaluation harness", "reproducibility", "deterministic · no LLM"],
-    href: "https://github.com/rockyzl/scientific-agent-lab",
-    external: true,
-    cta: "GitHub",
-  },
   {
     name: "ChemGraph Loop",
     tagline: "A real agentic chemistry workflow you can run live",
@@ -50,6 +39,28 @@ const featuredSystems = [
     href: u(`${lp}/agent/condition-monitoring/`),
     external: false,
     cta: "Live demo",
+  },
+  {
+    name: "Preventive Health Model Lab",
+    tagline: "A QLoRA fine-tuning study you can inspect end-to-end",
+    description:
+      "A controlled study on a single 8GB GPU: the same preventive-health task, synthetic data, and QLoRA recipe run on Gemma 3 and its medical sibling MedGemma, scored before and after fine-tuning. Fine-tuning closed the safety and grounding gaps (unsafe hard-fails 100% → 0%); the base model's general capability mattered more than medical pretraining. Every number re-derives from a committed run.",
+    status: "Live demo",
+    tags: ["QLoRA", "MedGemma / Gemma 3", "eval harness", "synthetic data"],
+    href: u(`${lp}/agent/preventive-health-model-lab/`),
+    external: false,
+    cta: "Live demo",
+  },
+  {
+    name: "Scientific Agent Lab",
+    tagline: "An evaluation & reproducibility layer for scientific AI",
+    description:
+      "Not another science assistant — the layer below that asks “when can you trust the result?” A deterministic, zero-dependency pipeline that separates evidence from assumptions, flags missing required data, refuses to conclude on gaps, and ships a reproducible trace an eval harness scores.",
+    status: "Public repository",
+    tags: ["Python", "evaluation harness", "reproducibility", "deterministic · no LLM"],
+    href: "https://github.com/rockyzl/scientific-agent-lab",
+    external: true,
+    cta: "GitHub",
   },
   {
     name: "Property OS",
@@ -164,7 +175,7 @@ const caseStudies = [
         <h2>A few systems I've built</h2>
         <p>Each answers the same questions: what is it, who's it for, can you try it, and what did I actually build?</p>
       </div>
-      <div class="grid grid-2">
+      <div class="grid">
         {featuredSystems.map((p) => (
           <div class="proj">
             <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>

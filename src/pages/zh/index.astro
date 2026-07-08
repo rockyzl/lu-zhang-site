@@ -17,17 +17,6 @@ const badgeClass = (status) => {
 
 const featuredSystems = [
   {
-    name: "Scientific Agent Lab",
-    tagline: "科学 AI 的评估与可复现层",
-    description:
-      "不是又一个科学助手 —— 而是它下面那一层：回答“结果什么时候能信”。一个确定性、零依赖的管道，把证据和假设分开、标出缺失的必需数据、证据不全时拒绝下结论，并交出一份可被评估 harness 打分、可复现的轨迹。",
-    status: "公开仓库",
-    tags: ["Python", "评估 harness", "可复现", "确定性 · 无 LLM"],
-    href: "https://github.com/rockyzl/scientific-agent-lab",
-    external: true,
-    cta: "GitHub",
-  },
-  {
     name: "ChemGraph Loop",
     tagline: "一个可以现场跑的真实 agentic 化学工作流",
     description:
@@ -48,6 +37,28 @@ const featuredSystems = [
     href: u(`${lp}/agent/condition-monitoring/`),
     external: false,
     cta: "在线 Demo",
+  },
+  {
+    name: "Preventive Health Model Lab",
+    tagline: "一个能从头看到尾的 QLoRA 微调研究",
+    description:
+      "在单张 8GB GPU 上做的对照实验:同一个预防健康任务、同一批合成数据、同一套 QLoRA 配方,分别跑在 Gemma 3 和它的医学版 MedGemma 上,微调前后各评一次。微调补上了安全与依据的缺口(不安全的硬失败 100% → 0%);而基座模型本身的通用能力,比医学预训练更关键。每个数字都能回溯到一次已提交的运行。",
+    status: "在线 Demo",
+    tags: ["QLoRA", "MedGemma / Gemma 3", "评估 harness", "合成数据"],
+    href: u(`${lp}/agent/preventive-health-model-lab/`),
+    external: false,
+    cta: "在线 Demo",
+  },
+  {
+    name: "Scientific Agent Lab",
+    tagline: "科学 AI 的评估与可复现层",
+    description:
+      "不是又一个科学助手 —— 而是它下面那一层：回答“结果什么时候能信”。一个确定性、零依赖的管道，把证据和假设分开、标出缺失的必需数据、证据不全时拒绝下结论，并交出一份可被评估 harness 打分、可复现的轨迹。",
+    status: "公开仓库",
+    tags: ["Python", "评估 harness", "可复现", "确定性 · 无 LLM"],
+    href: "https://github.com/rockyzl/scientific-agent-lab",
+    external: true,
+    cta: "GitHub",
   },
   {
     name: "Property OS",
@@ -158,7 +169,7 @@ const caseStudies = [
         <h2>我做过的几个系统</h2>
         <p>每个都回答同样的问题：是什么、给谁用、能不能试、我具体做了什么。</p>
       </div>
-      <div class="grid grid-2">
+      <div class="grid">
         {featuredSystems.map((p) => (
           <div class="proj">
             <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
