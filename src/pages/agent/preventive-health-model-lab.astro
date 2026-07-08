@@ -1,0 +1,17 @@
+---
+import Base from "../../layouts/Base.astro";
+import PreventiveHealthDemo from "../../components/PreventiveHealthDemo.astro";
+---
+
+<Base
+  title="Preventive Health Model Lab — QLoRA fine-tuning study — Lu Zhang"
+  description="A controlled QLoRA fine-tuning experiment on one 8GB GPU: does medical pretraining (MedGemma) help preventive-health reasoning vs its base family (Gemma 3)? Synthetic data, safety-aware evaluation, honest results. Research/education only."
+>
+  <div class="container ph-page">
+    <PreventiveHealthDemo locale="en" />
+  </div>
+</Base>
+
+<style>
+  .ph-page { padding-top: 30px; padding-bottom: 64px; }
+</style>

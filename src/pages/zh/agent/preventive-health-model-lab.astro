@@ -1,0 +1,17 @@
+---
+import Base from "../../../layouts/Base.astro";
+import PreventiveHealthDemo from "../../../components/PreventiveHealthDemo.astro";
+---
+
+<Base
+  title="预防健康模型实验室 — QLoRA 微调研究 — 张鲁 Lu Zhang"
+  description="一个在 8GB 单卡上完成的受控 QLoRA 微调实验:医疗预训练(MedGemma)相比同底座的通用模型(Gemma 3),对预防健康推理是否更有帮助?合成数据、安全导向评估、诚实结果。仅研究/教育用途。"
+>
+  <div class="container ph-page">
+    <PreventiveHealthDemo locale="zh" />
+  </div>
+</Base>
+
+<style>
+  .ph-page { padding-top: 30px; padding-bottom: 64px; }
+</style>
