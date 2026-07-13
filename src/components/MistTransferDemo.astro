@@ -254,99 +254,10 @@ const targetModelOrder = ["traditional", "xgboost", "mist", "mlp"];
     <p class="mtp-lead">{copy.lead}</p>
   </header>
 
-  <section class="mtp-story" aria-labelledby="mtp-story-title">
-    <div class="mtp-story-number" aria-hidden="true">4</div>
-    <div>
-      <h2 id="mtp-story-title">{copy.storyTitle}</h2>
-      <p>{copy.story}</p>
-    </div>
-  </section>
-
-  <section class="mtp-study" aria-labelledby="mtp-study-background">
-    <div class="mtp-study-copy">
-      <h2 id="mtp-study-background">{study.backgroundTitle}</h2>
-      <p>{study.background}</p>
-      <div class="mtp-source-links">
-        <a href="https://arxiv.org/abs/2510.18900" target="_blank" rel="noopener">MIST paper ↗</a>
-        <a href="https://huggingface.co/mist-models/mist-26.9M-kkgx0omx-qm9" target="_blank" rel="noopener">Hugging Face model ↗</a>
-        <a href="https://doi.org/10.1038/sdata.2014.22" target="_blank" rel="noopener">QM9 paper ↗</a>
-        <a href={repoHref} target="_blank" rel="noopener">Independent repo ↗</a>
-      </div>
-    </div>
-
-    <div class="mtp-study-data">
-      <h2>{study.dataTitle}</h2>
-      <dl>{study.dataItems.map(([term, detail]) => <div><dt>{term}</dt><dd>{detail}</dd></div>)}</dl>
-    </div>
-
-    <div class="mtp-chart-card">
-      <h2>{study.iterationTitle}</h2>
-      <p>{study.iterationHelp}</p>
-      <div class="mtp-overall-chart">
-        {Object.keys(iteration).map((step) => (
-          <div class={`mtp-bar-row is-${step}`}>
-            <strong>{iterationLabels[step]}</strong>
-            <div><i style={`--mtp-width:${iteration[step] / iteration.binary * 100}%`}></i></div>
-            <span>{iteration[step].toFixed(5)}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <div class="mtp-chart-card">
-      <h2>{study.resultTitle}</h2>
-      <p>{study.resultHelp}</p>
-      <div class="mtp-overall-chart">
-        {modelOrder.map((model) => (
-          <div class={`mtp-bar-row is-${model}`}>
-            <strong>{modelLabels[model]}</strong>
-            <div><i style={`--mtp-width:${overall[model] / overall.engineered * 100}%`}></i></div>
-            <span>{overall[model].toFixed(5)}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <div class="mtp-chart-card">
-      <h2>{study.targetTitle}</h2>
-      <p>{study.targetHelp}</p>
-      <div class="mtp-target-chart">
-        {targets.map(([target, values]) => {
-          const maximum = Math.max(...Object.values(values));
-          return (
-            <article>
-              <h3>{target.toUpperCase()}</h3>
-              {targetModelOrder.map((model) => (
-                <div class={`mtp-mini-bar is-${model}`}>
-                  <span>{modelLabels[model]}</span>
-                  <div><i style={`--mtp-width:${values[model] / maximum * 100}%`}></i></div>
-                  <small>{values[model].toFixed(4)}</small>
-                </div>
-              ))}
-            </article>
-          );
-        })}
-      </div>
-    </div>
-
-    <div class="mtp-second-layer">
-      <div aria-hidden="true">0.08740 → <strong>0.08116</strong></div>
-      <section>
-        <h2>{study.secondLayerTitle}</h2>
-        <p>{study.secondLayer}</p>
-      </section>
-    </div>
-
-    <div class="mtp-conclusion">
-      <h2>{study.conclusionTitle}</h2>
-      <p>{study.conclusion}</p>
-    </div>
-  </section>
-
   <header class="mtp-demo-heading">
     <p class="mtp-eyebrow">Live prediction client</p>
-    <h2>{study.demoTitle}</h2>
-    <p>{study.demoLead}</p>
+    <h2>{locale === "zh" ? "预测结果，不是 benchmark 分数" : "Predictions, not a benchmark score"}</h2>
+    <p>{locale === "zh" ? "输入一个公开示例，比较四个固定模型对同一分子的预测。这个页面不声称哪个模型获胜；模型优劣需要单独、受控的评估。" : "Enter a public example to compare the four fixed models on one molecule. This page does not claim that one model wins; model quality needs a separately controlled evaluation."}</p>
   </header>
 
   <div class="mtp-workspace">
