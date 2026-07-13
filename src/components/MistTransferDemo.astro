@@ -721,6 +721,7 @@ const modelOrder = ["ensemble", "xgboost", "mist", "mlp", "ridge"];
     try {
       endpoint = buildEndpoint(apiBaseUrl);
       submit.disabled = false;
+      submit.textContent = endpoint ? copy.predict : copy.replay;
       examples.forEach((button) => {
         button.disabled = !endpoint && button.dataset.mtpExample !== "CCO";
       });
