@@ -1,0 +1,17 @@
+---
+import Base from "../../layouts/Base.astro";
+import MistTransferDemo from "../../components/MistTransferDemo.astro";
+---
+
+<Base
+  title="Molecular Property Predictor — MIST transfer demo — Lu Zhang"
+  description="Compare ECFP Ridge, XGBoost, MLP, and MIST-28M predictions for 12 QM9 molecular properties from one SMILES string. Versioned API contract, explicit limitations, no browser-side model weights."
+>
+  <div class="container mtp-page">
+    <MistTransferDemo locale="en" />
+  </div>
+</Base>
+
+<style>
+  .mtp-page { padding-top: 38px; padding-bottom: 64px; }
+</style>

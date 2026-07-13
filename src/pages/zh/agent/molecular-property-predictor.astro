@@ -1,0 +1,17 @@
+---
+import Base from "../../../layouts/Base.astro";
+import MistTransferDemo from "../../../components/MistTransferDemo.astro";
+---
+
+<Base
+  title="分子性质预测器 — MIST 迁移实验 — 张鲁 Lu Zhang"
+  description="输入一个 SMILES，对比 ECFP Ridge、XGBoost、MLP 和 MIST-28M 对 12 个 QM9 分子性质的预测。版本化 API、清楚的适用边界，浏览器不加载模型权重。"
+>
+  <div class="container mtp-page">
+    <MistTransferDemo locale="zh" />
+  </div>
+</Base>
+
+<style>
+  .mtp-page { padding-top: 38px; padding-bottom: 64px; }
+</style>
