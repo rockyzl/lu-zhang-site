@@ -11,7 +11,7 @@ const copy = locale === "zh"
   ? {
       eyebrow: "张鲁独立研究 · MIST transfer benchmark",
       title: "Fine-tuned 分子基础模型能否匹敌专用模型？",
-      lead: "我设计并运行了这项独立 benchmark：在相同 QM9 数据划分和 12 个分子性质上，将发布的 fine-tuned MIST 与优化后的 Ridge、XGBoost、MLP 和 ensemble 公平比较。",
+      lead: "我设计并运行了这项独立 benchmark：在相同 QM9 数据划分和 12 个分子性质上，先比较 fine-tuned MIST 与传统模型，再检验两类模型组合后的 ensemble。",
       storyTitle: "一个很简单的故事",
       story: "想象四位学生拿到同一个分子。Ridge 只用一把直尺找规律；XGBoost 用许多判断题组合答案；MLP 从分子指纹学习弯曲的规律；MIST 先读过大量分子，再回答这道题。这个演示让他们同时作答。模型意见一致时只是一个线索，意见不同时则提醒我们继续检查；真正决定谁更好的是从未参与训练的测试数据。",
       apiUnavailable: "实时 API 尚未配置",
@@ -91,7 +91,7 @@ const copy = locale === "zh"
   : {
       eyebrow: "Independent research by Lu Zhang · MIST transfer benchmark",
       title: "Can a fine-tuned molecular foundation model match task-specific models?",
-      lead: "I designed and ran this independent benchmark to compare the released fine-tuned MIST checkpoint with optimized Ridge, XGBoost, MLP, and an ensemble on the same QM9 split and all 12 molecular properties.",
+      lead: "I designed and ran this independent benchmark to first compare fine-tuned MIST with task-specific models on the same QM9 split and 12 properties, then test an ensemble across both model families.",
       storyTitle: "A simple story",
       story: "Imagine four students receive the same molecule. Ridge uses a ruler to find a straight-line pattern. XGBoost combines many decision questions. The MLP learns curved patterns from a molecular fingerprint. MIST first studied a large molecular library, then answers this task. This demo lets all four answer together. Agreement is a clue and disagreement is a reason to inspect; unseen test data decides which student is actually better.",
       apiUnavailable: "Live API is not configured",
@@ -178,15 +178,19 @@ const study = locale === "zh"
         ["数据", "133,885 个 QM9 小型有机分子，12 个 DFT 计算性质"],
         ["划分", "107,108 train · 13,388 validation · 13,389 test"],
         ["特征", "Count ECFP4 的 2,048 个局部结构计数 + 17 个全局分子特征"],
-        ["优化", "5 组 XGBoost、5 组 MLP；只用 validation 选参数和 ensemble 权重"],
+        ["迭代", "4 种特征方案、5 组 XGBoost、5 组 MLP；只用 validation 做选择"],
         ["计算", "RTX PRO 2000 8GB Laptop GPU；完整运行 36.4 分钟"],
       ],
-      resultTitle: "共同测试集结果",
-      resultHelp: "平均标准化 MAE，越低越好。测试集只在所有选择冻结后读取一次。",
+      iterationTitle: "结果不是一次得到的",
+      iterationHelp: "Validation 平均标准化 MAE，越低越好。每一步都在前一步基础上增加特征工程、非线性模型或调参；最后用 validation 选择传统 ensemble 权重。",
+      resultTitle: "第一层：传统路线与 fine-tuned MIST",
+      resultHelp: "共同测试集平均标准化 MAE，越低越好。传统 ensemble 只包含 XGBoost、MLP 和工程化 Ridge；其权重仅由 validation 决定。由于这个报告结构是在第一版测试结果之后纠正的，应视为事后分析。",
       targetTitle: "12 个性质逐项比较",
-      targetHelp: "每一行按该性质中最高误差归一化柱长；数值仍是实际标准化 MAE。",
+      targetHelp: "为保持图表简单，只展示传统 ensemble、XGBoost、MLP 与 MIST。每一行按该性质中最高误差缩放；数字是实际标准化 MAE。",
+      secondLayerTitle: "第二层：把所有模型 ensemble 起来",
+      secondLayer: "传统 ensemble 为 0.08740；把 fine-tuned MIST 也加入后，全模型 ensemble 降到 0.08116，进一步改善 7.1%。它说明两类模型误差互补，但不替代第一层的独立模型比较。全模型权重为 MIST 39.32%、MLP 32.72%、XGBoost 27.96%、Ridge 0%。",
       conclusionTitle: "结论",
-      conclusion: "优化后的 XGBoost（0.09434）与 fine-tuned MIST（0.09506）在这次点估计中基本持平；没有多随机种子和置信区间，不能把 0.00073 的差距说成决定性胜负。Ensemble 达到 0.08116，说明基础模型与传统模型包含互补信息。这个结果支持 foundation model + fine-tuning 的复用价值，但还不能证明预训练本身是改善的唯一原因。",
+      conclusion: "最简单的 Ridge 起点并不好；经过特征工程、模型搜索与调参，传统模型才追上来。最佳传统单模型 XGBoost（0.09434）与 fine-tuned MIST（0.09506）几乎持平，0.00073 的差距不足以宣称决定性胜负。传统 ensemble 达到 0.08740，全模型 ensemble 进一步达到 0.08116。结果支持 foundation model + fine-tuning 以较强单模型性能复用表示，也说明传统系统工程和跨模型组合仍然有价值。",
       sources: "方法、数据与来源",
       demoTitle: "试一个公开示例",
       demoLead: "选择乙醇 CCO，可以播放四个固定模型生成的 12 项保存结果；任意新分子需要私有实时后端。",
@@ -199,37 +203,48 @@ const study = locale === "zh"
         ["Data", "133,885 small QM9 molecules with 12 DFT-computed properties"],
         ["Split", "107,108 train · 13,388 validation · 13,389 test"],
         ["Features", "2,048 count-ECFP4 local-structure features + 17 global descriptors"],
-        ["Search", "5 XGBoost and 5 MLP settings; validation-only model and blend selection"],
+        ["Iteration", "4 feature sets, 5 XGBoost and 5 MLP settings; validation-only selection"],
         ["Compute", "RTX PRO 2000 8GB Laptop GPU; 36.4-minute complete run"],
       ],
-      resultTitle: "Common held-out test result",
-      resultHelp: "Mean normalized MAE; lower is better. Test labels were loaded once after every choice was frozen.",
+      iterationTitle: "The result required iteration",
+      iterationHelp: "Validation mean normalized MAE; lower is better. Each step adds feature engineering, nonlinear modeling, or tuning. Traditional blend weights were selected on validation only.",
+      resultTitle: "Layer 1: task-specific pipeline versus fine-tuned MIST",
+      resultHelp: "Common-test mean normalized MAE; lower is better. The traditional ensemble contains only XGBoost, MLP, and engineered Ridge, with validation-only weights. Because this reporting structure was corrected after the first test report, it is post-specified.",
       targetTitle: "All 12 properties",
-      targetHelp: "Bar width is scaled to the largest error within each property; labels retain actual normalized MAE.",
+      targetHelp: "For clarity, this chart shows the traditional ensemble, XGBoost, MLP, and MIST. Width is scaled within each property; labels retain actual normalized MAE.",
+      secondLayerTitle: "Layer 2: ensemble all model families",
+      secondLayer: "The traditional ensemble scores 0.08740. Adding fine-tuned MIST produces an all-model ensemble of 0.08116, a further 7.1% reduction. This indicates complementary errors, but does not replace the independent comparison above. Weights are 39.32% MIST, 32.72% MLP, 27.96% XGBoost, and 0% Ridge.",
       conclusionTitle: "Conclusion",
-      conclusion: "Optimized XGBoost (0.09434) and fine-tuned MIST (0.09506) are effectively at parity in this point estimate. Without repeated seeds and confidence intervals, their 0.00073 gap is not a decisive win. The ensemble reaches 0.08116, showing complementary information between the foundation and task-specific models. This supports the reuse value of foundation-model fine-tuning, but does not isolate pretraining as the sole cause.",
+      conclusion: "The simple Ridge starting point was weak; feature engineering, model search, and tuning were needed before the task-specific pipeline caught up. Optimized XGBoost (0.09434) and fine-tuned MIST (0.09506) are effectively at parity, and their 0.00073 gap is not a decisive win. The traditional ensemble reaches 0.08740 and the all-model ensemble reaches 0.08116. The result supports reusable foundation-model fine-tuning while showing that classical systems engineering and cross-family ensembling still matter.",
       sources: "Methods, data, and sources",
       demoTitle: "Try a public example",
       demoLead: "Choose ethanol (CCO) to replay saved 12-property outputs from four fixed models. New molecules require the private live backend.",
     };
 
-const modelLabels = { ensemble: "Ensemble", xgboost: "XGBoost", mist: "MIST", mlp: "MLP", ridge: "Ridge" };
-const overall = { ensemble: 0.08115898, xgboost: 0.09433632, mist: 0.09506432, mlp: 0.10036413, ridge: 0.37004856 };
+const modelLabels = locale === "zh"
+  ? { traditional: "传统 ensemble", xgboost: "XGBoost", mist: "MIST", mlp: "MLP", engineered: "工程化 Ridge" }
+  : { traditional: "Trad. ensemble", xgboost: "XGBoost", mist: "MIST", mlp: "MLP", engineered: "Engineered Ridge" };
+const overall = { traditional: 0.08739987, xgboost: 0.09433632, mist: 0.09506432, mlp: 0.10036413, engineered: 0.14983871 };
+const iterationLabels = locale === "zh"
+  ? { binary: "原始 Ridge", count: "Count ECFP", globals: "+ 17 全局特征", xgboost: "调参 XGBoost", traditional: "传统 ensemble" }
+  : { binary: "Initial Ridge", count: "Count ECFP", globals: "+ 17 global features", xgboost: "Tuned XGBoost", traditional: "Traditional ensemble" };
+const iteration = { binary: 0.36968988, count: 0.23329289, globals: 0.15130330, xgboost: 0.09403011, traditional: 0.08753979 };
 const targets = [
-  ["mu", { ensemble: .307169, xgboost: .371006, mist: .313150, mlp: .354812, ridge: .521526 }],
-  ["alpha", { ensemble: .055902, xgboost: .064938, mist: .075184, mlp: .066560, ridge: .408352 }],
-  ["homo", { ensemble: .178815, xgboost: .232815, mist: .187313, mlp: .211746, ridge: .391671 }],
-  ["lumo", { ensemble: .092801, xgboost: .118009, mist: .107254, mlp: .112238, ridge: .288715 }],
-  ["gap", { ensemble: .119303, xgboost: .151663, mist: .128906, mlp: .144751, ridge: .326438 }],
-  ["r2", { ensemble: .097104, xgboost: .116319, mist: .121616, mlp: .117618, ridge: .385342 }],
-  ["zpve", { ensemble: .017893, xgboost: .010000, mist: .028299, mlp: .036792, ridge: .276258 }],
-  ["u0", { ensemble: .011420, xgboost: .001619, mist: .019865, mlp: .023555, ridge: .369774 }],
-  ["u298", { ensemble: .012914, xgboost: .001462, mist: .025987, mlp: .023541, ridge: .369771 }],
-  ["h298", { ensemble: .016510, xgboost: .001442, mist: .037158, mlp: .023563, ridge: .369769 }],
-  ["g298", { ensemble: .017407, xgboost: .001431, mist: .040903, mlp: .023547, ridge: .369779 }],
-  ["cv", { ensemble: .046670, xgboost: .061332, mist: .055139, mlp: .065646, ridge: .363187 }],
+  ["mu", { traditional: .338323, xgboost: .371006, mist: .313150, mlp: .354812 }],
+  ["alpha", { traditional: .056703, xgboost: .064938, mist: .075184, mlp: .066560 }],
+  ["homo", { traditional: .202736, xgboost: .232815, mist: .187313, mlp: .211746 }],
+  ["lumo", { traditional: .102699, xgboost: .118009, mist: .107254, mlp: .112238 }],
+  ["gap", { traditional: .133886, xgboost: .151663, mist: .128906, mlp: .144751 }],
+  ["r2", { traditional: .102811, xgboost: .116319, mist: .121616, mlp: .117618 }],
+  ["zpve", { traditional: .017123, xgboost: .010000, mist: .028299, mlp: .036792 }],
+  ["u0", { traditional: .010060, xgboost: .001619, mist: .019865, mlp: .023555 }],
+  ["u298", { traditional: .010029, xgboost: .001462, mist: .025987, mlp: .023541 }],
+  ["h298", { traditional: .010043, xgboost: .001442, mist: .037158, mlp: .023563 }],
+  ["g298", { traditional: .010033, xgboost: .001431, mist: .040903, mlp: .023547 }],
+  ["cv", { traditional: .054352, xgboost: .061332, mist: .055139, mlp: .065646 }],
 ];
-const modelOrder = ["ensemble", "xgboost", "mist", "mlp", "ridge"];
+const modelOrder = ["traditional", "xgboost", "mist", "mlp", "engineered"];
+const targetModelOrder = ["traditional", "xgboost", "mist", "mlp"];
 ---
 
 <section class="mtp-demo" data-mtp-demo>
@@ -265,13 +280,27 @@ const modelOrder = ["ensemble", "xgboost", "mist", "mlp", "ridge"];
     </div>
 
     <div class="mtp-chart-card">
+      <h2>{study.iterationTitle}</h2>
+      <p>{study.iterationHelp}</p>
+      <div class="mtp-overall-chart">
+        {Object.keys(iteration).map((step) => (
+          <div class={`mtp-bar-row is-${step}`}>
+            <strong>{iterationLabels[step]}</strong>
+            <div><i style={`--mtp-width:${iteration[step] / iteration.binary * 100}%`}></i></div>
+            <span>{iteration[step].toFixed(5)}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="mtp-chart-card">
       <h2>{study.resultTitle}</h2>
       <p>{study.resultHelp}</p>
       <div class="mtp-overall-chart">
         {modelOrder.map((model) => (
           <div class={`mtp-bar-row is-${model}`}>
             <strong>{modelLabels[model]}</strong>
-            <div><i style={`--mtp-width:${overall[model] / overall.ridge * 100}%`}></i></div>
+            <div><i style={`--mtp-width:${overall[model] / overall.engineered * 100}%`}></i></div>
             <span>{overall[model].toFixed(5)}</span>
           </div>
         ))}
@@ -287,7 +316,7 @@ const modelOrder = ["ensemble", "xgboost", "mist", "mlp", "ridge"];
           return (
             <article>
               <h3>{target.toUpperCase()}</h3>
-              {modelOrder.map((model) => (
+              {targetModelOrder.map((model) => (
                 <div class={`mtp-mini-bar is-${model}`}>
                   <span>{modelLabels[model]}</span>
                   <div><i style={`--mtp-width:${values[model] / maximum * 100}%`}></i></div>
@@ -298,6 +327,14 @@ const modelOrder = ["ensemble", "xgboost", "mist", "mlp", "ridge"];
           );
         })}
       </div>
+    </div>
+
+    <div class="mtp-second-layer">
+      <div aria-hidden="true">0.08740 → <strong>0.08116</strong></div>
+      <section>
+        <h2>{study.secondLayerTitle}</h2>
+        <p>{study.secondLayer}</p>
+      </section>
     </div>
 
     <div class="mtp-conclusion">
@@ -813,6 +850,7 @@ const modelOrder = ["ensemble", "xgboost", "mist", "mlp", "ridge"];
   .mtp-study-copy,
   .mtp-study-data,
   .mtp-chart-card,
+  .mtp-second-layer,
   .mtp-conclusion {
     padding: 24px;
     border: 1px solid var(--mtp-line);
@@ -847,7 +885,7 @@ const modelOrder = ["ensemble", "xgboost", "mist", "mlp", "ridge"];
   .mtp-overall-chart { display: grid; gap: 10px; margin-top: 18px; }
   .mtp-bar-row {
     display: grid;
-    grid-template-columns: 92px minmax(100px, 1fr) 70px;
+    grid-template-columns: 150px minmax(100px, 1fr) 70px;
     gap: 10px;
     align-items: center;
     font-size: .84rem;
@@ -863,11 +901,14 @@ const modelOrder = ["ensemble", "xgboost", "mist", "mlp", "ridge"];
     border-radius: inherit;
     background: #75938c;
   }
-  .is-ensemble i { background: #0f766e; }
+  .is-traditional i { background: #0f766e; }
   .is-xgboost i { background: #d97706; }
   .is-mist i { background: #6d5bd0; }
   .is-mlp i { background: #2f80b7; }
-  .is-ridge i { background: #9ca3af; }
+  .is-engineered i,
+  .is-binary i,
+  .is-count i,
+  .is-globals i { background: #9ca3af; }
   .mtp-bar-row > span { text-align: right; font-variant-numeric: tabular-nums; }
 
   .mtp-target-chart {
@@ -880,7 +921,7 @@ const modelOrder = ["ensemble", "xgboost", "mist", "mlp", "ridge"];
   .mtp-target-chart h3 { margin: 0 0 9px; font-size: .85rem; }
   .mtp-mini-bar {
     display: grid;
-    grid-template-columns: 66px 1fr 48px;
+    grid-template-columns: 82px 1fr 48px;
     gap: 7px;
     align-items: center;
     margin-top: 5px;
@@ -890,6 +931,22 @@ const modelOrder = ["ensemble", "xgboost", "mist", "mlp", "ridge"];
   .mtp-mini-bar small { text-align: right; font-size: .68rem; font-variant-numeric: tabular-nums; }
 
   .mtp-conclusion { border-color: #b9ddd4; background: #f1faf7; }
+  .mtp-second-layer {
+    display: grid;
+    grid-template-columns: minmax(150px, .45fr) 1fr;
+    gap: 22px;
+    align-items: center;
+    border-color: #d8d0f3;
+    background: #f8f6ff;
+  }
+  .mtp-second-layer > div {
+    color: #6d5bd0;
+    font-size: clamp(1.35rem, 4vw, 2.1rem);
+    font-variant-numeric: tabular-nums;
+    font-weight: 750;
+    text-align: center;
+  }
+  .mtp-second-layer h2 { margin: 0 0 8px; }
   .mtp-demo-heading { margin: 34px 0 18px; }
 
   .mtp-workspace {
@@ -1262,15 +1319,17 @@ const modelOrder = ["ensemble", "xgboost", "mist", "mlp", "ridge"];
     .mtp-story { grid-template-columns: 1fr; }
     .mtp-focus-grid { grid-template-columns: 1fr; }
     .mtp-target-chart { grid-template-columns: 1fr; }
+    .mtp-second-layer { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 560px) {
     .mtp-study-copy,
     .mtp-study-data,
     .mtp-chart-card,
+    .mtp-second-layer,
     .mtp-conclusion { padding: 17px; }
     .mtp-study-data dl > div { grid-template-columns: 1fr; gap: 3px; }
-    .mtp-bar-row { grid-template-columns: 76px minmax(70px, 1fr) 60px; }
+    .mtp-bar-row { grid-template-columns: 110px minmax(70px, 1fr) 60px; }
     .mtp-input-panel,
     .mtp-model-panel,
     .mtp-results,
