@@ -58,6 +58,7 @@ const copy = locale === "zh"
       limitationsTitle: "怎样读这些数字",
       limitations: [
         "它们是模型预测，不是实测值、置信区间或正式 benchmark 分数。",
+        "在 QM9 基准中，DFT 计算值被当作训练与评估的目标标签（ground truth）；这不等同于实验真值。",
         "QM9 主要覆盖小型有机分子和 DFT 计算标签；远离这个化学域时，误差可能明显增大。",
         "四个模型意见不一致，不等于经过校准的不确定性。",
         "HOMO、LUMO 和 gap 与分子筛选有关，但不能直接代表电解液、电极界面或电池性能。",
@@ -138,6 +139,7 @@ const copy = locale === "zh"
       limitationsTitle: "How to read these numbers",
       limitations: [
         "They are model predictions, not measurements, confidence intervals, or official benchmark scores.",
+        "For this QM9 benchmark, DFT-calculated values are treated as the target labels (ground truth) for training and evaluation; they are not experimental ground truth.",
         "QM9 mainly covers small organic molecules with DFT-computed labels; error can grow outside that chemical domain.",
         "Disagreement among the four models is not calibrated uncertainty.",
         "HOMO, LUMO, and gap can inform molecular screening, but they do not directly describe an electrolyte, electrode interface, or battery performance.",
