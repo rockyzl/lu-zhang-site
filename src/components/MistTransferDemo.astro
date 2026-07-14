@@ -174,8 +174,8 @@ const copy = locale === "zh"
 const study = locale === "zh"
   ? {
       backgroundTitle: "背景很简单",
-      background: "MIST-28M 先在 Enamine REAL Space 的 SMILES 上进行 masked-language-model 预训练，再用 QM9 做 12 目标监督 fine-tuning。预训练模型的吸引力在于同一个分子表示可以适配许多下游任务；这里要检验的是，这种复用路线在准确率上能否匹敌为 QM9 专门优化的模型。MIST 由密歇根大学 Electrochemical Energy Group 开发；本文 benchmark、代码、训练和分析由张鲁独立完成。",
-      dataTitle: "数据与训练",
+      background: "MIST-28M 由密歇根大学 Electrochemical Energy Group 开发、预训练、在 QM9 上 fine-tune 并公开发布。预训练模型的吸引力在于同一个分子表示可以适配许多下游任务；这里检验这种复用路线能否匹敌为 QM9 专门优化的模型。张鲁独立设计并实现本 benchmark，训练任务专用的 Ridge、XGBoost 和 MLP，评估已发布的 fine-tuned MIST 检查点，并完成结果分析。",
+      dataTitle: "数据与本地模型训练",
       dataItems: [
         ["数据", "133,885 个 QM9 小型有机分子，12 个 DFT 计算性质"],
         ["划分", "107,108 train · 13,388 validation · 13,389 test"],
@@ -186,21 +186,21 @@ const study = locale === "zh"
       iterationTitle: "结果不是一次得到的",
       iterationHelp: "Validation 平均标准化 MAE，越低越好。每一步都在前一步基础上增加特征工程、非线性模型或调参；最后用 validation 选择传统 ensemble 权重。",
       resultTitle: "第一层：传统路线与 fine-tuned MIST",
-      resultHelp: "共同测试集平均标准化 MAE，越低越好。传统 ensemble 只包含 XGBoost、MLP 和工程化 Ridge；其权重仅由 validation 决定。由于这个报告结构是在第一版测试结果之后纠正的，应视为事后分析。",
+      resultHelp: "共同测试集平均标准化 MAE，越低越好。传统 ensemble 只包含 XGBoost、MLP 和工程化 Ridge，权重仅由 validation 决定。把传统模型 ensemble 作为第一层结果的报告纠正，是在首次测试报告之后确定的，因此属于事后分析。",
       targetTitle: "12 个性质逐项比较",
       targetHelp: "为保持图表简单，只展示传统 ensemble、XGBoost、MLP 与 MIST。每一行按该性质中最高误差缩放；数字是实际标准化 MAE。",
       secondLayerTitle: "第二层：把所有模型 ensemble 起来",
-      secondLayer: "传统 ensemble 为 0.08740；把 fine-tuned MIST 也加入后，全模型 ensemble 降到 0.08116，进一步改善 7.1%。它说明两类模型误差互补，但不替代第一层的独立模型比较。全模型权重为 MIST 39.32%、MLP 32.72%、XGBoost 27.96%、Ridge 0%。",
+      secondLayer: "原始的 validation-selected 全模型 ensemble 加入 fine-tuned MIST 后达到 0.08116，相比传统 ensemble 的 0.08740 改善 7.1%。它是补充的系统工程结果，说明两类模型误差互补，但不替代第一层的独立模型比较。权重为 MIST 39.32%、MLP 32.72%、XGBoost 27.96%、Ridge 0%。",
       conclusionTitle: "结论",
-      conclusion: "最简单的 Ridge 起点并不好；经过特征工程、模型搜索与调参，传统模型才追上来。最佳传统单模型 XGBoost（0.09434）与 fine-tuned MIST（0.09506）几乎持平，0.00073 的差距不足以宣称决定性胜负。传统 ensemble 达到 0.08740，全模型 ensemble 进一步达到 0.08116。结果支持 foundation model + fine-tuning 以较强单模型性能复用表示，也说明传统系统工程和跨模型组合仍然有价值。",
+      conclusion: "在这个固定 split 的单次点估计中，最佳传统单模型 XGBoost（0.09434）与密歇根大学发布的 fine-tuned MIST 检查点（0.09506）接近，0.00073 的差距不足以宣称决定性胜负。传统 ensemble 达到 0.08740，补充的全模型 ensemble 达到 0.08116。这个比较不能分离预训练、模型架构和 fine-tuning recipe 各自的贡献，也不能据此作出预训练或 fine-tuning 的因果结论。",
       sources: "方法、数据与来源",
       demoTitle: "试一个公开示例",
       demoLead: "选择乙醇 CCO，可以播放四个固定模型生成的 12 项保存结果；任意新分子需要私有实时后端。",
     }
   : {
       backgroundTitle: "The background is simple",
-      background: "MIST-28M was pretrained with masked language modeling on SMILES from Enamine REAL Space, then supervised-fine-tuned on QM9 for 12 targets. A pretrained representation can be reused across many downstream tasks; this study asks whether that reusable path can match models optimized specifically for QM9. MIST was developed by the University of Michigan Electrochemical Energy Group. Lu Zhang independently designed and ran this benchmark, code, training, and analysis.",
-      dataTitle: "Data and training",
+      background: "MIST-28M was developed, pretrained, fine-tuned on QM9, and released by the University of Michigan Electrochemical Energy Group. A pretrained representation can be reused across downstream tasks; this study asks whether that path can match models optimized specifically for QM9. Lu Zhang independently designed and implemented this benchmark, trained the task-specific Ridge, XGBoost, and MLP models, evaluated the released fine-tuned MIST checkpoint, and analyzed the results.",
+      dataTitle: "Data and local model training",
       dataItems: [
         ["Data", "133,885 small QM9 molecules with 12 DFT-computed properties"],
         ["Split", "107,108 train · 13,388 validation · 13,389 test"],
@@ -211,13 +211,13 @@ const study = locale === "zh"
       iterationTitle: "The result required iteration",
       iterationHelp: "Validation mean normalized MAE; lower is better. Each step adds feature engineering, nonlinear modeling, or tuning. Traditional blend weights were selected on validation only.",
       resultTitle: "Layer 1: task-specific pipeline versus fine-tuned MIST",
-      resultHelp: "Common-test mean normalized MAE; lower is better. The traditional ensemble contains only XGBoost, MLP, and engineered Ridge, with validation-only weights. Because this reporting structure was corrected after the first test report, it is post-specified.",
+      resultHelp: "Common-test mean normalized MAE; lower is better. The traditional ensemble contains only XGBoost, MLP, and engineered Ridge, with validation-only weights. Reporting that traditional-only ensemble as Layer 1 was a correction made after the first test report, so that reporting correction is post-specified.",
       targetTitle: "All 12 properties",
       targetHelp: "For clarity, this chart shows the traditional ensemble, XGBoost, MLP, and MIST. Width is scaled within each property; labels retain actual normalized MAE.",
       secondLayerTitle: "Layer 2: ensemble all model families",
-      secondLayer: "The traditional ensemble scores 0.08740. Adding fine-tuned MIST produces an all-model ensemble of 0.08116, a further 7.1% reduction. This indicates complementary errors, but does not replace the independent comparison above. Weights are 39.32% MIST, 32.72% MLP, 27.96% XGBoost, and 0% Ridge.",
+      secondLayer: "The original validation-selected all-model ensemble scores 0.08116, a 7.1% reduction from the traditional ensemble's 0.08740. This remains a supplemental systems result: it indicates complementary errors but does not replace the independent comparison above. Weights are 39.32% MIST, 32.72% MLP, 27.96% XGBoost, and 0% Ridge.",
       conclusionTitle: "Conclusion",
-      conclusion: "The simple Ridge starting point was weak; feature engineering, model search, and tuning were needed before the task-specific pipeline caught up. Optimized XGBoost (0.09434) and fine-tuned MIST (0.09506) are effectively at parity, and their 0.00073 gap is not a decisive win. The traditional ensemble reaches 0.08740 and the all-model ensemble reaches 0.08116. The result supports reusable foundation-model fine-tuning while showing that classical systems engineering and cross-family ensembling still matter.",
+      conclusion: "On this fixed split and single point estimate, optimized XGBoost (0.09434) and the released University of Michigan fine-tuned MIST checkpoint (0.09506) are near parity; their 0.00073 gap is not a decisive win. The traditional ensemble reaches 0.08740 and the supplemental all-model ensemble reaches 0.08116. This comparison cannot separate the contributions of pretraining, architecture, and the fine-tuning recipe, and it does not support a causal claim about pretraining or fine-tuning.",
       sources: "Methods, data, and sources",
       demoTitle: "Try a public example",
       demoLead: "Choose ethanol (CCO) to replay saved 12-property outputs from four fixed models. New molecules require the private live backend.",
@@ -256,10 +256,111 @@ const targetModelOrder = ["traditional", "xgboost", "mist", "mlp"];
     <p class="mtp-lead">{copy.lead}</p>
   </header>
 
+  <section class="mtp-story" aria-labelledby="mtp-story-title">
+    <div class="mtp-story-number" aria-hidden="true">4</div>
+    <div>
+      <h2 id="mtp-story-title">{copy.storyTitle}</h2>
+      <p>{copy.story}</p>
+    </div>
+  </section>
+
+  <section class="mtp-study" aria-labelledby="mtp-study-background">
+    <div class="mtp-study-copy">
+      <h2 id="mtp-study-background">{study.backgroundTitle}</h2>
+      <p>{study.background}</p>
+      <nav class="mtp-source-links" aria-label={study.sources}>
+        <a href="https://arxiv.org/abs/2510.18900" target="_blank" rel="noopener">MIST paper ↗</a>
+        <a href="https://huggingface.co/mist-models/mist-26.9M-kkgx0omx-qm9" target="_blank" rel="noopener">MIST checkpoint ↗</a>
+        <a href="https://doi.org/10.1038/sdata.2014.22" target="_blank" rel="noopener">QM9 paper ↗</a>
+        <a href={repoHref} target="_blank" rel="noopener">{locale === "zh" ? "独立 benchmark 仓库 ↗" : "Independent benchmark repo ↗"}</a>
+      </nav>
+    </div>
+
+    <div class="mtp-study-data">
+      <h2>{study.dataTitle}</h2>
+      <dl>{study.dataItems.map(([term, detail]) => <div><dt>{term}</dt><dd>{detail}</dd></div>)}</dl>
+    </div>
+
+    <div class="mtp-chart-card">
+      <h2>{study.iterationTitle}</h2>
+      <p>{study.iterationHelp}</p>
+      <div class="mtp-overall-chart" role="list" aria-label={study.iterationTitle}>
+        {Object.keys(iteration).map((step) => (
+          <div
+            class={`mtp-bar-row is-${step}`}
+            role="listitem"
+            aria-label={`${iterationLabels[step]}: ${iteration[step].toFixed(5)}`}
+          >
+            <strong>{iterationLabels[step]}</strong>
+            <div aria-hidden="true"><i style={`--mtp-width:${iteration[step] / iteration.binary * 100}%`}></i></div>
+            <span>{iteration[step].toFixed(5)}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="mtp-chart-card">
+      <h2>{study.resultTitle}</h2>
+      <p>{study.resultHelp}</p>
+      <div class="mtp-overall-chart" role="list" aria-label={study.resultTitle}>
+        {modelOrder.map((model) => (
+          <div
+            class={`mtp-bar-row is-${model}`}
+            role="listitem"
+            aria-label={`${modelLabels[model]}: ${overall[model].toFixed(5)}`}
+          >
+            <strong>{modelLabels[model]}</strong>
+            <div aria-hidden="true"><i style={`--mtp-width:${overall[model] / overall.engineered * 100}%`}></i></div>
+            <span>{overall[model].toFixed(5)}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="mtp-chart-card">
+      <h2>{study.targetTitle}</h2>
+      <p>{study.targetHelp}</p>
+      <div class="mtp-target-chart">
+        {targets.map(([target, values]) => {
+          const maximum = Math.max(...Object.values(values));
+          const headingId = `mtp-target-${target}`;
+          return (
+            <article aria-labelledby={headingId}>
+              <h3 id={headingId}>{target.toUpperCase()}</h3>
+              {targetModelOrder.map((model) => (
+                <div
+                  class={`mtp-mini-bar is-${model}`}
+                  aria-label={`${modelLabels[model]}: ${values[model].toFixed(4)}`}
+                >
+                  <span>{modelLabels[model]}</span>
+                  <div aria-hidden="true"><i style={`--mtp-width:${values[model] / maximum * 100}%`}></i></div>
+                  <small>{values[model].toFixed(4)}</small>
+                </div>
+              ))}
+            </article>
+          );
+        })}
+      </div>
+    </div>
+
+    <div class="mtp-second-layer">
+      <div aria-hidden="true">0.08740 → <strong>0.08116</strong></div>
+      <section>
+        <h2>{study.secondLayerTitle}</h2>
+        <p>{study.secondLayer}</p>
+      </section>
+    </div>
+
+    <div class="mtp-conclusion">
+      <h2>{study.conclusionTitle}</h2>
+      <p>{study.conclusion}</p>
+    </div>
+  </section>
+
   <header class="mtp-demo-heading">
-    <p class="mtp-eyebrow">Live prediction client</p>
-    <h2>{locale === "zh" ? "预测结果，不是 benchmark 分数" : "Predictions, not a benchmark score"}</h2>
-    <p>{locale === "zh" ? "输入一个公开示例，比较四个固定模型对同一分子的预测。这个页面不声称哪个模型获胜；模型优劣需要单独、受控的评估。" : "Enter a public example to compare the four fixed models on one molecule. This page does not claim that one model wins; model quality needs a separately controlled evaluation."}</p>
+    <p class="mtp-eyebrow">{locale === "zh" ? "保存结果客户端" : "Saved-result prediction client"}</p>
+    <h2>{study.demoTitle}</h2>
+    <p>{study.demoLead}</p>
   </header>
 
   <div class="mtp-workspace">

@@ -122,8 +122,8 @@ const groups = [
         name: "ChemGraph Loop — live agentic chemistry",
         tagline_en: "A real agentic chemistry workflow, live in the browser",
         tagline_zh: "浏览器里可跑的真实 agentic 化学工作流",
-        desc_en: "A natural-language chat demo backed by the real ChemGraph agent (Argonne LCF, LangGraph + ASE) that I reproduced and hardened. It resolves a molecule via PubChem, builds a 3D structure, runs a real simulation (single-point energy and dipole live; vibrations, IR spectra, and thermochemistry from precomputed real runs), and audits the result against a workflow guard. An LLM intent router resolves any chemical name or formula, and out-of-scope requests get a clarifying reply instead of an error.",
-        desc_zh: "一个自然语言聊天 demo，后端是我复现并加固过的真实 ChemGraph agent（Argonne LCF，LangGraph + ASE）。它经 PubChem 识别分子、生成 3D 结构、跑真实仿真（单点能与偶极现算；振动、IR 谱、热化学用预计算的真实运行），并对照工作流护栏审计结果。LLM 意图路由能解析任意化学名或分子式，超出范围的请求会给出澄清回复而非报错。",
+        desc_en: "A natural-language chat demo backed by ChemGraph (LangGraph + ASE), an upstream framework created by Argonne LCF. I reproduced and hardened the workflow and built the guarded public interface. It resolves a molecule via PubChem, builds a 3D structure, runs single-point energy and dipole live, serves heavier supported tasks from precomputed real runs, and audits the result against a workflow guard.",
+        desc_zh: "一个基于 ChemGraph（LangGraph + ASE）的自然语言聊天 demo；上游 framework 由 Argonne LCF 创建。我复现并加固了工作流，并构建这个带护栏的公开界面。它经 PubChem 识别分子、生成 3D 结构、现场计算单点能与偶极，较重的受支持任务使用预计算真实运行，并对照工作流护栏审计结果。",
         status_en: "Live demo",
         status_zh: "在线 Demo",
         tags: ["agentic workflow", "LangGraph + ASE", "3D structure", "workflow guard"],
@@ -152,16 +152,36 @@ const groups = [
         name: "Preventive Health Model Lab",
         tagline_en: "A QLoRA fine-tuning study you can inspect, live in the browser",
         tagline_zh: "浏览器里可查看的 QLoRA 微调研究",
-        desc_en: "A controlled fine-tuning study run on a single 8GB GPU: the same preventive-health task, synthetic training data, and QLoRA recipe applied to Gemma 3 and its medical sibling MedGemma, scored by an eval harness before and after fine-tuning. Fine-tuning closed the safety and grounding gaps (unsafe hard-fails 100% → 0%), and the base model's general capability mattered more than medical pretraining. Results are precomputed and read-only; every number re-derives from a committed run.",
-        desc_zh: "在单张 8GB GPU 上做的对照微调研究:同一个预防健康任务、同一批合成训练数据、同一套 QLoRA 配方,分别应用到 Gemma 3 和它的医学版 MedGemma 上,由评估 harness 在微调前后各评一次。微调补上了安全与依据的缺口(不安全的硬失败 100% → 0%),而基座模型本身的通用能力比医学预训练更关键。结果为预计算、只读;每个数字都能回溯到一次已提交的运行。",
+        desc_en: "A QLoRA comparison I ran on one 8GB GPU: the same synthetic preventive-health task and recipe applied to Gemma 3 and MedGemma, with automatic evaluation before and after fine-tuning. The read-only results measure schema adherence, safety wording, and numeric grounding. This is a synthetic, nonclinical study and does not validate diagnosis or patient-care use.",
+        desc_zh: "我在单张 8GB GPU 上运行的 QLoRA 对比：把同一个合成预防健康任务和配方用于 Gemma 3 与 MedGemma，并在微调前后自动评估。只读结果衡量结构遵循、安全措辞和数字依据。这是合成、非临床研究，不验证诊断或患者照护用途。",
         status_en: "Live demo",
         status_zh: "在线 Demo",
         tags: ["QLoRA", "MedGemma / Gemma 3", "eval harness", "synthetic data"],
         gradient: "from-teal to-navy",
         href: u(`${lp}/agent/preventive-health-model-lab/`),
         external: false,
-        cta_en: "Try the live demo",
-        cta_zh: "试用 Demo",
+        cta_en: "Inspect results",
+        cta_zh: "查看结果",
+      },
+      {
+        name: "MIST Transfer Benchmark",
+        tagline_en: "An inspectable molecular transfer-learning comparison",
+        tagline_zh: "一个可检查的分子迁移学习对比实验",
+        desc_en: "An independent QM9 benchmark I built and ran to compare a released fine-tuned MIST-28M checkpoint with Ridge, XGBoost, and MLP on one shared split and 12 properties. The released comparison is exploratory and uses one fixed split. The traditional-only ensemble reporting correction was post-specified after the first test report; the original validation-selected all-model ensemble remains a supplemental systems result. A new repeated grouped/scaffold protocol is implemented but has not yet produced the reported results.",
+        desc_zh: "这是我独立设计并运行的 QM9 benchmark：在同一次数据划分和 12 个性质上，对比已发布的 fine-tuned MIST-28M 检查点与 Ridge、XGBoost、MLP。现有对比属于探索性结果，只使用一次固定划分。传统模型 ensemble 的报告纠正是在首次测试报告后确定的；原始的 validation-selected 全模型 ensemble 仍只作为补充的系统工程结果。新的多随机种子、grouped/scaffold 协议已经实现，但尚未产出这里展示的结果。",
+        status_en: "Exploratory benchmark · public saved results",
+        status_zh: "探索性 benchmark · 公开保存结果",
+        tags: ["MIST-28M", "QM9 · 12 targets", "model comparison", "explicit limitations"],
+        gradient: "from-teal to-navy",
+        href: null,
+        external: false,
+        cta_en: null,
+        cta_zh: null,
+        links: [
+          { label_en: "Inspect saved results", label_zh: "查看保存结果", href: u(`${lp}/agent/molecular-property-predictor/`), external: false },
+          { label_en: "Open result explorer", label_zh: "查看结果浏览器", href: "https://rockyzl.github.io/mist-transfer-benchmark/", external: true },
+          { label_en: "View repository", label_zh: "查看仓库", href: "https://github.com/rockyzl/mist-transfer-benchmark", external: true },
+        ],
       },
       {
         name: "Scientific Foundation Model Lab",
@@ -297,7 +317,9 @@ const groups = [
                 <div class="name">{p.name}</div>
                 <div class="tagline">{isZh ? p.tagline_zh : p.tagline_en}</div>
                 <div class="description">{isZh ? p.desc_zh : p.desc_en}</div>
-                {cta && <div class="links">{cta} ↗</div>}
+                {p.links
+                  ? <div class="links">{p.links.map((link) => <a href={link.href} {...(link.external ? { target: "_blank", rel: "noopener" } : {})}>{isZh ? link.label_zh : link.label_en} ↗</a>)}</div>
+                  : cta && <div class="links">{cta} ↗</div>}
                 <div class="tags">
                   {p.tags.map((tg) => <span class="tag">{tg}</span>)}
                 </div>
