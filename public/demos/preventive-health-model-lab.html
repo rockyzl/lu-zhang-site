@@ -79,22 +79,22 @@
 <div class="phml">
 <div class="safety">Synthetic data · research/education only · not a diagnostic tool · do not enter real health data</div>
 <div class="wrap">
-  <h1 id="h1">I fine-tuned two open medical AIs to reason about health trends — safely.</h1>
+  <h1 id="h1">I fine-tuned two open models and measured health-trend output contracts.</h1>
   <p class="sub">Same task, same synthetic data, same recipe on two models — Gemma&nbsp;3 and its medical
-    sibling MedGemma. The question: what does fine-tuning fix, and does a "medical" model actually do better?</p>
+    sibling MedGemma. The question: what changes in the automatic output-contract metrics after fine-tuning?</p>
 
   <div class="takes">
     <div class="take win"><span class="ic">✅</span><div>
-      <b id="t1b">Fine-tuning fixed the safety problems.</b>
-      <span id="t1s">Both models went from breaking the safety rules to following them every time.</span></div></div>
+      <b id="t1b">Fine-tuning improved automatic safety-contract adherence.</b>
+      <span id="t1s">Both models followed the evaluated wording and numeric-grounding checks more consistently. This is not clinical safety validation.</span></div></div>
     <div class="take surprise"><span class="ic">🔍</span><div>
-      <b>The medical model didn't win.</b>
-      <span id="t2s">After fine-tuning it was tied with the general one — a capable base + fine-tuning is what mattered, not the medical pretraining.</span></div></div>
+      <b>The two tuned models tied on this synthetic automatic evaluation.</b>
+      <span id="t2s">This small result does not isolate the effect of medical pretraining or establish clinical performance.</span></div></div>
   </div>
 
   <div class="chartcard">
     <h2>Overall quality score, before vs after fine-tuning</h2>
-    <p class="cap" id="chartcap">Higher is better (0–1). Automatic score: safe framing + correct structure + no made-up numbers.</p>
+    <p class="cap" id="chartcap">Higher is better (0–1). Automatic score: required structure, disclaimer/non-diagnostic wording, and numeric grounding. Not clinical safety.</p>
     <div class="bars" id="bars"></div>
     <div class="legend"><span><i class="sw-base"></i>before fine-tuning</span><span><i class="sw-tuned"></i>after fine-tuning</span></div>
   </div>
@@ -146,7 +146,7 @@ const pct = x => Math.round(x*100);
   const baseHF = Math.round((A.gemma3_base.hard_fail_rate + A.medgemma_base.hard_fail_rate)/2*100);
   const tunedHF = Math.round((A.gemma3_qlora.hard_fail_rate + A.medgemma_qlora.hard_fail_rate)/2*100);
   document.getElementById('t1s').textContent =
-    `Both models broke a safety rule (no disclaimer, or diagnosis-style wording) on ${baseHF}% of cases before fine-tuning, and ${tunedHF}% after.`;
+    `Automatic hard-fail rate for disclaimer or diagnosis-style wording was ${baseHF}% before fine-tuning and ${tunedHF}% after. This does not measure clinical safety.`;
   const baseMU = A.gemma3_base.n_hallucinated_numbers + A.medgemma_base.n_hallucinated_numbers;
   const tunedMU = A.gemma3_qlora.n_hallucinated_numbers + A.medgemma_qlora.n_hallucinated_numbers;
   document.getElementById('fine').textContent =

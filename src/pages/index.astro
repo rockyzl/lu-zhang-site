@@ -15,14 +15,14 @@ const badgeClass = (status) => {
   return "priv";
 };
 
-// Featured AI systems — 5 (three live demos lead), shown as a 3-col grid (public-content-contract compliant).
+// Featured AI systems — 6 (live demos lead), shown as a 3-col grid (public-content-contract compliant).
 // Property OS is a private system overview: describe only, NO repo, NO real URL.
 const featuredSystems = [
   {
     name: "ChemGraph Loop",
     tagline: "A real agentic chemistry workflow you can run live",
     description:
-      "Ask a plain-language question about a small molecule and watch a real agent — Argonne's ChemGraph, which I reproduced and hardened — pick its own tools, run a real simulation, draw the 3D structure, and audit its result against a workflow guard. A working example of loop engineering.",
+      "Ask a plain-language question about a small molecule and watch a real agent pick tools, run a simulation, draw the 3D structure, and audit its result against a workflow guard. The upstream ChemGraph framework was created by Argonne LCF; I reproduced and hardened it and built this guarded public demo.",
     status: "Live demo",
     tags: ["agentic workflow", "LangGraph + ASE", "tool use", "workflow guard"],
     href: u(`${lp}/agent/`),
@@ -44,12 +44,25 @@ const featuredSystems = [
     name: "Preventive Health Model Lab",
     tagline: "A QLoRA fine-tuning study you can inspect end-to-end",
     description:
-      "A controlled study on a single 8GB GPU: the same preventive-health task, synthetic data, and QLoRA recipe run on Gemma 3 and its medical sibling MedGemma, scored before and after fine-tuning. Fine-tuning closed the safety and grounding gaps (unsafe hard-fails 100% → 0%); the base model's general capability mattered more than medical pretraining. Every number re-derives from a committed run.",
+      "I ran the same synthetic preventive-health task and QLoRA recipe on Gemma 3 and its medical sibling MedGemma using one 8GB GPU, then scored both before and after fine-tuning. The automatic held-out evaluation measures format, safety wording, and numeric grounding. It is nonclinical and does not establish diagnostic performance.",
     status: "Live demo",
     tags: ["QLoRA", "MedGemma / Gemma 3", "eval harness", "synthetic data"],
     href: u(`${lp}/agent/preventive-health-model-lab/`),
     external: false,
-    cta: "Live demo",
+    cta: "Inspect results",
+  },
+  {
+    name: "MIST Transfer Benchmark",
+    tagline: "A molecular transfer-learning comparison you can inspect",
+    description:
+      "I built and ran this independent QM9 study to compare a released fine-tuned MIST-28M checkpoint with Ridge, XGBoost, and MLP on the same split and 12 molecular properties. The current result is exploratory and uses one fixed split. The traditional-only ensemble reporting correction was post-specified after the first test report; the original validation-selected all-model ensemble remains supplemental.",
+    status: "Exploratory benchmark · public saved results",
+    tags: ["molecular ML", "transfer learning", "12 QM9 targets", "explicit limitations"],
+    links: [
+      { label: "Inspect saved results", href: u(`${lp}/agent/molecular-property-predictor/`), external: false },
+      { label: "Explorer", href: "https://rockyzl.github.io/mist-transfer-benchmark/", external: true },
+      { label: "Repository", href: "https://github.com/rockyzl/mist-transfer-benchmark", external: true },
+    ],
   },
   {
     name: "Scientific Agent Lab",
@@ -182,7 +195,9 @@ const caseStudies = [
             <h3>{p.name}</h3>
             <p class="one">{p.tagline}</p>
             <div class="use">{p.description}</div>
-            {p.href
+            {p.links
+              ? <div class="links">{p.links.map((link) => <a href={link.href} {...(link.external ? { target: "_blank", rel: "noopener" } : {})}>{link.label} ↗</a>)}</div>
+              : p.href
               ? <div class="links"><a href={p.href} {...(p.external ? { target: "_blank", rel: "noopener" } : {})}>{p.cta} ↗</a></div>
               : <div class="links none">Private overview · case study only</div>}
             <div class="stack">{p.tags.map((t) => <span>{t}</span>)}</div>
