@@ -1,0 +1,196 @@
+---
+import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
+import { detectLocale } from "../lib/i18n";
+
+const locale = detectLocale(Astro.url.pathname);
+const isZh = locale === "zh";
+const lp = isZh ? "/zh" : "";
+
+const badgeClass = (status) => {
+  const s = (status || "").toLowerCase();
+  if (s.includes("demo") || s.includes("live") || s.includes("在线")) return "demo";
+  if (s.includes("public") || s.includes("repo") || s.includes("公开") || s.includes("仓库")) return "repo";
+  return "priv";
+};
+
+// The two long-term lines ("rivers"). Public-safe by construction: every card below
+// reuses a project already public on the site (live demo or public repo). No internal
+// git state, no private repos, no work-in-progress.
+const rivers = [
+  {
+    key: "molecular-discovery",
+    name_en: "AI-assisted molecular discovery",
+    name_zh: "AI 辅助分子发现",
+    star_en: "Toward a trustworthy, reproducible system that reasons about molecular properties — from agentic chemistry workflows to foundation-model benchmarks to redox / battery-relevant candidates.",
+    star_zh: "朝着一个可信、可复现、能对分子性质做推理的系统 —— 从 agentic 化学工作流，到基础模型 benchmark，再到氧化还原 / 电池相关候选分子。",
+    items: [
+      {
+        name: "ChemGraph Loop",
+        tagline_en: "A real agentic chemistry workflow you can run live",
+        tagline_zh: "一个可以现场跑的真实 agentic 化学工作流",
+        desc_en: "Ask a plain-language question about a small molecule and watch a real agent pick tools, run a simulation, draw the 3D structure, and audit its result against a workflow guard. Upstream ChemGraph is by Argonne LCF; I reproduced, hardened, and built the guarded public demo.",
+        desc_zh: "用大白话问一个小分子问题，看真实 agent 挑工具、跑仿真、画 3D 结构，并对照工作流护栏审计结果。上游 ChemGraph 由 Argonne LCF 创建；我完成复现、加固和这个受保护的公开 demo。",
+        status_en: "Live demo",
+        status_zh: "在线 Demo",
+        tags: ["agentic workflow", "LangGraph + ASE", "workflow guard"],
+        href: u(`${lp}/agent/`),
+        external: false,
+        cta_en: "Try the live demo",
+        cta_zh: "试用 Demo",
+      },
+      {
+        name: "MIST Transfer Benchmark",
+        tagline_en: "A molecular transfer-learning comparison you can inspect",
+        tagline_zh: "一个可检查的分子迁移学习对比实验",
+        desc_en: "An independent QM9 study comparing a released fine-tuned MIST-28M checkpoint with Ridge, XGBoost, and MLP on the same split and 12 properties. Exploratory, one fixed split, with limitations stated up front.",
+        desc_zh: "独立设计的 QM9 研究：在同一划分和 12 个性质上，对比已发布的 fine-tuned MIST-28M 检查点与 Ridge、XGBoost、MLP。探索性、单一固定划分、局限写在前面。",
+        status_en: "Exploratory benchmark · public results",
+        status_zh: "探索性 benchmark · 公开结果",
+        tags: ["molecular ML", "transfer learning", "12 QM9 targets"],
+        href: u(`${lp}/agent/molecular-property-predictor/`),
+        external: false,
+        cta_en: "Inspect saved results",
+        cta_zh: "查看保存结果",
+      },
+      {
+        name: "Property-Aware Molecular Discovery Agent",
+        tagline_en: "A forward/reverse molecular-discovery core, in the open",
+        tagline_zh: "开源的正向/反向分子发现内核",
+        desc_en: "An early Python-first core organized around forward and reverse workflows — molecule→property dossier and target-property→candidate discovery — architected around a Query Planner, Skill Registry, and Evidence Objects rather than treating LLM output as scientific truth.",
+        desc_zh: "一个 Python-first 的早期内核，围绕正向与反向工作流组织 —— 分子→性质档案、目标性质→候选发现 —— 架构围绕 Query Planner、Skill Registry 与 Evidence Objects，而不是把 LLM 输出当作科学真理。",
+        status_en: "Public repository",
+        status_zh: "公开仓库",
+        tags: ["query planner", "skill registry", "evidence objects"],
+        href: "https://github.com/rockyzl/property-aware-molecular-discovery-agent",
+        external: true,
+        cta_en: "See on GitHub",
+        cta_zh: "在 GitHub 查看",
+      },
+      {
+        name: "Scientific Foundation Model Lab",
+        tagline_en: "Training and understanding scientific foundation models",
+        tagline_zh: "训练与理解科学基础模型",
+        desc_en: "A hands-on lab for training and understanding scientific foundation models — representation learning, property prediction, and model-literacy tooling.",
+        desc_zh: "一个动手的实验室，用于训练和理解科学基础模型 —— 表示学习、性质预测，以及模型素养工具。",
+        status_en: "Public repository",
+        status_zh: "公开仓库",
+        tags: ["foundation models", "representation learning"],
+        href: "https://github.com/rockyzl/scientific-foundation-model-lab",
+        external: true,
+        cta_en: "See on GitHub",
+        cta_zh: "在 GitHub 查看",
+      },
+    ],
+  },
+  {
+    key: "trustworthy-ai",
+    name_en: "Trustworthy & evaluable scientific AI",
+    name_zh: "可信、可评估的科学 AI",
+    star_en: "The layer below the science: when can you trust a result? Evaluation harnesses, honest limitation boundaries, deterministic reproducibility, and human-in-the-loop gates — the method that makes the discovery work above credible.",
+    star_zh: "科学下面那一层：结果什么时候能信？评估 harness、诚实的局限边界、确定性可复现，以及人在环把关 —— 让上面那条发现之河可信的方法。",
+    items: [
+      {
+        name: "Scientific Agent Lab",
+        tagline_en: "An evaluation & reproducibility layer for scientific AI",
+        tagline_zh: "科学 AI 的评估与可复现层",
+        desc_en: "Not a science assistant but the layer below it — the “when can you trust the result?” spine. A deterministic, zero-dependency pipeline that separates evidence from assumptions, flags missing required data, refuses to conclude on gaps, and ships a reproducible, harness-scored trace. No LLM in the loop.",
+        desc_zh: "不是科学助手，而是它下面那一层 —— 回答“结果什么时候能信”的骨架。一个确定性、零依赖的管道：把证据和假设分开、标出缺失的必需数据、证据不全时拒绝下结论，并交出可复现、可被评估 harness 打分的轨迹。全程无 LLM。",
+        status_en: "Public repository",
+        status_zh: "公开仓库",
+        tags: ["evaluation harness", "reproducibility", "deterministic · no LLM"],
+        href: "https://github.com/rockyzl/scientific-agent-lab",
+        external: true,
+        cta_en: "See on GitHub",
+        cta_zh: "在 GitHub 查看",
+      },
+      {
+        name: "Condition-Monitoring Agent",
+        tagline_en: "A deterministic predictive-maintenance pipeline you can run live",
+        tagline_zh: "一个可以现场跑的确定性预测维护管道",
+        desc_en: "A deterministic pipeline agent runs a 10-stage remaining-useful-life analysis on public NASA turbofan data — with human-in-the-loop decision gates, evidence-backed decision cards, and cited diagnostics. No LLM in the default path; every result re-derives from a named artifact.",
+        desc_zh: "一个确定性管道智能体在 NASA 公开涡扇发动机数据上跑 10 阶段剩余寿命分析 —— 带人在环决策把关、带证据的决策卡、带引用的诊断。默认路径无 LLM；每个结果都能回溯到具体产物。",
+        status_en: "Live demo",
+        status_zh: "在线 Demo",
+        tags: ["deterministic pipeline", "human-in-the-loop", "auditable trace"],
+        href: u(`${lp}/agent/condition-monitoring/`),
+        external: false,
+        cta_en: "Try the live demo",
+        cta_zh: "试用 Demo",
+      },
+      {
+        name: "Preventive Health Model Lab",
+        tagline_en: "A QLoRA fine-tuning study you can inspect end-to-end",
+        tagline_zh: "一个能从头看到尾的 QLoRA 微调研究",
+        desc_en: "The same synthetic preventive-health task and QLoRA recipe run on Gemma 3 and its medical sibling MedGemma on one 8GB GPU, scored before and after fine-tuning. The held-out evaluation measures format, safety wording, and numeric grounding. Nonclinical; it does not establish diagnostic performance.",
+        desc_zh: "同一个合成预防健康任务和 QLoRA 配方，在单张 8GB GPU 上分别用于 Gemma 3 与 MedGemma，微调前后各评一次。留出集评估只测格式、安全措辞和数字依据。非临床；不证明诊断性能。",
+        status_en: "Live demo",
+        status_zh: "在线 Demo",
+        tags: ["QLoRA", "MedGemma / Gemma 3", "eval harness"],
+        href: u(`${lp}/agent/preventive-health-model-lab/`),
+        external: false,
+        cta_en: "Inspect results",
+        cta_zh: "查看结果",
+      },
+    ],
+  },
+];
+---
+<Base
+  title={(isZh ? "The Lab — " : "The Lab — ") + "SciencesLoop"}
+  description={isZh
+    ? "我在建什么：两条长期主线 —— AI 辅助分子发现，以及可信、可评估的科学 AI。每个项目都可点开:live demo 或公开仓库。"
+    : "What I'm building: two long-term lines — AI-assisted molecular discovery, and trustworthy, evaluable scientific AI. Every project links to a live demo or a public repo."}
+>
+  <div class="container" style="padding-top: 3rem;">
+    <span class="eyebrow">{isZh ? "我在建什么" : "What I'm building"}</span>
+    <h1>{isZh ? "实验室" : "The Lab"}</h1>
+    <p class="lead">
+      {isZh
+        ? "我的工作沿两条长期主线展开。一条是把东西造出来，一条是证明它何时可信 —— 后者是把前者做扎实的方法。项目会来会走；这两条河不会。每个下面的项目都能点开:live demo 或公开仓库。"
+        : "My work runs along two long-term lines. One builds things; one proves when they can be trusted — and the second is the method that makes the first credible. Projects come and go; these two rivers don't. Every project below links out to a live demo or a public repo."}
+    </p>
+    <p style="color: var(--c-muted); font-size: 0.95rem; margin-top: 0.6rem;">
+      {isZh ? "想看完整的项目分组？" : "Want the full grouped portfolio?"}
+      {" "}
+      <a class="more" href={u(`${lp}/projects/`)}>{isZh ? "全部项目 →" : "All projects →"}</a>
+    </p>
+
+    {rivers.map((r, ri) => (
+      <section style="margin-top: 3rem;">
+        <div class="section-head">
+          <div class="section-title">
+            <span class="eyebrow">{`0${ri + 1} — ` + (isZh ? "主线" : "River")}</span>
+            <h2 style="margin: 0;">{isZh ? r.name_zh : r.name_en}</h2>
+          </div>
+          <span class="more">{r.items.length}</span>
+        </div>
+        <p style="color: var(--c-muted); font-size: 0.98rem; margin-top: -0.3rem; max-width: 70ch;">{isZh ? r.star_zh : r.star_en}</p>
+        <div class="featured-grid">
+          {r.items.map((p) => {
+            const Outer = p.href ? "a" : "div";
+            const outerProps = p.href
+              ? (p.external
+                  ? { href: p.href, target: "_blank", rel: "noopener", class: "project-card" }
+                  : { href: p.href, class: "project-card" })
+              : { class: "project-card" };
+            const status = isZh ? p.status_zh : p.status_en;
+            const cta = isZh ? p.cta_zh : p.cta_en;
+            return (
+              <Outer {...outerProps}>
+                <span class={`badge ${badgeClass(status)}`}>● {status}</span>
+                <div class="name">{p.name}</div>
+                <div class="tagline">{isZh ? p.tagline_zh : p.tagline_en}</div>
+                <div class="description">{isZh ? p.desc_zh : p.desc_en}</div>
+                {cta && <div class="links">{cta} ↗</div>}
+                <div class="tags">
+                  {p.tags.map((tg) => <span class="tag">{tg}</span>)}
+                </div>
+              </Outer>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+  </div>
+</Base>
