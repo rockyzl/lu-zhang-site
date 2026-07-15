@@ -82,6 +82,13 @@ scripts/
   corresponding_overrides.json      whitelist of confirmed corresponding-author papers
 ```
 
+## Public live demos
+
+Live demos are indexed in one place: `src/data/demos.ts`. Home, Projects,
+Agent, and Lab derive their demo cards from that registry. See
+[`docs/demo-registry.md`](docs/demo-registry.md) before adding or changing a
+public demo.
+
 ## Deploy
 
 The repo is private and deploys through Vercel.

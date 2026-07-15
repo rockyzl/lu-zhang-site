@@ -25,6 +25,15 @@ must avoid overlapping writes.
 - Do not publish or submit public/job materials with fabricated claims. Style
   and emphasis may change; facts must remain conservative and sourceable.
 
+## Live demo registry and public indexes
+
+Read `docs/demo-registry.md` before adding or changing a public Demo. The
+single source of truth is `src/data/demos.ts`; Home, Projects, Agent, and Lab
+derive their live-demo cards from it. Do not manually duplicate a live-demo card
+on those pages. A demo can have an `articlePath` and `repoUrl`; integrate the
+corresponding public article commit before publishing a registry link so it
+cannot produce a 404.
+
 ## Develop
 
 ```bash
