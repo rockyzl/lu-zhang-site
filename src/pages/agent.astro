@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import ChemGraphDemo from "../components/ChemGraphDemo.astro";
 import { u } from "../lib/url";
+import { liveDemos } from "../data/demos";
 ---
 
 <Base
@@ -13,30 +14,12 @@ import { u } from "../lib/url";
 
     <aside class="cm-more">
       <span class="cm-more-eyebrow">More live demos</span>
-      <a href={u("/agent/condition-monitoring/")} class="cm-more-card">
-        <strong>Condition Monitoring Pipeline Agent →</strong>
-        <span>
-          A deterministic pipeline agent with human-in-the-loop decision gates:
-          10-stage RUL analysis on public NASA data, evidence-backed decision
-          cards, cited diagnostics — no LLM in the default path.
-        </span>
-      </a>
-      <a href={u("/agent/preventive-health-model-lab/")} class="cm-more-card" style="margin-top:12px">
-        <strong>Preventive Health Model Lab →</strong>
-        <span>
-          A controlled QLoRA fine-tuning study on one 8GB GPU: does medical
-          pretraining (MedGemma) beat its base family (Gemma 3) on preventive-health
-          reasoning? Synthetic data, safety-aware evaluation, honest results.
-        </span>
-      </a>
-      <a href={u("/agent/redox-rfb-predictor/")} class="cm-more-card" style="margin-top:12px">
-        <strong>Redox RFB Predictor →</strong>
-        <span>
-          Start with a SMILES or chemical name, inspect an editable RDKit-rendered
-          structure, then confirm it before running a fast aqueous organic redox
-          predictor on RedDB's DFT reference scale.
-        </span>
-      </a>
+      {liveDemos.filter((demo) => demo.id !== "chemgraph-loop").map((demo, index) => (
+        <a href={u(demo.path)} class="cm-more-card" style={index ? "margin-top:12px" : undefined}>
+          <strong>{demo.title.en} →</strong>
+          <span>{demo.summary.en}</span>
+        </a>
+      ))}
     </aside>
   </div>
 </Base>

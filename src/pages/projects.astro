@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { u } from "../lib/url";
 import { detectLocale } from "../lib/i18n";
+import { liveDemos } from "../data/demos";
 
 const locale = detectLocale(Astro.url.pathname);
 const isZh = locale === "zh";
@@ -118,66 +119,20 @@ const groups = [
     sub_en: "Foundation models and domain agents for scientific work.",
     sub_zh: "面向科学工作的基础模型与领域智能体。",
     items: [
-      {
-        name: "ChemGraph Loop — live agentic chemistry",
-        tagline_en: "A real agentic chemistry workflow, live in the browser",
-        tagline_zh: "浏览器里可跑的真实 agentic 化学工作流",
-        desc_en: "A natural-language chat demo backed by the real ChemGraph agent (Argonne LCF, LangGraph + ASE) that I reproduced and hardened. It resolves a molecule via PubChem, builds a 3D structure, runs a real simulation (single-point energy and dipole live; vibrations, IR spectra, and thermochemistry from precomputed real runs), and audits the result against a workflow guard. An LLM intent router resolves any chemical name or formula, and out-of-scope requests get a clarifying reply instead of an error.",
-        desc_zh: "一个自然语言聊天 demo，后端是我复现并加固过的真实 ChemGraph agent（Argonne LCF，LangGraph + ASE）。它经 PubChem 识别分子、生成 3D 结构、跑真实仿真（单点能与偶极现算；振动、IR 谱、热化学用预计算的真实运行），并对照工作流护栏审计结果。LLM 意图路由能解析任意化学名或分子式，超出范围的请求会给出澄清回复而非报错。",
+      ...liveDemos.map((demo) => ({
+        name: isZh ? demo.title.zh : demo.title.en,
+        tagline_en: demo.tagline.en,
+        tagline_zh: demo.tagline.zh,
+        desc_en: demo.summary.en,
+        desc_zh: demo.summary.zh,
         status_en: "Live demo",
         status_zh: "在线 Demo",
-        tags: ["agentic workflow", "LangGraph + ASE", "3D structure", "workflow guard"],
-        gradient: "from-teal to-navy",
-        href: u(`${lp}/agent/`),
+        tags: demo.tags,
+        href: u(`${lp}${demo.path}`),
         external: false,
         cta_en: "Try the live demo",
         cta_zh: "试用 Demo",
-      },
-      {
-        name: "Redox RFB Predictor — structure-confirmed molecular ML",
-        tagline_en: "A public redox-potential demo that checks molecular identity before prediction",
-        tagline_zh: "在预测前先确认分子身份的公开氧化还原电位 Demo",
-        desc_en: "A live molecular-machine-learning workflow for aqueous organic redox potential: enter a SMILES or chemical name, inspect PubChem-backed name options, review an RDKit-rendered and editable structure, then explicitly confirm it before the fixed Random Forest predictor runs. The result is on RedDB's DFT-derived scale and the page marks its quinone/aza-aromatic domain boundary.",
-        desc_zh: "一个面向水系有机分子氧化还原电位的在线 molecular-machine-learning 工作流：输入 SMILES 或化学名称，先查看 PubChem 支持的名称选项，再检查 RDKit 绘制、可编辑的结构，确认后才调用固定 Random Forest 预测器。结果在 RedDB 的 DFT 派生尺度上，页面明确标出 quinone/aza-aromatic 训练域边界。",
-        status_en: "Live demo · public repository",
-        status_zh: "在线 Demo · 公开仓库",
-        tags: ["redox potential", "RDKit", "PubChem", "human confirmation", "flow batteries"],
-        gradient: "from-teal to-navy",
-        href: u(`${lp}/agent/redox-rfb-predictor/`),
-        external: false,
-        cta_en: "Try the live demo",
-        cta_zh: "试用 Demo",
-      },
-      {
-        name: "Condition-Monitoring Pipeline Agent",
-        tagline_en: "A deterministic predictive-maintenance agent, live in the browser",
-        tagline_zh: "浏览器里可跑的确定性预测维护 agent",
-        desc_en: "A deterministic pipeline agent (no LLM in the default path) that runs a 10-stage remaining-useful-life analysis on public NASA C-MAPSS turbofan data: ingest → clean → model → predict → diagnose, with human-in-the-loop decision gates, a TF-IDF-retrieved maintenance knowledge base for cited diagnostics, and a fully auditable execution trace where every decision-card signal re-derives from a named artifact.",
-        desc_zh: "一个确定性管道 agent（默认路径无 LLM），在 NASA C-MAPSS 公开涡扇发动机数据上跑 10 阶段剩余寿命分析：载入 → 清理 → 建模 → 预测 → 诊断，带人在环决策把关、TF-IDF 检索的维护知识库（诊断带引用），以及完全可审计的执行轨迹（每条决策卡信号都能回溯到具体产物字段）。",
-        status_en: "Live demo",
-        status_zh: "在线 Demo",
-        tags: ["deterministic pipeline", "predictive maintenance", "human-in-the-loop", "auditable trace"],
-        gradient: "from-teal to-navy",
-        href: u(`${lp}/agent/condition-monitoring/`),
-        external: false,
-        cta_en: "Try the live demo",
-        cta_zh: "试用 Demo",
-      },
-      {
-        name: "Preventive Health Model Lab",
-        tagline_en: "A QLoRA fine-tuning study you can inspect, live in the browser",
-        tagline_zh: "浏览器里可查看的 QLoRA 微调研究",
-        desc_en: "A controlled fine-tuning study run on a single 8GB GPU: the same preventive-health task, synthetic training data, and QLoRA recipe applied to Gemma 3 and its medical sibling MedGemma, scored by an eval harness before and after fine-tuning. Fine-tuning closed the safety and grounding gaps (unsafe hard-fails 100% → 0%), and the base model's general capability mattered more than medical pretraining. Results are precomputed and read-only; every number re-derives from a committed run.",
-        desc_zh: "在单张 8GB GPU 上做的对照微调研究:同一个预防健康任务、同一批合成训练数据、同一套 QLoRA 配方,分别应用到 Gemma 3 和它的医学版 MedGemma 上,由评估 harness 在微调前后各评一次。微调补上了安全与依据的缺口(不安全的硬失败 100% → 0%),而基座模型本身的通用能力比医学预训练更关键。结果为预计算、只读;每个数字都能回溯到一次已提交的运行。",
-        status_en: "Live demo",
-        status_zh: "在线 Demo",
-        tags: ["QLoRA", "MedGemma / Gemma 3", "eval harness", "synthetic data"],
-        gradient: "from-teal to-navy",
-        href: u(`${lp}/agent/preventive-health-model-lab/`),
-        external: false,
-        cta_en: "Try the live demo",
-        cta_zh: "试用 Demo",
-      },
+      })),
       {
         name: "Scientific Foundation Model Lab",
         tagline_en: "Training and understanding scientific foundation models",

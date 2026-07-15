@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import ChemGraphDemo from "../../components/ChemGraphDemo.astro";
 import { u } from "../../lib/url";
+import { liveDemos } from "../../data/demos";
 ---
 
 <Base
@@ -13,27 +14,12 @@ import { u } from "../../lib/url";
 
     <aside class="cm-more">
       <span class="cm-more-eyebrow">更多在线演示</span>
-      <a href={u("/zh/agent/condition-monitoring/")} class="cm-more-card">
-        <strong>设备状态监测管道智能体 →</strong>
-        <span>
-          确定性管道智能体 + 人工决策把关：在 NASA 公开数据上跑 10
-          阶段剩余寿命分析，交回带证据和引用的决策卡——默认路径无 LLM。
-        </span>
-      </a>
-      <a href={u("/zh/agent/preventive-health-model-lab/")} class="cm-more-card" style="margin-top:12px">
-        <strong>预防健康模型实验室 →</strong>
-        <span>
-          8GB 单卡上的受控 QLoRA 微调研究：医疗预训练（MedGemma）相比同底座的
-          Gemma 3，对预防健康推理是否更强？合成数据、安全导向评估、诚实结果。
-        </span>
-      </a>
-      <a href={u("/zh/agent/redox-rfb-predictor/")} class="cm-more-card" style="margin-top:12px">
-        <strong>液流电池氧化还原电位预测器 →</strong>
-        <span>
-          输入 SMILES 或化学名称，先检查可编辑的 RDKit 二维结构并确认，再运行一个公开、
-          快速的水系有机分子氧化还原电位预测器。输出在 RedDB DFT 参考尺度上；页面明确给出适用域与实验限制。
-        </span>
-      </a>
+      {liveDemos.filter((demo) => demo.id !== "chemgraph-loop").map((demo, index) => (
+        <a href={u(`/zh${demo.path}`)} class="cm-more-card" style={index ? "margin-top:12px" : undefined}>
+          <strong>{demo.title.zh} →</strong>
+          <span>{demo.summary.zh}</span>
+        </a>
+      ))}
     </aside>
   </div>
 </Base>

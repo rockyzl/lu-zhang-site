@@ -3,6 +3,7 @@ import Base from "../../layouts/Base.astro";
 import { u } from "../../lib/url";
 import { detectLocale } from "../../lib/i18n";
 import { getFeaturedBlogPosts } from "../../lib/blog";
+import { liveDemos } from "../../data/demos";
 
 const locale = detectLocale(Astro.url.pathname);
 const lp = locale === "zh" ? "/zh" : "";
@@ -16,39 +17,16 @@ const badgeClass = (status) => {
 };
 
 const featuredSystems = [
-  {
-    name: "ChemGraph Loop",
-    tagline: "一个可以现场跑的真实 agentic 化学工作流",
-    description:
-      "用大白话问一个小分子的问题，看真实 agent —— Argonne 的 ChemGraph，我复现并加固过 —— 自己挑工具、跑真实仿真、画出 3D 结构，并对照工作流护栏审计结果。这是 loop engineering 的一个可运行例子。",
+  ...liveDemos.filter((demo) => demo.featured).map((demo) => ({
+    name: demo.title.zh,
+    tagline: demo.tagline.zh,
+    description: demo.summary.zh,
     status: "在线 Demo",
-    tags: ["agentic workflow", "LangGraph + ASE", "tool use", "workflow guard"],
-    href: u(`${lp}/agent/`),
+    tags: demo.tags,
+    href: u(`${lp}${demo.path}`),
     external: false,
     cta: "在线 Demo",
-  },
-  {
-    name: "设备状态监测智能体",
-    tagline: "一个可以现场跑的确定性预测维护管道",
-    description:
-      "打一句话，一个确定性管道智能体就在 NASA 公开涡扇发动机数据上跑完 10 阶段剩余寿命分析 —— 带人在环决策把关、带证据的决策卡、带引用的诊断。默认路径无 LLM；每个结果都能回溯到具体产物字段。",
-    status: "在线 Demo",
-    tags: ["deterministic pipeline", "predictive maintenance", "human-in-the-loop", "auditable trace"],
-    href: u(`${lp}/agent/condition-monitoring/`),
-    external: false,
-    cta: "在线 Demo",
-  },
-  {
-    name: "Preventive Health Model Lab",
-    tagline: "一个能从头看到尾的 QLoRA 微调研究",
-    description:
-      "在单张 8GB GPU 上做的对照实验:同一个预防健康任务、同一批合成数据、同一套 QLoRA 配方,分别跑在 Gemma 3 和它的医学版 MedGemma 上,微调前后各评一次。微调补上了安全与依据的缺口(不安全的硬失败 100% → 0%);而基座模型本身的通用能力,比医学预训练更关键。每个数字都能回溯到一次已提交的运行。",
-    status: "在线 Demo",
-    tags: ["QLoRA", "MedGemma / Gemma 3", "评估 harness", "合成数据"],
-    href: u(`${lp}/agent/preventive-health-model-lab/`),
-    external: false,
-    cta: "在线 Demo",
-  },
+  })),
   {
     name: "Scientific Agent Lab",
     tagline: "科学 AI 的评估与可复现层",
