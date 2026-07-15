@@ -34,6 +34,9 @@ on those pages. A demo can have an `articlePath` and `repoUrl`; integrate the
 corresponding public article commit before publishing a registry link so it
 cannot produce a 404.
 
+For a new demo plus its public English/Chinese project article, invoke the
+`sciencesloop-demo-article` skill.
+
 ## Develop
 
 ```bash

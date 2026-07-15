@@ -17,6 +17,8 @@ Before adding or changing a public demo, read
 single source of truth for live-demo cards across Home, Projects, Agent, and
 Lab. Do not manually duplicate a live-demo card on those pages. Add the route,
 then update the registry, then build and verify every generated surface.
+When a new demo also needs a public project article, use the
+`sciencesloop-demo-article` skill.
 
 Use the shared skill `scientificloop-writing` for SciencesLoop posts, LinkedIn
 drafts, and public AI-for-science writing.
