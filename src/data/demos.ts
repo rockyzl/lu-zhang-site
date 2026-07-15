@@ -55,7 +55,7 @@ export const demos: Demo[] = [
     path: "/agent/molecular-property-predictor/",
     articlePath: "/blog/2026-07-15-can-a-fine-tuned-molecular-foundation-model-match-engineered-baselines/",
     featured: false,
-    title: { en: "Molecular Property Predictor", zh: "分子性质预测器" },
+    title: { en: "MIST Transfer Benchmark", zh: "MIST 迁移学习 Benchmark" },
     tagline: { en: "Compare structure-based ML with a fine-tuned molecular foundation model", zh: "比较结构机器学习与微调分子基础模型" },
     summary: {
       en: "Enter a SMILES string and compare fixed Ridge, XGBoost, MLP, and fine-tuned MIST-28M predictors on QM9 DFT property labels.",

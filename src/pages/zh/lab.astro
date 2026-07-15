@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import { u } from "../../lib/url";
 import { detectLocale } from "../../lib/i18n";
+import { liveDemos } from "../../data/demos";
 
 const locale = detectLocale(Astro.url.pathname);
 const isZh = locale === "zh";
@@ -25,34 +26,20 @@ const rivers = [
     star_en: "Toward a trustworthy, reproducible system that reasons about molecular properties — from agentic chemistry workflows to foundation-model benchmarks to redox / battery-relevant candidates.",
     star_zh: "朝着一个可信、可复现、能对分子性质做推理的系统 —— 从 agentic 化学工作流，到基础模型 benchmark，再到氧化还原 / 电池相关候选分子。",
     items: [
-      {
-        name: "ChemGraph Loop",
-        tagline_en: "A real agentic chemistry workflow you can run live",
-        tagline_zh: "一个可以现场跑的真实 agentic 化学工作流",
-        desc_en: "Ask a plain-language question about a small molecule and watch a real agent pick tools, run a simulation, draw the 3D structure, and audit its result against a workflow guard. Upstream ChemGraph is by Argonne LCF; I reproduced, hardened, and built the guarded public demo.",
-        desc_zh: "用大白话问一个小分子问题，看真实 agent 挑工具、跑仿真、画 3D 结构，并对照工作流护栏审计结果。上游 ChemGraph 由 Argonne LCF 创建；我完成复现、加固和这个受保护的公开 demo。",
+      ...liveDemos.filter((demo) => ["chemgraph-loop", "molecular-property-predictor", "redox-rfb-predictor"].includes(demo.id)).map((demo) => ({
+        name: isZh ? demo.title.zh : demo.title.en,
+        tagline_en: demo.tagline.en,
+        tagline_zh: demo.tagline.zh,
+        desc_en: demo.summary.en,
+        desc_zh: demo.summary.zh,
         status_en: "Live demo",
         status_zh: "在线 Demo",
-        tags: ["agentic workflow", "LangGraph + ASE", "workflow guard"],
-        href: u(`${lp}/agent/`),
+        tags: demo.tags,
+        href: u(`${lp}${demo.path}`),
         external: false,
         cta_en: "Try the live demo",
         cta_zh: "试用 Demo",
-      },
-      {
-        name: "MIST Transfer Benchmark",
-        tagline_en: "A molecular transfer-learning comparison you can inspect",
-        tagline_zh: "一个可检查的分子迁移学习对比实验",
-        desc_en: "An independent QM9 study comparing a released fine-tuned MIST-28M checkpoint with Ridge, XGBoost, and MLP on the same split and 12 properties. Exploratory, one fixed split, with limitations stated up front.",
-        desc_zh: "独立设计的 QM9 研究：在同一划分和 12 个性质上，对比已发布的 fine-tuned MIST-28M 检查点与 Ridge、XGBoost、MLP。探索性、单一固定划分、局限写在前面。",
-        status_en: "Exploratory benchmark · public results",
-        status_zh: "探索性 benchmark · 公开结果",
-        tags: ["molecular ML", "transfer learning", "12 QM9 targets"],
-        href: u(`${lp}/agent/molecular-property-predictor/`),
-        external: false,
-        cta_en: "Inspect saved results",
-        cta_zh: "查看保存结果",
-      },
+      })),
       {
         name: "Property-Aware Molecular Discovery Agent",
         tagline_en: "A forward/reverse molecular-discovery core, in the open",
