@@ -1,6 +1,7 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import MistTransferDemo from "../../../components/MistTransferDemo.astro";
+import { u } from "../../../lib/url";
 ---
 
 <Base
@@ -9,9 +10,17 @@ import MistTransferDemo from "../../../components/MistTransferDemo.astro";
 >
   <div class="container mtp-page">
     <MistTransferDemo locale="zh" />
+    <aside class="article-link" aria-label="相关案例文章">
+      <strong>阅读完整 Case Study</strong>
+      <span>从效果较弱的 Ridge baseline 到传统 ensemble，为什么主要比较不混入 MIST，以及下一阶段论文 protocol 会验证什么。</span>
+      <a href={u("/zh/blog/2026-07-15-can-a-fine-tuned-molecular-foundation-model-match-engineered-baselines-zh/")}>打开文章 →</a>
+    </aside>
   </div>
 </Base>
 
 <style>
   .mtp-page { padding-top: 38px; padding-bottom: 64px; }
+  .article-link { margin-top: 26px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; display: grid; gap: 8px; background: var(--card); }
+  .article-link span { color: var(--muted); line-height: 1.6; }
+  .article-link a { width: fit-content; font-weight: 700; }
 </style>
