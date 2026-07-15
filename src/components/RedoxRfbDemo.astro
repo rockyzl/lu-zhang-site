@@ -6,25 +6,35 @@ const zh = locale === "zh";
 const copy = zh ? {
   eyebrow: "独立研究 · 水系液流电池",
   title: "预测有机分子的氧化还原电位",
-  lead: "输入 SMILES 或化学名称。名称会先由 LLM 转成候选 SMILES、再由 RDKit 验证，之后调用在线 RDKit + Morgan fingerprint 模型预测电位。",
+  lead: "输入 SMILES 或化学名称。名称助手会先给出可能的名称选项；结构来自 PubChem（找不到时才由 LLM 提议），随后由 RDKit 验证、绘制并由你确认。",
   inputType: "输入方式",
   smiles: "SMILES",
-  chemicalName: "化学名称（LLM 解析）",
+  chemicalName: "化学名称（结构助手）",
   label: "SMILES",
   nameLabel: "化学名称",
   hint: "例如：O=C1C=CC(=O)C=C1（对苯醌）",
   nameHint: "例如：p-benzoquinone、anthraquinone 或 1,4-benzoquinone",
+  nameAssistant: "名称助手",
+  nameAssistantLead: "先选择一个可能的标准名称，再查看任何结构。",
+  originalName: "保留原输入",
   submit: "预览结构",
-  resolving: "LLM 正在解析名称…",
+  resolving: "名称助手正在查找选项…",
   previewing: "RDKit 正在生成结构…",
   confirmTitle: "请确认分子结构",
   confirmLead: "请检查二维结构和 canonical SMILES。确认后才会运行电位预测。",
   confirm: "确认结构并预测",
   edit: "返回修改输入",
   structure: "二维分子结构",
+  structureSource: "结构来源",
+  editableSmiles: "编辑 SMILES",
+  redraw: "重新绘制编辑后的结构",
+  editAssistant: "结构编辑助手",
+  editAssistantLead: "用自然语言描述你想要的结构变化；助手会提出最多 3 个候选，你仍可选择、编辑并确认。",
+  editPlaceholder: "例如：把这个分子改成 oxoammonium form",
+  editSend: "提出结构选项",
   howTitle: "这个流程怎样工作？",
   howSteps: [
-    ["1. 输入", "你可以直接输入 SMILES；也可以输入化学名称。名称模式中，LLM 只负责提出一个候选 SMILES。"],
+    ["1. 输入", "你可以直接输入 SMILES；也可以输入化学名称。名称助手先给出可能的名称选项。"],
     ["2. 结构确认", "RDKit 解析并标准化该结构，生成二维图。你检查图和 canonical SMILES 后，主动确认。"],
     ["3. 电位预测", "确认后，RDKit 描述符和 Morgan fingerprint 被送入固定模型，输出 RedDB DFT 电位尺度上的预测值。"],
   ],
@@ -36,7 +46,7 @@ const copy = zh ? {
     ["机器学习", "300 棵决策树分别给出估计，再取平均"],
     ["输出", "水系氧化还原电位，V vs SHE（RedDB DFT 尺度）"],
   ],
-  llmRole: "LLM 的角色仅是把化学名称转成候选 SMILES；它不预测电位，也不替代结构确认。",
+  llmRole: "PubChem 是名称到结构的首选来源；只有 PubChem 找不到时，LLM 才会提出候选。LLM 不预测电位，也不替代结构确认。",
   loading: "正在预测…",
   resolved: "用于预测的 SMILES",
   value: "预测氧化还原电位",
@@ -52,25 +62,35 @@ const copy = zh ? {
 } : {
   eyebrow: "Independent research · aqueous flow batteries",
   title: "Predict an organic molecule's redox potential",
-  lead: "Enter a SMILES string or chemical name. A name is first converted by an LLM to a candidate SMILES and validated with RDKit, then sent to the online RDKit + Morgan-fingerprint predictor on RedDB's DFT reference scale.",
+  lead: "Enter a SMILES string or chemical name. The structure assistant first offers possible name matches; structures come from PubChem when available (with LLM fallback), then RDKit validates, draws, and you confirm them.",
   inputType: "Input type",
   smiles: "SMILES",
-  chemicalName: "Chemical name (LLM resolution)",
+  chemicalName: "Chemical name (structure assistant)",
   label: "SMILES",
   nameLabel: "Chemical name",
   hint: "Example: O=C1C=CC(=O)C=C1 (p-benzoquinone)",
   nameHint: "Example: p-benzoquinone, anthraquinone, or 1,4-benzoquinone",
+  nameAssistant: "Name assistant",
+  nameAssistantLead: "Choose a possible standardized name before viewing any structure.",
+  originalName: "Keep my original input",
   submit: "Preview structure",
-  resolving: "LLM is resolving the name…",
+  resolving: "The name assistant is finding options…",
   previewing: "RDKit is rendering the structure…",
   confirmTitle: "Confirm the molecular structure",
   confirmLead: "Check the 2D structure and canonical SMILES. Prediction starts only after confirmation.",
   confirm: "Confirm structure and predict",
   edit: "Edit input",
   structure: "2D molecular structure",
+  structureSource: "Structure source",
+  editableSmiles: "Edit SMILES",
+  redraw: "Render edited structure",
+  editAssistant: "Structure editing assistant",
+  editAssistantLead: "Describe a structure change in plain language. The assistant may propose up to three candidates; you still select, edit, and confirm one.",
+  editPlaceholder: "For example: convert this molecule to the oxoammonium form",
+  editSend: "Propose structure options",
   howTitle: "How this works",
   howSteps: [
-    ["1. Enter", "You can enter a SMILES string directly, or a chemical name. In name mode, the LLM only proposes a candidate SMILES."],
+    ["1. Enter", "You can enter a SMILES string directly, or a chemical name. In name mode, the assistant first offers possible name matches."],
     ["2. Confirm structure", "RDKit parses and canonicalizes the structure, then renders a 2D diagram. You inspect the diagram and canonical SMILES before explicitly confirming it."],
     ["3. Predict potential", "After confirmation, RDKit descriptors and a Morgan fingerprint go to the fixed model, which returns a prediction on RedDB's DFT potential scale."],
   ],
@@ -82,7 +102,7 @@ const copy = zh ? {
     ["Machine learning", "300 decision trees each estimate a value; their estimates are averaged"],
     ["Output", "Aqueous redox potential, V vs SHE (RedDB DFT scale)"],
   ],
-  llmRole: "The LLM only converts a chemical name into a candidate SMILES. It does not predict potential and does not replace structure confirmation.",
+  llmRole: "PubChem is the preferred name-to-structure source; the LLM proposes candidates only if PubChem cannot find a name. The LLM does not predict potential and does not replace structure confirmation.",
   loading: "Predicting…",
   resolved: "SMILES used for prediction",
   value: "Predicted redox potential",
@@ -116,17 +136,38 @@ const copy = zh ? {
     <p class="rrp-status" data-redox-status aria-live="polite"></p>
   </form>
 
+  <section class="rrp-name-chat" data-redox-name-chat hidden aria-live="polite">
+    <p class="rrp-result-label">{copy.nameAssistant}</p>
+    <p>{copy.nameAssistantLead}</p>
+    <div class="rrp-option-list" data-redox-name-options></div>
+  </section>
+
   <section class="rrp-confirm" data-redox-confirm hidden aria-live="polite">
     <div>
       <p class="rrp-result-label">{copy.confirmTitle}</p>
       <p class="rrp-confirm-lead">{copy.confirmLead}</p>
       <p class="rrp-resolved"><span>{copy.resolved}:</span> <code data-redox-confirm-smiles></code></p>
+      <p class="rrp-source" data-redox-source></p>
+      <div class="rrp-option-list" data-redox-candidates></div>
+      <label class="rrp-edit-label" for="redox-edit-smiles">{copy.editableSmiles}</label>
+      <input id="redox-edit-smiles" data-redox-edit-smiles maxlength="512" autocomplete="off" spellcheck="false" />
       <div class="rrp-actions">
         <button type="button" data-redox-confirm-button>{copy.confirm}</button>
+        <button type="button" class="rrp-secondary" data-redox-redraw>{copy.redraw}</button>
         <button type="button" class="rrp-secondary" data-redox-edit>{copy.edit}</button>
       </div>
     </div>
     <figure><img data-redox-confirm-image alt={copy.structure} /><figcaption>{copy.structure}</figcaption></figure>
+  </section>
+
+  <section class="rrp-edit-chat" data-redox-edit-chat hidden>
+    <p class="rrp-result-label">{copy.editAssistant}</p>
+    <p>{copy.editAssistantLead}</p>
+    <p class="rrp-chat-reply" data-redox-chat-reply aria-live="polite"></p>
+    <div class="rrp-option-list" data-redox-chat-options></div>
+    <label for="redox-chat-instruction">{copy.editAssistant}</label>
+    <input id="redox-chat-instruction" data-redox-chat-input maxlength="400" autocomplete="off" placeholder={copy.editPlaceholder} />
+    <button type="button" data-redox-chat-send>{copy.editSend}</button>
   </section>
 
   <section class="rrp-result" data-redox-result hidden aria-live="polite">
@@ -168,7 +209,7 @@ const copy = zh ? {
   .rrp-eyebrow { margin: 0 0 .55rem; color: #147a49; font-size: .8rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
   .rrp h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.06; letter-spacing: -.04em; }
   .rrp-lead { max-width: 720px; color: #4b5966; font-size: 1.08rem; line-height: 1.65; }
-  .rrp-card, .rrp-confirm, .rrp-result, .rrp-how, .rrp-model, .rrp-note { border: 1px solid #dbe5df; border-radius: 16px; padding: 1.35rem; margin-top: 1.5rem; background: #fff; box-shadow: 0 9px 26px rgba(17, 55, 38, .06); }
+  .rrp-card, .rrp-name-chat, .rrp-confirm, .rrp-edit-chat, .rrp-result, .rrp-how, .rrp-model, .rrp-note { border: 1px solid #dbe5df; border-radius: 16px; padding: 1.35rem; margin-top: 1.5rem; background: #fff; box-shadow: 0 9px 26px rgba(17, 55, 38, .06); }
   .rrp label, .rrp-result-label { display: block; font-weight: 750; margin-bottom: .55rem; }
   .rrp input, .rrp select { box-sizing: border-box; width: 100%; border: 1px solid #b8c9bd; border-radius: 9px; padding: .85rem; margin-bottom: .75rem; background: #fff; }
   .rrp input { font: 500 .96rem ui-monospace, SFMono-Regular, Menlo, monospace; }
@@ -176,6 +217,12 @@ const copy = zh ? {
   .rrp button { border: 0; border-radius: 9px; background: #147a49; color: white; font-weight: 750; padding: .75rem 1.05rem; cursor: pointer; }
   .rrp button:disabled { cursor: wait; opacity: .7; }
   .rrp-actions { display: flex; flex-wrap: wrap; gap: .7rem; }
+  .rrp-option-list { display: flex; flex-wrap: wrap; gap: .55rem; margin: .7rem 0; }
+  .rrp-option-list button { background: #edf4ef; color: #22533b; text-align: left; padding: .55rem .7rem; font-size: .85rem; }
+  .rrp-option-list button[aria-pressed="true"] { background: #147a49; color: #fff; }
+  .rrp-source, .rrp-chat-reply { color: #536159; font-size: .88rem; line-height: 1.45; }
+  .rrp-edit-label { margin-top: .9rem; }
+  .rrp-edit-chat { background: #fbfdfb; box-shadow: none; }
   .rrp .rrp-secondary { background: #edf4ef; color: #24533a; }
   .rrp-confirm { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(220px, .75fr); align-items: center; gap: 1.5rem; }
   .rrp-confirm-lead { color: #526259; margin-top: 0; line-height: 1.5; }
@@ -220,23 +267,77 @@ const copy = zh ? {
   const hint = document.querySelector("[data-redox-hint]");
   const button = document.querySelector("[data-redox-submit]");
   const status = document.querySelector("[data-redox-status]");
+  const nameChat = document.querySelector("[data-redox-name-chat]");
+  const nameOptions = document.querySelector("[data-redox-name-options]");
   const confirm = document.querySelector("[data-redox-confirm]");
   const confirmButton = document.querySelector("[data-redox-confirm-button]");
   const editButton = document.querySelector("[data-redox-edit]");
+  const redrawButton = document.querySelector("[data-redox-redraw]");
   const confirmSmiles = document.querySelector("[data-redox-confirm-smiles]");
+  const editSmiles = document.querySelector("[data-redox-edit-smiles]");
+  const source = document.querySelector("[data-redox-source]");
+  const candidates = document.querySelector("[data-redox-candidates]");
   const confirmImage = document.querySelector("[data-redox-confirm-image]");
+  const editChat = document.querySelector("[data-redox-edit-chat]");
+  const chatInput = document.querySelector("[data-redox-chat-input]");
+  const chatSend = document.querySelector("[data-redox-chat-send]");
+  const chatReply = document.querySelector("[data-redox-chat-reply]");
+  const chatOptions = document.querySelector("[data-redox-chat-options]");
   const result = document.querySelector("[data-redox-result]");
   const value = document.querySelector("[data-redox-value]");
   const model = document.querySelector("[data-redox-model]");
   const target = document.querySelector("[data-redox-target]");
   const resultSmiles = document.querySelector("[data-redox-result-smiles]");
   const resultImage = document.querySelector("[data-redox-result-image]");
-  let confirmedStructure = null;
+  let selectedStructure = null;
 
   const endpoint = (path) => new URL(path, `${apiBaseUrl.replace(/\/$/, "")}/`).href;
   const setStructureImage = (image, svg) => {
     image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
   };
+  const requestJson = async (path, body) => {
+    const response = await fetch(endpoint(path), {
+      method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body),
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || data.schema_version !== "redox-rfb-live-v1") throw new Error(data?.detail || "request failed");
+    return data;
+  };
+
+  function candidateButton(candidate, selected, onClick) {
+    const item = document.createElement("button");
+    item.type = "button";
+    item.textContent = candidate.label || candidate.smiles;
+    item.setAttribute("aria-pressed", String(selected));
+    item.addEventListener("click", onClick);
+    return item;
+  }
+
+  function renderCandidateChoices(list, active, mount) {
+    mount.replaceChildren(...list.map((candidate) => candidateButton(
+      candidate,
+      candidate.smiles === active.smiles,
+      () => showStructure(candidate, list),
+    )));
+  }
+
+  function showStructure(candidate, list = [candidate]) {
+    selectedStructure = candidate;
+    confirmSmiles.textContent = candidate.smiles;
+    editSmiles.value = candidate.smiles;
+    source.textContent = `${copy.structureSource}: ${candidate.source || "RDKit validation"}`;
+    setStructureImage(confirmImage, candidate.svg);
+    renderCandidateChoices(list, candidate, candidates);
+    confirm.hidden = false;
+    editChat.hidden = false;
+    result.hidden = true;
+  }
+
+  function manualCandidate(structure) {
+    return {
+      id: "manual", label: copy.editableSmiles, source: "RDKit validation", smiles: structure.smiles, svg: structure.svg,
+    };
+  }
 
   function setInputMode() {
     const isName = inputType?.value === "name";
@@ -244,6 +345,11 @@ const copy = zh ? {
     hint.textContent = isName ? copy.nameHint : copy.hint;
     input.value = isName ? "p-benzoquinone" : "O=C1C=CC(=O)C=C1";
     input.maxLength = isName ? 200 : 512;
+    nameChat.hidden = true;
+    confirm.hidden = true;
+    editChat.hidden = true;
+    result.hidden = true;
+    selectedStructure = null;
   }
   inputType?.addEventListener("change", setInputMode);
 
@@ -256,33 +362,24 @@ const copy = zh ? {
     status.textContent = "";
     result.hidden = true;
     confirm.hidden = true;
-    confirmedStructure = null;
+    editChat.hidden = true;
+    nameChat.hidden = true;
+    selectedStructure = null;
     try {
-      let structure;
       if (inputType?.value === "name") {
         button.textContent = copy.resolving;
-        const nameResponse = await fetch(endpoint("v1/resolve-name"), {
-          method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name: raw }),
-        });
-        const nameData = await nameResponse.json();
-        if (!nameResponse.ok || nameData.schema_version !== "redox-rfb-live-v1" || !nameData.smiles || !nameData.svg) {
-          throw new Error("name resolution failed");
-        }
-        structure = nameData;
+        const data = await requestJson("v1/suggest-name", { name: raw });
+        const labels = [raw, ...(Array.isArray(data.suggestions) ? data.suggestions : [])]
+          .filter((item, index, all) => typeof item === "string" && item.trim() && all.indexOf(item) === index)
+          .slice(0, 6);
+        nameOptions.replaceChildren(...labels.map((name) => candidateButton(
+          { label: name }, false, () => resolveSelectedName(name),
+        )));
+        nameChat.hidden = false;
       } else {
-        const previewResponse = await fetch(endpoint("v1/preview-structure"), {
-          method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ smiles: raw }),
-        });
-        const previewData = await previewResponse.json();
-        if (!previewResponse.ok || previewData.schema_version !== "redox-rfb-live-v1" || !previewData.smiles || !previewData.svg) {
-          throw new Error("structure preview failed");
-        }
-        structure = previewData;
+        const data = await requestJson("v1/preview-structure", { smiles: raw });
+        showStructure(manualCandidate(data));
       }
-      confirmedStructure = structure;
-      confirmSmiles.textContent = structure.smiles;
-      setStructureImage(confirmImage, structure.svg);
-      confirm.hidden = false;
     } catch (_) {
       status.textContent = inputType?.value === "name" ? copy.nameFailed : copy.unavailable;
     } finally {
@@ -291,24 +388,79 @@ const copy = zh ? {
     }
   });
 
-  editButton?.addEventListener("click", () => { confirm.hidden = true; input.focus(); });
+  async function resolveSelectedName(name) {
+    status.textContent = copy.resolving;
+    nameChat.hidden = true;
+    try {
+      const data = await requestJson("v1/resolve-name", { name });
+      if (!Array.isArray(data.candidates) || data.candidates.length === 0) throw new Error("no structure candidates");
+      showStructure(data.candidates[0], data.candidates);
+      status.textContent = "";
+    } catch (_) {
+      status.textContent = copy.nameFailed;
+      nameChat.hidden = false;
+    }
+  }
+
+  redrawButton?.addEventListener("click", async () => {
+    const smiles = editSmiles.value.trim();
+    if (!smiles) return;
+    redrawButton.disabled = true;
+    status.textContent = copy.previewing;
+    try {
+      const data = await requestJson("v1/preview-structure", { smiles });
+      showStructure(manualCandidate(data));
+      status.textContent = "";
+    } catch (_) {
+      status.textContent = copy.unavailable;
+    } finally {
+      redrawButton.disabled = false;
+    }
+  });
+
+  editButton?.addEventListener("click", () => {
+    confirm.hidden = true;
+    editChat.hidden = true;
+    nameChat.hidden = true;
+    input.focus();
+  });
+
+  chatSend?.addEventListener("click", async () => {
+    const instruction = chatInput.value.trim();
+    if (!instruction || !selectedStructure) return;
+    chatSend.disabled = true;
+    chatReply.textContent = copy.resolving;
+    chatOptions.replaceChildren();
+    try {
+      const data = await requestJson("v1/structure-chat", {
+        instruction, current_smiles: selectedStructure.smiles,
+      });
+      chatReply.textContent = data.reply || "";
+      const proposed = Array.isArray(data.candidates) ? data.candidates : [];
+      chatOptions.replaceChildren(...proposed.map((candidate) => candidateButton(
+        candidate, false, () => showStructure(candidate, proposed),
+      )));
+    } catch (_) {
+      chatReply.textContent = copy.unavailable;
+    } finally {
+      chatSend.disabled = false;
+    }
+  });
+
   confirmButton?.addEventListener("click", async () => {
-    if (!confirmedStructure) return;
+    if (!selectedStructure) return;
     confirmButton.disabled = true;
     confirmButton.textContent = copy.loading;
     status.textContent = "";
     result.hidden = true;
     try {
-      const response = await fetch(endpoint("v1/predict"), {
-        method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ smiles: confirmedStructure.smiles }),
-      });
-      const data = await response.json();
-      if (!response.ok || data.schema_version !== "redox-rfb-live-v1" || !Number.isFinite(data?.prediction?.value)) throw new Error("bad response");
+      const data = await requestJson("v1/predict", { smiles: selectedStructure.smiles });
+      if (!Number.isFinite(data?.prediction?.value)) throw new Error("bad response");
       value.textContent = `${data.prediction.value.toFixed(3)} ${data.prediction.unit}`;
       model.textContent = data.model.label;
       target.textContent = data.target.reference;
-      resultSmiles.textContent = confirmedStructure.smiles;
-      setStructureImage(resultImage, confirmedStructure.svg);
+      resultSmiles.textContent = selectedStructure.smiles;
+      setStructureImage(resultImage, selectedStructure.svg);
       result.hidden = false;
     } catch (_) {
       status.textContent = copy.unavailable;
