@@ -14,8 +14,14 @@ const copy = zh ? {
   nameLabel: "化学名称",
   hint: "例如：O=C1C=CC(=O)C=C1（对苯醌）",
   nameHint: "例如：p-benzoquinone、anthraquinone 或 1,4-benzoquinone",
-  submit: "预测电位",
+  submit: "预览结构",
   resolving: "LLM 正在解析名称…",
+  previewing: "RDKit 正在生成结构…",
+  confirmTitle: "请确认分子结构",
+  confirmLead: "请检查二维结构和 canonical SMILES。确认后才会运行电位预测。",
+  confirm: "确认结构并预测",
+  edit: "返回修改输入",
+  structure: "二维分子结构",
   loading: "正在预测…",
   resolved: "用于预测的 SMILES",
   value: "预测氧化还原电位",
@@ -23,7 +29,7 @@ const copy = zh ? {
   model: "模型",
   limitationTitle: "如何理解这个数值",
   limitation: "这是 RedDB 的 DFT 派生标签尺度上的模型预测，不是实验测量值。模型主要见过醌类和含氮芳香分子；远离这些化学家族的输入属于外推。",
-  privacy: "提交的 SMILES 会发送给公开预测服务。请不要提交保密分子。",
+  privacy: "提交的 SMILES 或化学名称会发送给公开预测服务。请不要提交保密分子。",
   invalid: "请输入 SMILES 或化学名称。",
   nameFailed: "无法可靠地把这个名称解析成分子结构。请改用 SMILES。",
   unavailable: "预测服务暂时不可用，请稍后重试。",
@@ -39,8 +45,14 @@ const copy = zh ? {
   nameLabel: "Chemical name",
   hint: "Example: O=C1C=CC(=O)C=C1 (p-benzoquinone)",
   nameHint: "Example: p-benzoquinone, anthraquinone, or 1,4-benzoquinone",
-  submit: "Predict potential",
+  submit: "Preview structure",
   resolving: "LLM is resolving the name…",
+  previewing: "RDKit is rendering the structure…",
+  confirmTitle: "Confirm the molecular structure",
+  confirmLead: "Check the 2D structure and canonical SMILES. Prediction starts only after confirmation.",
+  confirm: "Confirm structure and predict",
+  edit: "Edit input",
+  structure: "2D molecular structure",
   loading: "Predicting…",
   resolved: "SMILES used for prediction",
   value: "Predicted redox potential",
@@ -48,7 +60,7 @@ const copy = zh ? {
   model: "Model",
   limitationTitle: "How to read this number",
   limitation: "This is a model prediction on RedDB's DFT-derived label scale, not an experimental measurement. The training domain is mainly quinones and aza-aromatics; inputs far from those families are extrapolations.",
-  privacy: "The submitted SMILES is sent to a public prediction service. Do not submit confidential molecules.",
+  privacy: "The submitted SMILES or chemical name is sent to a public prediction service. Do not submit confidential molecules.",
   invalid: "Enter a SMILES string or chemical name.",
   nameFailed: "This name could not be reliably resolved to a molecular structure. Try a SMILES string instead.",
   unavailable: "The prediction service is unavailable. Please try again later.",
@@ -74,8 +86,21 @@ const copy = zh ? {
     <p class="rrp-status" data-redox-status aria-live="polite"></p>
   </form>
 
+  <section class="rrp-confirm" data-redox-confirm hidden aria-live="polite">
+    <div>
+      <p class="rrp-result-label">{copy.confirmTitle}</p>
+      <p class="rrp-confirm-lead">{copy.confirmLead}</p>
+      <p class="rrp-resolved"><span>{copy.resolved}:</span> <code data-redox-confirm-smiles></code></p>
+      <div class="rrp-actions">
+        <button type="button" data-redox-confirm-button>{copy.confirm}</button>
+        <button type="button" class="rrp-secondary" data-redox-edit>{copy.edit}</button>
+      </div>
+    </div>
+    <figure><img data-redox-confirm-image alt={copy.structure} /><figcaption>{copy.structure}</figcaption></figure>
+  </section>
+
   <section class="rrp-result" data-redox-result hidden aria-live="polite">
-    <p class="rrp-resolved" data-redox-resolved hidden><span>{copy.resolved}:</span> <code data-redox-resolved-smiles></code></p>
+    <div class="rrp-result-structure"><img data-redox-result-image alt={copy.structure} /><p class="rrp-resolved"><span>{copy.resolved}:</span> <code data-redox-result-smiles></code></p></div>
     <p class="rrp-result-label">{copy.value}</p>
     <strong data-redox-value></strong>
     <dl>
@@ -97,18 +122,27 @@ const copy = zh ? {
   .rrp-eyebrow { margin: 0 0 .55rem; color: #147a49; font-size: .8rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
   .rrp h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.06; letter-spacing: -.04em; }
   .rrp-lead { max-width: 720px; color: #4b5966; font-size: 1.08rem; line-height: 1.65; }
-  .rrp-card, .rrp-result, .rrp-note { border: 1px solid #dbe5df; border-radius: 16px; padding: 1.35rem; margin-top: 1.5rem; background: #fff; box-shadow: 0 9px 26px rgba(17, 55, 38, .06); }
+  .rrp-card, .rrp-confirm, .rrp-result, .rrp-note { border: 1px solid #dbe5df; border-radius: 16px; padding: 1.35rem; margin-top: 1.5rem; background: #fff; box-shadow: 0 9px 26px rgba(17, 55, 38, .06); }
   .rrp label, .rrp-result-label { display: block; font-weight: 750; margin-bottom: .55rem; }
   .rrp input, .rrp select { box-sizing: border-box; width: 100%; border: 1px solid #b8c9bd; border-radius: 9px; padding: .85rem; margin-bottom: .75rem; background: #fff; }
   .rrp input { font: 500 .96rem ui-monospace, SFMono-Regular, Menlo, monospace; }
   .rrp-hint, .rrp-status { color: #64726b; font-size: .88rem; }
   .rrp button { border: 0; border-radius: 9px; background: #147a49; color: white; font-weight: 750; padding: .75rem 1.05rem; cursor: pointer; }
   .rrp button:disabled { cursor: wait; opacity: .7; }
+  .rrp-actions { display: flex; flex-wrap: wrap; gap: .7rem; }
+  .rrp .rrp-secondary { background: #edf4ef; color: #24533a; }
+  .rrp-confirm { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(220px, .75fr); align-items: center; gap: 1.5rem; }
+  .rrp-confirm-lead { color: #526259; margin-top: 0; line-height: 1.5; }
+  .rrp-confirm figure { margin: 0; text-align: center; }
+  .rrp-confirm img, .rrp-result-structure img { width: 100%; max-width: 360px; min-height: 150px; object-fit: contain; background: #fbfdfb; border: 1px solid #e4ece7; border-radius: 10px; }
+  .rrp-confirm figcaption { color: #65736b; font-size: .8rem; margin-top: .35rem; }
   .rrp-result-label { color: #526259; font-size: .88rem; text-transform: uppercase; letter-spacing: .06em; }
   .rrp-result strong { color: #08703d; font-size: clamp(2rem, 7vw, 3.6rem); letter-spacing: -.045em; }
   .rrp-resolved { color: #506059; font-size: .9rem; margin: 0 0 1rem; }
   .rrp-resolved span { font-weight: 700; }
   .rrp-resolved code { overflow-wrap: anywhere; }
+  .rrp-result-structure { display: grid; grid-template-columns: minmax(200px, .8fr) minmax(0, 1.2fr); gap: 1.25rem; align-items: center; margin-bottom: 1.25rem; }
+  .rrp-result-structure .rrp-resolved { margin: 0; }
   .rrp dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.4rem 0 0; }
   .rrp dl div { border-top: 1px solid #e4ece7; padding-top: .7rem; }
   .rrp dt { color: #65736b; font-size: .78rem; font-weight: 700; text-transform: uppercase; }
@@ -116,6 +150,7 @@ const copy = zh ? {
   .rrp-note { background: #f4faf6; box-shadow: none; color: #435149; line-height: 1.55; }
   .rrp-note p { margin: .55rem 0; }
   .rrp-note a { color: #086a3a; font-weight: 700; }
+  @media (max-width: 640px) { .rrp-confirm, .rrp-result-structure { grid-template-columns: 1fr; } }
 </style>
 
 <script define:vars={{ apiBaseUrl, copy }}>
@@ -126,12 +161,23 @@ const copy = zh ? {
   const hint = document.querySelector("[data-redox-hint]");
   const button = document.querySelector("[data-redox-submit]");
   const status = document.querySelector("[data-redox-status]");
+  const confirm = document.querySelector("[data-redox-confirm]");
+  const confirmButton = document.querySelector("[data-redox-confirm-button]");
+  const editButton = document.querySelector("[data-redox-edit]");
+  const confirmSmiles = document.querySelector("[data-redox-confirm-smiles]");
+  const confirmImage = document.querySelector("[data-redox-confirm-image]");
   const result = document.querySelector("[data-redox-result]");
   const value = document.querySelector("[data-redox-value]");
   const model = document.querySelector("[data-redox-model]");
   const target = document.querySelector("[data-redox-target]");
-  const resolved = document.querySelector("[data-redox-resolved]");
-  const resolvedSmiles = document.querySelector("[data-redox-resolved-smiles]");
+  const resultSmiles = document.querySelector("[data-redox-result-smiles]");
+  const resultImage = document.querySelector("[data-redox-result-image]");
+  let confirmedStructure = null;
+
+  const endpoint = (path) => new URL(path, `${apiBaseUrl.replace(/\/$/, "")}/`).href;
+  const setStructureImage = (image, svg) => {
+    image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+  };
 
   function setInputMode() {
     const isName = inputType?.value === "name";
@@ -144,42 +190,72 @@ const copy = zh ? {
 
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
-    let smiles = input?.value.trim();
-    if (!smiles) { status.textContent = copy.invalid; result.hidden = true; return; }
+    let raw = input?.value.trim();
+    if (!raw) { status.textContent = copy.invalid; result.hidden = true; return; }
     button.disabled = true;
-    button.textContent = copy.loading;
+    button.textContent = copy.previewing;
     status.textContent = "";
     result.hidden = true;
-    resolved.hidden = true;
+    confirm.hidden = true;
+    confirmedStructure = null;
     try {
+      let structure;
       if (inputType?.value === "name") {
         button.textContent = copy.resolving;
-        const nameResponse = await fetch(new URL("v1/resolve-name", `${apiBaseUrl.replace(/\/$/, "")}/`).href, {
-          method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name: smiles }),
+        const nameResponse = await fetch(endpoint("v1/resolve-name"), {
+          method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name: raw }),
         });
         const nameData = await nameResponse.json();
-        if (!nameResponse.ok || nameData.schema_version !== "redox-rfb-live-v1" || !nameData.smiles) {
+        if (!nameResponse.ok || nameData.schema_version !== "redox-rfb-live-v1" || !nameData.smiles || !nameData.svg) {
           throw new Error("name resolution failed");
         }
-        smiles = nameData.smiles;
-        resolvedSmiles.textContent = smiles;
-        resolved.hidden = false;
+        structure = nameData;
+      } else {
+        const previewResponse = await fetch(endpoint("v1/preview-structure"), {
+          method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ smiles: raw }),
+        });
+        const previewData = await previewResponse.json();
+        if (!previewResponse.ok || previewData.schema_version !== "redox-rfb-live-v1" || !previewData.smiles || !previewData.svg) {
+          throw new Error("structure preview failed");
+        }
+        structure = previewData;
       }
-      button.textContent = copy.loading;
-      const response = await fetch(new URL("v1/predict", `${apiBaseUrl.replace(/\/$/, "")}/`).href, {
-        method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ smiles }),
+      confirmedStructure = structure;
+      confirmSmiles.textContent = structure.smiles;
+      setStructureImage(confirmImage, structure.svg);
+      confirm.hidden = false;
+    } catch (_) {
+      status.textContent = inputType?.value === "name" ? copy.nameFailed : copy.unavailable;
+    } finally {
+      button.disabled = false;
+      button.textContent = copy.submit;
+    }
+  });
+
+  editButton?.addEventListener("click", () => { confirm.hidden = true; input.focus(); });
+  confirmButton?.addEventListener("click", async () => {
+    if (!confirmedStructure) return;
+    confirmButton.disabled = true;
+    confirmButton.textContent = copy.loading;
+    status.textContent = "";
+    result.hidden = true;
+    try {
+      const response = await fetch(endpoint("v1/predict"), {
+        method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ smiles: confirmedStructure.smiles }),
       });
       const data = await response.json();
       if (!response.ok || data.schema_version !== "redox-rfb-live-v1" || !Number.isFinite(data?.prediction?.value)) throw new Error("bad response");
       value.textContent = `${data.prediction.value.toFixed(3)} ${data.prediction.unit}`;
       model.textContent = data.model.label;
       target.textContent = data.target.reference;
+      resultSmiles.textContent = confirmedStructure.smiles;
+      setStructureImage(resultImage, confirmedStructure.svg);
       result.hidden = false;
     } catch (_) {
-      status.textContent = inputType?.value === "name" ? copy.nameFailed : copy.unavailable;
+      status.textContent = copy.unavailable;
     } finally {
-      button.disabled = false;
-      button.textContent = copy.submit;
+      confirmButton.disabled = false;
+      confirmButton.textContent = copy.confirm;
     }
   });
 </script>
