@@ -1,6 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import MistTransferDemo from "../../components/MistTransferDemo.astro";
+import { u } from "../../lib/url";
 ---
 
 <Base
@@ -9,9 +10,17 @@ import MistTransferDemo from "../../components/MistTransferDemo.astro";
 >
   <div class="container mtp-page">
     <MistTransferDemo locale="en" />
+    <aside class="article-link" aria-label="Related case study">
+      <strong>Read the full case study</strong>
+      <span>How the weak Ridge baseline became an engineered ensemble, why MIST is kept outside the primary comparator, and what the next paper protocol will test.</span>
+      <a href={u("/blog/2026-07-15-can-a-fine-tuned-molecular-foundation-model-match-engineered-baselines/")}>Open the article →</a>
+    </aside>
   </div>
 </Base>
 
 <style>
   .mtp-page { padding-top: 38px; padding-bottom: 64px; }
+  .article-link { margin-top: 26px; padding: 22px; border: 1px solid var(--line); border-radius: 18px; display: grid; gap: 8px; background: var(--card); }
+  .article-link span { color: var(--muted); line-height: 1.6; }
+  .article-link a { width: fit-content; font-weight: 700; }
 </style>

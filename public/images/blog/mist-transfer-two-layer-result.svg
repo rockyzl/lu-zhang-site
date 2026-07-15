@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Two-layer MIST transfer benchmark result</title>
+  <desc id="desc">Horizontal bars compare mean normalized MAE. In layer one, the traditional ensemble scores 0.08740, XGBoost 0.09434, released fine-tuned MIST 0.09506, MLP 0.10036, and engineered Ridge 0.14984. A supplemental all-model ensemble scores 0.08116. Lower is better.</desc>
+  <rect width="1200" height="720" rx="32" fill="#f7f7fb"/>
+  <text x="64" y="70" font-family="system-ui, sans-serif" font-size="30" font-weight="700" fill="#17152b">Two questions, kept separate</text>
+  <text x="64" y="105" font-family="system-ui, sans-serif" font-size="18" fill="#5a5870">Mean normalized MAE across 12 QM9 targets · lower is better</text>
+
+  <rect x="48" y="140" width="1104" height="390" rx="24" fill="#ffffff" stroke="#deddea"/>
+  <text x="76" y="184" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#292641">Layer 1 · independent comparison</text>
+
+  <g font-family="system-ui, sans-serif" font-size="18" fill="#302e45">
+    <text x="76" y="234">Traditional ensemble</text>
+    <text x="76" y="294">XGBoost</text>
+    <text x="76" y="354">Released fine-tuned MIST</text>
+    <text x="76" y="414">MLP</text>
+    <text x="76" y="474">Engineered Ridge</text>
+  </g>
+  <g>
+    <rect x="340" y="211" width="437" height="30" rx="8" fill="#3c7a89"/>
+    <rect x="340" y="271" width="472" height="30" rx="8" fill="#5967b0"/>
+    <rect x="340" y="331" width="475" height="30" rx="8" fill="#8a5fb0"/>
+    <rect x="340" y="391" width="502" height="30" rx="8" fill="#7480c7"/>
+    <rect x="340" y="451" width="749" height="30" rx="8" fill="#a6a6b8"/>
+  </g>
+  <g font-family="ui-monospace, SFMono-Regular, monospace" font-size="18" font-weight="700" fill="#232136">
+    <text x="792" y="234">0.08740</text>
+    <text x="827" y="294">0.09434</text>
+    <text x="830" y="354">0.09506</text>
+    <text x="857" y="414">0.10036</text>
+    <text x="1104" y="474" text-anchor="end">0.14984</text>
+  </g>
+
+  <rect x="48" y="558" width="1104" height="114" rx="24" fill="#eee9f8" stroke="#d7caed"/>
+  <text x="76" y="599" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#4d3374">Layer 2 · supplemental systems result</text>
+  <text x="76" y="642" font-family="system-ui, sans-serif" font-size="18" fill="#302e45">All-model ensemble: MIST + XGBoost + MLP</text>
+  <rect x="514" y="619" width="406" height="30" rx="8" fill="#7447a4"/>
+  <text x="936" y="642" font-family="ui-monospace, SFMono-Regular, monospace" font-size="18" font-weight="700" fill="#232136">0.08116</text>
+</svg>
