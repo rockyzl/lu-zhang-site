@@ -1,0 +1,130 @@
+---
+interface Props { locale?: "en" | "zh"; }
+const { locale = "en" } = Astro.props;
+const apiBaseUrl = (import.meta.env.PUBLIC_REDOX_RFB_API_URL ?? "https://rockyaaos-redox-rfb-predictor.hf.space").trim();
+const zh = locale === "zh";
+const copy = zh ? {
+  eyebrow: "独立研究 · 水系液流电池",
+  title: "预测有机分子的氧化还原电位",
+  lead: "输入 SMILES，调用在线 RDKit + Morgan fingerprint 模型，预测其在 RedDB DFT 参考尺度上的水系氧化还原电位。",
+  label: "SMILES",
+  hint: "例如：O=C1C=CC(=O)C=C1（对苯醌）",
+  submit: "预测电位",
+  loading: "正在预测…",
+  value: "预测氧化还原电位",
+  target: "目标",
+  model: "模型",
+  limitationTitle: "如何理解这个数值",
+  limitation: "这是 RedDB 的 DFT 派生标签尺度上的模型预测，不是实验测量值。模型主要见过醌类和含氮芳香分子；远离这些化学家族的输入属于外推。",
+  privacy: "提交的 SMILES 会发送给公开预测服务。请不要提交保密分子。",
+  invalid: "请输入有效的 SMILES。",
+  unavailable: "预测服务暂时不可用，请稍后重试。",
+  source: "查看在线服务说明",
+} : {
+  eyebrow: "Independent research · aqueous flow batteries",
+  title: "Predict an organic molecule's redox potential",
+  lead: "Enter a SMILES string to run the online RDKit + Morgan-fingerprint predictor on RedDB's DFT reference scale for aqueous redox potential.",
+  label: "SMILES",
+  hint: "Example: O=C1C=CC(=O)C=C1 (p-benzoquinone)",
+  submit: "Predict potential",
+  loading: "Predicting…",
+  value: "Predicted redox potential",
+  target: "Target",
+  model: "Model",
+  limitationTitle: "How to read this number",
+  limitation: "This is a model prediction on RedDB's DFT-derived label scale, not an experimental measurement. The training domain is mainly quinones and aza-aromatics; inputs far from those families are extrapolations.",
+  privacy: "The submitted SMILES is sent to a public prediction service. Do not submit confidential molecules.",
+  invalid: "Enter a valid SMILES string.",
+  unavailable: "The prediction service is unavailable. Please try again later.",
+  source: "View service notes",
+};
+---
+
+<section class="rrp" aria-labelledby="redox-title">
+  <p class="rrp-eyebrow">{copy.eyebrow}</p>
+  <h1 id="redox-title">{copy.title}</h1>
+  <p class="rrp-lead">{copy.lead}</p>
+
+  <form data-redox-form class="rrp-card">
+    <label for="redox-smiles">{copy.label}</label>
+    <input id="redox-smiles" data-redox-smiles value="O=C1C=CC(=O)C=C1" maxlength="512" autocomplete="off" spellcheck="false" />
+    <p class="rrp-hint">{copy.hint}</p>
+    <button type="submit" data-redox-submit>{copy.submit}</button>
+    <p class="rrp-status" data-redox-status aria-live="polite"></p>
+  </form>
+
+  <section class="rrp-result" data-redox-result hidden aria-live="polite">
+    <p class="rrp-result-label">{copy.value}</p>
+    <strong data-redox-value></strong>
+    <dl>
+      <div><dt>{copy.model}</dt><dd data-redox-model></dd></div>
+      <div><dt>{copy.target}</dt><dd data-redox-target></dd></div>
+    </dl>
+  </section>
+
+  <aside class="rrp-note">
+    <strong>{copy.limitationTitle}</strong>
+    <p>{copy.limitation}</p>
+    <p>{copy.privacy}</p>
+    <a href="https://huggingface.co/spaces/rockyaaos/redox-rfb-predictor" target="_blank" rel="noreferrer">{copy.source} ↗</a>
+  </aside>
+</section>
+
+<style>
+  .rrp { max-width: 800px; margin: 0 auto; padding: 3rem 1.25rem 5rem; color: #17212b; }
+  .rrp-eyebrow { margin: 0 0 .55rem; color: #147a49; font-size: .8rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .rrp h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.06; letter-spacing: -.04em; }
+  .rrp-lead { max-width: 720px; color: #4b5966; font-size: 1.08rem; line-height: 1.65; }
+  .rrp-card, .rrp-result, .rrp-note { border: 1px solid #dbe5df; border-radius: 16px; padding: 1.35rem; margin-top: 1.5rem; background: #fff; box-shadow: 0 9px 26px rgba(17, 55, 38, .06); }
+  .rrp label, .rrp-result-label { display: block; font-weight: 750; margin-bottom: .55rem; }
+  .rrp input { box-sizing: border-box; width: 100%; border: 1px solid #b8c9bd; border-radius: 9px; padding: .85rem; font: 500 .96rem ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .rrp-hint, .rrp-status { color: #64726b; font-size: .88rem; }
+  .rrp button { border: 0; border-radius: 9px; background: #147a49; color: white; font-weight: 750; padding: .75rem 1.05rem; cursor: pointer; }
+  .rrp button:disabled { cursor: wait; opacity: .7; }
+  .rrp-result-label { color: #526259; font-size: .88rem; text-transform: uppercase; letter-spacing: .06em; }
+  .rrp-result strong { color: #08703d; font-size: clamp(2rem, 7vw, 3.6rem); letter-spacing: -.045em; }
+  .rrp dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.4rem 0 0; }
+  .rrp dl div { border-top: 1px solid #e4ece7; padding-top: .7rem; }
+  .rrp dt { color: #65736b; font-size: .78rem; font-weight: 700; text-transform: uppercase; }
+  .rrp dd { margin: .25rem 0 0; font-weight: 650; }
+  .rrp-note { background: #f4faf6; box-shadow: none; color: #435149; line-height: 1.55; }
+  .rrp-note p { margin: .55rem 0; }
+  .rrp-note a { color: #086a3a; font-weight: 700; }
+</style>
+
+<script define:vars={{ apiBaseUrl, copy }}>
+  const form = document.querySelector("[data-redox-form]");
+  const input = document.querySelector("[data-redox-smiles]");
+  const button = document.querySelector("[data-redox-submit]");
+  const status = document.querySelector("[data-redox-status]");
+  const result = document.querySelector("[data-redox-result]");
+  const value = document.querySelector("[data-redox-value]");
+  const model = document.querySelector("[data-redox-model]");
+  const target = document.querySelector("[data-redox-target]");
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const smiles = input?.value.trim();
+    if (!smiles) { status.textContent = copy.invalid; result.hidden = true; return; }
+    button.disabled = true;
+    button.textContent = copy.loading;
+    status.textContent = "";
+    result.hidden = true;
+    try {
+      const response = await fetch(new URL("v1/predict", `${apiBaseUrl.replace(/\/$/, "")}/`).href, {
+        method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ smiles }),
+      });
+      const data = await response.json();
+      if (!response.ok || data.schema_version !== "redox-rfb-live-v1" || !Number.isFinite(data?.prediction?.value)) throw new Error("bad response");
+      value.textContent = `${data.prediction.value.toFixed(3)} ${data.prediction.unit}`;
+      model.textContent = data.model.label;
+      target.textContent = data.target.reference;
+      result.hidden = false;
+    } catch (_) {
+      status.textContent = copy.unavailable;
+    } finally {
+      button.disabled = false;
+      button.textContent = copy.submit;
+    }
+  });
+</script>

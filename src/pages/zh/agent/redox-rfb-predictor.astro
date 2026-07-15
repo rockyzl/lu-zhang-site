@@ -1,0 +1,10 @@
+---
+import Base from "../../../layouts/Base.astro";
+import RedoxRfbDemo from "../../../components/RedoxRfbDemo.astro";
+---
+
+<Base title="氧化还原电位预测器 — SciencesLoop" description="输入 SMILES，预测分子在 RedDB DFT 参考尺度上的水系氧化还原电位。">
+  <div class="container rrp-page"><RedoxRfbDemo locale="zh" /></div>
+</Base>
+
+<style>.rrp-page { padding-top: 38px; padding-bottom: 64px; }</style>
