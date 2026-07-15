@@ -22,6 +22,21 @@ const copy = zh ? {
   confirm: "确认结构并预测",
   edit: "返回修改输入",
   structure: "二维分子结构",
+  howTitle: "这个流程怎样工作？",
+  howSteps: [
+    ["1. 输入", "你可以直接输入 SMILES；也可以输入化学名称。名称模式中，LLM 只负责提出一个候选 SMILES。"],
+    ["2. 结构确认", "RDKit 解析并标准化该结构，生成二维图。你检查图和 canonical SMILES 后，主动确认。"],
+    ["3. 电位预测", "确认后，RDKit 描述符和 Morgan fingerprint 被送入固定模型，输出 RedDB DFT 电位尺度上的预测值。"],
+  ],
+  modelTitle: "电位由什么模型预测？",
+  modelLead: "在线预测器不是 LLM，也不会现场运行 DFT。它是一个在 RedDB DFT 标签上训练好的 Random Forest 回归模型。",
+  modelPipeline: [
+    ["分子结构", "确认后的 canonical SMILES"],
+    ["结构特征", "26 个 RDKit 描述符 + 1024 位 Morgan fingerprint"],
+    ["机器学习", "300 棵决策树分别给出估计，再取平均"],
+    ["输出", "水系氧化还原电位，V vs SHE（RedDB DFT 尺度）"],
+  ],
+  llmRole: "LLM 的角色仅是把化学名称转成候选 SMILES；它不预测电位，也不替代结构确认。",
   loading: "正在预测…",
   resolved: "用于预测的 SMILES",
   value: "预测氧化还原电位",
@@ -53,6 +68,21 @@ const copy = zh ? {
   confirm: "Confirm structure and predict",
   edit: "Edit input",
   structure: "2D molecular structure",
+  howTitle: "How this works",
+  howSteps: [
+    ["1. Enter", "You can enter a SMILES string directly, or a chemical name. In name mode, the LLM only proposes a candidate SMILES."],
+    ["2. Confirm structure", "RDKit parses and canonicalizes the structure, then renders a 2D diagram. You inspect the diagram and canonical SMILES before explicitly confirming it."],
+    ["3. Predict potential", "After confirmation, RDKit descriptors and a Morgan fingerprint go to the fixed model, which returns a prediction on RedDB's DFT potential scale."],
+  ],
+  modelTitle: "What model predicts the potential?",
+  modelLead: "The live predictor is not an LLM and does not run DFT on demand. It is a Random Forest regression model trained on RedDB's DFT-derived labels.",
+  modelPipeline: [
+    ["Molecular structure", "The confirmed canonical SMILES"],
+    ["Structure features", "26 RDKit descriptors + a 1024-bit Morgan fingerprint"],
+    ["Machine learning", "300 decision trees each estimate a value; their estimates are averaged"],
+    ["Output", "Aqueous redox potential, V vs SHE (RedDB DFT scale)"],
+  ],
+  llmRole: "The LLM only converts a chemical name into a candidate SMILES. It does not predict potential and does not replace structure confirmation.",
   loading: "Predicting…",
   resolved: "SMILES used for prediction",
   value: "Predicted redox potential",
@@ -109,6 +139,22 @@ const copy = zh ? {
     </dl>
   </section>
 
+  <section class="rrp-how" aria-labelledby="redox-how-title">
+    <p class="rrp-result-label" id="redox-how-title">{copy.howTitle}</p>
+    <ol>
+      {copy.howSteps.map(([title, text]) => <li><strong>{title}</strong><span>{text}</span></li>)}
+    </ol>
+  </section>
+
+  <section class="rrp-model" aria-labelledby="redox-model-title">
+    <p class="rrp-result-label" id="redox-model-title">{copy.modelTitle}</p>
+    <p class="rrp-model-lead">{copy.modelLead}</p>
+    <div class="rrp-model-pipeline">
+      {copy.modelPipeline.map(([title, text]) => <div><strong>{title}</strong><span>{text}</span></div>)}
+    </div>
+    <p class="rrp-model-llm">{copy.llmRole}</p>
+  </section>
+
   <aside class="rrp-note">
     <strong>{copy.limitationTitle}</strong>
     <p>{copy.limitation}</p>
@@ -122,7 +168,7 @@ const copy = zh ? {
   .rrp-eyebrow { margin: 0 0 .55rem; color: #147a49; font-size: .8rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
   .rrp h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.06; letter-spacing: -.04em; }
   .rrp-lead { max-width: 720px; color: #4b5966; font-size: 1.08rem; line-height: 1.65; }
-  .rrp-card, .rrp-confirm, .rrp-result, .rrp-note { border: 1px solid #dbe5df; border-radius: 16px; padding: 1.35rem; margin-top: 1.5rem; background: #fff; box-shadow: 0 9px 26px rgba(17, 55, 38, .06); }
+  .rrp-card, .rrp-confirm, .rrp-result, .rrp-how, .rrp-model, .rrp-note { border: 1px solid #dbe5df; border-radius: 16px; padding: 1.35rem; margin-top: 1.5rem; background: #fff; box-shadow: 0 9px 26px rgba(17, 55, 38, .06); }
   .rrp label, .rrp-result-label { display: block; font-weight: 750; margin-bottom: .55rem; }
   .rrp input, .rrp select { box-sizing: border-box; width: 100%; border: 1px solid #b8c9bd; border-radius: 9px; padding: .85rem; margin-bottom: .75rem; background: #fff; }
   .rrp input { font: 500 .96rem ui-monospace, SFMono-Regular, Menlo, monospace; }
@@ -148,9 +194,22 @@ const copy = zh ? {
   .rrp dt { color: #65736b; font-size: .78rem; font-weight: 700; text-transform: uppercase; }
   .rrp dd { margin: .25rem 0 0; font-weight: 650; }
   .rrp-note { background: #f4faf6; box-shadow: none; color: #435149; line-height: 1.55; }
+  .rrp-how { box-shadow: none; background: #fbfdfb; }
+  .rrp-how ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; list-style: none; margin: 0; padding: 0; }
+  .rrp-how li { border-top: 2px solid #b9d7c2; padding-top: .65rem; color: #526259; line-height: 1.5; font-size: .92rem; }
+  .rrp-how li strong, .rrp-how li span { display: block; }
+  .rrp-how li strong { color: #17683f; margin-bottom: .25rem; }
+  .rrp-model { background: #f7faf8; box-shadow: none; }
+  .rrp-model-lead { max-width: 680px; color: #4e5e55; line-height: 1.55; margin-top: 0; }
+  .rrp-model-pipeline { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .7rem; }
+  .rrp-model-pipeline div { position: relative; border: 1px solid #dbe8df; border-radius: 10px; padding: .75rem; background: #fff; min-height: 78px; }
+  .rrp-model-pipeline strong, .rrp-model-pipeline span { display: block; }
+  .rrp-model-pipeline strong { color: #166b40; font-size: .82rem; margin-bottom: .35rem; }
+  .rrp-model-pipeline span { color: #536159; font-size: .84rem; line-height: 1.4; }
+  .rrp-model-llm { color: #536159; font-size: .9rem; line-height: 1.5; margin: 1rem 0 0; }
   .rrp-note p { margin: .55rem 0; }
   .rrp-note a { color: #086a3a; font-weight: 700; }
-  @media (max-width: 640px) { .rrp-confirm, .rrp-result-structure { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .rrp-confirm, .rrp-result-structure, .rrp-how ol, .rrp-model-pipeline { grid-template-columns: 1fr; } }
 </style>
 
 <script define:vars={{ apiBaseUrl, copy }}>
