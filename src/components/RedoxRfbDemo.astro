@@ -6,35 +6,51 @@ const zh = locale === "zh";
 const copy = zh ? {
   eyebrow: "独立研究 · 水系液流电池",
   title: "预测有机分子的氧化还原电位",
-  lead: "输入 SMILES，调用在线 RDKit + Morgan fingerprint 模型，预测其在 RedDB DFT 参考尺度上的水系氧化还原电位。",
+  lead: "输入 SMILES 或化学名称。名称会先由 LLM 转成候选 SMILES、再由 RDKit 验证，之后调用在线 RDKit + Morgan fingerprint 模型预测电位。",
+  inputType: "输入方式",
+  smiles: "SMILES",
+  chemicalName: "化学名称（LLM 解析）",
   label: "SMILES",
+  nameLabel: "化学名称",
   hint: "例如：O=C1C=CC(=O)C=C1（对苯醌）",
+  nameHint: "例如：p-benzoquinone、anthraquinone 或 1,4-benzoquinone",
   submit: "预测电位",
+  resolving: "LLM 正在解析名称…",
   loading: "正在预测…",
+  resolved: "用于预测的 SMILES",
   value: "预测氧化还原电位",
   target: "目标",
   model: "模型",
   limitationTitle: "如何理解这个数值",
   limitation: "这是 RedDB 的 DFT 派生标签尺度上的模型预测，不是实验测量值。模型主要见过醌类和含氮芳香分子；远离这些化学家族的输入属于外推。",
   privacy: "提交的 SMILES 会发送给公开预测服务。请不要提交保密分子。",
-  invalid: "请输入有效的 SMILES。",
+  invalid: "请输入 SMILES 或化学名称。",
+  nameFailed: "无法可靠地把这个名称解析成分子结构。请改用 SMILES。",
   unavailable: "预测服务暂时不可用，请稍后重试。",
   source: "查看在线服务说明",
 } : {
   eyebrow: "Independent research · aqueous flow batteries",
   title: "Predict an organic molecule's redox potential",
-  lead: "Enter a SMILES string to run the online RDKit + Morgan-fingerprint predictor on RedDB's DFT reference scale for aqueous redox potential.",
+  lead: "Enter a SMILES string or chemical name. A name is first converted by an LLM to a candidate SMILES and validated with RDKit, then sent to the online RDKit + Morgan-fingerprint predictor on RedDB's DFT reference scale.",
+  inputType: "Input type",
+  smiles: "SMILES",
+  chemicalName: "Chemical name (LLM resolution)",
   label: "SMILES",
+  nameLabel: "Chemical name",
   hint: "Example: O=C1C=CC(=O)C=C1 (p-benzoquinone)",
+  nameHint: "Example: p-benzoquinone, anthraquinone, or 1,4-benzoquinone",
   submit: "Predict potential",
+  resolving: "LLM is resolving the name…",
   loading: "Predicting…",
+  resolved: "SMILES used for prediction",
   value: "Predicted redox potential",
   target: "Target",
   model: "Model",
   limitationTitle: "How to read this number",
   limitation: "This is a model prediction on RedDB's DFT-derived label scale, not an experimental measurement. The training domain is mainly quinones and aza-aromatics; inputs far from those families are extrapolations.",
   privacy: "The submitted SMILES is sent to a public prediction service. Do not submit confidential molecules.",
-  invalid: "Enter a valid SMILES string.",
+  invalid: "Enter a SMILES string or chemical name.",
+  nameFailed: "This name could not be reliably resolved to a molecular structure. Try a SMILES string instead.",
   unavailable: "The prediction service is unavailable. Please try again later.",
   source: "View service notes",
 };
@@ -46,14 +62,20 @@ const copy = zh ? {
   <p class="rrp-lead">{copy.lead}</p>
 
   <form data-redox-form class="rrp-card">
-    <label for="redox-smiles">{copy.label}</label>
+    <label for="redox-input-type">{copy.inputType}</label>
+    <select id="redox-input-type" data-redox-input-type>
+      <option value="smiles">{copy.smiles}</option>
+      <option value="name">{copy.chemicalName}</option>
+    </select>
+    <label for="redox-smiles" data-redox-label>{copy.label}</label>
     <input id="redox-smiles" data-redox-smiles value="O=C1C=CC(=O)C=C1" maxlength="512" autocomplete="off" spellcheck="false" />
-    <p class="rrp-hint">{copy.hint}</p>
+    <p class="rrp-hint" data-redox-hint>{copy.hint}</p>
     <button type="submit" data-redox-submit>{copy.submit}</button>
     <p class="rrp-status" data-redox-status aria-live="polite"></p>
   </form>
 
   <section class="rrp-result" data-redox-result hidden aria-live="polite">
+    <p class="rrp-resolved" data-redox-resolved hidden><span>{copy.resolved}:</span> <code data-redox-resolved-smiles></code></p>
     <p class="rrp-result-label">{copy.value}</p>
     <strong data-redox-value></strong>
     <dl>
@@ -77,12 +99,16 @@ const copy = zh ? {
   .rrp-lead { max-width: 720px; color: #4b5966; font-size: 1.08rem; line-height: 1.65; }
   .rrp-card, .rrp-result, .rrp-note { border: 1px solid #dbe5df; border-radius: 16px; padding: 1.35rem; margin-top: 1.5rem; background: #fff; box-shadow: 0 9px 26px rgba(17, 55, 38, .06); }
   .rrp label, .rrp-result-label { display: block; font-weight: 750; margin-bottom: .55rem; }
-  .rrp input { box-sizing: border-box; width: 100%; border: 1px solid #b8c9bd; border-radius: 9px; padding: .85rem; font: 500 .96rem ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .rrp input, .rrp select { box-sizing: border-box; width: 100%; border: 1px solid #b8c9bd; border-radius: 9px; padding: .85rem; margin-bottom: .75rem; background: #fff; }
+  .rrp input { font: 500 .96rem ui-monospace, SFMono-Regular, Menlo, monospace; }
   .rrp-hint, .rrp-status { color: #64726b; font-size: .88rem; }
   .rrp button { border: 0; border-radius: 9px; background: #147a49; color: white; font-weight: 750; padding: .75rem 1.05rem; cursor: pointer; }
   .rrp button:disabled { cursor: wait; opacity: .7; }
   .rrp-result-label { color: #526259; font-size: .88rem; text-transform: uppercase; letter-spacing: .06em; }
   .rrp-result strong { color: #08703d; font-size: clamp(2rem, 7vw, 3.6rem); letter-spacing: -.045em; }
+  .rrp-resolved { color: #506059; font-size: .9rem; margin: 0 0 1rem; }
+  .rrp-resolved span { font-weight: 700; }
+  .rrp-resolved code { overflow-wrap: anywhere; }
   .rrp dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.4rem 0 0; }
   .rrp dl div { border-top: 1px solid #e4ece7; padding-top: .7rem; }
   .rrp dt { color: #65736b; font-size: .78rem; font-weight: 700; text-transform: uppercase; }
@@ -95,22 +121,51 @@ const copy = zh ? {
 <script define:vars={{ apiBaseUrl, copy }}>
   const form = document.querySelector("[data-redox-form]");
   const input = document.querySelector("[data-redox-smiles]");
+  const inputType = document.querySelector("[data-redox-input-type]");
+  const inputLabel = document.querySelector("[data-redox-label]");
+  const hint = document.querySelector("[data-redox-hint]");
   const button = document.querySelector("[data-redox-submit]");
   const status = document.querySelector("[data-redox-status]");
   const result = document.querySelector("[data-redox-result]");
   const value = document.querySelector("[data-redox-value]");
   const model = document.querySelector("[data-redox-model]");
   const target = document.querySelector("[data-redox-target]");
+  const resolved = document.querySelector("[data-redox-resolved]");
+  const resolvedSmiles = document.querySelector("[data-redox-resolved-smiles]");
+
+  function setInputMode() {
+    const isName = inputType?.value === "name";
+    inputLabel.textContent = isName ? copy.nameLabel : copy.label;
+    hint.textContent = isName ? copy.nameHint : copy.hint;
+    input.value = isName ? "p-benzoquinone" : "O=C1C=CC(=O)C=C1";
+    input.maxLength = isName ? 200 : 512;
+  }
+  inputType?.addEventListener("change", setInputMode);
 
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const smiles = input?.value.trim();
+    let smiles = input?.value.trim();
     if (!smiles) { status.textContent = copy.invalid; result.hidden = true; return; }
     button.disabled = true;
     button.textContent = copy.loading;
     status.textContent = "";
     result.hidden = true;
+    resolved.hidden = true;
     try {
+      if (inputType?.value === "name") {
+        button.textContent = copy.resolving;
+        const nameResponse = await fetch(new URL("v1/resolve-name", `${apiBaseUrl.replace(/\/$/, "")}/`).href, {
+          method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ name: smiles }),
+        });
+        const nameData = await nameResponse.json();
+        if (!nameResponse.ok || nameData.schema_version !== "redox-rfb-live-v1" || !nameData.smiles) {
+          throw new Error("name resolution failed");
+        }
+        smiles = nameData.smiles;
+        resolvedSmiles.textContent = smiles;
+        resolved.hidden = false;
+      }
+      button.textContent = copy.loading;
       const response = await fetch(new URL("v1/predict", `${apiBaseUrl.replace(/\/$/, "")}/`).href, {
         method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ smiles }),
       });
@@ -121,7 +176,7 @@ const copy = zh ? {
       target.textContent = data.target.reference;
       result.hidden = false;
     } catch (_) {
-      status.textContent = copy.unavailable;
+      status.textContent = inputType?.value === "name" ? copy.nameFailed : copy.unavailable;
     } finally {
       button.disabled = false;
       button.textContent = copy.submit;
