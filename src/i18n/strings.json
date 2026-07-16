@@ -68,6 +68,10 @@
     "en": "Agent Demo",
     "zh": "智能体 Demo"
   },
+  "nav.lab": {
+    "en": "Lab",
+    "zh": "实验室"
+  },
   "nav.cv": {
     "en": "Academic CV",
     "zh": "学术 CV"

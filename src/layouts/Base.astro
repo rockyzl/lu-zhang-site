@@ -26,13 +26,13 @@ const publicOrigin = siteUrl.replace(/\/+$/, "");
 const ogImageUrl = ogImage ?? `${publicOrigin}${u("/og-default.png")}`;
 
 const homeHref = locale === "zh" ? "/zh/" : "/";
-// Flat top nav — exactly 5 items. Every other page stays reachable through
-// the Research Archive page (publications / patents / talks / reports / awards)
-// and the About page (CV / mentorship / research archive).
+// Flat top nav — exactly 5 items. Lab is the public entry point for the
+// active project map and live demos; the individual demo route stays linked
+// from Lab and project pages.
 const navItems = [
   { href: homeHref, key: "nav.home" },
   { href: `${langPrefix}/projects/`, key: "nav.projects" },
-  { href: `${langPrefix}/agent/`, key: "nav.agent" },
+  { href: `${langPrefix}/lab/`, key: "nav.lab" },
   { href: `${langPrefix}/blog/`, key: "nav.blog" },
   { href: `${langPrefix}/about/`, key: "nav.about" },
 ];
