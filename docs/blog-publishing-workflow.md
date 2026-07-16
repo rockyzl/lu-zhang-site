@@ -183,6 +183,15 @@ PUBLIC_GISCUS_CATEGORY
 PUBLIC_GISCUS_CATEGORY_ID
 ```
 
+Current configuration (2026-07-15): Giscus is enabled only on Field Notes
+article pages (`/blog/...` and `/zh/blog/...`). It uses the dedicated public
+repository [`rockyzl/sciencesloop-comments`](https://github.com/rockyzl/sciencesloop-comments)
+and its `Announcements` discussion category. The client uses strict pathname
+mapping, so each article URL has an independent discussion thread. It is
+lazy-loaded only after a reader clicks the comment button; posting requires a
+GitHub account. Do not add the component to Lab, Projects, live demos, or other
+static pages without an explicit product decision.
+
 Requirements before enabling:
 
 - comments repo must be public;
