@@ -10,6 +10,7 @@ workflows, intelligent agents, scientific state systems, and evidence-driven
 infrastructure for discovery.
 
 Live: <https://sciencesloop.com/>
+GitHub Pages redirect: <https://rockyzl.github.io/lu-zhang-site/>
 
 ## Research Programs
 
@@ -91,7 +92,9 @@ public demo.
 
 ## Deploy
 
-The repo is private and deploys through Vercel.
+The production domain deploys through Vercel. GitHub Pages publishes only a
+redirect at `/lu-zhang-site/`, including fallback handling for old subpaths, so
+all public traffic reaches the canonical production domain.
 
 Manual production deploy:
 

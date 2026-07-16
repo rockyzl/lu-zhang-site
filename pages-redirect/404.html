@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <title>Redirecting to SciencesLoop</title>
+    <script>
+      (() => {
+        const canonical = "https://sciencesloop.com";
+        const path = location.pathname.replace(/^\/lu-zhang-site(?=\/|$)/, "") || "/";
+        location.replace(canonical + path + location.search + location.hash);
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="https://sciencesloop.com/">Continue to SciencesLoop</a>
+  </body>
+</html>
