@@ -15,9 +15,9 @@ const badgeClass = (status) => {
   return "priv";
 };
 
-// The two long-term lines ("rivers"). Public-safe by construction: every card below
-// reuses a project already public on the site (live demo or public repo). No internal
-// git state, no private repos, no work-in-progress.
+// The two long-term lines ("rivers"). Public-safe by construction: cards link
+// only to live demos or public repos. Private work may have a high-level
+// project summary, but never a repository link.
 const rivers = [
   {
     key: "molecular-discovery",
@@ -42,17 +42,17 @@ const rivers = [
       })),
       {
         name: "Property-Aware Molecular Discovery Agent",
-        tagline_en: "A forward/reverse molecular-discovery core, in the open",
-        tagline_zh: "开源的正向/反向分子发现内核",
+        tagline_en: "A forward/reverse molecular-discovery core",
+        tagline_zh: "正向/反向分子发现内核",
         desc_en: "An early Python-first core organized around forward and reverse workflows — molecule→property dossier and target-property→candidate discovery — architected around a Query Planner, Skill Registry, and Evidence Objects rather than treating LLM output as scientific truth.",
         desc_zh: "一个 Python-first 的早期内核，围绕正向与反向工作流组织 —— 分子→性质档案、目标性质→候选发现 —— 架构围绕 Query Planner、Skill Registry 与 Evidence Objects，而不是把 LLM 输出当作科学真理。",
-        status_en: "Public repository",
-        status_zh: "公开仓库",
+        status_en: "Early independent prototype",
+        status_zh: "早期独立原型",
         tags: ["query planner", "skill registry", "evidence objects"],
-        href: "https://github.com/rockyzl/property-aware-molecular-discovery-agent",
-        external: true,
-        cta_en: "See on GitHub",
-        cta_zh: "在 GitHub 查看",
+        href: null,
+        external: false,
+        cta_en: null,
+        cta_zh: null,
       },
       {
         name: "Scientific Foundation Model Lab",
