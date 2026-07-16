@@ -359,6 +359,9 @@ const copy = locale === "zh"
     async function ask(q) {
       if (busy || !q.trim()) return;
       busy = true; sendBtn.disabled = true; text.value = "";
+      // The landing state is deliberately compact. Once someone starts a real
+      // run, give the trace, structure, and result card a normal reading width.
+      root.classList.add("cg--conversation");
       if (chips) chips.style.display = "none";
       const userEl = addUser(q);
       const thinkEl = addThinking();
@@ -419,7 +422,9 @@ const copy = locale === "zh"
 </script>
 
 <style is:global>
-  .cg { max-width: 780px; margin: 0 auto; }
+  /* Start as a focused prompt, then expand only when there is a real run to read. */
+  .cg { max-width: 780px; margin: 0 auto; transition: max-width .24s ease; }
+  .cg.cg--conversation { max-width: 1080px; }
   .cg-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
   .cg-h1 { font-size: clamp(24px, 3.6vw, 36px); letter-spacing: -.03em; font-weight: 730; margin: 8px 0 0; text-wrap: balance; line-height: 1.12; }
   .cg-lead { color: var(--ink-2); font-size: 15px; margin: 12px 0 0; max-width: 68ch; line-height: 1.6; }
@@ -523,6 +528,7 @@ const copy = locale === "zh"
   .cg-cap a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 
   @media (max-width: 560px) {
+    .cg.cg--conversation { max-width: 100%; }
     .cg-bubble { max-width: 100%; }
     .cg-3d { width: 100%; }
   }
