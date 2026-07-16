@@ -89,10 +89,12 @@ const groups = [
         status_zh: "在线 · 角标助手",
         tags: ["RAG", "attribution guardrail", "grounded Q&A"],
         gradient: "from-amber to-teal",
-        href: null,
+        // The card opens the globally mounted widget; its href is an
+        // accessible no-JS fallback rather than the unrelated ChemGraph demo.
+        href: u(`${lp}/#loopi`),
         external: false,
-        cta_en: null,
-        cta_zh: null,
+        cta_en: "Open Loopi",
+        cta_zh: "打开 Loopi",
       },
       {
         name: "Realtime Synthetic Call Center",
@@ -284,10 +286,11 @@ const groups = [
         <div class="featured-grid">
           {g.items.map((p) => {
             const Outer = p.href ? "a" : "div";
+            const loopiLauncher = p.href?.endsWith("#loopi");
             const outerProps = p.href
               ? (p.external
                   ? { href: p.href, target: "_blank", rel: "noopener", class: "project-card" }
-                  : { href: p.href, class: "project-card" })
+                  : { href: p.href, class: "project-card", ...(loopiLauncher ? { "data-loopi-launch": "" } : {}) })
               : { class: "project-card" };
             const status = isZh ? p.status_zh : p.status_en;
             const cta = isZh ? p.cta_zh : p.cta_en;
@@ -308,4 +311,17 @@ const groups = [
       </section>
     ))}
   </div>
+
+  <script is:inline>
+    // Loopi is mounted by Base on every page. Project-card clicks open it in
+    // place; the anchor remains a safe fallback if the widget is unavailable.
+    document.querySelectorAll("[data-loopi-launch]").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const launcher = document.querySelector("[data-cw-launcher]");
+        if (!launcher) return;
+        event.preventDefault();
+        launcher.click();
+      });
+    });
+  </script>
 </Base>
