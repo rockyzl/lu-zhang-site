@@ -81,7 +81,7 @@ export const demos: Demo[] = [
     id: "molecular-discovery-workflow",
     path: "/agent/molecular-discovery/",
     articlePath: "/blog/2026-07-16-a-molecular-workflow-should-show-what-it-does-not-know/",
-    featured: false,
+    featured: true,
     title: { en: "Molecular Discovery Workflow", zh: "分子发现工作流" },
     tagline: { en: "Resolve identity, inspect the structure, then show what evidence is missing", zh: "解析身份、检查结构，再明确展示证据缺口" },
     summary: {
