@@ -1,0 +1,17 @@
+---
+import Base from "../../layouts/Base.astro";
+import MolecularDiscoveryDemo from "../../components/MolecularDiscoveryDemo.astro";
+import { u } from "../../lib/url";
+---
+
+<Base
+  title="Molecular Discovery Workflow Demo — SciencesLoop"
+  description="Resolve a chemical name or SMILES through PubChem, confirm the structure, calculate RDKit descriptors, and see which molecular-property evidence is still missing."
+>
+  <div class="container page">
+    <MolecularDiscoveryDemo locale="en" />
+    <aside class="article-link"><strong>Read the project note</strong><span>Why a molecular workflow should treat missing evidence as a result rather than make up a property value.</span><a href={u("/blog/2026-07-16-a-molecular-workflow-should-show-what-it-does-not-know/")}>Open the article →</a></aside>
+  </div>
+</Base>
+
+<style>.page{padding-top:38px;padding-bottom:64px}.article-link{margin:0 auto 26px;max-width:850px;padding:22px;border:1px solid var(--line);border-radius:18px;display:grid;gap:8px;background:var(--card)}.article-link span{color:var(--muted);line-height:1.6}.article-link a{width:fit-content;font-weight:700}</style>

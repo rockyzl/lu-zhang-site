@@ -1,0 +1,10 @@
+---
+import Base from "../../../layouts/Base.astro";
+import MolecularDiscoveryDemo from "../../../components/MolecularDiscoveryDemo.astro";
+---
+
+<Base title="分子发现工作流 Demo — SciencesLoop" description="用 PubChem 解析化学名称或 SMILES、确认结构、计算 RDKit 结构描述符，并明确展示尚缺少哪些分子性质证据。">
+  <div class="container page"><MolecularDiscoveryDemo locale="zh" /></div>
+</Base>
+
+<style>.page{padding-top:38px;padding-bottom:64px}</style>

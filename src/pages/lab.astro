@@ -26,7 +26,7 @@ const rivers = [
     star_en: "Toward a trustworthy, reproducible system that reasons about molecular properties — from agentic chemistry workflows to foundation-model benchmarks to redox / battery-relevant candidates.",
     star_zh: "朝着一个可信、可复现、能对分子性质做推理的系统 —— 从 agentic 化学工作流，到基础模型 benchmark，再到氧化还原 / 电池相关候选分子。",
     items: [
-      ...liveDemos.filter((demo) => ["chemgraph-loop", "molecular-property-predictor", "redox-rfb-predictor"].includes(demo.id)).map((demo) => ({
+      ...liveDemos.filter((demo) => ["chemgraph-loop", "molecular-property-predictor", "redox-rfb-predictor", "molecular-discovery-workflow"].includes(demo.id)).map((demo) => ({
         name: isZh ? demo.title.zh : demo.title.en,
         tagline_en: demo.tagline.en,
         tagline_zh: demo.tagline.zh,

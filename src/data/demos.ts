@@ -77,6 +77,19 @@ export const demos: Demo[] = [
     },
     tags: ["redox potential", "RDKit", "PubChem", "human confirmation", "flow batteries"],
   },
+  {
+    id: "molecular-discovery-workflow",
+    path: "/agent/molecular-discovery/",
+    articlePath: "/blog/2026-07-16-a-molecular-workflow-should-show-what-it-does-not-know/",
+    featured: false,
+    title: { en: "Molecular Discovery Workflow", zh: "分子发现工作流" },
+    tagline: { en: "Resolve identity, inspect the structure, then show what evidence is missing", zh: "解析身份、检查结构，再明确展示证据缺口" },
+    summary: {
+      en: "A public, bounded version of a private molecular-discovery prototype: PubChem-backed identity resolution, human structure confirmation, RDKit descriptors, and explicit evidence gaps instead of invented property values.",
+      zh: "一个私有分子发现原型的公开受限版本：PubChem 身份解析、人工结构确认、RDKit 描述符，以及明确的证据缺口，而不是编造性质数值。",
+    },
+    tags: ["PubChem", "RDKit", "evidence gaps", "human confirmation"],
+  },
 ];
 
 export const liveDemos = demos;
