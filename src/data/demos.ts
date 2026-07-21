@@ -93,7 +93,7 @@ export const demos: Demo[] = [
   {
     id: "guidelinebench-oa",
     path: "/agent/guidelinebench-oa/",
-    featured: false,
+    featured: true,
     title: { en: "Guideline-Faithfulness Chat", zh: "指南忠实度聊天" },
     tagline: {
       en: "Reports clinical-guideline positions while preserving each one's official strength",
