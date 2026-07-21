@@ -1,0 +1,43 @@
+---
+import Base from "../../layouts/Base.astro";
+const SPACE = "https://rockyaaos-guidelinebench-chat.hf.space";
+---
+<Base
+  title="GuidelineBench-OA — guideline-faithfulness chat — SciencesLoop"
+  description="Ask a knee-osteoarthritis question; the answer reports what NICE and ACR/AF guidelines say while preserving each one's official recommendation strength. A research demo of guideline faithfulness — not medical advice."
+>
+  <div class="container gboa">
+    <span class="eyebrow">Healthcare AI · reliability research</span>
+    <h1>Guideline-faithfulness chat</h1>
+    <p class="lead">
+      A guideline recommendation carries an official <b>strength</b> — <i>strong</i>,
+      <i>conditional</i> — set by the guideline's expert committee. Ask a knee-osteoarthritis
+      question and this demo reports what <b>NICE NG226</b> and <b>ACR/AF</b> say, re-reading
+      each source to keep that strength faithful — instead of flattening two guidelines into a
+      single confident-sounding answer. Retrieve → answer → re-read source &amp; correct.
+    </p>
+    <p class="note">
+      Research demo of guideline faithfulness — <b>not medical advice</b>, not a clinical tool.
+      It reports published-guideline positions with citations; it does not recommend treatment.
+    </p>
+    <div class="frame">
+      <iframe src={SPACE} title="GuidelineBench-OA guideline chat" loading="lazy"
+        allow="clipboard-write"></iframe>
+    </div>
+    <p class="foot">
+      Part of <b>GuidelineBench-OA</b>, a benchmark measuring whether AI faithfully restates
+      clinical-guideline recommendations. This public demo covers NICE + ACR/AF for knee
+      osteoarthritis.
+    </p>
+  </div>
+</Base>
+<style>
+  .gboa { padding-top: 38px; padding-bottom: 64px; }
+  .gboa .lead { max-width: 68ch; }
+  .gboa .note { max-width: 68ch; font-size: 0.9rem; color: var(--c-muted);
+    border-left: 3px solid var(--c-border); padding-left: 12px; margin: 14px 0 22px; }
+  .gboa .frame { border: 1px solid var(--c-border); border-radius: 12px; overflow: hidden;
+    background: var(--c-bg); }
+  .gboa .frame iframe { width: 100%; height: min(78vh, 760px); border: 0; display: block; }
+  .gboa .foot { margin-top: 18px; font-size: 0.85rem; color: var(--c-muted); max-width: 68ch; }
+</style>

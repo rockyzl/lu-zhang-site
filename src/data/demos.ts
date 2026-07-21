@@ -90,6 +90,21 @@ export const demos: Demo[] = [
     },
     tags: ["PubChem", "RDKit", "evidence gaps", "human confirmation"],
   },
+  {
+    id: "guidelinebench-oa",
+    path: "/agent/guidelinebench-oa/",
+    featured: false,
+    title: { en: "Guideline-Faithfulness Chat", zh: "指南忠实度聊天" },
+    tagline: {
+      en: "Reports clinical-guideline positions while preserving each one's official strength",
+      zh: "如实复述临床指南立场,并保住每一份的官方推荐力度",
+    },
+    summary: {
+      en: "Ask a knee-osteoarthritis question; the answer reports what NICE NG226 and ACR/AF say, re-reading each source so the recommendation strength stays faithful instead of collapsing into one confident answer. A research demo of guideline faithfulness — not medical advice.",
+      zh: "问一个膝关节炎的问题,答案如实复述 NICE NG226 和 ACR/AF 怎么说,并回读原文让推荐力度保持忠实,而不是糊成一句笃定的话。指南忠实度的研究 demo——非医疗建议。",
+    },
+    tags: ["clinical guidelines", "evidence verification", "reliability", "no medical advice"],
+  },
 ];
 
 export const liveDemos = demos;

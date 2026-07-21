@@ -1,0 +1,40 @@
+---
+import Base from "../../../layouts/Base.astro";
+const SPACE = "https://rockyaaos-guidelinebench-chat.hf.space";
+---
+<Base
+  title="GuidelineBench-OA — 指南忠实度聊天 — 张鲁 Lu Zhang · SciencesLoop"
+  description="Ask a knee-osteoarthritis question; the answer reports what NICE and ACR/AF guidelines say while preserving each one's official recommendation strength. A research demo of guideline faithfulness — not medical advice."
+>
+  <div class="container gboa">
+    <span class="eyebrow">医疗 AI · 可靠性研究</span>
+    <h1>指南忠实度聊天</h1>
+    <p class="lead">
+      指南里每条推荐都带一个官方<b>力度</b>——<i>强烈</i>、<i>有条件</i>——由指南的专家委员会
+      定。问一个膝关节炎的问题,这个 demo 会如实复述 <b>NICE NG226</b> 和 <b>ACR/AF</b> 怎么说,
+      并回读原文保住那个力度——而不是把两份指南糊成一句听起来很笃定的话。检索 → 回答 → 回读原文并改正。
+    </p>
+    <p class="note">
+      指南忠实度的研究 demo ——<b>非医疗建议</b>,不是临床工具。它带引用地复述公开指南的立场,
+      不给任何治疗建议。
+    </p>
+    <div class="frame">
+      <iframe src={SPACE} title="GuidelineBench-OA guideline chat" loading="lazy"
+        allow="clipboard-write"></iframe>
+    </div>
+    <p class="foot">
+      属于 <b>GuidelineBench-OA</b>——一套衡量 AI 能否忠实复述临床指南推荐的 benchmark。
+      本公开 demo 覆盖膝关节炎的 NICE + ACR/AF。
+    </p>
+  </div>
+</Base>
+<style>
+  .gboa { padding-top: 38px; padding-bottom: 64px; }
+  .gboa .lead { max-width: 68ch; }
+  .gboa .note { max-width: 68ch; font-size: 0.9rem; color: var(--c-muted);
+    border-left: 3px solid var(--c-border); padding-left: 12px; margin: 14px 0 22px; }
+  .gboa .frame { border: 1px solid var(--c-border); border-radius: 12px; overflow: hidden;
+    background: var(--c-bg); }
+  .gboa .frame iframe { width: 100%; height: min(78vh, 760px); border: 0; display: block; }
+  .gboa .foot { margin-top: 18px; font-size: 0.85rem; color: var(--c-muted); max-width: 68ch; }
+</style>
