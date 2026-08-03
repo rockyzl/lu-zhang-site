@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>KIT Battery Early-Warning Replay · Development OOF</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">KIT battery aging · historical replay</p>
+        <h1>Forecast capacity change three check-ups ahead</h1>
+        <p class="lede">Replay 228 measured cells along their historical timelines, then compare forecasts with and without EIS for the 180 cells eligible for paired evaluation.</p>
+      </div>
+      <label class="mode-select">
+        Evidence view
+        <select id="data-mode" aria-describedby="data-mode-note" data-data-mode="development-oof">
+          <option value="development-oof">KIT Development OOF · B vs D_CORE</option>
+          <option value="accepted-kit-oof" disabled>Final / protected test · not run</option>
+        </select>
+      </label>
+    </header>
+
+    <aside class="evidence-banner" aria-live="polite" data-development-label>
+      <strong>DEVELOPMENT OOF — not a final model or production alarm.</strong>
+      <span id="data-mode-note">Every forecast comes from a development replay that holds out complete experimental conditions; no protected test was used.</span>
+      <span><code>publication_ready=false</code>; <code>selection_performed=false</code>: comparison only, with no universal winner or causal claim.</span>
+    </aside>
+
+    <main>
+      <section class="answer-strip" aria-label="Ten-second project overview">
+        <article>
+          <span>What is predicted?</span>
+          <strong>SoH loss over the next 3 check-ups</strong>
+          <small>Target: SoH<sub>now</sub> − SoH<sub>three check-ups later</sub></small>
+        </article>
+        <article>
+          <span>Cell roster</span>
+          <strong id="overview-roster">228</strong>
+          <small id="overview-coverage">180 with paired OOF forecasts; 48 outside the current modeling conditions</small>
+        </article>
+        <article>
+          <span>Replay position</span>
+          <strong id="overview-time">Check-up 10 / 28</strong>
+          <small id="overview-exposure">Advance through recorded completed check-ups</small>
+        </article>
+        <article class="review-answer">
+          <span>Which cell should we inspect?</span>
+          <strong id="overview-review-cell">Calculating</strong>
+          <small id="overview-review-reason">Ranked by model disagreement for research review only</small>
+        </article>
+      </section>
+
+      <section class="model-finding development-panel" aria-labelledby="finding-title">
+        <div>
+          <span class="development-chip" data-development-label>Condition-held-out development OOF</span>
+          <h2 id="finding-title">Core question: does adding EIS improve the forecast?</h2>
+          <p><b>There is no single answer.</b> Error deltas are D_CORE − B: negative means lower error after adding EIS; positive means higher error. These are paired development comparisons on the same snapshots, folds, and model family—not a causal test.</p>
+        </div>
+        <div id="mode-scorecards" class="mode-scorecards" aria-label="Compare B and D_CORE by aging mode and model family"></div>
+      </section>
+
+      <section class="comparison-panel development-panel" aria-labelledby="comparison-title">
+        <div class="panel-heading">
+          <div>
+            <span class="development-chip" data-development-label>Paired EIS increment study · primary policy</span>
+            <h2 id="comparison-title">Six paired results: EIS can help, hurt, or remain uncertain</h2>
+          </div>
+          <p>MAE and RMSE are in SoH percentage points; R² is a supporting metric.</p>
+        </div>
+        <div id="eis-comparison-grid" class="eis-comparison-grid"></div>
+        <details>
+          <summary>Why can't we simply say “EIS works” or “EIS does not work”?</summary>
+          <p>Aging modes and model families point in different directions. When the 95% interval crosses zero, the current development evidence cannot establish a direction. The bootstrap resamples complete conditions; 2,000 draws do not become 2,000 new cells.</p>
+        </details>
+      </section>
+
+      <section class="replay-panel development-panel" aria-labelledby="replay-title">
+        <div class="panel-heading">
+          <div>
+            <span class="development-chip" data-development-label>Development OOF · not final</span>
+            <h2 id="replay-title">Reveal the history one check-up at a time</h2>
+          </div>
+          <p id="replay-position" class="position-label"></p>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Aging mode">
+          <button id="tab-all" role="tab" aria-selected="true" aria-controls="fleet-panel" data-mode="all">All 228 cells</button>
+          <button id="tab-calendar" role="tab" aria-selected="false" aria-controls="fleet-panel" data-mode="calendar">Calendar aging</button>
+          <button id="tab-cyclic" role="tab" aria-selected="false" aria-controls="fleet-panel" data-mode="cyclic">Cyclic aging</button>
+          <button id="tab-profile" role="tab" aria-selected="false" aria-controls="fleet-panel" data-mode="profile">Driving-profile aging</button>
+        </div>
+
+        <div class="playback-controls">
+          <button id="replay-prev" aria-label="Previous check-up">← Previous</button>
+          <button id="replay-play" aria-pressed="false" aria-label="Play historical replay">▶ Play</button>
+          <button id="replay-next" aria-label="Next check-up">Next →</button>
+          <label class="slider-label" for="replay-slider">
+            Check-up <output id="checkup-output" for="replay-slider">10</output>
+          </label>
+          <input id="replay-slider" type="range" min="0" max="28" value="10" step="1" />
+          <label>
+            Speed
+            <select id="replay-speed">
+              <option value="1200">Slow</option>
+              <option value="700" selected>Normal</option>
+              <option value="350">Fast</option>
+            </select>
+          </label>
+          <label>
+            Model family
+            <select id="model-family">
+              <option value="hgb">HGB</option>
+              <option value="elasticNet">ElasticNet</option>
+            </select>
+          </label>
+        </div>
+        <p class="microcopy">“Check-up” is the observation order, not a shared number of days, equivalent full cycles, or kilometers. Each cell retains its own elapsed days. D_CORE uses EIS matched to the current check-up; this artifact does not include mileage.</p>
+      </section>
+
+      <section class="workspace">
+        <section id="fleet-panel" class="fleet-panel development-panel" role="tabpanel" aria-labelledby="tab-all">
+          <div class="panel-heading fleet-heading">
+            <div>
+              <span class="development-chip" data-development-label>228 real KIT cells · development replay</span>
+              <h2 id="fleet-title">What does the fleet look like at this moment?</h2>
+            </div>
+            <p id="fleet-count"></p>
+          </div>
+          <div class="legend" aria-label="Data-status legend">
+            <span><i class="dot eligible"></i> Paired B / D_CORE forecast available</span>
+            <span><i class="dot history"></i> Insufficient history</span>
+            <span><i class="dot h3"></i> No third future check-up</span>
+            <span><i class="dot unavailable"></i> No record at this check-up</span>
+            <span><i class="dot attention"></i> Research review suggested (model disagreement)</span>
+          </div>
+          <div id="fleet-grid" class="fleet-grid" aria-label="Matrix of 228 cells" data-roster-size="228"></div>
+        </section>
+
+        <aside class="queue-panel development-panel" aria-labelledby="queue-title">
+          <span class="development-chip" data-development-label>Development review · not an alarm</span>
+          <h2 id="queue-title">Research review queue</h2>
+          <p class="microcopy">Prioritizes records where the same model changes most after adding EIS. This is not a failure probability or replacement recommendation.</p>
+          <div id="queue-summary" class="queue-summary"></div>
+          <ol id="review-queue" class="review-queue"></ol>
+        </aside>
+      </section>
+
+      <section class="detail-panel development-panel" aria-labelledby="detail-title">
+        <div class="panel-heading">
+          <div>
+            <span class="development-chip" data-development-label>Selected cell · Development OOF</span>
+            <h2 id="detail-title">Selected cell: from measurement to forecast</h2>
+          </div>
+          <p id="cell-identity"></p>
+        </div>
+
+        <div class="process-steps" aria-label="Forecasting process">
+          <span><b>1</b> Read capacity history available now</span>
+          <span><b>2</b> Run the same model with B and D_CORE</span>
+          <span><b>3</b> Reveal the measured answer three check-ups later</span>
+        </div>
+
+        <div class="metric-grid">
+          <article><span>Measured capacity now</span><strong id="current-capacity"></strong><small id="q0-capacity"></small></article>
+          <article><span>Measured SoH now</span><strong id="current-soh"></strong><small>SoH = current capacity ÷ initial capacity</small></article>
+          <article class="model-metric b-view"><span id="b-view-label">B: forecast loss / future SoH</span><strong id="b-forecast"></strong><small id="b-note"></small></article>
+          <article class="model-metric d-core-view"><span id="d-core-label">D_CORE: forecast loss / future SoH</span><strong id="d-core-forecast"></strong><small id="d-core-note"></small></article>
+        </div>
+        <p id="prediction-explanation" class="plain-explanation"></p>
+
+        <div class="detail-layout">
+          <div class="history-card">
+            <h3>Measured capacity history available at this moment</h3>
+            <svg id="history-chart" viewBox="0 0 620 250" role="img" aria-labelledby="chart-title chart-desc">
+              <title id="chart-title">KIT cell history and future SoH forecasts from two feature views</title>
+              <desc id="chart-desc">The solid line is measured history visible now; dashed lines connect B and D_CORE future forecast points.</desc>
+              <g id="chart-grid"></g>
+              <g id="chart-labels"></g>
+              <polyline id="history-line" points="" fill="none" stroke="currentColor" stroke-width="3"></polyline>
+              <line id="b-forecast-line" class="forecast-line b-line" x1="0" y1="0" x2="0" y2="0"></line>
+              <line id="d-core-forecast-line" class="forecast-line d-core-line" x1="0" y1="0" x2="0" y2="0"></line>
+              <g id="history-points"></g>
+              <g id="forecast-points"></g>
+            </svg>
+            <div class="chart-legend"><span class="measured-key">Measured</span><span class="b-key">B forecast</span><span class="d-core-key">D_CORE (B + EIS) forecast</span></div>
+            <p class="microcopy">Forecast points are not measurements; future measured data to the right of the current timeline remain hidden.</p>
+          </div>
+
+          <div class="maturation-column">
+            <div class="maturation-card" aria-live="polite">
+              <h3>Three check-ups later: compare with the measured answer</h3>
+              <div id="maturation-state" data-h3-maturity="locked"></div>
+            </div>
+            <div id="cell-statuses" class="status-strip"></div>
+            <p id="view-status" class="empty-message"></p>
+          </div>
+        </div>
+
+        <details>
+          <summary>Technical details and provenance</summary>
+          <dl class="technical-list">
+            <dt>Evidence level</dt><dd>KIT condition-held-out DEVELOPMENT OOF; not a protected test.</dd>
+            <dt>Primary target</dt><dd><code>soh_loss_pp_h3 = SoH_t - SoH_t+3</code></dd>
+            <dt>Feature views</dt><dd>B: capacity history + context; D_CORE: B + EIS matched to the current check-up.</dd>
+            <dt>Grouping</dt><dd>Complete experimental conditions are held out; three cells from one condition do not cross training and validation.</dd>
+            <dt>Model selection</dt><dd><code>selection_performed=false</code>; the page compares B and D_CORE within the same model family.</dd>
+            <dt>Sensitivity</dt><dd>Primary and keep-last acquisition policies give the same six deltas; timestamp/retry semantics remain provisional.</dd>
+            <dt>Cell / fold</dt><dd id="technical-cell"></dd>
+            <dt>Source artifact</dt><dd id="technical-artifact"></dd>
+          </dl>
+        </details>
+      </section>
+
+      <p class="required-disclosure">
+        KIT historical-data replay. This page shows condition-held-out development OOF estimates—not a physical simulation, live monitor, protected external test, fault diagnosis, or battery-replacement recommendation. The difference between B and D_CORE is not a causal effect of EIS.
+        Source: KIT's <a href="https://doi.org/10.35097/1947" target="_blank" rel="noopener">Comprehensive battery aging dataset</a>, licensed <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>; dataset description: <a href="https://doi.org/10.1038/s41597-024-03831-x" target="_blank" rel="noopener">Scientific Data (2024)</a>.
+      </p>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

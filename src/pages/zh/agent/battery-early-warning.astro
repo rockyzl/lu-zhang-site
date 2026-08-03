@@ -1,0 +1,17 @@
+---
+import Base from "../../../layouts/Base.astro";
+import BatteryEarlyWarningDemo from "../../../components/BatteryEarlyWarningDemo.astro";
+---
+
+<Base
+  title="电池早期预警回放 — KIT EIS Benchmark — 张鲁 Lu Zhang"
+  description="回放 228 个 KIT 实测电芯，在不同老化模式和模型家族中比较加入 EIS 前后的 condition-held-out development OOF 预测。"
+>
+  <div class="container kit-page">
+    <BatteryEarlyWarningDemo locale="zh" />
+  </div>
+</Base>
+
+<style>
+  .kit-page { padding-top: 38px; padding-bottom: 64px; }
+</style>

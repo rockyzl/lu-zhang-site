@@ -6,13 +6,14 @@
   "scripts": {
     "dev": "astro dev",
     "clean": "rm -rf .astro dist",
-    "build": "npm run clean && astro build",
+    "build": "npm run clean && astro build && npm run registry:check",
     "preview": "astro preview",
     "data": "python3 scripts/parse_md.py && python3 scripts/fetch_openalex.py",
     "new:post": "node scripts/new_blog_post.mjs",
     "daily:radar": "node scripts/daily_ai_radar.mjs",
     "daily:signal": "node scripts/daily_signal.mjs",
     "content:guard": "node scripts/content_guard.mjs",
+    "registry:check": "node scripts/validate_demo_registry.mjs",
     "check": "npm run content:guard && npm run build",
     "cv": "npm run build && python3 scripts/generate_cv.py"
   },

@@ -10,6 +10,13 @@ export type Demo = {
   tags: string[];
 };
 
+export type PublicDemoRegistrySnapshot = {
+  readonly schemaVersion: "sciencesloop.demo-registry.v1";
+  readonly demos: Demo[];
+};
+
+export const DEMO_REGISTRY_SCHEMA_VERSION = "sciencesloop.demo-registry.v1" as const;
+
 // Single public index for live demos. Pages derive their cards and links from
 // this file so adding a demo does not require editing the home, Projects, and
 // Agent-index pages separately.
@@ -105,6 +112,40 @@ export const demos: Demo[] = [
     },
     tags: ["clinical guidelines", "evidence verification", "reliability", "no medical advice"],
   },
+  {
+    id: "kit-battery-early-warning",
+    path: "/agent/battery-early-warning/",
+    articlePath: "/blog/2026-08-03-can-eis-improve-battery-early-warning/",
+    repoUrl: "https://github.com/rockyzl/battery-eis-soh-benchmark/tree/protocol/soh-target-v2",
+    featured: true,
+    title: { en: "Battery Early-Warning Replay", zh: "电池早期预警回放" },
+    tagline: {
+      en: "Replay 228 measured cells and test whether EIS improves a three-check-up-ahead forecast",
+      zh: "回放 228 个实测电芯，检验 EIS 能否改善未来三次检查的预测",
+    },
+    summary: {
+      en: "Move through KIT cell histories, compare matched development OOF forecasts with and without EIS, and reveal the measured answer three check-ups later. Results vary by aging mode and model; this is not a production alarm.",
+      zh: "沿 KIT 电芯历史逐步回放，对比加入 EIS 前后的配对 development OOF 预测，并在三次检查后打开实测答案。结果随老化方式和模型而变，不是生产报警。",
+    },
+    tags: ["battery reliability", "EIS", "condition-held-out OOF", "interactive replay"],
+  },
 ];
 
 export const liveDemos = demos;
+
+// Build-derived public snapshot for non-Astro consumers. Keep `demos` above as
+// the only authored registry; never hand-maintain a parallel JSON file.
+export const publicDemoRegistrySnapshot: PublicDemoRegistrySnapshot = {
+  schemaVersion: DEMO_REGISTRY_SCHEMA_VERSION,
+  demos: demos.map((demo) => ({
+    id: demo.id,
+    path: demo.path,
+    ...(demo.articlePath ? { articlePath: demo.articlePath } : {}),
+    ...(demo.repoUrl ? { repoUrl: demo.repoUrl } : {}),
+    featured: demo.featured,
+    title: { ...demo.title },
+    tagline: { ...demo.tagline },
+    summary: { ...demo.summary },
+    tags: [...demo.tags],
+  })),
+};
