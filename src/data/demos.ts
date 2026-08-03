@@ -124,8 +124,8 @@ export const demos: Demo[] = [
       zh: "回放 228 个实测电芯，检验 EIS 能否改善未来三次检查的预测",
     },
     summary: {
-      en: "Move through KIT cell histories, compare matched development OOF forecasts with and without EIS, and reveal the measured answer three check-ups later. Results vary by aging mode and model; this is not a production alarm.",
-      zh: "沿 KIT 电芯历史逐步回放，对比加入 EIS 前后的配对 development OOF 预测，并在三次检查后打开实测答案。结果随老化方式和模型而变，不是生产报警。",
+      en: "Replay transformed, derived data from Luh and Blank's KIT v2 result dataset, compare matched development OOF forecasts with and without EIS, and reveal the measured answer three check-ups later. Results vary by aging mode and model; this is not a production alarm.",
+      zh: "回放由 Luh 与 Blank 的 KIT v2 结果数据转换而来的派生数据，对比加入 EIS 前后的配对 development OOF 预测，并在三次检查后打开实测答案。结果随老化方式和模型而变，不是生产报警。",
     },
     tags: ["battery reliability", "EIS", "condition-held-out OOF", "interactive replay"],
   },

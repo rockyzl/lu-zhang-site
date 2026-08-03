@@ -12,7 +12,7 @@ const articlePath = isZh
   ? "/zh/blog/2026-08-03-can-eis-improve-battery-early-warning-zh/"
   : "/blog/2026-08-03-can-eis-improve-battery-early-warning/";
 const repoUrl = "https://github.com/rockyzl/battery-eis-soh-benchmark/tree/protocol/soh-target-v2";
-const datasetUrl = "https://doi.org/10.35097/1947";
+const datasetUrl = "https://doi.org/10.35097/1969";
 const paperUrl = "https://doi.org/10.1038/s41597-024-03831-x";
 const licenseUrl = "https://creativecommons.org/licenses/by/4.0/";
 
@@ -22,6 +22,7 @@ const copy = isZh
       title: "哪些电池正在偏离？EIS 能不能让预警更准？",
       lead: "拖动检查进度，让 228 个 KIT 实测电芯沿历史时间线一起老化。页面会在每个时点比较两个特征视图：B 只使用容量历史和实验背景，D_CORE 在同一个模型上再加入当前 EIS。三次检查以后，再用后来测到的 SoH 回头核对当时的预测。",
       state: "Development OOF · 非最终模型 · 非生产报警",
+      attribution: "数据署名：Matthias Luh 与 Thomas Blank（2024）。本页面使用的是经过转换的派生回放数据。",
       howTitle: "你可以怎么操作",
       how: [
         "按播放，观察 228 个电芯随着检查推进而变化。",
@@ -38,8 +39,8 @@ const copy = isZh
       article: "阅读完整项目文章 →",
       repo: "查看代码、训练协议与审计证据 →",
       sourceTitle: "数据与使用边界",
-      source: "数据来自 KIT 公开 NMC/C-SiO 电芯老化数据集（CC BY 4.0）。页面展示 condition-held-out development out-of-fold 预测；没有运行 protected test，也没有进行最终模型选择。它不是实时电池监控、故障概率、因果分析或换电池建议。所有数据和交互都作为静态文件在浏览器内运行，不调用外部预测 API。",
-      dataset: "KIT 数据集",
+      source: "源数据为 Matthias Luh 与 Thomas Blank（2024）发布的 KIT v2 processed result data（CC BY 4.0）；本页面把其中的结果表转换成派生的静态回放数据。页面展示 condition-held-out development out-of-fold 预测；没有运行 protected test，也没有进行最终模型选择。它不是实时电池监控、故障概率、因果分析或换电池建议。所有数据和交互都在浏览器内运行，不调用外部预测 API。",
+      dataset: "KIT v2 结果数据",
       paper: "数据说明论文",
       license: "CC BY 4.0",
     }
@@ -48,6 +49,7 @@ const copy = isZh
       title: "Which cells are drifting—and does EIS improve the warning?",
       lead: "Move through the check-ups and watch 228 measured KIT cells age along their historical timelines. At each point, the page compares two feature views: B uses capacity history and experimental context; D_CORE adds current EIS to the same model. Three check-ups later, the forecast is checked against the SoH that was actually measured.",
       state: "Development OOF · not a final model · not a production alarm",
+      attribution: "Source attribution: Matthias Luh and Thomas Blank (2024). This page uses transformed, derived replay data.",
       howTitle: "What you can do",
       how: [
         "Press play to move all 228 cells through their recorded check-ups.",
@@ -64,8 +66,8 @@ const copy = isZh
       article: "Read the complete project article →",
       repo: "View code, training protocol, and audit evidence →",
       sourceTitle: "Data and interpretation boundary",
-      source: "Data come from KIT's public NMC/C-SiO cell-aging dataset (CC BY 4.0). The page shows condition-held-out development out-of-fold forecasts. No protected test or final model selection has been performed. This is not live battery monitoring, a failure probability, a causal analysis, or a replacement recommendation. Data and interactions run as static browser assets with no external prediction API.",
-      dataset: "KIT dataset",
+      source: "The source is KIT v2 processed result data published by Matthias Luh and Thomas Blank (2024) under CC BY 4.0; this page transforms its result tables into derived static replay data. The page shows condition-held-out development out-of-fold forecasts. No protected test or final model selection has been performed. This is not live battery monitoring, a failure probability, a causal analysis, or a replacement recommendation. Data and interactions run in the browser with no external prediction API.",
+      dataset: "KIT v2 result data",
       paper: "Dataset paper",
       license: "CC BY 4.0",
     };
@@ -77,6 +79,11 @@ const copy = isZh
     <h1>{copy.title}</h1>
     <p class="kit-lead">{copy.lead}</p>
     <span class="kit-state">{copy.state}</span>
+    <p class="kit-attribution">
+      {copy.attribution}
+      <a href={datasetUrl} target="_blank" rel="noopener">{copy.dataset} ↗</a>
+      <a href={licenseUrl} target="_blank" rel="noopener">{copy.license} ↗</a>
+    </p>
   </header>
 
   <div class="kit-explainer">
@@ -133,6 +140,8 @@ const copy = isZh
     display: inline-block; border: 1px solid #d6a758; border-radius: 999px;
     padding: 5px 11px; background: #fff0cf; color: #704300; font-size: .76rem; font-weight: 800;
   }
+  .kit-attribution { max-width: 78ch; margin: 12px 0 0; color: var(--muted); font-size: .82rem; line-height: 1.55; }
+  .kit-attribution a { margin-left: 8px; white-space: nowrap; }
   .kit-explainer { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0 18px; }
   .kit-explainer article, .kit-boundary {
     border: 1px solid var(--line); border-radius: 16px; background: var(--card); padding: 20px;
