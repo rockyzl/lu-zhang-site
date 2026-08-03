@@ -1,0 +1,163 @@
+---
+import { u } from "../lib/url";
+import type { Locale } from "../lib/i18n";
+
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const isZh = locale === "zh";
+
+const demoPath = isZh
+  ? "/demos/kit-battery-early-warning/zh.html"
+  : "/demos/kit-battery-early-warning/index.html";
+const articlePath = isZh
+  ? "/zh/blog/2026-08-03-can-eis-improve-battery-early-warning-zh/"
+  : "/blog/2026-08-03-can-eis-improve-battery-early-warning/";
+const repoUrl = "https://github.com/rockyzl/battery-eis-soh-benchmark/tree/protocol/soh-target-v2";
+const datasetUrl = "https://doi.org/10.35097/1947";
+const paperUrl = "https://doi.org/10.1038/s41597-024-03831-x";
+const licenseUrl = "https://creativecommons.org/licenses/by/4.0/";
+
+const copy = isZh
+  ? {
+      eyebrow: "电池可靠性 · KIT 历史数据回放",
+      title: "哪些电池正在偏离？EIS 能不能让预警更准？",
+      lead: "拖动检查进度，让 228 个 KIT 实测电芯沿历史时间线一起老化。页面会在每个时点比较两个特征视图：B 只使用容量历史和实验背景，D_CORE 在同一个模型上再加入当前 EIS。三次检查以后，再用后来测到的 SoH 回头核对当时的预测。",
+      state: "Development OOF · 非最终模型 · 非生产报警",
+      howTitle: "你可以怎么操作",
+      how: [
+        "按播放，观察 228 个电芯随着检查推进而变化。",
+        "切换 calendar、cyclic 和 driving-profile 三种老化方式。",
+        "切换 HGB / ElasticNet，看模型选择如何改变 EIS 的增量价值。",
+        "点任意电芯，查看容量历史、未来 SoH 预测，以及三次检查后的真实核对结果。",
+      ],
+      questionTitle: "这个 Demo 真正在问什么",
+      question: "它不只是预测当前 SoH——当前容量测量本身已经能给出 SoH。更有用的问题是：只使用截至现在的数据，能否预测未来第三次检查时会损失多少 SoH；加入 EIS 后，这个未来预测是否稳定地变好？",
+      resultTitle: "目前最诚实的答案",
+      result: "没有统一答案。对 cyclic aging 的 HGB，加入 EIS 后 MAE 下降 0.625 个 SoH 百分点；但 cyclic ElasticNet 明显变差，calendar 基本没有变化，profile 结果混合。这说明 EIS 的价值依赖老化方式和模型，不能宣传成普遍提升。",
+      frameTitle: "KIT 电池早期预警交互式回放",
+      full: "全屏打开交互 Demo ↗",
+      article: "阅读完整项目文章 →",
+      repo: "查看代码、训练协议与审计证据 →",
+      sourceTitle: "数据与使用边界",
+      source: "数据来自 KIT 公开 NMC/C-SiO 电芯老化数据集（CC BY 4.0）。页面展示 condition-held-out development out-of-fold 预测；没有运行 protected test，也没有进行最终模型选择。它不是实时电池监控、故障概率、因果分析或换电池建议。所有数据和交互都作为静态文件在浏览器内运行，不调用外部预测 API。",
+      dataset: "KIT 数据集",
+      paper: "数据说明论文",
+      license: "CC BY 4.0",
+    }
+  : {
+      eyebrow: "Battery reliability · KIT historical-data replay",
+      title: "Which cells are drifting—and does EIS improve the warning?",
+      lead: "Move through the check-ups and watch 228 measured KIT cells age along their historical timelines. At each point, the page compares two feature views: B uses capacity history and experimental context; D_CORE adds current EIS to the same model. Three check-ups later, the forecast is checked against the SoH that was actually measured.",
+      state: "Development OOF · not a final model · not a production alarm",
+      howTitle: "What you can do",
+      how: [
+        "Press play to move all 228 cells through their recorded check-ups.",
+        "Switch among calendar, cyclic, and driving-profile aging.",
+        "Switch HGB / ElasticNet to see how model choice changes EIS's incremental value.",
+        "Select any cell to inspect capacity history, future-SoH forecasts, and the measured answer three check-ups later.",
+      ],
+      questionTitle: "What the demo is actually asking",
+      question: "It is not merely estimating current SoH—the measured capacity already gives that. The useful question is whether data available now can forecast the SoH loss three check-ups ahead, and whether adding EIS improves that future forecast consistently.",
+      resultTitle: "The most honest answer so far",
+      result: "There is no universal gain. For cyclic aging with HGB, adding EIS lowers MAE by 0.625 SoH percentage points. But cyclic ElasticNet gets clearly worse, calendar is essentially unchanged, and profile results are mixed. EIS value depends on aging mode and model family.",
+      frameTitle: "Interactive KIT battery early-warning replay",
+      full: "Open the interactive demo full screen ↗",
+      article: "Read the complete project article →",
+      repo: "View code, training protocol, and audit evidence →",
+      sourceTitle: "Data and interpretation boundary",
+      source: "Data come from KIT's public NMC/C-SiO cell-aging dataset (CC BY 4.0). The page shows condition-held-out development out-of-fold forecasts. No protected test or final model selection has been performed. This is not live battery monitoring, a failure probability, a causal analysis, or a replacement recommendation. Data and interactions run as static browser assets with no external prediction API.",
+      dataset: "KIT dataset",
+      paper: "Dataset paper",
+      license: "CC BY 4.0",
+    };
+---
+
+<section class="kit-demo">
+  <header class="kit-hero">
+    <p class="kit-eyebrow">{copy.eyebrow}</p>
+    <h1>{copy.title}</h1>
+    <p class="kit-lead">{copy.lead}</p>
+    <span class="kit-state">{copy.state}</span>
+  </header>
+
+  <div class="kit-explainer">
+    <article>
+      <h2>{copy.howTitle}</h2>
+      <ol>
+        {copy.how.map((step) => <li>{step}</li>)}
+      </ol>
+    </article>
+    <article>
+      <h2>{copy.questionTitle}</h2>
+      <p>{copy.question}</p>
+      <h2>{copy.resultTitle}</h2>
+      <p>{copy.result}</p>
+    </article>
+  </div>
+
+  <div class="kit-frame-shell">
+    <iframe
+      src={u(demoPath)}
+      title={copy.frameTitle}
+      loading="eager"
+    ></iframe>
+  </div>
+  <p class="kit-full"><a href={u(demoPath)} target="_blank" rel="noopener">{copy.full}</a></p>
+
+  <aside class="kit-boundary">
+    <div>
+      <h2>{copy.sourceTitle}</h2>
+      <p>{copy.source}</p>
+      <p class="kit-sources">
+        <a href={datasetUrl} target="_blank" rel="noopener">{copy.dataset} ↗</a>
+        <a href={paperUrl} target="_blank" rel="noopener">{copy.paper} ↗</a>
+        <a href={licenseUrl} target="_blank" rel="noopener">{copy.license} ↗</a>
+      </p>
+    </div>
+    <nav aria-label={isZh ? "项目链接" : "Project links"}>
+      <a href={u(articlePath)}>{copy.article}</a>
+      <a href={repoUrl} target="_blank" rel="noopener">{copy.repo}</a>
+    </nav>
+  </aside>
+</section>
+
+<style>
+  .kit-demo { max-width: 1240px; margin: 0 auto; }
+  .kit-hero { max-width: 890px; }
+  .kit-eyebrow {
+    margin: 0 0 8px; color: var(--accent); font-size: .76rem;
+    font-weight: 800; letter-spacing: .11em; text-transform: uppercase;
+  }
+  .kit-hero h1 { max-width: 18ch; margin: 0 0 14px; font-size: clamp(2.2rem, 5vw, 4.4rem); line-height: 1.02; }
+  .kit-lead { max-width: 76ch; margin: 0 0 13px; color: var(--muted); font-size: 1.04rem; line-height: 1.7; }
+  .kit-state {
+    display: inline-block; border: 1px solid #d6a758; border-radius: 999px;
+    padding: 5px 11px; background: #fff0cf; color: #704300; font-size: .76rem; font-weight: 800;
+  }
+  .kit-explainer { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0 18px; }
+  .kit-explainer article, .kit-boundary {
+    border: 1px solid var(--line); border-radius: 16px; background: var(--card); padding: 20px;
+  }
+  .kit-explainer h2, .kit-boundary h2 { margin: 0 0 9px; font-size: 1rem; }
+  .kit-explainer p, .kit-explainer li, .kit-boundary p { color: var(--muted); line-height: 1.6; }
+  .kit-explainer ol { margin: 0; padding-left: 21px; }
+  .kit-explainer li + li { margin-top: 5px; }
+  .kit-explainer article h2:not(:first-child) { margin-top: 17px; }
+  .kit-frame-shell {
+    height: min(1120px, 82vh); min-height: 760px; overflow: hidden;
+    border: 1px solid var(--line); border-radius: 18px; background: #f5f2e9;
+    box-shadow: 0 18px 55px rgb(29 45 37 / 9%);
+  }
+  .kit-frame-shell iframe { display: block; width: 100%; height: 100%; border: 0; }
+  .kit-full { margin: 9px 0 24px; text-align: right; font-size: .86rem; }
+  .kit-boundary { display: grid; grid-template-columns: 1.5fr .8fr; gap: 24px; }
+  .kit-boundary p { margin: 0; }
+  .kit-sources { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 12px !important; font-size: .86rem; }
+  .kit-boundary nav { display: grid; align-content: center; gap: 10px; }
+  .kit-boundary nav a { border-bottom: 1px solid var(--line); padding-bottom: 8px; font-weight: 750; }
+  @media (max-width: 760px) {
+    .kit-explainer, .kit-boundary { grid-template-columns: 1fr; }
+    .kit-hero h1 { max-width: none; }
+    .kit-frame-shell { height: 860px; min-height: 0; border-radius: 12px; }
+    .kit-full { text-align: left; }
+  }
+</style>

@@ -1,0 +1,17 @@
+---
+import Base from "../../layouts/Base.astro";
+import BatteryEarlyWarningDemo from "../../components/BatteryEarlyWarningDemo.astro";
+---
+
+<Base
+  title="Battery Early-Warning Replay — KIT EIS benchmark — Lu Zhang"
+  description="Replay 228 measured KIT battery cells and compare condition-held-out development OOF forecasts with and without EIS across aging modes and model families."
+>
+  <div class="container kit-page">
+    <BatteryEarlyWarningDemo locale="en" />
+  </div>
+</Base>
+
+<style>
+  .kit-page { padding-top: 38px; padding-bottom: 64px; }
+</style>
