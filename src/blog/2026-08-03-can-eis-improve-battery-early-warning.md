@@ -21,9 +21,11 @@ The comparison produced a result I trust more than a tidy leaderboard: adding EI
 
 You can inspect that behavior in the [interactive 228-cell replay](/agent/battery-early-warning/). It is a historical development replay, not a live battery monitor.
 
+The source result data were published by Matthias Luh and Thomas Blank (2024) under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The interface uses transformed, derived replay data rather than presenting the source tables unchanged.
+
 ## The data and the prediction target
 
-The project uses the public [KIT battery ageing result data](https://publikationen.bibliothek.kit.edu/1000169196) and its [data descriptor](https://doi.org/10.1038/s41597-024-03831-x). The study contains 228 commercial NMC/C+SiO cells tested under 76 operating conditions, with three physical replicate cells per condition. Repeated diagnostic check-ups include capacity, EIS, and pulse measurements. I did not create this source dataset; this is an independent reconstruction and is not an official KIT study.
+The project uses the public [KIT v2 processed result data](https://doi.org/10.35097/1969) and its [data descriptor](https://doi.org/10.1038/s41597-024-03831-x). The study contains 228 commercial NMC/C+SiO cells tested under 76 operating conditions, with three physical replicate cells per condition. Repeated diagnostic check-ups include capacity, EIS, and pulse measurements. I did not create this source dataset; this is an independent reconstruction and is not an official KIT study.
 
 The cells age in three different ways:
 

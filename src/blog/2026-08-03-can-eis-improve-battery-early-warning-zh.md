@@ -21,9 +21,11 @@ tags:
 
 这些结果可以在 [228 个电芯的交互式历史回放](/zh/agent/battery-early-warning/) 中查看。它是开发阶段的历史回放，不是实时电池监控系统。
 
+源结果数据由 Matthias Luh 与 Thomas Blank（2024）发布，许可为 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)。界面使用的是经过转换的派生回放数据，并不是把源结果表原样展示出来。
+
 ## 数据是什么，模型预测什么
 
-项目使用公开的 [KIT battery ageing result data](https://publikationen.bibliothek.kit.edu/1000169196) 和相应的 [data descriptor](https://doi.org/10.1038/s41597-024-03831-x)。数据包括 228 个 commercial NMC/C+SiO 电芯、76 种 operating conditions，每种条件有 3 个真实重复电芯。电芯在寿命过程中接受多次标准检查，结果包括容量、EIS 和 pulse measurements。这份源数据不是我创建的；这里是独立重建，也不是 KIT 官方研究。
+项目使用公开的 [KIT v2 processed result data](https://doi.org/10.35097/1969) 和相应的 [data descriptor](https://doi.org/10.1038/s41597-024-03831-x)。数据包括 228 个 commercial NMC/C+SiO 电芯、76 种 operating conditions，每种条件有 3 个真实重复电芯。电芯在寿命过程中接受多次标准检查，结果包括容量、EIS 和 pulse measurements。这份源数据不是我创建的；这里是独立重建，也不是 KIT 官方研究。
 
 数据里有三种不同的老化过程：
 
