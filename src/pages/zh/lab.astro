@@ -15,6 +15,41 @@ const badgeClass = (status) => {
   return "priv";
 };
 
+// Lab is a curated research map, not a mirror of every public demo. Keep the
+// selection explicit by stable registry ID, while deriving public copy and
+// routes from the shared demo registry.
+const MOLECULAR_DEMO_IDS = [
+  "chemgraph-loop",
+  "molecular-property-predictor",
+  "redox-rfb-predictor",
+  "molecular-discovery-workflow",
+];
+const TRUSTWORTHY_AI_DEMO_IDS = [
+  "condition-monitoring",
+  "kit-battery-early-warning",
+  "preventive-health-model-lab",
+  "guidelinebench-oa",
+];
+
+const registryDemoCards = (ids: string[]) => ids.flatMap((id) => {
+  const demo = liveDemos.find((candidate) => candidate.id === id);
+  if (!demo) return [];
+  return [{
+    name: isZh ? demo.title.zh : demo.title.en,
+    tagline_en: demo.tagline.en,
+    tagline_zh: demo.tagline.zh,
+    desc_en: demo.summary.en,
+    desc_zh: demo.summary.zh,
+    status_en: "Live demo",
+    status_zh: "在线 Demo",
+    tags: demo.tags,
+    href: u(`${lp}${demo.path}`),
+    external: false,
+    cta_en: "Try the live demo",
+    cta_zh: "试用 Demo",
+  }];
+});
+
 // The two long-term lines ("rivers"). Public-safe by construction: cards link
 // only to live demos or public repos. Private work may have a high-level
 // project summary, but never a repository link.
@@ -26,20 +61,7 @@ const rivers = [
     star_en: "Toward a trustworthy, reproducible system that reasons about molecular properties — from agentic chemistry workflows to foundation-model benchmarks to redox / battery-relevant candidates.",
     star_zh: "朝着一个可信、可复现、能对分子性质做推理的系统 —— 从 agentic 化学工作流，到基础模型 benchmark，再到氧化还原 / 电池相关候选分子。",
     items: [
-      ...liveDemos.filter((demo) => ["chemgraph-loop", "molecular-property-predictor", "redox-rfb-predictor"].includes(demo.id)).map((demo) => ({
-        name: isZh ? demo.title.zh : demo.title.en,
-        tagline_en: demo.tagline.en,
-        tagline_zh: demo.tagline.zh,
-        desc_en: demo.summary.en,
-        desc_zh: demo.summary.zh,
-        status_en: "Live demo",
-        status_zh: "在线 Demo",
-        tags: demo.tags,
-        href: u(`${lp}${demo.path}`),
-        external: false,
-        cta_en: "Try the live demo",
-        cta_zh: "试用 Demo",
-      })),
+      ...registryDemoCards(MOLECULAR_DEMO_IDS),
       {
         name: "Property-Aware Molecular Discovery Agent",
         tagline_en: "A forward/reverse molecular-discovery core",
@@ -91,48 +113,7 @@ const rivers = [
         cta_en: "See on GitHub",
         cta_zh: "在 GitHub 查看",
       },
-      {
-        name: "Condition-Monitoring Agent",
-        tagline_en: "A deterministic predictive-maintenance pipeline you can run live",
-        tagline_zh: "一个可以现场跑的确定性预测维护管道",
-        desc_en: "A deterministic pipeline agent runs a 10-stage remaining-useful-life analysis on public NASA turbofan data — with human-in-the-loop decision gates, evidence-backed decision cards, and cited diagnostics. No LLM in the default path; every result re-derives from a named artifact.",
-        desc_zh: "一个确定性管道智能体在 NASA 公开涡扇发动机数据上跑 10 阶段剩余寿命分析 —— 带人在环决策把关、带证据的决策卡、带引用的诊断。默认路径无 LLM；每个结果都能回溯到具体产物。",
-        status_en: "Live demo",
-        status_zh: "在线 Demo",
-        tags: ["deterministic pipeline", "human-in-the-loop", "auditable trace"],
-        href: u(`${lp}/agent/condition-monitoring/`),
-        external: false,
-        cta_en: "Try the live demo",
-        cta_zh: "试用 Demo",
-      },
-      {
-        name: "Preventive Health Model Lab",
-        tagline_en: "A QLoRA fine-tuning study you can inspect end-to-end",
-        tagline_zh: "一个能从头看到尾的 QLoRA 微调研究",
-        desc_en: "The same synthetic preventive-health task and QLoRA recipe run on Gemma 3 and its medical sibling MedGemma on one 8GB GPU, scored before and after fine-tuning. The held-out evaluation measures format, safety wording, and numeric grounding. Nonclinical; it does not establish diagnostic performance.",
-        desc_zh: "同一个合成预防健康任务和 QLoRA 配方，在单张 8GB GPU 上分别用于 Gemma 3 与 MedGemma，微调前后各评一次。留出集评估只测格式、安全措辞和数字依据。非临床；不证明诊断性能。",
-        status_en: "Live demo",
-        status_zh: "在线 Demo",
-        tags: ["QLoRA", "MedGemma / Gemma 3", "eval harness"],
-        href: u(`${lp}/agent/preventive-health-model-lab/`),
-        external: false,
-        cta_en: "Inspect results",
-        cta_zh: "查看结果",
-      },
-      {
-        name: "Guideline-Faithfulness Chat",
-        tagline_en: "Reports clinical-guideline positions while preserving each one's official strength",
-        tagline_zh: "如实复述临床指南立场，并保住每一份的官方推荐力度",
-        desc_en: "Ask a knee-osteoarthritis question; it reports what NICE and ACR/AF say, re-reading each source so the recommendation strength stays faithful instead of collapsing two guidelines into one confident answer. A research demo of guideline faithfulness — not medical advice.",
-        desc_zh: "问一个膝关节炎的问题，它如实复述 NICE 和 ACR/AF 怎么说，并回读原文让推荐力度保持忠实，而不是把两份指南糊成一句笃定的话。指南忠实度的研究 demo —— 非医疗建议。",
-        status_en: "Live demo",
-        status_zh: "在线 Demo",
-        tags: ["clinical guidelines", "evidence verification", "faithful strength"],
-        href: u(`${lp}/agent/guidelinebench-oa/`),
-        external: false,
-        cta_en: "Try the live demo",
-        cta_zh: "试用 Demo",
-      },
+      ...registryDemoCards(TRUSTWORTHY_AI_DEMO_IDS),
     ],
   },
 ];
