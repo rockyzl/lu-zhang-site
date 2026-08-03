@@ -60,9 +60,10 @@ For Jinja2, fetch or load the JSON in the Python application and pass
 `registry["demos"]` into the template. Jinja2 remains only a renderer; do not
 create a second Jinja-specific demo registry.
 
-After a build, run `npm run registry:check`. It fails if the JSON differs from
-the TypeScript registry, an ID is duplicated, or a registered demo/article
-route was not generated.
+Every production `npm run build` automatically runs `npm run registry:check`.
+It fails if the JSON differs from the TypeScript registry, an ID or tag is
+duplicated, localized public fields are missing, or a registered English/Chinese
+demo or article route was not generated.
 
 ## Add or update a demo
 

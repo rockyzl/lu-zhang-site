@@ -11,8 +11,8 @@ export type Demo = {
 };
 
 export type PublicDemoRegistrySnapshot = {
-  schemaVersion: "sciencesloop.demo-registry.v1";
-  demos: Demo[];
+  readonly schemaVersion: "sciencesloop.demo-registry.v1";
+  readonly demos: Demo[];
 };
 
 export const DEMO_REGISTRY_SCHEMA_VERSION = "sciencesloop.demo-registry.v1" as const;

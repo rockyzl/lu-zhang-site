@@ -18,6 +18,15 @@ function routeOutput(route) {
   return path.join(root, "dist", pathname, "index.html");
 }
 
+function chineseRoute(route) {
+  return `/zh${route}`;
+}
+
+function chineseArticleRoute(route) {
+  const slug = route.slice("/blog/".length, -1);
+  return `/zh/blog/${slug}-zh/`;
+}
+
 await access(snapshotPath);
 const builtBytes = await readFile(snapshotPath, "utf8");
 const expectedBytes = `${JSON.stringify(publicDemoRegistrySnapshot, null, 2)}\n`;
@@ -68,7 +77,12 @@ for (const [index, demo] of demos.entries()) {
   assert.equal(published.repoUrl, demo.repoUrl);
   assert.equal(typeof published.featured, "boolean");
   assert.ok(Array.isArray(published.tags) && published.tags.length > 0);
-  assert.ok(published.tags.every((tag) => typeof tag === "string" && tag.trim()));
+  for (const tag of published.tags) {
+    assert.equal(typeof tag, "string");
+    assert.ok(tag.length > 0);
+    assert.equal(tag, tag.trim(), `Tag must be trimmed: ${JSON.stringify(tag)}`);
+  }
+  assert.equal(new Set(published.tags).size, published.tags.length, `${demo.id} tags must be unique`);
   for (const key of localizedKeys) {
     assert.deepEqual(Object.keys(published[key]).sort(), ["en", "zh"]);
     assert.ok(published[key].en.trim());
@@ -77,7 +91,11 @@ for (const [index, demo] of demos.entries()) {
   if (published.articlePath) assert.match(published.articlePath, /^\/[a-z0-9/-]*\/$/);
   if (published.repoUrl) assert.equal(new URL(published.repoUrl).protocol, "https:");
   await access(routeOutput(demo.path));
-  if (demo.articlePath) await access(routeOutput(demo.articlePath));
+  await access(routeOutput(chineseRoute(demo.path)));
+  if (demo.articlePath) {
+    await access(routeOutput(demo.articlePath));
+    await access(routeOutput(chineseArticleRoute(demo.articlePath)));
+  }
 }
 
 console.log(
