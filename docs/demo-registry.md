@@ -4,6 +4,17 @@
 live demos. Do not add a new public demo by manually copying cards into several
 pages.
 
+The build also publishes a deterministic, public-safe snapshot at
+[`/data/demos.json`](/data/demos.json). It is derived from the same TypeScript
+registry and is not a second file to edit. The payload has a `schemaVersion`
+and the public card fields; it intentionally has no generated timestamp, secret,
+private status, or internal filesystem metadata.
+
+Repository URLs are copied exactly. This matters when the public work lives on
+a durable non-default branch: for example, the KIT battery replay intentionally
+links to `protocol/soh-target-v2` rather than the repository's unrelated default
+branch. Consumers must not rewrite `repoUrl` to a repository homepage.
+
 Each registry entry owns its:
 
 - stable `id`;
@@ -25,6 +36,33 @@ Each registry entry owns its:
 
 Astro generates the sitemap from public pages at build time. A demo route is
 therefore indexed when its route page exists and `npm run build` succeeds.
+
+## Reuse outside Astro
+
+Browser JavaScript can read the snapshot directly:
+
+```js
+const registry = await fetch("https://sciencesloop.com/data/demos.json").then((response) => response.json());
+for (const demo of registry.demos) console.log(demo.id, demo.path);
+```
+
+Python can consume the same public data without parsing TypeScript:
+
+```python
+import json
+from urllib.request import urlopen
+
+with urlopen("https://sciencesloop.com/data/demos.json") as response:
+    registry = json.load(response)
+```
+
+For Jinja2, fetch or load the JSON in the Python application and pass
+`registry["demos"]` into the template. Jinja2 remains only a renderer; do not
+create a second Jinja-specific demo registry.
+
+After a build, run `npm run registry:check`. It fails if the JSON differs from
+the TypeScript registry, an ID is duplicated, or a registered demo/article
+route was not generated.
 
 ## Add or update a demo
 

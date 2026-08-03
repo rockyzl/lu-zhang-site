@@ -10,6 +10,13 @@ export type Demo = {
   tags: string[];
 };
 
+export type PublicDemoRegistrySnapshot = {
+  schemaVersion: "sciencesloop.demo-registry.v1";
+  demos: Demo[];
+};
+
+export const DEMO_REGISTRY_SCHEMA_VERSION = "sciencesloop.demo-registry.v1" as const;
+
 // Single public index for live demos. Pages derive their cards and links from
 // this file so adding a demo does not require editing the home, Projects, and
 // Agent-index pages separately.
@@ -125,3 +132,20 @@ export const demos: Demo[] = [
 ];
 
 export const liveDemos = demos;
+
+// Build-derived public snapshot for non-Astro consumers. Keep `demos` above as
+// the only authored registry; never hand-maintain a parallel JSON file.
+export const publicDemoRegistrySnapshot: PublicDemoRegistrySnapshot = {
+  schemaVersion: DEMO_REGISTRY_SCHEMA_VERSION,
+  demos: demos.map((demo) => ({
+    id: demo.id,
+    path: demo.path,
+    ...(demo.articlePath ? { articlePath: demo.articlePath } : {}),
+    ...(demo.repoUrl ? { repoUrl: demo.repoUrl } : {}),
+    featured: demo.featured,
+    title: { ...demo.title },
+    tagline: { ...demo.tagline },
+    summary: { ...demo.summary },
+    tags: [...demo.tags],
+  })),
+};
