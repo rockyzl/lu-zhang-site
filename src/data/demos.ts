@@ -1,26 +1,37 @@
-export type Demo = {
+export type LocalizedText = Readonly<{ en: string; zh: string }>;
+
+export type DemoSourceKind = "dataset" | "paper" | "license" | "documentation";
+
+export type DemoSource = Readonly<{
+  kind: DemoSourceKind;
+  label: LocalizedText;
+  url: string;
+}>;
+
+export type Demo = Readonly<{
   id: string;
   path: string;
   articlePath?: string;
   repoUrl?: string;
   featured: boolean;
-  title: { en: string; zh: string };
-  tagline: { en: string; zh: string };
-  summary: { en: string; zh: string };
-  tags: string[];
-};
+  title: LocalizedText;
+  tagline: LocalizedText;
+  summary: LocalizedText;
+  tags: readonly string[];
+  sources?: readonly DemoSource[];
+}>;
 
-export type PublicDemoRegistrySnapshot = {
+export type PublicDemoRegistrySnapshot = Readonly<{
   readonly schemaVersion: "sciencesloop.demo-registry.v1";
-  readonly demos: Demo[];
-};
+  readonly demos: readonly Demo[];
+}>;
 
 export const DEMO_REGISTRY_SCHEMA_VERSION = "sciencesloop.demo-registry.v1" as const;
 
 // Single public index for live demos. Pages derive their cards and links from
 // this file so adding a demo does not require editing the home, Projects, and
 // Agent-index pages separately.
-export const demos: Demo[] = [
+export const demos: readonly Demo[] = [
   {
     id: "chemgraph-loop",
     path: "/agent/",
@@ -128,6 +139,26 @@ export const demos: Demo[] = [
       zh: "回放由 Luh 与 Blank 的 KIT v2 结果数据转换而来的派生数据，对比加入 EIS 前后的配对 development OOF 预测，并在三次检查后打开实测答案。结果随老化方式和模型而变，不是生产报警。",
     },
     tags: ["battery reliability", "EIS", "condition-held-out OOF", "interactive replay"],
+    sources: [
+      {
+        kind: "dataset",
+        label: { en: "KIT v2 processed result data", zh: "KIT v2 处理后结果数据" },
+        url: "https://doi.org/10.35097/1969",
+      },
+      {
+        kind: "paper",
+        label: {
+          en: "Scientific Data dataset descriptor",
+          zh: "Scientific Data 数据说明论文",
+        },
+        url: "https://doi.org/10.1038/s41597-024-03831-x",
+      },
+      {
+        kind: "license",
+        label: { en: "CC BY 4.0 license", zh: "CC BY 4.0 许可" },
+        url: "https://creativecommons.org/licenses/by/4.0/",
+      },
+    ],
   },
 ];
 
@@ -147,5 +178,14 @@ export const publicDemoRegistrySnapshot: PublicDemoRegistrySnapshot = {
     tagline: { ...demo.tagline },
     summary: { ...demo.summary },
     tags: [...demo.tags],
+    ...(demo.sources
+      ? {
+          sources: demo.sources.map((source) => ({
+            kind: source.kind,
+            label: { ...source.label },
+            url: source.url,
+          })),
+        }
+      : {}),
   })),
 };
