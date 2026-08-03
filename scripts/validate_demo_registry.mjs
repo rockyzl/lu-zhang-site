@@ -56,12 +56,15 @@ const allowedDemoKeys = [
   "id",
   "path",
   "repoUrl",
+  "sources",
   "summary",
   "tagline",
   "tags",
   "title",
 ];
 const localizedKeys = ["summary", "tagline", "title"];
+const allowedSourceKeys = ["kind", "label", "url"];
+const allowedSourceKinds = new Set(["dataset", "documentation", "license", "paper"]);
 
 for (const [index, demo] of demos.entries()) {
   const published = builtSnapshot.demos[index];
@@ -90,6 +93,37 @@ for (const [index, demo] of demos.entries()) {
   }
   if (published.articlePath) assert.match(published.articlePath, /^\/[a-z0-9/-]*\/$/);
   if (published.repoUrl) assert.equal(new URL(published.repoUrl).protocol, "https:");
+  if (published.sources !== undefined) {
+    assert.ok(
+      Array.isArray(published.sources) && published.sources.length > 0,
+      `${demo.id} sources must be a non-empty array when present`,
+    );
+    const sourceKinds = [];
+    const sourceUrls = [];
+    for (const source of published.sources) {
+      assert.deepEqual(Object.keys(source).sort(), allowedSourceKeys);
+      assert.ok(allowedSourceKinds.has(source.kind), `${demo.id} has invalid source kind`);
+      assert.deepEqual(Object.keys(source.label).sort(), ["en", "zh"]);
+      assert.ok(source.label.en.trim(), `${demo.id} source English label is required`);
+      assert.ok(source.label.zh.trim(), `${demo.id} source Chinese label is required`);
+      const sourceUrl = new URL(source.url);
+      assert.equal(sourceUrl.protocol, "https:", `${demo.id} source URLs must use HTTPS`);
+      assert.equal(sourceUrl.username, "", `${demo.id} source URLs cannot contain credentials`);
+      assert.equal(sourceUrl.password, "", `${demo.id} source URLs cannot contain credentials`);
+      sourceKinds.push(source.kind);
+      sourceUrls.push(source.url);
+    }
+    assert.equal(
+      new Set(sourceKinds).size,
+      sourceKinds.length,
+      `${demo.id} source kinds must be unique`,
+    );
+    assert.equal(
+      new Set(sourceUrls).size,
+      sourceUrls.length,
+      `${demo.id} source URLs must be unique`,
+    );
+  }
   await access(routeOutput(demo.path));
   await access(routeOutput(chineseRoute(demo.path)));
   if (demo.articlePath) {

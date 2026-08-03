@@ -21,6 +21,7 @@ Each registry entry owns its:
 - English and Chinese title, tagline, and summary;
 - public route (`path`);
 - optional public article (`articlePath`) and repository (`repoUrl`);
+- optional typed public sources (`sources`) for datasets, papers, licenses, and documentation;
 - tags; and
 - homepage visibility (`featured`).
 
@@ -54,16 +55,39 @@ from urllib.request import urlopen
 
 with urlopen("https://sciencesloop.com/data/demos.json") as response:
     registry = json.load(response)
+
+for demo in registry["demos"]:
+    for source in demo.get("sources", []):
+        print(source["kind"], source["label"]["en"], source["url"])
 ```
 
 For Jinja2, fetch or load the JSON in the Python application and pass
-`registry["demos"]` into the template. Jinja2 remains only a renderer; do not
-create a second Jinja-specific demo registry.
+`registry["demos"]` into the template. Optional sources can be rendered without
+creating a second registry:
+
+```jinja2
+{% for demo in demos %}
+  <h2>{{ demo["title"][locale] }}</h2>
+  {% for source in demo.get("sources", []) %}
+    <a href="{{ source["url"] }}">{{ source["label"][locale] }}</a>
+  {% endfor %}
+{% endfor %}
+```
+
+Jinja2 remains only a renderer; do not create a second Jinja-specific demo
+registry.
+
+Each optional `sources` entry has exactly three public fields: a finite `kind`
+(`dataset`, `paper`, `license`, or `documentation`), a bilingual `label`, and an
+HTTPS `url`. Source kinds and URLs must be unique within one demo. Keep the list
+ordered from the primary evidence to supporting material.
 
 Every production `npm run build` automatically runs `npm run registry:check`.
 It fails if the JSON differs from the TypeScript registry, an ID or tag is
 duplicated, localized public fields are missing, or a registered English/Chinese
-demo or article route was not generated.
+demo or article route was not generated. It also rejects unknown source fields or
+kinds, missing bilingual source labels, credential-bearing URLs, non-HTTPS URLs,
+and duplicate source kinds or URLs.
 
 ## Add or update a demo
 
@@ -83,7 +107,9 @@ demo or article route was not generated.
 7. Keep claims in the registry's summary public-safe and conservative. Do not
    include secrets, internal Git state, private repositories, or unverified
    performance claims.
-8. Run `npm run content:guard` and `npm run build`. Check the route, home,
+8. When a demo depends on public evidence, add typed `sources` in the same record
+   instead of maintaining an unrelated source list elsewhere.
+9. Run `npm run content:guard` and `npm run build`. Check the route, home,
    Projects, Agent index, Lab (when applicable), article, and RSS before push.
 
 ## Do not bypass the registry
