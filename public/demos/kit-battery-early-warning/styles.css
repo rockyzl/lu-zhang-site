@@ -34,7 +34,8 @@ h2 { margin-bottom: 6px; }
 .eyebrow { color: var(--green); font-size: .75rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
 .lede, .microcopy { color: var(--muted); }
 .lede { margin-bottom: 0; font-size: 1.05rem; }
-.mode-select { display: grid; gap: 6px; min-width: 285px; font-weight: 700; }
+.mode-select { display: grid; gap: 6px; min-width: 285px; max-width: 100%; font-weight: 700; }
+.mode-select select { width: 100%; min-width: 0; max-width: 100%; }
 select { border: 1px solid var(--line); border-radius: 8px; background: white; padding: 7px 10px; }
 
 .evidence-banner { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; gap: 7px 18px; padding: 11px max(16px, calc((100vw - 1500px) / 2)); border-block: 1px solid #e9ba7e; background: #fff2d9; color: #633b06; font-size: .88rem; }
