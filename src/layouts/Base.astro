@@ -96,6 +96,7 @@ const personSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
+    <link rel="alternate" hreflang={locale === "zh" ? "zh-CN" : "en"} href={canonical} />
     <link rel="alternate" hreflang={locale === "zh" ? "en" : "zh-CN"} href={new URL(altPath, siteUrl).href} />
     <link rel="alternate" hreflang="x-default" href={new URL(u("/"), siteUrl).href} />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b2631'/%3E%3Cpath d='M18 19h28v7H25v8h18v7H25v10h-7z' fill='%232db89a'/%3E%3C/svg%3E" />
