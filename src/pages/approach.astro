@@ -2,114 +2,25 @@
 import Base from "../layouts/Base.astro";
 import { u } from "../lib/url";
 
-const layers = [
-  {
-    name: "LLM / foundation models",
-    text: "Retrieval, grounding, and no-fabrication behavior. Necessary, not sufficient.",
-  },
-  {
-    name: "Agent engineering",
-    text: "Tools, state machines, multi-agent orchestration, and MCP. Comfortable across LangGraph, Anthropic tool-use, Google ADK, and related ecosystems without treating any one framework as the core skill.",
-  },
-  {
-    name: "Context engineering",
-    text: "What the model should and should not see: retrieval assembly and ranking, conversation state, memory, routing, and state transitions.",
-  },
-  {
-    name: "Evaluation / agent harness",
-    text: "Golden sets with per-case acceptance contracts, regression checks, failure analysis, human-in-the-loop confirmation, and safety guardrails.",
-  },
-];
-
-const methods = [
-  ["Evaluation harnesses", "Versioned golden sets plus per-case acceptance contracts spanning routing, grounding, action confirmation, and safety, so regressions are caught before release."],
-  ["Context engineering", "Multi-turn state, retrieval assembly and ranking, and layered memory so the agent stays grounded and on task."],
-  ["Human-in-the-loop", "Confirm-before-write, send, or act. Nothing irreversible runs without explicit approval."],
-  ["Grounding and provenance", "Answers come from evidence with traceable IDs, not invention."],
-  ["Multi-agent orchestration", "Bounded roles, explicit handoffs, and guardrails over unbounded loops."],
+const gates = [
+  ["Source gate", "Can the input be identified, versioned, and traced to an allowed source?"],
+  ["Quality gate", "Does the evidence meet the declared completeness and quality threshold?"],
+  ["Uncertainty gate", "Is confidence calibrated enough for this decision, or should the system abstain?"],
+  ["Approval gate", "Does the proposed action require explicit human review before it can proceed?"],
 ];
 ---
+<Base title="Approach — SciencesLoop" description="How SciencesLoop structures evidence-gated scientific workflows around claims, provenance, uncertainty, abstention, and human approval." alternatePath={u("/zh/approach/")}>
+  <div class="sl-page">
+    <section class="sl-page-hero"><span class="sl-chip proposed">Product architecture · proposed</span><h1>Make every scientific decision answerable.</h1><p class="sl-lead">The core unit is not an AI response. It is an evidence contract: a claim, the evidence required to support it, a decision rule, and a replayable record of what happened.</p></section>
 
-<Base
-  title="How I Build Reliable Agents — SciencesLoop"
-  description="SciencesLoop approach page on reliable agents: context engineering, evaluation harnesses, tool orchestration, grounding, and human review."
->
-  <div class="container">
-    <section class="page-hero compact">
-      <span class="eyebrow">Approach · reliable agents · Scientific AI</span>
-      <h1>How I Build Reliable Agents</h1>
-      <p class="lead">
-        The model is rarely the bottleneck. Making an autonomous system reliable
-        is. My work focuses on the engineering that decides whether an agent can
-        be trusted in production and in the lab: context, evaluation, tools, and
-        human review, not any single framework.
-      </p>
-    </section>
+    <section class="sl-section sl-dark"><div class="sl-section-head"><span>01 · Evidence contract</span><h2>Claim → evidence → gate → decision.</h2></div><div class="sl-trace"><div><b>C</b><strong>Claim</strong><small>Define the question and allowable conclusion</small></div><i>→</i><div><b>E</b><strong>Evidence</strong><small>Bind data, source, version, and transformation</small></div><i>→</i><div><b>G</b><strong>Gate</strong><small>Evaluate quality, uncertainty, and policy</small></div><i>→</i><div><b>D</b><strong>Decision</strong><small>Pass, abstain, or request review</small></div></div></section>
 
-    <section class="workflow-panel">
-      <div>
-        <span class="eyebrow">Four layers</span>
-        <h2>Most people stop at the first layer.</h2>
-        <p>
-          SciencesLoop treats foundation models as one component inside a larger
-          reliability system. The scarce work is in state, context, evaluation,
-          and review.
-        </p>
-      </div>
-    </section>
+    <section class="sl-section"><div class="sl-section-head"><span>02 · Four gates</span><h2>Reliability comes from explicit stopping rules.</h2></div><div class="sl-grid two">{gates.map(([name, text], i) => <article class="sl-card"><span class="sl-index">0{i + 1}</span><h3>{name}</h3><p>{text}</p></article>)}</div></section>
 
-    <section class="product-modules" aria-label="Reliable agent layers">
-      {layers.map((layer, index) => (
-        <article class="product-module">
-          <span>Layer {String(index + 1).padStart(2, "0")}</span>
-          <h2>{layer.name}</h2>
-          <p>{layer.text}</p>
-        </article>
-      ))}
-    </section>
+    <section class="sl-section"><div class="sl-section-head"><span>03 · Evidence states</span><h2>A workflow should say what it knows.</h2></div><div class="sl-state-table" role="table" aria-label="Evidence states"><div role="row"><strong role="columnheader">State</strong><strong role="columnheader">Meaning</strong><strong role="columnheader">Allowed behavior</strong></div><div role="row"><span><i class="state ok"></i>Supported</span><span>Required evidence is present and passes checks.</span><span>Return a bounded result with provenance.</span></div><div role="row"><span><i class="state warn"></i>Conditional</span><span>Evidence is usable but uncertainty or assumptions matter.</span><span>Expose limits and request review when needed.</span></div><div role="row"><span><i class="state stop"></i>Unsupported</span><span>A required source, field, or quality threshold is missing.</span><span>Abstain; do not invent a conclusion.</span></div></div></section>
 
-    <div class="section-head">
-      <h2>Methods I use</h2>
-    </div>
-    <section class="workflow-steps">
-      {methods.map(([name, text]) => (
-        <article>
-          <span>Method</span>
-          <h2>{name}</h2>
-          <p>{text}</p>
-        </article>
-      ))}
-    </section>
+    <section class="sl-section sl-note"><div><span class="sl-chip working">Working prototype</span><h2>What exists today</h2><p>Public SciencesLoop demos implement bounded pieces of this pattern: deterministic replay, source-linked identity checks, explicit evidence gaps, and human confirmation.</p></div><div><span class="sl-chip proposed">Proposed</span><h2>What comes next</h2><p>A unified scientific workflow layer connecting offline instrument exports, analysis, uncertainty, provenance, and approval. This architecture is not yet a validated production system.</p></div></section>
 
-    <section class="workflow-panel">
-      <div>
-        <span class="eyebrow">Honest note</span>
-        <h2>Recent depth, production anchored.</h2>
-        <p>
-          This reliability depth is recent and production anchored: daily
-          production AI-system work in 2026, corroborated by open prototypes and
-          public SciencesLoop systems. The truthful claim is not "two years of
-          harness work"; it is roughly two years building LLM and agent systems,
-          with agent-reliability depth concentrated in 2026.
-        </p>
-      </div>
-    </section>
-
-    <section class="workflow-panel">
-      <div>
-        <span class="eyebrow">Next steps</span>
-        <h2>See the approach applied.</h2>
-        <p>
-          The case studies show how these layers appear in scientific agents,
-          molecular-property modeling, foundation-model smoke tests, and the
-          public SciencesLoop site agent.
-        </p>
-      </div>
-      <p>
-        <a class="more" href={u("/programs/#case-studies")}>Case Studies →</a>
-        {" · "}
-        <a class="more" href={u("/blog/")}>Field Notes →</a>
-      </p>
-    </section>
+    <section class="sl-section sl-contact"><div><h2>Inspect the claims, not the pitch.</h2><p>The evidence page separates demonstrated behavior from proposed product direction.</p></div><a class="sl-button primary" href={u("/evidence/")}>Open evidence register</a></section>
   </div>
 </Base>

@@ -105,7 +105,7 @@ def fetch_all_works():
             f"&select=id,doi,title,publication_year,cited_by_count,primary_location,authorships,topics,type"
             f"&cursor={cursor}"
         )
-        req = urllib.request.Request(url, headers={"User-Agent": "lu-zhang-site/1.0 (mailto:zhanglu77@gmail.com)"})
+        req = urllib.request.Request(url, headers={"User-Agent": "sciencesloop-site/1.0 (mailto:luzhang@sciencesloop.com)"})
         with urllib.request.urlopen(req, timeout=30) as r:
             data = json.loads(r.read())
         works.extend(data["results"])

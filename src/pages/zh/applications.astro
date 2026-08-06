@@ -1,0 +1,14 @@
+---
+import Base from "../../layouts/Base.astro";
+import { u } from "../../lib/url";
+---
+<Base title="应用 — SciencesLoop" description="SciencesLoop 证据门控科学工作流的拟议应用，从存量实验室的离线电化学分析开始。" alternatePath={u("/applications/")}>
+  <div class="sl-page">
+    <section class="sl-page-hero"><span class="sl-chip proposed">应用方向 · 拟议</span><h1>先从仪器旁边开始，而不是进入仪器内部。</h1><p class="sl-lead">首个产品方向是离线电化学工作流软件层：读取已有 CV/EIS 导出文件，评估证据质量，暴露异常，保存溯源，并把重要决策交给人工。</p></section>
+    <section class="sl-section"><div class="sl-section-head"><span>01 · 第一切入点</span><h2>电化学证据复核。</h2></div><div class="sl-grid three"><article class="sl-card"><span class="sl-index">输入</span><h3>存量系统导出</h3><p>从已有仪器文件与实验室元数据开始，不声称直接控制仪器。</p></article><article class="sl-card"><span class="sl-index">分析</span><h3>CV/EIS 推断</h3><p>执行有边界的预处理、特征提取、异常检查与不确定性感知比较。</p></article><article class="sl-card"><span class="sl-index">输出</span><h3>证据包</h3><p>生成连接源数据、转换、主张、不确定性与人工批准状态的记录。</p></article></div></section>
+    <section class="sl-section sl-dark"><div class="sl-section-head"><span>02 · 边界</span><h2>不是自主仪器控制器。</h2></div><div class="sl-boundary"><div><span class="sl-chip working">开发中</span><ul><li>离线文件读取与 schema 检查</li><li>确定性预处理与回放</li><li>证据缺口、异常标记与复核状态</li><li>人工批准接口</li></ul></div><div><span class="sl-chip risk">不在当前主张内</span><ul><li>向实验仪器发送指令</li><li>经过验证的闭环湿实验</li><li>跨实验室迁移性能</li><li>生产部署或安全认证</li></ul></div></div></section>
+    <section class="sl-section"><div class="sl-section-head"><span>03 · 验证路径</span><h2>合作应由证据需求决定。</h2></div><div class="sl-grid two"><article class="sl-card"><span class="sl-chip proposed">近期</span><h3>公开及获准数据</h3><p>定义验收标准，在可归因数据集、物理模型或确定性案例上测试有边界的工作流行为。</p></article><article class="sl-card"><span class="sl-chip proposed">未来选项</span><h3>实验室验证</h3><p>当数据权限与工作范围合适时，大学、客户实验室或 DOE 用户设施可以成为未来验证协作者。目前不声称与任何 National Lab 或大学已有合作，也不把这种合作描述为软件概念的申请前提。</p></article></div></section>
+    <section class="sl-section"><div class="sl-section-head"><span>04 · 扩展逻辑</span><h2>推广证据契约，而不是扩大营销口号。</h2></div><div class="sl-roadmap"><div><b>现在</b><strong>电化学</strong><span>离线 CV/EIS 证据复核</span></div><i>→</i><div><b>下一步</b><strong>相邻仪器</strong><span>复用溯源与批准模式</span></div><i>→</i><div><b>以后</b><strong>跨工作流编排</strong><span>仅在验证支持迁移后</span></div></div></section>
+    <section class="sl-section sl-contact"><div><h2>带来一个真实的工作流边界。</h2><p>SciencesLoop 关注具备可归因数据、清晰决策与可测验收标准的验证问题。</p></div><a class="sl-button primary" href="mailto:luzhang@sciencesloop.com?subject=SciencesLoop%20validation%20conversation">讨论验证场景</a></section>
+  </div>
+</Base>

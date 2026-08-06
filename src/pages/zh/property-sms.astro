@@ -1,0 +1,36 @@
+---
+import Base from "../../layouts/Base.astro";
+import { u } from "../../lib/url";
+---
+<Base
+  title="Zhang Rental Management 短信同意说明"
+  description="Zhang Rental Management 非营销物业运营短信支持的订阅、帮助与退订说明。"
+  alternatePath={u("/property-sms/")}
+>
+  <div class="container" style="padding-top: 3rem; max-width: 820px;">
+    <span class="eyebrow">Zhang Rental Management</span>
+    <h1>短信同意说明</h1>
+    <p class="lead">
+      <strong>Zhang Rental Management</strong> 为现有住宅租户与服务供应商提供非营销性质的物业运营短信支持，包括维修、预约协调、租约或停车问题以及供应商排期。
+    </p>
+
+    <h2>如何订阅</h2>
+    <p>
+      现有租户或服务供应商阅读本公开说明后，须本人向 <strong>+1 (630) 407-1314</strong> 发送 <strong>START</strong>。发送 START 即表示同意接收与其物业支持或服务协调有关的重复事务性短信；这是本项目唯一的订阅方式。是否同意不影响租赁或物业管理服务。
+    </p>
+    <p>短信频率不固定，可能产生短信与数据费用。本项目不发送营销或促销短信。</p>
+
+    <h2>确认短信示例</h2>
+    <p>Zhang Rental Management：您已订阅重复物业运营短信。频率不固定，可能产生短信与数据费用。回复 HELP 获取帮助，回复 STOP 取消。</p>
+
+    <h2>帮助与退订</h2>
+    <p>回复 <strong>HELP</strong> 获取帮助；回复 <strong>STOP</strong> 停止接收；退订后回复 <strong>START</strong> 可重新订阅。</p>
+    <p>发送 START 会记录订阅请求。普通物业运营短信仅发送给已有租户或服务关系的联系人；发送 START 本身不会建立此类关系。</p>
+
+    <h2>隐私与条款</h2>
+    <p>订阅前请阅读<a href={u("/zh/privacy/")}>隐私政策</a>和<a href={u("/zh/terms/")}>短信条款</a>。短信订阅数据与同意记录不会与第三方或关联方共享用于营销或促销。</p>
+
+    <h2>联系方式</h2>
+    <p>如需支持或咨询，请发送邮件至 <a href="mailto:luzhang@sciencesloop.com">luzhang@sciencesloop.com</a>。</p>
+  </div>
+</Base>
