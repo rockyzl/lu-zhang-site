@@ -1,0 +1,86 @@
+---
+import type { Locale } from "../../lib/i18n";
+
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const isZh = locale === "zh";
+const nodes = isZh
+  ? ["目标", "证据", "协议", "人工批准", "仪器", "测量", "分析", "下一实验"]
+  : ["Objective", "Evidence", "Protocol", "Human Approval", "Instrument", "Measurement", "Analysis", "Next Experiment"];
+const details = isZh
+  ? [
+      "定义可检验目标与停止条件。",
+      "绑定来源、已知缺口与假设。",
+      "将实验意图编译成可审查步骤。",
+      "在有后果的动作前暂停并记录决定。",
+      "通过适配器连接现有设备；当前原型不控制硬件。",
+      "保留原始导出文件与仪器元数据。",
+      "执行可重放变换并显示不确定性。",
+      "提出下一步；再次进入审查边界。",
+    ]
+  : [
+      "Define a testable objective and stop conditions.",
+      "Bind sources, known gaps, and assumptions.",
+      "Compile intent into a reviewable protocol.",
+      "Pause before consequential action and record the decision.",
+      "Connect through adapters; the current prototype does not control hardware.",
+      "Preserve raw exports and instrument metadata.",
+      "Run replayable transforms and expose uncertainty.",
+      "Propose the next step, then return to review.",
+    ];
+---
+
+<section class="sl-loop" id="loop" aria-labelledby="loop-title" data-loop>
+  <header class="sl-loop__head">
+    <div>
+      <p class="sl-kicker">{isZh ? "受控实验循环" : "Controlled experimental loop"}</p>
+      <h2 id="loop-title">{isZh ? "每一步都留下可检查的状态。" : "Every transition leaves an inspectable state."}</h2>
+    </div>
+    <p>{isZh ? "选择任一节点查看其证据边界。动画脉冲会在人工批准处停下，再以青色携带测量数据返回。" : "Select any node to inspect its evidence boundary. The pulse pauses at human approval, then returns with measured data in cyan."}</p>
+  </header>
+
+  <div class="sl-loop__rail" aria-label={isZh ? "实验循环节点" : "Experimental loop nodes"}>
+    <svg class="sl-loop__path" viewBox="0 0 1000 74" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M28 37H972"></path>
+      <path class="sl-loop__return" d="M972 55H28"></path>
+      <circle class="sl-loop__pulse sl-loop__pulse--out" cx="0" cy="37" r="6"></circle>
+      <circle class="sl-loop__pulse sl-loop__pulse--return" cx="972" cy="55" r="5"></circle>
+    </svg>
+    {nodes.map((node, index) => (
+      <button
+        type="button"
+        class:list={["sl-loop__node", index === 3 && "is-approval", index === 0 && "is-active"]}
+        data-loop-node
+        data-index={index}
+        aria-pressed={index === 0 ? "true" : "false"}
+      >
+        <span>{String(index + 1).padStart(2, "0")}</span>
+        <strong>{node}</strong>
+      </button>
+    ))}
+  </div>
+
+  <div class="sl-loop__readout" aria-live="polite">
+    <span data-loop-step>01 / {nodes[0]}</span>
+    <p data-loop-detail>{details[0]}</p>
+    <small>{isZh ? "当前公开状态：软件原型与示意工作流；不代表已执行湿实验或自主控制仪器。" : "Public state: software prototype and illustrative workflow; not evidence of wet-lab execution or autonomous instrument control."}</small>
+  </div>
+</section>
+
+<script define:vars={{ nodes, details }}>
+  document.querySelectorAll("[data-loop]").forEach((loop) => {
+    const buttons = [...loop.querySelectorAll("[data-loop-node]")];
+    const step = loop.querySelector("[data-loop-step]");
+    const detail = loop.querySelector("[data-loop-detail]");
+    const activate = (button) => {
+      buttons.forEach((item) => {
+        const active = item === button;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
+      const index = Number(button.dataset.index || 0);
+      step.textContent = `${String(index + 1).padStart(2, "0")} / ${nodes[index]}`;
+      detail.textContent = details[index];
+    };
+    buttons.forEach((button) => button.addEventListener("click", () => activate(button)));
+  });
+</script>

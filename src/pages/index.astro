@@ -1,61 +1,23 @@
 ---
 import Base from "../layouts/Base.astro";
 import { u } from "../lib/url";
+import HomeHero from "../components/home/HomeHero.astro";
+import PlatformSection from "../components/home/PlatformSection.astro";
+import ProofTrustSection from "../components/home/ProofTrustSection.astro";
+import EcosystemSection from "../components/home/EcosystemSection.astro";
+import HomeClosing from "../components/home/HomeClosing.astro";
 ---
 
 <Base
-  title="SciencesLoop — Evidence-gated scientific workflows"
-  description="SciencesLoop builds evidence-gated scientific workflow software for brownfield laboratories, starting with electrochemistry."
+  title="SciencesLoop — From scientific intent to measurement—and back"
+  description="SciencesLoop connects models, protocols, existing instruments, and human review into traceable experimental loops, starting with adaptive electrochemistry."
   alternatePath={u("/zh/")}
 >
-  <div class="sl-page sl-home">
-    <section class="sl-hero">
-      <div class="sl-kicker"><span class="sl-signal"></span>Scientific workflow software · in development</div>
-      <h1>Evidence before autonomy.</h1>
-      <p class="sl-lead">SciencesLoop builds evidence-gated scientific workflow software for brownfield laboratories, starting with electrochemistry.</p>
-      <p class="sl-sublead">The first wedge is offline CV/EIS inference and anomaly review: preserve the instrument, add a traceable decision layer, and require human approval when evidence is incomplete.</p>
-      <div class="sl-actions">
-        <a class="sl-button primary" href={u("/evidence/")}>Inspect current evidence</a>
-        <a class="sl-button" href={u("/approach/")}>See the approach</a>
-      </div>
-    </section>
-
-    <section class="sl-section">
-      <div class="sl-section-head">
-        <span>01 · The problem</span>
-        <h2>Laboratory decisions still lose their reasoning.</h2>
-      </div>
-      <div class="sl-grid three">
-        <article class="sl-card"><span class="sl-chip risk">Observed gap</span><h3>Fragmented context</h3><p>Instrument files, notebooks, scripts, and expert judgment sit in separate systems.</p></article>
-        <article class="sl-card"><span class="sl-chip risk">Observed gap</span><h3>Weak decision traces</h3><p>A result may be saved without the assumptions, uncertainty, or approval that made it actionable.</p></article>
-        <article class="sl-card"><span class="sl-chip risk">Observed gap</span><h3>Brownfield reality</h3><p>Most laboratories need software that can sit beside existing instruments, not require a clean-room rebuild.</p></article>
-      </div>
-    </section>
-
-    <section class="sl-section sl-dark">
-      <div class="sl-section-head"><span>02 · The loop</span><h2>A bounded path from claim to decision.</h2></div>
-      <div class="sl-trace" aria-label="Claim to decision trace">
-        <div><b>01</b><strong>Claim</strong><small>What the workflow is trying to establish</small></div>
-        <i aria-hidden="true">→</i>
-        <div><b>02</b><strong>Evidence</strong><small>Source, provenance, quality, and uncertainty</small></div>
-        <i aria-hidden="true">→</i>
-        <div><b>03</b><strong>Gate</strong><small>Pass, abstain, or request human review</small></div>
-        <i aria-hidden="true">→</i>
-        <div><b>04</b><strong>Decision</strong><small>A replayable output with explicit limits</small></div>
-      </div>
-    </section>
-
-    <section class="sl-section">
-      <div class="sl-section-head"><span>03 · Current position</span><h2>Small, inspectable, and honest about the boundary.</h2></div>
-      <div class="sl-grid two">
-        <article class="sl-card featured"><span class="sl-chip live">Live demonstration</span><h3>Public evidence workflows</h3><p>Runnable demos show bounded identity checks, deterministic analysis, evidence gaps, and human confirmation.</p><p class="sl-limit"><b>They demonstrate:</b> traceable workflow behavior. <b>They do not prove:</b> wet-lab validation or autonomous instrument control.</p><a class="sl-text-link" href={u("/evidence/")}>Review the evidence register →</a></article>
-        <article class="sl-card"><span class="sl-chip proposed">Proposed</span><h3>Electrochemistry workflow layer</h3><p>A future product direction for offline CV/EIS inference, anomaly detection, provenance, and approval gates around existing laboratory systems.</p><p class="sl-limit">No production deployment, wet-lab validation, or committed laboratory partnership is claimed.</p><a class="sl-text-link" href={u("/applications/")}>Explore the application wedge →</a></article>
-      </div>
-    </section>
-
-    <section class="sl-section sl-contact">
-      <div><span class="sl-chip working">Working prototype</span><h2>Build the evidence layer first.</h2><p>SciencesLoop is looking for technically rigorous conversations about scientific workflow reliability and electrochemistry validation.</p></div>
-      <a class="sl-button primary" href="mailto:luzhang@sciencesloop.com">Contact SciencesLoop</a>
-    </section>
+  <div class="sl-home">
+    <HomeHero locale="en" />
+    <PlatformSection locale="en" />
+    <ProofTrustSection locale="en" />
+    <EcosystemSection locale="en" />
+    <HomeClosing locale="en" />
   </div>
 </Base>

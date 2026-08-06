@@ -1,0 +1,67 @@
+---
+import type { Locale } from "../../lib/i18n";
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const isZh = locale === "zh";
+const audit = isZh ? [
+  ["证据来源", "原始导出文件、样品身份、参数与变换记录绑定。"],
+  ["可重现记录", "同一输入可重放为同一分析产物；版本差异可见。"],
+  ["缺失数据与不确定性", "证据不足时标记、降级或弃权，而不是补写结果。"],
+  ["人工与安全边界", "任何仪器动作前需显式批准；批准者和理由进入追踪。"],
+] : [
+  ["Evidence provenance", "Raw export, sample identity, parameters, and transformations remain bound."],
+  ["Reproducible record", "The same input can replay the same analysis artifact; version changes remain visible."],
+  ["Missing data & uncertainty", "Insufficient evidence is flagged, degraded, or abstained from—not filled in."],
+  ["Human & safety boundary", "Instrument action requires explicit approval; reviewer and rationale enter the trace."],
+];
+---
+
+<section class="sl-section sl-proof" id="electrochemistry" aria-labelledby="proof-title">
+  <div class="sl-shell">
+    <header class="sl-section__head">
+      <p class="sl-kicker">{isZh ? "首个受控验证" : "First controlled proof"}</p>
+      <h2 id="proof-title">{isZh ? "从自适应电化学开始。" : "Starting with adaptive electrochemistry."}</h2>
+      <p>{isZh ? "下面是工作原型的界面化表达，使用示意 CV 曲线说明数据与审查状态。它不是实验结果，也未连接真实仪器。" : "The interface below represents the working prototype with an illustrative CV trace. It is not an experimental result and is not connected to a physical instrument."}</p>
+    </header>
+
+    <div class="sl-proof__grid">
+      <figure class="sl-cv" aria-labelledby="cv-title cv-caption">
+        <div class="sl-cv__bar">
+          <div><span>EC / LOOP-01</span><strong id="cv-title">{isZh ? "自适应 CV 审查" : "Adaptive CV review"}</strong></div>
+          <span class="sl-cv__state">{isZh ? "模拟器 / 只读" : "Simulator / read-only"}</span>
+        </div>
+        <div class="sl-cv__meta">
+          <dl><dt>{isZh ? "实验" : "Experiment"}</dt><dd>CV-SIM-014</dd></dl>
+          <dl><dt>{isZh ? "样品" : "Sample"}</dt><dd>Reference redox couple</dd></dl>
+          <dl><dt>{isZh ? "扫描速率" : "Scan rate"}</dt><dd>50 mV s⁻¹</dd></dl>
+          <dl><dt>{isZh ? "电位窗口" : "Potential window"}</dt><dd>−0.40 → +0.80 V</dd></dl>
+        </div>
+        <div class="sl-cv__plot">
+          <svg viewBox="0 0 720 300" role="img" aria-labelledby="cv-plot-title cv-plot-desc">
+            <title id="cv-plot-title">{isZh ? "示意循环伏安曲线" : "Illustrative cyclic voltammetry trace"}</title>
+            <desc id="cv-plot-desc">{isZh ? "非实验数据的示意曲线，用于展示原型界面。" : "A non-experimental illustrative trace used to demonstrate the prototype interface."}</desc>
+            <g class="cv-grid"><path d="M62 34V246M142 34V246M222 34V246M302 34V246M382 34V246M462 34V246M542 34V246M622 34V246M62 34H670M62 87H670M62 140H670M62 193H670M62 246H670"></path></g>
+            <g class="cv-axis"><path d="M62 34V246H670"></path><text x="330" y="282">Potential / V</text><text transform="translate(22 190) rotate(-90)">Current / arbitrary units</text></g>
+            <path class="cv-trace" pathLength="1" d="M76 170C148 173 235 164 294 130C332 108 342 59 373 52C402 46 430 87 437 119C443 150 415 164 363 176C297 191 211 211 135 205C88 201 60 184 76 170Z"></path>
+            <g class="cv-note"><path d="M374 52V31"></path><text x="387" y="26">ILLUSTRATIVE PEAK</text></g>
+          </svg>
+          <span>{isZh ? "示意曲线 · 非实验数据" : "Illustrative trace · not experimental data"}</span>
+        </div>
+        <div class="sl-cv__artifacts">
+          <dl><dt>{isZh ? "原始数据产物" : "Raw-data artifact"}</dt><dd>cv_sim_014.csv · SHA pending</dd></dl>
+          <dl><dt>{isZh ? "分析状态" : "Analysis status"}</dt><dd>{isZh ? "重放完成 · 不确定性待校准" : "Replay complete · uncertainty uncalibrated"}</dd></dl>
+          <dl><dt>{isZh ? "建议下一步" : "Proposed next action"}</dt><dd>{isZh ? "缩小电位窗口并重复模拟" : "Narrow potential window and repeat simulation"}</dd></dl>
+          <dl class="sl-cv__approval"><dt>{isZh ? "动作边界" : "Action boundary"}</dt><dd>{isZh ? "需要人工批准" : "Human approval required"}</dd></dl>
+        </div>
+        <figcaption id="cv-caption">{isZh ? "界面展示软件状态与审查逻辑，不代表仪器控制、湿实验验证或已完成的实验工作。" : "The interface demonstrates software state and review logic—not instrument control, wet-lab validation, or completed experimental work."}</figcaption>
+      </figure>
+
+      <aside class="sl-audit" aria-labelledby="trust-title">
+        <p class="sl-kicker">{isZh ? "审计链" : "Audit trail"}</p>
+        <h3 id="trust-title">{isZh ? "信任是架构的一部分。" : "Trust is part of the architecture."}</h3>
+        <ol>
+          {audit.map(([title, body], index) => <li><span>{String(index + 1).padStart(2, "0")}</span><div><strong>{title}</strong><p>{body}</p></div></li>)}
+        </ol>
+      </aside>
+    </div>
+  </div>
+</section>

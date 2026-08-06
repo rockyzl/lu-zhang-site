@@ -1,6 +1,10 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
+// Chinese content remains buildable for future launch, but is deliberately
+// excluded from public discovery until the product team enables it.
+const enableChineseSite = process.env.PUBLIC_ENABLE_ZH === "true";
+
 export default defineConfig({
   site: process.env.ASTRO_SITE ?? "https://sciencesloop.com",
   base: process.env.ASTRO_BASE ?? "/",
@@ -17,7 +21,7 @@ export default defineConfig({
         defaultLocale: "en",
         locales: { en: "en", zh: "zh-CN" },
       },
-      filter: (page) => !page.includes("/zh/zh/"),
+      filter: (page) => !page.includes("/zh/zh/") && (enableChineseSite || !new URL(page).pathname.startsWith("/zh/")),
     }),
   ],
 });

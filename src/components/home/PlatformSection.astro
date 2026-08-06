@@ -1,0 +1,51 @@
+---
+import type { Locale } from "../../lib/i18n";
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const isZh = locale === "zh";
+const layers = isZh ? [
+  { n: "01", title: "证据与数据", input: "原始文件、元数据、来源", op: "规范化并绑定身份", artifact: "版本化证据包", review: "缺失字段 / 来源" },
+  { n: "02", title: "模型与计算", input: "证据包、假设、约束", op: "计算、检索、估计不确定性", artifact: "模型输出与置信边界", review: "适用域 / 缺失证据" },
+  { n: "03", title: "协议即代码", input: "科学目标、模型建议", op: "生成可审查步骤与停止条件", artifact: "可执行协议草案", review: "参数 / 资源 / 风险" },
+  { n: "04", title: "仪器适配与安全门", input: "已批准协议", op: "检查设备能力与动作边界", artifact: "适配器命令计划", review: "人工批准 / 安全联锁" },
+  { n: "05", title: "追踪、评估与人工审查", input: "全链路事件与测量", op: "重放、比较、标注异常", artifact: "审计记录与下一步建议", review: "批准、拒绝或弃权" },
+] : [
+  { n: "01", title: "Evidence & data", input: "Raw files, metadata, provenance", op: "Normalize and bind identity", artifact: "Versioned evidence packet", review: "Missing fields / source" },
+  { n: "02", title: "Models & computation", input: "Evidence, hypotheses, constraints", op: "Compute, retrieve, estimate uncertainty", artifact: "Output with confidence bounds", review: "Domain / missing evidence" },
+  { n: "03", title: "Protocol as code", input: "Scientific objective, model proposal", op: "Compile reviewable steps and stop rules", artifact: "Executable protocol draft", review: "Parameters / resources / risk" },
+  { n: "04", title: "Instrument adapters & safety gates", input: "Approved protocol", op: "Check capability and action boundaries", artifact: "Adapter command plan", review: "Human approval / interlocks" },
+  { n: "05", title: "Trace, evaluation & human review", input: "Loop events and measurements", op: "Replay, compare, flag anomalies", artifact: "Audit record and next proposal", review: "Approve, reject, or abstain" },
+];
+---
+
+<section class="sl-section sl-platform" id="platform" aria-labelledby="platform-title">
+  <div class="sl-shell">
+    <div class="sl-problem">
+      <p class="sl-kicker">{isZh ? "问题" : "The problem"}</p>
+      <h2>{isZh ? "强大的模型。彼此断开的实验室系统。" : "Powerful models. Disconnected laboratories."}</h2>
+      <div class="sl-problem__text">
+        <p>{isZh ? "在一些研发环境中，证据分散在文件、笔记本和模型输出中；老旧仪器边界也让新软件难以安全接入。" : "In some R&D environments, evidence is fragmented across files, notebooks, and model outputs, while legacy instrument boundaries make new software difficult to connect safely."}</p>
+        <p>{isZh ? "当数据变换、假设和审批状态不能一起重放时，决定就难以审查。SciencesLoop 关注的是这些接口，而不是替换现有科学。" : "When transformations, assumptions, and approval state cannot be replayed together, decisions become difficult to review. SciencesLoop focuses on those interfaces—not on replacing the science already in place."}</p>
+      </div>
+    </div>
+
+    <header class="sl-section__head">
+      <p class="sl-kicker">{isZh ? "平台" : "The platform"}</p>
+      <h2 id="platform-title">{isZh ? "实验循环的控制平面。" : "A control plane for the experimental loop."}</h2>
+      <p>{isZh ? "五个层次共享同一条证据链。每一层都明确输入、操作、产物和审查边界。" : "Five layers share one evidence chain. Each makes its input, operation, artifact, and review boundary explicit."}</p>
+    </header>
+
+    <ol class="sl-layers">
+      {layers.map((layer) => (
+        <li>
+          <div class="sl-layers__title"><span>{layer.n}</span><h3>{layer.title}</h3></div>
+          <dl>
+            <div><dt>{isZh ? "输入" : "Input"}</dt><dd>{layer.input}</dd></div>
+            <div><dt>{isZh ? "操作" : "Operation"}</dt><dd>{layer.op}</dd></div>
+            <div><dt>{isZh ? "产物" : "Artifact"}</dt><dd>{layer.artifact}</dd></div>
+            <div class="sl-layers__review"><dt>{isZh ? "审查边界" : "Review boundary"}</dt><dd>{layer.review}</dd></div>
+          </dl>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

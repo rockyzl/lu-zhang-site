@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import { u } from "../lib/url";
 import { detectLocale, altLocalePath, type Locale } from "../lib/i18n";
+import ChatWidget from "../components/ChatWidget.astro";
 
 const {
   title = "SciencesLoop — Evidence-gated scientific workflows",
@@ -12,6 +13,8 @@ const {
 
 const pathname = Astro.url.pathname;
 const locale: Locale = detectLocale(pathname);
+const enableChineseSite = import.meta.env.PUBLIC_ENABLE_ZH === "true";
+const isHiddenLocale = locale === "zh" && !enableChineseSite;
 const langPrefix = locale === "zh" ? "/zh" : "";
 const altPath = alternatePath ?? altLocalePath(pathname, import.meta.env.BASE_URL);
 const siteUrl = Astro.site?.href ?? "https://sciencesloop.com/";
@@ -20,20 +23,20 @@ const publicOrigin = siteUrl.replace(/\/+$/, "");
 const ogImageUrl = ogImage ?? `${publicOrigin}${u("/og-default.png")}`;
 
 const labels = locale === "zh"
-  ? { home: "首页", approach: "方法", evidence: "证据", applications: "应用", notes: "研究笔记", founder: "创始人" }
-  : { home: "Home", approach: "Approach", evidence: "Evidence", applications: "Applications", notes: "Notes", founder: "Founder" };
+  ? { platform: "平台", electrochemistry: "电化学", lab: "实验室", notes: "研究笔记", about: "关于", loop: "探索循环", pilot: "讨论试点" }
+  : { platform: "Platform", electrochemistry: "Electrochemistry", lab: "Lab", notes: "Field Notes", about: "About", loop: "Explore the Loop", pilot: "Discuss a Pilot" };
 
 const homeHref = locale === "zh" ? "/zh/" : "/";
 const navItems = [
-  { href: homeHref, label: labels.home },
-  { href: `${langPrefix}/approach/`, label: labels.approach },
-  { href: `${langPrefix}/evidence/`, label: labels.evidence },
-  { href: `${langPrefix}/applications/`, label: labels.applications },
+  { href: `${homeHref}#platform`, label: labels.platform },
+  { href: `${homeHref}#electrochemistry`, label: labels.electrochemistry },
+  { href: `${langPrefix}/lab/`, label: labels.lab },
   { href: `${langPrefix}/blog/`, label: labels.notes },
-  { href: `${langPrefix}/research-archive/`, label: labels.founder },
+  { href: `${langPrefix}/about/`, label: labels.about },
 ];
 
 const isActive = (href: string) => {
+  if (href.includes("#")) return false;
   const target = u(href);
   if (href === homeHref) return pathname === target;
   return pathname === target || pathname.startsWith(target);
@@ -76,7 +79,7 @@ const personSchema = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="SciencesLoop" />
-    {isNonProductionVercel && <meta name="robots" content="noindex, nofollow, noarchive" />}
+    {(isNonProductionVercel || isHiddenLocale) && <meta name="robots" content="noindex, nofollow, noarchive" />}
     <link rel="canonical" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title="SciencesLoop Notes RSS" href={new URL(u("/rss.xml"), siteUrl).href} />
 
@@ -86,7 +89,7 @@ const personSchema = {
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="SciencesLoop" />
     <meta property="og:locale" content={locale === "zh" ? "zh_CN" : "en_US"} />
-    <meta property="og:locale:alternate" content={locale === "zh" ? "en_US" : "zh_CN"} />
+    {enableChineseSite && <meta property="og:locale:alternate" content={locale === "zh" ? "en_US" : "zh_CN"} />}
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -96,34 +99,55 @@ const personSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <link rel="alternate" hreflang={locale === "zh" ? "zh-CN" : "en"} href={canonical} />
-    <link rel="alternate" hreflang={locale === "zh" ? "en" : "zh-CN"} href={new URL(altPath, siteUrl).href} />
-    <link rel="alternate" hreflang="x-default" href={new URL(u("/"), siteUrl).href} />
+    {!isHiddenLocale && <link rel="alternate" hreflang={locale === "zh" ? "zh-CN" : "en"} href={canonical} />}
+    {enableChineseSite && <link rel="alternate" hreflang={locale === "zh" ? "en" : "zh-CN"} href={new URL(altPath, siteUrl).href} />}
+    {!isHiddenLocale && <link rel="alternate" hreflang="x-default" href={new URL(u("/"), siteUrl).href} />}
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b2631'/%3E%3Cpath d='M18 19h28v7H25v8h18v7H25v10h-7z' fill='%232db89a'/%3E%3C/svg%3E" />
 
     {locale === "en" && isHome && <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />}
     {locale === "en" && isAbout && <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />}
   </head>
-  <body data-locale={locale}>
+  <body data-locale={locale} class={isHome ? "page-home" : undefined}>
     <header class="site">
       <div class="inner">
-        <a class="name" href={u(homeHref)} aria-label="SciencesLoop home"><span class="brand-loop" aria-hidden="true"></span>SciencesLoop</a>
+        <a class="name" href={u(homeHref)} aria-label={locale === "zh" ? "SciencesLoop 首页" : "SciencesLoop home"}>
+          <svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true">
+            <circle cx="15" cy="15" r="12.5"></circle>
+            <path d="M4 16.5h5l2.1-6 3.4 11 2.8-8 2.1 3h6.6"></path>
+          </svg>
+          <span>SciencesLoop</span>
+        </a>
         <nav aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>
-          {navItems.map((item) => (
-            <a href={u(item.href)} class={isActive(item.href) ? "active" : ""} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
-          ))}
-          <a class="lang-toggle" href={altPath} aria-label={locale === "zh" ? "Switch to English" : "切换到中文"}>{locale === "zh" ? "EN" : "中"}</a>
+          <span class="nav-core">
+            {navItems.map((item) => (
+              <a href={u(item.href)} class={isActive(item.href) ? "active" : ""} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
+            ))}
+          </span>
+          {enableChineseSite && <a class="lang-toggle" href={altPath} aria-label={locale === "zh" ? "Switch to English" : "切换到中文"}>{locale === "zh" ? "EN" : "中"}</a>}
+          <a class="nav-loop" href={u(`${homeHref}#loop`)}>{labels.loop}</a>
+          <a class="nav-contact" href="mailto:luzhang@sciencesloop.com?subject=SciencesLoop%20pilot%20discussion">{labels.pilot}<span aria-hidden="true">↗</span></a>
         </nav>
       </div>
     </header>
     <main><slot /></main>
     <footer class="site company-footer">
-      <span>© 2026 SciencesLoop LLC</span>
-      <span aria-hidden="true">·</span>
-      <a href="mailto:luzhang@sciencesloop.com">luzhang@sciencesloop.com</a>
-      <span aria-hidden="true">·</span>
-      <a href={u(locale === "zh" ? "/zh/privacy/" : "/privacy/")}>{locale === "zh" ? "隐私" : "Privacy"}</a>
+      <div class="company-footer__inner">
+        <div class="company-footer__identity">
+          <span class="company-footer__name">SciencesLoop LLC</span>
+          <p>{locale === "zh" ? "为现有实验室开发证据门控的科学工作流软件。" : "Evidence-gated scientific workflow software for existing laboratories."}</p>
+        </div>
+        <nav aria-label={locale === "zh" ? "页脚导航" : "Footer navigation"}>
+          {navItems.map((item) => <a href={u(item.href)}>{item.label}</a>)}
+          <a href={u(locale === "zh" ? "/zh/privacy/" : "/privacy/")}>{locale === "zh" ? "隐私" : "Privacy"}</a>
+        </nav>
+        <div class="company-footer__contact">
+          <span>{locale === "zh" ? "试点交流" : "Pilot conversations"}</span>
+          <a href="mailto:luzhang@sciencesloop.com">luzhang@sciencesloop.com</a>
+        </div>
+        <div class="company-footer__legal">© 2026 SciencesLoop LLC</div>
+      </div>
     </footer>
+    <ChatWidget locale={locale} />
   </body>
 </html>
 

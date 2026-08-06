@@ -1,0 +1,15 @@
+---
+import { u } from "../../lib/url";
+import type { Locale } from "../../lib/i18n";
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const isZh = locale === "zh";
+---
+<section class="sl-closing" aria-labelledby="closing-title">
+  <div class="sl-shell sl-closing__inner">
+    <div><p class="sl-kicker">{isZh ? "一个可测量的起点" : "One measurable starting point"}</p><h2 id="closing-title">{isZh ? "从一个受控循环开始。" : "Begin with one controlled loop."}</h2><p>{isZh ? "带来一个真实的实验交接、现有仪器边界与可检查的成功标准。" : "Bring one real experimental handoff, the existing instrument boundary, and an inspectable success criterion."}</p></div>
+    <div class="sl-closing__actions">
+      <a class="sl-button sl-button--primary" href="mailto:luzhang@sciencesloop.com?subject=SciencesLoop%20pilot%20discussion">{isZh ? "讨论试点" : "Discuss a Pilot"}</a>
+      <a class="sl-button sl-button--quiet" href={u(isZh ? "/zh/approach/" : "/approach/")}>{isZh ? "探索技术方法" : "Explore the Technical Approach"}</a>
+    </div>
+  </div>
+</section>

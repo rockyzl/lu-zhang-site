@@ -1,52 +1,23 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { u } from "../../lib/url";
+import HomeHero from "../../components/home/HomeHero.astro";
+import PlatformSection from "../../components/home/PlatformSection.astro";
+import ProofTrustSection from "../../components/home/ProofTrustSection.astro";
+import EcosystemSection from "../../components/home/EcosystemSection.astro";
+import HomeClosing from "../../components/home/HomeClosing.astro";
 ---
 
 <Base
-  title="SciencesLoop — 证据门控的科学工作流"
-  description="SciencesLoop 为存量实验室构建证据门控的科学工作流软件，从电化学开始。"
+  title="SciencesLoop — 从科学意图到测量，再回到下一步"
+  description="SciencesLoop 把模型、实验协议、现有仪器与人工审查连接成可追踪的实验循环，先从自适应电化学开始。"
   alternatePath={u("/")}
 >
-  <div class="sl-page sl-home">
-    <section class="sl-hero">
-      <div class="sl-kicker"><span class="sl-signal"></span>科学工作流软件 · 开发中</div>
-      <h1>先建立证据，再谈自主。</h1>
-      <p class="sl-lead">SciencesLoop 为存量实验室构建证据门控的科学工作流软件，从电化学开始。</p>
-      <p class="sl-sublead">第一切入点是离线 CV/EIS 推断与异常复核：保留现有仪器，在其外部增加可追溯的决策层，并在证据不足时要求人工批准。</p>
-      <div class="sl-actions"><a class="sl-button primary" href={u("/zh/evidence/")}>查看当前证据</a><a class="sl-button" href={u("/zh/approach/")}>了解方法</a></div>
-    </section>
-
-    <section class="sl-section">
-      <div class="sl-section-head"><span>01 · 问题</span><h2>实验室决策往往丢失推理过程。</h2></div>
-      <div class="sl-grid three">
-        <article class="sl-card"><span class="sl-chip risk">已观察问题</span><h3>上下文碎片化</h3><p>仪器文件、实验记录、脚本与专家判断散落在不同系统中。</p></article>
-        <article class="sl-card"><span class="sl-chip risk">已观察问题</span><h3>决策链不完整</h3><p>结果可能被保存，但支撑行动的假设、不确定性和批准过程没有留下。</p></article>
-        <article class="sl-card"><span class="sl-chip risk">已观察问题</span><h3>存量实验室现实</h3><p>多数实验室需要能与现有仪器并存的软件，而不是从零重建。</p></article>
-      </div>
-    </section>
-
-    <section class="sl-section sl-dark">
-      <div class="sl-section-head"><span>02 · 闭环</span><h2>从主张到决策的有边界路径。</h2></div>
-      <div class="sl-trace" aria-label="从主张到决策的证据链">
-        <div><b>01</b><strong>主张</strong><small>工作流试图证明什么</small></div><i aria-hidden="true">→</i>
-        <div><b>02</b><strong>证据</strong><small>来源、溯源、质量与不确定性</small></div><i aria-hidden="true">→</i>
-        <div><b>03</b><strong>门控</strong><small>通过、拒答或请求人工复核</small></div><i aria-hidden="true">→</i>
-        <div><b>04</b><strong>决策</strong><small>带明确边界、可回放的输出</small></div>
-      </div>
-    </section>
-
-    <section class="sl-section">
-      <div class="sl-section-head"><span>03 · 当前状态</span><h2>范围小、可检查，并如实说明边界。</h2></div>
-      <div class="sl-grid two">
-        <article class="sl-card featured"><span class="sl-chip live">在线演示</span><h3>公开证据工作流</h3><p>可运行演示展示有边界的身份核验、确定性分析、证据缺口与人工确认。</p><p class="sl-limit"><b>它们证明：</b>工作流行为可追溯。<b>它们不证明：</b>湿实验验证或仪器自主控制。</p><a class="sl-text-link" href={u("/zh/evidence/")}>查看证据登记 →</a></article>
-        <article class="sl-card"><span class="sl-chip proposed">拟议方向</span><h3>电化学工作流层</h3><p>未来面向离线 CV/EIS 推断、异常检测、数据溯源，以及围绕现有实验系统的批准门控。</p><p class="sl-limit">目前不声称生产部署、湿实验验证或已承诺的实验室合作。</p><a class="sl-text-link" href={u("/zh/applications/")}>查看应用切入点 →</a></article>
-      </div>
-    </section>
-
-    <section class="sl-section sl-contact">
-      <div><span class="sl-chip working">工作原型</span><h2>先构建证据层。</h2><p>SciencesLoop 希望围绕科学工作流可靠性和电化学验证开展严谨的技术交流。</p></div>
-      <a class="sl-button primary" href="mailto:luzhang@sciencesloop.com">联系 SciencesLoop</a>
-    </section>
+  <div class="sl-home">
+    <HomeHero locale="zh" />
+    <PlatformSection locale="zh" />
+    <ProofTrustSection locale="zh" />
+    <EcosystemSection locale="zh" />
+    <HomeClosing locale="zh" />
   </div>
 </Base>

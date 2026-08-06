@@ -1,6 +1,8 @@
 ---
-// Floating chat-bot widget — a launcher bubble (bottom-right, every page) that
-// pops out a slide-in chat panel for multi-turn Q&A with the SciencesLoop agent.
+// Floating public-site guide. It preserves the existing live endpoint and
+// local fallback, and adds one explicit, bounded chemistry tool: molecule
+// identity resolution plus calculated structure descriptors. It is not a
+// chemistry authority or an instrument controller.
 //
 // This is a FRESH floating-chat UX. It does NOT reuse the inline agent card
 // markup, but it DOES reuse SiteAgent.astro's backend contract verbatim:
@@ -18,10 +20,16 @@ const agentApiUrl = import.meta.env.PUBLIC_AGENT_API_URL ?? "https://api.science
 // Same public link map SiteAgent uses, so local-fallback answers point to the
 // same public pages.
 const links = {
-  ai: u(locale === "zh" ? "/zh/programs/" : "/programs/"),
+  home: u(locale === "zh" ? "/zh/" : "/"),
+  platform: u(locale === "zh" ? "/zh/#platform" : "/#platform"),
+  electrochemistry: u(locale === "zh" ? "/zh/#electrochemistry" : "/#electrochemistry"),
+  lab: u(locale === "zh" ? "/zh/lab/" : "/lab/"),
+  evidence: u(locale === "zh" ? "/zh/evidence/" : "/evidence/"),
+  notes: u(locale === "zh" ? "/zh/blog/" : "/blog/"),
   approach: u(locale === "zh" ? "/zh/approach/" : "/approach/"),
-  evolution: u(locale === "zh" ? "/zh/evolution/" : "/evolution/"),
-  cases: u(locale === "zh" ? "/zh/programs/#case-studies" : "/programs/#case-studies"),
+  chemistry: u(locale === "zh" ? "/zh/agent/molecular-discovery/" : "/agent/molecular-discovery/"),
+  redox: u(locale === "zh" ? "/zh/agent/redox-rfb-predictor/" : "/agent/redox-rfb-predictor/"),
+  battery: u(locale === "zh" ? "/zh/agent/battery-early-warning/" : "/agent/battery-early-warning/"),
   publications: u(locale === "zh" ? "/zh/publications/" : "/publications/"),
   patents: u(locale === "zh" ? "/zh/patents/" : "/patents/"),
   projects: u(locale === "zh" ? "/zh/projects/" : "/projects/"),
@@ -37,8 +45,8 @@ const links = {
 const copy = locale === "zh"
   ? {
       title: "Loopi",
-      subtitle: "SciencesLoop 智能体",
-      placeholder: "问问 Lu 的工作…",
+      subtitle: "公开站点与实验室指南",
+      placeholder: "询问平台、证据或公开 Demo…",
       send: "发送",
       sendAria: "发送消息",
       close: "关闭对话",
@@ -49,25 +57,58 @@ const copy = locale === "zh"
       tabHistory: "历史",
       historyEmpty: "还没有提问记录。",
       historyHint: "点任意问题可重新提问",
-      launcherOpen: "和 Loopi 聊聊",
-      greeting: "你好，我是 Loopi 👋 SciencesLoop 的智能体。我只根据公开网站内容回答，还会标出处。可以问我 Lu 建过哪些 AI 系统、他怎么让 agent 可靠可测，或者这些工作背后的科学背景。",
+      launcherOpen: "询问 Loopi",
+      greeting: "你好，我是 Loopi，SciencesLoop 的公开站点与实验室指南。我可以帮助你检查平台概念、证据和公开 Demo，并尽量标出来源。我不会控制仪器，也不会把网站内容当成实验结果或科学建议。",
       thinking: "正在思考…",
       apiError: "实时 agent 暂时不可用，这是我能基于公开网站内容回答的部分。",
       rateLimit: "稍等一下——问得太快了，过一会儿再试。",
       sources: "来源",
       followupsLabel: "继续追问",
-      startersLabel: "可以先问：",
+      startersLabel: "从公开材料开始：",
       starters: [
-        "Lu 建过哪些 AI 系统？",
-        "他怎么让 agent 可靠、可测？",
-        "Property OS 是什么？怎么做安全门控的？",
+        "SciencesLoop 的实验循环如何工作？",
+        "有哪些证据与限制？",
+        "分析分子：咖啡因",
       ],
-      fallback: "我现在只能回答网站里的核心主题。可以试试 agent reliability、case studies、technical evolution、AI for science、workflow、battery、Argonne、publication、patent、academic CV、contact。",
+      scope: "真实工具：分子名称或 SMILES → PubChem 身份 + RDKit 计算描述符。不要输入保密结构；结果不是实验测量或科学建议。",
+      fallback: "我目前只能解释公开站点内容。可以询问实验循环、adaptive electrochemistry、证据边界、National Lab 合作、分子身份确认、电池回放、Lab、技术方法或试点联系。",
+      molecule: {
+        heading: "分子身份与描述符",
+        databaseIdentity: "PubChem 候选记录",
+        structureIdentity: "提交结构的 RDKit 计算身份",
+        calculated: "RDKit 计算描述符",
+        source: "来源",
+        boundary: "边界",
+        boundaryText: "不含实验测量或 ML 预测。使用前请人工确认候选结构。",
+        privacy: "公开输入演示：名称/SMILES 会发送到 SciencesLoop 公共分析服务及 PubChem，并可能出现在网络或服务日志中。请勿提交保密/专有结构、未发表研究、个人数据或商业秘密。",
+        originalInput: "原始输入",
+        submittedSmiles: "提交的 SMILES",
+        resolverConfidence: "解析器报告",
+        ambiguity: "歧义标记",
+        noAmbiguity: "未报告",
+        retrievedAt: "检索时间",
+        formula: "分子式",
+        molecularWeight: "分子量",
+        exactMass: "精确质量",
+        logP: "RDKit Crippen LogP",
+        tpsa: "TPSA",
+        donorsAcceptors: "HBD / HBA",
+        rings: "环 / 芳香环",
+        rotatable: "可旋转键",
+        charge: "形式电荷",
+        smiles: "Canonical SMILES",
+        inchiKey: "InChIKey",
+        record: "打开来源响应",
+        gaps: "证据缺口",
+        warnings: "警告",
+        invalidInput: "未能解析该名称或 SMILES。请检查公开输入后重试。",
+        serviceError: "分子分析服务暂时无法验证结果；未返回任何化学值。请稍后重试。",
+      },
     }
   : {
       title: "Loopi",
-      subtitle: "SciencesLoop agent",
-      placeholder: "Ask about Lu's work…",
+      subtitle: "Public site & lab guide",
+      placeholder: "Ask about the platform, evidence, or demos…",
       send: "Send",
       sendAria: "Send message",
       close: "Close chat",
@@ -78,20 +119,53 @@ const copy = locale === "zh"
       tabHistory: "History",
       historyEmpty: "No questions yet.",
       historyHint: "Tap any question to ask it again",
-      launcherOpen: "Chat with Loopi",
-      greeting: "Hi, I'm Loopi 👋 the SciencesLoop agent. I only answer from the public site — and I cite my sources. Ask me about the AI systems Lu has built, how he keeps agents grounded and testable, or the science behind the work.",
+      launcherOpen: "Ask Loopi",
+      greeting: "Hi, I'm Loopi, the bounded SciencesLoop site and lab guide. I can help you inspect platform concepts, evidence, and public demos, with sources when available. I do not control instruments or treat website content as experimental results or scientific advice.",
       thinking: "Thinking…",
       apiError: "Live agent is temporarily unavailable — here's what I can answer from the public site.",
       rateLimit: "Give me a moment — too many questions at once. Please try again shortly.",
       sources: "Sources",
       followupsLabel: "Follow up",
-      startersLabel: "Try asking:",
+      startersLabel: "Start from public evidence:",
       starters: [
-        "What AI systems has Lu built?",
-        "How does he keep agents grounded and testable?",
-        "What's Property OS, and how is it safety-gated?",
+        "How does the SciencesLoop experimental loop work?",
+        "What evidence exists, and what are the limits?",
+        "Analyze molecule: caffeine",
       ],
-      fallback: "I can answer the core site topics for now. Try agent reliability, case studies, technical evolution, AI for science, workflow, battery, Argonne, publication, patent, academic CV, or contact.",
+      scope: "Real tool: molecule name or SMILES → PubChem identity + RDKit-calculated descriptors. Do not enter confidential structures; results are not experimental measurements or scientific advice.",
+      fallback: "I can explain the public site for now. Try experimental loop, adaptive electrochemistry, evidence boundaries, National Lab collaboration, molecular identity confirmation, battery replay, Lab, technical approach, or pilot contact.",
+      molecule: {
+        heading: "Molecule identity & descriptors",
+        databaseIdentity: "Candidate PubChem record",
+        structureIdentity: "RDKit identity from submitted structure",
+        calculated: "RDKit-calculated descriptors",
+        source: "Source",
+        boundary: "Boundary",
+        boundaryText: "No experimental measurements or ML predictions are included. Confirm the candidate structure before use.",
+        privacy: "Public-input demo: names/SMILES are sent to the SciencesLoop public analysis service and PubChem, and may appear in network or service logs. Do not submit confidential or proprietary structures, unpublished research, personal data, or trade secrets.",
+        originalInput: "Original input",
+        submittedSmiles: "Submitted SMILES",
+        resolverConfidence: "Resolver report",
+        ambiguity: "Ambiguity flags",
+        noAmbiguity: "None reported",
+        retrievedAt: "Retrieved at",
+        formula: "Formula",
+        molecularWeight: "Molecular weight",
+        exactMass: "Exact mass",
+        logP: "RDKit Crippen LogP",
+        tpsa: "TPSA",
+        donorsAcceptors: "HBD / HBA",
+        rings: "Rings / aromatic",
+        rotatable: "Rotatable bonds",
+        charge: "Formal charge",
+        smiles: "Canonical SMILES",
+        inchiKey: "InChIKey",
+        record: "Open source response",
+        gaps: "Evidence gaps",
+        warnings: "Warnings",
+        invalidInput: "No candidate record or valid structure was returned. Check the public name or SMILES and try again.",
+        serviceError: "The analysis service could not validate a result, so no chemistry values were returned. Please try again later.",
+      },
     };
 ---
 
@@ -133,18 +207,18 @@ const copy = locale === "zh"
       </div>
     </header>
 
-    <div class="cw-tabs" role="tablist">
-      <button type="button" class="cw-tab is-on" data-cw-tab="chat">{copy.tabChat}</button>
-      <button type="button" class="cw-tab" data-cw-tab="history">{copy.tabHistory}</button>
+    <div class="cw-tabs" role="tablist" aria-label={locale === "zh" ? "Loopi 视图" : "Loopi views"}>
+      <button type="button" role="tab" class="cw-tab is-on" data-cw-tab="chat" aria-selected="true" aria-controls="cw-chat-view">{copy.tabChat}</button>
+      <button type="button" role="tab" class="cw-tab" data-cw-tab="history" aria-selected="false" aria-controls="cw-history-view">{copy.tabHistory}</button>
     </div>
 
-    <div class="cw-messages" data-cw-messages aria-live="polite" aria-atomic="false">
+    <div class="cw-messages" id="cw-chat-view" role="tabpanel" data-cw-messages aria-live="polite" aria-atomic="false">
       <div class="cw-msg cw-msg--agent">
         <div class="cw-bubble">{copy.greeting}</div>
       </div>
     </div>
 
-    <div class="cw-history" data-cw-history hidden>
+    <div class="cw-history" id="cw-history-view" role="tabpanel" data-cw-history hidden>
       <div class="cw-history-hint" data-cw-history-hint hidden>{copy.historyHint}</div>
       <div class="cw-history-empty" data-cw-history-empty>{copy.historyEmpty}</div>
       <div class="cw-history-list" data-cw-history-list></div>
@@ -157,8 +231,10 @@ const copy = locale === "zh"
           <button type="button" class="cw-chip" data-cw-prompt={s}>{s}</button>
         ))}
       </div>
+      <p class="cw-scope">{copy.scope}</p>
     </div>
 
+    <p class="cw-input-note">{copy.molecule.privacy}</p>
     <form class="cw-form" data-cw-form>
       <input
         class="cw-input"
@@ -551,7 +627,123 @@ const copy = locale === "zh"
     .cw-send-text { display: none; }
     .cw-send { padding: .5rem .6rem; }
   }
+
+  /* SciencesLoop instrument treatment: visually subordinate, inspectable, and
+     intentionally less consumer-chat-like than the legacy rounded bubble. */
+  .cw-root { right: 18px; bottom: 18px; }
+  .cw-launcher {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #45d8df;
+    border-radius: 2px;
+    background: #0b2930;
+    color: #45d8df;
+    box-shadow: 6px 6px 0 rgba(11,41,48,.16);
+  }
+  .cw-launcher:hover { background: #123840; color: #fff; box-shadow: 4px 4px 0 rgba(11,41,48,.2); }
+  .cw-launcher:focus-visible { outline: 2px solid #087f88; outline-offset: 4px; }
+  .cw-panel,
+  .cw-panel.cw-expanded {
+    bottom: 62px;
+    width: min(410px, calc(100vw - 36px));
+    border: 1px solid #365159;
+    border-radius: 2px;
+    background: #f3f1ea;
+    box-shadow: 12px 12px 0 rgba(11,41,48,.18);
+  }
+  .cw-panel.cw-expanded { width: min(560px, calc(100vw - 36px)); }
+  .cw-head {
+    padding: .72rem .8rem;
+    border-bottom-color: #365159;
+    background: #0b2930;
+  }
+  .cw-avatar { width: 30px; height: 30px; border-radius: 2px; background: transparent; color: #45d8df; box-shadow: none; }
+  .cw-title { color: #edf5f2; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; }
+  .cw-subtitle { color: #93aeaa; font-size: .61rem; letter-spacing: .07em; text-transform: uppercase; }
+  .cw-close, .cw-expand, .cw-reset { border-radius: 2px; color: #9db5b1; }
+  .cw-close:hover, .cw-expand:hover, .cw-reset:hover { background: #123840; color: #fff; }
+  .cw-tabs { border-bottom-color: #bdc4bd; background: #f3f1ea; }
+  .cw-tab { color: #697773; }
+  .cw-tab.is-on { color: #0b2930; border-bottom-color: #087f88; }
+  .cw-messages { background: #f3f1ea; }
+  .cw-bubble { border-radius: 2px; font-size: .84rem; }
+  .cw-msg--user .cw-bubble { border-radius: 2px; background: #087f88; }
+  .cw-msg--agent .cw-bubble { border-color: #bdc4bd; border-radius: 2px; background: #fbfaf6; }
+  .cw-msg--agent .cw-bubble a { color: #087f88; }
+  .cw-starters { border-top-color: #bdc4bd; }
+  .cw-starters-label { color: #596865; }
+  .cw-scope { margin: .55rem 0 0; color: #72807c; font: 500 .6rem/1.45 var(--font-mono); }
+  .cw-input-note {
+    margin: 0;
+    padding: .42rem .75rem;
+    border-top: 1px solid #bdc4bd;
+    color: #697773;
+    background: #eef0e9;
+    font: 500 .56rem/1.45 var(--font-mono);
+  }
+  .cw-chip, .cw-followups button,
+  .cw-history-item { border-color: #bdc4bd; border-radius: 2px; background: #fbfaf6; color: #344440; }
+  .cw-chip:hover, .cw-followups button:hover,
+  .cw-history-item:hover { border-color: #087f88; background: #e7f3f1; color: #0b2930; }
+  .cw-form { border-top-color: #bdc4bd; background: #f3f1ea; }
+  .cw-input { border-color: #9fa9a4; border-radius: 2px; background: #fbfaf6; }
+  .cw-input:focus { border-color: #087f88; box-shadow: 0 0 0 2px rgba(8,127,136,.16); }
+  .cw-send { border: 1px solid #0b2930; border-radius: 2px; background: #0b2930; }
+  .cw-send:hover { border-color: #45d8df; background: #45d8df; color: #0b2930; }
+  .cw-tools { display: grid; gap: .45rem; margin-top: .65rem; }
+  .cw-tool { border: 1px solid #9fa9a4; background: #eef0e9; }
+  .cw-tool__head { display: flex; justify-content: space-between; gap: .6rem; padding: .45rem .5rem; border-bottom: 1px solid #bdc4bd; }
+  .cw-tool__head strong { font: 700 .64rem/1.3 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+  .cw-tool__head span { color: #087f88; font: 700 .58rem/1.3 var(--font-mono); text-transform: uppercase; }
+  .cw-tool dl { margin: 0; padding: .25rem .5rem .5rem; }
+  .cw-tool dl > div { display: grid; grid-template-columns: 90px 1fr; gap: .5rem; padding-top: .3rem; }
+  .cw-tool dt { color: #697773; font: 600 .55rem/1.35 var(--font-mono); text-transform: uppercase; }
+  .cw-tool dd { margin: 0; color: #344440; font-size: .67rem; line-height: 1.4; overflow-wrap: anywhere; }
+  .cw-molecule-card { display: grid; gap: .55rem; margin-top: .55rem; }
+  .cw-molecule-card__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: .65rem;
+    padding: .55rem .6rem;
+    border: 1px solid #365159;
+    background: #0b2930;
+    color: #edf5f2;
+  }
+  .cw-molecule-card__head strong { font: 700 .67rem/1.35 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+  .cw-molecule-card__head span { color: #45d8df; font: 700 .55rem/1.35 var(--font-mono); text-align: right; text-transform: uppercase; }
+  .cw-molecule-card__identity,
+  .cw-molecule-card__metrics,
+  .cw-molecule-card__boundary { border: 1px solid #bdc4bd; background: #fbfaf6; }
+  .cw-molecule-card__label { margin: 0; padding: .36rem .5rem; border-bottom: 1px solid #bdc4bd; color: #087f88; font: 700 .56rem/1.35 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+  .cw-molecule-card dl { margin: 0; padding: .2rem .5rem .5rem; }
+  .cw-molecule-card dl > div { display: grid; grid-template-columns: minmax(82px, .7fr) minmax(0, 1.3fr); gap: .5rem; padding-top: .34rem; }
+  .cw-molecule-card dt { color: #697773; font: 600 .54rem/1.35 var(--font-mono); text-transform: uppercase; }
+  .cw-molecule-card dd { margin: 0; color: #273a36; font-size: .67rem; line-height: 1.4; overflow-wrap: anywhere; }
+  .cw-molecule-card__metrics dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 .65rem; }
+  .cw-molecule-card__metrics dl > div { grid-template-columns: 1fr; gap: .08rem; }
+  .cw-molecule-card__boundary { padding: .52rem .56rem; border-left: 3px solid #d79b37; }
+  .cw-molecule-card__boundary strong { display: block; margin-bottom: .22rem; color: #7a520f; font: 700 .57rem/1.35 var(--font-mono); letter-spacing: .04em; text-transform: uppercase; }
+  .cw-molecule-card__boundary p { margin: 0; color: #4e5d59; font-size: .66rem; line-height: 1.48; }
+  .cw-molecule-card__list { margin: .25rem 0 0; padding-left: 1.1rem; color: #52625e; font-size: .64rem; line-height: 1.45; }
+
+  @media (max-width: 480px) {
+    .cw-root { right: 12px; bottom: 12px; }
+    .cw-panel,
+    .cw-panel.cw-expanded { right: 0; bottom: 60px; width: calc(100vw - 24px); height: min(76vh, 620px); max-height: min(76vh, 620px); box-shadow: 6px 6px 0 rgba(11,41,48,.18); }
+  }
 </style>
+
+<script>
+  import { analyzeMoleculeThroughPublicApi } from "../lib/loopiMoleculeTool";
+
+  Object.assign(window, {
+    __loopiMoleculeTool: {
+      analyzeMoleculeName: (value: string) => analyzeMoleculeThroughPublicApi({ kind: "name", value }),
+      analyzeMoleculeSmiles: (value: string) => analyzeMoleculeThroughPublicApi({ kind: "smiles", value }),
+    },
+  });
+</script>
 
 <script define:vars={{ agentApiUrl, locale, links, copy }}>
   (() => {
@@ -605,42 +797,42 @@ const copy = locale === "zh"
     /* ---------- local keyword fallback (public corpus, same as SiteAgent) ---------- */
     const answerSets = {
       en: [
-        { keys: ["agent", "agents", "rag", "mcp", "langgraph", "workflow", "harness", "ai for science", "scientific agent"],
-          html: `Lu's current direction is AI for Science through reliable agent systems: context engineering, evaluation harnesses, multi-agent orchestration, traceable workflow execution, and human-in-the-loop scientific decision support. See <a href="${links.ai}">Programs</a>.` },
-        { keys: ["approach", "reliable", "reliability", "grounded", "testable", "context engineering", "golden set", "acceptance contract", "human review", "human-in-the-loop"],
-          html: `The <a href="${links.approach}">Approach</a> page explains the reliability stack: foundation models, agent engineering, context engineering, and evaluation harnesses — measurable behavior, grounded context, explicit tools, and human review.` },
-        { keys: ["case", "case study", "case studies", "rfb", "scifm", "molecular property", "molecular-property", "chemgraph"],
-          html: `The <a href="${links.cases}">case studies</a> cover the RFB formulation agent, ChemGraph workflow contributions, the scifm registry, and a public molecular-property ML pipeline, with maturity labels preserved.` },
-        { keys: ["evolution", "timeline", "technical evolution", "commit", "commits", "trajectory"],
-          html: `The <a href="${links.evolution}">Technical Evolution</a> page frames the path from scientific research to data science, LLM/agent systems, and 2026 production reliability work.` },
-        { keys: ["mlops", "eval", "evaluation", "observability", "trace", "smoke test", "deployment", "azure", "docker", "search"],
-          html: `Lu's AI engineering emphasizes application-layer reliability: retrieval checks, smoke tests, trace review, Docker/Azure deployment-readiness, and rollback-aware search-index workflows — application-layer AI/MLOps, not model pretraining.` },
-        { keys: ["battery", "redox", "flow", "electrolyte", "redoxmer", "materials", "property os"],
-          html: `Lu's scientific base is battery materials and electrochemistry: redox-flow batteries, redox-active organic molecules, Li-ion electrolyte additives, redox shuttles, and molecular design. See <a href="${links.publications}">publications</a> and <a href="${links.patents}">patents</a>.` },
-        { keys: ["publication", "paper", "citation", "scholar", "patent"],
-          html: `For publication depth use the <a href="${links.publications}">publication list</a> and <a href="${links.scholar}" target="_blank" rel="noopener">Google Scholar</a>. For invention output see <a href="${links.patents}">patents</a>.` },
-        { keys: ["argonne", "anl", "autonomous", "discovery", "robotic", "jcesr", "doe", "national lab"],
-          html: `Lu spent 14+ years at Argonne on battery materials, redox molecules, DOE/JCESR programs, and selected AI/ML, high-throughput, and autonomous-discovery collaborations — AI for Science built on deep scientific domain expertise.` },
+        { keys: ["loop", "workflow", "control plane", "objective", "protocol", "approval", "instrument", "measurement", "next experiment"],
+          html: `The SciencesLoop thesis is an evidence-aware control plane: objective → evidence → protocol → human approval → instrument boundary → measurement → analysis → next experiment. The current public proof is a bounded software prototype, not autonomous hardware control. <a href="${links.home}#loop">Inspect the loop</a>.` },
+        { keys: ["electrochemistry", "cv", "cyclic voltammetry", "adaptive", "eis"],
+          html: `Adaptive electrochemistry is the first controlled proof. The public interface uses an illustrative CV trace to show protocol, artifact, analysis, and approval states; it is not experimental data and is not connected to a physical instrument. <a href="${links.electrochemistry}">See the proof boundary</a>.` },
+        { keys: ["evidence", "limit", "limitation", "maturity", "provenance", "reproducible", "uncertainty", "trust"],
+          html: `Public evidence includes runnable bounded demos, source-linked artifacts, identity confirmation, replayable analysis, and explicit limitations. It does not establish laboratory deployment, wet-lab validation, or instrument control. <a href="${links.evidence}">Inspect the evidence register</a>.` },
+        { keys: ["national lab", "doe lab", "user facility", "argonne", "partner", "partnership"],
+          html: `A National Laboratory or DOE user-facility partnership is not a universal requirement. It can strengthen projects where real facility needs, instrument boundaries, or validation access are central. SciencesLoop does not currently claim a committed National Lab or university partnership.` },
+        { keys: ["molecule", "molecular", "identity", "property", "smiles", "pubchem", "rdkit", "chemistry"],
+          html: `Loopi can retrieve a candidate PubChem record for a public chemical name, or validate a submitted SMILES, then calculate bounded RDKit structure descriptors. Try <code>Analyze molecule: caffeine</code> or <code>SMILES: CCO</code>. It does not return experimental measurements or property predictions. <a href="${links.chemistry}">Open the full molecular workflow</a>.` },
+        { keys: ["battery", "early warning", "replay", "eis improve"],
+          html: `The <a href="${links.battery}">Battery Early-Warning Replay</a> uses transformed public KIT v2 data to compare matched forecasts with and without EIS. It is an offline research replay, not a production alarm, and results vary by aging mode and model.` },
+        { keys: ["lab", "demo", "demos", "scientific agent"],
+          html: `The <a href="${links.lab}">Lab</a> collects public demos as evidence for one control-plane thesis: bounded tool use, identity checks, replayable analysis, evidence gaps, and human review. Each demo retains its own maturity and limitation labels.` },
+        { keys: ["approach", "architecture", "layer", "adapter", "safety gate", "evaluation"],
+          html: `The <a href="${links.approach}">technical approach</a> separates evidence/data, models/computation, protocol-as-code, instrument adapters/safety gates, and trace/evaluation/human review. The present instrument adapter is a proposed boundary, not a validated deployment.` },
         { keys: ["cv", "resume", "linkedin", "github", "contact", "email"],
           html: `Use the <a href="${links.cv}" target="_blank" rel="noopener">academic CV PDF</a>, <a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a>, <a href="${links.github}" target="_blank" rel="noopener">GitHub</a>, or <a href="${links.email}">email Lu</a>.` },
       ],
       zh: [
-        { keys: ["agent", "智能体", "rag", "mcp", "langgraph", "workflow", "工作流", "ai for science"],
-          html: `Lu 现在的主线是把可靠 agent 系统用于 AI for Science：context engineering、evaluation harnesses、multi-agent orchestration、可追踪工作流和 human-in-the-loop 科学决策支持。见 <a href="${links.ai}">Programs</a>。` },
-        { keys: ["approach", "方法", "可靠", "可测", "grounded", "reliability", "context engineering", "golden set", "human review", "human-in-the-loop"],
-          html: `<a href="${links.approach}">方法页</a> 解释可靠 agent 的四层：foundation models、agent engineering、context engineering 和 evaluation harnesses。重点是可测量行为、grounded context、明确工具和人工 review。` },
-        { keys: ["case", "案例", "rfb", "scifm", "molecular property", "molecular-property", "chemgraph"],
-          html: `<a href="${links.cases}">case studies</a> 包含 RFB formulation agent、ChemGraph workflow、scifm registry 和公开 molecular-property ML pipeline，并保留 maturity 标签。` },
-        { keys: ["evolution", "演化", "timeline", "时间线", "technical evolution", "trajectory"],
-          html: `<a href="${links.evolution}">技术演化页</a> 解释从科学研究到 data science、LLM/agent systems，再到 2026 production reliability work 的连续路径。` },
-        { keys: ["mlops", "eval", "evaluation", "评估", "trace", "smoke test", "部署", "azure", "docker", "search"],
-          html: `Lu 的 AI 工程重点是应用层可靠性：retrieval checks、smoke tests、trace review、Docker/Azure deployment-readiness，以及可回滚的 search-index 工作流。是应用层 AI/MLOps，不是模型预训练。` },
-        { keys: ["battery", "电池", "redox", "flow", "液流", "electrolyte", "电解液", "redoxmer", "materials", "材料", "property os"],
-          html: `Lu 的科学基础是电池材料和电化学：液流电池、氧化还原活性有机分子、锂离子电解液添加剂、redox shuttle 和分子设计。见 <a href="${links.publications}">论文</a> 和 <a href="${links.patents}">专利</a>。` },
-        { keys: ["publication", "paper", "论文", "citation", "引用", "scholar", "patent", "专利"],
-          html: `论文看 <a href="${links.publications}">publication list</a> 与 <a href="${links.scholar}" target="_blank" rel="noopener">Google Scholar</a>；发明成果看 <a href="${links.patents}">专利</a>。` },
-        { keys: ["argonne", "anl", "阿贡", "autonomous", "自主发现", "discovery", "jcesr", "doe", "国家实验室"],
-          html: `Lu 在 Argonne 有 14+ 年电池材料、redox molecules、DOE/JCESR 项目经验，并参与过部分 AI/ML、高通量和 autonomous-discovery 合作——以深厚科学背景为基础的 AI for Science。` },
+        { keys: ["循环", "工作流", "控制平面", "目标", "协议", "批准", "仪器", "测量", "下一实验"],
+          html: `SciencesLoop 的主线是证据感知控制平面：目标 → 证据 → 协议 → 人工批准 → 仪器边界 → 测量 → 分析 → 下一实验。当前公开证据是受限软件原型，不是自主硬件控制。<a href="${links.home}#loop">查看循环</a>。` },
+        { keys: ["电化学", "cv", "循环伏安", "自适应", "eis"],
+          html: `自适应电化学是首个受控验证。公开界面用示意 CV 曲线展示协议、产物、分析与批准状态；不是实验数据，也未连接真实仪器。<a href="${links.electrochemistry}">查看边界</a>。` },
+        { keys: ["证据", "限制", "成熟度", "来源", "可重现", "不确定性", "信任"],
+          html: `公开证据包括可运行的受限 Demo、来源链接、身份确认、可重放分析与显式限制；不证明实验室部署、湿实验验证或仪器控制。<a href="${links.evidence}">查看证据登记</a>。` },
+        { keys: ["national lab", "国家实验室", "用户设施", "argonne", "阿贡", "合作", "伙伴"],
+          html: `National Lab 或 DOE user facility 合作不是普遍硬要求。当真实设施需求、仪器边界或验证访问是项目核心时，它可以增强可信度。SciencesLoop 当前不声称已有承诺的 National Lab 或大学合作。` },
+        { keys: ["分子", "身份", "性质", "smiles", "pubchem", "rdkit", "化学"],
+          html: `Loopi 可以为公开化学名称检索 PubChem 候选记录，或验证提交的 SMILES，再计算受限的 RDKit 结构描述符。试试 <code>分析分子：咖啡因</code> 或 <code>SMILES: CCO</code>。它不返回实验测量或性质预测。<a href="${links.chemistry}">打开完整分子工作流</a>。` },
+        { keys: ["电池", "早期预警", "回放", "eis 改善"],
+          html: `<a href="${links.battery}">电池早期预警回放</a>使用转换后的公开 KIT v2 数据，比较有无 EIS 的配对预测。它是离线研究回放，不是生产报警，结果随老化模式和模型变化。` },
+        { keys: ["lab", "实验室", "demo", "演示", "scientific agent"],
+          html: `<a href="${links.lab}">Lab</a> 把公开 Demo 组织成同一条控制平面证据：受限工具使用、身份检查、可重放分析、证据缺口与人工审查。每个 Demo 保留自己的成熟度和限制。` },
+        { keys: ["方法", "架构", "层", "适配器", "安全门", "评估"],
+          html: `<a href="${links.approach}">技术方法</a>区分证据/数据、模型/计算、协议即代码、仪器适配/安全门、追踪/评估/人工审查。当前仪器适配器是设计边界，不是已验证部署。` },
         { keys: ["cv", "resume", "简历", "linkedin", "github", "contact", "email", "联系"],
           html: `公开记录看 <a href="${links.cv}" target="_blank" rel="noopener">学术 CV PDF</a>，职业背景看 <a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a>，代码看 <a href="${links.github}" target="_blank" rel="noopener">GitHub</a>，也可 <a href="${links.email}">邮件联系 Lu</a>。` },
       ],
@@ -699,6 +891,98 @@ const copy = locale === "zh"
       return match ? match.html : copy.fallback;
     }
 
+    function parseMoleculeIntent(query) {
+      const value = String(query || "").trim();
+      const patterns = [
+        { kind: "smiles", pattern: /^smiles\s*[:：]\s*(.+)$/i },
+        { kind: "name", pattern: /^(?:analy[sz]e\s+)?molecule\s*[:：]\s*(.+)$/i },
+        { kind: "name", pattern: /^分析分子\s*[:：]\s*(.+)$/i },
+        { kind: "name", pattern: /^(?:what\s+are\s+|show\s+|inspect\s+|calculate\s+)?(?:the\s+)?(?:molecular|chemical)\s+(?:properties|descriptors)\s+(?:of|for)\s+(.+?)[?.!]*$/i },
+        { kind: "name", pattern: /^(?:查询|分析|计算)(.+?)(?:的)?(?:分子性质|结构描述符)[？?。]*$/i },
+      ];
+      for (const item of patterns) {
+        const match = value.match(item.pattern);
+        const input = match?.[1]?.trim();
+        if (input) return { kind: item.kind, value: input };
+      }
+      return null;
+    }
+
+    function formatNumber(value, digits = 3) {
+      return Number(value).toLocaleString(locale === "zh" ? "zh-CN" : "en-US", {
+        maximumFractionDigits: digits,
+      });
+    }
+
+    function humanizeEvidence(value) {
+      return String(value || "").replaceAll("_", " ");
+    }
+
+    function renderMoleculeResult(result, intent) {
+      const identity = result.identity;
+      const provenance = identity.provenance;
+      const values = result.descriptors.values;
+      const sourceLabel = provenance.kind === "database_identity"
+        ? copy.molecule.databaseIdentity
+        : copy.molecule.structureIdentity;
+      const sourceDetail = provenance.kind === "database_identity"
+        ? `${provenance.source} · CID ${provenance.recordId}`
+        : `${provenance.source} · ${copy.molecule.submittedSmiles}`;
+      const sourceLink = provenance.kind === "database_identity"
+        ? `<a href="${escapeHtml(provenance.sourceUrl)}" target="_blank" rel="noopener">${escapeHtml(copy.molecule.record)}</a>`
+        : "";
+      const gaps = Array.isArray(result.evidenceGaps) ? result.evidenceGaps.slice(0, 4) : [];
+      const warnings = Array.isArray(result.warnings)
+        ? result.warnings
+            .map((warning) => String(warning).replace(/calculated locally with RDKit/gi, "calculated with RDKit by the analysis service"))
+            .slice(0, 3)
+        : [];
+      const gapsHtml = gaps.length
+        ? `<div><strong>${escapeHtml(copy.molecule.gaps)}</strong><ul class="cw-molecule-card__list">${gaps.map((gap) => `<li>${escapeHtml(humanizeEvidence(gap.propertyName))}: ${escapeHtml(humanizeEvidence(gap.status))}. ${escapeHtml(gap.recommendedAction)}</li>`).join("")}</ul></div>`
+        : "";
+      const warningsHtml = warnings.length
+        ? `<div><strong>${escapeHtml(copy.molecule.warnings)}</strong><ul class="cw-molecule-card__list">${warnings.map((warning) => `<li>${escapeHtml(warning)}</li>`).join("")}</ul></div>`
+        : "";
+
+      return `<div class="cw-molecule-card">
+        <div class="cw-molecule-card__head"><strong>${escapeHtml(copy.molecule.heading)}</strong><span>${escapeHtml(copy.molecule.calculated)}</span></div>
+        <section class="cw-molecule-card__identity">
+          <p class="cw-molecule-card__label">${escapeHtml(sourceLabel)}</p>
+          <dl>
+            <div><dt>${escapeHtml(copy.molecule.originalInput)}</dt><dd>${escapeHtml(intent.value)}</dd></div>
+            <div><dt>${escapeHtml(copy.molecule.source)}</dt><dd>${escapeHtml(sourceDetail)}${sourceLink ? ` · ${sourceLink}` : ""}</dd></div>
+            <div><dt>${escapeHtml(copy.molecule.resolverConfidence)}</dt><dd>${escapeHtml(identity.resolverConfidence)}</dd></div>
+            <div><dt>${escapeHtml(copy.molecule.ambiguity)}</dt><dd>${identity.ambiguityFlags.length ? escapeHtml(identity.ambiguityFlags.join(", ")) : escapeHtml(copy.molecule.noAmbiguity)}</dd></div>
+            ${provenance.kind === "database_identity" ? `<div><dt>${escapeHtml(copy.molecule.retrievedAt)}</dt><dd>${escapeHtml(new Date(provenance.retrievedAt).toLocaleString(locale === "zh" ? "zh-CN" : "en-US"))}</dd></div>` : ""}
+            <div><dt>${escapeHtml(copy.molecule.smiles)}</dt><dd><code>${escapeHtml(identity.canonicalSmiles)}</code></dd></div>
+            <div><dt>${escapeHtml(copy.molecule.inchiKey)}</dt><dd><code>${escapeHtml(identity.inchiKey)}</code></dd></div>
+          </dl>
+        </section>
+        <section class="cw-molecule-card__metrics">
+          <p class="cw-molecule-card__label">${escapeHtml(copy.molecule.calculated)}</p>
+          <dl>
+            <div><dt>${escapeHtml(copy.molecule.formula)}</dt><dd>${escapeHtml(values.formula)}</dd></div>
+            <div><dt>${escapeHtml(copy.molecule.molecularWeight)}</dt><dd>${formatNumber(values.molecularWeight)} g/mol</dd></div>
+            <div><dt>${escapeHtml(copy.molecule.exactMass)}</dt><dd>${formatNumber(values.exactMolecularWeight, 4)} Da</dd></div>
+            <div><dt>${escapeHtml(copy.molecule.logP)}</dt><dd>${formatNumber(values.logP, 4)}</dd></div>
+            <div><dt>${escapeHtml(copy.molecule.tpsa)}</dt><dd>${formatNumber(values.tpsa)} Å²</dd></div>
+            <div><dt>${escapeHtml(copy.molecule.donorsAcceptors)}</dt><dd>${values.hydrogenBondDonors} / ${values.hydrogenBondAcceptors}</dd></div>
+            <div><dt>${escapeHtml(copy.molecule.rings)}</dt><dd>${values.ringCount} / ${values.aromaticRingCount}</dd></div>
+            <div><dt>${escapeHtml(copy.molecule.rotatable)}</dt><dd>${values.rotatableBonds}</dd></div>
+            <div><dt>${escapeHtml(copy.molecule.charge)}</dt><dd>${values.formalCharge}</dd></div>
+          </dl>
+        </section>
+        <aside class="cw-molecule-card__boundary"><strong>${escapeHtml(copy.molecule.boundary)}</strong><p>${escapeHtml(copy.molecule.boundaryText)}</p>${gapsHtml}${warningsHtml}</aside>
+      </div>`;
+    }
+
+    function moleculeErrorHtml(error) {
+      const code = error && typeof error === "object" ? error.code : "";
+      if (code === "rate_limited") return escapeHtml(copy.rateLimit);
+      if (code === "invalid_input") return escapeHtml(copy.molecule.invalidInput);
+      return `${escapeHtml(copy.molecule.serviceError)} <span class="cw-muted">(${escapeHtml(code || "service unavailable")})</span>`;
+    }
+
     /* ---------- DOM helpers ---------- */
     function scrollToBottom() {
       messages.scrollTop = messages.scrollHeight;
@@ -752,6 +1036,12 @@ const copy = locale === "zh"
         citeMap[n] ? `<a class="cw-cite" href="${escapeHtml(citeMap[n])}" target="_blank" rel="noopener">[${n}]</a>` : m);
       const agent = data.agent || {};
       const followups = Array.isArray(agent.followups) ? agent.followups.slice(0, 3) : [];
+      // Reserved, evidence-first rendering contract for future backend tools.
+      // Nothing is shown unless the API supplies real tool metadata. A result
+      // card intentionally exposes identity, source/model, status, and limits.
+      const toolResults = Array.isArray(data.tool_results)
+        ? data.tool_results.slice(0, 4)
+        : (Array.isArray(data.tools) ? data.tools.slice(0, 4) : []);
 
       const sources = citations
         .map((item) => {
@@ -769,7 +1059,17 @@ const copy = locale === "zh"
             .map((f) => `<button type="button" data-cw-prompt="${escapeHtml(f)}">${escapeHtml(f)}</button>`)
             .join("")}</div>`
         : "";
-      return `<div>${answer || escapeHtml(copy.fallback)}</div>${sourcesHtml}${followupsHtml}`;
+      const toolsHtml = toolResults.length
+        ? `<div class="cw-tools" aria-label="Tool results">${toolResults.map((tool) => {
+            const name = escapeHtml(tool.name || tool.tool || "Tool");
+            const identity = escapeHtml(tool.input_identity || tool.input || "Not supplied");
+            const source = escapeHtml(tool.source_model || tool.source || tool.model || "Not supplied");
+            const status = escapeHtml(tool.status || "reported");
+            const limits = escapeHtml(tool.limits || tool.limitations || "No limits supplied by backend");
+            return `<article class="cw-tool"><div class="cw-tool__head"><strong>${name}</strong><span>${status}</span></div><dl><div><dt>Input identity</dt><dd>${identity}</dd></div><div><dt>Source / model</dt><dd>${source}</dd></div><div><dt>Limits</dt><dd>${limits}</dd></div></dl></article>`;
+          }).join("")}</div>`
+        : "";
+      return `<div>${answer || escapeHtml(copy.fallback)}</div>${toolsHtml}${sourcesHtml}${followupsHtml}`;
     }
 
     /* ---------- live API (same contract as SiteAgent.astro) ---------- */
@@ -805,18 +1105,48 @@ const copy = locale === "zh"
     async function send(query) {
       const q = (query || "").trim();
       if (!q || pending) return; // debounce: ignore while a request is in flight
+      const moleculeIntent = parseMoleculeIntent(q);
 
       if (root.classList.contains("cw-view-history")) showView("chat"); // asking jumps back to chat
       root.classList.add("cw-conversing"); // hide starter chips after first turn
       addUserMessage(q);
       history.push({ role: "user", text: q });
-      transcript.push({ role: "user", text: q });
-      if (questionLog[questionLog.length - 1] !== q) questionLog.push(q); // log for History tab
-      persist();
+      // Chemistry inputs/results remain in the current DOM only. They are
+      // deliberately excluded from sessionStorage and the History tab.
+      if (!moleculeIntent) {
+        transcript.push({ role: "user", text: q });
+        if (questionLog[questionLog.length - 1] !== q) questionLog.push(q);
+        persist();
+      }
       input.value = "";
       setPending(true);
 
       const bubble = addAgentMessage(thinkingHtml());
+
+      const moleculeTool = window.__loopiMoleculeTool;
+      if (moleculeIntent) {
+        if (!moleculeTool) {
+          bubble.innerHTML = `<div>${escapeHtml(copy.molecule.serviceError)}</div>`;
+          setPending(false);
+          scrollToBottom();
+          if (!input.disabled) input.focus();
+          return;
+        }
+        try {
+          const result = moleculeIntent.kind === "smiles"
+            ? await moleculeTool.analyzeMoleculeSmiles(moleculeIntent.value)
+            : await moleculeTool.analyzeMoleculeName(moleculeIntent.value);
+          bubble.innerHTML = renderMoleculeResult(result, moleculeIntent);
+          history.push({ role: "agent", text: `${copy.molecule.heading}: ${result.identity.inputName}` });
+        } catch (error) {
+          bubble.innerHTML = `<div>${moleculeErrorHtml(error)}</div>`;
+        } finally {
+          setPending(false);
+          scrollToBottom();
+          if (!input.disabled) input.focus();
+        }
+        return;
+      }
 
       if (!agentApiUrl) {
         // No endpoint configured → local fallback only (graceful degrade).
@@ -895,7 +1225,11 @@ const copy = locale === "zh"
     function showView(view) {
       const isHistory = view === "history";
       root.classList.toggle("cw-view-history", isHistory);
-      tabs.forEach((t) => t.classList.toggle("is-on", t.getAttribute("data-cw-tab") === view));
+      tabs.forEach((t) => {
+        const selected = t.getAttribute("data-cw-tab") === view;
+        t.classList.toggle("is-on", selected);
+        t.setAttribute("aria-selected", selected ? "true" : "false");
+      });
       if (isHistory) renderHistory();
       persist();
     }
@@ -914,6 +1248,14 @@ const copy = locale === "zh"
     expandBtn.addEventListener("click", toggleExpand);
     resetBtn.addEventListener("click", resetChat);
     tabs.forEach((t) => t.addEventListener("click", () => showView(t.getAttribute("data-cw-tab"))));
+    tabs.forEach((tab, index) => tab.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      const next = tabs[(index + direction + tabs.length) % tabs.length];
+      showView(next.getAttribute("data-cw-tab"));
+      next.focus();
+    }));
 
     // Esc closes the panel when it's open.
     document.addEventListener("keydown", (e) => {

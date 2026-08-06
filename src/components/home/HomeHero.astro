@@ -1,0 +1,42 @@
+---
+import { u } from "../../lib/url";
+import type { Locale } from "../../lib/i18n";
+import ExperimentalLoop from "./ExperimentalLoop.astro";
+
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const isZh = locale === "zh";
+---
+
+<section class="sl-hero" aria-labelledby="home-title">
+  <div class="sl-shell sl-hero__grid">
+    <div class="sl-hero__copy">
+      <p class="sl-kicker">{isZh ? "科学研发的证据感知控制平面" : "Evidence-aware control plane for scientific R&D"}</p>
+      <h1 id="home-title">{isZh ? "从科学意图，到测量，再回到下一步。" : "From scientific intent to measurement—and back."}</h1>
+      <p class="sl-hero__dek">{isZh ? "SciencesLoop 把模型、实验协议、现有仪器与人工审查连接成可追踪的实验循环，先从自适应电化学开始。" : "SciencesLoop connects models, protocols, existing instruments, and human review into traceable experimental loops—starting with adaptive electrochemistry."}</p>
+      <div class="sl-hero__actions">
+        <a class="sl-button sl-button--primary" href="#loop">{isZh ? "探索循环" : "Explore the Loop"}</a>
+        <a class="sl-button sl-button--quiet" href="mailto:luzhang@sciencesloop.com?subject=SciencesLoop%20pilot%20discussion">{isZh ? "讨论试点" : "Discuss a Pilot"}</a>
+      </div>
+      <div class="sl-status-strip" aria-label={isZh ? "原型状态" : "Prototype status"}>
+        <span class="sl-status-strip__signal" aria-hidden="true"></span>
+        <strong>{isZh ? "自适应电化学 · 工作原型" : "Adaptive electrochemistry · Working prototype"}</strong>
+        <span>{isZh ? "软件循环 / 仪器执行尚未验证" : "Software loop / instrument execution not yet validated"}</span>
+      </div>
+    </div>
+    <aside class="sl-hero__scope sl-mini-loop" aria-label={isZh ? "闭环状态模型" : "Closed-loop state model"}>
+      <header class="sl-mini-loop__head">
+        <span>POC / CV-001</span>
+        <strong>{isZh ? "闭环状态模型" : "Closed-loop state model"}</strong>
+      </header>
+      <ol>
+        <li><span>01</span><strong>{isZh ? "意图" : "Intent"}</strong><small>{isZh ? "目标 + 约束" : "objective + constraints"}</small></li>
+        <li><span>02</span><strong>{isZh ? "协议" : "Protocol"}</strong><small>{isZh ? "可审查步骤" : "reviewable steps"}</small></li>
+        <li class="sl-mini-loop__approval"><span>03</span><strong>{isZh ? "审批" : "Approve"}</strong><small>{isZh ? "人工门控" : "human gate"}</small></li>
+        <li><span>04</span><strong>{isZh ? "测量" : "Measure"}</strong><small>{isZh ? "返回证据" : "return evidence"}</small></li>
+      </ol>
+      <div class="sl-mini-loop__return"><span aria-hidden="true">↺</span><small>{isZh ? "证据回到下一实验决策" : "Evidence returns to the next experiment decision"}</small></div>
+      <p>{isZh ? "把科学目标编译成可审查协议，再把测量结果带回下一轮决策。" : "Compile a scientific objective into a reviewable protocol, then carry measurements back into the next decision."}</p>
+    </aside>
+  </div>
+  <div class="sl-shell"><ExperimentalLoop locale={locale} /></div>
+</section>

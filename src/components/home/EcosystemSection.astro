@@ -1,0 +1,62 @@
+---
+import { u } from "../../lib/url";
+import type { Locale } from "../../lib/i18n";
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const isZh = locale === "zh";
+const prefix = isZh ? "/zh" : "";
+const audiences = isZh ? [
+  ["研究实验室", "选一个重复、可测量、目前依赖人工交接的循环。", "讨论验证边界", "mailto:luzhang@sciencesloop.com?subject=SciencesLoop%20pilot%20boundary"],
+  ["科学研发团队", "把一个模型建议连接到可审查协议与决策包。", "查看技术方法", `${prefix}/approach/`],
+  ["仪器与平台伙伴", "定义一个不绕过现有安全边界的适配接口。", "讨论适配器", "mailto:luzhang@sciencesloop.com?subject=SciencesLoop%20instrument%20adapter"],
+] : [
+  ["Research laboratories", "Select one repetitive, measurable loop that currently depends on manual handoffs.", "Discuss a validation boundary", "mailto:luzhang@sciencesloop.com?subject=SciencesLoop%20pilot%20boundary"],
+  ["Scientific R&D teams", "Connect one model proposal to a reviewable protocol and decision packet.", "Inspect the technical approach", `${prefix}/approach/`],
+  ["Instrument & platform partners", "Define an adapter interface that preserves existing safety boundaries.", "Discuss an adapter", "mailto:luzhang@sciencesloop.com?subject=SciencesLoop%20instrument%20adapter"],
+];
+const evidence = isZh ? [
+  ["自适应电化学", "工作原型", "原型界面 / 公开方法", "模拟数据；未接真实仪器。", "/applications/"],
+  ["Scientific Agent Lab", "公开演示", "可运行工作流", "受限问题空间；不是科学权威。", "/agent/"],
+  ["氧化还原预测 + 身份确认", "公开演示", "代码 + 方法文章", "固定模型与 DFT 尺度；非实验测量。", "/agent/redox-rfb-predictor/"],
+  ["电池早期预警回放", "公开演示", "公开数据 + 代码 + 文章", "离线回放；表现随老化模式和模型变化。", "/agent/battery-early-warning/"],
+  ["证据落地检索", "工作流模式", "来源链接 + 显式证据缺口", "能力受公开语料限制。", "/evidence/"],
+] : [
+  ["Adaptive electrochemistry", "Working prototype", "Prototype interface / public approach", "Simulated data; no physical instrument connection.", "/applications/"],
+  ["Scientific Agent Lab", "Public demo", "Runnable workflow", "Bounded problem space; not scientific authority.", "/agent/"],
+  ["Redox prediction + identity confirmation", "Public demo", "Code + method note", "Fixed model on a DFT scale; not an experimental measurement.", "/agent/redox-rfb-predictor/"],
+  ["Battery early-warning replay", "Public demo", "Public data + code + article", "Offline replay; performance varies by aging mode and model.", "/agent/battery-early-warning/"],
+  ["Evidence-grounded retrieval", "Workflow pattern", "Linked sources + explicit evidence gaps", "Capability is bounded by the public corpus.", "/evidence/"],
+];
+---
+
+<section class="sl-section sl-ecosystem" id="lab" aria-labelledby="audience-title">
+  <div class="sl-shell">
+    <header class="sl-section__head">
+      <p class="sl-kicker">{isZh ? "合作路径" : "Ways to engage"}</p>
+      <h2 id="audience-title">{isZh ? "为已经拥有宝贵科学的实验室而设计。" : "Designed for laboratories that already have valuable science."}</h2>
+      <p>{isZh ? "从一个仪器边界、一套可审查协议和一个需要人工协调的决策开始。若更广泛的设施合作对访问或验证至关重要，可在受控试点之后逐步扩展。" : "Begin with one instrument boundary, one reviewable protocol, and one decision that still depends on manual coordination. Broader facility collaboration can follow when access or validation makes it useful."}</p>
+    </header>
+
+    <div class="sl-audiences">
+      {audiences.map(([title, body, action, href], index) => (
+        <article><span>0{index + 1}</span><h3>{title}</h3><p>{body}</p><a href={href.startsWith("/") ? u(href) : href}>{action} <i aria-hidden="true">↗</i></a></article>
+      ))}
+    </div>
+
+    <div class="sl-evidence-head">
+      <div><p class="sl-kicker">{isZh ? "实验室证据" : "Lab evidence"}</p><h2>{isZh ? "一条控制平面主线，五种可检查行为。" : "One control-plane thesis, five inspectable behaviors."}</h2></div>
+      <a href={u(`${prefix}/lab/`)}>{isZh ? "浏览完整 Lab" : "Open the full Lab"} <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="sl-evidence-table" role="table" aria-label={isZh ? "公开演示成熟度" : "Public demo maturity"}>
+      <div class="sl-evidence-table__row sl-evidence-table__head" role="row"><span role="columnheader">{isZh ? "证据" : "Evidence"}</span><span role="columnheader">{isZh ? "成熟度" : "Maturity"}</span><span role="columnheader">{isZh ? "可用材料" : "Available"}</span><span role="columnheader">{isZh ? "边界" : "Limitation"}</span></div>
+      {evidence.map(([title, maturity, available, limit, href]) => (
+        <a class="sl-evidence-table__row" role="row" href={u(`${prefix}${href}`)}><strong role="cell">{title}</strong><span role="cell">{maturity}</span><span role="cell">{available}</span><span role="cell">{limit}</span></a>
+      ))}
+    </div>
+
+    <aside class="sl-founder">
+      <div><p class="sl-kicker">{isZh ? "创始人" : "Founder"}</p><h2>Lu Zhang</h2><strong>{isZh ? "科学家与 AI 工程师" : "Scientist & AI Engineer"}</strong></div>
+      <p>{isZh ? "以电化学能源研究为科学基础，拥有论文与发明记录，并从事生产级 AI 工程。SciencesLoop 是主角；创始人经历用于说明为什么这个控制平面从证据与实验边界出发。" : "Scientific grounding in electrochemical energy research, a publication and invention record, and production AI engineering. The company remains primary; the founder background explains why this control plane begins with evidence and experimental boundaries."}</p>
+      <a href={u(`${prefix}/about/`)}>{isZh ? "关于创始人" : "About the founder"} <span aria-hidden="true">→</span></a>
+    </aside>
+  </div>
+</section>
