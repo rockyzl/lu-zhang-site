@@ -8,7 +8,7 @@ public so search engines and visitors can discover the site.
 
 Only information that already exists in public form elsewhere:
 
-- Name (Lu Zhang / 张鲁) and a personal-use email (`zhanglu77@gmail.com`)
+- Name (Lu Zhang / 张鲁) and the company contact email (`luzhang@sciencesloop.com`)
 - Education and career history (already on LinkedIn / OpenAlex / ANL profile)
 - Peer-reviewed publications (already in OpenAlex / Crossref / Google Scholar)
 - US patents (already on USPTO / Google Patents / OSTI)

@@ -1,0 +1,20 @@
+---
+import Base from "../../layouts/Base.astro";
+import { u } from "../../lib/url";
+import { liveDemos } from "../../data/demos";
+const selected = ["kit-battery-early-warning", "redox-rfb-predictor", "molecular-discovery-workflow", "chemgraph-loop"].map((id) => liveDemos.find((demo) => demo.id === id)).filter(Boolean);
+const notes: Record<string, { proves: string; not: string }> = {
+  "kit-battery-early-warning": { proves: "在转换后的公开电池派生数据上进行可回放对比，包括加入和不加入 EIS 的配对预测。", not: "生产报警、前瞻性实验室验证或实验自主控制。" },
+  "redox-rfb-predictor": { proves: "固定模型输出范围明确的预测前，先由人工确认分子身份。", not: "实验氧化还原验证或通用材料发现引擎。" },
+  "molecular-discovery-workflow": { proves: "带来源的身份解析，以及用明确证据缺口替代虚构性质数值。", not: "新实验测量或实验室自主运行。" },
+  "chemgraph-loop": { proves: "带工作流护栏和可检查中间状态的可运行工具流程。", not: "湿实验验证、跨领域校准的科学准确性或真实仪器控制。" },
+};
+---
+<Base title="证据 — SciencesLoop" description="SciencesLoop 证据登记：公开演示证明什么、不证明什么，以及当前产品边界。" alternatePath={u("/evidence/")}>
+  <div class="sl-page">
+    <section class="sl-page-hero"><span class="sl-chip live">证据登记 · 更新于 2026-08-05</span><h1>把已演示行为与拟议能力分开。</h1><p class="sl-lead">这些公开产物是有限工作流模式的证据，不是湿实验验证、生产就绪或仪器自主控制的证据。</p></section>
+    <section class="sl-section"><div class="sl-section-head"><span>01 · 公开产物</span><h2>带明确边界的可运行演示。</h2></div><div class="sl-grid two">{selected.map((demo) => demo && <article class="sl-card evidence-card"><div class="sl-card-top"><span class="sl-chip live">在线演示</span><span class="sl-id">{demo.id}</span></div><h3>{demo.title.zh}</h3><p>{demo.summary.zh}</p><div class="sl-claim"><strong>能够证明</strong><p>{notes[demo.id].proves}</p></div><div class="sl-claim limit"><strong>不能证明</strong><p>{notes[demo.id].not}</p></div><a class="sl-text-link" href={u(`/zh${demo.path}`)}>运行演示 →</a></article>)}</div></section>
+    <section class="sl-section"><div class="sl-section-head"><span>02 · 主张台账</span><h2>当前公开状态。</h2></div><div class="sl-ledger"><div><span class="sl-chip live">已演示</span><p>选定的公开工作流能够保留来源、暴露中间状态、要求确认、在证据缺失时拒答，并支持确定性回放。</p></div><div><span class="sl-chip working">工作原型</span><p>证据门控架构的若干部分已存在于公开产物中，但尚未形成经过验证的统一电化学产品。</p></div><div><span class="sl-chip proposed">拟议</span><p>围绕存量实验室仪器的离线 CV/EIS 推断、异常复核、溯源与批准门控。</p></div><div><span class="sl-chip risk">尚未演示</span><p>湿实验验证、跨实验室迁移、仪器自主控制、客户部署或生产可靠性。</p></div></div></section>
+    <section class="sl-section sl-contact"><div><h2>对验证有疑问？</h2><p>可以要求查看支撑某项主张的产物、输入、指标或边界。</p></div><a class="sl-button primary" href="mailto:luzhang@sciencesloop.com?subject=SciencesLoop%20evidence%20question">联系 SciencesLoop</a></section>
+  </div>
+</Base>

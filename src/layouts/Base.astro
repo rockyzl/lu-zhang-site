@@ -1,12 +1,11 @@
 ---
 import "../styles/global.css";
 import { u } from "../lib/url";
-import { detectLocale, t, altLocalePath, type Locale } from "../lib/i18n";
-import ChatWidget from "../components/ChatWidget.astro";
+import { detectLocale, altLocalePath, type Locale } from "../lib/i18n";
 
 const {
-  title = "SciencesLoop — AI engineering for science and operations",
-  description = "AI engineer building grounded, testable agents for science and operations, with a scientific foundation in electrochemical energy research.",
+  title = "SciencesLoop — Evidence-gated scientific workflows",
+  description = "SciencesLoop builds evidence-gated scientific workflow software for brownfield laboratories, starting with electrochemistry.",
   ogImage,
   alternatePath,
 } = Astro.props;
@@ -15,31 +14,58 @@ const pathname = Astro.url.pathname;
 const locale: Locale = detectLocale(pathname);
 const langPrefix = locale === "zh" ? "/zh" : "";
 const altPath = alternatePath ?? altLocalePath(pathname, import.meta.env.BASE_URL);
-
 const siteUrl = Astro.site?.href ?? "https://sciencesloop.com/";
-const baseUrl = (import.meta.env.BASE_URL ?? "/").replace(/\/+$/, "");
-const canonicalUrl = new URL(pathname, siteUrl).href;
-// Pages render under the base path (/lu-zhang-site/) but Astro.site is just the
-// origin; ensure canonical points to the actual deployment.
-const canonical = canonicalUrl;
+const canonical = new URL(pathname, siteUrl).href;
 const publicOrigin = siteUrl.replace(/\/+$/, "");
 const ogImageUrl = ogImage ?? `${publicOrigin}${u("/og-default.png")}`;
 
+const labels = locale === "zh"
+  ? { home: "首页", approach: "方法", evidence: "证据", applications: "应用", notes: "研究笔记", founder: "创始人" }
+  : { home: "Home", approach: "Approach", evidence: "Evidence", applications: "Applications", notes: "Notes", founder: "Founder" };
+
 const homeHref = locale === "zh" ? "/zh/" : "/";
-// Flat top nav — exactly 5 items. Lab is the public entry point for the
-// active project map and live demos; the individual demo route stays linked
-// from Lab and project pages.
 const navItems = [
-  { href: homeHref, key: "nav.home" },
-  { href: `${langPrefix}/projects/`, key: "nav.projects" },
-  { href: `${langPrefix}/lab/`, key: "nav.lab" },
-  { href: `${langPrefix}/blog/`, key: "nav.blog" },
-  { href: `${langPrefix}/about/`, key: "nav.about" },
+  { href: homeHref, label: labels.home },
+  { href: `${langPrefix}/approach/`, label: labels.approach },
+  { href: `${langPrefix}/evidence/`, label: labels.evidence },
+  { href: `${langPrefix}/applications/`, label: labels.applications },
+  { href: `${langPrefix}/blog/`, label: labels.notes },
+  { href: `${langPrefix}/research-archive/`, label: labels.founder },
 ];
-const isActive = (href) => {
+
+const isActive = (href: string) => {
   const target = u(href);
   if (href === homeHref) return pathname === target;
   return pathname === target || pathname.startsWith(target);
+};
+
+const isHome = pathname === u("/") || pathname === u("/zh/");
+const isAbout = pathname === u("/about/");
+// Vercel provides VERCEL_ENV at build time. Keep local and production builds
+// indexable; only preview/development Vercel artifacts receive noindex.
+const isNonProductionVercel = Boolean(process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production");
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "SciencesLoop LLC",
+  url: publicOrigin,
+  email: "mailto:luzhang@sciencesloop.com",
+  founder: { "@type": "Person", name: "Lu Zhang" },
+  description: "Evidence-gated scientific workflow software for brownfield laboratories, starting with electrochemistry.",
+};
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Lu Zhang",
+  alternateName: "张鲁",
+  jobTitle: "Founder, SciencesLoop",
+  url: `${publicOrigin}${u("/about/")}`,
+  email: "mailto:luzhang@sciencesloop.com",
+  sameAs: [
+    "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en",
+    "https://github.com/rockyzl",
+    "https://www.linkedin.com/in/lu-zhang-argonne/",
+  ],
 };
 ---
 <!doctype html>
@@ -49,12 +75,12 @@ const isActive = (href) => {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Lu Zhang" />
+    <meta name="author" content="SciencesLoop" />
+    {isNonProductionVercel && <meta name="robots" content="noindex, nofollow, noarchive" />}
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" type="application/rss+xml" title="SciencesLoop Field Notes RSS" href={new URL(u("/rss.xml"), siteUrl).href} />
+    <link rel="alternate" type="application/rss+xml" title="SciencesLoop Notes RSS" href={new URL(u("/rss.xml"), siteUrl).href} />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content={pathname === u("/") || pathname === u("/zh/") ? "profile" : "website"} />
+    <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -64,103 +90,45 @@ const isActive = (href) => {
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Lu Zhang — AI engineer building grounded, testable agents for science and operations" />
-    <meta property="profile:first_name" content="Lu" />
-    <meta property="profile:last_name" content="Zhang" />
-
-    <!-- Twitter Card -->
+    <meta property="og:image:alt" content="SciencesLoop evidence-gated scientific workflow interface" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <!-- Hreflang for bilingual -->
     <link rel="alternate" hreflang={locale === "zh" ? "en" : "zh-CN"} href={new URL(altPath, siteUrl).href} />
     <link rel="alternate" hreflang="x-default" href={new URL(u("/"), siteUrl).href} />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230b2631'/%3E%3Cpath d='M18 19h28v7H25v8h18v7H25v10h-7z' fill='%232db89a'/%3E%3C/svg%3E" />
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d7361'/%3E%3Ctext x='32' y='45' font-family='ui-monospace, Menlo, monospace' font-size='38' font-weight='700' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
-    <!-- The redesign uses only system + monospace font stacks — no webfont/CDN requests. -->
-
-    <!-- JSON-LD Person schema (English locale only to avoid duplication) -->
-    {locale === "en" && (pathname === u("/") || pathname === u("/about/")) && (
-      <script type="application/ld+json" set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        name: "Lu Zhang",
-        alternateName: "张鲁",
-        givenName: "Lu",
-        familyName: "Zhang",
-        honorificSuffix: "Ph.D.",
-        jobTitle: "AI Engineer · Scientific Systems Builder",
-        alumniOf: [
-          { "@type": "EducationalOrganization", name: "Chinese Academy of Sciences" },
-          { "@type": "EducationalOrganization", name: "Florida State University" },
-          { "@type": "EducationalOrganization", name: "Shandong University" },
-        ],
-        award: [
-          "R&D 100 Award (2014) — for redox-shuttle technology",
-          "R&D 100 Award Finalist (2015)",
-        ],
-        knowsAbout: [
-          "Redox flow batteries",
-          "Lithium-ion electrolytes",
-          "Silicon-anode binders",
-          "Organic redox-active molecules",
-          "Machine learning for materials discovery",
-          "Electrochemistry",
-          "Energy storage",
-        ],
-        url: publicOrigin,
-        sameAs: [
-          "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en",
-          "https://github.com/rockyzl",
-          "https://www.linkedin.com/in/lu-zhang-argonne/",
-          "https://www.anl.gov/profile/lu-zhang",
-        ],
-        email: "mailto:zhanglu77@gmail.com",
-        description: "AI engineer building grounded, testable agents for science and operations, with a scientific foundation in electrochemical energy research. Former Argonne battery scientist, now building retrieval-grounded, evaluation-driven agent systems with explicit safety boundaries.",
-      })} />
-    )}
+    {locale === "en" && isHome && <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />}
+    {locale === "en" && isAbout && <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />}
   </head>
   <body data-locale={locale}>
     <header class="site">
       <div class="inner">
-        <a class="name" href={u(homeHref)}><span class="brand-loop" aria-hidden="true"></span>SciencesLoop</a>
-        <nav>
-          {navItems.map((n) => (
-            <a href={u(n.href)} class={isActive(n.href) ? "active" : ""}>
-              {t(n.key, locale)}
-            </a>
+        <a class="name" href={u(homeHref)} aria-label="SciencesLoop home"><span class="brand-loop" aria-hidden="true"></span>SciencesLoop</a>
+        <nav aria-label={locale === "zh" ? "主导航" : "Primary navigation"}>
+          {navItems.map((item) => (
+            <a href={u(item.href)} class={isActive(item.href) ? "active" : ""} aria-current={isActive(item.href) ? "page" : undefined}>{item.label}</a>
           ))}
-          <a class="lang-toggle" href={altPath} aria-label="Switch language">{locale === "zh" ? "EN" : "中"}</a>
+          <a class="lang-toggle" href={altPath} aria-label={locale === "zh" ? "Switch to English" : "切换到中文"}>{locale === "zh" ? "EN" : "中"}</a>
         </nav>
-        <span class="avail"><span class="dot" aria-hidden="true"></span>{t("nav.availability", locale)}</span>
       </div>
     </header>
-    <main>
-      <slot />
-    </main>
-    <footer class="site">
-      © 2026 SciencesLoop · Lu Zhang ·
-      <a href={u("/files/Lu_Zhang_CV.pdf")} target="_blank" rel="noopener">{locale === "zh" ? "学术 CV (PDF)" : "Academic CV (PDF)"}</a> ·
-      <a href="https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en">{t("footer.scholar", locale)}</a> ·
-      <a href="https://github.com/rockyzl">{t("footer.github", locale)}</a> ·
-      <a href={u(locale === "zh" ? "/zh/privacy/" : "/privacy/")}>{locale === "zh" ? "隐私政策" : "Privacy"}</a> ·
-      <a href={u(locale === "zh" ? "/zh/terms/" : "/terms/")}>{locale === "zh" ? "短信条款" : "SMS Terms"}</a> ·
-      <a href={u("/property-sms/")}>{locale === "zh" ? "短信同意" : "SMS Consent"}</a> ·
-      <a href="mailto:zhanglu77@gmail.com">{t("footer.email", locale)}</a>
+    <main><slot /></main>
+    <footer class="site company-footer">
+      <span>© 2026 SciencesLoop LLC</span>
+      <span aria-hidden="true">·</span>
+      <a href="mailto:luzhang@sciencesloop.com">luzhang@sciencesloop.com</a>
+      <span aria-hidden="true">·</span>
+      <a href={u(locale === "zh" ? "/zh/privacy/" : "/privacy/")}>{locale === "zh" ? "隐私" : "Privacy"}</a>
     </footer>
-    <ChatWidget locale={locale} />
   </body>
 </html>
 
 <style is:global>
-  /* zh locale: keep a CJK-capable sans stack (the redesign is sans-only, no
-     external webfonts). --font-serif is aliased to sans site-wide, so we point
-     both at a system CJK sans so headings and body render crisply. */
   body[data-locale="zh"] {
-    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-      "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", Roboto, sans-serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", Roboto, sans-serif;
     --font-serif: var(--font-sans);
   }
 </style>
