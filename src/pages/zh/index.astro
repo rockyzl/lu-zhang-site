@@ -1,52 +1,330 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { u } from "../../lib/url";
+import { detectLocale } from "../../lib/i18n";
+import { getFeaturedBlogPosts } from "../../lib/blog";
+import { liveDemos } from "../../data/demos";
+
+const locale = detectLocale(Astro.url.pathname);
+const lp = locale === "zh" ? "/zh" : "";
+const featuredPosts = getFeaturedBlogPosts(3);
+
+const badgeClass = (status) => {
+  const s = (status || "").toLowerCase();
+  if (s.includes("demo") || s.includes("live") || s.includes("在线")) return "demo";
+  if (s.includes("public") || s.includes("repo") || s.includes("公开") || s.includes("仓库")) return "repo";
+  return "priv";
+};
+
+const featuredSystems = [
+  ...liveDemos.filter((demo) => demo.featured).map((demo) => ({
+    name: demo.title.zh,
+    tagline: demo.tagline.zh,
+    description: demo.summary.zh,
+    status: "在线 Demo",
+    tags: demo.tags,
+    href: u(`${lp}${demo.path}`),
+    external: false,
+    cta: "在线 Demo",
+  })),
+  {
+    name: "Scientific Agent Lab",
+    tagline: "科学 AI 的评估与可复现层",
+    description:
+      "不是又一个科学助手 —— 而是它下面那一层：回答“结果什么时候能信”。一个确定性、零依赖的管道，把证据和假设分开、标出缺失的必需数据、证据不全时拒绝下结论，并交出一份可被评估 harness 打分、可复现的轨迹。",
+    status: "公开仓库",
+    tags: ["Python", "评估 harness", "可复现", "确定性 · 无 LLM"],
+    href: "https://github.com/rockyzl/scientific-agent-lab",
+    external: true,
+    cta: "GitHub",
+  },
+  {
+    name: "Property OS",
+    tagline: "安全门控的实时语音与短信运营智能体",
+    description:
+      "在隐私、安全和数据边界与模型能力同等重要的运营场景：自然语音、硬编码的安全筛查、严格的数据治理。",
+    status: "私有系统概览",
+    tags: ["realtime voice", "Twilio relay", "LLM safety screen", "data governance"],
+    href: null,
+    external: false,
+    cta: null,
+  },
+];
+
+const capabilities = [
+  {
+    key: "input · grounding",
+    name: "Context Engineering",
+    text: "喂给模型的东西：grounded retrieval、引用和署名护栏，让回答始终以真实证据为依据。",
+  },
+  {
+    key: "control · the loop",
+    name: "Loop Engineering",
+    text: "控制回路 —— retrieve → reason → act → verify —— 让行为可观测、可纠正，而不是黑盒。",
+  },
+  {
+    key: "proof · evaluation",
+    name: "Harness Engineering",
+    text: "怎么知道它有效：可回放的 eval harness、确定性测试和回归检查，让行为可度量。",
+  },
+  {
+    key: "guardrail · safety",
+    name: "Safety Gating",
+    text: "护栏：硬编码的安全筛查、受限工具、隐私边界，以及上线前的人工复核。",
+  },
+];
+
+// Case studies —— 两个端到端负责的系统（一个企业级，一个独立构建）。脱敏：雇主匿名，无仓库/URL。
+const caseStudies = [
+  {
+    name: "Academy-Wide Virtual Assistant",
+    tagline: "面向约 3.8 万会员协会的 member-facing agentic 助手",
+    description:
+      "一个基于 MCP 工具、以企业 CRM 实时数据为依据的 agent：从权威记录回答会员问题，答不了时自动创建服务工单。我负责 MCP 工具层、读写数据链路，以及多环境 Azure 部署（Container Apps、Key Vault、托管身份、SSO）。",
+    status: "企业级 · 工作案例",
+    tags: ["MCP tools", "Dynamics CRM", "Azure", "SSO / OIDC"],
+  },
+  {
+    name: "“Second Brain” — 本地优先个人 AI",
+    tagline: "把工作流编译成知识的本地优先个人 AI",
+    description:
+      "本地 RAG（ChromaDB + sentence-transformers，Flask 后端）、实时会议助手（流式 Whisper + 截图 OCR + 自动综述），以及自我编译的 Obsidian wiki —— 全部本地运行。包含定位原生库并发段错误、消除按量 API 成本。",
+    status: "独立构建 · 日常在用",
+    tags: ["RAG", "streaming STT", "vision / OCR", "local-first"],
+  },
+];
 ---
-
 <Base
-  title="SciencesLoop — 证据门控的科学工作流"
-  description="SciencesLoop 为存量实验室构建证据门控的科学工作流软件，从电化学开始。"
-  alternatePath={u("/")}
+  title="张鲁 Lu Zhang — 构建有据可查、可测试的 AI 智能体"
+  description="AI 工程师，为科学与运营构建有据可查、可测试的智能体 —— 把 context engineering、loop engineering、harness engineering 与 safety gating 变成可靠的软件。"
 >
-  <div class="sl-page sl-home">
-    <section class="sl-hero">
-      <div class="sl-kicker"><span class="sl-signal"></span>科学工作流软件 · 开发中</div>
-      <h1>先建立证据，再谈自主。</h1>
-      <p class="sl-lead">SciencesLoop 为存量实验室构建证据门控的科学工作流软件，从电化学开始。</p>
-      <p class="sl-sublead">第一切入点是离线 CV/EIS 推断与异常复核：保留现有仪器，在其外部增加可追溯的决策层，并在证据不足时要求人工批准。</p>
-      <div class="sl-actions"><a class="sl-button primary" href={u("/zh/evidence/")}>查看当前证据</a><a class="sl-button" href={u("/zh/approach/")}>了解方法</a></div>
-    </section>
-
-    <section class="sl-section">
-      <div class="sl-section-head"><span>01 · 问题</span><h2>实验室决策往往丢失推理过程。</h2></div>
-      <div class="sl-grid three">
-        <article class="sl-card"><span class="sl-chip risk">已观察问题</span><h3>上下文碎片化</h3><p>仪器文件、实验记录、脚本与专家判断散落在不同系统中。</p></article>
-        <article class="sl-card"><span class="sl-chip risk">已观察问题</span><h3>决策链不完整</h3><p>结果可能被保存，但支撑行动的假设、不确定性和批准过程没有留下。</p></article>
-        <article class="sl-card"><span class="sl-chip risk">已观察问题</span><h3>存量实验室现实</h3><p>多数实验室需要能与现有仪器并存的软件，而不是从零重建。</p></article>
+  <main class="hp wrap">
+    <section class="hero" style="border-top:none">
+      <div class="hi"><span class="wave">👋</span> 你好，我是张鲁。</div>
+      <h1>我为科学与运营构建<span class="em">有据可查、可测试</span>的 AI 智能体。</h1>
+      <p class="lede">
+        我构建的 AI 系统把<b>检索、评估、安全护栏和领域经验</b>结合起来，
+        将复杂、高语境的知识工作流变成可靠的软件。我喜欢会留下轨迹的智能体、
+        真能测试的 demo，以及会说明出处的回答。
+      </p>
+      <p class="buzz">context engineering · loop engineering · harness engineering · safety gating</p>
+      <div class="credline">
+        <span>转向 AI 前，我在 <b>阿贡 / JCESR</b> 做了 <b>15+ 年</b>能源科学</span>
+        <span class="sep">·</span><span><b>97</b> 篇论文</span>
+        <span class="sep">·</span><span><b>28</b> 项专利</span>
+        <span class="sep">·</span><span>h-index <b>39</b></span>
+        <span class="sep">·</span><a href={u(`${lp}/research-archive/`)}>研究档案 →</a>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="#work">探索 AI 系统 <span class="arrow">↗</span></a>
+        <a class="btn" href={u(`${lp}/agent/`)}>看实时 agent demo <span class="arrow">↗</span></a>
       </div>
     </section>
 
-    <section class="sl-section sl-dark">
-      <div class="sl-section-head"><span>02 · 闭环</span><h2>从主张到决策的有边界路径。</h2></div>
-      <div class="sl-trace" aria-label="从主张到决策的证据链">
-        <div><b>01</b><strong>主张</strong><small>工作流试图证明什么</small></div><i aria-hidden="true">→</i>
-        <div><b>02</b><strong>证据</strong><small>来源、溯源、质量与不确定性</small></div><i aria-hidden="true">→</i>
-        <div><b>03</b><strong>门控</strong><small>通过、拒答或请求人工复核</small></div><i aria-hidden="true">→</i>
-        <div><b>04</b><strong>决策</strong><small>带明确边界、可回放的输出</small></div>
+    <section id="cases">
+      <div class="shead">
+        <div class="snum">01 — Case studies</div>
+        <h2>两个我端到端负责的系统</h2>
+        <p>一个企业级交付，一个独立构建 —— 最能说明我怎么工作。</p>
+      </div>
+      <div class="grid grid-2">
+        {caseStudies.map((p) => (
+          <div class="proj">
+            <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
+            <h3>{p.name}</h3>
+            <p class="one">{p.tagline}</p>
+            <div class="use">{p.description}</div>
+            <div class="links none">案例 · 无公开仓库</div>
+            <div class="stack">{p.tags.map((t) => <span>{t}</span>)}</div>
+          </div>
+        ))}
       </div>
     </section>
 
-    <section class="sl-section">
-      <div class="sl-section-head"><span>03 · 当前状态</span><h2>范围小、可检查，并如实说明边界。</h2></div>
-      <div class="sl-grid two">
-        <article class="sl-card featured"><span class="sl-chip live">在线演示</span><h3>公开证据工作流</h3><p>可运行演示展示有边界的身份核验、确定性分析、证据缺口与人工确认。</p><p class="sl-limit"><b>它们证明：</b>工作流行为可追溯。<b>它们不证明：</b>湿实验验证或仪器自主控制。</p><a class="sl-text-link" href={u("/zh/evidence/")}>查看证据登记 →</a></article>
-        <article class="sl-card"><span class="sl-chip proposed">拟议方向</span><h3>电化学工作流层</h3><p>未来面向离线 CV/EIS 推断、异常检测、数据溯源，以及围绕现有实验系统的批准门控。</p><p class="sl-limit">目前不声称生产部署、湿实验验证或已承诺的实验室合作。</p><a class="sl-text-link" href={u("/zh/applications/")}>查看应用切入点 →</a></article>
+    <section id="work">
+      <div class="shead">
+        <div class="snum">02 — 精选 AI 系统</div>
+        <h2>我做过的几个系统</h2>
+        <p>每个都回答同样的问题：是什么、给谁用、能不能试、我具体做了什么。<a href={u(`${lp}/lab/`)} style="color:var(--accent);border-bottom:1px solid transparent">看我沿哪两条主线在建 →</a></p>
+      </div>
+      <div class="grid">
+        {featuredSystems.map((p) => (
+          <div class="proj">
+            <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
+            <h3>{p.name}</h3>
+            <p class="one">{p.tagline}</p>
+            <div class="use">{p.description}</div>
+            {p.href
+              ? <div class="links"><a href={p.href} {...(p.external ? { target: "_blank", rel: "noopener" } : {})}>{p.cta} ↗</a></div>
+              : <div class="links none">私有系统概览 · 仅案例</div>}
+            <div class="stack">{p.tags.map((t) => <span>{t}</span>)}</div>
+          </div>
+        ))}
       </div>
     </section>
 
-    <section class="sl-section sl-contact">
-      <div><span class="sl-chip working">工作原型</span><h2>先构建证据层。</h2><p>SciencesLoop 希望围绕科学工作流可靠性和电化学验证开展严谨的技术交流。</p></div>
-      <a class="sl-button primary" href="mailto:luzhang@sciencesloop.com">联系 SciencesLoop</a>
+    <section id="build">
+      <div class="shead">
+        <div class="snum">03 — 我怎么构建</div>
+        <h2>我如何构建可靠的 agent</h2>
+        <p>四个工程面 —— context、control、evaluation、safety 如何组成一个系统。</p>
+      </div>
+      <div class="caps">
+        {capabilities.map((c) => (
+          <div class="cap">
+            <div class="k">→ {c.key}</div>
+            <h4>{c.name}</h4>
+            <p>{c.text}</p>
+          </div>
+        ))}
+      </div>
     </section>
-  </div>
+
+    <section id="notes">
+      <div class="notes">
+        <div class="nlead">
+          <div class="snum">04 — 研究笔记</div>
+          <h2 class="nh">研究笔记</h2>
+          <p>构建有据可查的智能体时留下的工作笔记、构建日志和小心得。有些已经打磨完善，有些还在生长中。</p>
+          <a class="nmore" href={u(`${lp}/blog/`)}>全部笔记 →</a>
+        </div>
+        <div class="noteslist">
+          {featuredPosts.map((post) => (
+            <a class="note" href={u(`${lp}/blog/${post.slug}/`)}>
+              <time datetime={post.dateLabel}>{post.dateLabel}</time>
+              <span class="t">{post.title}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="found" style="border-top:none;padding-top:18px">
+      <div class="found">
+        <div class="l">
+          <div class="k">科学根基</div>
+          <p>我的 AI 工作由在 <b>阿贡和 JCESR</b> 的 <b>15+ 年</b>电化学能源研究塑造 —— 液流电池、电解液、自主材料发现。这也是我在意证据、可复现性和安全边界的原因。</p>
+        </div>
+        <a href={u(`${lp}/research-archive/`)}>查看研究档案 →</a>
+      </div>
+    </section>
+
+    <section id="contact" class="contact" style="border-top:none">
+      <div class="eyebrow" style="text-align:center">05 — 联系</div>
+      <h2>一起做点经得起考验的东西。</h2>
+      <p>开放注重严谨的 AI / agent 工程机会。问 Loopi 关于我的工作，或者打个招呼。</p>
+      <div class="cta">
+        <a class="btn primary" href={u(`${lp}/agent/`)} data-open-loopi>问 Loopi <span class="arrow">↗</span></a>
+        <a class="btn" href="https://github.com/rockyzl" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+        <a class="btn" href="https://www.linkedin.com/in/lu-zhang-argonne/" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    // “问 Loopi” 打开站内角标助手（widget），而不是 /agent/ 的 demo 页。
+    document.querySelectorAll("[data-open-loopi]").forEach((b) => {
+      b.addEventListener("click", (e) => {
+        const launcher = document.querySelector("[data-cw-launcher]");
+        if (launcher) { e.preventDefault(); launcher.click(); }
+      });
+    });
+  </script>
+
+  <style is:global>
+    :root {
+      --paper: #f3f1ea; --card: #fbfaf5; --card-2: #f0eee5;
+      --ink: #1b201c; --ink-2: #39423b; --muted: #6a736a;
+      --line: #e4e0d4; --line-strong: #d3cebe;
+      --accent: #0d7361; --accent-deep: #0a5849; --accent-soft: #dcefe8;
+      --honey: #c1863c; --honey-soft: #f2e6d2;
+      --hp-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+      --hp-maxw: 1080px; --hp-r: 16px;
+    }
+    @keyframes hp-wave { 0%,60%,100% { transform: rotate(0); } 20% { transform: rotate(16deg); } 40% { transform: rotate(-8deg); } }
+  </style>
+
+  <style>
+    .hp.wrap { max-width: var(--hp-maxw); margin: 0 auto; padding: 0 26px; }
+    .hp a { color: inherit; text-decoration: none; }
+    .hp b { font-weight: 640; color: var(--ink); }
+    .hp .eyebrow { font-family: var(--hp-mono); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+
+    .hp .hero { display: block; padding: 74px 0 46px; }
+    .hp .hi { font-family: var(--hp-mono); font-size: 15px; color: var(--honey); letter-spacing: .01em; margin-bottom: 16px; }
+    .hp .hi .wave { display: inline-block; animation: hp-wave 2.6s ease-in-out 2; }
+    .hp h1 { font-size: clamp(34px, 5.2vw, 58px); line-height: 1.08; letter-spacing: -.03em; font-weight: 720; margin: 0; text-wrap: balance; max-width: 22ch; }
+    .hp h1 .em { color: var(--accent); }
+    .hp .lede { max-width: 60ch; margin: 22px 0 0; font-size: clamp(16px, 1.6vw, 18px); color: var(--ink-2); line-height: 1.7; }
+    .hp .buzz { margin: 16px 0 0; font-family: var(--hp-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-deep); }
+    .hp .credline { margin-top: 20px; font-family: var(--hp-mono); font-size: 12.5px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .hp .credline b { color: var(--ink); }
+    .hp .credline .sep { color: var(--line-strong); }
+    .hp .credline a { color: var(--accent); border-bottom: 1px solid transparent; }
+    .hp .credline a:hover { border-color: var(--accent); }
+    .hp .cta { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 28px; }
+    .hp .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--hp-mono); font-size: 13px; padding: 12px 18px; border-radius: 11px; border: 1px solid var(--line-strong); background: var(--card); color: var(--ink); transition: transform .12s, box-shadow .15s, border-color .15s, background .15s; }
+    .hp .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -12px rgba(13,115,97,.5); border-color: var(--accent); }
+    .hp .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .hp .btn.primary:hover { background: var(--accent-deep); }
+    .hp .btn .arrow { transition: .15s; }
+    .hp .btn:hover .arrow { transform: translate(2px, -2px); }
+
+    .hp section { display: block; padding: 54px 0; border-top: 1px solid var(--line); }
+    .hp .snum { font-family: var(--hp-mono); font-size: 11.5px; color: var(--accent); letter-spacing: .1em; }
+    .hp .shead h2 { font-size: clamp(22px, 2.9vw, 31px); letter-spacing: -.02em; margin: 8px 0 0; font-weight: 700; }
+    .hp .shead p { margin: 8px 0 24px; color: var(--muted); max-width: 56ch; font-size: 15px; }
+
+    .hp .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .hp .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .hp .proj { background: var(--card); border: 1px solid var(--line); border-radius: var(--hp-r); padding: 20px 20px 18px; display: flex; flex-direction: column; transition: transform .14s, box-shadow .18s, border-color .15s; position: relative; overflow: hidden; }
+    .hp .proj::after { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 3px; background: var(--accent); transform: scaleY(0); transform-origin: top; transition: transform .2s; }
+    .hp .proj:hover { transform: translateY(-3px); box-shadow: 0 20px 44px -28px rgba(27,32,28,.5); border-color: var(--line-strong); }
+    .hp .proj:hover::after { transform: scaleY(1); }
+    .hp .badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--hp-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; padding: 4px 8px; border-radius: 6px; align-self: flex-start; }
+    .hp .badge.repo { color: var(--accent-deep); background: var(--accent-soft); border: 1px solid #cbe3da; }
+    .hp .badge.demo { color: #215d3a; background: #ddeede; border: 1px solid #c6e0c9; }
+    .hp .badge.priv { color: #7a5a2c; background: var(--honey-soft); border: 1px solid #e7d3b0; }
+    .hp .proj h3 { margin: 12px 0 0; font-size: 18px; letter-spacing: -.01em; font-weight: 670; }
+    .hp .proj .one { margin: 8px 0 0; color: var(--ink-2); font-size: 14px; line-height: 1.5; }
+    .hp .proj .use { margin: 11px 0 0; font-family: var(--hp-mono); font-size: 11.5px; color: var(--muted); line-height: 1.6; padding-left: 11px; border-left: 2px solid var(--line-strong); }
+    .hp .proj .links { margin: 13px 0 0; font-family: var(--hp-mono); font-size: 11.5px; color: var(--accent); display: flex; gap: 12px; flex-wrap: wrap; }
+    .hp .proj .links.none { color: var(--muted); }
+    .hp .proj .links a:hover { border-bottom: 1px solid var(--accent); }
+    .hp .stack { margin-top: auto; padding-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .hp .stack span { font-family: var(--hp-mono); font-size: 10.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; }
+
+    .hp .caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
+    .hp .cap { border: 1px solid var(--line); border-radius: var(--hp-r); padding: 19px; background: var(--card); }
+    .hp .cap .k { font-family: var(--hp-mono); font-size: 11px; color: var(--accent); letter-spacing: .05em; }
+    .hp .cap h4 { margin: 11px 0 6px; font-size: 15.5px; letter-spacing: -.01em; }
+    .hp .cap p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+
+    .hp .notes { display: flex; gap: 22px; align-items: flex-start; flex-wrap: wrap; }
+    .hp .nlead { flex: 1 1 260px; }
+    .hp .nlead .nh { font-size: 26px; letter-spacing: -.02em; margin: 8px 0 0; font-weight: 700; }
+    .hp .nlead p { color: var(--muted); font-size: 15px; margin: 8px 0 0; }
+    .hp .nlead .nmore { display: inline-block; margin-top: 12px; font-family: var(--hp-mono); font-size: 12px; color: var(--accent); }
+    .hp .noteslist { flex: 2 1 380px; display: grid; gap: 10px; }
+    .hp .note { display: flex; gap: 14px; align-items: baseline; border: 1px solid var(--line); border-radius: 12px; padding: 13px 16px; background: var(--card); transition: .15s; }
+    .hp .note:hover { border-color: var(--accent); transform: translateX(2px); }
+    .hp .note time { font-family: var(--hp-mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
+    .hp .note .t { font-size: 14.5px; }
+
+    .hp .found { display: flex; align-items: center; justify-content: space-between; gap: 22px; flex-wrap: wrap; background: var(--card-2); border: 1px solid var(--line); border-radius: var(--hp-r); padding: 22px 26px; }
+    .hp .found .l .k { font-family: var(--hp-mono); font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+    .hp .found .l p { margin: 7px 0 0; font-size: 14.5px; color: var(--ink-2); max-width: 54ch; line-height: 1.7; }
+    .hp .found .l b { color: var(--ink); }
+    .hp .found a { font-family: var(--hp-mono); font-size: 12.5px; color: var(--accent); white-space: nowrap; border: 1px solid var(--line-strong); padding: 9px 14px; border-radius: 10px; background: var(--card); }
+    .hp .found a:hover { border-color: var(--accent); }
+
+    .hp .contact { text-align: center; padding: 66px 0 20px; }
+    .hp .contact h2 { font-size: clamp(24px, 4vw, 40px); letter-spacing: -.03em; margin: 8px 0 0; font-weight: 720; text-wrap: balance; }
+    .hp .contact p { color: var(--muted); margin: 14px auto 0; max-width: 46ch; }
+    .hp .contact .cta { justify-content: center; }
+
+    @media (max-width: 880px) { .hp .grid, .hp .caps { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 620px) { .hp .grid, .hp .caps { grid-template-columns: 1fr; } .hp .found { flex-direction: column; align-items: flex-start; } }
+    @media (prefers-reduced-motion: reduce) { .hp *, .hp *::before, .hp *::after { animation: none !important; transition: none !important; } }
+  </style>
 </Base>

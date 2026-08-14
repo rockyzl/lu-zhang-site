@@ -1,61 +1,344 @@
 ---
 import Base from "../layouts/Base.astro";
 import { u } from "../lib/url";
+import { detectLocale } from "../lib/i18n";
+import { getFeaturedBlogPosts } from "../lib/blog";
+import { liveDemos } from "../data/demos";
+
+const locale = detectLocale(Astro.url.pathname);
+const lp = locale === "zh" ? "/zh" : "";
+const featuredPosts = getFeaturedBlogPosts(3);
+
+const badgeClass = (status) => {
+  const s = (status || "").toLowerCase();
+  if (s.includes("demo") || s.includes("live") || s.includes("在线")) return "demo";
+  if (s.includes("public") || s.includes("repo") || s.includes("公开") || s.includes("仓库")) return "repo";
+  return "priv";
+};
+
+// Live demos are defined once in src/data/demos.ts, then rendered here and on
+// the Projects and Agent pages. The remaining cards are non-demo systems.
+const featuredSystems = [
+  ...liveDemos.filter((demo) => demo.featured).map((demo) => ({
+    name: demo.title.en,
+    tagline: demo.tagline.en,
+    description: demo.summary.en,
+    status: "Live demo",
+    tags: demo.tags,
+    href: u(`${lp}${demo.path}`),
+    external: false,
+    cta: "Live demo",
+  })),
+  {
+    name: "Scientific Agent Lab",
+    tagline: "An evaluation & reproducibility layer for scientific AI",
+    description:
+      "Not another science assistant — the layer below that asks “when can you trust the result?” A deterministic, zero-dependency pipeline that separates evidence from assumptions, flags missing required data, refuses to conclude on gaps, and ships a reproducible trace an eval harness scores.",
+    status: "Public repository",
+    tags: ["Python", "evaluation harness", "reproducibility", "deterministic · no LLM"],
+    href: "https://github.com/rockyzl/scientific-agent-lab",
+    external: true,
+    cta: "GitHub",
+  },
+  {
+    name: "Property OS",
+    tagline: "Safety-gated real-time voice & SMS operations agent",
+    description:
+      "Operations workflows where privacy, safety, and data boundaries matter as much as model capability: natural voice, a hard-coded safety screen, and strict data governance.",
+    status: "Private system overview",
+    tags: ["realtime voice", "Twilio relay", "LLM safety screen", "data governance"],
+    href: null,
+    external: false,
+    cta: null,
+  },
+];
+
+// How I build — four engineering surfaces, read as one coherent pipeline:
+// context (input) → loop (control) → harness (proof) → safety (guardrail).
+const capabilities = [
+  {
+    key: "input · grounding",
+    name: "Context Engineering",
+    text: "What goes into the model: grounded retrieval, citations, and attribution guardrails, so answers stay tied to real evidence.",
+  },
+  {
+    key: "control · the loop",
+    name: "Loop Engineering",
+    text: "The control loop — retrieve → reason → act → verify — built so behavior is observable and correctable, not a black box.",
+  },
+  {
+    key: "proof · evaluation",
+    name: "Harness Engineering",
+    text: "How I know it works: replayable eval harnesses, deterministic tests, and regression checks that make behavior measurable.",
+  },
+  {
+    key: "guardrail · safety",
+    name: "Safety Gating",
+    text: "The guardrails: hard-coded safety screens, scoped tools, privacy boundaries, and human review before anything ships.",
+  },
+];
+
+// Case studies — two systems Lu owns end-to-end (one enterprise, one independent).
+// Desensitized: employer anonymized, no repos/URLs.
+const caseStudies = [
+  {
+    name: "Academy-Wide Virtual Assistant",
+    tagline: "A member-facing agentic assistant for a ~38,000-member association",
+    description:
+      "An MCP-tool agent grounded in a live enterprise CRM: it answers member questions from authoritative records and files service tickets when it can't. I owned the MCP tool layer, the read/write data path, and a multi-environment Azure deployment (Container Apps, Key Vault, managed identity, SSO).",
+    status: "Enterprise · work case study",
+    tags: ["MCP tools", "Dynamics CRM", "Azure", "SSO / OIDC"],
+  },
+  {
+    name: "“Second Brain” — Local-First Personal AI",
+    tagline: "A local-first personal AI that compiles my work stream into knowledge",
+    description:
+      "Local RAG (ChromaDB + sentence-transformers behind Flask), a real-time meeting assistant (streaming Whisper + screenshot OCR + auto-synthesis), and a self-compiling Obsidian wiki — all on-device. Includes root-causing a native-library concurrency segfault and killing metered-API cost.",
+    status: "Solo build · daily driver",
+    tags: ["RAG", "streaming STT", "vision / OCR", "local-first"],
+  },
+];
 ---
-
 <Base
-  title="SciencesLoop — Evidence-gated scientific workflows"
-  description="SciencesLoop builds evidence-gated scientific workflow software for brownfield laboratories, starting with electrochemistry."
-  alternatePath={u("/zh/")}
+  title="Lu Zhang — AI engineer for grounded, testable agents"
+  description="AI engineer building grounded, testable agents for science and operations — loop engineering, harness engineering, context engineering, and safety gating turned into reliable software."
 >
-  <div class="sl-page sl-home">
-    <section class="sl-hero">
-      <div class="sl-kicker"><span class="sl-signal"></span>Scientific workflow software · in development</div>
-      <h1>Evidence before autonomy.</h1>
-      <p class="sl-lead">SciencesLoop builds evidence-gated scientific workflow software for brownfield laboratories, starting with electrochemistry.</p>
-      <p class="sl-sublead">The first wedge is offline CV/EIS inference and anomaly review: preserve the instrument, add a traceable decision layer, and require human approval when evidence is incomplete.</p>
-      <div class="sl-actions">
-        <a class="sl-button primary" href={u("/evidence/")}>Inspect current evidence</a>
-        <a class="sl-button" href={u("/approach/")}>See the approach</a>
+  <main class="hp wrap">
+    <section class="hero" style="border-top:none">
+      <div class="hi"><span class="wave">👋</span> Hi, I'm Lu.</div>
+      <h1>I build <span class="em">grounded, testable</span> AI agents for science &amp; operations.</h1>
+      <p class="lede">
+        My work combines <b>retrieval, evaluation, safety guardrails, and domain
+        expertise</b> — turning complex, high-context knowledge workflows into
+        reliable software. I like agents that leave traces, demos you can actually
+        test, and answers that say where they came from.
+      </p>
+      <p class="buzz">context engineering · loop engineering · harness engineering · safety gating</p>
+      <div class="credline">
+        <span>Before AI, <b>15+ yrs</b> in energy science at <b>Argonne / JCESR</b></span>
+        <span class="sep">·</span><span><b>97</b> papers</span>
+        <span class="sep">·</span><span><b>28</b> patents</span>
+        <span class="sep">·</span><span>h-index <b>39</b></span>
+        <span class="sep">·</span><a href={u(`${lp}/research-archive/`)}>research archive →</a>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="#work">Explore AI systems <span class="arrow">↗</span></a>
+        <a class="btn" href={u(`${lp}/agent/`)}>See the live agent demo <span class="arrow">↗</span></a>
       </div>
     </section>
 
-    <section class="sl-section">
-      <div class="sl-section-head">
-        <span>01 · The problem</span>
-        <h2>Laboratory decisions still lose their reasoning.</h2>
+    <section id="cases">
+      <div class="shead">
+        <div class="snum">01 — Case studies</div>
+        <h2>Two systems I own end-to-end</h2>
+        <p>One enterprise delivery, one independent build — the clearest proof of how I work.</p>
       </div>
-      <div class="sl-grid three">
-        <article class="sl-card"><span class="sl-chip risk">Observed gap</span><h3>Fragmented context</h3><p>Instrument files, notebooks, scripts, and expert judgment sit in separate systems.</p></article>
-        <article class="sl-card"><span class="sl-chip risk">Observed gap</span><h3>Weak decision traces</h3><p>A result may be saved without the assumptions, uncertainty, or approval that made it actionable.</p></article>
-        <article class="sl-card"><span class="sl-chip risk">Observed gap</span><h3>Brownfield reality</h3><p>Most laboratories need software that can sit beside existing instruments, not require a clean-room rebuild.</p></article>
-      </div>
-    </section>
-
-    <section class="sl-section sl-dark">
-      <div class="sl-section-head"><span>02 · The loop</span><h2>A bounded path from claim to decision.</h2></div>
-      <div class="sl-trace" aria-label="Claim to decision trace">
-        <div><b>01</b><strong>Claim</strong><small>What the workflow is trying to establish</small></div>
-        <i aria-hidden="true">→</i>
-        <div><b>02</b><strong>Evidence</strong><small>Source, provenance, quality, and uncertainty</small></div>
-        <i aria-hidden="true">→</i>
-        <div><b>03</b><strong>Gate</strong><small>Pass, abstain, or request human review</small></div>
-        <i aria-hidden="true">→</i>
-        <div><b>04</b><strong>Decision</strong><small>A replayable output with explicit limits</small></div>
+      <div class="grid grid-2">
+        {caseStudies.map((p) => (
+          <div class="proj">
+            <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
+            <h3>{p.name}</h3>
+            <p class="one">{p.tagline}</p>
+            <div class="use">{p.description}</div>
+            <div class="links none">Case study · no public repo</div>
+            <div class="stack">{p.tags.map((t) => <span>{t}</span>)}</div>
+          </div>
+        ))}
       </div>
     </section>
 
-    <section class="sl-section">
-      <div class="sl-section-head"><span>03 · Current position</span><h2>Small, inspectable, and honest about the boundary.</h2></div>
-      <div class="sl-grid two">
-        <article class="sl-card featured"><span class="sl-chip live">Live demonstration</span><h3>Public evidence workflows</h3><p>Runnable demos show bounded identity checks, deterministic analysis, evidence gaps, and human confirmation.</p><p class="sl-limit"><b>They demonstrate:</b> traceable workflow behavior. <b>They do not prove:</b> wet-lab validation or autonomous instrument control.</p><a class="sl-text-link" href={u("/evidence/")}>Review the evidence register →</a></article>
-        <article class="sl-card"><span class="sl-chip proposed">Proposed</span><h3>Electrochemistry workflow layer</h3><p>A future product direction for offline CV/EIS inference, anomaly detection, provenance, and approval gates around existing laboratory systems.</p><p class="sl-limit">No production deployment, wet-lab validation, or committed laboratory partnership is claimed.</p><a class="sl-text-link" href={u("/applications/")}>Explore the application wedge →</a></article>
+    <section id="work">
+      <div class="shead">
+        <div class="snum">02 — Featured AI systems</div>
+        <h2>A few systems I've built</h2>
+        <p>Each answers the same questions: what is it, who's it for, can you try it, and what did I actually build? <a href={u(`${lp}/lab/`)} style="color:var(--accent);border-bottom:1px solid transparent">See the two lines I build along →</a></p>
+      </div>
+      <div class="grid">
+        {featuredSystems.map((p) => (
+          <div class="proj">
+            <span class={`badge ${badgeClass(p.status)}`}>● {p.status}</span>
+            <h3>{p.name}</h3>
+            <p class="one">{p.tagline}</p>
+            <div class="use">{p.description}</div>
+            {p.href
+              ? <div class="links"><a href={p.href} {...(p.external ? { target: "_blank", rel: "noopener" } : {})}>{p.cta} ↗</a></div>
+              : <div class="links none">Private overview · case study only</div>}
+            <div class="stack">{p.tags.map((t) => <span>{t}</span>)}</div>
+          </div>
+        ))}
       </div>
     </section>
 
-    <section class="sl-section sl-contact">
-      <div><span class="sl-chip working">Working prototype</span><h2>Build the evidence layer first.</h2><p>SciencesLoop is looking for technically rigorous conversations about scientific workflow reliability and electrochemistry validation.</p></div>
-      <a class="sl-button primary" href="mailto:luzhang@sciencesloop.com">Contact SciencesLoop</a>
+    <section id="build">
+      <div class="shead">
+        <div class="snum">03 — How I build</div>
+        <h2>How I build reliable agents</h2>
+        <p>Four engineering surfaces — how context, control, evaluation, and safety fit into one system.</p>
+      </div>
+      <div class="caps">
+        {capabilities.map((c) => (
+          <div class="cap">
+            <div class="k">→ {c.key}</div>
+            <h4>{c.name}</h4>
+            <p>{c.text}</p>
+          </div>
+        ))}
+      </div>
     </section>
-  </div>
+
+    <section id="notes">
+      <div class="notes">
+        <div class="nlead">
+          <div class="snum">04 — Field notes</div>
+          <h2 class="nh">Field notes</h2>
+          <p>Working notes, build logs, and small lessons from building grounded agents. Some are polished. Some are still growing.</p>
+          <a class="nmore" href={u(`${lp}/blog/`)}>All notes →</a>
+        </div>
+        <div class="noteslist">
+          {featuredPosts.map((post) => (
+            <a class="note" href={u(`${lp}/blog/${post.slug}/`)}>
+              <time datetime={post.dateLabel}>{post.dateLabel}</time>
+              <span class="t">{post.title}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="found" style="border-top:none;padding-top:18px">
+      <div class="found">
+        <div class="l">
+          <div class="k">Scientific foundation</div>
+          <p>My AI work is shaped by <b>15+ years</b> in electrochemical energy research at <b>Argonne &amp; JCESR</b> — flow batteries, electrolytes, and autonomous materials discovery. It's why I care about evidence, reproducibility, and safety boundaries.</p>
+        </div>
+        <a href={u(`${lp}/research-archive/`)}>View research archive →</a>
+      </div>
+    </section>
+
+    <section id="contact" class="contact" style="border-top:none">
+      <div class="eyebrow" style="text-align:center">05 — Contact</div>
+      <h2>Let's build something that holds up.</h2>
+      <p>Open to AI / agent engineering roles where rigor matters. Ask Loopi about my work, or say hi.</p>
+      <div class="cta">
+        <a class="btn primary" href={u(`${lp}/agent/`)} data-open-loopi>Ask Loopi <span class="arrow">↗</span></a>
+        <a class="btn" href="https://github.com/rockyzl" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+        <a class="btn" href="https://www.linkedin.com/in/lu-zhang-argonne/" target="_blank" rel="noopener">LinkedIn <span class="arrow">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    // "Ask Loopi" opens the site assistant (corner widget), not the /agent/ demo page.
+    document.querySelectorAll("[data-open-loopi]").forEach((b) => {
+      b.addEventListener("click", (e) => {
+        const launcher = document.querySelector("[data-cw-launcher]");
+        if (launcher) { e.preventDefault(); launcher.click(); }
+      });
+    });
+  </script>
+
+  <style is:global>
+    :root {
+      --paper: #f3f1ea; --card: #fbfaf5; --card-2: #f0eee5;
+      --ink: #1b201c; --ink-2: #39423b; --muted: #6a736a;
+      --line: #e4e0d4; --line-strong: #d3cebe;
+      --accent: #0d7361; --accent-deep: #0a5849; --accent-soft: #dcefe8;
+      --honey: #c1863c; --honey-soft: #f2e6d2;
+      --hp-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+      --hp-maxw: 1080px; --hp-r: 16px;
+    }
+    @keyframes hp-wave { 0%,60%,100% { transform: rotate(0); } 20% { transform: rotate(16deg); } 40% { transform: rotate(-8deg); } }
+  </style>
+
+  <style>
+    /* All selectors namespaced under .hp to avoid colliding with global.css
+       (which owns .hero, .btn, .badge, .proj, .snum, etc.). */
+    .hp.wrap { max-width: var(--hp-maxw); margin: 0 auto; padding: 0 26px; }
+    .hp a { color: inherit; text-decoration: none; }
+    .hp b { font-weight: 640; color: var(--ink); }
+    .hp .eyebrow { font-family: var(--hp-mono); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+
+    /* hero */
+    .hp .hero { display: block; padding: 74px 0 46px; }
+    .hp .hi { font-family: var(--hp-mono); font-size: 15px; color: var(--honey); letter-spacing: .01em; margin-bottom: 16px; }
+    .hp .hi .wave { display: inline-block; animation: hp-wave 2.6s ease-in-out 2; }
+    .hp h1 { font-size: clamp(36px, 5.4vw, 62px); line-height: 1.05; letter-spacing: -.032em; font-weight: 720; margin: 0; text-wrap: balance; max-width: 20ch; }
+    .hp h1 .em { color: var(--accent); }
+    .hp .lede { max-width: 62ch; margin: 22px 0 0; font-size: clamp(16px, 1.6vw, 18.5px); color: var(--ink-2); line-height: 1.6; }
+    .hp .buzz { margin: 16px 0 0; font-family: var(--hp-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-deep); }
+    .hp .credline { margin-top: 20px; font-family: var(--hp-mono); font-size: 12.5px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .hp .credline b { color: var(--ink); }
+    .hp .credline .sep { color: var(--line-strong); }
+    .hp .credline a { color: var(--accent); border-bottom: 1px solid transparent; }
+    .hp .credline a:hover { border-color: var(--accent); }
+    .hp .cta { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 28px; }
+    .hp .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--hp-mono); font-size: 13px; padding: 12px 18px; border-radius: 11px; border: 1px solid var(--line-strong); background: var(--card); color: var(--ink); transition: transform .12s, box-shadow .15s, border-color .15s, background .15s; }
+    .hp .btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -12px rgba(13,115,97,.5); border-color: var(--accent); }
+    .hp .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .hp .btn.primary:hover { background: var(--accent-deep); }
+    .hp .btn .arrow { transition: .15s; }
+    .hp .btn:hover .arrow { transform: translate(2px, -2px); }
+
+    .hp section { display: block; padding: 54px 0; border-top: 1px solid var(--line); }
+    .hp .snum { font-family: var(--hp-mono); font-size: 11.5px; color: var(--accent); letter-spacing: .1em; }
+    .hp .shead h2 { font-size: clamp(22px, 2.9vw, 31px); letter-spacing: -.02em; margin: 8px 0 0; font-weight: 700; }
+    .hp .shead p { margin: 8px 0 24px; color: var(--muted); max-width: 56ch; font-size: 15px; }
+
+    /* case-study cards */
+    .hp .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .hp .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .hp .proj { background: var(--card); border: 1px solid var(--line); border-radius: var(--hp-r); padding: 20px 20px 18px; display: flex; flex-direction: column; transition: transform .14s, box-shadow .18s, border-color .15s; position: relative; overflow: hidden; }
+    .hp .proj::after { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 3px; background: var(--accent); transform: scaleY(0); transform-origin: top; transition: transform .2s; }
+    .hp .proj:hover { transform: translateY(-3px); box-shadow: 0 20px 44px -28px rgba(27,32,28,.5); border-color: var(--line-strong); }
+    .hp .proj:hover::after { transform: scaleY(1); }
+    .hp .badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--hp-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; padding: 4px 8px; border-radius: 6px; align-self: flex-start; }
+    .hp .badge.repo { color: var(--accent-deep); background: var(--accent-soft); border: 1px solid #cbe3da; }
+    .hp .badge.demo { color: #215d3a; background: #ddeede; border: 1px solid #c6e0c9; }
+    .hp .badge.priv { color: #7a5a2c; background: var(--honey-soft); border: 1px solid #e7d3b0; }
+    .hp .proj h3 { margin: 12px 0 0; font-size: 18px; letter-spacing: -.01em; font-weight: 670; }
+    .hp .proj .one { margin: 8px 0 0; color: var(--ink-2); font-size: 14px; line-height: 1.5; }
+    .hp .proj .use { margin: 11px 0 0; font-family: var(--hp-mono); font-size: 11.5px; color: var(--muted); line-height: 1.55; padding-left: 11px; border-left: 2px solid var(--line-strong); }
+    .hp .proj .links { margin: 13px 0 0; font-family: var(--hp-mono); font-size: 11.5px; color: var(--accent); display: flex; gap: 12px; flex-wrap: wrap; }
+    .hp .proj .links.none { color: var(--muted); }
+    .hp .proj .links a:hover { border-bottom: 1px solid var(--accent); }
+    .hp .stack { margin-top: auto; padding-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .hp .stack span { font-family: var(--hp-mono); font-size: 10.5px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 3px 8px; }
+
+    /* how I build */
+    .hp .caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; }
+    .hp .cap { border: 1px solid var(--line); border-radius: var(--hp-r); padding: 19px; background: var(--card); }
+    .hp .cap .k { font-family: var(--hp-mono); font-size: 11px; color: var(--accent); letter-spacing: .05em; }
+    .hp .cap h4 { margin: 11px 0 6px; font-size: 15.5px; letter-spacing: -.01em; }
+    .hp .cap p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+
+    /* field notes garden */
+    .hp .notes { display: flex; gap: 22px; align-items: flex-start; flex-wrap: wrap; }
+    .hp .nlead { flex: 1 1 260px; }
+    .hp .nlead .nh { font-size: 26px; letter-spacing: -.02em; margin: 8px 0 0; font-weight: 700; }
+    .hp .nlead p { color: var(--muted); font-size: 15px; margin: 8px 0 0; }
+    .hp .nlead .nmore { display: inline-block; margin-top: 12px; font-family: var(--hp-mono); font-size: 12px; color: var(--accent); }
+    .hp .noteslist { flex: 2 1 380px; display: grid; gap: 10px; }
+    .hp .note { display: flex; gap: 14px; align-items: baseline; border: 1px solid var(--line); border-radius: 12px; padding: 13px 16px; background: var(--card); transition: .15s; }
+    .hp .note:hover { border-color: var(--accent); transform: translateX(2px); }
+    .hp .note time { font-family: var(--hp-mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
+    .hp .note .t { font-size: 14.5px; }
+
+    /* scientific foundation */
+    .hp .found { display: flex; align-items: center; justify-content: space-between; gap: 22px; flex-wrap: wrap; background: var(--card-2); border: 1px solid var(--line); border-radius: var(--hp-r); padding: 22px 26px; }
+    .hp .found .l .k { font-family: var(--hp-mono); font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+    .hp .found .l p { margin: 7px 0 0; font-size: 14.5px; color: var(--ink-2); max-width: 54ch; }
+    .hp .found .l b { color: var(--ink); }
+    .hp .found a { font-family: var(--hp-mono); font-size: 12.5px; color: var(--accent); white-space: nowrap; border: 1px solid var(--line-strong); padding: 9px 14px; border-radius: 10px; background: var(--card); }
+    .hp .found a:hover { border-color: var(--accent); }
+
+    /* contact */
+    .hp .contact { text-align: center; padding: 66px 0 20px; }
+    .hp .contact h2 { font-size: clamp(26px, 4.2vw, 44px); letter-spacing: -.03em; margin: 8px 0 0; font-weight: 720; text-wrap: balance; }
+    .hp .contact p { color: var(--muted); margin: 14px auto 0; max-width: 46ch; }
+    .hp .contact .cta { justify-content: center; }
+
+    @media (max-width: 880px) { .hp .grid, .hp .caps { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 620px) { .hp .grid, .hp .caps { grid-template-columns: 1fr; } .hp .found { flex-direction: column; align-items: flex-start; } }
+    @media (prefers-reduced-motion: reduce) { .hp *, .hp *::before, .hp *::after { animation: none !important; transition: none !important; } }
+  </style>
 </Base>
