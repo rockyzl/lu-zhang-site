@@ -33,6 +33,40 @@ export const DEMO_REGISTRY_SCHEMA_VERSION = "sciencesloop.demo-registry.v1" as c
 // Agent-index pages separately.
 export const demos: readonly Demo[] = [
   {
+    id: "fieldgamma",
+    path: "/agent/fieldgamma/",
+    articlePath: "/blog/2026-08-25-fieldgamma-limited-data-radioisotope-detection/",
+    repoUrl: "https://github.com/rockyzl/fieldgamma",
+    featured: true,
+    title: { en: "FieldGamma", zh: "FieldGamma" },
+    tagline: {
+      en: "Test what limited-data isotope classifiers do when the spectrum shifts",
+      zh: "检验有限数据同位素分类器在能谱偏移后还剩多少能力",
+    },
+    summary: {
+      en: "A governed synthetic benchmark across 1–25 labeled spectra per isotope, five model families, frozen low-count/background/drift tests, ANSI N42 parsing, and a replay API—with the negative result left visible.",
+      zh: "一个受治理的合成基准：每种同位素 1–25 条标注光谱、五类模型、冻结的低计数/背景/漂移测试、ANSI N42 解析和回放 API，并把负面结果原样保留。",
+    },
+    tags: ["gamma spectra", "limited-data ML", "ANSI N42", "test & evaluation"],
+    sources: [
+      {
+        kind: "dataset",
+        label: { en: "Sandia BALDR seed signatures", zh: "Sandia BALDR seed signatures" },
+        url: "https://github.com/sandialabs/BALDR-Study-07.04",
+      },
+      {
+        kind: "license",
+        label: { en: "PyRIID BSD-3-Clause license", zh: "PyRIID BSD-3-Clause 许可" },
+        url: "https://github.com/sandialabs/pyriid/blob/master/LICENSE.md",
+      },
+      {
+        kind: "documentation",
+        label: { en: "NIST ANSI N42 examples", zh: "NIST ANSI N42 示例" },
+        url: "https://www.nist.gov/pml/radiation-physics/ansiieee-n4242-2020-version",
+      },
+    ],
+  },
+  {
     id: "chemgraph-loop",
     path: "/agent/",
     featured: true,
