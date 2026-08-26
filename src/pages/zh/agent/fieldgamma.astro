@@ -1,0 +1,17 @@
+---
+import Base from "../../../layouts/Base.astro";
+import FieldGammaDemo from "../../../components/FieldGammaDemo.astro";
+---
+
+<Base
+  title="FieldGamma — 有限数据放射性同位素识别 T&E — 张鲁"
+  description="查看有限标注放射性同位素分类器在低计数、背景偏移、校准漂移与分辨率退化下的受治理合成基准，以及 ANSI N42 回放互操作性。"
+>
+  <div class="container fg-page">
+    <FieldGammaDemo locale="zh" />
+  </div>
+</Base>
+
+<style>
+  .fg-page { padding-top: 30px; padding-bottom: 64px; }
+</style>

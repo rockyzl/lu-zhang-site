@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">FieldGamma validation-to-shift performance gap</title>
+  <desc id="desc">At 25 synthetic labeled spectra per isotope, Random Forest, XGBoost, and a Poisson template all score about 0.96 validation macro-F1, but shifted-test macro-F1 falls to 0.015, 0.096, and 0.118. Their background false-alarm rates are 6.7, 26.3, and 87 percent.</desc>
+  <rect width="1200" height="630" fill="#f3f1ea"/>
+  <rect x="56" y="48" width="1088" height="534" rx="28" fill="#12201d"/>
+  <text x="100" y="102" fill="#78cfb9" font-family="ui-monospace, Menlo, monospace" font-size="18" font-weight="700" letter-spacing="2">FIELDGAMMA · FROZEN SYNTHETIC TEST</text>
+  <text x="100" y="155" fill="#ffffff" font-family="system-ui, sans-serif" font-size="36" font-weight="750">High validation scores did not survive the compound shift.</text>
+  <text x="100" y="190" fill="#aabbb5" font-family="system-ui, sans-serif" font-size="19">25 labeled spectra per isotope · mean across three seeds</text>
+
+  <text x="100" y="243" fill="#d6e0dc" font-family="ui-monospace, Menlo, monospace" font-size="16">MODEL</text>
+  <text x="360" y="243" fill="#d6e0dc" font-family="ui-monospace, Menlo, monospace" font-size="16">VALIDATION F1</text>
+  <text x="650" y="243" fill="#d6e0dc" font-family="ui-monospace, Menlo, monospace" font-size="16">SHIFTED F1</text>
+  <text x="960" y="243" fill="#d6e0dc" font-family="ui-monospace, Menlo, monospace" font-size="16">BACKGROUND FAR</text>
+
+  <g font-family="system-ui, sans-serif" font-size="20">
+    <text x="100" y="306" fill="#ffffff" font-weight="700">Random Forest</text>
+    <rect x="360" y="281" width="240" height="28" rx="6" fill="#28443c"/>
+    <rect x="360" y="281" width="231" height="28" rx="6" fill="#70cbb5"/>
+    <text x="610" y="303" fill="#dce9e4">0.961</text>
+    <rect x="650" y="281" width="200" height="28" rx="6" fill="#3a3527"/>
+    <rect x="650" y="281" width="3" height="28" rx="2" fill="#e0a84e"/>
+    <text x="860" y="303" fill="#f1dcba">0.015</text>
+    <text x="990" y="303" fill="#f3b7ac">6.7%</text>
+
+    <text x="100" y="386" fill="#ffffff" font-weight="700">XGBoost</text>
+    <rect x="360" y="361" width="240" height="28" rx="6" fill="#28443c"/>
+    <rect x="360" y="361" width="231" height="28" rx="6" fill="#70cbb5"/>
+    <text x="610" y="383" fill="#dce9e4">0.961</text>
+    <rect x="650" y="361" width="200" height="28" rx="6" fill="#3a3527"/>
+    <rect x="650" y="361" width="19" height="28" rx="4" fill="#e0a84e"/>
+    <text x="860" y="383" fill="#f1dcba">0.096</text>
+    <text x="990" y="383" fill="#f3b7ac">26.3%</text>
+
+    <text x="100" y="466" fill="#ffffff" font-weight="700">Poisson template</text>
+    <rect x="360" y="441" width="240" height="28" rx="6" fill="#28443c"/>
+    <rect x="360" y="441" width="229" height="28" rx="6" fill="#70cbb5"/>
+    <text x="610" y="463" fill="#dce9e4">0.956</text>
+    <rect x="650" y="441" width="200" height="28" rx="6" fill="#3a3527"/>
+    <rect x="650" y="441" width="24" height="28" rx="4" fill="#e0a84e"/>
+    <text x="860" y="463" fill="#f1dcba">0.118</text>
+    <text x="990" y="463" fill="#f3b7ac">87.0%</text>
+  </g>
+
+  <line x1="100" y1="503" x2="1100" y2="503" stroke="#334a43"/>
+  <text x="100" y="542" fill="#aabbb5" font-family="system-ui, sans-serif" font-size="17">Synthetic benchmark only · low counts + higher background + 1.2% calibration drift + resolution blur</text>
+  <text x="100" y="568" fill="#7f918b" font-family="system-ui, sans-serif" font-size="15">No measured classifier validation · no hardware integration · no field deployment</text>
+</svg>

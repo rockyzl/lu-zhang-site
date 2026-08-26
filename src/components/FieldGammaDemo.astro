@@ -1,0 +1,393 @@
+---
+import { u } from "../lib/url";
+import type { Locale } from "../lib/i18n";
+
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const isZh = locale === "zh";
+const articlePath = isZh
+  ? "/zh/blog/2026-08-25-fieldgamma-limited-data-radioisotope-detection-zh/"
+  : "/blog/2026-08-25-fieldgamma-limited-data-radioisotope-detection/";
+const repoUrl = "https://github.com/rockyzl/fieldgamma";
+
+const copy = isZh
+  ? {
+      eyebrow: "Scientific ML T&E · 受治理的合成数据基准",
+      title: "当伽马能谱发生偏移，模型还剩下多少能力？",
+      lead: "选择模型和每种同位素的标注样本数，比较同分布验证、固定复合偏移、纯背景误报和未知同位素拒绝。这里最重要的不是最好看的分数，而是同一个阈值在四条测试通道里暴露出的取舍。",
+      state: "独立原型 · 合成分类基准 · 无硬件或现场部署",
+      sourceNote: "训练与评测光谱由 PyRIID 基于 Sandia BALDR 公开的 GADRAS 派生 seed signatures 合成。N42 文件只用于格式解析和回放兼容性。",
+      pipeline: ["公开 seed signatures", "合成与独立数据拆分", "五类有限数据模型", "固定偏移与拒绝评测", "N42 / API 回放原型"],
+      explorerTitle: "查看冻结结果",
+      explorerLead: "模型设置和 abstain 阈值在打开 protected test 之前固定。切换控件只读取已保存的结果，不会重新训练。",
+      modelLabel: "模型",
+      budgetLabel: "每种同位素的标注光谱数",
+      validation: "同分布 validation macro-F1",
+      shifted: "固定偏移 test macro-F1",
+      falseAlarm: "纯背景误报率",
+      ood: "OOD 未知拒绝率",
+      validationLane: "Validation",
+      shiftedLane: "Compound shift",
+      farLane: "Background false alarm",
+      oodLane: "Unknown-isotope rejection",
+      decisionTitle: "T&E 读法",
+      loading: "正在读取 hash 绑定的结果……",
+      auditTitle: "这次 run 留下了什么证据",
+      audit: [
+        ["60", "预注册 fits"],
+        ["3", "随机 seeds"],
+        ["96,000", "由 R 重新计算的预测行"],
+        ["1.11e−16", "Python / R 最大差异"],
+        ["10 / 10", "Python 测试通过"],
+        ["76.1 s", "正式 run 时间"],
+      ],
+      n42Title: "N42 兼容性通道",
+      n42Text: "自建 parser 与 SandiaSpecUtils 对同一份公开 Mn-56 fixture 的结果一致：channel counts、总计数和 live time 完全相同，能量边界差异不超过 0.0003 keV。这个检查证明文件互操作，不证明分类器在实测数据上有效。",
+      n42Facts: ["16,384 channels", "698,514 total counts", "1,800 s live time", "≤ 0.0003 keV edge difference"],
+      boundaryTitle: "必须和结果放在一起读的边界",
+      boundary: "FieldGamma 没有接入真实探测器，也没有在实验室或现场运行。它不是辐射安全、安防报警、源活度估计或仪器认证系统；Sandia、DOE、NIST 与上游作者均未赞助或背书本项目。",
+      article: "阅读完整方法与负面结果 →",
+      repo: "查看代码、协议和审计工件 →",
+      data: "下载页面使用的静态结果 JSON →",
+      sources: "一手来源",
+      interpretations: {
+        random_forest: "验证规则选择了 Random Forest：同分布分数和 OOD 拒绝都很强，但在低计数、高背景、校准漂移和分辨率退化同时出现时，它大多选择 abstain。低误报并不等于可用检出。",
+        xgboost: "XGBoost 在复合偏移下保留了更多分类，但纯背景误报和未知同位素误判都明显增加。它展示的是 sensitivity 与 operational burden 之间的取舍。",
+        poisson_template: "Poisson template 在复合偏移下得到最高的 macro-F1，但 25-shot 条件下纯背景误报达到 87%。会报警不代表会正确报警。",
+        logistic_regression: "Logistic regression 在 validation-selected 阈值下几乎全部 abstain。它是一个诚实的负对照，而不是被事后调参隐藏的失败。",
+        cnn_1d: "小型 1D CNN 在最多 25 个标注样本/类的冻结设置中没有学到可接受的置信度。test 打开后没有继续调结构或归一化。",
+      },
+    }
+  : {
+      eyebrow: "Scientific ML T&E · governed synthetic benchmark",
+      title: "What survives when the gamma spectrum shifts?",
+      lead: "Choose a model and a labeled-spectra budget, then compare in-envelope validation, a frozen compound shift, background false alarms, and unknown-isotope rejection. The point is not the prettiest score. It is the trade-off exposed when one threshold has to survive all four lanes.",
+      state: "Independent prototype · synthetic classifier benchmark · no hardware or field deployment",
+      sourceNote: "Training and evaluation spectra are synthesized with PyRIID from public GADRAS-derived seed signatures in Sandia's BALDR study. N42 files are used only for parsing and replay compatibility.",
+      pipeline: ["Public seed signatures", "Synthesis + disjoint splits", "Five limited-data models", "Frozen shift + rejection tests", "N42 / API replay prototype"],
+      explorerTitle: "Inspect the frozen result",
+      explorerLead: "Model settings and abstention thresholds were fixed before protected-test evaluation. These controls read saved results; they do not retrain anything.",
+      modelLabel: "Model",
+      budgetLabel: "Labeled spectra per isotope",
+      validation: "In-envelope validation macro-F1",
+      shifted: "Frozen shifted-test macro-F1",
+      falseAlarm: "Background false-alarm rate",
+      ood: "OOD unknown-rejection rate",
+      validationLane: "Validation",
+      shiftedLane: "Compound shift",
+      farLane: "Background false alarm",
+      oodLane: "Unknown-isotope rejection",
+      decisionTitle: "T&E reading",
+      loading: "Loading the hash-bound result…",
+      auditTitle: "What this run left behind",
+      audit: [
+        ["60", "pre-registered fits"],
+        ["3", "random seeds"],
+        ["96,000", "prediction rows recomputed in R"],
+        ["1.11e−16", "maximum Python / R difference"],
+        ["10 / 10", "Python tests passing"],
+        ["76.1 s", "formal-run time"],
+      ],
+      n42Title: "N42 interoperability lane",
+      n42Text: "My parser and SandiaSpecUtils agree on the same public Mn-56 fixture: channel counts, total counts, and live time match exactly, while calibrated energy edges agree within 0.0003 keV. That validates file interoperability on one fixture—not measured classifier performance.",
+      n42Facts: ["16,384 channels", "698,514 total counts", "1,800 s live time", "≤ 0.0003 keV edge difference"],
+      boundaryTitle: "Boundary that travels with every result",
+      boundary: "FieldGamma has not been connected to a physical detector or operated in a laboratory or field setting. It is not a radiation-safety system, security alarm, activity estimator, or instrument certification. Sandia, DOE, NIST, and the upstream authors do not sponsor or endorse this independent project.",
+      article: "Read the full method and negative result →",
+      repo: "View code, protocol, and audit artifacts →",
+      data: "Download the static result JSON used here →",
+      sources: "Primary sources",
+      interpretations: {
+        random_forest: "The validation rule selected Random Forest. Its in-envelope score and OOD rejection are strong, but it abstains on most spectra when low counts, higher background, calibration drift, and blur arrive together. Low false alarms do not imply useful detection.",
+        xgboost: "XGBoost keeps more classifications under the compound shift, but both background alarms and confident OOD mistakes increase. It exposes the sensitivity-versus-review-burden trade-off.",
+        poisson_template: "The Poisson template has the highest compound-shift macro-F1, but its background false-alarm rate reaches 87% at 25 shots. Producing an alarm is not the same as producing a useful alarm.",
+        logistic_regression: "Logistic regression abstains almost everywhere under its validation-selected threshold. It remains visible as an honest negative control instead of being hidden by post-test tuning.",
+        cnn_1d: "The small 1D CNN never learns acceptable confidence with at most 25 labeled examples per class under the frozen setup. Its architecture and normalization were not retuned after the test opened.",
+      },
+    };
+
+const models = [
+  ["random_forest", "Random Forest"],
+  ["xgboost", "XGBoost"],
+  ["poisson_template", "Poisson template"],
+  ["logistic_regression", "Logistic"],
+  ["cnn_1d", "1D CNN"],
+];
+---
+
+<section
+  class="fg-demo"
+  data-fieldgamma
+  data-data-url={u("/data/fieldgamma-v1.json")}
+  data-interpretations={JSON.stringify(copy.interpretations)}
+>
+  <header class="fg-hero">
+    <p class="fg-eyebrow">{copy.eyebrow}</p>
+    <h1>{copy.title}</h1>
+    <p class="fg-lead">{copy.lead}</p>
+    <span class="fg-state">{copy.state}</span>
+    <p class="fg-source-note">{copy.sourceNote}</p>
+  </header>
+
+  <ol class="fg-pipeline" aria-label={isZh ? "FieldGamma 流程" : "FieldGamma workflow"}>
+    {copy.pipeline.map((stage, index) => (
+      <li><span>{String(index + 1).padStart(2, "0")}</span>{stage}</li>
+    ))}
+  </ol>
+
+  <section class="fg-workbench">
+    <header>
+      <div>
+        <p class="fg-kicker">FIELDGAMMA / FORMAL-V1-20260825</p>
+        <h2>{copy.explorerTitle}</h2>
+        <p>{copy.explorerLead}</p>
+      </div>
+      <div class="fg-run-light"><span></span> HASH-BOUND</div>
+    </header>
+
+    <div class="fg-controls">
+      <fieldset>
+        <legend>{copy.modelLabel}</legend>
+        <div class="fg-models">
+          {models.map(([value, label], index) => (
+            <button type="button" data-model={value} aria-pressed={index === 0 ? "true" : "false"}>{label}</button>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>{copy.budgetLabel}</legend>
+        <div class="fg-budgets">
+          {[1, 5, 10, 25].map((budget) => (
+            <button type="button" data-budget={budget} aria-pressed={budget === 25 ? "true" : "false"}>{budget}</button>
+          ))}
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="fg-metrics" aria-live="polite">
+      <article><span>{copy.validation}</span><strong data-value="validation">—</strong></article>
+      <article><span>{copy.shifted}</span><strong data-value="shifted">—</strong></article>
+      <article><span>{copy.falseAlarm}</span><strong data-value="far">—</strong></article>
+      <article><span>{copy.ood}</span><strong data-value="ood">—</strong></article>
+    </div>
+
+    <div class="fg-readout">
+      <div class="fg-bars">
+        {[
+          ["validation", copy.validationLane],
+          ["shifted", copy.shiftedLane],
+          ["far", copy.farLane],
+          ["ood", copy.oodLane],
+        ].map(([key, label]) => (
+          <div class={`fg-bar fg-bar-${key}`}>
+            <div><span>{label}</span><b data-bar-value={key}>—</b></div>
+            <div class="fg-track"><i data-bar={key}></i></div>
+          </div>
+        ))}
+      </div>
+      <article class="fg-decision">
+        <span>{copy.decisionTitle}</span>
+        <h3 data-model-name>Random Forest · 25-shot</h3>
+        <p data-interpretation>{copy.loading}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="fg-audit">
+    <div class="fg-section-head">
+      <p>RUN LEDGER</p>
+      <h2>{copy.auditTitle}</h2>
+    </div>
+    <div class="fg-audit-grid">
+      {copy.audit.map(([value, label]) => <article><strong>{value}</strong><span>{label}</span></article>)}
+    </div>
+  </section>
+
+  <section class="fg-n42">
+    <div>
+      <p class="fg-section-code">ANSI N42.42 / PUBLIC FIXTURE</p>
+      <h2>{copy.n42Title}</h2>
+      <p>{copy.n42Text}</p>
+    </div>
+    <ul>{copy.n42Facts.map((fact) => <li>{fact}</li>)}</ul>
+  </section>
+
+  <aside class="fg-boundary">
+    <div>
+      <h2>{copy.boundaryTitle}</h2>
+      <p>{copy.boundary}</p>
+      <p class="fg-source-links">
+        <strong>{copy.sources}:</strong>
+        <a href="https://github.com/sandialabs/BALDR-Study-07.04" target="_blank" rel="noopener">Sandia BALDR ↗</a>
+        <a href="https://github.com/sandialabs/pyriid" target="_blank" rel="noopener">PyRIID ↗</a>
+        <a href="https://github.com/sandialabs/SpecUtils" target="_blank" rel="noopener">SpecUtils ↗</a>
+        <a href="https://www.nist.gov/pml/radiation-physics/ansiieee-n4242-2020-version" target="_blank" rel="noopener">NIST N42 ↗</a>
+      </p>
+    </div>
+    <nav aria-label={isZh ? "项目链接" : "Project links"}>
+      <a href={u(articlePath)}>{copy.article}</a>
+      <a href={repoUrl} target="_blank" rel="noopener">{copy.repo}</a>
+      <a href={u("/data/fieldgamma-v1.json")} target="_blank">{copy.data}</a>
+    </nav>
+  </aside>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-fieldgamma]").forEach((root) => {
+    const dataUrl = root.dataset.dataUrl;
+    const interpretations = JSON.parse(root.dataset.interpretations || "{}") as Record<string, string>;
+    const modelLabels: Record<string, string> = {
+      random_forest: "Random Forest",
+      xgboost: "XGBoost",
+      poisson_template: "Poisson template",
+      logistic_regression: "Logistic regression",
+      cnn_1d: "1D CNN",
+    };
+    let selectedModel = "random_forest";
+    let selectedBudget = 25;
+    let rows: Array<Record<string, number | string>> = [];
+
+    const setText = (selector: string, value: string) => {
+      const element = root.querySelector<HTMLElement>(selector);
+      if (element) element.textContent = value;
+    };
+    const display = (value: number) => value.toFixed(3);
+    const percent = (value: number) => `${(100 * value).toFixed(1)}%`;
+
+    const update = () => {
+      const row = rows.find((candidate) =>
+        candidate.model === selectedModel && Number(candidate.budget_per_class) === selectedBudget
+      );
+      if (!row) return;
+      const values = {
+        validation: Number(row.validation_macro_f1_mean),
+        shifted: Number(row.shifted_macro_f1_mean),
+        far: Number(row.background_false_alarm_rate_mean),
+        ood: Number(row.ood_unknown_rejection_rate_mean),
+      };
+      setText('[data-value="validation"]', display(values.validation));
+      setText('[data-value="shifted"]', display(values.shifted));
+      setText('[data-value="far"]', percent(values.far));
+      setText('[data-value="ood"]', percent(values.ood));
+      Object.entries(values).forEach(([key, value]) => {
+        setText(`[data-bar-value="${key}"]`, key === "far" || key === "ood" ? percent(value) : display(value));
+        const bar = root.querySelector<HTMLElement>(`[data-bar="${key}"]`);
+        if (bar) bar.style.width = `${Math.max(0, Math.min(100, value * 100))}%`;
+      });
+      setText("[data-model-name]", `${modelLabels[selectedModel]} · ${selectedBudget}-shot`);
+      setText("[data-interpretation]", interpretations[selectedModel] || "");
+    };
+
+    root.querySelectorAll<HTMLButtonElement>("[data-model]").forEach((button) => {
+      button.addEventListener("click", () => {
+        selectedModel = button.dataset.model || selectedModel;
+        root.querySelectorAll("[data-model]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        update();
+      });
+    });
+    root.querySelectorAll<HTMLButtonElement>("[data-budget]").forEach((button) => {
+      button.addEventListener("click", () => {
+        selectedBudget = Number(button.dataset.budget || selectedBudget);
+        root.querySelectorAll("[data-budget]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        update();
+      });
+    });
+
+    if (dataUrl) {
+      fetch(dataUrl)
+        .then((response) => {
+          if (!response.ok) throw new Error(`FieldGamma data request failed: ${response.status}`);
+          return response.json();
+        })
+        .then((data) => {
+          rows = data.learning_curves || [];
+          update();
+        })
+        .catch(() => setText("[data-interpretation]", "Result data could not be loaded. The repository remains available from the source link below."));
+    }
+  });
+</script>
+
+<style>
+  .fg-demo { max-width: 1160px; margin: 0 auto; }
+  .fg-hero { max-width: 920px; }
+  .fg-eyebrow, .fg-kicker, .fg-section-head p, .fg-section-code {
+    margin: 0 0 9px; color: var(--accent); font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: .75rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase;
+  }
+  .fg-hero h1 { max-width: 18ch; margin: 0 0 16px; font-size: clamp(2.35rem, 5.6vw, 5rem); line-height: .98; letter-spacing: -.045em; }
+  .fg-lead { max-width: 78ch; margin: 0 0 14px; color: var(--muted); font-size: 1.06rem; line-height: 1.72; }
+  .fg-state { display: inline-flex; border: 1px solid #d5a452; border-radius: 999px; padding: 6px 11px; background: #fff1d5; color: #6c4203; font-size: .76rem; font-weight: 800; }
+  .fg-source-note { max-width: 82ch; margin: 13px 0 0; color: var(--muted); font-size: .84rem; line-height: 1.55; }
+  .fg-pipeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin: 30px 0 18px; padding: 1px; list-style: none; background: var(--line); border: 1px solid var(--line); border-radius: 15px; overflow: hidden; }
+  .fg-pipeline li { min-height: 92px; padding: 15px; background: var(--card); color: var(--ink-2); font-size: .84rem; line-height: 1.4; }
+  .fg-pipeline span { display: block; margin-bottom: 14px; color: var(--accent); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: .72rem; font-weight: 800; }
+  .fg-workbench { padding: clamp(20px, 4vw, 36px); border-radius: 20px; background: #12201d; color: #f2f4ee; box-shadow: 0 24px 70px rgb(18 32 29 / 18%); }
+  .fg-workbench > header { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; }
+  .fg-workbench h2 { margin: 0 0 8px; color: #fff; font-size: clamp(1.55rem, 3vw, 2.35rem); }
+  .fg-workbench header p:not(.fg-kicker) { max-width: 72ch; margin: 0; color: #a9b9b3; line-height: 1.55; }
+  .fg-kicker { color: #77cdb9; }
+  .fg-run-light { display: flex; gap: 7px; align-items: center; flex: 0 0 auto; padding: 7px 10px; border: 1px solid #37564e; border-radius: 999px; color: #b9d5cc; font: 700 .68rem ui-monospace, Menlo, monospace; }
+  .fg-run-light span { width: 7px; height: 7px; border-radius: 50%; background: #65d5ad; box-shadow: 0 0 12px #65d5ad; }
+  .fg-controls { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin: 28px 0 18px; }
+  .fg-controls fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+  .fg-controls legend { margin-bottom: 8px; color: #a9b9b3; font-size: .74rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+  .fg-models, .fg-budgets { display: flex; flex-wrap: wrap; gap: 7px; }
+  .fg-controls button { border: 1px solid #3b514b; border-radius: 8px; padding: 8px 11px; background: #1a2c28; color: #c7d4cf; cursor: pointer; font: 700 .76rem ui-monospace, Menlo, monospace; }
+  .fg-controls button:hover { border-color: #72b7a6; }
+  .fg-controls button[aria-pressed="true"] { border-color: #77cdb9; background: #17453a; color: #fff; box-shadow: inset 0 0 0 1px #77cdb9; }
+  .fg-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+  .fg-metrics article { min-height: 112px; padding: 15px; border: 1px solid #31453f; border-radius: 12px; background: #182824; }
+  .fg-metrics span { display: block; min-height: 2.8em; color: #9eafa9; font-size: .75rem; line-height: 1.4; }
+  .fg-metrics strong { display: block; margin-top: 8px; color: #fff; font: 750 1.8rem ui-monospace, Menlo, monospace; }
+  .fg-readout { display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; margin-top: 18px; }
+  .fg-bars, .fg-decision { border: 1px solid #31453f; border-radius: 13px; padding: 18px; background: #0f1b18; }
+  .fg-bar + .fg-bar { margin-top: 15px; }
+  .fg-bar > div:first-child { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 6px; color: #afbbb7; font-size: .75rem; }
+  .fg-bar b { color: #e8efeb; font-family: ui-monospace, Menlo, monospace; }
+  .fg-track { height: 9px; overflow: hidden; border-radius: 999px; background: #263833; }
+  .fg-track i { display: block; width: 0; height: 100%; border-radius: inherit; background: #70cbb5; transition: width .32s ease; }
+  .fg-bar-shifted .fg-track i { background: #e0a84e; }
+  .fg-bar-far .fg-track i { background: #d36e5e; }
+  .fg-bar-ood .fg-track i { background: #8cafda; }
+  .fg-decision > span { color: #77cdb9; font: 800 .7rem ui-monospace, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase; }
+  .fg-decision h3 { margin: 11px 0 8px; color: #fff; font-size: 1rem; }
+  .fg-decision p { margin: 0; color: #b6c2be; line-height: 1.62; font-size: .88rem; }
+  .fg-audit { margin: 26px 0; }
+  .fg-section-head h2 { margin: 0 0 16px; font-size: 1.55rem; }
+  .fg-audit-grid { display: grid; grid-template-columns: repeat(6, 1fr); border: 1px solid var(--line); border-radius: 15px; overflow: hidden; }
+  .fg-audit-grid article { min-height: 108px; padding: 16px; background: var(--card); }
+  .fg-audit-grid article + article { border-left: 1px solid var(--line); }
+  .fg-audit-grid strong { display: block; color: var(--ink); font: 750 1.35rem ui-monospace, Menlo, monospace; }
+  .fg-audit-grid span { display: block; margin-top: 7px; color: var(--muted); font-size: .77rem; line-height: 1.4; }
+  .fg-n42 { display: grid; grid-template-columns: 1.35fr 1fr; gap: 24px; margin: 26px 0; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: #e9f1ed; }
+  .fg-n42 h2 { margin: 0 0 9px; }
+  .fg-n42 p:not(.fg-section-code) { margin: 0; color: var(--ink-2); line-height: 1.62; }
+  .fg-n42 ul { display: grid; align-content: center; gap: 7px; margin: 0; padding: 0; list-style: none; }
+  .fg-n42 li { padding: 9px 11px; border-left: 3px solid var(--accent); background: rgb(255 255 255 / 58%); color: var(--ink-2); font: 700 .78rem ui-monospace, Menlo, monospace; }
+  .fg-boundary { display: grid; grid-template-columns: 1.4fr .8fr; gap: 26px; padding: 24px; border: 1px solid #dbc18e; border-radius: 16px; background: #fff4dd; }
+  .fg-boundary h2 { margin: 0 0 8px; font-size: 1.05rem; }
+  .fg-boundary p { margin: 0; color: #5b5040; line-height: 1.62; }
+  .fg-source-links { display: flex; flex-wrap: wrap; gap: 6px 13px; margin-top: 13px !important; font-size: .8rem; }
+  .fg-boundary nav { display: grid; align-content: center; gap: 9px; }
+  .fg-boundary nav a { border-bottom: 1px solid #dbc18e; padding-bottom: 8px; color: #4f3c1c; font-weight: 750; }
+  @media (max-width: 900px) {
+    .fg-pipeline { grid-template-columns: 1fr 1fr; }
+    .fg-audit-grid { grid-template-columns: repeat(3, 1fr); }
+    .fg-audit-grid article:nth-child(4) { border-left: 0; }
+    .fg-audit-grid article:nth-child(n + 4) { border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 720px) {
+    .fg-hero h1 { max-width: none; }
+    .fg-workbench > header, .fg-controls, .fg-readout, .fg-n42, .fg-boundary { grid-template-columns: 1fr; }
+    .fg-workbench > header { display: grid; }
+    .fg-run-light { justify-self: start; }
+    .fg-metrics { grid-template-columns: 1fr 1fr; }
+    .fg-audit-grid { grid-template-columns: 1fr 1fr; }
+    .fg-audit-grid article:nth-child(odd) { border-left: 0; }
+    .fg-audit-grid article:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 460px) {
+    .fg-pipeline, .fg-metrics, .fg-audit-grid { grid-template-columns: 1fr; }
+    .fg-audit-grid article + article { border-left: 0; border-top: 1px solid var(--line); }
+  }
+</style>
