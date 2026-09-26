@@ -30,6 +30,27 @@ Astro port.
 
 ## Release and rollback
 
+### Expert-review integration — 2026-09-25
+
+- Kept the approved theme, image, three needs and illustrative animations.
+- Made scoped pilots visible in the hero and concrete proposed handoffs explicit:
+  selected source-linked records, comparisons with missing-information checks,
+  and one agreed data-to-analysis-to-review workflow.
+- Added illustrative sample-ID/concentration/temperature checks, without implying
+  causality or an analysis actually performed by a deployed product.
+- Added founder/research-archive links and separated prior scientific work from
+  evidence of customer deployment.
+- Added example acceptance checks, non-confidential intake guidance and a visible
+  email address. No fabricated ROI, security guarantee or customer claim.
+- Matched tab orientation and arrow keys to the viewport, reset inactive button
+  backgrounds and added a no-script view of all three services.
+- English and Chinese remain synchronized. Browser acceptance is still pending;
+  the previously documented preview/sign-in limitations remain.
+- Validation: full build passed (78 pages, 9 registered demos); generated HTML
+  links/assets and intake text checked in both locales. DOM-mock execution passed
+  initialization, selected/hidden states, horizontal/vertical keyboard navigation,
+  wraparound and Home. This is not a browser rendering test.
+
 This change uses the existing Astro/Vercel deployment path. Merge the reviewed PR
 to release through the repository's normal deployment process. Reverting that
 merge restores the prior home pages; no data migration is required.
