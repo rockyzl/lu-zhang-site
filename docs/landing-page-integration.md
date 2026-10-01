@@ -28,6 +28,12 @@ should be repeated against the Vercel PR preview before production merge; the
 separate reference prototype was browser-tested, but that does not validate this
 Astro port.
 
+## PR #10 acceptance checkpoint — 2026-10-01
+
+Reviewed the current draft head `9de6185` and its shared Astro component/CSS. The three need selectors, matching panels, visible email address, non-confidential intake text, conditional service language, founder research links, viewport-dependent tab orientation, no-script service fallback, and reduced-motion CSS are present in source. GitHub reports the PR open and draft. Vercel's status check for that head is `success`; its bot comment reports the preview ready. This confirms deployment status, not rendered layout or interaction quality.
+
+The live preview could not be inspected in this run: automatic approval review rejected opening the Vercel preview in the cloud browser. Browser acceptance therefore remains pending. Before merge, check the actual English and Chinese preview at desktop and 320/390px widths; use mouse/touch and keyboard to switch all three services; test mobile menu, replay, reduced motion, email link, no-script rendering, and links to retained sections. Record screenshots or observed failures against this PR. Do not mark this port visually accepted from the older prototype's results.
+
 ## Release and rollback
 
 ### Expert-review integration — 2026-09-25
