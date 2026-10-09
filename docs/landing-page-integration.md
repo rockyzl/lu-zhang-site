@@ -34,6 +34,24 @@ Reviewed the current draft head `9de6185` and its shared Astro component/CSS. Th
 
 The live preview could not be inspected in this run: automatic approval review rejected opening the Vercel preview in the cloud browser. Browser acceptance therefore remains pending. Before merge, check the actual English and Chinese preview at desktop and 320/390px widths; use mouse/touch and keyboard to switch all three services; test mobile menu, replay, reduced motion, email link, no-script rendering, and links to retained sections. Record screenshots or observed failures against this PR. Do not mark this port visually accepted from the older prototype's results.
 
+## Automated acceptance checkpoint — 2026-10-09
+
+`npm run build` now runs `npm run landing:check` before Astro compilation. The
+dependency-free checker verifies that both route files use the shared component,
+the three service IDs exist, and the source retains the tab linkage, direct email
+path, no-script fallback, mobile-menu relationship, mobile breakpoint and
+reduced-motion rules. Astro then performs the full static build and the existing
+demo-registry validation still runs afterward.
+
+`npm run landing:check:generated` is retained as a stricter diagnostic for an
+already-built `dist/`; it is not part of the deployment gate until its generated
+HTML assumptions are validated in an environment with build-log access. The
+first attempt to gate deployment on that generated-output check failed Vercel,
+and this environment could not read the protected build log. The corrected
+pre-build source contract plus Astro/registry sequence passed Vercel at commit
+`f617c19`. This is repeatable source/build acceptance, not browser layout or
+interaction acceptance.
+
 ## Release and rollback
 
 ### Expert-review integration — 2026-09-25
@@ -60,3 +78,4 @@ The live preview could not be inspected in this run: automatic approval review r
 This change uses the existing Astro/Vercel deployment path. Merge the reviewed PR
 to release through the repository's normal deployment process. Reverting that
 merge restores the prior home pages; no data migration is required.
+
