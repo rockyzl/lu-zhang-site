@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "clean": "rm -rf .astro dist",
-    "build": "npm run clean && npm run landing:check && astro build && npm run registry:check",
+    "build": "npm run clean && npm run landing:check && astro build && npm run landing:check:generated && npm run registry:check",
     "preview": "astro preview",
     "data": "python3 scripts/parse_md.py && python3 scripts/fetch_openalex.py",
     "new:post": "node scripts/new_blog_post.mjs",
