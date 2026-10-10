@@ -8,6 +8,8 @@ const requireMatch = (condition, message) => {
   if (!condition) throw new Error(message);
 };
 const count = (text, pattern) => [...text.matchAll(pattern)].length;
+const countElementsWithRole = (html, role) =>
+  count(html, new RegExp(`<[^>]+\\brole=["']${role}["'][^>]*>`, 'g'));
 
 const component = read('src/components/ResearchLanding.astro');
 const css = read('src/styles/landing.css');
@@ -33,9 +35,9 @@ if (!sourceOnly) {
     ['zh', 'dist/zh/index.html'],
   ]) {
     const html = read(path);
-    requireMatch(count(html, /role="tab"/g) === 3, `${locale}: expected exactly three tabs`);
+    requireMatch(countElementsWithRole(html, 'tab') === 3, `${locale}: expected exactly three tabs`);
     requireMatch(
-      count(html, /role="tabpanel"/g) === 3,
+      countElementsWithRole(html, 'tabpanel') === 3,
       `${locale}: expected exactly three tab panels`,
     );
     for (const id of ['knowledge', 'analysis', 'workflow']) {
