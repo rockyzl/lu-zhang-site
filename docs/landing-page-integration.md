@@ -52,6 +52,21 @@ pre-build source contract plus Astro/registry sequence passed Vercel at commit
 `f617c19`. This is repeatable source/build acceptance, not browser layout or
 interaction acceptance.
 
+## Generated-output gate — 2026-10-10
+
+A full local checkout reproduced the stricter check's earlier failure. The page
+contained exactly three rendered tab panels; the validator counted a fourth
+text occurrence from the bundled client script's
+`querySelectorAll('[role="tabpanel"]')`. The checker now counts HTML elements
+whose start tags carry the role instead of counting raw string occurrences.
+
+The generated-output check now passes for both English and Chinese after a clean
+78-page Astro build, and `npm run build` runs it between compilation and the
+existing nine-entry demo-registry check. This closes the generated-markup
+acceptance gap without weakening the required count. Protected-preview visual,
+responsive, pointer and keyboard acceptance remains pending; no merge or
+deployment is implied.
+
 ## Release and rollback
 
 ### Expert-review integration — 2026-09-25
