@@ -25,6 +25,12 @@ requireMatch(chinesePage.includes('locale="zh"'), 'Chinese route must select the
 requireMatch(component.includes('<noscript>'), 'missing no-script fallback');
 requireMatch(component.includes('mailto:zhanglu77@gmail.com'), 'missing direct email path');
 requireMatch(component.includes('aria-controls="mobile-nav"'), 'mobile button lacks aria-controls');
+requireMatch(component.includes('aria-orientation="horizontal"'), 'tablist must declare its desktop orientation');
+requireMatch(component.includes("event.key==='Home'"), 'tab keyboard contract lacks Home navigation');
+requireMatch(component.includes("event.key==='End'"), 'tab keyboard contract lacks End navigation');
+requireMatch(component.includes("event.key==='Escape'"), 'mobile navigation lacks Escape handling');
+requireMatch(component.includes("nav.hidden=!nav.hidden"), 'mobile navigation lacks explicit hidden-state toggle');
+
 requireMatch(component.includes('id="mobile-nav"'), 'mobile navigation target is missing');
 requireMatch(css.includes('@media(prefers-reduced-motion:reduce)'), 'missing reduced-motion rules');
 requireMatch(css.includes('@media(max-width:760px)'), 'missing mobile breakpoint');
@@ -36,6 +42,16 @@ if (!sourceOnly) {
   ]) {
     const html = read(path);
     requireMatch(countElementsWithRole(html, 'tab') === 3, `${locale}: expected exactly three tabs`);
+    requireMatch(
+      count(html, /aria-selected="true"/g) === 1,
+      `${locale}: expected exactly one selected tab`,
+    );
+    requireMatch(
+      count(html, /aria-selected="false"/g) === 2,
+      `${locale}: expected exactly two unselected tabs`,
+    );
+    requireMatch(html.includes('aria-expanded="false"'), `${locale}: mobile control must start collapsed`);
+
     requireMatch(
       countElementsWithRole(html, 'tabpanel') === 3,
       `${locale}: expected exactly three tab panels`,
