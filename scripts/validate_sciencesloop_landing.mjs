@@ -23,7 +23,7 @@ for (const id of ['knowledge', 'analysis', 'workflow']) {
 requireMatch(englishPage.includes('locale="en"'), 'English route must select the English locale');
 requireMatch(chinesePage.includes('locale="zh"'), 'Chinese route must select the Chinese locale');
 requireMatch(component.includes('<noscript>'), 'missing no-script fallback');
-requireMatch(component.includes('mailto:zhanglu77@gmail.com'), 'missing direct email path');
+requireMatch(component.includes('mailto:luzhang@sciencesloop.com'), 'missing direct email path');
 requireMatch(component.includes('aria-controls="mobile-nav"'), 'mobile button lacks aria-controls');
 requireMatch(component.includes('aria-orientation="horizontal"'), 'tablist must declare its desktop orientation');
 requireMatch(component.includes("event.key==='Home'"), 'tab keyboard contract lacks Home navigation');
@@ -76,7 +76,7 @@ if (!sourceOnly) {
       );
     }
     requireMatch(html.includes('<noscript>'), `${locale}: no-script fallback was not emitted`);
-    requireMatch(html.includes('mailto:zhanglu77@gmail.com'), `${locale}: missing email path`);
+    requireMatch(html.includes('mailto:luzhang@sciencesloop.com'), `${locale}: missing email path`);
     requireMatch(html.includes('aria-controls="mobile-nav"'), `${locale}: missing mobile control`);
     requireMatch(html.includes('id="mobile-nav"'), `${locale}: missing mobile navigation`);
     for (const language of ['en', 'zh-CN', 'x-default']) {
