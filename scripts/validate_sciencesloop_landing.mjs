@@ -34,6 +34,13 @@ requireMatch(component.includes("nav.hidden=!nav.hidden"), 'mobile navigation la
 requireMatch(component.includes('id="mobile-nav"'), 'mobile navigation target is missing');
 requireMatch(css.includes('@media(prefers-reduced-motion:reduce)'), 'missing reduced-motion rules');
 requireMatch(css.includes('@media(max-width:760px)'), 'missing mobile breakpoint');
+const desktopHeroNoWrap = css.indexOf('h1 em{letter-spacing:-.06em;white-space:nowrap}');
+const mobileHeroWrap = css.lastIndexOf('@media(max-width:760px){h1 em{white-space:normal}}');
+requireMatch(desktopHeroNoWrap >= 0, 'desktop English hero line contract is missing');
+requireMatch(
+  mobileHeroWrap > desktopHeroNoWrap,
+  'mobile English hero wrap override must follow the desktop nowrap rule',
+);
 
 if (!sourceOnly) {
   for (const [locale, path] of [
