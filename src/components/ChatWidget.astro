@@ -13,9 +13,8 @@ import { u } from "../lib/url";
 import type { Locale } from "../lib/i18n";
 
 const { locale = "en", mode = "portfolio" } = Astro.props as { locale?: Locale; mode?: "portfolio" | "landing" };
-// The existing API still indexes the personal portfolio and can return stale pilot advice.
-// Landing answers are bounded to the reviewed public landing copy until that corpus is updated.
-const agentApiUrl = mode === "landing" ? "" : (import.meta.env.PUBLIC_AGENT_API_URL ?? "https://api.sciencesloop.com/api/agent");
+// The landing request selects the API’s separately scoped, current public pilot corpus.
+const agentApiUrl = import.meta.env.PUBLIC_AGENT_API_URL ?? "https://api.sciencesloop.com/api/agent";
 
 // Same public link map SiteAgent uses, so local-fallback answers point to the
 // same public pages.
@@ -830,7 +829,7 @@ const copy = mode === "landing"
         const response = await fetch(agentApiUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query, locale }),
+          body: JSON.stringify({ query, locale, surface: mode }),
           signal: controller.signal,
         });
         if (!response.ok) {
