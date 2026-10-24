@@ -613,6 +613,9 @@ const copy = mode === "landing"
     const STORE_KEY = mode === "landing" ? "sl-chat-widget-landing-v1" : "sl-chat-widget-v2"; // v2: fresh schema (drops stale pre-fix transcripts)
     let transcript = []; // [{role:"user",text} | {role:"agent",html}] — current conversation
     let questionLog = []; // just the questions asked, for the History tab (survives "New chat")
+    function withoutFollowups(html) {
+      return String(html || "").replace(/<div class="cw-followups">[\s\S]*?<\/div>/g, "");
+    }
     function persist() {
       try {
         sessionStorage.setItem(STORE_KEY, JSON.stringify({
@@ -863,6 +866,9 @@ const copy = mode === "landing"
       root.classList.add("cw-conversing"); // hide starter chips after first turn
       // Only the latest answer offers follow-up actions.
       messages.querySelectorAll(".cw-followups").forEach((group) => group.remove());
+      transcript.forEach((turn) => {
+        if (turn.role === "agent") turn.html = withoutFollowups(turn.html);
+      });
       addUserMessage(q);
       history.push({ role: "user", text: q });
       transcript.push({ role: "user", text: q });
@@ -995,6 +1001,9 @@ const copy = mode === "landing"
       if (!saved) return;
       if (Array.isArray(saved.transcript) && saved.transcript.length) {
         transcript = saved.transcript;
+        transcript.slice(0, -1).forEach((turn) => {
+          if (turn.role === "agent") turn.html = withoutFollowups(turn.html);
+        });
         transcript.forEach((turn) => {
           if (turn.role === "user") addUserMessage(turn.text);
           else if (turn.role === "agent") addAgentMessage(turn.html);
