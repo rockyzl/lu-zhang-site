@@ -29,7 +29,7 @@ Each registry entry owns its:
 
 | Surface | Rule |
 | --- | --- |
-| Home (`/`, `/zh/`) | Shows demos where `featured: true`. |
+| Home (`/`, `/zh/`) | Customer-facing service introduction; links to Projects and Lab for live demos. No demo cards on the landing page. |
 | Projects (`/projects/`, `/zh/projects/`) | Shows every registry demo in the Science AI group. |
 | Agent index (`/agent/`, `/zh/agent/`) | Shows every registry demo except the ChemGraph demo that is already the page's primary content. |
 | Lab (`/lab/`, `/zh/lab/`) | Both research rivers use explicit stable-ID allowlists. The molecular-discovery river currently selects ChemGraph, MIST, Redox, and the molecular-discovery workflow. The trustworthy-scientific-AI river currently selects Condition Monitoring, KIT Battery Early Warning, Preventive Health, and Guideline Faithfulness. A registry entry does not enter Lab automatically; add it to one river only when it belongs to that long-term research line. |
@@ -99,8 +99,9 @@ and duplicate source kinds or URLs.
 4. If the demo belongs in Lab, add its stable ID to exactly one of Lab's
    explicit river allowlists. Registry membership alone does not opt a demo
    into Lab.
-5. Set `featured: true` only for a demo intended for the home-page systems
-   grid. It will still appear on Projects and Agent indexes when false.
+5. `featured` is retained as registry metadata for downstream consumers. The
+   customer landing page does not render demo cards; Projects and Agent indexes
+   continue to list their registered demos regardless of this flag.
 6. If there is a public project note, add the English `articlePath`. Publish a
    Chinese rewrite in `src/blog/` when appropriate; the blog/RSS indexes it
    automatically.
