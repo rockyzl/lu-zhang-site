@@ -160,7 +160,7 @@ const copy = mode === "landing"
       </div>
     </div>
 
-    <div class="cw-history" data-cw-history hidden>
+    <div class="cw-history" data-cw-history aria-hidden="true">
       <div class="cw-history-hint" data-cw-history-hint hidden>{copy.historyHint}</div>
       <div class="cw-history-empty" data-cw-history-empty>{copy.historyEmpty}</div>
       <div class="cw-history-list" data-cw-history-list></div>
@@ -594,6 +594,7 @@ const copy = mode === "landing"
     const sendBtn = form.querySelector("[data-cw-send]");
     const resetBtn = root.querySelector("[data-cw-reset]");
     const tabs = [...root.querySelectorAll("[data-cw-tab]")];
+    const historyView = root.querySelector("[data-cw-history]");
     const historyList = root.querySelector("[data-cw-history-list]");
     const historyEmpty = root.querySelector("[data-cw-history-empty]");
     const historyHint = root.querySelector("[data-cw-history-hint]");
@@ -800,7 +801,10 @@ const copy = mode === "landing"
       const answer = renderMarkdown(data.answer || "").replace(/\[(\d+)\]/g, (m, n) =>
         citeMap[n] ? `<a class="cw-cite" href="${escapeHtml(citeMap[n])}" target="_blank" rel="noopener">[${n}]</a>` : m);
       const agent = data.agent || {};
-      const followups = Array.isArray(agent.followups) ? agent.followups.slice(0, 3) : [];
+      const asked = new Set(questionLog.map((q) => q.toLocaleLowerCase(locale).replace(/[？?!.。]+$/, "").trim()));
+      const followups = Array.isArray(agent.followups)
+        ? agent.followups.filter((q) => !asked.has(String(q).toLocaleLowerCase(locale).replace(/[？?!.。]+$/, "").trim())).slice(0, 3)
+        : [];
 
       const sources = citations
         .map((item) => {
@@ -857,6 +861,8 @@ const copy = mode === "landing"
 
       if (root.classList.contains("cw-view-history")) showView("chat"); // asking jumps back to chat
       root.classList.add("cw-conversing"); // hide starter chips after first turn
+      // Only the latest answer offers follow-up actions.
+      messages.querySelectorAll(".cw-followups").forEach((group) => group.remove());
       addUserMessage(q);
       history.push({ role: "user", text: q });
       transcript.push({ role: "user", text: q });
@@ -944,6 +950,7 @@ const copy = mode === "landing"
     function showView(view) {
       const isHistory = view === "history";
       root.classList.toggle("cw-view-history", isHistory);
+      historyView.setAttribute("aria-hidden", isHistory ? "false" : "true");
       tabs.forEach((t) => t.classList.toggle("is-on", t.getAttribute("data-cw-tab") === view));
       if (isHistory) renderHistory();
       persist();
