@@ -12,8 +12,10 @@
 import { u } from "../lib/url";
 import type { Locale } from "../lib/i18n";
 
-const { locale = "en" } = Astro.props as { locale?: Locale };
-const agentApiUrl = import.meta.env.PUBLIC_AGENT_API_URL ?? "https://api.sciencesloop.com/api/agent";
+const { locale = "en", mode = "portfolio" } = Astro.props as { locale?: Locale; mode?: "portfolio" | "landing" };
+// The existing API still indexes the personal portfolio and can return stale pilot advice.
+// Landing answers are bounded to the reviewed public landing copy until that corpus is updated.
+const agentApiUrl = mode === "landing" ? "" : (import.meta.env.PUBLIC_AGENT_API_URL ?? "https://api.sciencesloop.com/api/agent");
 
 // Same public link map SiteAgent uses, so local-fallback answers point to the
 // same public pages.
@@ -30,11 +32,11 @@ const links = {
   scholar: "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en",
   github: "https://github.com/rockyzl",
   linkedin: "https://www.linkedin.com/in/lu-zhang-argonne/",
-  email: "mailto:zhanglu77@gmail.com",
+  email: "mailto:luzhang@sciencesloop.com",
   cv: u("/files/Lu_Zhang_CV.pdf"),
 };
 
-const copy = locale === "zh"
+const baseCopy = locale === "zh"
   ? {
       title: "Loopi",
       subtitle: "SciencesLoop 智能体",
@@ -93,9 +95,24 @@ const copy = locale === "zh"
       ],
       fallback: "I can answer the core site topics for now. Try agent reliability, case studies, technical evolution, AI for science, workflow, battery, Argonne, publication, patent, academic CV, or contact.",
     };
+const copy = mode === "landing"
+  ? { ...baseCopy,
+      subtitle: locale === "zh" ? "SciencesLoop 科研流程向导" : "SciencesLoop research guide",
+      placeholder: locale === "zh" ? "问问试点与研究流程…" : "Ask about a research pilot…",
+      greeting: locale === "zh"
+        ? "你好，我是 Loopi。我可以介绍 SciencesLoop 的研究流程试点、证据追溯和人工审核方式。这里的示意图不是已部署的客户系统；具体可行性需要与你的团队讨论。"
+        : "Hi, I'm Loopi. I can explain SciencesLoop's focused research pilots, evidence tracing, and researcher review. The illustrations are concepts, not a deployed customer system. Feasibility depends on your setup.",
+      starters: locale === "zh"
+        ? ["SciencesLoop 能帮我们做什么？", "怎样开始一个试点？", "数据和决策如何追溯？"]
+        : ["What can SciencesLoop help us do?", "How do we start a pilot?", "How are evidence and decisions traced?"],
+      fallback: locale === "zh"
+        ? '我能介绍公开页面上的试点范围、证据追溯、实验对照和人工审核。具体问题请从<a href="#start">非机密的研究瓶颈</a>开始，或<a href="mailto:luzhang@sciencesloop.com">邮件联系 Lu</a>。'
+        : 'I can explain the public pilot scope, evidence tracing, experiment comparison, and researcher review. For a specific need, start with a <a href="#start">non-confidential research bottleneck</a> or <a href="mailto:luzhang@sciencesloop.com">email Lu</a>.'
+    }
+  : baseCopy;
 ---
 
-<div class="chat-widget cw-root" data-chat-widget data-locale={locale}>
+<div class="chat-widget cw-root" data-chat-widget data-locale={locale} data-mode={mode}>
   <!-- Panel: rendered above the launcher, hidden until opened -->
   <div class="cw-panel" id="cw-panel" role="dialog" aria-modal="false" aria-label={copy.title} hidden>
     <header class="cw-head">
@@ -205,6 +222,16 @@ const copy = locale === "zh"
     bottom: 20px;
     z-index: 900;
     font-family: var(--font-sans);
+  }
+
+  .cw-root[data-mode="landing"] {
+    --font-sans: Arial, Helvetica, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+    --c-card: #fffdf6; --c-bg-soft: #f6f4ed; --c-border-soft: #d6d9cb;
+    --c-fg: #233d35; --c-fg-2: #344d42; --c-ink: #233d35;
+    --c-muted: #617269; --c-muted-2: #617269; --line: #d6d9cb;
+    --accent: #233d35; --accent-deep: #162e27; --accent-soft: #dfe6cd;
+    --shadow-lg: 0 18px 54px rgba(20, 44, 34, .18);
   }
 
   /* ---- Launcher bubble ---- */
@@ -553,7 +580,7 @@ const copy = locale === "zh"
   }
 </style>
 
-<script define:vars={{ agentApiUrl, locale, links, copy }}>
+<script define:vars={{ agentApiUrl, locale, links, copy, mode }}>
   (() => {
     const root = document.querySelector("[data-chat-widget]");
     if (!root) return;
@@ -583,7 +610,7 @@ const copy = locale === "zh"
        This is a static MPA: every navigation is a full page reload, so the
        conversation must be saved and rehydrated to survive across pages.
        sessionStorage keeps it for the tab's browsing session (clears on close). */
-    const STORE_KEY = "sl-chat-widget-v2"; // v2: fresh schema (drops stale pre-fix transcripts)
+    const STORE_KEY = mode === "landing" ? "sl-chat-widget-landing-v1" : "sl-chat-widget-v2"; // v2: fresh schema (drops stale pre-fix transcripts)
     let transcript = []; // [{role:"user",text} | {role:"agent",html}] — current conversation
     let questionLog = []; // just the questions asked, for the History tab (survives "New chat")
     function persist() {
@@ -692,9 +719,32 @@ const copy = locale === "zh"
         .join("");
     }
 
+    const landingAnswers = {
+      en: [
+        { keys: ["pilot", "start", "begin", "contact", "email", "scope", "cost", "price"],
+          html: 'Start with one non-confidential research bottleneck and the tools or records involved. We agree on a bounded pilot and checks before expanding; scope and availability are confirmed in discussion. <a href="#start">Discuss a pilot</a> or <a href="mailto:luzhang@sciencesloop.com">email Lu</a>. No price is posted.' },
+        { keys: ["evidence", "trace", "decision", "memory", "record", "history"],
+          html: 'The proposed workflow connects a result to its source files, conditions, analysis, alternative explanations, decision rationale, and researcher review. A focused pilot would test which links and records are feasible in your setting. <a href="#solutions">See the research needs</a>.' },
+        { keys: ["experiment", "compare", "difference", "analysis", "data"],
+          html: 'We can begin by comparing two runs: check sample identity, formulation, settings, and missing records before interpreting a difference. The example on this page is illustrative, not a customer result. <a href="#solutions">Explore the comparison</a>.' },
+        { keys: ["sciencesloop", "help", "do", "service", "workflow", "research", "agent", "loopi"],
+          html: 'SciencesLoop explores focused, researcher-led AI workflows for materials and electrochemistry R&D: finding source-linked evidence, comparing experiments, and keeping decisions connected to their reasons. These are pilot directions, not claims of a deployed customer system. <a href="#approach">How we work</a>.' },
+      ],
+      zh: [
+        { keys: ["试点", "开始", "合作", "联系", "邮箱", "价格", "费用", "范围"],
+          html: '先描述一个非机密的科研瓶颈，以及涉及的工具和记录。双方约定有限范围与评估方式，再决定是否扩展；具体范围与安排需讨论确认。<a href="#start">讨论试点</a>或<a href="mailto:luzhang@sciencesloop.com">邮件联系 Lu</a>。页面未公布价格。' },
+        { keys: ["证据", "追溯", "决策", "记忆", "记录", "历史"],
+          html: '设想中的流程把结果与原始文件、实验条件、分析、备选解释、决策理由和研究者审阅连起来。具体能接入哪些记录，要在试点中核实。<a href="#solutions">查看研究场景</a>。' },
+        { keys: ["实验", "对比", "对照", "差异", "分析", "数据"],
+          html: '可以先对照两次实验的样品、配方、设置和缺失记录，再讨论差异。页面上的例子只是示意，不是客户实测结果。<a href="#solutions">查看对照场景</a>。' },
+        { keys: ["sciencesloop", "能做", "帮助", "服务", "流程", "研究", "智能体", "loopi"],
+          html: 'SciencesLoop 探索面向材料与电化学研发、由研究者主导的 AI 流程试点：追溯证据、对照实验，并保留决策依据。这是试点方向，不代表已有客户部署。<a href="#approach">了解合作方式</a>。' },
+      ],
+    };
+
     function localReply(query) {
       const normalized = query.toLowerCase();
-      const set = answerSets[locale] || answerSets.en;
+      const set = mode === "landing" ? (landingAnswers[locale] || landingAnswers.en) : (answerSets[locale] || answerSets.en);
       const match = set.find((item) => item.keys.some((key) => normalized.includes(key.toLowerCase())));
       return match ? match.html : copy.fallback;
     }

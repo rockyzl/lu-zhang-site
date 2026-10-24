@@ -1,5 +1,6 @@
 ---
 import { u } from '../lib/url';
+import ChatWidget from './ChatWidget.astro';
 import '../styles/landing.css';
 const { locale = 'en' } = Astro.props;
 const zh = locale === 'zh';
@@ -73,4 +74,5 @@ const links = [['/projects/',t('Selected work','项目实践')],['/lab/',t('Rese
  nav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
  document.addEventListener('keydown',event=>{if(event.key==='Escape' && nav && !nav.hidden){closeMenu();menu?.focus();}});
 </script>
+<ChatWidget locale={zh ? 'zh' : 'en'} mode="landing" />
 </body></html>
