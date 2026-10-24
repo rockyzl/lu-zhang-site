@@ -112,7 +112,7 @@ const copy = mode === "landing"
   : baseCopy;
 ---
 
-<div class="chat-widget cw-root" data-chat-widget data-locale={locale}>
+<div class="chat-widget cw-root" data-chat-widget data-locale={locale} data-mode={mode}>
   <!-- Panel: rendered above the launcher, hidden until opened -->
   <div class="cw-panel" id="cw-panel" role="dialog" aria-modal="false" aria-label={copy.title} hidden>
     <header class="cw-head">
@@ -217,6 +217,14 @@ const copy = mode === "landing"
 
 <style is:global>
   .cw-root {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 900;
+    font-family: var(--font-sans);
+  }
+
+  .cw-root[data-mode="landing"] {
     --font-sans: Arial, Helvetica, sans-serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
     --c-card: #fffdf6; --c-bg-soft: #f6f4ed; --c-border-soft: #d6d9cb;
@@ -224,11 +232,6 @@ const copy = mode === "landing"
     --c-muted: #617269; --c-muted-2: #617269; --line: #d6d9cb;
     --accent: #233d35; --accent-deep: #162e27; --accent-soft: #dfe6cd;
     --shadow-lg: 0 18px 54px rgba(20, 44, 34, .18);
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 900;
-    font-family: var(--font-sans);
   }
 
   /* ---- Launcher bubble ---- */
@@ -607,7 +610,7 @@ const copy = mode === "landing"
        This is a static MPA: every navigation is a full page reload, so the
        conversation must be saved and rehydrated to survive across pages.
        sessionStorage keeps it for the tab's browsing session (clears on close). */
-    const STORE_KEY = "sl-chat-widget-v2"; // v2: fresh schema (drops stale pre-fix transcripts)
+    const STORE_KEY = mode === "landing" ? "sl-chat-widget-landing-v1" : "sl-chat-widget-v2"; // v2: fresh schema (drops stale pre-fix transcripts)
     let transcript = []; // [{role:"user",text} | {role:"agent",html}] — current conversation
     let questionLog = []; // just the questions asked, for the History tab (survives "New chat")
     function persist() {
