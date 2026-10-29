@@ -33,6 +33,25 @@ export const DEMO_REGISTRY_SCHEMA_VERSION = "sciencesloop.demo-registry.v1" as c
 // Agent-index pages separately.
 export const demos: readonly Demo[] = [
   {
+    id: "battery-research-workbench",
+    repoUrl: "https://github.com/rockyzl/battery-eis-soh-benchmark/tree/1ac0e7f2c54d5927f91d6924ebf95f5ec5523252/tools/battery-tools",
+    path: "/agent/battery-research/",
+    featured: true,
+    title: { en: "Battery Research Workbench", zh: "电池研发工作台" },
+    tagline: { en: "Inspect measured EIS and test a capacity forecast on held-out cells", zh: "分析实测 EIS，用留出电池检验容量预测" },
+    summary: {
+      en: "An executable public-data investigation: 12 measured cells, impedance checks and circuit fitting, grouped model selection, temperature-transfer exploration and local CSV analysis. The deterministic workflow retains the negative baseline comparison.",
+      zh: "一个可运行的公开实测数据研究：12 个电池、阻抗检查与电路拟合、按电池选择模型、温度迁移检验及本地 CSV 分析。确定性流程保留了未超过简单基线的结果。",
+    },
+    tags: ["battery R&D", "EIS fitting", "capacity prediction", "measured data"],
+    sources: [
+      { kind: "dataset", label: { en: "Cambridge measured EIS/capacity dataset", zh: "剑桥实测 EIS/容量数据" }, url: "https://doi.org/10.5281/zenodo.3633835" },
+      { kind: "paper", label: { en: "Original 2020 study", zh: "原始 2020 研究" }, url: "https://doi.org/10.1038/s41467-020-15235-7" },
+      { kind: "license", label: { en: "CC BY 4.0", zh: "CC BY 4.0" }, url: "https://creativecommons.org/licenses/by/4.0/" },
+      { kind: "documentation", label: { en: "impedance.py", zh: "impedance.py" }, url: "https://impedancepy.readthedocs.io/" },
+    ],
+  },
+  {
     id: "fieldgamma",
     path: "/agent/fieldgamma/",
     articlePath: "/blog/2026-08-25-fieldgamma-limited-data-radioisotope-detection/",
