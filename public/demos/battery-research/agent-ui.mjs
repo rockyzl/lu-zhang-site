@@ -35,7 +35,7 @@ $('agent-run').onclick=async()=>{
   const history=[],seen=new Set();
   for(let i=0;i<7;i++){
    $('agent-status').textContent=t('Model selecting the next analysis…','模型正在选择下一步分析…');
-   const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task,dataset:{source:data.source,cells:data.audit.cells},selected:{cell:'25C05'},previous_round:rounds.at(-1)?{task:rounds.at(-1).task,conclusion:rounds.at(-1).conclusion,nextSteps:rounds.at(-1).nextSteps}:null,history}),signal:AbortSignal.timeout(55000)});
+   const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task,dataset:{source:data.source,cells:data.audit.cells},selected:{cell:'25C05'},previous_round:rounds.at(-1)?{task:rounds.at(-1).task,conclusion:rounds.at(-1).conclusion,nextSteps:rounds.at(-1).nextSteps,measurements:rounds.at(-1).steps.filter(x=>x.action==='fit_eis').map(x=>x.output)}:null,history}),signal:AbortSignal.timeout(55000)});
    const out=await response.json();if(!response.ok||out.mode!=='llm')throw Error(out.error||'Model connection unavailable');
    const s=out.step;if(!['inspect_data','fit_eis','predict_capacity','finish'].includes(s.action))throw Error('Unsupported model action');
    log(article,t('Model choice','模型选择')+': '+s.action,s.explanation);
