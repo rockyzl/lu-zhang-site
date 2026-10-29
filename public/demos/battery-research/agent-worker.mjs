@@ -1,9 +1,11 @@
+import {validationTool} from './agent-validation.mjs';
 import {prepareLocalCSV,summarizeDQDV} from './agent-local-data.mjs';
 import {compareEisHypotheses} from './agent-hypotheses.mjs';
 import {simulatePulse} from './agent-simulation.mjs';
 import {fitCircuit, investigate} from './analysis.mjs';
 let data;
 export async function executeTool(action,args={},providedData){
+ if(['inspect_validation','compare_validation'].includes(action))return validationTool(action,args,providedData);
  if(action==='prepare_local_csv')return prepareLocalCSV(args.text);
  if(action==='simulate_pulse')return simulatePulse(Object.fromEntries(Object.entries(args).filter(([k,v])=>['ocv_v','current_a','r0_ohm','r1_ohm','tau_s','duration_s'].includes(k)&&v!==null)));
  data=providedData||data||await fetch(new URL('./data.json',import.meta.url)).then(r=>{if(!r.ok)throw Error('Dataset HTTP '+r.status);return r.json();});
