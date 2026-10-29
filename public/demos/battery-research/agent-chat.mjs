@@ -145,4 +145,4 @@ if(chenCase){
  $('agent-open-csv').hidden=true;
 }
 
-if(chenCase){document.querySelectorAll('aside .tab').forEach(b=>{if(b!==nav)b.hidden=true;});const note=document.querySelector('.rail-note p');if(note)note.textContent=t('Actual PyBaMM DFN runs are saved. Browser tools recalculate comparison errors against three measured cells.','PyBaMM DFN 已实际运行并保存。浏览器工具对照三颗实测电池，即时重算比较误差。');}
+if(chenCase){document.querySelectorAll('aside .tab').forEach(b=>{if(b!==nav){b.hidden=true;b.style.display='none';}});const note=document.querySelector('.rail-note p');if(note)note.textContent=t('Actual PyBaMM DFN runs are saved. Browser tools recalculate comparison errors against three measured cells.','PyBaMM DFN 已实际运行并保存。浏览器工具对照三颗实测电池，即时重算比较误差。');}
