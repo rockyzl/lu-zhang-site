@@ -120,7 +120,7 @@ $('upload').onchange=async()=>{try{const file=$('upload').files[0];if(!file)retu
 }catch(e){$('importStatus').textContent=e.message;$('importStatus').className='error';}};
 const translations={
   '← Homepage':'← 返回主页','Prediction study':'预测研究','EIS workbench':'EIS 工作台','Your data':'你的数据','Tool library':'计算工具库','ELECTROCHEMICAL ANALYSIS':'电化学分析流程',
-  'What runs here':'实际运行的内容','Real numerical analysis in your browser. Reference EIS calculations use impedance.py.':'浏览器执行真实数值分析；EIS 参考计算调用 impedance.py。',
+  'What runs here':'实际运行的内容','Real numerical analysis in your browser. Reference EIS calculations use impedance.py.':'浏览器执行真实数值分析；EIS 参考计算调用 impedance.py。','The research agent uses a live model to select permitted analysis tools and interpret their actual results. Numerical tools execute deterministic calculations.':'研究 Agent 使用实时模型选择允许的分析工具，并解释工具返回的实际结果；数值工具执行确定性计算。',
   'This version uses a deterministic workflow. Live LLM planning and autonomous code revision are future capabilities.':'当前版本采用确定性流程。实时大模型规划与自主代码修订是后续能力。',
   'State-V EIS for discharge-capacity prediction':'基于 State-V EIS 的放电容量预测','Export report ↓':'导出研究报告 ↓','Prediction horizon':'预测范围','Test condition':'测试条件',
   'Run investigation ↗':'运行研发流程 ↗','5 diagnostic indices ahead':'预测后续 5 个诊断序号','10 diagnostic indices ahead':'预测后续 10 个诊断序号','20 diagnostic indices ahead':'预测后续 20 个诊断序号',
@@ -136,7 +136,7 @@ const translations={
   'Files stay in this browser session. This version reads the CSV schemas below; vendor-native files need a verified adapter.':'文件保留在本次浏览器会话中。此版本支持以下 CSV 格式；仪器原生文件需要验证过的适配器。',
   'Inspect measured Nyquist curves and a model-dependent fit. Three reference spectra include linear-KK checks and RC-versus-CPE fits computed with impedance.py.':'查看实测 Nyquist 曲线及依赖模型的拟合。三个参考谱包含 impedance.py 计算的线性 KK 检查及 RC/CPE 电路比较。'
 };
-if(zh){document.documentElement.lang='zh-CN';const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode()){const key=node.textContent.trim();if(translations[key])node.textContent=node.textContent.replace(key,translations[key]);}$('hero').innerHTML='电池实验数据分析 Agent';$('lead').textContent='输入电池研究任务，由模型选择分析工具、检查计算结果并形成结论。首个案例使用实测 EIS；预测仅在任务需要时调用。';}
+if(zh){document.documentElement.lang='zh-CN';for(const link of document.querySelectorAll('header a, footer a')){if(link.href===new URL('/',location.origin).href)link.href=new URL('/zh/',location.origin).href;}const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode()){const key=node.textContent.trim();if(translations[key])node.textContent=node.textContent.replace(key,translations[key]);}$('hero').innerHTML='电池实验数据分析 Agent';$('lead').textContent='输入电池研究任务，由模型选择分析工具、检查计算结果并形成结论。首个案例使用实测 EIS；预测仅在任务需要时调用。';}
 toolsTable();
 try{const response=await fetch(new URL('./data.json',import.meta.url));if(!response.ok)throw Error('Dataset HTTP '+response.status);data=await response.json();
   if(data.schema!=='sciencesloop.battery-demo.v1')throw Error('Unsupported dataset schema');
