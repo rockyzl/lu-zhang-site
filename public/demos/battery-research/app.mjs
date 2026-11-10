@@ -119,6 +119,9 @@ $('upload').onchange=async()=>{try{const file=$('upload').files[0];if(!file)retu
   }$('importStatus').className='success';
 }catch(e){$('importStatus').textContent=e.message;$('importStatus').className='error';}};
 const translations={
+  'BATTERY R&D / EIS AND DISCHARGE-CAPACITY DIAGNOSTICS':'电池研发 / EIS 与放电容量诊断','PUBLIC MEASURED DATA':'公开实测数据','Original measurements ↗':'原始测量数据 ↗',
+  'Battery Research Workbench v1':'电池研发工作台 v1','Measured source: Yunwei Zhang et al., Cambridge/Newcastle, 2020 ·':'实测来源：Yunwei Zhang 等，Cambridge/Newcastle，2020 ·','paper':'论文','data':'数据',
+  '. Derived subsets and new calculations appear in the export. Exploratory demonstration, not a validated universal battery model.':'。导出内容包含派生数据子集与新增计算。本页是探索性演示，并非经过验证的通用电池模型。',
   '← Homepage':'← 返回主页','Prediction study':'预测研究','EIS workbench':'EIS 工作台','Your data':'你的数据','Tool library':'计算工具库','ELECTROCHEMICAL ANALYSIS':'电化学分析流程',
   'What runs here':'实际运行的内容','Real numerical analysis in your browser. Reference EIS calculations use impedance.py.':'浏览器执行真实数值分析；EIS 参考计算调用 impedance.py。','The research agent uses a live model to select permitted analysis tools and interpret their actual results. Numerical tools execute deterministic calculations.':'研究 Agent 使用实时模型选择允许的分析工具，并解释工具返回的实际结果；数值工具执行确定性计算。',
   'This version uses a deterministic workflow. Live LLM planning and autonomous code revision are future capabilities.':'当前版本采用确定性流程。实时大模型规划与自主代码修订是后续能力。',
