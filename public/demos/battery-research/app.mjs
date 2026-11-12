@@ -100,8 +100,7 @@ function toolsTable(){const tools=[
   ['ZView','https://www.ameteksi.com/products/software/zview-software-en',t('Commercial EIS fitting and simulation','商业 EIS 拟合与仿真'),t('License, circuit judgment, reproducible exports','许可、电路选择、可重现导出')],
   ['PyBaMM + PyBOP','https://github.com/pybop-team/PyBOP',t('Physics-based battery simulation and parameter fitting','物理电池模型仿真与参数辨识'),t('Geometry, chemistry, parameter identifiability, solver cost','几何、化学体系、参数可辨识性、求解成本')],
   ['PBT','https://github.com/Ruifeng-Tan/PBT',t('Pretrained battery lifetime prediction','预训练电池寿命预测'),t('Matching inputs/labels, target adaptation, cell-held-out tests','匹配输入与标签、目标域适配、按电池留出验证')]
-];$('toolTable').innerHTML=table([t('Tool','工具'),t('Useful calculation','可用计算'),t('What needs expertise','需要专业判断的环节')],tools.map(([n,u,a,b])=>[n+' ↗',a,b]));
-  $('toolTable').querySelectorAll('tbody tr').forEach((row,i)=>{const link=document.createElement('a');link.href=tools[i][1];link.target='_blank';link.rel='noopener noreferrer';link.textContent=tools[i][0]+' ↗';row.cells[0].replaceChildren(link);});}
+];$('toolTable').innerHTML=table([t('Tool','工具'),t('Useful calculation','可用计算'),t('What needs expertise','需要专业判断的环节')],tools.map(([n,u,a,b])=>['<a href="'+u+'" target="_blank" rel="noreferrer">'+n+' ↗</a>',esc(a),esc(b)]));}
 $('templateEis').onclick=()=>{const s=data.spectra.find(s=>s.cell==='25C05');download('measured-eis-example.csv','cell_id,cycle,frequency_hz,z_real_ohm,z_imag_ohm\n'+data.frequency_hz.map((f,i)=>[s.cell,s.cycle,f,s.real[i],-s.negImag[i]].join(',')).join('\n'),'text/csv');};
 $('templateCycling').onclick=()=>download('cycling-column-template.csv','cell_id,cycle,voltage_v,capacity_mah,current_a\n','text/csv');
 $('upload').onchange=async()=>{try{const file=$('upload').files[0];if(!file)return;if(file.size>10*1024*1024)throw Error(t('Maximum file size is 10 MB','文件不能超过 10 MB'));
