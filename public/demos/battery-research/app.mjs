@@ -104,11 +104,11 @@ function toolsTable(){const tools=[
 $('templateEis').onclick=()=>{const s=data.spectra.find(s=>s.cell==='25C05');download('measured-eis-example.csv','cell_id,cycle,frequency_hz,z_real_ohm,z_imag_ohm\n'+data.frequency_hz.map((f,i)=>[s.cell,s.cycle,f,s.real[i],-s.negImag[i]].join(',')).join('\n'),'text/csv');};
 $('templateCycling').onclick=()=>download('cycling-column-template.csv','cell_id,cycle,voltage_v,capacity_mah,current_a\n','text/csv');
 $('upload').onchange=async()=>{try{const file=$('upload').files[0];if(!file)return;if(file.size>10*1024*1024)throw Error(t('Maximum file size is 10 MB','文件不能超过 10 MB'));
-  const rows=parseCSV(await file.text());$('importResults').replaceChildren();if(!rows.length)throw Error('No data rows');
+  const rows=parseCSV(await file.text());$('importResults').replaceChildren();if(!rows.length)throw Error(t('No data rows','CSV 没有数据行'));
   if('frequency_hz' in rows[0]){
-    const required=['cell_id','cycle','frequency_hz','z_real_ohm','z_imag_ohm'];if(required.some(k=>!(k in rows[0])))throw Error('Required: '+required.join(', '));
-    const groups=new Map();for(const r of rows){const key=r.cell_id+':'+r.cycle;if(!groups.has(key))groups.set(key,[]);if(['frequency_hz','z_real_ohm','z_imag_ohm','cycle'].some(k=>r[k]===''||!Number.isFinite(Number(r[k]))))throw Error('Missing or non-finite numeric input');if(Number(r.frequency_hz)<=0)throw Error('Frequency must be positive');groups.get(key).push(r);}
-    let j=0;for(const [name,records] of groups){if(j>=12)break;const a=records.sort((a,b)=>Number(b.frequency_hz)-Number(a.frequency_hz));if(new Set(a.map(r=>Number(r.frequency_hz))).size!==a.length)throw Error('Duplicate frequency in '+name);
+    const required=['cell_id','cycle','frequency_hz','z_real_ohm','z_imag_ohm'];if(required.some(k=>!(k in rows[0])))throw Error(t('Required: ','缺少必需列：')+required.join(', '));
+    const groups=new Map();for(const r of rows){const key=r.cell_id+':'+r.cycle;if(!groups.has(key))groups.set(key,[]);if(['frequency_hz','z_real_ohm','z_imag_ohm','cycle'].some(k=>r[k]===''||!Number.isFinite(Number(r[k]))))throw Error(t('Missing or non-finite numeric input','数值列缺失或含非有限数值'));if(Number(r.frequency_hz)<=0)throw Error(t('Frequency must be positive','频率必须大于零'));groups.get(key).push(r);}
+    let j=0;for(const [name,records] of groups){if(j>=12)break;const a=records.sort((a,b)=>Number(b.frequency_hz)-Number(a.frequency_hz));if(new Set(a.map(r=>Number(r.frequency_hz))).size!==a.length)throw Error(t('Duplicate frequency in ','频率重复：')+name);
       const f=a.map(r=>Number(r.frequency_hz)),re=a.map(r=>Number(r.z_real_ohm)),ni=a.map(r=>-Number(r.z_imag_ohm)),fit=fitCircuit(f,re,ni),id='uploaded-'+j++;
       const article=document.createElement('article');article.className='full';const h=document.createElement('h3');h.textContent=name;article.append(h);const div=document.createElement('div');div.id=id;div.className='chart';article.append(div);const p=document.createElement('p');p.className='small';p.textContent=t('Candidate weighted RMS residual ','候选加权 RMS 残差 ')+num(fit.weightedRmsPercent,3)+'%. '+t('No KK result, mechanism or future-capacity inference is claimed.','未计算 KK，不推断机制或未来容量。');article.append(p);$('importResults').append(article);
       chart(id,[{name:t('Measured','实测'),points:re.map((v,i)=>[v,ni[i]]),scatter:true},{name:'CPE',points:fit.real.map((v,i)=>[v,fit.negImag[i]])}],{xlabel:'Re(Z) / Ω',ylabel:'−Im(Z) / Ω',equal:true});}
@@ -119,8 +119,11 @@ $('upload').onchange=async()=>{try{const file=$('upload').files[0];if(!file)retu
   }$('importStatus').className='success';
 }catch(e){$('importStatus').textContent=e.message;$('importStatus').className='error';}};
 const translations={
+  'BATTERY R&D / EIS AND DISCHARGE-CAPACITY DIAGNOSTICS':'电池研发 / EIS 与放电容量诊断','PUBLIC MEASURED DATA':'公开实测数据','Original measurements ↗':'原始测量数据 ↗',
+  'Battery Research Workbench v1':'电池研发工作台 v1','Measured source: Yunwei Zhang et al., Cambridge/Newcastle, 2020 ·':'实测来源：Yunwei Zhang 等，Cambridge/Newcastle，2020 ·','paper':'论文','data':'数据',
+  '. Derived subsets and new calculations appear in the export. Exploratory demonstration, not a validated universal battery model.':'。导出内容包含派生数据子集与新增计算。本页是探索性演示，并非经过验证的通用电池模型。',
   '← Homepage':'← 返回主页','Prediction study':'预测研究','EIS workbench':'EIS 工作台','Your data':'你的数据','Tool library':'计算工具库','ELECTROCHEMICAL ANALYSIS':'电化学分析流程',
-  'What runs here':'实际运行的内容','Real numerical analysis in your browser. Reference EIS calculations use impedance.py.':'浏览器执行真实数值分析；EIS 参考计算调用 impedance.py。',
+  'What runs here':'实际运行的内容','Real numerical analysis in your browser. Reference EIS calculations use impedance.py.':'浏览器执行真实数值分析；EIS 参考计算调用 impedance.py。','The research agent uses a live model to select permitted analysis tools and interpret their actual results. Numerical tools execute deterministic calculations.':'研究 Agent 使用实时模型选择允许的分析工具，并解释工具返回的实际结果；数值工具执行确定性计算。',
   'This version uses a deterministic workflow. Live LLM planning and autonomous code revision are future capabilities.':'当前版本采用确定性流程。实时大模型规划与自主代码修订是后续能力。',
   'State-V EIS for discharge-capacity prediction':'基于 State-V EIS 的放电容量预测','Export report ↓':'导出研究报告 ↓','Prediction horizon':'预测范围','Test condition':'测试条件',
   'Run investigation ↗':'运行研发流程 ↗','5 diagnostic indices ahead':'预测后续 5 个诊断序号','10 diagnostic indices ahead':'预测后续 10 个诊断序号','20 diagnostic indices ahead':'预测后续 20 个诊断序号',
@@ -136,10 +139,10 @@ const translations={
   'Files stay in this browser session. This version reads the CSV schemas below; vendor-native files need a verified adapter.':'文件保留在本次浏览器会话中。此版本支持以下 CSV 格式；仪器原生文件需要验证过的适配器。',
   'Inspect measured Nyquist curves and a model-dependent fit. Three reference spectra include linear-KK checks and RC-versus-CPE fits computed with impedance.py.':'查看实测 Nyquist 曲线及依赖模型的拟合。三个参考谱包含 impedance.py 计算的线性 KK 检查及 RC/CPE 电路比较。'
 };
-if(zh){document.documentElement.lang='zh-CN';const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode()){const key=node.textContent.trim();if(translations[key])node.textContent=node.textContent.replace(key,translations[key]);}$('hero').innerHTML='电池实验数据分析 Agent';$('lead').textContent='输入电池研究任务，由模型选择分析工具、检查计算结果并形成结论。首个案例使用实测 EIS；预测仅在任务需要时调用。';}
+if(zh){document.documentElement.lang='zh-CN';for(const link of document.querySelectorAll('header a, footer a')){if(link.href===new URL('/',location.origin).href)link.href=new URL('/zh/',location.origin).href;}const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let node;while(node=walker.nextNode()){const key=node.textContent.trim();if(translations[key])node.textContent=node.textContent.replace(key,translations[key]);}$('hero').innerHTML='电池实验数据分析 Agent';$('lead').textContent='输入电池研究任务，由模型选择分析工具、检查计算结果并形成结论。首个案例使用实测 EIS；预测仅在任务需要时调用。';}
 toolsTable();
 try{const response=await fetch(new URL('./data.json',import.meta.url));if(!response.ok)throw Error('Dataset HTTP '+response.status);data=await response.json();
-  if(data.schema!=='sciencesloop.battery-demo.v1')throw Error('Unsupported dataset schema');
+  if(data.schema!=='sciencesloop.battery-demo.v1')throw Error(t('Unsupported dataset schema','数据格式版本不受支持'));
   $('facts').innerHTML=[[data.audit.cells.length,t('independent cells','独立电池')],[data.samples.length,t('aligned EIS/capacity records','配对 EIS/容量记录')],[60,t('frequencies per spectrum','每条谱的频率点')],[3,t('temperatures: 25 / 35 / 45°C','温度：25 / 35 / 45°C')]].map(([a,b])=>'<div class="fact"><b>'+a+'</b><small>'+b+'</small></div>').join('');
   $('status').textContent=t('Measured data loaded · raw archive checksums verified · ready to compute','实测数据已载入 · 原始压缩包校验和已核对 · 可以开始计算');
   $('run').disabled=false;$('eisCell').innerHTML=data.audit.cells.map(c=>'<option '+(c==='25C05'?'selected':'')+'>'+esc(c)+'</option>').join('');populateCycles();
