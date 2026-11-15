@@ -103,6 +103,19 @@ function toolsTable(){const tools=[
 ];$('toolTable').innerHTML=table([t('Tool','工具'),t('Useful calculation','可用计算'),t('What needs expertise','需要专业判断的环节')],tools.map(([n,u,a,b])=>['<a href="'+u+'" target="_blank" rel="noreferrer">'+n+' ↗</a>',esc(a),esc(b)]));}
 $('templateEis').onclick=()=>{const s=data.spectra.find(s=>s.cell==='25C05');download('measured-eis-example.csv','cell_id,cycle,frequency_hz,z_real_ohm,z_imag_ohm\n'+data.frequency_hz.map((f,i)=>[s.cell,s.cycle,f,s.real[i],-s.negImag[i]].join(',')).join('\n'),'text/csv');};
 $('templateCycling').onclick=()=>download('cycling-column-template.csv','cell_id,cycle,voltage_v,capacity_mah,current_a\n','text/csv');
+function localizeImportMessage(message){if(!zh)return message;const exact={
+  'Unclosed CSV quote':'CSV 引号未闭合',
+  'Duplicate CSV column name':'CSV 列名重复',
+  'Missing cycling value':'循环数据有缺失值',
+  'Non-finite cycling value':'循环数据含非有限数值',
+  'Current varies by more than 5%; split constant-current steps first':'电流变化超过 5%；请先拆分恒流阶段',
+  'Voltage direction changes; separate protocol steps':'电压方向改变；请分开不同实验阶段',
+  'Need at least 20 points and 50 mV span':'至少需要 20 个数据点和 50 mV 电压跨度'
+};if(exact[message])return exact[message];
+  if(message.startsWith('CSV column count differs at row '))return 'CSV 第 '+message.slice('CSV column count differs at row '.length)+' 行的列数不一致';
+  if(message.startsWith('Cycling CSV requires '))return '循环数据 CSV 缺少必需列：'+message.slice('Cycling CSV requires '.length);
+  return message;
+}
 $('upload').onchange=async()=>{try{const file=$('upload').files[0];if(!file)return;if(file.size>10*1024*1024)throw Error(t('Maximum file size is 10 MB','文件不能超过 10 MB'));
   const rows=parseCSV(await file.text());$('importResults').replaceChildren();if(!rows.length)throw Error(t('No data rows','CSV 没有数据行'));
   if('frequency_hz' in rows[0]){
@@ -114,10 +127,10 @@ $('upload').onchange=async()=>{try{const file=$('upload').files[0];if(!file)retu
       chart(id,[{name:t('Measured','实测'),points:re.map((v,i)=>[v,ni[i]]),scatter:true},{name:'CPE',points:fit.real.map((v,i)=>[v,fit.negImag[i]])}],{xlabel:'Re(Z) / Ω',ylabel:'−Im(Z) / Ω',equal:true});}
     $('importStatus').textContent=t('Imported '+rows.length+' measured points in '+groups.size+' spectra. Showing up to 12 fits. File stays in memory.','已导入 '+rows.length+' 个实测点，'+groups.size+' 条谱，最多展示 12 条拟合。文件仅保留在浏览器内存。');
   }else{
-    const analyses=cyclingAnalysis(rows);let j=0;for(const a of analyses){const article=document.createElement('article');article.className='full';const h=document.createElement('h3');h.textContent=a.id;article.append(h);const p=document.createElement('p');p.textContent=a.eligible?t('Eligible constant-current segment; capacity span ','通过恒流段检查；容量跨度 ')+num(a.capacitySpan,3)+' mAh':a.reason;article.append(p);if(a.eligible){const div=document.createElement('div');div.id='cycling-'+j++;div.className='chart';article.append(div);$('importResults').append(article);chart(div.id,[{name:'dQ/dV',points:a.dqdv}],{xlabel:'Voltage / V',ylabel:'dQ/dV / mAh V⁻¹'});}else $('importResults').append(article);}
+    const analyses=cyclingAnalysis(rows);let j=0;for(const a of analyses){const article=document.createElement('article');article.className='full';const h=document.createElement('h3');h.textContent=a.id;article.append(h);const p=document.createElement('p');p.textContent=a.eligible?t('Eligible constant-current segment; capacity span ','通过恒流段检查；容量跨度 ')+num(a.capacitySpan,3)+' mAh':localizeImportMessage(a.reason);article.append(p);if(a.eligible){const div=document.createElement('div');div.id='cycling-'+j++;div.className='chart';article.append(div);$('importResults').append(article);chart(div.id,[{name:'dQ/dV',points:a.dqdv}],{xlabel:'Voltage / V',ylabel:'dQ/dV / mAh V⁻¹'});}else $('importResults').append(article);}
     $('importStatus').textContent=t('Checked '+analyses.length+' segments. Eligible: '+analyses.filter(a=>a.eligible).length+'.','检查 '+analyses.length+' 个片段，符合条件 '+analyses.filter(a=>a.eligible).length+' 个。');
   }$('importStatus').className='success';
-}catch(e){$('importStatus').textContent=e.message;$('importStatus').className='error';}};
+}catch(e){$('importStatus').textContent=localizeImportMessage(e.message);$('importStatus').className='error';}};
 const translations={
   'BATTERY R&D / EIS AND DISCHARGE-CAPACITY DIAGNOSTICS':'电池研发 / EIS 与放电容量诊断','PUBLIC MEASURED DATA':'公开实测数据','Original measurements ↗':'原始测量数据 ↗',
   'Battery Research Workbench v1':'电池研发工作台 v1','Measured source: Yunwei Zhang et al., Cambridge/Newcastle, 2020 ·':'实测来源：Yunwei Zhang 等，Cambridge/Newcastle，2020 ·','paper':'论文','data':'数据',
