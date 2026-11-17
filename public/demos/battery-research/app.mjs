@@ -16,7 +16,7 @@ function chart(id,series,{xlabel='',ylabel='',scatter=false,equal=false,diagonal
   let dx=xmax-xmin||1,dy=ymax-ymin||1;xmin-=dx*.04;xmax+=dx*.04;ymin-=dy*.08;ymax+=dy*.08;
   if(equal){const range=Math.max(xmax-xmin,(ymax-ymin)*(w-L-R)/(h-T-B)),cx=(xmin+xmax)/2,cy=(ymin+ymax)/2;xmin=cx-range/2;xmax=cx+range/2;const yr=range*(h-T-B)/(w-L-R);ymin=cy-yr/2;ymax=cy+yr/2;}
   const X=x=>L+(x-xmin)/(xmax-xmin)*(w-L-R),Y=y=>h-B-(y-ymin)/(ymax-ymin)*(h-T-B);
-  let svg='<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+esc(xlabel+' versus '+ylabel)+'">';
+  let svg='<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="'+esc(xlabel+t(' versus ',' 对 ')+ylabel)+'">';
   for(let i=0;i<=4;i++){const x=xmin+(xmax-xmin)*i/4,y=ymin+(ymax-ymin)*i/4;
     svg+='<line x1="'+L+'" x2="'+(w-R)+'" y1="'+Y(y)+'" y2="'+Y(y)+'" stroke="#e4e8de"/><text x="'+(L-8)+'" y="'+(Y(y)+3)+'" text-anchor="end" fill="#66796d" font-size="10">'+num(y,Math.abs(y)<1?3:1)+'</text><text x="'+X(x)+'" y="'+(h-B+18)+'" text-anchor="middle" fill="#66796d" font-size="10">'+num(x,Math.abs(x)<1?2:1)+'</text>';}
   if(diagonal)svg+='<line x1="'+X(xmin)+'" y1="'+Y(xmin)+'" x2="'+X(xmax)+'" y2="'+Y(xmax)+'" stroke="#a0aca1" stroke-dasharray="5 5"/>';
