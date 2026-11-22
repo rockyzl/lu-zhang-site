@@ -24,7 +24,25 @@ const links = [['/agent/battery-research/',t('Battery research demo','电池研�
 ---
 <!doctype html>
 <html lang={zh ? 'zh-CN' : 'en'}>
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>{title}</title><meta name="description" content={description}/><link rel="canonical" href={canonical}/><link rel="alternate" hreflang="en" href={new URL(u('/'),origin).href}/><link rel="alternate" hreflang="zh-CN" href={new URL(u('/zh/'),origin).href}/><link rel="alternate" hreflang="x-default" href={new URL(u('/'),origin).href}/><meta property="og:type" content="website"/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:site_name" content="SciencesLoop"/><meta property="og:image" content={new URL(u('/og-default.png'),origin).href}/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content={title}/><meta name="twitter:description" content={description}/><meta name="twitter:image" content={new URL(u('/og-default.png'),origin).href}/><link rel="icon" href={u('/images/landing-mark.svg')}/><link rel="alternate" type="application/rss+xml" title="SciencesLoop Field Notes" href={u('/rss.xml')}/></head>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>{title}</title><meta name="description" content={description}/><link rel="canonical" href={canonical}/><link rel="alternate" hreflang="en" href={new URL(u('/'),origin).href}/><link rel="alternate" hreflang="zh-CN" href={new URL(u('/zh/'),origin).href}/><link rel="alternate" hreflang="x-default" href={new URL(u('/'),origin).href}/><meta property="og:type" content="website"/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:site_name" content="SciencesLoop"/><meta property="og:image" content={new URL(u('/og-default.png'),origin).href}/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content={title}/><meta name="twitter:description" content={description}/><meta name="twitter:image" content={new URL(u('/og-default.png'),origin).href}/><link rel="icon" href={u('/images/landing-mark.svg')}/><link rel="alternate" type="application/rss+xml" title="SciencesLoop Field Notes" href={u('/rss.xml')}/><script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": new URL('/#organization', origin).href,
+  name: "SciencesLoop",
+  url: new URL('/', origin).href,
+  description: "Researcher-led AI workflow pilots connecting scientific knowledge, experimental data, and analysis tools for materials and electrochemistry R&D.",
+  founder: {
+    "@type": "Person",
+    name: "Lu Zhang",
+    url: new URL('/about/', origin).href,
+    sameAs: [
+      "https://github.com/rockyzl",
+      "https://www.linkedin.com/in/lu-zhang-argonne/",
+      "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ"
+    ]
+  }
+})} />
+</head>
 <body>
 <noscript><style>.need-list,.replay-button,.mobile-menu-button{display:none!important}.service-panel[data-state=inactive]{display:grid!important}.service-panel{padding-bottom:35px} @media(max-width:760px){.service-panel[data-state=inactive]{display:flex!important}}</style></noscript>
 <a class="skip-link" href="#main">{t('Skip to content','跳到正文')}</a>
