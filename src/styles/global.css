@@ -2057,3 +2057,20 @@ th { color: var(--c-muted); font-weight: 600; font-size: 0.82rem; letter-spacing
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================
+   DISPLAY FACE — page titles share the home page's typeface so
+   interior pages and the home page read as one site. Article
+   titles (long sentences) and Chinese titles keep the body sans.
+   ============================================================ */
+@font-face {
+  font-family: "Michroma"; font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../assets/fonts/michroma-latin-400-normal.woff2") format("woff2");
+}
+body:not([data-locale="zh"]) main h1:not(.blog-post h1) {
+  font-family: "Michroma", "Eurostile", "Microgramma D", var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(1.55rem, 3.1vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+}
