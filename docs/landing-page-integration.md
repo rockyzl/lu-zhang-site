@@ -94,3 +94,28 @@ This change uses the existing Astro/Vercel deployment path. Merge the reviewed P
 to release through the repository's normal deployment process. Reverting that
 merge restores the prior home pages; no data migration is required.
 
+
+## Hero "instrument console" — 2026-11-22
+
+Requested by Lu Zhang: a more science-fiction, AI-forward first screen. Scope is the
+shared header and hero only; every section below the hero is unchanged.
+
+- Dark header and hero. The conceptual photograph is replaced by a console that shows
+  an agent run: cyclic voltammograms at five scan rates drawn in sequence, peak markers,
+  a peak-separation label, and a four-line log (question, experiment, analysis, review).
+- The traces are simulated at build time in `ResearchLanding.astro` (finite-difference
+  diffusion, fast electron transfer) for a reversible couple: peak potentials do not
+  move with scan rate, peak current scales with √v, ΔEp ≈ 59 mV. The console is labeled
+  "Illustration, simulated data". It is not measured data or a customer deployment.
+- Status line names the audience. Primary action now opens the battery research demo
+  (`/agent/battery-research/`); secondary action jumps to the contact section. Swap the
+  primary back to `#solutions` if the demo is not ready for first-time visitors.
+- Founder proof on the first screen reuses numbers already published on the research
+  archive (97 papers, 28 patents and applications, 4,700+ citations, R&D 100 Award 2014).
+- Animation is CSS only (no added JavaScript), one 20 s sequence, with a static final
+  state under `prefers-reduced-motion`. Two self-hosted fonts, about 32 KB together, in
+  `src/assets/fonts/`: Michroma and IBM Plex Mono, both SIL Open Font License.
+- Validation: `npm run build` passes (landing checks and demo registry). Layout checked
+  in headless Chromium at 390, 900, 1440 and 1920 px in English and Chinese, plus the
+  mobile menu and reduced motion. Safari and real-device checks are still pending; do
+  them on the Vercel preview before merge.

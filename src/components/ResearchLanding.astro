@@ -16,6 +16,78 @@ const steps = [
  [t('Connect a focused workflow','围绕一个流程开展试点'), t('We agree on a bounded pilot around selected records, analysis tools, and review steps. Integration and feasibility are assessed for your setup.','选择一组记录、分析工具和审核步骤，约定清晰的试点范围，并结合实际环境评估数据衔接与实施可行性。')],
  [t('Evaluate before expanding','先评估，再决定是否扩展'), t('Agree on checks such as source traceability, researcher-reviewed comparisons, and manual handoffs relative to your current workflow. Review the results and limitations before deciding whether to expand.','事先约定检查方式，例如来源能否追溯、对比结果能否由研究者复核、手动衔接步骤相比原流程有何变化。评估结果与局限，再决定是否扩展。')]
 ];
+const founderStats = [
+ { n:'97', l:t('journal papers','篇 SCI 论文'), href:u(`${lp}/publications/`) },
+ { n:'28', l:t('patents and applications','项专利与申请'), href:u(`${lp}/patents/`) },
+ { n:'4,700+', l:t('citations','次引用'), href:u(`${lp}/research-archive/`) },
+ { n:'R&D 100', l:t('Award, 2014','大奖，2014'), href:u(`${lp}/awards/`) }
+];
+// Hero console: cyclic-voltammetry traces simulated at build time (finite-difference
+// diffusion with Butler-Volmer kinetics). Kinetics are fast at every scan rate, so the
+// couple is reversible: peak potentials stay fixed and peak current scales with sqrt(v).
+// Illustrative only — not measured data.
+const cvRates = [10, 20, 40, 60, 100];
+const P0 = -13, P1 = 13;
+function simulateCV() {
+ const alpha = 0.5, lam = 2000, dT = 0.002, dX = Math.sqrt(dT / 0.4);
+ const steps = Math.round((2 * (P1 - P0)) / dT), n = Math.ceil((6 * Math.sqrt(2 * (P1 - P0))) / dX);
+ let R = new Float64Array(n).fill(1), O = new Float64Array(n);
+ const pts: number[][] = [];
+ let hi = [0, -Infinity], lo = [0, Infinity];
+ for (let k = 0; k <= steps; k++) {
+  const T = k * dT, p = T <= P1 - P0 ? P0 + T : P1 - (T - (P1 - P0));
+  const kf = Math.exp((1 - alpha) * p), kb = Math.exp(-alpha * p);
+  const J = (lam * (R[1] * kf - O[1] * kb)) / (1 + lam * dX * (kf + kb));
+  R[0] = R[1] - J * dX; O[0] = O[1] + J * dX;
+  const R2 = R.slice(), O2 = O.slice();
+  for (let i = 1; i < n - 1; i++) { R2[i] = R[i] + 0.4 * (R[i + 1] - 2 * R[i] + R[i - 1]); O2[i] = O[i] + 0.4 * (O[i + 1] - 2 * O[i] + O[i - 1]); }
+  R = R2; O = O2;
+  const cur = J;
+  if (cur > hi[1]) hi = [p, cur];
+  if (cur < lo[1]) lo = [p, cur];
+  if (k % 260 === 0) pts.push([p, cur]);
+ }
+ return { pts, hi, lo };
+}
+// A reversible response has one dimensionless shape; each scan rate scales it by sqrt(v).
+const cvUnit = simulateCV();
+const cvRaw = cvRates.map((rate) => { const k = Math.sqrt(rate / 10), sc = (q: number[]) => [q[0], q[1] * k]; return { pts: cvUnit.pts.map(sc), hi: sc(cvUnit.hi), lo: sc(cvUnit.lo) }; });
+const cvI = cvRaw.flatMap((c) => [c.hi[1], c.lo[1]]);
+const cvMax = Math.max(...cvI), cvMin = Math.min(...cvI);
+const PX0 = 54, PW = 648, PY0 = 26, PH = 318;
+const cvScale = (PH * 0.84) / (cvMax - cvMin);
+const cvZero = PY0 + PH * 0.05 + cvMax * cvScale;
+const cvX = (pp: number) => PX0 + ((pp - P0) / (P1 - P0)) * PW;
+const cvY = (i: number) => cvZero - i * cvScale;
+const cvCurves = cvRaw.map(({ pts, hi, lo }, idx) => {
+ const xy = pts.map(([pp, i]) => [+cvX(pp).toFixed(1), +cvY(i).toFixed(1)]);
+ const mark = (q: number[]) => [+cvX(q[0]).toFixed(1), +cvY(q[1]).toFixed(1)];
+ return { rate: cvRates[idx], d: 'M' + xy.map((q) => q.join(',')).join('L'), peak: mark(hi), valley: mark(lo) };
+});
+const cvTrend = 'M' + cvCurves.map((c) => c.peak.join(',')).join('L');
+// Peak separation of the simulated couple, in mV at 25 °C (RT/F = 25.69 mV).
+const cvDeltaEp = Math.round((cvUnit.hi[0] - cvUnit.lo[0]) * 25.69);
+const cvDimY = PY0 + PH - 14;
+const cvTrendLow = 'M' + cvCurves.map((c) => c.valley.join(',')).join('L');
+const cvTicks = [0, 0.2, 0.4, 0.6].map((e) => ({ label: e.toFixed(1), x: +cvX((e - 0.28) / 0.02569).toFixed(1) }));
+const cvGridY = [0.2, 0.4, 0.6, 0.8].map((f) => +(PY0 + PH * f).toFixed(1));
+// One orchestrated 20 s sequence: question, five scans, analysis, review, then reset.
+const CYCLE = 20, pc = (sec: number) => ((sec / CYCLE) * 100).toFixed(2) + '%';
+const scanStart = (i: number) => 1.2 + i * 1.5;
+const logAt = [0.3, 1.2, 9.2, 11.2];
+const cvAnim = [
+ ...cvCurves.map((_, i) => `@keyframes sf-draw-${i}{0%,${pc(scanStart(i))}{stroke-dashoffset:1;opacity:var(--o)}${pc(scanStart(i) + 1.4)},93%{stroke-dashoffset:0;opacity:var(--o)}98%{stroke-dashoffset:0;opacity:0}99%,100%{stroke-dashoffset:1;opacity:0}}@keyframes sf-head-${i}{0%,${pc(scanStart(i) - 0.01)}{offset-distance:0%;opacity:0}${pc(scanStart(i))}{offset-distance:0%;opacity:1}${pc(scanStart(i) + 1.4)}{offset-distance:100%;opacity:1}${pc(scanStart(i) + 1.6)},100%{offset-distance:100%;opacity:0}}`),
+ `@keyframes sf-peaks{0%,${pc(9.2)}{opacity:0}${pc(9.6)},93%{opacity:1}98%,100%{opacity:0}}`,
+ `@keyframes sf-trend{0%,${pc(9.4)}{stroke-dashoffset:1;opacity:1}${pc(10.4)},93%{stroke-dashoffset:0;opacity:1}98%{stroke-dashoffset:0;opacity:0}99%,100%{stroke-dashoffset:1;opacity:0}}`,
+ `@keyframes sf-note{0%,${pc(10.4)}{opacity:0}${pc(10.9)},93%{opacity:1}98%,100%{opacity:0}}`,
+ ...logAt.map((sec, i) => `@keyframes sf-log-${i}{0%,${pc(sec)}{opacity:.3}${pc(sec + 0.4)},93%{opacity:1}98%,100%{opacity:.3}}`)
+].join('');
+const consoleLog = [
+ [t('Question','问题'), t('Is this redox couple reversible and diffusion-controlled?','这个氧化还原电对可逆吗？受扩散控制吗？')],
+ [t('Experiment','实验'), t('Cyclic voltammetry at five scan rates, 10–100 mV/s','五个扫速下的循环伏安，10–100 mV/s')],
+ [t('Analysis','分析'), t('Peaks stay put, peak current ∝ √v: reversible, diffusion-controlled','峰电位不随扫速移动，峰电流与 √v 成正比：可逆，受扩散控制')],
+ [t('Review','审核'), t('Waiting for researcher approval before the next run','等待研究者确认后再启动下一轮')]
+];
 const title = t('One-Stop Adaptive AI Workflows for Scientific R&D | SciencesLoop','科研一站式自适应 AI 工作流 | SciencesLoop');
 const description = t('A unified R&D workspace connecting experimental data, simulation, machine learning and scientific tools through adaptive, traceable AI workflows. Starting with electrochemistry.','将实验数据、仿真、机器学习与已有科研工具整合到同一工作入口，通过自适应、可追溯的 AI 流程为复杂研发提效，从电化学切入。');
 const origin = Astro.site ?? new URL('https://sciencesloop.com');
@@ -47,10 +119,50 @@ const links = [['/battery-ai/',t('Battery & electrochemistry AI','电池与电�
 <body>
 <noscript><style>.need-list,.replay-button,.mobile-menu-button{display:none!important}.service-panel[data-state=inactive]{display:grid!important}.service-panel{padding-bottom:35px} @media(max-width:760px){.service-panel[data-state=inactive]{display:flex!important}}</style></noscript>
 <a class="skip-link" href="#main">{t('Skip to content','跳到正文')}</a>
-<header class="site-header"><a href={u(`${lp}/`)} class="wordmark" aria-label="SciencesLoop">sciences<span>loop</span><b>.</b></a><div class="nav-group"><nav class="desktop-nav" aria-label={t('Main navigation','主导航')}><a href="#solutions">{t('What we do','我们做什么')}</a><a href="#approach">{t('How we work','如何合作')}</a><a class="nav-cta" href="#start">{t('Start a conversation','聊聊你的需求')} ↗</a></nav><a class="language-link" href={u(zh ? '/' : '/zh/')} lang={zh ? 'en' : 'zh-CN'}>{zh ? 'EN' : '中文'}</a><button class="mobile-menu-button" aria-label={t('Toggle navigation','展开或收起导航')} aria-controls="mobile-nav" aria-expanded="false">☰</button></div></header>
-<nav id="mobile-nav" class="mobile-nav" hidden aria-label={t('Mobile navigation','移动导航')}><a href="#solutions">{t('What we do','我们做什么')}</a><a href="#approach">{t('How we work','如何合作')}</a><a href="#start">{t('Start a conversation','聊聊你的需求')}</a></nav>
+<header class="site-header site-header-sf"><a href={u(`${lp}/`)} class="wordmark" aria-label="SciencesLoop">sciences<span>loop</span><b>.</b></a><div class="nav-group"><nav class="desktop-nav" aria-label={t('Main navigation','主导航')}><a href="#solutions">{t('What we do','我们做什么')}</a><a href="#approach">{t('How we work','如何合作')}</a><a class="nav-cta" href="#start">{t('Start a conversation','聊聊你的需求')} ↗</a></nav><a class="language-link" href={u(zh ? '/' : '/zh/')} lang={zh ? 'en' : 'zh-CN'}>{zh ? 'EN' : '中文'}</a><button class="mobile-menu-button" aria-label={t('Toggle navigation','展开或收起导航')} aria-controls="mobile-nav" aria-expanded="false">☰</button></div></header>
+<nav id="mobile-nav" class="mobile-nav mobile-nav-sf" hidden aria-label={t('Mobile navigation','移动导航')}><a href="#solutions">{t('What we do','我们做什么')}</a><a href="#approach">{t('How we work','如何合作')}</a><a href="#start">{t('Start a conversation','聊聊你的需求')}</a></nav>
 <main id="main">
-<section class="hero shell" aria-labelledby="hero-title"><div class="hero-kicker"><span class="eyebrow">{t('ONE WORKSPACE · ADAPTIVE SCIENTIFIC AI','一个入口 · 自适应科研 AI')}</span><span class="hero-index">{t('DATA / SIMULATION / ML / TOOLS','数据 / 仿真 / 机器学习 / 工具')}</span></div><div class="hero-layout"><h1 id="hero-title">{t('Complex science.','复杂科研，')}<br/><em>{t('One workspace.','一站式工作流。')}</em></h1><div class="hero-copy"><p>{t('Bring your experimental data, simulations, machine-learning models and scientific software into one adaptive research workflow. We aim to integrate complex existing systems, reduce platform switching and accelerate the path from question to validated result—starting with battery and electrochemistry R&D.','把实验数据、仿真软件、机器学习模型和现有科研工具整合进一站式自适应工作流。面对复杂系统，按实际需求连接、调用和组合工具，减少跨平台操作，加快从科研问题到可验证结果的过程；从电池与电化学研发切入。')}</p><a class="button button-dark" href="#solutions">{t('Find your starting point','找到你的起点')} ↓</a><a class="text-link" href={u(zh ? '/zh/battery-ai/' : '/battery-ai/')}>{t('Explore battery & electrochemistry AI pilots','了解电池与电化学 AI 试点')} ↗</a><span class="hero-audience">{t('Pilot integrations are scoped to your existing systems, available interfaces and researcher-approved actions.','具体集成范围取决于现有系统、可用接口和研究者授权；先验证，再扩展。')}</span></div></div><div class="hero-image-wrap"><img class="hero-image" src={u('/images/research-hero.webp')} alt={t('Conceptual materials research image of glass sample vessels in warm light','暖色光线中的玻璃样品容器，科研概念配图')} width="1536" height="1024" fetchpriority="high"/><div class="image-overlay"></div><div class="image-caption"><span>{t('FROM ISOLATED PIECES','从分散的资料')}</span><span>{t('TO A CONNECTED RESEARCH PICTURE.','到连贯的研究全貌。')}</span></div><span class="image-credit">{t('Concept image','概念配图')}</span></div><div class="hero-service-links">{services.map((s,i)=><a href="#solutions" data-jump={s.id}><span>0{i+1}</span>{s.short} ↓</a>)}</div></section>
+<section class="hero hero-sf" aria-labelledby="hero-title">
+<div class="shell">
+<p class="sf-status"><span class="sf-status-dot" aria-hidden="true"></span>{t('Pilots open for battery and electrochemistry R&D teams','面向电池与电化学研发团队，试点开放中')}</p>
+<div class="sf-layout">
+<div class="sf-main">
+<h1 id="hero-title"><span>{t('Complex science.','复杂科研，')}</span><span>{t('One workspace.','一站式工作流。')}</span></h1>
+<p class="sf-lede">{t('Connect your experimental data, simulations, ML models and lab software in one traceable research loop. Researchers approve the key decisions.','把实验数据、仿真、机器学习模型和现有科研软件接进同一个可追溯的科研闭环，关键决策由研究者确认。')}</p>
+<div class="sf-actions">
+<a class="sf-button" href={u(`${lp}/agent/battery-research/`)}>{t('Try the battery agent demo','试用电池研发智能体')}</a>
+<a class="sf-link" href="#start">{t('Talk through your workflow','聊聊你的研发流程')}</a>
+</div>
+<p class="sf-scope">{t('Pilot integrations are scoped to your existing systems, available interfaces and researcher-approved actions.','具体集成范围取决于现有系统、可用接口和研究者授权；先验证，再扩展。')}</p>
+</div>
+<figure class="sf-console" aria-labelledby="sf-console-caption">
+<style set:html={cvAnim}></style>
+<i class="sf-corner sf-tl" aria-hidden="true"></i><i class="sf-corner sf-tr" aria-hidden="true"></i><i class="sf-corner sf-bl" aria-hidden="true"></i><i class="sf-corner sf-br" aria-hidden="true"></i>
+<div class="sf-console-bar"><span>{t('Agent run: redox couple check','智能体运行：氧化还原电对检查')}</span><span class="sf-tag" id="sf-console-caption">{t('Illustration, simulated data','示意，模拟数据')}</span></div>
+<svg class="sf-plot" viewBox="0 0 720 396" role="img" aria-label={t('Illustration: an AI agent records cyclic voltammograms at five scan rates, then marks the peaks: their potentials stay fixed while peak current grows with scan rate.','示意图：智能体在五个扫速下记录循环伏安曲线并标出峰位：峰电位保持不变，峰电流随扫速增大。')}>
+<g class="sf-grid">{cvGridY.map((y)=><line x1={PX0} x2={PX0+PW} y1={y} y2={y}/>)}{cvTicks.map((k)=><line x1={k.x} x2={k.x} y1={PY0} y2={PY0+PH}/>)}</g>
+<line class="sf-zero" x1={PX0} x2={PX0+PW} y1={cvZero.toFixed(1)} y2={cvZero.toFixed(1)}/>
+<rect class="sf-frame" x={PX0} y={PY0} width={PW} height={PH}/>
+<g class="sf-axis">{cvTicks.map((k)=><text x={k.x} y={PY0+PH+20} text-anchor="middle">{k.label}</text>)}<text class="sf-axis-title" x={PX0+PW} y={PY0+PH+42} text-anchor="end">{t('E / V vs Ag/AgCl','E / V（相对 Ag/AgCl）')}</text><text x={PX0-10} y={(cvZero+4).toFixed(1)} text-anchor="end">0</text><text x={PX0-10} y={PY0+12} text-anchor="end">i</text><text x={PX0+12} y={PY0+22}>{t('10 → 100 mV/s','10 → 100 mV/s')}</text></g>
+<g class="sf-traces">{cvCurves.map((c,i)=><path class="sf-trace" d={c.d} pathLength="1" style={`animation-name:sf-draw-${i};--o:${(0.5+i*0.125).toFixed(3)}`}/>)}</g>
+<path class="sf-trend" d={cvTrend} pathLength="1"/>
+<path class="sf-trend" d={cvTrendLow} pathLength="1"/>
+<g class="sf-peaks">{cvCurves.map((c)=><circle cx={c.peak[0]} cy={c.peak[1]} r="3.6"/>)}{cvCurves.map((c)=><circle cx={c.valley[0]} cy={c.valley[1]} r="3.6"/>)}</g>
+<text class="sf-note" x={cvCurves[4].peak[0]+14} y={cvCurves[4].peak[1]+2}>{t('Ep fixed, ip ∝ √v','峰位不变，峰电流 ∝ √v')}</text>
+<path class="sf-dim" d={`M${cvCurves[0].valley[0]},${cvDimY-6}V${cvDimY}H${cvCurves[0].peak[0]}V${cvDimY-6}`}/>
+<text class="sf-note" x={cvCurves[0].peak[0]+12} y={cvDimY+3}>{`ΔEp ≈ ${cvDeltaEp} mV`}</text>
+{cvCurves.map((c,i)=><circle class="sf-head" r="4.5" style={`offset-path:path("${c.d}");animation-name:sf-head-${i}`}/>)}
+</svg>
+<ol class="sf-log">{consoleLog.map(([k,v],i)=><li style={`animation-name:sf-log-${i}`}><span>{k}</span><span>{v}{i===3 && <i class="sf-cursor" aria-hidden="true"></i>}</span></li>)}</ol>
+</figure>
+</div>
+<div class="sf-founder">
+<p>{t('Built by a battery scientist. ','由电池科学家创立。')}<a href={u(`${lp}/about/`)}>{t('Lu Zhang','张鲁 Lu Zhang')}</a>{t(' spent 14+ years on battery research at Argonne National Laboratory.',' 在美国阿贡国家实验室从事电池研究 14 年以上。')}</p>
+<ul>{founderStats.map((f)=><li><a href={f.href}><strong>{f.n}</strong><span>{f.l}</span></a></li>)}</ul>
+</div>
+<div class="hero-service-links">{services.map((sv,i)=><a href="#solutions" data-jump={sv.id}><span>0{i+1}</span>{sv.short} ↓</a>)}</div>
+</div>
+</section>
 
 <section class="operating-layer shell" aria-labelledby="layer-title">
   <div class="layer-intro">
