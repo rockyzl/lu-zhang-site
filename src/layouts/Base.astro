@@ -127,18 +127,37 @@ const isActive = (href) => {
   <body data-locale={locale}>
     <header class="site">
       <div class="inner">
-        <a class="name" href={u(homeHref)}><span class="brand-loop" aria-hidden="true"></span>SciencesLoop</a>
-        <nav>
+        <a class="name" href={u(homeHref)} aria-label="SciencesLoop">sciences<span>loop</span><b>.</b></a>
+        <nav id="site-nav" aria-label={locale === "zh" ? "主导航" : "Main navigation"}>
           {navItems.map((n) => (
-            <a href={u(n.href)} class={isActive(n.href) ? "active" : ""}>
+            <a href={u(n.href)} class={isActive(n.href) ? "active" : ""} aria-current={isActive(n.href) ? "page" : undefined}>
               {t(n.key, locale)}
             </a>
           ))}
-          <a class="lang-toggle" href={altPath} aria-label="Switch language">{locale === "zh" ? "EN" : "中"}</a>
         </nav>
         <span class="avail"><span class="dot" aria-hidden="true"></span>{t("nav.availability", locale)}</span>
+        <a class="lang-toggle" href={altPath} aria-label={locale === "zh" ? "Switch to English" : "切换到中文"}>{locale === "zh" ? "EN" : "中文"}</a>
+        <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label={locale === "zh" ? "展开或收起导航" : "Toggle navigation"}>
+          <span aria-hidden="true"></span>
+        </button>
       </div>
     </header>
+    <noscript><style>header.site nav{display:flex!important}</style></noscript>
+    <script is:inline>
+      (() => {
+        const header = document.querySelector("header.site");
+        const button = header && header.querySelector(".nav-toggle");
+        if (!button) return;
+        const set = (open) => {
+          header.classList.toggle("nav-open", open);
+          button.setAttribute("aria-expanded", String(open));
+        };
+        button.addEventListener("click", () => set(!header.classList.contains("nav-open")));
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && header.classList.contains("nav-open")) { set(false); button.focus(); }
+        });
+      })();
+    </script>
     <main>
       <slot />
     </main>

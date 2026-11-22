@@ -119,3 +119,43 @@ shared header and hero only; every section below the hero is unchanged.
   in headless Chromium at 390, 900, 1440 and 1920 px in English and Chinese, plus the
   mobile menu and reduced motion. Safari and real-device checks are still pending; do
   them on the Vercel preview before merge.
+
+## Shared header, footer and phone cleanup — 2026-11-22
+
+Requested by Lu after the hero change: interior pages looked cluttered on phones and
+no longer matched the home page.
+
+- `Base.astro` header now uses the home page's dark bar and `sciencesloop.` wordmark.
+  At 720 px and below it is one row (wordmark, language, menu button) with a
+  collapsible nav; before, the links wrapped into three or four sticky rows (112 px
+  tall at 390 px, now 64 px). Menu button sets `aria-expanded`, closes on Escape, and
+  a `<noscript>` rule shows the links without JavaScript.
+- Footer uses the same deep green, with extra bottom padding on phones so the chat
+  button does not cover the last link.
+- Phone fixes: tables scroll inside their own box (blog posts and the mentorship page
+  no longer scroll sideways), publication filters stay inside the screen, the
+  battery-ai page regains its side padding, and the chat launcher is 48 px.
+- Content, routes, metadata and structured data are unchanged.
+- Checked in headless Chromium at 390, 820 and 1440 px across 22 interior routes: no
+  page scrolls sideways. Safari and real devices still need a look on the preview.
+- Open question for Lu: the header pill still reads "Open to AI Engineer roles",
+  which sits oddly next to the customer-pilot positioning on the home page.
+
+## One look across the site — 2026-11-22
+
+Lu's follow-up: the dark home hero and the light rest of the site felt like two
+different sites. Rule adopted: dark frame (header, home hero, closing band, footer),
+light reading surface in between, one display face for titles.
+
+- Home page below the hero: section headings use the hero's display face (the serif
+  italic accents are gone), the orchestration box, active service tab and the two
+  illustration cards use the hero's deep green with mint labels, the closing contact
+  section is a dark band with the amber action, and the home footer is dark like the
+  footer on every other page.
+- Interior pages: English page titles use the same display face. Article titles and
+  Chinese titles keep the body sans (long sentences and CJK read better that way).
+  The battery-ai title was resized to suit.
+- Not done, offered to Lu as an option: a dark title band at the top of every interior
+  page. It unifies more strongly but means wrapping the intro markup in about sixty
+  page files, so it should wait until the parallel SEO edits to those files land.
+- Checked at 390 and 1440 px, English and Chinese: 27 routes, none scrolls sideways.
