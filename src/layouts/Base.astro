@@ -75,8 +75,9 @@ const isActive = (href) => {
     <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- Hreflang for bilingual -->
-    <link rel="alternate" hreflang={locale === "zh" ? "en" : "zh-CN"} href={new URL(altPath, siteUrl).href} />
-    <link rel="alternate" hreflang="x-default" href={new URL(u("/"), siteUrl).href} />
+    <link rel="alternate" hreflang="en" href={locale === "en" ? canonical : new URL(altPath, siteUrl).href} />
+    <link rel="alternate" hreflang="zh-CN" href={locale === "zh" ? canonical : new URL(altPath, siteUrl).href} />
+    <link rel="alternate" hreflang="x-default" href={locale === "en" ? canonical : new URL(altPath, siteUrl).href} />
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d7361'/%3E%3Ctext x='32' y='45' font-family='ui-monospace, Menlo, monospace' font-size='38' font-weight='700' fill='white' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
     <!-- The redesign uses only system + monospace font stacks — no webfont/CDN requests. -->
@@ -86,6 +87,7 @@ const isActive = (href) => {
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Person",
+        "@id": new URL("/about/#person", siteUrl).href,
         name: "Lu Zhang",
         alternateName: "张鲁",
         givenName: "Lu",
@@ -110,7 +112,7 @@ const isActive = (href) => {
           "Electrochemistry",
           "Energy storage",
         ],
-        url: publicOrigin,
+        url: new URL(u("/about/"), siteUrl).href,
         sameAs: [
           "https://scholar.google.com/citations?user=Wx7oSUwAAAAJ&hl=en",
           "https://github.com/rockyzl",
