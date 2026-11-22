@@ -51,22 +51,22 @@ const stages = [
 <Base
   title={t("Battery & Electrochemistry AI Workflows | SciencesLoop", "电池与电化学研发 AI 工作流程 | SciencesLoop")}
   description={t(
-    "Researcher-led AI workflow pilots for battery and electrochemistry R&D: connect CV, EIS, cycling data, experimental context and traceable evidence.",
-    "面向电池与电化学研发的 AI 工作流程试点：关联 CV、EIS、充放电数据、实验条件及可追溯证据，由研究者审核关键判断。"
+    "Adaptive AI workflow pilots for battery and electrochemistry R&D: connect experiments, simulation, machine learning, scientific models and traceable tool calls.",
+    "面向电池与电化学研发的自适应 AI 工作流试点：连接实验数据、仿真、机器学习、科学模型和可追溯工具调用。" 
   )}
   alternatePath={u(zh ? "/battery-ai/" : "/zh/battery-ai/")}
 >
   <div class="container battery-ai-page">
     <section class="battery-hero">
       <p class="eyebrow">{t("BATTERY & ELECTROCHEMISTRY · SCIENTIFIC AI", "电池与电化学 · 科学 AI")}</p>
-      <h1>{t("AI workflows built around real battery research questions", "围绕真实电池研发问题构建 AI 工作流程")}</h1>
+      <h1>{t("Adaptive scientific workflows, starting with batteries", "从电池研发开始，构建自适应科研工作流")}</h1>
       <p class="lead">{t(
-        "Connect electrochemical measurements, experimental context and scientific evidence so your team can review results and choose the next useful test.",
-        "把电化学测量结果、实验背景与科研证据连接起来，帮助团队复核结果、判断下一步值得做的实验。"
+        "Unify data, simulations, machine-learning models and foundation-model-assisted tool calling into a traceable workflow that can adjust its next step as the research question changes.",
+        "把数据、仿真、机器学习模型和基础模型辅助的工具调用连接为可追溯的工作流，让科研问题变化时，下一步分析也能随之调整。"
       )}</p>
       <p class="status">{t(
-        "Early-stage R&D workflows and scoped pilots. Capability, integration and outcomes are assessed case by case.",
-        "当前处于早期工作流程与小范围试点阶段。能力边界、仪器集成和交付结果需逐项评估。"
+        "Early-stage pilots: adaptive tool selection is bounded by validated integrations, traceable outputs and scientist review. No claim of universal autonomous operation.",
+        "目前仍是小范围试点：工具选择受已验证的集成能力约束，结果可追溯并由研究者审核，不承诺适用于一切情境的无人值守自主运行。"
       )}</p>
       <div class="actions">
         <a class="primary" href="mailto:luzhang@sciencesloop.com?subject=Battery%20and%20electrochemistry%20AI%20pilot">{t("Discuss a research bottleneck", "聊一个具体研发难题")}</a>
@@ -76,15 +76,15 @@ const stages = [
 
     <section aria-labelledby="questions">
       <p class="eyebrow">{t("THE FIRST USE CASES", "优先解决的问题")}</p>
-      <h2 id="questions">{t("Start with a decision the lab already makes", "从实验室每天需要做的判断开始")}</h2>
+      <h2 id="questions">{t("The workflow adapts to the question", "让工具链随科研问题而调整")}</h2>
       <div class="question-grid">
         {questions.map((question) => (
           <article class="question"><h3>{question.title}</h3><p>{question.body}</p></article>
         ))}
       </div>
       <p>{t(
-        "Potential inputs include cyclic voltammetry (CV), electrochemical impedance spectroscopy (EIS), cycling measurements, lab notes and related literature. The first pilot should use only data your team can legitimately share.",
-        "可评估的数据包括循环伏安（CV）、电化学阻抗谱（EIS）、充放电测试、实验笔记和相关文献。首次试点只使用团队有权分享的数据。"
+        "For example: retrieve CV or EIS measurements, check sample and test context, call an appropriate fitting, simulation or ML tool, then compare evidence before a scientist approves a follow-up. Available tools depend on the team's actual integrations and validated scope.",
+        "例如：读取 CV 或 EIS 数据，核对样品与测试条件，按问题调用合适的拟合、仿真或机器学习工具，比较证据后交由研究者审批后续步骤。实际可调用的工具以团队现有集成与验证范围为准。"
       )}</p>
     </section>
 
