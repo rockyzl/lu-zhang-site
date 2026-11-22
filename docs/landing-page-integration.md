@@ -159,3 +159,25 @@ light reading surface in between, one display face for titles.
   page. It unifies more strongly but means wrapping the intro markup in about sixty
   page files, so it should wait until the parallel SEO edits to those files land.
 - Checked at 390 and 1440 px, English and Chinese: 27 routes, none scrolls sideways.
+
+## Service illustrations redrawn — 2026-11-22
+
+Lu's note on the "What we do" tabs: the first illustration (three source boxes
+feeding a "Connected context" card) felt stiff, especially on a phone.
+
+- Tab 1 now traces one invented result: a capacity-retention plot (92% after 100
+  cycles, cell C-07) and a thread of the records behind it — sample, conditions,
+  lab note, source file — plus one record flagged as missing (membrane lot).
+- Tab 3 carries the same result forward: result, evidence, two candidate
+  explanations (crossover or decomposition), then one proposed step waiting for
+  researcher approval. It replaces the three-box "Lab data → Analysis → Shared
+  findings" diagram.
+- Tab 2 (run comparison) keeps its content. Each illustration header now names
+  what it shows instead of repeating "Scientific work, connected".
+- The numbers, IDs and notes are invented for illustration; the frame still
+  reads "Service illustration / Not a live system or customer dataset".
+- Each illustration plays once when it scrolls into view; Replay restarts it;
+  reduced-motion users get the finished state.
+- CSS note: the `@container` blocks only change geometry. Animation and display
+  stay outside them, otherwise a style recalculation can restart a finished
+  animation on the connector lines.
