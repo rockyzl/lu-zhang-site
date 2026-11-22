@@ -119,3 +119,24 @@ shared header and hero only; every section below the hero is unchanged.
   in headless Chromium at 390, 900, 1440 and 1920 px in English and Chinese, plus the
   mobile menu and reduced motion. Safari and real-device checks are still pending; do
   them on the Vercel preview before merge.
+
+## Shared header, footer and phone cleanup — 2026-11-22
+
+Requested by Lu after the hero change: interior pages looked cluttered on phones and
+no longer matched the home page.
+
+- `Base.astro` header now uses the home page's dark bar and `sciencesloop.` wordmark.
+  At 720 px and below it is one row (wordmark, language, menu button) with a
+  collapsible nav; before, the links wrapped into three or four sticky rows (112 px
+  tall at 390 px, now 64 px). Menu button sets `aria-expanded`, closes on Escape, and
+  a `<noscript>` rule shows the links without JavaScript.
+- Footer uses the same deep green, with extra bottom padding on phones so the chat
+  button does not cover the last link.
+- Phone fixes: tables scroll inside their own box (blog posts and the mentorship page
+  no longer scroll sideways), publication filters stay inside the screen, the
+  battery-ai page regains its side padding, and the chat launcher is 48 px.
+- Content, routes, metadata and structured data are unchanged.
+- Checked in headless Chromium at 390, 820 and 1440 px across 22 interior routes: no
+  page scrolls sideways. Safari and real devices still need a look on the preview.
+- Open question for Lu: the header pill still reads "Open to AI Engineer roles",
+  which sits oddly next to the customer-pilot positioning on the home page.

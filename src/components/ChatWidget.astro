@@ -260,6 +260,12 @@ const copy = mode === "landing"
     outline-offset: 3px;
   }
   .cw-icon-close { display: none; }
+  /* Phones: a smaller launcher tucked into the corner covers less of the page. */
+  @media (max-width: 760px) {
+    .cw-root { right: 12px; bottom: 12px; }
+    .cw-launcher { width: 48px; height: 48px; }
+    .cw-launcher .cw-icon-open { width: 25px; height: 25px; }
+  }
   .cw-root.cw-open .cw-icon-open { display: none; }
   .cw-root.cw-open .cw-icon-close { display: block; }
 
