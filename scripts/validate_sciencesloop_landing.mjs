@@ -23,6 +23,13 @@ for (const id of ['knowledge', 'analysis', 'workflow']) {
 requireMatch(englishPage.includes('locale="en"'), 'English route must select the English locale');
 requireMatch(chinesePage.includes('locale="zh"'), 'Chinese route must select the Chinese locale');
 requireMatch(component.includes('<noscript>'), 'missing no-script fallback');
+requireMatch(component.includes("t('Complex science.','复杂科研，')"), 'unified research workflow hero missing');
+requireMatch(component.includes("t('One workspace.','一站式工作流。')"), 'one-stop workflow proposition missing');
+requireMatch(component.includes('class="operating-layer shell"'), 'missing research integration section');
+requireMatch(component.includes('Simulation & scientific software'), 'missing simulation integration');
+requireMatch(component.includes('Machine learning & foundation models'), 'missing model integration');
+requireMatch(component.includes("'/approach/'"), 'missing reliable agents approach link');
+
 requireMatch(component.includes('mailto:luzhang@sciencesloop.com'), 'missing direct email path');
 requireMatch(component.includes('aria-controls="mobile-nav"'), 'mobile button lacks aria-controls');
 requireMatch(component.includes('aria-orientation="horizontal"'), 'tablist must declare its desktop orientation');
@@ -83,6 +90,9 @@ if (!sourceOnly) {
       requireMatch(html.includes(`hreflang="${language}"`), `${locale}: missing ${language} alternate`);
     }
     requireMatch(html.includes('rel="canonical"'), `${locale}: missing canonical URL`);
+    requireMatch(html.includes('id="layer-title"'), `${locale}: missing unified workflow heading`);
+    requireMatch(html.includes('class="layer-diagram"'), `${locale}: missing integration diagram`);
+    requireMatch(html.includes('class="layer-core"'), `${locale}: missing adaptive orchestration layer`);
   }
 }
 
