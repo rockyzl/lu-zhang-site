@@ -138,8 +138,8 @@ no longer matched the home page.
 - Content, routes, metadata and structured data are unchanged.
 - Checked in headless Chromium at 390, 820 and 1440 px across 22 interior routes: no
   page scrolls sideways. Safari and real devices still need a look on the preview.
-- Open question for Lu: the header pill still reads "Open to AI Engineer roles",
-  which sits oddly next to the customer-pilot positioning on the home page.
+- Resolved 2026-11-22: Lu chose to replace the header pill "Open to AI Engineer
+  roles" with "Pilots open" / "试点开放中", matching the home hero status line.
 
 ## One look across the site — 2026-11-22
 
