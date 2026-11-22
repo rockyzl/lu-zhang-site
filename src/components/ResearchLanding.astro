@@ -80,7 +80,10 @@ const links = [['/battery-ai/',t('Battery & electrochemistry AI','电池与电�
       <span>{t('Integration and efficiency gains are goals to validate in scoped pilots, not pre-proven guarantees.','集成范围和提效幅度需要在具体试点中验证，不预先承诺通用效果。')}</span>
     </div>
   </div>
-  <a class="layer-link" href={u(zh ? '/zh/battery-ai/' : '/battery-ai/')}>{t('See a first use case: battery & electrochemistry','查看第一个落地场景：电池与电化学')} ↗</a>
+  <div class="layer-links">
+    <a class="layer-link" href={u(zh ? '/zh/battery-ai/' : '/battery-ai/')}>{t('First use case: battery & electrochemistry','首个落地场景：电池与电化学')} ↗</a>
+    <a class="layer-link" href={u(zh ? '/zh/approach/' : '/approach/')}>{t('See our approach to reliable agents','了解可复核的 Agent 工程方法')} ↗</a>
+  </div>
 </section>
 <section class="solutions shell" id="solutions" aria-labelledby="solutions-title"><div class="section-heading"><div><span class="eyebrow">{t('01 — WHAT WE DO','01 — 我们做什么')}</span><h2 id="solutions-title">{t('When research gets stuck,','科研卡住的时候，')}<br/><em>{t('find the next question.','先找对下一步问题。')}</em></h2></div><p>{t('Choose where your team loses the thread: finding evidence, comparing results, or carrying a decision and its rationale into the next stage.','从最容易断线的地方开始：追溯证据、对照结果，或让决策理由随着研究一起延续。')}</p></div>
 <div class="solutions-tabs"><div class="need-list" data-slot="tabs-list" role="tablist" aria-orientation="horizontal" aria-label={t('Choose a research challenge','选择科研中的难题')}>{services.map((s,i)=><button type="button" role="tab" class="need-button" data-slot="tabs-trigger" data-state={i===0?'active':'inactive'} id={`tab-${s.id}`} aria-controls={`panel-${s.id}`} aria-selected={i===0?'true':'false'} tabindex={i===0?0:-1} data-service={s.id}><span class="need-number">0{i+1}</span><span class="need-title">{s.need}</span><span class="need-arrow" aria-hidden="true">↗</span></button>)}</div>
