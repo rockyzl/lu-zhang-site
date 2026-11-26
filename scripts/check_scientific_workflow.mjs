@@ -31,6 +31,8 @@ await assert.rejects(()=>executeTool('unapproved_hardware_command',{},data),/Too
 const demo=readFileSync('src/components/ScientificWorkflowDemo.astro','utf8');
 const js=readFileSync('public/demos/electrochemistry-workflow/app.mjs','utf8');
 assert(demo.includes('id="wf-form"')&&demo.includes('id="wf-export"'));
+assert(demo.includes('.wf-layout>*{min-width:0}'), 'grid child must shrink at mobile widths');
+assert(demo.includes('@media(max-width:880px){.wf-layout{grid-template-columns:minmax(0,1fr)}'), 'mobile grid must not use min-content width');
 assert(demo.includes('alternatePath={u(zh ? "/workflow/electrochemistry/" : "/zh/workflow/electrochemistry/")}'));
 assert(js.includes("executeTool(action,args,providedData)"));
 assert(js.includes('latestReport'));
