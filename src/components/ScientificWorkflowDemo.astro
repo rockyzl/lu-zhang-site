@@ -100,20 +100,21 @@ const t = (en: string, cn: string) => zh ? cn : en;
 .wf-links{display:flex;flex-wrap:wrap;gap:1rem 2rem;margin-top:1rem}
 .wf-links a{font-weight:600;color:var(--c-accent);text-decoration:underline;text-underline-offset:3px}
 .wf-layout{display:grid;grid-template-columns:minmax(300px, .8fr) minmax(0,1.2fr);gap:1rem}
-.wf-card{border:1px solid var(--c-border);border-radius:12px;padding:1.4rem;background:var(--c-card)}
+.wf-layout>*{min-width:0}
+.wf-card{min-width:0;max-width:100%;border:1px solid var(--c-border);border-radius:12px;padding:1.4rem;background:var(--c-card)}
 .wf-card .eyebrow,.wf-end .eyebrow{font-size:.7rem;letter-spacing:.1em;color:var(--c-accent);font-weight:700}
-.wf-setup form{display:grid;gap:.55rem}
+.wf-setup form{display:grid;grid-template-columns:minmax(0,1fr);min-width:0;gap:.55rem}
 .wf-setup label{font-size:.85rem;font-weight:650;margin-top:.6rem}
-.wf-setup select{width:100%;border:1px solid var(--c-border);border-radius:6px;padding:.85rem;background:var(--c-bg, white);color:var(--c-fg);font:inherit}
-.wf-parameters{display:grid;gap:.5rem}
+.wf-setup select{width:100%;min-width:0;max-width:100%;border:1px solid var(--c-border);border-radius:6px;padding:.85rem;background:var(--c-bg, white);color:var(--c-fg);font:inherit}
+.wf-parameters{display:grid;grid-template-columns:minmax(0,1fr);min-width:0;gap:.5rem}
 .wf-parameters[hidden]{display:none}
 .wf-primary,.wf-secondary{border:0;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;gap:1rem;text-decoration:none;font-weight:650;line-height:1.35;cursor:pointer;font:inherit;padding:.95rem 1.1rem}
 .wf-primary{background:var(--c-accent);color:white}
 .wf-secondary{border:1px solid var(--c-border);color:var(--c-fg);background:transparent}
 .wf-primary:disabled,.wf-secondary:disabled{opacity:.5;cursor:not-allowed}
 #wf-status{font-size:.9rem;margin-top:1rem;min-height:2.2rem}
-#wf-steps{padding:0;list-style:none;display:grid;gap:.65rem}
-#wf-steps li{border-left:3px solid var(--c-border);padding:.75rem .9rem;background:var(--c-bg, #f6f4ed);border-radius:0 7px 7px 0;font-size:.92rem}
+#wf-steps{padding:0;min-width:0;list-style:none;display:grid;grid-template-columns:minmax(0,1fr);gap:.65rem}
+#wf-steps li{min-width:0;overflow-wrap:anywhere;word-break:break-word;border-left:3px solid var(--c-border);padding:.75rem .9rem;background:var(--c-bg, #f6f4ed);border-radius:0 7px 7px 0;font-size:.92rem}
 #wf-steps li strong{display:block;font-size:.9rem}
 #wf-steps li span{display:block;color:var(--c-muted);font-size:.8rem;margin-top:.3rem;overflow-wrap:anywhere}
 #wf-steps li.wf-complete{border-color:#338a61}
@@ -126,14 +127,14 @@ const t = (en: string, cn: string) => zh ? cn : en;
 .wf-metric{border:1px solid var(--c-border);border-radius:8px;padding:1rem;min-width:0}
 .wf-metric strong{font-size:clamp(1.2rem,2vw,1.7rem);display:block;font-variant-numeric:tabular-nums}
 .wf-metric span{display:block;font-size:.8rem;color:var(--c-muted);margin-top:.3rem}
-.wf-visual{overflow:hidden;border:1px solid var(--c-border);border-radius:8px;padding:1rem}
+.wf-visual{min-width:0;overflow:hidden;border:1px solid var(--c-border);border-radius:8px;padding:1rem}
 #wf-plot{width:100%;height:auto;display:block;max-height:310px}
 .wf-visual .wf-note{margin-top:.4rem}
 .wf-decision{border-left:3px solid var(--c-accent);margin:1.3rem 0;padding:1rem 1.1rem;background:var(--c-bg,#f6f4ed)}
 .wf-end{margin-top:2rem;padding:2rem;border-radius:12px;border:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;gap:2rem}
 .wf-end>div{max-width:720px}
 .wf-end h2{font-size:clamp(1.4rem,2.4vw,2rem)}
-@media(max-width:880px){.wf-layout{grid-template-columns:1fr}.wf-end{flex-direction:column;align-items:stretch}.wf-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:880px){.wf-layout{grid-template-columns:minmax(0,1fr)}.wf-end{flex-direction:column;align-items:stretch}.wf-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:510px){.scientific-workflow{padding-block:1.5rem 3rem}.wf-card{padding:1rem}.wf-metrics{grid-template-columns:1fr 1fr}.wf-head .wf-secondary{width:100%}.wf-end{padding:1.3rem}.wf-end .wf-primary{width:100%}}
 @media(prefers-reduced-motion:reduce){#wf-steps li.wf-running{animation:none}}
 </style>
