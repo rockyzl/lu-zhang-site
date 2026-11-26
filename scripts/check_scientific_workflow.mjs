@@ -34,4 +34,7 @@ assert(demo.includes('id="wf-form"')&&demo.includes('id="wf-export"'));
 assert(demo.includes('alternatePath={u(zh ? "/workflow/electrochemistry/" : "/zh/workflow/electrochemistry/")}'));
 assert(js.includes("executeTool(action,args,providedData)"));
 assert(js.includes('latestReport'));
+assert(demo.includes('value="integrated"'));
+assert(js.includes('async function evaluateIntegrated(report,json)'));
+assert(js.includes("if(goal==='integrated')await evaluateIntegrated(report,json)"));
 console.log('Scientific workflow acceptance: measured EIS, hypothesis tool, held-out-cell ML and bounded simulation passed.');
