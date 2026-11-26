@@ -14,7 +14,7 @@ const talkUrl = (t) =>
 const confUrl = (c) =>
   c.url ?? `https://scholar.google.com/scholar?q=${encodeURIComponent(`${c.title} ${c.venue} Lu Zhang Argonne`)}`;
 ---
-<Base title={(locale === "zh" ? "报告 — " : "Talks — ") + "Lu Zhang"}>
+<Base title={(locale === "zh" ? "报告 — " : "Talks — ") + "Lu Zhang"} description={locale === "zh" ? "张鲁的电化学、储能材料及电池研发学术报告和会议发言。" : "Invited talks and research presentations by Lu Zhang on electrochemistry, batteries, energy materials and scientific research."}>
   <div class="container" style="padding-top: 3rem;">
     <span class="eyebrow">{invited.length} invited · {conferences.length} abstracts</span>
     <h1>{t("page.talks.title", locale)}</h1>
