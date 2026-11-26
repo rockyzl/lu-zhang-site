@@ -161,6 +161,34 @@ async function evaluateEis(report,json) {
     '同一数据集上的拟合对照不等于独立预测或统计显著性检验；更多参数可能降低残差，但不能证明唯一物理机理。'
   );
 }
+async function evaluateIntegrated(report,json) {
+  // One executed sequence across real measured EIS, a held-out-cell ML model,
+  // and a transparent illustrative simulation. The simulation is not fitted
+  // from EIS and no joint mechanistic inference is claimed.
+  await evaluateEis(report,json);
+  const forecast=await tool(report,
+    t('Check whether future-capacity ML beats simple baselines','检验容量预测机器学习是否优于简单基线'),
+    'predict_capacity',{horizon:Number($('wf-horizon').value),domain:'25'},json);
+  metric(t('Ridge held-out MAE','Ridge 留出电池 MAE'),fmt(forecast.modelMAE,3)+' mAh');
+  metric(t('Persistence baseline MAE','延续基线 MAE'),fmt(forecast.persistenceMAE,3)+' mAh');
+  const simulated=await tool(report,
+    t('Run independent illustrative pulse model','运行独立的说明性脉冲模型'),
+    'simulate_pulse',{ocv_v:4,current_a:Number($('wf-current').value),r0_ohm:.35,r1_ohm:.6,tau_s:10,duration_s:10});
+  metric(t('Illustrative pulse IR drop','说明性脉冲 IR 压降'),fmt(simulated.instantaneousDropV*1000,2)+' mV');
+  const mlBetter=forecast.modelMAE<forecast.persistenceMAE;
+  const r0=report.steps.find(s=>s.action==='compare_eis_hypotheses')?.output?.candidates?.find(s=>s.id==='r0_only');
+  const full=report.steps.find(s=>s.action==='compare_eis_hypotheses')?.output?.candidates?.find(s=>s.id==='all_parameters');
+  const delta=r0&&full?fmt(r0.weightedRmsPercent/Math.max(full.weightedRmsPercent,1e-9),2):'—';
+  setDecision(
+    'Integrated review completed. On the same later EIS spectrum, the R0-only residual is '+delta+'× the full refit. Held-out-cell Ridge MAE is '+fmt(forecast.modelMAE,3)+' mAh versus persistence '+fmt(forecast.persistenceMAE,3)+' mAh ('+(mlBetter?'lower':'not lower')+'). An independent one-RC pulse scenario was also computed. Next: check SOC, temperature and rest context, inspect competing circuits, and acquire matched pulse measurements before trying to fit the pulse model or changing an experiment.',
+    '整条工作流已运行。相同后期 EIS 数据上，仅调整 R0 的残差是全部拟合的 '+delta+' 倍；留出电池 Ridge MAE 为 '+fmt(forecast.modelMAE,3)+' mAh，延续基线为 '+fmt(forecast.persistenceMAE,3)+' mAh（'+(mlBetter?'较优':'未占优')+'）。同时执行了独立的一阶 RC 脉冲示例。下一步先核对 SOC、温度与静置条件，审阅候选电路，并取得条件匹配的实测脉冲曲线，再考虑拟合或调整实验。',
+    'EIS fitting, held-out-cell ML prediction and illustrative pulse simulation are different evidence types—not a jointly calibrated cell model. No parameter transfer or unique physical mechanism is established. The simulation is not a PyBaMM run, and ML improvement is not externally validated.',
+    'EIS 拟合、留出电池的机器学习预测和说明性脉冲仿真是不同类型证据，并非联合标定的电池模型。没有把 EIS 参数转给脉冲模型，也不能证明唯一物理机理；本例不是 PyBaMM，机器学习也未获独立外部验证。');
+  $('wf-plot-caption').textContent += ' '+t(
+    'The chart shows measured Nyquist data; additional ML and simulation outputs appear in the numerical cards and export.',
+    '图中展示实测 Nyquist 数据；机器学习与仿真数值记录显示在指标卡和导出报告中。');
+}
+
 async function evaluateML(report,json) {
   const horizon=Number($('wf-horizon').value);
   await tool(report,t('Inspect records and pairing constraints','检查数据和配对限制'),'inspect_data',{},json);
@@ -198,7 +226,7 @@ async function evaluatePulse(report) {
   );
 }
 function showGoal() {
-  for(const fieldset of document.querySelectorAll('.wf-parameters'))fieldset.hidden=fieldset.dataset.goal!==goalSelect.value;
+  for(const fieldset of document.querySelectorAll('.wf-parameters'))fieldset.hidden=fieldset.dataset.goal!==goalSelect.value&&goalSelect.value!=='integrated';
   if(!running)setStatus('Ready to run. Tool steps change with the research goal.','准备就绪。工具步骤将根据研究目标变化。');
 }
 goalSelect.addEventListener('change',showGoal);
@@ -222,7 +250,8 @@ form.addEventListener('submit',async(event)=>{
     else {
       const json=await data();
       provenance(report,json);
-      if(goal==='eis')await evaluateEis(report,json);
+      if(goal==='integrated')await evaluateIntegrated(report,json);
+      else if(goal==='eis')await evaluateEis(report,json);
       else if(goal==='ml')await evaluateML(report,json);
       else throw Error('Unknown research goal');
     }
