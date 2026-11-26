@@ -18,7 +18,7 @@ const t = (en: string, cn: string) => zh ? cn : en;
   <section class="wf-hero">
     <p class="eyebrow">{t("ONE RESEARCH QUESTION · REAL TOOL EXECUTION", "一个科研问题 · 真实工具执行")}</p>
     <h1>{t("See a scientific workflow actually run.", "亲自运行一条科研工作流。")}</h1>
-    <p class="lead">{t("One workspace connects measured electrochemistry data, numerical fitting, machine learning and a bounded physics model. Change the question and the executed tool sequence changes.", "一个工作入口连接电化学实测数据、数值拟合、机器学习与有边界的物理模型。改变研究问题，执行的工具链也会改变。")}</p>
+    <p class="lead">{t("One workspace connects measured electrochemistry data, numerical fitting, machine learning and a bounded physics model. Run an integrated review or switch goals; the executed tool sequence changes with the question.", "一个工作入口连接电化学实测数据、数值拟合、机器学习与有边界的物理模型。你可以一键运行整条证据链，也可以切换研究目标，让工具调用顺序随问题改变。")}</p>
     <p class="wf-disclaimer">{t("Public, measured LCO/graphite battery data · numerical tools run locally in your browser · no instrument is controlled · orchestration is rule-based, not a live LLM agent.", "公开的 LCO/石墨电池实测数据 · 数值工具在浏览器本地执行 · 不控制真实仪器 · 当前为规则驱动编排，不是在线 LLM 自主智能体。")}</p>
     <div class="wf-links">
       <a href="https://zenodo.org/records/3633835" target="_blank" rel="noopener noreferrer">{t("Inspect original measured dataset", "查看公开实测数据源")} ↗</a>
@@ -32,6 +32,7 @@ const t = (en: string, cn: string) => zh ? cn : en;
       <form id="wf-form">
         <label for="wf-goal">{t("Choose a research goal", "选择研究目标")}</label>
         <select id="wf-goal" name="goal">
+          <option value="integrated">{t("Full research review: EIS → ML → simulation", "完整研究流程：EIS → 机器学习 → 仿真")}</option>
           <option value="eis">{t("Explain measured EIS changes", "比较实测 EIS 变化的解释")}</option>
           <option value="ml">{t("Test future-capacity ML against baselines", "检验容量预测是否优于基线")}</option>
           <option value="pulse">{t("Explore an illustrative pulse simulation", "运行说明性的脉冲仿真")}</option>
