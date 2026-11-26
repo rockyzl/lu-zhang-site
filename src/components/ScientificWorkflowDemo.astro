@@ -1,0 +1,137 @@
+---
+import Base from "../layouts/Base.astro";
+import { u } from "../lib/url";
+
+const { locale = "en" } = Astro.props;
+const zh = locale === "zh";
+const t = (en: string, cn: string) => zh ? cn : en;
+---
+<Base
+  title={t("Live Electrochemistry Research Workflow | SciencesLoop", "真实电化学科研工作流 | SciencesLoop")}
+  description={t(
+    "Run a real, traceable research workflow on public battery EIS data: inspect measurements, compare circuit hypotheses, evaluate an ML baseline or run a bounded pulse simulation.",
+    "用公开电池 EIS 实测数据运行可追溯的科研工作流：检查测量、比较电路假设、评估机器学习基线，或运行有明确边界的脉冲仿真。"
+  )}
+  alternatePath={u(zh ? "/workflow/electrochemistry/" : "/zh/workflow/electrochemistry/")}
+>
+<main class="container scientific-workflow">
+  <section class="wf-hero">
+    <p class="eyebrow">{t("ONE RESEARCH QUESTION · REAL TOOL EXECUTION", "一个科研问题 · 真实工具执行")}</p>
+    <h1>{t("See a scientific workflow actually run.", "亲自运行一条科研工作流。")}</h1>
+    <p class="lead">{t("One workspace connects measured electrochemistry data, numerical fitting, machine learning and a bounded physics model. Change the question and the executed tool sequence changes.", "一个工作入口连接电化学实测数据、数值拟合、机器学习与有边界的物理模型。改变研究问题，执行的工具链也会改变。")}</p>
+    <p class="wf-disclaimer">{t("Public, measured LCO/graphite battery data · numerical tools run locally in your browser · no instrument is controlled · orchestration is rule-based, not a live LLM agent.", "公开的 LCO/石墨电池实测数据 · 数值工具在浏览器本地执行 · 不控制真实仪器 · 当前为规则驱动编排，不是在线 LLM 自主智能体。")}</p>
+    <div class="wf-links">
+      <a href="https://zenodo.org/records/3633835" target="_blank" rel="noopener noreferrer">{t("Inspect original measured dataset", "查看公开实测数据源")} ↗</a>
+      <a href={u(zh ? "/zh/agent/battery-research/" : "/agent/battery-research/")}>{t("Open full battery workbench", "进入完整电池工作台")} ↗</a>
+    </div>
+  </section>
+  <div class="wf-layout">
+    <section class="wf-card wf-setup" aria-labelledby="wf-setup-title">
+      <span class="eyebrow">01 / {t("RESEARCH QUESTION", "科研问题")}</span>
+      <h2 id="wf-setup-title">{t("What should the workflow investigate?", "这次要解决什么问题？")}</h2>
+      <form id="wf-form">
+        <label for="wf-goal">{t("Choose a research goal", "选择研究目标")}</label>
+        <select id="wf-goal" name="goal">
+          <option value="eis">{t("Explain measured EIS changes", "比较实测 EIS 变化的解释")}</option>
+          <option value="ml">{t("Test future-capacity ML against baselines", "检验容量预测是否优于基线")}</option>
+          <option value="pulse">{t("Explore an illustrative pulse simulation", "运行说明性的脉冲仿真")}</option>
+        </select>
+        <div class="wf-parameters" data-goal="eis">
+          <label for="wf-cell">{t("Measured cell", "实测电池")}</label>
+          <select id="wf-cell" name="cell"><option value="25C05">25C05 · LCO/graphite · 25°C</option></select>
+          <label for="wf-late">{t("Compare diagnostic index 1 with", "将诊断序号 1 与以下序号比较")}</label>
+          <select id="wf-late" name="late"><option value="275">275</option><option value="138">138</option></select>
+        </div>
+        <div class="wf-parameters" data-goal="ml" hidden>
+          <label for="wf-horizon">{t("Prediction horizon (diagnostic indices)", "预测跨度（诊断序号）")}</label>
+          <select id="wf-horizon" name="horizon"><option value="5">5</option><option value="10">10</option><option value="20">20</option></select>
+          <p class="wf-note">{t("Models train on whole development cells and test on different cells. Results are exploratory, not external validation.", "按整颗电池区分训练与测试。结果是探索性验证，不代表独立的外部验证。")}</p>
+        </div>
+        <div class="wf-parameters" data-goal="pulse" hidden>
+          <label for="wf-current">{t("Discharge current (A)", "放电电流（A）")}</label>
+          <select id="wf-current" name="current"><option value="0.01">0.010</option><option value="0.02">0.020</option><option value="0.05">0.050</option></select>
+          <p class="wf-note">{t("One-RC Thevenin model with illustrative OCV 4 V, R0 0.35 Ω, R1 0.6 Ω, τ 10 s. Not fit to this measured cell.", "一阶 Thevenin 模型，说明性参数 OCV 4 V、R0 0.35 Ω、R1 0.6 Ω、τ 10 秒，并非从该实测电池拟合。")}</p>
+        </div>
+        <button type="submit" id="wf-run" class="wf-primary">{t("Run selected scientific workflow", "执行选定的科研工作流")} <span aria-hidden="true">↗</span></button>
+      </form>
+      <p id="wf-status" role="status" aria-live="polite">{t("Ready to run. Select a goal above.", "准备就绪。请选择上方研究目标。")}</p>
+      <p class="wf-note">{t("The tool registry is deliberately restricted. No fabricated experiments, vendor device commands or open-ended autonomous execution.", "工具注册表刻意限制范围：不会虚构实验、发送仪器指令或运行无边界自主程序。")}</p>
+    </section>
+    <section class="wf-card wf-trace" aria-labelledby="wf-trace-title">
+      <span class="eyebrow">02 / {t("LIVE TOOL TRACE", "真实工具调用记录")}</span>
+      <h2 id="wf-trace-title">{t("Watch the workflow select and run tools.", "查看工作流如何选择与执行工具。")}</h2>
+      <ol id="wf-steps" aria-live="polite" aria-label={t("Execution trace", "执行记录")}>
+        <li class="wf-pending">{t("Steps appear here once you run a research goal.", "执行研究目标后，工具步骤将显示在这里。")}</li>
+      </ol>
+    </section>
+  </div>
+  <section class="wf-card wf-outcome" id="wf-outcome" hidden aria-labelledby="wf-outcome-title">
+    <span class="eyebrow">03 / {t("EVIDENCE & DECISION", "证据与判断")}</span>
+    <div class="wf-head">
+      <h2 id="wf-outcome-title">{t("Computed results and the next check", "计算结果与下一步检查")}</h2>
+      <button id="wf-export" type="button" class="wf-secondary" disabled>{t("Export reproducible JSON report", "导出可复核 JSON 报告")} ↓</button>
+    </div>
+    <div id="wf-metrics" class="wf-metrics"></div>
+    <div class="wf-visual"><svg id="wf-plot" viewBox="0 0 680 270" role="img" aria-label={t("Numeric results visualization", "数值计算结果图")}></svg><p id="wf-plot-caption" class="wf-note"></p></div>
+    <div class="wf-decision"><h3>{t("Researcher review", "研究者复核")}</h3><p id="wf-decision"></p><p id="wf-limits" class="wf-note"></p></div>
+    <p class="wf-note">{t("Reports contain actual tool outputs and source identifiers. Exporting or reviewing never executes a laboratory instrument.", "报告保存实际计算结果和来源信息。下载或审核不会触发任何真实仪器操作。")}</p>
+  </section>
+  <section class="wf-end">
+    <div>
+      <p class="eyebrow">{t("FROM AN OPEN DEMO TO YOUR RESEARCH STACK", "从公开演示，到你的真实科研体系")}</p>
+      <h2>{t("Bring one workflow that takes your team too many handoffs.", "从团队最耗时的一条研究流程开始。")}</h2>
+      <p>{t("A first pilot can connect approved datasets and a small number of verified tools, then test traceability, analyst effort and scientific review against your current process.", "首次试点可以从团队有权使用的数据和少量已验证工具开始，与现有流程比较证据可追溯性、人工操作步骤和结果复核效率。")}</p>
+    </div>
+    <a class="wf-primary" href="mailto:luzhang@sciencesloop.com?subject=SciencesLoop%20scientific%20workflow%20pilot">{t("Discuss a focused research pilot", "讨论一个具体科研试点")} ↗</a>
+  </section>
+</main>
+<script is:inline type="module" src={u("/demos/electrochemistry-workflow/app.mjs")}></script>
+</Base>
+<style>
+.scientific-workflow{padding-block:3.2rem 5rem}
+.scientific-workflow h1{font-size:clamp(2.2rem,5vw,4.35rem);letter-spacing:-.045em;line-height:1.1;max-width:1000px}
+.scientific-workflow h2{font-size:clamp(1.3rem,2.1vw,1.8rem);line-height:1.25;margin:.5rem 0 1.2rem}
+.scientific-workflow h3{font-size:1.15rem;margin:0 0 .55rem}
+.scientific-workflow p{line-height:1.65}
+.wf-hero{max-width:1110px;padding-bottom:2.5rem}
+.wf-hero .lead{max-width:940px;font-size:clamp(1.08rem,1.7vw,1.3rem);margin:1.2rem 0}
+.wf-disclaimer,.wf-note{font-size:.87rem;color:var(--c-muted)}
+.wf-links{display:flex;flex-wrap:wrap;gap:1rem 2rem;margin-top:1rem}
+.wf-links a{font-weight:600;color:var(--c-accent);text-decoration:underline;text-underline-offset:3px}
+.wf-layout{display:grid;grid-template-columns:minmax(300px, .8fr) minmax(0,1.2fr);gap:1rem}
+.wf-card{border:1px solid var(--c-border);border-radius:12px;padding:1.4rem;background:var(--c-card)}
+.wf-card .eyebrow,.wf-end .eyebrow{font-size:.7rem;letter-spacing:.1em;color:var(--c-accent);font-weight:700}
+.wf-setup form{display:grid;gap:.55rem}
+.wf-setup label{font-size:.85rem;font-weight:650;margin-top:.6rem}
+.wf-setup select{width:100%;border:1px solid var(--c-border);border-radius:6px;padding:.85rem;background:var(--c-bg, white);color:var(--c-fg);font:inherit}
+.wf-parameters{display:grid;gap:.5rem}
+.wf-primary,.wf-secondary{border:0;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;gap:1rem;text-decoration:none;font-weight:650;line-height:1.35;cursor:pointer;font:inherit;padding:.95rem 1.1rem}
+.wf-primary{background:var(--c-accent);color:white}
+.wf-secondary{border:1px solid var(--c-border);color:var(--c-fg);background:transparent}
+.wf-primary:disabled,.wf-secondary:disabled{opacity:.5;cursor:not-allowed}
+#wf-status{font-size:.9rem;margin-top:1rem;min-height:2.2rem}
+#wf-steps{padding:0;list-style:none;display:grid;gap:.65rem}
+#wf-steps li{border-left:3px solid var(--c-border);padding:.75rem .9rem;background:var(--c-bg, #f6f4ed);border-radius:0 7px 7px 0;font-size:.92rem}
+#wf-steps li strong{display:block;font-size:.9rem}
+#wf-steps li span{display:block;color:var(--c-muted);font-size:.8rem;margin-top:.3rem;overflow-wrap:anywhere}
+#wf-steps li.wf-complete{border-color:#338a61}
+#wf-steps li.wf-running{border-color:#c99853;animation:wf-pulse 1.2s ease-in-out infinite alternate}
+#wf-steps li.wf-error{border-color:#b94b4b}
+@keyframes wf-pulse{to{background:var(--c-card)}}
+.wf-outcome{margin-top:1rem}
+.wf-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem}
+.wf-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;margin:1.4rem 0}
+.wf-metric{border:1px solid var(--c-border);border-radius:8px;padding:1rem;min-width:0}
+.wf-metric strong{font-size:clamp(1.2rem,2vw,1.7rem);display:block;font-variant-numeric:tabular-nums}
+.wf-metric span{display:block;font-size:.8rem;color:var(--c-muted);margin-top:.3rem}
+.wf-visual{overflow:hidden;border:1px solid var(--c-border);border-radius:8px;padding:1rem}
+#wf-plot{width:100%;height:auto;display:block;max-height:310px}
+.wf-visual .wf-note{margin-top:.4rem}
+.wf-decision{border-left:3px solid var(--c-accent);margin:1.3rem 0;padding:1rem 1.1rem;background:var(--c-bg,#f6f4ed)}
+.wf-end{margin-top:2rem;padding:2rem;border-radius:12px;border:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;gap:2rem}
+.wf-end>div{max-width:720px}
+.wf-end h2{font-size:clamp(1.4rem,2.4vw,2rem)}
+@media(max-width:880px){.wf-layout{grid-template-columns:1fr}.wf-end{flex-direction:column;align-items:stretch}.wf-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:510px){.scientific-workflow{padding-block:1.5rem 3rem}.wf-card{padding:1rem}.wf-metrics{grid-template-columns:1fr 1fr}.wf-head .wf-secondary{width:100%}.wf-end{padding:1.3rem}.wf-end .wf-primary{width:100%}}
+@media(prefers-reduced-motion:reduce){#wf-steps li.wf-running{animation:none}}
+</style>
