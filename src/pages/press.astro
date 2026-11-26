@@ -9,7 +9,7 @@ const profiles = press.items.filter((p) => p.date === "—");
 dated.sort((a, b) => (b.date > a.date ? 1 : -1));
 const videos = press.videos ?? [];
 ---
-<Base title={(locale === "zh" ? "媒体 — " : "Press — ") + "Lu Zhang"}>
+<Base title={(locale === "zh" ? "媒体 — " : "Press — ") + "Lu Zhang"} description={locale === "zh" ? "关于张鲁电池科研、技术创新和公共研究成果的媒体报道与视频。" : "Press coverage, interviews and media featuring Lu Zhang’s electrochemistry, battery research and scientific innovation."}>
   <div class="container" style="padding-top: 3rem;">
     <span class="eyebrow">{t("page.press.eyebrow", locale)}</span>
     <h1>{t("page.press.title", locale)}</h1>

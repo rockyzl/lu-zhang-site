@@ -30,7 +30,7 @@ const ISSUED = issued.length;
 const APPS = extra.published_applications.length + extra.internal_applications.length;
 const TOTAL = ISSUED + APPS;
 ---
-<Base title={(locale === "zh" ? "专利 — " : "Patents — ") + "Lu Zhang"}>
+<Base title={(locale === "zh" ? "专利 — " : "Patents — ") + "Lu Zhang"} description={locale === "zh" ? "张鲁的电池化学与储能技术专利，包含已授权专利与申请记录。" : "Patents by Lu Zhang in batteries, electrochemical energy storage, redox-active molecules and materials engineering."}>
   <div class="container" style="padding-top: 3rem;">
     <span class="eyebrow">{TOTAL} total · {ISSUED} issued · {APPS} pending</span>
     <h1>{t("page.patents.title", locale)}</h1>

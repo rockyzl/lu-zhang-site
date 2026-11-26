@@ -33,6 +33,41 @@ export const DEMO_REGISTRY_SCHEMA_VERSION = "sciencesloop.demo-registry.v1" as c
 // Agent-index pages separately.
 export const demos: readonly Demo[] = [
   {
+    id: "electrochemistry-research-workflow",
+    path: "/workflow/electrochemistry/",
+    featured: true,
+    title: {
+      en: "Live Electrochemistry Research Workflow",
+      zh: "真实电化学科研工作流",
+    },
+    tagline: {
+      en: "Watch EIS, ML baselines and bounded simulation run in one traceable workflow",
+      zh: "在一条可追溯流程中执行 EIS、机器学习基线与有边界的仿真",
+    },
+    summary: {
+      en: "A researcher-led public-data workflow using actual Cambridge battery EIS measurements: compare circuit hypotheses, evaluate cell-held-out Ridge forecasts against persistence, and run a clearly separate illustrative one-RC pulse scenario. Exact tool calls, numerical outputs, caveats and JSON report are visible. No instrument commands or autonomous LLM reasoning.",
+      zh: "使用剑桥公开电池 EIS 实测数据的科研工作流：对比电路假设，按整颗电池留出评估 Ridge 与延续基线，并运行明确独立的说明性一阶 RC 脉冲仿真。展示实际工具调用、数值结果、局限及 JSON 报告。不控制仪器，也不宣称自主大模型推理。",
+    },
+    tags: ["electrochemistry", "EIS diagnostics", "ML baseline evaluation", "scientific workflow"],
+    sources: [
+      {
+        kind: "dataset",
+        label: { en: "Cambridge measured battery EIS data", zh: "剑桥电池 EIS 实测数据" },
+        url: "https://doi.org/10.5281/zenodo.3633835",
+      },
+      {
+        kind: "paper",
+        label: { en: "Original measured-data study", zh: "实测数据原始论文" },
+        url: "https://doi.org/10.1038/s41467-020-15235-7",
+      },
+      {
+        kind: "license",
+        label: { en: "CC BY 4.0 data license", zh: "CC BY 4.0 数据许可" },
+        url: "https://creativecommons.org/licenses/by/4.0/",
+      },
+    ],
+  },
+  {
     id: "battery-research-workbench",
     repoUrl: "https://github.com/rockyzl/battery-eis-soh-benchmark/tree/1ac0e7f2c54d5927f91d6924ebf95f5ec5523252/tools/battery-tools",
     path: "/agent/battery-research/",

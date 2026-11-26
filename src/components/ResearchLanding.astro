@@ -113,10 +113,10 @@ const consoleLog = [
  [t('Review','审核'), t('Waiting for researcher approval before the next run','等待研究者确认后再启动下一轮')]
 ];
 const title = t('One-Stop Adaptive AI Workflows for Scientific R&D | SciencesLoop','科研一站式自适应 AI 工作流 | SciencesLoop');
-const description = t('A unified R&D workspace connecting experimental data, simulation, machine learning and scientific tools through adaptive, traceable AI workflows. Starting with electrochemistry.','将实验数据、仿真、机器学习与已有科研工具整合到同一工作入口，通过自适应、可追溯的 AI 流程为复杂研发提效，从电化学切入。');
+const description = t('One adaptive R&D workspace for experimental data, simulations, machine learning and scientific tools. Traceable workflows, starting with electrochemistry.','将实验数据、仿真、机器学习与已有科研工具整合到同一工作入口，通过自适应、可追溯的 AI 流程为复杂研发提效，从电化学切入。');
 const origin = Astro.site ?? new URL('https://sciencesloop.com');
 const canonical = new URL(u(`${lp}/`),origin).href;
-const links = [['/battery-ai/',t('Battery & electrochemistry AI','电池与电化学 AI')],['/agent/battery-research/',t('Battery research demo','电池研发 Demo')],['/projects/',t('Selected work','项目实践')],['/lab/',t('Research lab','研究实验室')],['/blog/',t('Field notes','研究笔记')],['/research-archive/',t('Research archive','科研档案')],['/about/',t('About the founder','关于创始人')]];
+const links = [['/workflow/electrochemistry/',t('Run a scientific workflow','运行科研工作流')],['/battery-ai/',t('Battery & electrochemistry AI','电池与电化学 AI')],['/agent/battery-research/',t('Battery research demo','电池研发 Demo')],['/projects/',t('Selected work','项目实践')],['/lab/',t('Research lab','研究实验室')],['/blog/',t('Field notes','研究笔记')],['/research-archive/',t('Research archive','科研档案')],['/about/',t('About the founder','关于创始人')]];
 ---
 <!doctype html>
 <html lang={zh ? 'zh-CN' : 'en'}>
@@ -154,7 +154,7 @@ const links = [['/battery-ai/',t('Battery & electrochemistry AI','电池与电�
 <h1 id="hero-title"><span>{t('Complex science.','复杂科研，')}</span><span>{t('One workspace.','一站式工作流。')}</span></h1>
 <p class="sf-lede">{t('Connect your experimental data, simulations, ML models and lab software in one traceable research loop. Researchers approve the key decisions.','把实验数据、仿真、机器学习模型和现有科研软件接进同一个可追溯的科研闭环，关键决策由研究者确认。')}</p>
 <div class="sf-actions">
-<a class="sf-button" href={u(`${lp}/agent/battery-research/`)}>{t('Try the battery agent demo','试用电池研发智能体')}</a>
+<a class="sf-button" href={u(`${lp}/workflow/electrochemistry/`)}>{t('Run the live research workflow','运行真实科研工作流')}</a>
 <a class="sf-link" href="#start">{t('Talk through your workflow','聊聊你的研发流程')}</a>
 </div>
 <p class="sf-scope">{t('Pilot integrations are scoped to your existing systems, available interfaces and researcher-approved actions.','具体集成范围取决于现有系统、可用接口和研究者授权；先验证，再扩展。')}</p>
@@ -217,6 +217,7 @@ const links = [['/battery-ai/',t('Battery & electrochemistry AI','电池与电�
     </div>
   </div>
   <div class="layer-links">
+    <a class="layer-link" href={u(zh ? '/zh/workflow/electrochemistry/' : '/workflow/electrochemistry/')}>{t('Run the live electrochemistry workflow','运行真实电化学工作流')} ↗</a>
     <a class="layer-link" href={u(zh ? '/zh/battery-ai/' : '/battery-ai/')}>{t('First use case: battery & electrochemistry','首个落地场景：电池与电化学')} ↗</a>
     <a class="layer-link" href={u(zh ? '/zh/approach/' : '/approach/')}>{t('See our approach to reliable agents','了解可复核的 Agent 工程方法')} ↗</a>
   </div>
