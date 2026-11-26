@@ -3,6 +3,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { u } from '../../../lib/url';
 const raw = fs.readFileSync(path.join(process.cwd(), 'public/demos/battery-research/index.html'), 'utf8');
-const html = raw.replace('<head>', '<head><base href="' + u('/demos/battery-research/') + '">');
+// Keep the executable workbench and client-side language behavior unchanged,
+// but make the Chinese route visibly localized to users and search engines.
+const html = raw
+  .replace('<html lang="en">', '<html lang="zh-CN">')
+  .replace('<title>Battery Research Workbench · SciencesLoop</title>', '<title>电池科研数据分析工作台 · SciencesLoop</title>')
+  .replace('An executable battery research workbench using measured impedance and capacity data.', '基于公开实测 EIS 和容量数据的可执行电池研究工作台，包含数值分析、数据来源及研究者复核。')
+  .replace('<h1 id="hero">Battery experimental-data analysis agent</h1>', '<h1 id="hero">电池实验数据分析与研究工作流</h1>')
+  .replace('<p id="lead">Submit a battery research task. The model selects analysis tools, checks numerical results and writes a conclusion. The first case uses measured EIS; forecasting is an optional tool.</p>', '<p id="lead">围绕真实电池数据提出问题，选择数值分析工具，对比 EIS 假设与模型基线，并保留证据和局限性。工作台包含模型辅助的工具选择，但不控制真实实验仪器。</p>')
+  .replace('<section class="intro">', '<section class="intro"><p class="small">中文入口：实测数据检查、EIS 电路拟合、容量预测对照与脉冲仿真。图表和数值工具由浏览器计算；研究者仍需检查实验条件、模型假设及结论适用范围。</p>')
+  .replace('<head>', '<head><link rel="canonical" href="https://sciencesloop.com/zh/agent/battery-research/"><link rel="alternate" hreflang="en" href="https://sciencesloop.com/agent/battery-research/"><link rel="alternate" hreflang="zh-CN" href="https://sciencesloop.com/zh/agent/battery-research/"><base href="' + u('/demos/battery-research/') + '">');
 ---
 <Fragment set:html={html} />
