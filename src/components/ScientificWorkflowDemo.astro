@@ -138,3 +138,35 @@ const t = (en: string, cn: string) => zh ? cn : en;
 @media(max-width:510px){.scientific-workflow{padding-block:1.5rem 3rem}.wf-card{padding:1rem}.wf-metrics{grid-template-columns:1fr 1fr}.wf-head .wf-secondary{width:100%}.wf-end{padding:1.3rem}.wf-end .wf-primary{width:100%}}
 @media(prefers-reduced-motion:reduce){#wf-steps li.wf-running{animation:none}}
 </style>
+<!-- These nodes are created at runtime. Astro's scoped component styles do
+     not match dynamic children, so keep these rules explicitly global and
+     namespace them to this single workflow page. -->
+<style is:global>
+.scientific-workflow #wf-steps li{
+  min-width:0;max-width:100%;box-sizing:border-box;
+  overflow-wrap:anywhere;word-break:break-word;
+  border-left:3px solid var(--c-border);padding:.75rem .9rem;
+  background:var(--c-bg,#f6f4ed);border-radius:0 7px 7px 0;font-size:.92rem;
+}
+.scientific-workflow #wf-steps li strong{display:block;font-size:.9rem}
+.scientific-workflow #wf-steps li span{
+  display:block;min-width:0;max-width:100%;white-space:normal;
+  overflow-wrap:anywhere;word-break:break-word;
+  color:var(--c-muted);font-size:.8rem;margin-top:.3rem;
+}
+.scientific-workflow #wf-steps li.wf-complete{border-color:#338a61}
+.scientific-workflow #wf-steps li.wf-running{border-color:#c99853}
+.scientific-workflow #wf-steps li.wf-error{border-color:#b94b4b}
+.scientific-workflow #wf-metrics .wf-metric{
+  min-width:0;max-width:100%;box-sizing:border-box;
+  border:1px solid var(--c-border);border-radius:8px;padding:1rem;
+}
+.scientific-workflow #wf-metrics .wf-metric strong{
+  display:block;overflow-wrap:anywhere;font-size:clamp(1.2rem,2vw,1.7rem);
+  font-variant-numeric:tabular-nums;
+}
+.scientific-workflow #wf-metrics .wf-metric span{
+  display:block;overflow-wrap:anywhere;font-size:.8rem;
+  color:var(--c-muted);margin-top:.3rem;
+}
+</style>

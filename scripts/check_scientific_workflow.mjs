@@ -32,6 +32,8 @@ const demo=readFileSync('src/components/ScientificWorkflowDemo.astro','utf8');
 const js=readFileSync('public/demos/electrochemistry-workflow/app.mjs','utf8');
 assert(demo.includes('id="wf-form"')&&demo.includes('id="wf-export"'));
 assert(demo.includes('.wf-layout>*{min-width:0}'), 'grid child must shrink at mobile widths');
+assert(demo.includes('.scientific-workflow #wf-steps li span'), 'dynamic tool trace needs a global wrapping rule');
+assert(demo.includes('.scientific-workflow #wf-metrics .wf-metric'), 'dynamic metric cards need global scoped-to-page styles');
 assert(demo.includes('@media(max-width:880px){.wf-layout{grid-template-columns:minmax(0,1fr)}'), 'mobile grid must not use min-content width');
 assert(demo.includes('alternatePath={u(zh ? "/workflow/electrochemistry/" : "/zh/workflow/electrochemistry/")}'));
 assert(js.includes("executeTool(action,args,providedData)"));
