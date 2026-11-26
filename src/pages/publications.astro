@@ -26,7 +26,7 @@ const isReview = (p) => p.doi && REVIEW_DOIS.has(p.doi.toLowerCase());
 // Take the highest-cited review-style paper for surfacing
 const reviews = filtered.filter((p) => /liquid redoxmers for nonaqueous redox flow batteries/i.test(p.title));
 ---
-<Base title={(locale === "zh" ? "论文 — " : "Publications — ") + "Lu Zhang"}>
+<Base title={(locale === "zh" ? "论文 — " : "Publications — ") + "Lu Zhang"} description={locale === "zh" ? "浏览张鲁在电化学储能、电池材料及氧化还原液流电池领域经过核实的期刊论文。" : "Browse Lu Zhang’s verified journal publications on electrochemical energy storage, battery materials, and redox flow batteries."}>
   <div class="container" style="padding-top: 3rem;">
   <span class="eyebrow">{t("page.publications.eyebrow", locale)}</span>
   <h1>{t("page.publications.title", locale)}</h1>
